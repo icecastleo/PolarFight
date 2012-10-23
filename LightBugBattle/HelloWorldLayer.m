@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "BattleLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -42,30 +43,32 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World Label!" fontName:@"Marker Felt" fontSize:32];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
 	
 		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
+		label.position =  ccp( size.width /2 , size.height/4 * 3);
 		
 		// add the label as a child to this Layer
 		[self addChild: label];
 		
-		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:28];
+		// Default font size will be 20 points.
+		[CCMenuItemFont setFontSize:20];
 		
-		CCMenuItem *defaultMenu = [CCMenuItemFont itemWithString:@"Default MenuItem!"];
+		CCMenuItem *defaultMenu = [CCMenuItemFont itemWithString:@"Battle Scene" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[BattleLayer scene]];
+        }];
 		
 		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, nil];
 		
 		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
+		[menu setPosition:ccp( size.width/2, size.height/2 )];
 		
 		// Add the menu to the layer
 		[self addChild:menu];
-
+        
 	}
 	return self;
 }
