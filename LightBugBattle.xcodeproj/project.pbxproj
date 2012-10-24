@@ -866,6 +866,7 @@
 		9B063BF5163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B063BE9163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m */; };
 		9B063BF6163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B063BEB163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
+		9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFB6541636C431006ECAC0 /* BattleSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1854,27 +1855,29 @@
 		9B06375C1635414C00E06018 /* zph1_lf2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_lf2.gif; sourceTree = "<group>"; };
 		9B06375D1635414C00E06018 /* zph1_rt1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt1.gif; sourceTree = "<group>"; };
 		9B06375E1635414C00E06018 /* zph1_rt2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt2.gif; sourceTree = "<group>"; };
-		9B063BD6163551F000E06018 /* CCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCNavigationViewController.h; path = Classes/CCNavigationViewController.h; sourceTree = "<group>"; };
-		9B063BD7163551F000E06018 /* CCNavigationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CCNavigationViewController.mm; path = Classes/CCNavigationViewController.mm; sourceTree = "<group>"; };
-		9B063BD8163551F000E06018 /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoredCircleSprite.h; path = Classes/ColoredCircleSprite.h; sourceTree = "<group>"; };
-		9B063BD9163551F000E06018 /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoredCircleSprite.m; path = Classes/ColoredCircleSprite.m; sourceTree = "<group>"; };
-		9B063BDA163551F000E06018 /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoredSquareSprite.h; path = Classes/ColoredSquareSprite.h; sourceTree = "<group>"; };
-		9B063BDB163551F000E06018 /* ColoredSquareSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoredSquareSprite.m; path = Classes/ColoredSquareSprite.m; sourceTree = "<group>"; };
-		9B063BDC163551F000E06018 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		9B063BDD163551F000E06018 /* HelloWorldScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
-		9B063BDE163551F000E06018 /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyButton.h; path = Classes/SneakyButton.h; sourceTree = "<group>"; };
-		9B063BDF163551F000E06018 /* SneakyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyButton.m; path = Classes/SneakyButton.m; sourceTree = "<group>"; };
-		9B063BE0163551F000E06018 /* SneakyButtonSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyButtonSkinnedBase.h; path = Classes/SneakyButtonSkinnedBase.h; sourceTree = "<group>"; };
-		9B063BE1163551F000E06018 /* SneakyButtonSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyButtonSkinnedBase.m; path = Classes/SneakyButtonSkinnedBase.m; sourceTree = "<group>"; };
-		9B063BE4163551F000E06018 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystick.h; path = Classes/SneakyJoystick.h; sourceTree = "<group>"; };
-		9B063BE5163551F000E06018 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyJoystick.m; path = Classes/SneakyJoystick.m; sourceTree = "<group>"; };
-		9B063BE6163551F000E06018 /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystickSkinnedBase.h; path = Classes/SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
-		9B063BE7163551F000E06018 /* SneakyJoystickSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyJoystickSkinnedBase.m; path = Classes/SneakyJoystickSkinnedBase.m; sourceTree = "<group>"; };
-		9B063BE8163551F000E06018 /* SneakyJoystickSkinnedDPadExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystickSkinnedDPadExample.h; path = Classes/SneakyJoystickSkinnedDPadExample.h; sourceTree = "<group>"; };
-		9B063BE9163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyJoystickSkinnedDPadExample.m; path = Classes/SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
-		9B063BEA163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakyJoystickSkinnedJoystickExample.h; path = Classes/SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
-		9B063BEB163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakyJoystickSkinnedJoystickExample.m; path = Classes/SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
+		9B063BD6163551F000E06018 /* CCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationViewController.h; sourceTree = "<group>"; };
+		9B063BD7163551F000E06018 /* CCNavigationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCNavigationViewController.mm; sourceTree = "<group>"; };
+		9B063BD8163551F000E06018 /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
+		9B063BD9163551F000E06018 /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
+		9B063BDA163551F000E06018 /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
+		9B063BDB163551F000E06018 /* ColoredSquareSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredSquareSprite.m; sourceTree = "<group>"; };
+		9B063BDC163551F000E06018 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
+		9B063BDD163551F000E06018 /* HelloWorldScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloWorldScene.m; sourceTree = "<group>"; };
+		9B063BDE163551F000E06018 /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButton.h; sourceTree = "<group>"; };
+		9B063BDF163551F000E06018 /* SneakyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButton.m; sourceTree = "<group>"; };
+		9B063BE0163551F000E06018 /* SneakyButtonSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButtonSkinnedBase.h; sourceTree = "<group>"; };
+		9B063BE1163551F000E06018 /* SneakyButtonSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButtonSkinnedBase.m; sourceTree = "<group>"; };
+		9B063BE4163551F000E06018 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
+		9B063BE5163551F000E06018 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
+		9B063BE6163551F000E06018 /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
+		9B063BE7163551F000E06018 /* SneakyJoystickSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedBase.m; sourceTree = "<group>"; };
+		9B063BE8163551F000E06018 /* SneakyJoystickSkinnedDPadExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedDPadExample.h; sourceTree = "<group>"; };
+		9B063BE9163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
+		9B063BEA163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
+		9B063BEB163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
 		9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9BFFB6531636C431006ECAC0 /* BattleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSprite.h; sourceTree = "<group>"; };
+		9BFFB6541636C431006ECAC0 /* BattleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1938,7 +1941,7 @@
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
 				9B062E8616353F5400E06018 /* BattleLayer.h */,
 				9B062E8716353F5400E06018 /* BattleLayer.m */,
-				9B062E7F16353A2B00E06018 /* Character */,
+				9B062E7F16353A2B00E06018 /* Sprite */,
 				9B062E701635275300E06018 /* HelloWorldLayer.h */,
 				9B062E711635275300E06018 /* HelloWorldLayer.m */,
 				9B062E731635275300E06018 /* IntroLayer.h */,
@@ -2315,13 +2318,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9B062E7F16353A2B00E06018 /* Character */ = {
+		9B062E7F16353A2B00E06018 /* Sprite */ = {
 			isa = PBXGroup;
 			children = (
 				9B062E8216353A8200E06018 /* Army */,
+				9BFFB6531636C431006ECAC0 /* BattleSprite.h */,
+				9BFFB6541636C431006ECAC0 /* BattleSprite.m */,
 				9B062E8116353A4F00E06018 /* Player */,
 			);
-			name = Character;
+			name = Sprite;
 			sourceTree = "<group>";
 		};
 		9B062E8116353A4F00E06018 /* Player */ = {
@@ -3091,7 +3096,7 @@
 				9B063BEB163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m */,
 			);
 			name = SneakyJoystick;
-			path = Classes;
+			path = libs/SneakyJoystick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4004,6 +4009,7 @@
 				9B063BF4163551F000E06018 /* SneakyJoystickSkinnedBase.m in Sources */,
 				9B063BF5163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m in Sources */,
 				9B063BF6163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m in Sources */,
+				9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

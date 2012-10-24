@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "BattleSprite.h"
+
 #import "SneakyJoystick.h"
 #import "SneakyJoystickSkinnedJoystickExample.h"
 #import "SneakyJoystickSkinnedDPadExample.h"
@@ -20,7 +22,14 @@
     SneakyJoystick *leftJoystick;
     SneakyButton *attackButton;
     
-    CCSprite *currentSprite;
+    BattleSprite *currentSprite;
+    NSMutableArray *sprites;
+    
+    bool canMove;
+    bool isMove;
+    float cumulativeTime;
+    
+    int currentIndex;
 }
 
 +(id) scene;
