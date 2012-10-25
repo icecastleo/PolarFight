@@ -30,6 +30,8 @@
 {
 	if(self = [super init]) {
 		self.isTouchEnabled = YES;
+        
+        CGSize size = [CCDirector sharedDirector].winSize;
 				
         [self initJoystick];
         
@@ -66,6 +68,35 @@
         
         currentIndex = 0;
         currentSprite = sprites[currentIndex];
+
+        
+        startLabel = [CCLabelTTF labelWithString:@"Press to start!"  fontName:@"Marker Felt"  fontSize:21];
+        
+        startLabel.position = ccp(size.width / 2,size.height / 2);
+        
+        startLabel.opacity = 150;
+        
+        [self addChild:startLabel];
+
+        
+        selectSprite = [[CCSprite alloc] init];
+//        selectSprite = [CCSprite spriteWithFile:@"select-1.png"];
+//        [selectSprite retain];
+        [self addChild:selectSprite];
+        
+        CCAnimation *animation = [CCAnimation animation];
+        
+        [animation addSpriteFrameWithFilename:@"select-1.png"];
+        [animation addSpriteFrameWithFilename:@"select-2.png"];
+        [animation addSpriteFrameWithFilename:@"select-3.png"];
+        animation.restoreOriginalFrame = NO;
+        animation.delayPerUnit = 0.25;
+        
+        CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
+        selectAction = [CCRepeatForever actionWithAction:selectAnimate];
+        [selectAction retain];
+        
+        [self startSelect];
         
         [self scheduleUpdate];
 	}
@@ -99,6 +130,9 @@
     [leftJoystick release];
     [attackButton release];
     [sprites release];
+    
+    [selectSprite release];
+    [selectAction release];
     [super dealloc];
 }
 
@@ -107,13 +141,32 @@
     [self addChild:sprite];
 }
 
+-(void) startSelect {
+    selectSprite.position = currentSprite.position;
+    [selectSprite runAction:selectAction];
+    selectSprite.visible = YES;
+}
+
+-(void) stopSelect {
+    selectSprite.visible = NO;
+    [selectSprite stopAllActions];
+}
+
 - (void) update:(ccTime) delta {
     
     if(!canMove)
         return;
     
-    if(!isMove && (leftJoystick.velocity.x != 0 || leftJoystick.velocity.y != 0))
+//    if(!isMove && (leftJoystick.velocity.x != 0 || leftJoystick.velocity.y != 0))
+//        isMove = YES;
+    
+    if(!isMove && attackButton.active) {
+        attackButton.active = NO;
         isMove = YES;
+        startLabel.visible = false;
+        [self stopSelect];
+        return;
+    }
     
     if(isMove) {
         
@@ -130,6 +183,7 @@
         }
         
         if(attackButton.active) {
+            attackButton.active = NO;
             [currentSprite attackEnemy:nil];
             return;
         }
@@ -141,14 +195,18 @@
 -(void) endMove {
     canMove = NO;
     
-    // 回合結束的檢查
-    
+    // 回合結束的檢查 && 設定參數
+ 
     isMove = NO;
+    startLabel.visible = YES;
+    
     cumulativeTime = 0;
     
     currentIndex = ++currentIndex % sprites.count;
     
     currentSprite = sprites[currentIndex];
+    
+    [self startSelect];
     
     canMove = YES;
 }

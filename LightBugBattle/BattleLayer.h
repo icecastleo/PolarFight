@@ -30,6 +30,11 @@
     float cumulativeTime;
     
     int currentIndex;
+    
+    CCLabelTTF *startLabel;
+    
+    CCSprite *selectSprite;
+    CCAction *selectAction;
 }
 
 +(id) scene;
