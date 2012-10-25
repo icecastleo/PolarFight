@@ -54,23 +54,28 @@
         
         state = stateIdle;
         
-//        upAnimate.duration = 0.3;
-//        CCAnimation *animation = [CCAnimation animation];
-//        
-//        [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr1.gif",name]];
-//        [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr2.gif",name]];
-//        animation.restoreOriginalFrame = NO;
-//        animation.delayPerUnit = 0.1;
-//        
-//        upAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-//
-//        
-//        [self runAction:[CCRepeatForever actionWithAction:upAnimate]];
+        bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
+        bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
+        [self addChild:bloodSprite];
+        
+        //        upAnimate.duration = 0.3;
+        //        CCAnimation *animation = [CCAnimation animation];
+        //
+        //        [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr1.gif",name]];
+        //        [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr2.gif",name]];
+        //        animation.restoreOriginalFrame = NO;
+        //        animation.delayPerUnit = 0.1;
+        //
+        //        upAnimate = [[CCAnimate alloc] initWithAnimation:animation];
+        //
+        //
+        //        [self runAction:[CCRepeatForever actionWithAction:upAnimate]];
     }
     return self;
 }
 
 -(void) setRandomAbility {
+    maxHp = 30;
     hp = 30;
     
     attack = arc4random() % 4 + 3;
@@ -112,7 +117,7 @@
     animation.delayPerUnit = 0.5;
     
     leftAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-
+    
     
     animation = [CCAnimation animation];
     
@@ -175,6 +180,8 @@
     
     // be attacked state;
     hp -= damage;
+    
+    bloodSprite.scaleX = hp / maxHp;
     
     if(hp <= 0) {
         state = stateDead;
