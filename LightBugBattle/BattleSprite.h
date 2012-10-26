@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 @class BattleLayer;
-
+@class AttackType;
 typedef enum {
     stateAttack,
     stateMove,
@@ -50,7 +50,7 @@ typedef enum {
     
     BattleLayer *layer;
     NSMutableArray *pointArray;
-    CGMutablePathRef path;
+    AttackType *attackType;
     
 }
 
@@ -73,10 +73,13 @@ typedef enum {
 +(id) spriteWithFile:(NSString *)filename player:(int)player;
 -(id) initWithFile:(NSString *)filename player:(int)player;
 
+-(NSString*) getName;
+
 -(void) addPosition:(CGPoint)point time:(ccTime)delta;
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
 -(void) getDamage:(int) damage;
-
+-(void) drawRange;
 -(void) end;
+
 @end

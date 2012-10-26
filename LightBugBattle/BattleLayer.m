@@ -200,6 +200,8 @@
             return;
         }
         
+        [currentSprite drawRange];
+        
         [currentSprite addPosition:leftJoystick.velocity time:delta];       
     }
 }
