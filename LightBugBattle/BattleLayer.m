@@ -141,6 +141,8 @@
     [self addChild:sprite];
 }
 
+
+
 -(void) startSelect {
     selectSprite.position = currentSprite.position;
     [selectSprite runAction:selectAction];
@@ -184,7 +186,7 @@
         
         if(attackButton.active) {
             attackButton.active = NO;
-            [currentSprite attackEnemy:nil];
+            [currentSprite attackEnemy:sprites];
             return;
         }
         

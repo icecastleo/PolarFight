@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+@class BattleLayer;
 
 typedef enum {
     stateAttack,
@@ -42,6 +43,11 @@ typedef enum {
     
 //    SpriteStates state;
     SpriteDirections direction;
+    
+    BattleLayer *layer;
+    NSMutableArray *pointArray;
+    CGMutablePathRef path;
+    
 }
 
 @property int player;
@@ -54,6 +60,8 @@ typedef enum {
 @property (readonly) int moveTime;
 
 @property (readonly) SpriteStates state;
+
+@property (nonatomic, retain) NSMutableArray *pointArray;
 
 //+(id) spriteWithRandomAbility;
 //-(id) initWithRandomAbility;

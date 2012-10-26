@@ -38,5 +38,5 @@
 }
 
 +(id) scene;
-
++(NSMutableArray*) getSprites;
 @end
