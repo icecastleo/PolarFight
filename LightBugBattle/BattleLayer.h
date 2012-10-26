@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "BattleSprite.h"
+#import "CountDownLabel.h"
 
 #import "SneakyJoystick.h"
 #import "SneakyJoystickSkinnedJoystickExample.h"
@@ -35,6 +36,8 @@
     
     CCSprite *selectSprite;
     CCAction *selectAction;
+    
+    CountDownLabel *countDownLabel;
 }
 
 +(id) scene;
