@@ -54,6 +54,13 @@
         
         state = stateIdle;
         
+        
+        
+        bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
+        bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
+        [self addChild:bloodSprite];
+        
+        
         layer = (BattleLayer*)[self parent];
         [self makePoint];
         [self makePath];
