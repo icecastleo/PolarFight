@@ -28,20 +28,24 @@ typedef enum {
     
     NSString *name;
     
-//    int hp;
-//    int attack;
-//    int defense;
-//    int speed;
-//    
-//    int moveSpeed;
-//    int moveTime;
+    CCSprite *bloodSprite;
+    
+    int maxHp;
+    
+    //    int hp;
+    //    int attack;
+    //    int defense;
+    //    int speed;
+    //
+    //    int moveSpeed;
+    //    int moveTime;
     
     CCAnimate *upAnimate;
     CCAnimate *downAnimate;
     CCAnimate *rightAnimate;
     CCAnimate *leftAnimate;
     
-//    SpriteStates state;
+    //    SpriteStates state;
     SpriteDirections direction;
     
     BattleLayer *layer;
@@ -52,7 +56,7 @@ typedef enum {
 
 @property int player;
 
-@property int hp;
+@property (readonly) int hp;
 @property (readonly) int attack;
 @property (readonly) int defense;
 @property (readonly) int speed;

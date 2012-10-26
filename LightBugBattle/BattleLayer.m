@@ -98,6 +98,10 @@
         
         [self startSelect];
         
+        countDownLabel = [[CountDownLabel alloc] initWithTime:[currentSprite moveTime]];
+        countDownLabel.position = ccp(size.width / 2, size.height - 30);
+        [self addChild:countDownLabel];
+        
         [self scheduleUpdate];
 	}
 	return self;
@@ -154,6 +158,11 @@
     [selectSprite stopAllActions];
 }
 
+//-(void) setCountDownLable {
+//    countDownLabel = [[CountDownLabel alloc] initWithTime:[currentSprite moveTime]];
+//    CountDownLabel.position_ = ccp(<#__X__#>, <#__Y__#>)
+//}
+
 - (void) update:(ccTime) delta {
     
     if(!canMove)
@@ -165,6 +174,7 @@
     if(!isMove && attackButton.active) {
         attackButton.active = NO;
         isMove = YES;
+        [countDownLabel start];
         startLabel.visible = false;
         [self stopSelect];
         return;
@@ -209,6 +219,7 @@
     currentSprite = sprites[currentIndex];
     
     [self startSelect];
+    [countDownLabel resetTime:currentSprite.moveTime];
     
     canMove = YES;
 }

@@ -99,6 +99,7 @@
 }
 
 -(void) setRandomAbility {
+    maxHp = 30;
     hp = 30;
     
     attack = arc4random() % 4 + 3;
@@ -140,7 +141,7 @@
     animation.delayPerUnit = 0.5;
     
     leftAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-
+    
     
     animation = [CCAnimation animation];
     
@@ -203,6 +204,8 @@
     
     // be attacked state;
     hp -= damage;
+    
+    bloodSprite.scaleX = hp / maxHp;
     
     if(hp <= 0) {
         state = stateDead;

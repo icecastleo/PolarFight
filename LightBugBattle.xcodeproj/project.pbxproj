@@ -868,6 +868,9 @@
 		9B520C1C1639128100057A3D /* select-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520C191639128100057A3D /* select-1.png */; };
 		9B520C1D1639128100057A3D /* select-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520C1A1639128100057A3D /* select-2.png */; };
 		9B520C1E1639128100057A3D /* select-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520C1B1639128100057A3D /* select-3.png */; };
+		9B520E1416396C8F00057A3D /* CountDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B520E1316396C8F00057A3D /* CountDownLabel.m */; };
+		9B520E20163972F500057A3D /* TestFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1E163972F500057A3D /* TestFont.fnt */; };
+		9B520E21163972F500057A3D /* TestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1F163972F500057A3D /* TestFont.png */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
 		9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFB6541636C431006ECAC0 /* BattleSprite.m */; };
 /* End PBXBuildFile section */
@@ -1881,6 +1884,10 @@
 		9B520C191639128100057A3D /* select-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-1.png"; sourceTree = "<group>"; };
 		9B520C1A1639128100057A3D /* select-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-2.png"; sourceTree = "<group>"; };
 		9B520C1B1639128100057A3D /* select-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-3.png"; sourceTree = "<group>"; };
+		9B520E1216396C8F00057A3D /* CountDownLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountDownLabel.h; path = ../CountDownLabel.h; sourceTree = "<group>"; };
+		9B520E1316396C8F00057A3D /* CountDownLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountDownLabel.m; path = ../CountDownLabel.m; sourceTree = "<group>"; };
+		9B520E1E163972F500057A3D /* TestFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFont.fnt; sourceTree = "<group>"; };
+		9B520E1F163972F500057A3D /* TestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestFont.png; sourceTree = "<group>"; };
 		9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9BFFB6531636C431006ECAC0 /* BattleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSprite.h; sourceTree = "<group>"; };
 		9BFFB6541636C431006ECAC0 /* BattleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSprite.m; sourceTree = "<group>"; };
@@ -1947,13 +1954,15 @@
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
 				9B062E8616353F5400E06018 /* BattleLayer.h */,
 				9B062E8716353F5400E06018 /* BattleLayer.m */,
-				9B062E7F16353A2B00E06018 /* Sprite */,
+				9B520E1216396C8F00057A3D /* CountDownLabel.h */,
+				9B520E1316396C8F00057A3D /* CountDownLabel.m */,
 				9B062E701635275300E06018 /* HelloWorldLayer.h */,
 				9B062E711635275300E06018 /* HelloWorldLayer.m */,
 				9B062E731635275300E06018 /* IntroLayer.h */,
 				9B062E741635275300E06018 /* IntroLayer.m */,
 				9B062D101635275100E06018 /* libs */,
 				9B062CF61635275000E06018 /* Resources */,
+				9B062E7F16353A2B00E06018 /* Sprite */,
 				9B062E691635275300E06018 /* Supporting Files */,
 			);
 			path = LightBugBattle;
@@ -1962,6 +1971,8 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B520E1E163972F500057A3D /* TestFont.fnt */,
+				9B520E1F163972F500057A3D /* TestFont.png */,
 				9B520C191639128100057A3D /* select-1.png */,
 				9B520C1A1639128100057A3D /* select-2.png */,
 				9B520C1B1639128100057A3D /* select-3.png */,
@@ -3896,6 +3907,8 @@
 				9B520C1C1639128100057A3D /* select-1.png in Resources */,
 				9B520C1D1639128100057A3D /* select-2.png in Resources */,
 				9B520C1E1639128100057A3D /* select-3.png in Resources */,
+				9B520E20163972F500057A3D /* TestFont.fnt in Resources */,
+				9B520E21163972F500057A3D /* TestFont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4022,6 +4035,7 @@
 				9B063BF5163551F000E06018 /* SneakyJoystickSkinnedDPadExample.m in Sources */,
 				9B063BF6163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m in Sources */,
 				9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */,
+				9B520E1416396C8F00057A3D /* CountDownLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
