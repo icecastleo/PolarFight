@@ -1,15 +1,15 @@
 //
-//  FanShape.m
+//  CircleAttackType.m
 //  LightBugBattle
 //
-//  Created by 陳 謙 on 12/10/26.
+//  Created by 陳 謙 on 12/10/28.
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "FanShape.h"
+#import "CircleAttackType.h"
 
 
-@implementation FanShape
+@implementation CircleAttackType
 
 -(void)setParameter {
     effectSides = effectSideEnemy;
@@ -18,14 +18,8 @@
     
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, 50, M_PI/4*7, M_PI/4*1,NO);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, 50, 0, M_PI*2,NO);
     CGPathCloseSubpath(attackRange);
     CGPathRetain(attackRange);
 }
-- (void) dealloc
-{
-	[super dealloc];
-}
-
-
 @end

@@ -27,7 +27,6 @@ typedef enum{
 
 @interface AttackType : NSObject {
     NSString *name;
-    NSMutableArray *attackPointArray;
     CGMutablePathRef attackRange;
     BattleSprite* battleSprite;
     EffectNums effectNums;
@@ -40,10 +39,8 @@ typedef enum{
 
 @property (nonatomic, retain) BattleSprite *battleSprite;
 @property (nonatomic, retain) CCSprite *rangeSprite;
-@property (nonatomic, retain) NSMutableArray *attackPointArray;
 @property (nonatomic) CGMutablePathRef attackRange;
 -(id) initWithSprite:(BattleSprite*) sprite;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
--(void)setPath;
 -(void) setRotation:(float) offX:(float) offY;
 @end

@@ -9,6 +9,7 @@
 #import "BattleSprite.h"
 #import "BattleLayer.h"
 #import "FanShape.h"
+#import "CircleAttackType.h"
 @implementation BattleSprite
 
 @synthesize player;
@@ -63,7 +64,7 @@
         
         layer = (BattleLayer*)[self parent];
         [self makePoint];
-        attackType = [[FanShape alloc] initWithSprite:self];
+        attackType = [[CircleAttackType alloc] initWithSprite:self];
         context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
 //        CCAnimation *animation = [CCAnimation animation];

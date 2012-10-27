@@ -11,6 +11,7 @@
 		2D19985F163A820C00DB5AB9 /* FanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D19985E163A820C00DB5AB9 /* FanShape.m */; };
 		2D4AD558163B107D00A949C3 /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4AD557163B107C00A949C3 /* blood.png */; };
 		2D4AD564163BE32C00A949C3 /* blob.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4AD563163BE32B00A949C3 /* blob.png */; };
+		2D4AD56B163C44D900A949C3 /* CircleAttackType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD56A163C44D900A949C3 /* CircleAttackType.m */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -886,6 +887,8 @@
 		2D19985E163A820C00DB5AB9 /* FanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanShape.m; sourceTree = "<group>"; };
 		2D4AD557163B107C00A949C3 /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blood.png; path = ../../../../Downloads/blood.png; sourceTree = "<group>"; };
 		2D4AD563163BE32B00A949C3 /* blob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blob.png; path = ../../../../Desktop/blob.png; sourceTree = "<group>"; };
+		2D4AD569163C44D900A949C3 /* CircleAttackType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAttackType.h; sourceTree = "<group>"; };
+		2D4AD56A163C44D900A949C3 /* CircleAttackType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAttackType.m; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* LightBugBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBugBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1930,6 +1933,8 @@
 				2D199853163A7F4500DB5AB9 /* AttackType.m */,
 				2D19985D163A820C00DB5AB9 /* FanShape.h */,
 				2D19985E163A820C00DB5AB9 /* FanShape.m */,
+				2D4AD569163C44D900A949C3 /* CircleAttackType.h */,
+				2D4AD56A163C44D900A949C3 /* CircleAttackType.m */,
 			);
 			name = AttackType;
 			sourceTree = "<group>";
@@ -4064,6 +4069,7 @@
 				9B520E1416396C8F00057A3D /* CountDownLabel.m in Sources */,
 				2D199854163A7F4500DB5AB9 /* AttackType.m in Sources */,
 				2D19985F163A820C00DB5AB9 /* FanShape.m in Sources */,
+				2D4AD56B163C44D900A949C3 /* CircleAttackType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@
 #import "BattleSprite.h"
 
 @implementation AttackType
-@synthesize battleSprite, attackPointArray,attackRange,rangeSprite;
+@synthesize battleSprite,attackRange,rangeSprite;
 
 
 -(id)initWithSprite:(BattleSprite*) sprite
@@ -40,20 +40,6 @@
 
 -(void)setParameter {
     [self doesNotRecognizeSelector:_cmd];
-}
-
--(void)setPath
-{
-    attackRange = CGPathCreateMutable();
-    CGPoint loc=[[attackPointArray objectAtIndex:0] CGPointValue];
-    CGPathMoveToPoint(attackRange, NULL, loc.x, loc.y);
-    for (int i=1; i<[attackPointArray count]; i++) {
-        CGPoint loc=[[attackPointArray objectAtIndex:i] CGPointValue];
-        CGPathAddLineToPoint(attackRange, NULL, loc.x, loc.y);
-    }
-    
-    CGPathCloseSubpath(attackRange);
-    CGPathRetain(attackRange);
 }
 
 -(void)showPoints {
@@ -86,11 +72,29 @@
         BattleSprite *bs = ((BattleSprite*)[enemies objectAtIndex:i]);
     
         ///determine if this attack can effect self
-        if([bs getName]==[battleSprite getName])
+        if(effectSelfOrNot == effectExceptSelf){
+        if(bs==battleSprite)
             continue;
+        }
+        
+        
+        
         ///determine if can effect ally
-        if(bs.player==battleSprite.player)
-            continue;
+        switch (effectSides) {
+            case effectSideAlly:
+                if(bs.player!=battleSprite.player)
+                    continue;
+                break; 
+            case effectSideEnemy:
+                if(bs.player==battleSprite.player)
+                    continue;
+                break;
+            case effectSideBoth:
+                break;
+            default:
+                break;
+        }
+        
         
         NSMutableArray *points=bs.pointArray;
         for (int j=0; j<[points count]; j++) {
