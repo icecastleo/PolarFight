@@ -151,11 +151,14 @@
     selectSprite.position = currentSprite.position;
     [selectSprite runAction:selectAction];
     selectSprite.visible = YES;
+    [currentSprite showAttackRange:YES];
+    
 }
 
 -(void) stopSelect {
     selectSprite.visible = NO;
     [selectSprite stopAllActions];
+  
 }
 
 //-(void) setCountDownLable {
@@ -199,9 +202,8 @@
             [currentSprite attackEnemy:sprites];
             return;
         }
-        
-        [currentSprite drawRange];
-        
+        if(leftJoystick.velocity.x!=0 && leftJoystick.velocity.y!=0)
+            [currentSprite setAttackRotation:leftJoystick.velocity.x :leftJoystick.velocity.y];
         [currentSprite addPosition:leftJoystick.velocity time:delta];       
     }
 }
@@ -212,6 +214,7 @@
     // 回合結束的檢查 && 設定參數
  
     isMove = NO;
+    [currentSprite showAttackRange:NO];
     startLabel.visible = YES;
     
     cumulativeTime = 0;

@@ -51,7 +51,7 @@ typedef enum {
     BattleLayer *layer;
     NSMutableArray *pointArray;
     AttackType *attackType;
-    
+    CGContextRef context;
 }
 
 @property int player;
@@ -79,7 +79,8 @@ typedef enum {
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
 -(void) getDamage:(int) damage;
--(void) drawRange;
+-(void) showAttackRange:(BOOL)visible;
 -(void) end;
+-(void) setAttackRotation:(float) offX:(float) offY;
 
 @end

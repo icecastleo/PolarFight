@@ -17,17 +17,27 @@
     effectSelfOrNot = effectExceptSelf;
     
     attackPointArray = [NSMutableArray arrayWithObjects:
-    [NSValue valueWithCGPoint:ccp(0, 32)],
-    [NSValue valueWithCGPoint:ccp(32, 32)],
-    [NSValue valueWithCGPoint:ccp(32, 64)],
-    [NSValue valueWithCGPoint:ccp(0, 64)],nil];
+    [NSValue valueWithCGPoint:ccp(rangeWidth/2-30, rangeHeight/2-30)],
+    [NSValue valueWithCGPoint:ccp(rangeWidth/2+30, rangeHeight/2-30)],
+    [NSValue valueWithCGPoint:ccp(rangeWidth/2+30, rangeHeight/2+30)],
+    [NSValue valueWithCGPoint:ccp(rangeWidth/2-30, rangeHeight/2+30)],nil];
     [self setPath];
      [attackPointArray retain];
 }
+-(void)setPath
+{
+    attackRange = CGPathCreateMutable();
+    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, 50, M_PI/4*7, M_PI/4*1,NO);
+    CGPathCloseSubpath(attackRange);
+    CGPathRetain(attackRange);
 
+}
 - (void) dealloc
 {
     [attackPointArray release];
 	[super dealloc];
 }
+
+
 @end

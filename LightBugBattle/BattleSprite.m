@@ -64,6 +64,7 @@
         layer = (BattleLayer*)[self parent];
         [self makePoint];
         attackType = [[FanShape alloc] initWithSprite:self];
+        context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
 //        CCAnimation *animation = [CCAnimation animation];
 //        
@@ -83,6 +84,10 @@
 -(NSString*) getName
 {
     return name;
+}
+-(void) setAttackRotation:(float) offX:(float) offY
+{
+    [attackType setRotation:offX :offY];
 }
 
 -(void) makePoint
@@ -225,10 +230,11 @@
     
 }
 
--(void) drawRange{
-    
-  
+-(void) showAttackRange:(BOOL)visible
+{
+    attackType.rangeSprite.visible = visible;
 }
+
 
 -(void) end {
     // 回合結束
