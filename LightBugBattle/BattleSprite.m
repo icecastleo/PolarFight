@@ -8,7 +8,8 @@
 
 #import "BattleSprite.h"
 #import "BattleLayer.h"
-
+#import "FanShape.h"
+#import "CircleAttackType.h"
 @implementation BattleSprite
 
 @synthesize player;
@@ -63,7 +64,8 @@
         
         layer = (BattleLayer*)[self parent];
         [self makePoint];
-        [self makePath];
+        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
 //        CCAnimation *animation = [CCAnimation animation];
 //        
@@ -80,6 +82,15 @@
     return self;
 }
 
+-(NSString*) getName
+{
+    return name;
+}
+-(void) setAttackRotation:(float) offX:(float) offY
+{
+    [attackType setRotation:offX :offY];
+}
+
 -(void) makePoint
 {
     pointArray=[NSMutableArray arrayWithObjects:
@@ -91,19 +102,6 @@
     
 }
 
--(void) makePath
-{
-    path=CGPathCreateMutable();
-    CGPoint loc=[[pointArray objectAtIndex:0] CGPointValue];
-    CGPathMoveToPoint(path, NULL, loc.x, loc.y);
-    for (int i=1; i<[pointArray count]; i++) {
-        CGPoint loc=[[pointArray objectAtIndex:i] CGPointValue];
-        CGPathAddLineToPoint(path, NULL, loc.x, loc.y);
-    }
-    CGPathCloseSubpath(path);
-    CGPathRetain(path);
-    
-}
 
 -(void) setRandomAbility {
     maxHp = 30;
@@ -275,6 +273,12 @@
     }
     
 }
+
+-(void) showAttackRange:(BOOL)visible
+{
+    attackType.rangeSprite.visible = visible;
+}
+
 
 -(void) end {
     // 回合結束
