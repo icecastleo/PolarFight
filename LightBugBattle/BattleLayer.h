@@ -41,5 +41,8 @@
 }
 
 +(id) scene;
-+(NSMutableArray*) getSprites;
+
+// Where to remove?
+-(void) removeSprite:(BattleSprite*) sprite;
+
 @end

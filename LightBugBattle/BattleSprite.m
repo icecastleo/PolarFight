@@ -114,7 +114,7 @@
     speed = arc4random() % 7 + 3;
     
     moveSpeed = arc4random() % 3 + 4;
-    moveTime = 3;
+    moveTime = arc4random() % 3 + 2;
 }
 
 -(void) setAnimation {
@@ -209,16 +209,23 @@
 
 -(void) getDamage:(int) damage {
     
+    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, name, damage);
+    
     // be attacked state;
     hp -= damage;
     
-    bloodSprite.scaleX = hp / maxHp;
+    bloodSprite.scaleX = (float)hp / maxHp;
+    bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
     
     if(hp <= 0) {
         state = stateDead;
         
         // dead animation + cleanup
-        [self removeFromParentAndCleanup:YES];
+//        [self removeFromParentAndCleanup:YES];
+        
+        BattleLayer *bl = (BattleLayer*)[self parent];
+        
+        [bl removeSprite:self];
     }
 }
 
@@ -260,7 +267,7 @@
             loc=[bs convertToWorldSpace:loc];
             loc=[self convertToNodeSpace:loc];
             if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-               CCLOG(@"Player %i is under attack ",bs.player);
+                [bs getDamage:attack];
                 break;
             }
         }

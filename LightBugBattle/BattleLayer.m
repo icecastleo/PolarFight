@@ -140,12 +140,15 @@
     [super dealloc];
 }
 
-- (void) addSprite:(CCSprite*) sprite {
+-(void) addSprite:(BattleSprite*) sprite {
     [sprites addObject:sprite];
     [self addChild:sprite];
 }
 
-
+-(void) removeSprite:(BattleSprite*) sprite {
+    [sprites removeObject:sprite];
+    [sprite removeFromParentAndCleanup:YES];
+}
 
 -(void) startSelect {
     selectSprite.position = currentSprite.position;
