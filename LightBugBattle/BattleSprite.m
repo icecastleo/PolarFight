@@ -233,44 +233,7 @@
     
     state = stateAttack;
     
-    NSMutableArray *attackPointArray;
-    attackPointArray=[NSMutableArray arrayWithObjects:
-                      [NSValue valueWithCGPoint:ccp(0, 32)],
-                      [NSValue valueWithCGPoint:ccp(32, 32)],
-                      [NSValue valueWithCGPoint:ccp(32, 64)],
-                      [NSValue valueWithCGPoint:ccp(0, 64)],nil];
-    
-    
-    
-    
-    CGMutablePathRef attackRange = CGPathCreateMutable();
-    CGPoint loc=[[attackPointArray objectAtIndex:0] CGPointValue];
-    CGPathMoveToPoint(attackRange, NULL, loc.x, loc.y);
-    for (int i=1; i<[attackPointArray count]; i++) {
-        CGPoint loc=[[attackPointArray objectAtIndex:i] CGPointValue];
-        CGPathAddLineToPoint(attackRange, NULL, loc.x, loc.y);
-    }
-    CGPathCloseSubpath(attackRange);
-    CGPathRetain(attackRange);
-    
-    for(int i = 0; i<[enemies count];i++)
-    {
-        BattleSprite *bs = ((BattleSprite*)[enemies objectAtIndex:i]);
-        if(bs.player==player)
-            continue;
-        NSMutableArray *points=bs.pointArray;
-        for (int j=0; j<[points count]; j++) {
-            CGPoint loc=[[points objectAtIndex:j] CGPointValue];
-            // switch coordinate systems
-            loc=[bs convertToWorldSpace:loc];
-            loc=[self convertToNodeSpace:loc];
-            if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-                [bs getDamage:attack];
-                break;
-            }
-        }
-        
-    }
+    [attackType getEffectTargets:enemies];
     
 }
 
