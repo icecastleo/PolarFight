@@ -11,9 +11,6 @@
 		2BBF9911163E6134005AD8B9 /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF990F163E6134005AD8B9 /* MapCameraControl.m */; };
 		2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF9914163E6267005AD8B9 /* MapControlExample.m */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
-		2D199854163A7F4500DB5AB9 /* AttackType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D199853163A7F4500DB5AB9 /* AttackType.m */; };
-		2D19985F163A820C00DB5AB9 /* FanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D19985E163A820C00DB5AB9 /* FanShape.m */; };
-		2D4AD56B163C44D900A949C3 /* CircleAttackType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD56A163C44D900A949C3 /* CircleAttackType.m */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -879,6 +876,9 @@
 		9B520E1416396C8F00057A3D /* CountDownLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B520E1316396C8F00057A3D /* CountDownLabel.m */; };
 		9B520E20163972F500057A3D /* TestFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1E163972F500057A3D /* TestFont.fnt */; };
 		9B520E21163972F500057A3D /* TestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1F163972F500057A3D /* TestFont.png */; };
+		9BFFAE67163E9DBB00073DC5 /* AttackType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* AttackType.m */; };
+		9BFFAE68163E9DBB00073DC5 /* CircleAttackType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* CircleAttackType.m */; };
+		9BFFAE69163E9DBB00073DC5 /* FanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE66163E9DBB00073DC5 /* FanShape.m */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
 		9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFB6541636C431006ECAC0 /* BattleSprite.m */; };
 /* End PBXBuildFile section */
@@ -890,12 +890,6 @@
 		2BBF9913163E6267005AD8B9 /* MapControlExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlExample.h; sourceTree = "<group>"; };
 		2BBF9914163E6267005AD8B9 /* MapControlExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlExample.m; sourceTree = "<group>"; };
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
-		2D199852163A7F4500DB5AB9 /* AttackType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttackType.h; path = ../AttackType.h; sourceTree = "<group>"; };
-		2D199853163A7F4500DB5AB9 /* AttackType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttackType.m; path = ../AttackType.m; sourceTree = "<group>"; };
-		2D19985D163A820C00DB5AB9 /* FanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanShape.h; sourceTree = "<group>"; };
-		2D19985E163A820C00DB5AB9 /* FanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanShape.m; sourceTree = "<group>"; };
-		2D4AD569163C44D900A949C3 /* CircleAttackType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAttackType.h; sourceTree = "<group>"; };
-		2D4AD56A163C44D900A949C3 /* CircleAttackType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAttackType.m; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* LightBugBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBugBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1905,10 +1899,16 @@
 		9B520C191639128100057A3D /* select-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-1.png"; sourceTree = "<group>"; };
 		9B520C1A1639128100057A3D /* select-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-2.png"; sourceTree = "<group>"; };
 		9B520C1B1639128100057A3D /* select-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-3.png"; sourceTree = "<group>"; };
-		9B520E1216396C8F00057A3D /* CountDownLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountDownLabel.h; path = ../CountDownLabel.h; sourceTree = "<group>"; };
-		9B520E1316396C8F00057A3D /* CountDownLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountDownLabel.m; path = ../CountDownLabel.m; sourceTree = "<group>"; };
+		9B520E1216396C8F00057A3D /* CountDownLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownLabel.h; sourceTree = "<group>"; };
+		9B520E1316396C8F00057A3D /* CountDownLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownLabel.m; sourceTree = "<group>"; };
 		9B520E1E163972F500057A3D /* TestFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFont.fnt; sourceTree = "<group>"; };
 		9B520E1F163972F500057A3D /* TestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestFont.png; sourceTree = "<group>"; };
+		9BFFAE61163E9DBB00073DC5 /* AttackType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackType.h; sourceTree = "<group>"; };
+		9BFFAE62163E9DBB00073DC5 /* AttackType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackType.m; sourceTree = "<group>"; };
+		9BFFAE63163E9DBB00073DC5 /* CircleAttackType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleAttackType.h; sourceTree = "<group>"; };
+		9BFFAE64163E9DBB00073DC5 /* CircleAttackType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleAttackType.m; sourceTree = "<group>"; };
+		9BFFAE65163E9DBB00073DC5 /* FanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FanShape.h; sourceTree = "<group>"; };
+		9BFFAE66163E9DBB00073DC5 /* FanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FanShape.m; sourceTree = "<group>"; };
 		9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9BFFB6531636C431006ECAC0 /* BattleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSprite.h; sourceTree = "<group>"; };
 		9BFFB6541636C431006ECAC0 /* BattleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSprite.m; sourceTree = "<group>"; };
@@ -1934,19 +1934,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D19984D163A7ECD00DB5AB9 /* AttackType */ = {
-			isa = PBXGroup;
-			children = (
-				2D199852163A7F4500DB5AB9 /* AttackType.h */,
-				2D199853163A7F4500DB5AB9 /* AttackType.m */,
-				2D19985D163A820C00DB5AB9 /* FanShape.h */,
-				2D19985E163A820C00DB5AB9 /* FanShape.m */,
-				2D4AD569163C44D900A949C3 /* CircleAttackType.h */,
-				2D4AD56A163C44D900A949C3 /* CircleAttackType.m */,
-			);
-			name = AttackType;
-			sourceTree = "<group>";
-		};
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
@@ -1984,14 +1971,13 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				9BFFAE60163E9D8A00073DC5 /* AttackType */,
 				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
 				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
 				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
 				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
-				2D19984D163A7ECD00DB5AB9 /* AttackType */,
 				9B062E6D1635275300E06018 /* AppDelegate.h */,
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
-				2D19984D163A7ECD00DB5AB9 /* AttackType */,
 				9B062E8616353F5400E06018 /* BattleLayer.h */,
 				9B062E8716353F5400E06018 /* BattleLayer.m */,
 				9B520E1216396C8F00057A3D /* CountDownLabel.h */,
@@ -3164,6 +3150,19 @@
 			path = libs/SneakyJoystick;
 			sourceTree = "<group>";
 		};
+		9BFFAE60163E9D8A00073DC5 /* AttackType */ = {
+			isa = PBXGroup;
+			children = (
+				9BFFAE61163E9DBB00073DC5 /* AttackType.h */,
+				9BFFAE62163E9DBB00073DC5 /* AttackType.m */,
+				9BFFAE63163E9DBB00073DC5 /* CircleAttackType.h */,
+				9BFFAE64163E9DBB00073DC5 /* CircleAttackType.m */,
+				9BFFAE65163E9DBB00073DC5 /* FanShape.h */,
+				9BFFAE66163E9DBB00073DC5 /* FanShape.m */,
+			);
+			name = AttackType;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4084,11 +4083,11 @@
 				9B063BF6163551F000E06018 /* SneakyJoystickSkinnedJoystickExample.m in Sources */,
 				9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */,
 				9B520E1416396C8F00057A3D /* CountDownLabel.m in Sources */,
-				2D199854163A7F4500DB5AB9 /* AttackType.m in Sources */,
-				2D19985F163A820C00DB5AB9 /* FanShape.m in Sources */,
-				2D4AD56B163C44D900A949C3 /* CircleAttackType.m in Sources */,
 				2BBF9911163E6134005AD8B9 /* MapCameraControl.m in Sources */,
 				2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */,
+				9BFFAE67163E9DBB00073DC5 /* AttackType.m in Sources */,
+				9BFFAE68163E9DBB00073DC5 /* CircleAttackType.m in Sources */,
+				9BFFAE69163E9DBB00073DC5 /* FanShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

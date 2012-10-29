@@ -64,7 +64,8 @@
         
         layer = (BattleLayer*)[self parent];
         [self makePoint];
-        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        attackType = [[FanShape alloc] initWithSprite:self];
+//        attackType = [[CircleAttackType alloc] initWithSprite:self];
         context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
 //        CCAnimation *animation = [CCAnimation animation];
@@ -233,7 +234,11 @@
     
     state = stateAttack;
     
-    [attackType getEffectTargets:enemies];
+    NSMutableArray *effectTargets = [attackType getEffectTargets:enemies];
+    
+    for (BattleSprite *sprite in effectTargets) {
+        [sprite getDamage:attack];
+    }
     
 }
 
