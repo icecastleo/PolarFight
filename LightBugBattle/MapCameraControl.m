@@ -44,6 +44,11 @@
  
 -(void) followTarget:(CCSprite*)theTarget
 {
+    if( theTarget == NULL )
+    {
+        [self unschedule:@selector(followUpdate:)];
+        return ;
+    }
     target = theTarget;
     [self schedule:@selector(followUpdate:)];
 }

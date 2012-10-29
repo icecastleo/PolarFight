@@ -10,7 +10,7 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "BattleLayer.h"
-
+#import "MapControlExample.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
@@ -61,7 +61,11 @@
             [[CCDirector sharedDirector] replaceScene:[BattleLayer scene]];
         }];
 		
-		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, nil];
+        CCMenuItem *mapItem = [CCMenuItemFont itemWithString:@"MapCameraTest" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[MapControlExample scene]];
+        }];
+        
+		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, mapItem, nil];
 		
 		[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( size.width/2, size.height/2 )];
