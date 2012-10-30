@@ -12,6 +12,7 @@
 		2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF9914163E6267005AD8B9 /* MapControlExample.m */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
+		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -893,6 +894,7 @@
 		2D4AD58F163FCD8C00A949C3 /* SkillSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillSet.h; sourceTree = "<group>"; };
 		2D4AD590163FCD8C00A949C3 /* SkillSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSet.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
+		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* LightBugBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBugBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1939,6 +1941,7 @@
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
+				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
 				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
@@ -4100,6 +4103,7 @@
 				9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */,
 				9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */,
 				2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */,
+				2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
