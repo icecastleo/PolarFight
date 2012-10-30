@@ -1934,7 +1934,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D19984D163A7ECD00DB5AB9 /* AttackType */ = {
+		2D4AD57E163FC27C00A949C3 /* AttackType */ = {
 			isa = PBXGroup;
 			children = (
 				2D199852163A7F4500DB5AB9 /* AttackType.h */,
@@ -1984,14 +1984,13 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				2D4AD57E163FC27C00A949C3 /* AttackType */,
 				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
 				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
 				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
 				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
-				2D19984D163A7ECD00DB5AB9 /* AttackType */,
 				9B062E6D1635275300E06018 /* AppDelegate.h */,
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
-				2D19984D163A7ECD00DB5AB9 /* AttackType */,
 				9B062E8616353F5400E06018 /* BattleLayer.h */,
 				9B062E8716353F5400E06018 /* BattleLayer.m */,
 				9B520E1216396C8F00057A3D /* CountDownLabel.h */,
