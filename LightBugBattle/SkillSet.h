@@ -14,9 +14,12 @@
     NSString *name;
     RangeType *effectRange;
     BattleSprite* battleSprite;
+    NSMutableArray* effectSet;
 }
+-(id) initWithRangeName:(BattleSprite*) sprite rangeName:(NSString*) rangeName;
 -(id) initWithRange:(BattleSprite*) sprite range:(RangeType*) range;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;
+-(void) doSkill:(NSMutableArray *)targets;
 @end

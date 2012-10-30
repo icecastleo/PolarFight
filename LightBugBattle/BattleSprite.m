@@ -62,8 +62,8 @@
         
         layer = (BattleLayer*)[self parent];
         [self makePoint];
-        skillSet = [[SkillSet alloc] initWithRange:self range:NULL];
-//        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+        //        attackType = [[CircleAttackType alloc] initWithSprite:self];
         context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
 //        CCAnimation *animation = [CCAnimation animation];

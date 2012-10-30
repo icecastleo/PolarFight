@@ -22,6 +22,7 @@
         [self setParameter];
         [self showPoints];
         
+        
     }
     
     return self;
