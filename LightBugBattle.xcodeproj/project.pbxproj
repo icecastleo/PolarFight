@@ -879,7 +879,6 @@
 		9B520E21163972F500057A3D /* TestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1F163972F500057A3D /* TestFont.png */; };
 		9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* RangeType.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
-		9BFFAE69163E9DBB00073DC5 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE66163E9DBB00073DC5 /* RangeFanShape.m */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
 		9BFFB6551636C431006ECAC0 /* BattleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFB6541636C431006ECAC0 /* BattleSprite.m */; };
 /* End PBXBuildFile section */
@@ -1912,7 +1911,6 @@
 		9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCircle.h; sourceTree = "<group>"; };
 		9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeCircle.m; sourceTree = "<group>"; };
 		9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFanShape.h; sourceTree = "<group>"; };
-		9BFFAE66163E9DBB00073DC5 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9BFFB6531636C431006ECAC0 /* BattleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSprite.h; sourceTree = "<group>"; };
 		9BFFB6541636C431006ECAC0 /* BattleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSprite.m; sourceTree = "<group>"; };
@@ -1946,7 +1944,6 @@
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
 				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
 				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
-				9BFFAE66163E9DBB00073DC5 /* RangeFanShape.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -4102,7 +4099,6 @@
 				2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */,
 				9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */,
 				9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */,
-				9BFFAE69163E9DBB00073DC5 /* RangeFanShape.m in Sources */,
 				2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
