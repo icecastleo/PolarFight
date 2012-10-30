@@ -6,10 +6,10 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "FanShape.h"
+#import "RangeFanShape.h"
 
 
-@implementation FanShape
+@implementation RangeFanShape
 
 -(void)setParameter {
     effectSides = effectSideEnemy;

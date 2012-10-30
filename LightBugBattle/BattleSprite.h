@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "SkillKit.h"
 @class BattleLayer;
-@class AttackType;
+@class SkillSet;
 typedef enum {
     stateAttack,
     stateMove,
@@ -50,7 +51,7 @@ typedef enum {
     
     BattleLayer *layer;
     NSMutableArray *pointArray;
-    AttackType *attackType;
+    SkillSet *skillSet;
     CGContextRef context;
 }
 

@@ -8,8 +8,6 @@
 
 #import "BattleSprite.h"
 #import "BattleLayer.h"
-#import "FanShape.h"
-#import "CircleAttackType.h"
 @implementation BattleSprite
 
 @synthesize player;
@@ -64,7 +62,7 @@
         
         layer = (BattleLayer*)[self parent];
         [self makePoint];
-        attackType = [[FanShape alloc] initWithSprite:self];
+        skillSet = [[SkillSet alloc] initWithRange:self range:NULL];
 //        attackType = [[CircleAttackType alloc] initWithSprite:self];
         context = UIGraphicsGetCurrentContext();
 //        upAnimate.duration = 0.3;
@@ -89,7 +87,7 @@
 }
 -(void) setAttackRotation:(float) offX:(float) offY
 {
-    [attackType setRotation:offX :offY];
+    [skillSet setRangeRotation:offX :offY];
 }
 
 -(void) makePoint
@@ -234,7 +232,7 @@
     
     state = stateAttack;
     
-    NSMutableArray *effectTargets = [attackType getEffectTargets:enemies];
+    NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
     
     for (BattleSprite *sprite in effectTargets) {
         [sprite getDamage:attack];
@@ -244,7 +242,7 @@
 
 -(void) showAttackRange:(BOOL)visible
 {
-    attackType.rangeSprite.visible = visible;
+    [skillSet showAttackRange:visible];
 }
 
 

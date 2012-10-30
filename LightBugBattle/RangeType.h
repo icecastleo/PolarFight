@@ -25,7 +25,7 @@ typedef enum{
     effectSelf
 }EffectSelfOrNot;
 
-@interface AttackType : NSObject {
+@interface RangeType : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
     BattleSprite* battleSprite;

@@ -6,10 +6,10 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "CircleAttackType.h"
+#import "RangeCircle.h"
 
 
-@implementation CircleAttackType
+@implementation RangeCircle
 
 -(void)setParameter {
     effectSides = effectSideEnemy;

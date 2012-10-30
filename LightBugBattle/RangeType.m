@@ -6,10 +6,10 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "AttackType.h"
+#import "RangeType.h"
 #import "BattleSprite.h"
 
-@implementation AttackType
+@implementation RangeType
 @synthesize battleSprite,attackRange,rangeSprite;
 
 
@@ -58,6 +58,7 @@
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage( context );
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
+
     rangeSprite.position=ccp(battleSprite.texture.contentSize.width/2,battleSprite.texture.contentSize.height/2);
     rangeSprite.zOrder=-1;
     rangeSprite.visible=NO;
