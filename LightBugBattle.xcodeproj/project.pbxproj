@@ -1938,6 +1938,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D4AD598163FDDC400A949C3 /* Range */ = {
+			isa = PBXGroup;
+			children = (
+				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
+				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
+				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
+				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
+				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
+				9BFFAE66163E9DBB00073DC5 /* RangeFanShape.m */,
+			);
+			name = Range;
+			sourceTree = "<group>";
+		};
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
@@ -3157,12 +3170,7 @@
 		9BFFAE60163E9D8A00073DC5 /* SkillSet */ = {
 			isa = PBXGroup;
 			children = (
-				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
-				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
-				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
-				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
-				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
-				9BFFAE66163E9DBB00073DC5 /* RangeFanShape.m */,
+				2D4AD598163FDDC400A949C3 /* Range */,
 				2D4AD58F163FCD8C00A949C3 /* SkillSet.h */,
 				2D4AD590163FCD8C00A949C3 /* SkillSet.m */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
