@@ -11,15 +11,13 @@
 
 @implementation SkillSet
 
-
-
--(id) initWithRange:(BattleSprite*) sprite range:(RangeType*) range
+-(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range
 {
     if( (self=[super init]) ) {
         
-        battleSprite=sprite;
+        character = battleCharacter;
 //        effectRange=range;
-        effectRange = [[RangeFanShape alloc] initWithSprite:sprite];
+//        effectRange = [[RangeFanShape alloc] initWithSprite:character.characterSprite];
     }
     
     return self;

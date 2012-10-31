@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-@class BattleSprite;
+
+@class Character;
 typedef enum {
     effectSideEnemy,
     effectSideAlly,
@@ -28,7 +29,7 @@ typedef enum{
 @interface RangeType : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
-    BattleSprite* battleSprite;
+    Character* character;
     EffectNums effectNums;
     EffectSides effectSides;
     EffectSelfOrNot effectSelfOrNot;
@@ -37,10 +38,10 @@ typedef enum{
     int rangeWidth;
 }
 
-@property (nonatomic, retain) BattleSprite *battleSprite;
+@property (nonatomic, retain) Character *character;
 @property (nonatomic, retain) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
--(id) initWithSprite:(BattleSprite*) sprite;
+-(id) initWithCharacter:(Character*) battleCharacter;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(void) setRotation:(float) offX:(float) offY;
 @end

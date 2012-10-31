@@ -7,23 +7,21 @@
 //
 
 #import "RangeType.h"
-#import "BattleSprite.h"
+#import "Character.h"
 
 @implementation RangeType
-@synthesize battleSprite,attackRange,rangeSprite;
+@synthesize character,attackRange,rangeSprite;
 
 
--(id)initWithSprite:(BattleSprite*) sprite
+-(id)initWithCharacter:(Character *)battleCharacter
 {
     if( (self=[super init]) ) {
         rangeHeight=100;
         rangeWidth=100;
-        battleSprite=sprite;
+        character=battleCharacter;
         [self setParameter];
         [self showPoints];
-        
     }
-    
     return self;
 }
 
@@ -59,10 +57,10 @@
     CGImageRef imgRef = CGBitmapContextCreateImage( context );
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
-    rangeSprite.position=ccp(battleSprite.texture.contentSize.width/2,battleSprite.texture.contentSize.height/2);
+    rangeSprite.position=ccp(character.characterSprite.texture.contentSize.width/2,character.characterSprite.texture.contentSize.height/2);
     rangeSprite.zOrder=-1;
     rangeSprite.visible=NO;
-    [battleSprite addChild:rangeSprite];
+    [character.characterSprite addChild:rangeSprite];
 }
 
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies
@@ -70,24 +68,22 @@
     NSMutableArray *effectTargets=   [[NSMutableArray alloc] init];
     for(int i = 0; i<[enemies count];i++)
     {
-        BattleSprite *bs = ((BattleSprite*)[enemies objectAtIndex:i]);
+        Character *temp = (Character*)[enemies objectAtIndex:i];
     
         ///determine if this attack can effect self
         if(effectSelfOrNot == effectExceptSelf){
-        if(bs==battleSprite)
-            continue;
+            if(temp==character)
+                continue;
         }
-        
-        
         
         ///determine if can effect ally
         switch (effectSides) {
             case effectSideAlly:
-                if(bs.player!=battleSprite.player)
+                if(temp.player!=character.player)
                     continue;
                 break; 
             case effectSideEnemy:
-                if(bs.player==battleSprite.player)
+                if(temp.player==character.player)
                     continue;
                 break;
             case effectSideBoth:
@@ -97,15 +93,15 @@
         }
         
         
-        NSMutableArray *points=bs.pointArray;
+        NSMutableArray *points=temp.pointArray;
         for (int j=0; j<[points count]; j++) {
             CGPoint loc=[[points objectAtIndex:j] CGPointValue];
             // switch coordinate systems
-            loc=[bs convertToWorldSpace:loc];
+            loc=[temp.characterSprite convertToWorldSpace:loc];
             loc=[rangeSprite convertToNodeSpace:loc];
             if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-                [effectTargets addObject:bs];
-                CCLOG(@"Player %d is under attack", bs.player);
+                [effectTargets addObject:temp];
+                CCLOG(@"Player %d is under attack", temp.player);
                 break;
             }
         }

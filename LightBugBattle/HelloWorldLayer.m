@@ -9,8 +9,8 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-#import "BattleLayer.h"
 #import "MapControlExample.h"
+#import "BattleController.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
@@ -58,7 +58,7 @@
 		[CCMenuItemFont setFontSize:20];
 		
 		CCMenuItem *defaultMenu = [CCMenuItemFont itemWithString:@"Battle Scene" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[BattleLayer scene]];
+            [[CCDirector sharedDirector] replaceScene:[BattleController node]];
         }];
 		
         CCMenuItem *mapItem = [CCMenuItemFont itemWithString:@"MapCameraTest" block:^(id sender) {

@@ -1,16 +1,16 @@
 //
-//  BattleSprite.h
+//  BattleCharacter.h
 //  LightBugBattle
 //
-//  Created by 朱 世光 on 12/10/23.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 朱 世光 on 12/10/31.
+//
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "SkillKit.h"
-@class BattleLayer;
+
 @class SkillSet;
+@class BattleController;
 typedef enum {
     stateAttack,
     stateMove,
@@ -25,10 +25,10 @@ typedef enum {
     directionRight
 } SpriteDirections;
 
-@interface BattleSprite : CCSprite {
-    
+@interface Character : NSObject {
     NSString *name;
     
+    CCSprite *characterSprite;
     CCSprite *bloodSprite;
     
     int maxHp;
@@ -49,7 +49,7 @@ typedef enum {
     //    SpriteStates state;
     SpriteDirections direction;
     
-    BattleLayer *layer;
+    BattleController *controller;
     NSMutableArray *pointArray;
     SkillSet *skillSet;
     CGContextRef context;
@@ -66,22 +66,23 @@ typedef enum {
 
 @property (readonly) SpriteStates state;
 
+@property (readonly) CCSprite *characterSprite;
+@property CGPoint position;
+
 @property (nonatomic, retain) NSMutableArray *pointArray;
 
-//+(id) spriteWithRandomAbility;
-//-(id) initWithRandomAbility;
++(id) characterWithController:(BattleController *) battleController player:(int)pNumber withFile:(NSString *) filename;
+-(id) initWithController:(BattleController *) battleController player:(int)pNumber withFile:(NSString *) filename;
 
-+(id) spriteWithFile:(NSString *)filename player:(int)player;
--(id) initWithFile:(NSString *)filename player:(int)player;
-
--(NSString*) getName;
-
--(void) addPosition:(CGPoint)point time:(ccTime)delta;
+-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
 -(void) getDamage:(int) damage;
 -(void) showAttackRange:(BOOL)visible;
 -(void) end;
 -(void) setAttackRotation:(float) offX:(float) offY;
+
+-(void) setPosition:(CGPoint)position;
+-(CGPoint) position;
 
 @end

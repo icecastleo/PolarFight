@@ -77,7 +77,7 @@
 			return YES;
 		}
 	}
-return NO;
+    return NO;
 }
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event

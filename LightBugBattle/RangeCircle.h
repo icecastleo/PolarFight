@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "RangeType.h"
+
 @interface RangeCircle : RangeType {
     
 }
