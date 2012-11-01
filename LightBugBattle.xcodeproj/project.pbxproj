@@ -880,6 +880,7 @@
 		9B92D2B0164169CA000AF467 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2AF164169CA000AF467 /* BattleStatusLayer.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2BD164184D1000AF467 /* MapLayer.m */; };
+		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9BF91B9C16400BE40094DB94 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF91B9B16400BE40094DB94 /* DPadLayer.m */; };
 		9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* RangeType.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -1915,6 +1916,8 @@
 		9B92D2BB164171F5000AF467 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B92D2BC164184D1000AF467 /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLayer.h; sourceTree = "<group>"; };
 		9B92D2BD164184D1000AF467 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
+		9B92D2BF16424E74000AF467 /* CharacterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSprite.h; sourceTree = "<group>"; };
+		9B92D2C016424E74000AF467 /* CharacterSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSprite.m; sourceTree = "<group>"; };
 		9BF91B9A16400BE40094DB94 /* DPadLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPadLayer.h; sourceTree = "<group>"; };
 		9BF91B9B16400BE40094DB94 /* DPadLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPadLayer.m; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* RangeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeType.h; sourceTree = "<group>"; };
@@ -2396,6 +2399,8 @@
 			children = (
 				9B92D2B416416D66000AF467 /* Character.h */,
 				9B92D2B516416D66000AF467 /* Character.m */,
+				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
+				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
 				9B062E8216353A8200E06018 /* Army */,
 				9B062E8116353A4F00E06018 /* Player */,
 			);
@@ -4126,6 +4131,7 @@
 				9B92D2B0164169CA000AF467 /* BattleStatusLayer.m in Sources */,
 				9B92D2B616416D66000AF467 /* Character.m in Sources */,
 				9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */,
+				9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,4 +14,18 @@ typedef enum {
     test2
 } CharacterType;
 
+typedef enum {
+    stateAttack,
+    stateMove,
+    stateIdle,
+    stateDead
+} SpriteStates;
+
+typedef enum {
+    directionUp,
+    directionDown,
+    directionLeft,
+    directionRight
+} SpriteDirections;
+
 #endif

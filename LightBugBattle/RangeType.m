@@ -57,10 +57,10 @@
     CGImageRef imgRef = CGBitmapContextCreateImage( context );
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
-    rangeSprite.position=ccp(character.characterSprite.texture.contentSize.width/2,character.characterSprite.texture.contentSize.height/2);
+    rangeSprite.position=ccp(character.sprite.texture.contentSize.width/2,character.sprite.texture.contentSize.height/2);
     rangeSprite.zOrder=-1;
     rangeSprite.visible=NO;
-    [character.characterSprite addChild:rangeSprite];
+    [character.sprite addChild:rangeSprite];
 }
 
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies
@@ -97,7 +97,7 @@
         for (int j=0; j<[points count]; j++) {
             CGPoint loc=[[points objectAtIndex:j] CGPointValue];
             // switch coordinate systems
-            loc=[temp.characterSprite convertToWorldSpace:loc];
+            loc=[temp.sprite convertToWorldSpace:loc];
             loc=[rangeSprite convertToNodeSpace:loc];
             if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
                 [effectTargets addObject:temp];

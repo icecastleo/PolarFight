@@ -12,10 +12,10 @@
 
 @implementation Character
 
-@synthesize player;
+@synthesize player,name,maxHp;
 @synthesize hp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
-@synthesize characterSprite;
+@synthesize sprite;
 @synthesize position;
 @synthesize pointArray;
 
@@ -30,15 +30,9 @@
         name = filename;
         player = pNumber;
         
-        characterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@_%@2.gif",filename, player == 1 ? @"rt" : @"lf"]];
-        
-        bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
-        bloodSprite.position = ccp([characterSprite boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
-        [characterSprite addChild:bloodSprite];
-        
-                
         [self setRandomAbility];
-        [self setAnimation];
+
+        sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
         state = stateIdle;
         
@@ -81,95 +75,44 @@
     moveTime = arc4random() % 3 + 2;
 }
 
--(void) setAnimation {
-    
-    CCAnimation *animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_bk1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_bk2.gif",name]];
-    animation.restoreOriginalFrame = NO;
-    animation.delayPerUnit = 0.5;
-    
-    upAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-    
-    animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr2.gif",name]];
-    
-    animation.restoreOriginalFrame = NO;
-    animation.delayPerUnit = 0.5;
-    
-    downAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-    
-    
-    animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_lf1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_lf2.gif",name]];
-    
-    animation.restoreOriginalFrame = NO;
-    animation.delayPerUnit = 0.5;
-    
-    leftAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-    
-    
-    animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_rt1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_rt2.gif",name]];
-    
-    animation.restoreOriginalFrame = NO;
-    animation.delayPerUnit = 0.1;
-    
-    rightAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-}
-
 // TODO: need be done at mapLayers
 -(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
     
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
+        [sprite stopAllActions];
         return;
     }
     
     state = stateMove;
     
-    characterSprite.position = ccpAdd(characterSprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+    [self setDirectionWithVelocity:velocity];
+}
+
+-(void) setDirectionWithVelocity:(CGPoint)velocity {
+    SpriteDirections newDirection;
     
     if(fabsf(velocity.x) >= fabsf(velocity.y)) {
         if(velocity.x > 0) {
-            [self setDirection:directionRight];
+            newDirection = directionRight;
         } else {
-            [self setDirection:directionLeft];
+            newDirection = directionLeft;
         }
     } else {
         if(velocity.y > 0) {
-            [self setDirection:directionUp];
+            newDirection = directionUp;
         } else {
-            [self setDirection:directionDown];
+            newDirection = directionDown;
         }
     }
-}
-
--(void) setDirection:(SpriteDirections) newDirection {
-    if(direction == newDirection) {
+    
+    if(direction == newDirection && [sprite numberOfRunningActions] != 0) {
         return;
     }
     
-    [characterSprite stopAllActions];
-    
     direction = newDirection;
-    
-    if(direction == directionUp) {
-        [characterSprite runAction:upAnimate];
-    } else if (direction == directionDown) {
-        [characterSprite runAction:downAnimate];
-    } else if (direction == directionLeft) {
-        [characterSprite runAction:leftAnimate];
-    } else if (direction == directionRight) {
-        [characterSprite runAction:rightAnimate];
-    }
+    [sprite setDirectionAnimate:direction];
 }
 
 -(void) getDamage:(int) damage {
@@ -178,9 +121,7 @@
     
     // be attacked state;
     hp -= damage;
-    
-    bloodSprite.scaleX = (float)hp / maxHp;
-    bloodSprite.position = ccp([characterSprite boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
+    [sprite setBloodSpriteWithCharacter:self];
     
     if(hp <= 0) {
         state = stateDead;
@@ -197,30 +138,29 @@
     
     state = stateAttack;
     
-//    NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
-//
-//    for (Character *character in effectTargets) {
-//        [character getDamage:attack];
-//    }
+    NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
+
+    for (Character *character in effectTargets) {
+        [character getDamage:attack];
+    }
 }
 
--(void) showAttackRange:(BOOL)visible
-{
+-(void) showAttackRange:(BOOL)visible {
     [skillSet showAttackRange:visible];
 }
 
-
 -(void) end {
     // 回合結束
+    [sprite stopAllActions];
     state = stateIdle;
 }
 
 -(void)setPosition:(CGPoint)newPosition {
-    characterSprite.position = newPosition;
+    sprite.position = newPosition;
 }
 
 -(CGPoint)position {
-    return characterSprite.position;
+    return sprite.position;
 }
 
 @end

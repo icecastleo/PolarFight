@@ -18,7 +18,7 @@
         character.position = ccp(arc4random() % 200 + 21 + 240, arc4random() % 280 + 21);
     }
     
-    [self addChild:character.characterSprite];
+    [self addChild:character.sprite];
 }
 
 -(void)removeCharacter:(Character *)character {

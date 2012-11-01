@@ -8,30 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Constant.h"
+#import "CharacterSprite.h"
 
 @class SkillSet;
 @class BattleController;
-typedef enum {
-    stateAttack,
-    stateMove,
-    stateIdle,
-    stateDead
-} SpriteStates;
-
-typedef enum {
-    directionUp,
-    directionDown,
-    directionLeft,
-    directionRight
-} SpriteDirections;
 
 @interface Character : NSObject {
-    NSString *name;
-    
-    CCSprite *characterSprite;
-    CCSprite *bloodSprite;
-    
-    int maxHp;
+    CharacterSprite *sprite;
+    //    NSString *name;
+    //    int maxHp;
     
     //    int hp;
     //    int attack;
@@ -40,11 +26,6 @@ typedef enum {
     //
     //    int moveSpeed;
     //    int moveTime;
-    
-    CCAnimate *upAnimate;
-    CCAnimate *downAnimate;
-    CCAnimate *rightAnimate;
-    CCAnimate *leftAnimate;
     
     //    SpriteStates state;
     SpriteDirections direction;
@@ -56,6 +37,8 @@ typedef enum {
 }
 
 @property int player;
+@property (readonly) NSString *name;
+@property (readonly) int maxHp;
 
 @property (readonly) int hp;
 @property (readonly) int attack;
@@ -66,7 +49,7 @@ typedef enum {
 
 @property (readonly) SpriteStates state;
 
-@property (readonly) CCSprite *characterSprite;
+@property (readonly) CharacterSprite *sprite;
 @property CGPoint position;
 
 @property (nonatomic, retain) NSMutableArray *pointArray;

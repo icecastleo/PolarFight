@@ -64,7 +64,7 @@
 
 -(void)removeCharacter:(Character *)character {
     [characters removeObject:character];
-    [character.characterSprite removeFromParentAndCleanup:YES];
+    [character.sprite removeFromParentAndCleanup:YES];
     [character release];
 //    [mapLayer removeCharacter:character];
 }
@@ -105,10 +105,9 @@
             return;
         }
         
-        if(currentCharacter.state == stateAttack && currentCharacter.characterSprite.numberOfRunningActions != 0) {
+        if(currentCharacter.state == stateAttack && currentCharacter.sprite.numberOfRunningActions != 0) {
             return;
         }
-        
         
         if(dPadLayer.pressButton) {
             [currentCharacter attackEnemy:characters];
