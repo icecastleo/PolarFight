@@ -10,8 +10,13 @@
 #define LightBugBattle_SkillKit_h
 
 #import "SkillSet.h"
-#import "RangeType.h"
+
 #import "RangeFanShape.h"
 #import "RangeCircle.h"
+
+
+
+#import "EffectDamage.h"
+
 #endif
 

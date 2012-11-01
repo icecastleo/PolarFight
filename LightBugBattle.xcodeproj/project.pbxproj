@@ -11,6 +11,8 @@
 		2BBF9911163E6134005AD8B9 /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF990F163E6134005AD8B9 /* MapCameraControl.m */; };
 		2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF9914163E6267005AD8B9 /* MapControlExample.m */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
+		2D26FC9A1640114D00C34AA4 /* EffectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* EffectType.m */; };
+		2D26FC9C1640116100C34AA4 /* EffectDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC9B1640116100C34AA4 /* EffectDamage.m */; };
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
@@ -894,6 +896,10 @@
 		2BBF9913163E6267005AD8B9 /* MapControlExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlExample.h; sourceTree = "<group>"; };
 		2BBF9914163E6267005AD8B9 /* MapControlExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlExample.m; sourceTree = "<group>"; };
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
+		2D26FC981640114D00C34AA4 /* EffectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectType.h; sourceTree = "<group>"; };
+		2D26FC991640114D00C34AA4 /* EffectType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectType.m; sourceTree = "<group>"; };
+		2D26FC9B1640116100C34AA4 /* EffectDamage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectDamage.m; sourceTree = "<group>"; };
+		2D26FC9D1640116A00C34AA4 /* EffectDamage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectDamage.h; sourceTree = "<group>"; };
 		2D4AD58F163FCD8C00A949C3 /* SkillSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillSet.h; sourceTree = "<group>"; };
 		2D4AD590163FCD8C00A949C3 /* SkillSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSet.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
@@ -1948,6 +1954,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D26FC961640111500C34AA4 /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				2D26FC9D1640116A00C34AA4 /* EffectDamage.h */,
+				2D26FC9B1640116100C34AA4 /* EffectDamage.m */,
+				2D26FC981640114D00C34AA4 /* EffectType.h */,
+				2D26FC991640114D00C34AA4 /* EffectType.m */,
+			);
+			name = Effect;
+			sourceTree = "<group>";
+		};
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +1974,10 @@
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
 				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
+				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
+				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
+				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
+				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -3195,6 +3216,7 @@
 		9BFFAE60163E9D8A00073DC5 /* SkillSet */ = {
 			isa = PBXGroup;
 			children = (
+				2D26FC961640111500C34AA4 /* Effect */,
 				2D4AD598163FDDC400A949C3 /* Range */,
 				2D4AD58F163FCD8C00A949C3 /* SkillSet.h */,
 				2D4AD590163FCD8C00A949C3 /* SkillSet.m */,
@@ -4126,6 +4148,8 @@
 				9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */,
 				2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */,
 				2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */,
+				2D26FC9A1640114D00C34AA4 /* EffectType.m in Sources */,
+				2D26FC9C1640116100C34AA4 /* EffectDamage.m in Sources */,
 				9BF91B9C16400BE40094DB94 /* DPadLayer.m in Sources */,
 				9B92D2AD164166BA000AF467 /* BattleController.m in Sources */,
 				9B92D2B0164169CA000AF467 /* BattleStatusLayer.m in Sources */,

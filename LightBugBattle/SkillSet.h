@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "RangeType.h"
-#import "Character.h"
 
+@class  Character;
 @interface SkillSet : NSObject {
     NSString *name;
     RangeType *effectRange;
     Character* character;
+    NSMutableArray* effectSet;
 }
+-(id) initWithRangeName:(Character*)battleCharacter rangeName:(NSString*) rangeName;
 -(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;
+-(void) doSkill:(NSMutableArray *)targets;
 @end

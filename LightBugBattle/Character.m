@@ -38,8 +38,8 @@
         
         [self makePoint];
         
-        // FIXME: wait cloudsan!
-        skillSet = [[SkillSet alloc] initWithRange:self range:NULL];
+        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+//        attackType = [[CircleAttackType alloc] initWithSprite:self];
         
         context = UIGraphicsGetCurrentContext();
     }

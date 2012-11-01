@@ -135,6 +135,7 @@
     currentCharacter = characters[currentIndex];
     
     [statusLayer startSelectCharacter:currentCharacter];
+    [currentCharacter showAttackRange:YES];
     countdown = currentCharacter.moveTime;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     

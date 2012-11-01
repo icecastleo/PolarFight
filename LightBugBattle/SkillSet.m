@@ -7,20 +7,36 @@
 //
 
 #import "SkillSet.h"
-
+#import "Character.h"
 
 @implementation SkillSet
 
--(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range
-{
-    if( (self=[super init]) ) {
-        
+-(id) initWithRangeName:(Character *)battleCharacter rangeName:(NSString *)rangeName {
+    
+    id range = [[NSClassFromString(rangeName) alloc] initWithCharacter:battleCharacter];
+    return [self initWithRange:battleCharacter range:range];
+}
+
+-(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range {
+    if( (self=[super init]) ) {    
         character = battleCharacter;
 //        effectRange=range;
-//        effectRange = [[RangeFanShape alloc] initWithSprite:character.characterSprite];
+        effectRange = [[RangeFanShape alloc] initWithCharacter:character];
+        effectSet = [[NSMutableArray alloc] init];
+        [effectSet addObject:[[EffectDamage alloc] init]];
     }
     
     return self;
+}
+
+-(void) doSkill:(NSMutableArray *)targets
+{
+    NSMutableArray *effectTargets= [self getEffectTargets:targets];
+    for (BattleSprite *sprite in effectTargets) {
+        for (EffectType *effectItem in effectSet) {
+            [effectItem doEffect:sprite];
+        }
+    }
 }
 
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies

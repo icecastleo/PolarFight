@@ -10,8 +10,8 @@
 #import "cocos2d.h"
 #import "Constant.h"
 #import "CharacterSprite.h"
+#import "SkillKit.h"
 
-@class SkillSet;
 @class BattleController;
 
 @interface Character : NSObject {
