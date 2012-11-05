@@ -198,19 +198,19 @@ static const int nilRoleTag = 100;
 - (NSString *)loadCurrentLevel
 {
     //load data from file...
-    return @"1";
+    return @"Level: 1";
 }
 
 - (NSString *)loadCurrentGoal
 {
     //load data from file...
-    return @"who let the dog out?";
+    return @"Goal: Who let the dogs out?";
 }
 
 - (NSString *)loadCurrentMoney
 {
     //load data from file...
-    return @"100元";
+    return @"Money: 100元";
 }
 
 //=========================================
@@ -329,6 +329,7 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
+        /*
         [selSprite stopAllActions];
         [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
         CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
@@ -336,6 +337,8 @@ static const int nilRoleTag = 100;
         CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
         CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
         [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
+        //*/
+        [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
     if (!newSprite) {
@@ -360,6 +363,7 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
+        /*
         [selSprite stopAllActions];
         [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
         CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
@@ -367,8 +371,21 @@ static const int nilRoleTag = 100;
         CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
         CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
         [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
+        //*/
+        [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
+}
+
+- (void)shakyShaky:(CCSprite *) newSprite
+{
+    [selSprite stopAllActions];
+    [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
+    CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
+    CCRotateTo * rotCenter = [CCRotateBy actionWithDuration:0.1 angle:0.0];
+    CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
+    CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
+    [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
 }
 
 - (void)addRole:(CCSprite *)sprite
