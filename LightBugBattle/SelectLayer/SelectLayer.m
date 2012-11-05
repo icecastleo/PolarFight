@@ -329,15 +329,6 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
-        /*
-        [selSprite stopAllActions];
-        [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
-        CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
-        CCRotateTo * rotCenter = [CCRotateBy actionWithDuration:0.1 angle:0.0];
-        CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
-        CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
-        [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
-        //*/
         [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
@@ -363,15 +354,6 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
-        /*
-        [selSprite stopAllActions];
-        [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
-        CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
-        CCRotateTo * rotCenter = [CCRotateBy actionWithDuration:0.1 angle:0.0];
-        CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
-        CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
-        [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
-        //*/
         [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
