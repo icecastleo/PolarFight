@@ -83,7 +83,7 @@
     if(!canMove)
         return;
     
-    if(!isMove && dPadLayer.pressButton) {
+    if(!isMove && dPadLayer.isButtonPressed) {
         isMove = YES;
         statusLayer.startLabel.visible = NO;
         [statusLayer stopSelect];
@@ -109,7 +109,7 @@
             return;
         }
         
-        if(dPadLayer.pressButton) {
+        if(dPadLayer.isButtonPressed) {
             [currentCharacter attackEnemy:characters];
             return;
         }

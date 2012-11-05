@@ -42,7 +42,7 @@
     return leftJoystick.velocity;
 }
 
--(Boolean) pressButton {
+-(Boolean) isButtonPressed {
     if(attackButton.active) {
         attackButton.active = NO;
         return YES;
