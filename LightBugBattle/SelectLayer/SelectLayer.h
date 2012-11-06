@@ -8,9 +8,7 @@
 
 #import "cocos2d.h"
 
-//@class Character;
-
-@interface SelectLayer : CCLayerColor { //CCLayer
+@interface SelectLayer : CCLayerColor {
     
     NSMutableArray * allRoleBases;
 }

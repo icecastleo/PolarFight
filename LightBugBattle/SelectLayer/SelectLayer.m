@@ -7,8 +7,6 @@
 //
 
 #import "SelectLayer.h"
-//#import "Character.h"
-//#import "CharacterSprite.h"
 #import "Constant.h"
 
 #import "HelloWorldLayer.h"
@@ -46,7 +44,6 @@ static const int nilRoleTag = 100;
 -(id) init
 {
     if( (self=[super initWithColor:ccc4(255, 255, 255, 255)]) ) {
-      //if( (self=[super init]) ) {
                 
         // 1 - Initialize
         self.isTouchEnabled = YES;
@@ -72,7 +69,6 @@ static const int nilRoleTag = 100;
 
 - (void)SetLabelsAndMenu
 {
-    //=============== Labels ===============
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
     NSString *currentLevel = [self loadCurrentLevel];
@@ -97,8 +93,6 @@ static const int nilRoleTag = 100;
     moneyLabel.color = ccBLACK;
     [self addChild: moneyLabel];
     
-    //=============== Menu ===============
-    
     [CCMenuItemFont setFontSize:26];
     
     CCMenuItem *cancelMenuItem = [CCMenuItemFont itemWithString:@"取消任務" block:^(id sender) {
@@ -113,8 +107,6 @@ static const int nilRoleTag = 100;
     menu.color = ccBLACK;
     
     [menu alignItemsHorizontallyWithPadding:20];
-    //[menu alignItemsVerticallyWithPadding:30];
-    //menu.anchorPoint = CGPointMake(0, 0); //it doesn't work
     [menu setPosition:ccp( windowSize.width*3/4, 20 )];
     // Add the menu to the layer
     [self addChild:menu];
@@ -126,39 +118,16 @@ static const int nilRoleTag = 100;
     NSArray * rolePositions = [NSArray arrayWithContentsOfFile:plistPath];
     allRoleBases = [[NSMutableArray alloc] initWithCapacity:10];
     
-    //[self loadAllRoleCanUse];
-    
-    //int rolesNumber = 0;
     for(NSDictionary * rolePos in rolePositions)
     {
-        NSLog(@"2");
         CCSprite * roleBase = [CCSprite spriteWithFile:@"open_spot.jpg"];
-        //[self addChild:roleBase];
+        
         [roleBase setPosition:ccp([[rolePos objectForKey:@"x"] intValue],[[rolePos objectForKey:@"y"] intValue])];
         
         roleBase.tag = nilRoleTag;
         
         [self addChild:roleBase];
         [allRoleBases addObject:roleBase];
-        //only init (put position)
-        /*
-        if(rolesNumber < allRoleCanUse.count)//
-        {
-            
-            //Character * role = [Character characterWithController:self player:1 withFile:@"amg1"];
-            
-            //role.parent.position = roleBase.position;
-            
-            [self addCharacter:[allRoleCanUse objectAtIndex:rolesNumber] toPosition:roleBase.position];
-            roleBase = nil;
-            //[self addChild:role];
-            [allRoleBases addObject:[allRoleCanUse objectAtIndex:rolesNumber]];
-            rolesNumber++;
-        }else{
-            [self addChild:roleBase];
-            [allRoleBases addObject:roleBase];
-        }
-        //*/
     }
 }
 
@@ -173,16 +142,7 @@ static const int nilRoleTag = 100;
     
     for(NSDictionary * rolePos in rolePositions)
     {
-        NSLog(@"1");
         CCSprite * roleBase;
-        /*
-        if ([rolePositions indexOfObject:rolePos] == 0) {
-            roleBase = [CCSprite spriteWithFile:@"mainRole.jpg"];
-            [self.selectedRoles addObject:roleBase];
-        }else{
-            roleBase = [CCSprite spriteWithFile:@"open_spot.jpg"];
-        }
-        //*/ //only init (put position)
         roleBase = [CCSprite spriteWithFile:@"open_spot.jpg"];
         [roleBase setPosition:ccp([[rolePos objectForKey:@"x"] intValue],[[rolePos objectForKey:@"y"] intValue])];
         roleBase.tag = nilRoleTag;
@@ -190,8 +150,6 @@ static const int nilRoleTag = 100;
         [self addChild:roleBase];
     }
 }
-
-//===============init===========================
 
 #pragma LoadData
 
@@ -213,7 +171,6 @@ static const int nilRoleTag = 100;
     return @"Money: 100元";
 }
 
-//=========================================
 -(void)putMainRole
 {
     CCSprite *oldMainRole = [self.selectedRoles objectAtIndex:mainRolePosition];
@@ -221,7 +178,6 @@ static const int nilRoleTag = 100;
     CCSprite *mainRole = [CCSprite spriteWithFile:@"mainRole.jpg"];
     mainRole.tag = mainRoleTag; //should put main roles Tag
     
-    NSLog(@"oldMainRole.tag = %d",oldMainRole.tag);
     if (oldMainRole.tag == nilRoleTag) {
     
         [self replaceOldRole:oldMainRole newCharacter:mainRole inArray:self.selectedRoles index:mainRolePosition];
@@ -279,15 +235,11 @@ static const int nilRoleTag = 100;
     }
 }
 
-//=================== select roles methods ============
-
 -(BOOL)canPutRoles {
     return YES;
 }
-//=================== select roles methods ============
 
 #pragma draw character methods
-//=============== add and remove character methods ===============
 - (void)replaceOldRole:(CCSprite*)oldCharacter newCharacter:(CCSprite*)newCharacter inArray:(NSMutableArray *)selectedArray index:(int)index
 {
     [self addCharacter:newCharacter toPosition:oldCharacter.position];
@@ -296,12 +248,10 @@ static const int nilRoleTag = 100;
     
     if ([selectedArray isEqualToArray:self.selectedRoles]) {
         currentRoleIndex = index;
-        NSLog(@"%d",currentRoleIndex);
     }
 }
 
 -(void) addCharacter:(CCSprite*)character toPosition:(CGPoint)position{
-    // Need to be done at map
     
     character.position = position;
     
@@ -310,12 +260,9 @@ static const int nilRoleTag = 100;
 
 -(void)removeCharacter:(CCSprite *)character {
     [character removeFromParentAndCleanup:YES];
-    //[character release];
 }
-//=============== add and remove character function ===============
 
 #pragma touch
-//========= touch ===========
 - (void)selectSpriteForTouch:(CGPoint)touchLocation
 {
     CCSprite * newSprite = nil;
@@ -348,7 +295,6 @@ static const int nilRoleTag = 100;
                 newSprite = sprite;
                 currentRoleIndex = [self.selectedRoles indexOfObject:sprite];
                 isSelecting = YES;
-                NSLog(@"currentRoleIndex:%d",currentRoleIndex);
             }
             break;
         }
@@ -378,12 +324,11 @@ static const int nilRoleTag = 100;
     }else if ([self IsPositionFull]) {
         return;
     }
-    
-    //*
+
     CCTexture2D *tx = [sprite texture];
     CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
     newSprite.tag = sprite.tag;
-    //*/
+    
     [self replaceOldRole:[self.selectedRoles objectAtIndex:nextRoleIndex] newCharacter:newSprite inArray:self.selectedRoles index:nextRoleIndex];
     
     for (CCSprite *sprite in self.selectedRoles) {
@@ -393,8 +338,6 @@ static const int nilRoleTag = 100;
         }
     }
     
-    NSLog(@"nextRoleIndex:%d",nextRoleIndex);
-
 }
 
 - (BOOL)IsPositionFull
@@ -407,14 +350,11 @@ static const int nilRoleTag = 100;
     return YES;
 }
 
-//*
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touches");
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [self selectSpriteForTouch:touchLocation];
 }
-//*/
 
 @end
