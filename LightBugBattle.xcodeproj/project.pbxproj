@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1C55D51643B07C007D6CEA /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C55D41643B07C007D6CEA /* Map.m */; };
+		2B51EB031643EB0000441FB1 /* debugColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B51EB021643EB0000441FB1 /* debugColor.png */; };
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF9911163E6134005AD8B9 /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF990F163E6134005AD8B9 /* MapCameraControl.m */; };
 		2BBF9915163E6267005AD8B9 /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBF9914163E6267005AD8B9 /* MapControlExample.m */; };
@@ -890,6 +892,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B1C55D31643B07C007D6CEA /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		2B1C55D41643B07C007D6CEA /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		2B51EB021643EB0000441FB1 /* debugColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugColor.png; sourceTree = "<group>"; };
 		2BBF990D163E6134005AD8B9 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		2BBF990E163E6134005AD8B9 /* MapCameraControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCameraControl.h; sourceTree = "<group>"; };
 		2BBF990F163E6134005AD8B9 /* MapCameraControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCameraControl.m; sourceTree = "<group>"; };
@@ -1954,6 +1959,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B1C55D71643B08A007D6CEA /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2B1C55D31643B07C007D6CEA /* Map.h */,
+				2B1C55D41643B07C007D6CEA /* Map.m */,
+				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
+				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
+				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
+				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		2D26FC961640111500C34AA4 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
@@ -2019,13 +2037,10 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				2B1C55D71643B08A007D6CEA /* Map */,
 				9B92D2AA16416670000AF467 /* BattleScene */,
 				9BFFAE60163E9D8A00073DC5 /* SkillSet */,
 				9B92D2BB164171F5000AF467 /* Constant.h */,
-				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
-				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
-				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
-				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
 				9B062E6D1635275300E06018 /* AppDelegate.h */,
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
 				9B062E701635275300E06018 /* HelloWorldLayer.h */,
@@ -2033,8 +2048,6 @@
 				9B062E731635275300E06018 /* IntroLayer.h */,
 				9B062E741635275300E06018 /* IntroLayer.m */,
 				9B062D101635275100E06018 /* libs */,
-				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
-				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
 				9B062CF61635275000E06018 /* Resources */,
 				9B062E7F16353A2B00E06018 /* Character */,
 				9B062E691635275300E06018 /* Supporting Files */,
@@ -2045,6 +2058,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2B51EB021643EB0000441FB1 /* debugColor.png */,
 				2BBF991A163E6532005AD8B9 /* controlBall.png */,
 				2BBF990D163E6134005AD8B9 /* map.png */,
 				9B114122163E4CAD0074969E /* blood.png */,
@@ -4018,6 +4032,7 @@
 				9B114123163E4CAD0074969E /* blood.png in Resources */,
 				2BBF9910163E6134005AD8B9 /* map.png in Resources */,
 				2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */,
+				2B51EB031643EB0000441FB1 /* debugColor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4156,6 +4171,7 @@
 				9B92D2B616416D66000AF467 /* Character.m in Sources */,
 				9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */,
 				9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */,
+				2B1C55D51643B07C007D6CEA /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

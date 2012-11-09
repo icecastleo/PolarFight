@@ -8,13 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MapCameraControl.h"
+#import "Map.h"
 
 @interface MapControlExample : CCLayer
 {
-    MapCameraControl* camControl;
-    
-    
+    Map* layerMap;
     //things to test the camera control
     CCSprite* switchButton;
     CCSprite* movePanel;
