@@ -17,6 +17,25 @@
         mapLayer = [[MapLayer alloc] init];
         [self addChild:mapLayer];
         
+        //first you need a MAP and a layer to put MAP
+        //*CCNode can be a layer
+        CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
+        
+        
+        //some map setting
+        [map setPosition:ccp(0,0)];
+        
+        
+        //the camera need to be add into the map layer
+        //(it wont display but not adding it will cause error)
+        [mapLayer setMap:map];
+        
+        
+        
+        
+        
+        
+        
         dPadLayer = [[DPadLayer alloc] init];
         [self addChild:dPadLayer];
         
@@ -47,7 +66,10 @@
         currentIndex = 0;
         currentCharacter = characters[currentIndex];
         
+        //start game
         [statusLayer startSelectCharacter:currentCharacter];
+        [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+        
         countdown = currentCharacter.moveTime;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         [currentCharacter showAttackRange:YES];
@@ -121,7 +143,14 @@
         if(dPadLayer.velocity.x!=0 && dPadLayer.velocity.y!=0)
             [currentCharacter setAttackRotation:dPadLayer.velocity.x :dPadLayer.velocity.y];
         
-        [currentCharacter addPosition:dPadLayer.velocity time:delta];
+        //[currentCharacter addPosition:dPadLayer.velocity time:delta];
+        //
+        // CHARACTER MOVE
+        //
+        // Character position control is in mapLayer
+        // so character move should call maplayer
+        CGPoint vol = ccp( dPadLayer.velocity.x * 5, dPadLayer.velocity.y * 5 );
+        [mapLayer moveCharacter:currentCharacter velocity:vol];
     }
 }
 
@@ -138,7 +167,10 @@
     
     currentCharacter = characters[currentIndex];
     
+    //select player
     [statusLayer startSelectCharacter:currentCharacter];
+    [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
+    
     [currentCharacter showAttackRange:YES];
     countdown = currentCharacter.moveTime;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];

@@ -14,9 +14,7 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
-//=============== 浩翔 ===============
 #import "SelectLayer.h"
-//=============== 浩翔 ===============
 
 #pragma mark - HelloWorldLayer
 
@@ -69,15 +67,12 @@
             [[CCDirector sharedDirector] replaceScene:[MapControlExample scene]];
         }];
         
-        //=============== 浩翔 ===============
         CCMenuItem *selectScene = [CCMenuItemFont itemWithString:@"Select Scene" block:^(id sender) {
             [[CCDirector sharedDirector] replaceScene:[SelectLayer node]];
         }];
-        //=============== 浩翔 ===============
         
 		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, mapItem, selectScene, nil];
 		
-		//[menu alignItemsHorizontallyWithPadding:20];
         [menu alignItemsVerticallyWithPadding:30];
 		[menu setPosition:ccp( size.width/2, size.height/2-20 )];
 		

@@ -29,30 +29,21 @@
 		
         CGSize size = [CCDirector sharedDirector].winSize;
         
-        //CameraControl Init
-        camControl = [MapCameraControl node];
         
         
         //first you need a MAP and a layer to put MAP
         //*CCNode can be a layer
-        CCNode* layerMap = [CCNode node];
+        layerMap = [Map node];
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
         
         //some map setting
-        [map setScale:2];
         [map setPosition:ccp(0,0)];
         
         
         //the camera need to be add into the map layer
         //(it wont display but not adding it will cause error)
-        [layerMap addChild:camControl];
-        [layerMap addChild:map];
-        
-        
-        //Set map and layer to CameraControl
-        [camControl setMap:map mapLayer:layerMap];
-        
+        [layerMap setMap:map];
         
         
         
@@ -74,9 +65,9 @@
         man2 = [CCSprite spriteWithFile:@"ftr1_fr1.gif"];
         man3 = [CCSprite spriteWithFile:@"avt4_fr1.gif"];
         
-        [layerMap addChild:man1];
-        [layerMap addChild:man2];
-        [layerMap addChild:man3];
+        [layerMap addCharacter:man1 position:ccp(100,200)];
+        [layerMap addCharacter:man2 position:ccp(200,300)];
+        [layerMap addCharacter:man3 position:ccp(-200,100)];
         
         [man1 setPosition:ccp( 0, 100)];
         [man2 setPosition:ccp( -100, 0)];
@@ -87,6 +78,8 @@
         [self addChild:movePanel];
         [self addChild:moveButton];
         [self addChild:switchButton];
+        
+        //[layerMap setMapBlocks];
         
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:1 swallowsTouches:YES];
         
@@ -108,17 +101,17 @@
         if( temp < 0.3 )
         {
             moveTarget = man1;
-            [camControl followTarget:man1];
+            [[layerMap cameraControl] followTarget:man1];
         }
         else if( temp < 0.6)
         {
             moveTarget = man2;
-            [camControl followTarget:man2];
+            [[layerMap cameraControl] followTarget:man2];
         }
         else
         {
             moveTarget = man3;
-            [camControl followTarget:man3];
+            [[layerMap cameraControl] followTarget:man3];
         }
         
         return YES;
@@ -129,7 +122,7 @@
         return YES;
     }
     moveMap = true;
-    [camControl followTarget:NULL];
+    [[layerMap cameraControl] followTarget:NULL];
     return YES;
 }
 
@@ -155,7 +148,7 @@
     else if( moveMap )
     {
         CGPoint diff = ccp( location.x - lastPoint.x, location.y - lastPoint.y );
-        [camControl moveCameraX:-0.5*diff.x Y:-0.5*diff.y];
+        [[layerMap cameraControl] moveCameraX:-0.5*diff.x Y:-0.5*diff.y];
     }
     else
     {
@@ -170,7 +163,8 @@
 }
 -(void) moveUpdate:(ccTime) dt
 {
-    [moveTarget setPosition:ccpAdd(moveTarget.position, ccp(moveAmount.x*dt, moveAmount.y*dt ) )];
+    [layerMap moveCharacter:moveTarget velocity:ccp(moveAmount.x*dt, moveAmount.y*dt )];
+    //[moveTarget setPosition:ccpAdd(moveTarget.position, ccp(moveAmount.x*dt, moveAmount.y*dt ) )];
 }
 
 @end
