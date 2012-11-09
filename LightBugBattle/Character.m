@@ -9,24 +9,25 @@
 #import "Character.h"
 #import "BattleController.h"
 #import "SkillKit.h"
+#import "StatusKit.h"
 
 @implementation Character
 
+@synthesize controller;
 @synthesize player,name,maxHp;
 @synthesize hp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
-@synthesize sprite;
+@synthesize sprite,direction;
 @synthesize position;
 @synthesize pointArray;
 
-+(id)characterWithController:(BattleController *)battleController player:(int)pNumber withFile:(NSString *)filename {
-    return [[[self alloc] initWithController:battleController player:pNumber withFile:filename] autorelease];
-}
+//+(id) characterWithController:(BattleController *)battleController player:(int)pNumber withFile:(NSString *)filename {
+//    return [[[self alloc] initWithController:battleController player:pNumber withFile:filename] autorelease];
+//}
 
--(id) initWithController:(BattleController *) battleController player:(int)pNumber withFile:(NSString *) filename {
+-(id) initWithFileName:(NSString *) filename player:(int)pNumber{
     if(self = [super init]) {
         
-        controller = battleController;
         name = filename;
         player = pNumber;
         
@@ -42,8 +43,17 @@
 //        attackType = [[CircleAttackType alloc] initWithSprite:self];
         
         context = UIGraphicsGetCurrentContext();
+        
+        statusDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+-(void)dealloc {
+    [pointArray release];
+    [skillSet release];
+    [statusDictionary release];
+    [super dealloc];
 }
 
 -(void) setAttackRotation:(float) offX:(float) offY
@@ -59,7 +69,6 @@
                 [NSValue valueWithCGPoint:ccp(32, 0)],
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
     [pointArray retain];
-    
 }
 
 
@@ -112,7 +121,7 @@
     }
     
     direction = newDirection;
-    [sprite setDirectionAnimate:direction];
+    [sprite runDirectionAnimate];
 }
 
 -(void) getDamage:(int) damage {
@@ -121,14 +130,14 @@
     
     // be attacked state;
     hp -= damage;
-    [sprite setBloodSpriteWithCharacter:self];
+    [sprite updateBloodSprite];
     
     if(hp <= 0) {
         state = stateDead;
         
         // dead animation + cleanup
-        
-        [controller removeCharacter:self];
+        if(controller)
+            [controller removeCharacter:self];
     }
 }
 
@@ -161,6 +170,23 @@
 
 -(CGPoint)position {
     return sprite.position;
+}
+
+-(void)addStatus:(StatusType)type withTime:(int)time {
+    Status *temp;
+    
+    if ((temp = [statusDictionary objectForKey:[NSNumber numberWithInt:type]])) {
+        if([temp isKindOfClass:[TimeStatus class]]) {
+            TimeStatus *t = (TimeStatus*)temp;
+            [t addTime:time];
+        }
+    } else {
+        // TODO: put status in map.
+    }
+}
+
+-(void)removeStatus:(StatusType)type {
+    [statusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
 }
 
 @end

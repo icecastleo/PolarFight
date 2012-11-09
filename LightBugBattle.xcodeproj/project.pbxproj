@@ -20,6 +20,10 @@
 		372580B31643BE6A006E7FD8 /* UnSelectedRolesPosition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 372580B21643BE6A006E7FD8 /* UnSelectedRolesPosition.plist */; };
 		37AF179C1647A9CC00075F4C /* mainRole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37AF179A1647A9CC00075F4C /* mainRole.jpg */; };
 		37AF179D1647A9CC00075F4C /* open_spot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37AF179B1647A9CC00075F4C /* open_spot.jpg */; };
+		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
+		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
+		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
+		9B019B1D16495B6100A6976F /* PoisonStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1C16495B6100A6976F /* PoisonStatus.m */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -888,6 +892,7 @@
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2BD164184D1000AF467 /* MapLayer.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
+		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
 		9BF91B9C16400BE40094DB94 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF91B9B16400BE40094DB94 /* DPadLayer.m */; };
 		9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* RangeType.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -915,6 +920,14 @@
 		372580B21643BE6A006E7FD8 /* UnSelectedRolesPosition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnSelectedRolesPosition.plist; sourceTree = "<group>"; };
 		37AF179A1647A9CC00075F4C /* mainRole.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainRole.jpg; sourceTree = "<group>"; };
 		37AF179B1647A9CC00075F4C /* open_spot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = open_spot.jpg; sourceTree = "<group>"; };
+		9B019B1016494E8000A6976F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		9B019B1116494E8000A6976F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		9B019B1316494F2500A6976F /* TimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatus.h; sourceTree = "<group>"; };
+		9B019B1416494F2500A6976F /* TimeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeStatus.m; sourceTree = "<group>"; };
+		9B019B161649542E00A6976F /* AuraStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraStatus.h; sourceTree = "<group>"; };
+		9B019B171649542E00A6976F /* AuraStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraStatus.m; sourceTree = "<group>"; };
+		9B019B1B16495B6100A6976F /* PoisonStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonStatus.h; sourceTree = "<group>"; };
+		9B019B1C16495B6100A6976F /* PoisonStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonStatus.m; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* LightBugBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBugBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1935,6 +1948,9 @@
 		9B92D2BD164184D1000AF467 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
 		9B92D2BF16424E74000AF467 /* CharacterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSprite.h; sourceTree = "<group>"; };
 		9B92D2C016424E74000AF467 /* CharacterSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSprite.m; sourceTree = "<group>"; };
+		9B9FC8E0164C085900D11743 /* StatusKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusKit.h; sourceTree = "<group>"; };
+		9B9FC8E2164C0C0800D11743 /* StatusFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFactory.h; sourceTree = "<group>"; };
+		9B9FC8E3164C0C0800D11743 /* StatusFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFactory.m; sourceTree = "<group>"; };
 		9BF91B9A16400BE40094DB94 /* DPadLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPadLayer.h; sourceTree = "<group>"; };
 		9BF91B9B16400BE40094DB94 /* DPadLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPadLayer.m; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* RangeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeType.h; sourceTree = "<group>"; };
@@ -2006,6 +2022,32 @@
 			path = SelectLayer;
 			sourceTree = "<group>";
 		};
+		9B019B0F16494D7700A6976F /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				9B019B1016494E8000A6976F /* Status.h */,
+				9B019B1116494E8000A6976F /* Status.m */,
+				9B019B161649542E00A6976F /* AuraStatus.h */,
+				9B019B171649542E00A6976F /* AuraStatus.m */,
+				9B019B1316494F2500A6976F /* TimeStatus.h */,
+				9B019B1416494F2500A6976F /* TimeStatus.m */,
+				9B9FC8E0164C085900D11743 /* StatusKit.h */,
+				9B9FC8E2164C0C0800D11743 /* StatusFactory.h */,
+				9B9FC8E3164C0C0800D11743 /* StatusFactory.m */,
+				9B019B1A16495AF800A6976F /* ExtendStatus */,
+			);
+			name = Status;
+			sourceTree = "<group>";
+		};
+		9B019B1A16495AF800A6976F /* ExtendStatus */ = {
+			isa = PBXGroup;
+			children = (
+				9B019B1B16495B6100A6976F /* PoisonStatus.h */,
+				9B019B1C16495B6100A6976F /* PoisonStatus.m */,
+			);
+			name = ExtendStatus;
+			sourceTree = "<group>";
+		};
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
@@ -2043,25 +2085,24 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
-				371B10181642A28800B7878D /* SelectLayer */,
-				9B92D2AA16416670000AF467 /* BattleScene */,
-				9BFFAE60163E9D8A00073DC5 /* SkillSet */,
-				9B92D2BB164171F5000AF467 /* Constant.h */,
-				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
-				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
-				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
-				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
 				9B062E6D1635275300E06018 /* AppDelegate.h */,
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
+				9B92D2BB164171F5000AF467 /* Constant.h */,
 				9B062E701635275300E06018 /* HelloWorldLayer.h */,
 				9B062E711635275300E06018 /* HelloWorldLayer.m */,
 				9B062E731635275300E06018 /* IntroLayer.h */,
 				9B062E741635275300E06018 /* IntroLayer.m */,
-				9B062D101635275100E06018 /* libs */,
+				2BBF9913163E6267005AD8B9 /* MapControlExample.h */,
+				2BBF9914163E6267005AD8B9 /* MapControlExample.m */,
 				2BBF990E163E6134005AD8B9 /* MapCameraControl.h */,
 				2BBF990F163E6134005AD8B9 /* MapCameraControl.m */,
-				9B062CF61635275000E06018 /* Resources */,
+				9B92D2AA16416670000AF467 /* BattleScene */,
 				9B062E7F16353A2B00E06018 /* Character */,
+				9B019B0F16494D7700A6976F /* Status */,
+				9B062D101635275100E06018 /* libs */,
+				9B062CF61635275000E06018 /* Resources */,
+				371B10181642A28800B7878D /* SelectLayer */,
+				9BFFAE60163E9D8A00073DC5 /* SkillSet */,
 				9B062E691635275300E06018 /* Supporting Files */,
 			);
 			path = LightBugBattle;
@@ -4186,6 +4227,11 @@
 				9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */,
 				9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */,
 				371B101F1642A72B00B7878D /* SelectLayer.m in Sources */,
+				9B019B1216494E8000A6976F /* Status.m in Sources */,
+				9B019B1516494F2500A6976F /* TimeStatus.m in Sources */,
+				9B019B181649542E00A6976F /* AuraStatus.m in Sources */,
+				9B019B1D16495B6100A6976F /* PoisonStatus.m in Sources */,
+				9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

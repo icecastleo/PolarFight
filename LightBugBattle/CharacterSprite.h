@@ -11,6 +11,8 @@
 
 @class Character;
 @interface CharacterSprite : CCSprite {
+    Character *character;
+    
     CCSprite *bloodSprite;
     
     CCAction *upAction;
@@ -21,7 +23,10 @@
 
 -(id) initWithCharacter:(Character *)character;
 
--(void) setDirectionAnimate:(SpriteDirections)direction;
--(void) setBloodSpriteWithCharacter:(Character*)character;
+-(void) addBloodSprite;
+-(void) removeBloodSprite;
+
+-(void) runDirectionAnimate;
+-(void) updateBloodSprite;
 
 @end

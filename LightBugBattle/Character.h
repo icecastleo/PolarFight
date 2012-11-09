@@ -15,7 +15,8 @@
 @class BattleController;
 
 @interface Character : NSObject {
-    CharacterSprite *sprite;
+    //    BattleController *controller;
+//    CharacterSprite *sprite;
     //    NSString *name;
     //    int maxHp;
     
@@ -28,13 +29,15 @@
     //    int moveTime;
     
     //    SpriteStates state;
-    SpriteDirections direction;
+//    SpriteDirections direction;
     
-    BattleController *controller;
     NSMutableArray *pointArray;
     SkillSet *skillSet;
     CGContextRef context;
+    
+    NSMutableDictionary *statusDictionary;
 }
+@property (assign) BattleController *controller;
 
 @property int player;
 @property (readonly) NSString *name;
@@ -50,12 +53,12 @@
 @property (readonly) SpriteStates state;
 
 @property (readonly) CharacterSprite *sprite;
+@property (readonly) SpriteDirections direction;
 @property CGPoint position;
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
 
-+(id) characterWithController:(BattleController *) battleController player:(int)pNumber withFile:(NSString *) filename;
--(id) initWithController:(BattleController *) battleController player:(int)pNumber withFile:(NSString *) filename;
+-(id) initWithFileName:(NSString *) filename player:(int)pNumber;
 
 -(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 
@@ -67,5 +70,8 @@
 
 -(void) setPosition:(CGPoint)position;
 -(CGPoint) position;
+
+-(void) addStatus:(StatusType)type withTime:(int)time;
+-(void) removeStatus:(StatusType)type;
 
 @end

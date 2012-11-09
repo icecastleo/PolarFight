@@ -13,6 +13,7 @@
 
 -(id)init {
     if(self = [super init]) {
+        
         mapLayer = [[MapLayer alloc] init];
         [self addChild:mapLayer];
         
@@ -27,12 +28,16 @@
         int number = 2;
         
         for (int i = 0; i < number; i++) {
-            Character *character = [Character characterWithController:self player:1 withFile:@"amg1"];
+            Character *character = [[Character alloc] initWithFileName:@"amg1" player:1];
+            character.controller = self;
+            [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
         for (int i = 0; i < number; i++) {
-            Character *character = [Character characterWithController:self player:2 withFile:@"avt1"];
+            Character *character = [[Character alloc] initWithFileName:@"avt1" player:2];
+            character.controller = self;
+            [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
@@ -76,7 +81,6 @@
     [mapLayer release];
     [super dealloc];
 }
-
 
 - (void) update:(ccTime) delta {
     

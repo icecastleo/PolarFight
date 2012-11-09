@@ -28,6 +28,11 @@ typedef enum {
     directionRight
 } SpriteDirections;
 
+typedef enum {
+    statusUnknown,
+    statusPoison,
+} StatusType;
+
 //=============== 浩翔 ===============
 typedef enum {
     role1Tag,

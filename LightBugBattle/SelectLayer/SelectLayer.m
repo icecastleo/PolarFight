@@ -279,14 +279,14 @@ static const int nilRoleTag = 100;
     }
 }
 
-//=================== select roles methods ============
+// =================== select roles methods ============
 
 -(BOOL)canPutRoles {
     return YES;
 }
 //=================== select roles methods ============
 
-#pragma draw character methods
+#pragma mark draw character methods
 //=============== add and remove character methods ===============
 - (void)replaceOldRole:(CCSprite*)oldCharacter newCharacter:(CCSprite*)newCharacter inArray:(NSMutableArray *)selectedArray index:(int)index
 {

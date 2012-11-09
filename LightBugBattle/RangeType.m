@@ -70,46 +70,54 @@
     {
         Character *temp = (Character*)[enemies objectAtIndex:i];
     
-        ///determine if this attack can effect self
-        if(effectSelfOrNot == effectExceptSelf){
-            if(temp==character)
-                continue;
+        if ([self containTarget:temp]) {
+            [effectTargets addObject:temp];
         }
-        
-        ///determine if can effect ally
-        switch (effectSides) {
-            case effectSideAlly:
-                if(temp.player!=character.player)
-                    continue;
-                break; 
-            case effectSideEnemy:
-                if(temp.player==character.player)
-                    continue;
-                break;
-            case effectSideBoth:
-                break;
-            default:
-                break;
-        }
-        
-        
-        NSMutableArray *points=temp.pointArray;
-        for (int j=0; j<[points count]; j++) {
-            CGPoint loc=[[points objectAtIndex:j] CGPointValue];
-            // switch coordinate systems
-            loc=[temp.sprite convertToWorldSpace:loc];
-            loc=[rangeSprite convertToNodeSpace:loc];
-            if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-                [effectTargets addObject:temp];
-                CCLOG(@"Player %d is under attack", temp.player);
-                break;
-            }
-        }
-    
-        
     }
     return effectTargets;
 }
+
+-(BOOL)containTarget:(Character *)temp {
+    
+    ///determine if this attack can effect self
+    if(effectSelfOrNot == effectExceptSelf){
+        if(temp==character)
+            return NO;
+    }
+    
+    ///determine if can effect ally
+    switch (effectSides) {
+        case effectSideAlly:
+            if(temp.player!=character.player)
+                return NO;
+            break;
+        case effectSideEnemy:
+            if(temp.player==character.player)
+                return NO;
+            break;
+        case effectSideBoth:
+            break;
+        default:
+            break;
+    }
+    
+    
+    NSMutableArray *points=temp.pointArray;
+    for (int j=0; j<[points count]; j++) {
+        CGPoint loc=[[points objectAtIndex:j] CGPointValue];
+        // switch coordinate systems
+        loc=[temp.sprite convertToWorldSpace:loc];
+        loc=[rangeSprite convertToNodeSpace:loc];
+        if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
+//            [effectTargets addObject:temp];
+            CCLOG(@"Player %d is under the range", temp.player);
+            return YES;
+//            break;
+        }
+    }
+    return NO;
+}
+
 CGContextRef CreateARGBBitmapContext(CGSize size)
 {
     CGContextRef    context = NULL;

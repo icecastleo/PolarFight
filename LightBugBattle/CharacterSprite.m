@@ -11,27 +11,38 @@
 
 @implementation CharacterSprite
 
--(id)initWithCharacter:(Character *)character {
+-(id)initWithCharacter:(Character *)cha {
     if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",character.name, character.player == 1 ? @"rt" : @"lf"]])
+               [NSString stringWithFormat:@"%@_%@2.gif",cha.name, cha.player == 1 ? @"rt" : @"lf"]])
     {
-        bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
-        bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
-        [self setBloodSpriteWithCharacter:character];
-        [self addChild:bloodSprite];
-
+        character = cha;
         [self setAnimationWithName:character.name];
     }
     return self;
 }
 
 -(void)dealloc {
-    [bloodSprite release];
+    if(bloodSprite) {
+        [bloodSprite release];
+    }
+    
     [upAction release];
     [downAction release];
     [leftAction release];
     [rightAction release];
     [super dealloc];
+}
+
+-(void)addBloodSprite {
+    bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
+    bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
+    [self updateBloodSprite];
+    [self addChild:bloodSprite];
+}
+
+-(void)removeBloodSprite {
+    [bloodSprite removeFromParentAndCleanup:YES];
+    bloodSprite = nil;
 }
 
 -(void) setAnimationWithName:(NSString*) name {
@@ -76,7 +87,9 @@
     
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
 
--(void)setDirectionAnimate:(SpriteDirections)direction {
+-(void) runDirectionAnimate {
+    SpriteDirections direction = character.direction;
+    
     [self stopAllActions];
     
     if(direction == directionUp) {
@@ -90,7 +103,7 @@
     }
 }
 
--(void) setBloodSpriteWithCharacter:(Character*)character {
+-(void) updateBloodSprite {
     bloodSprite.scaleX = (float)character.hp/ character.maxHp;
     bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
 }
