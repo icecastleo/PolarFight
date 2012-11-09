@@ -2062,6 +2062,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1C55D71643B08A007D6CEA /* Map */,
+				371B10181642A28800B7878D /* SelectLayer */,
 				9B92D2AA16416670000AF467 /* BattleScene */,
 				9BFFAE60163E9D8A00073DC5 /* SkillSet */,
 				9B92D2BB164171F5000AF467 /* Constant.h */,
@@ -4056,6 +4057,10 @@
 				9B114123163E4CAD0074969E /* blood.png in Resources */,
 				2BBF9910163E6134005AD8B9 /* map.png in Resources */,
 				2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */,
+				372580A01643A8A2006E7FD8 /* SelectedRolesPostion.plist in Resources */,
+				372580B31643BE6A006E7FD8 /* UnSelectedRolesPosition.plist in Resources */,
+				37AF179C1647A9CC00075F4C /* mainRole.jpg in Resources */,
+				37AF179D1647A9CC00075F4C /* open_spot.jpg in Resources */,
 				2B51EB031643EB0000441FB1 /* debugColor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4195,6 +4200,7 @@
 				9B92D2B616416D66000AF467 /* Character.m in Sources */,
 				9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */,
 				9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */,
+				371B101F1642A72B00B7878D /* SelectLayer.m in Sources */,
 				2B1C55D51643B07C007D6CEA /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

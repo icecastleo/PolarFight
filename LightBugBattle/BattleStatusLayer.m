@@ -34,7 +34,7 @@
         
         selectSprite = [[CCSprite alloc] init];
 //        selectSprite.visible = NO;
-        [self addChild:selectSprite];
+        //[self addChild:selectSprite];
         
         CCAnimation *animation = [CCAnimation animation];
         
@@ -54,12 +54,16 @@
 }
 
 -(void) startSelectCharacter:(Character*)character {
+    
+    //selectSprite should be on the same layer as the character
+    [[[character sprite] parent] addChild:selectSprite];
     selectSprite.position = character.position;
     [selectSprite runAction:selectAction];
     selectSprite.visible = YES;    
 }
 
 -(void) stopSelect {
+    [selectSprite removeFromParentAndCleanup:NO];
     selectSprite.visible = NO;
     [selectSprite stopAllActions];
 }

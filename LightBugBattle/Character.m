@@ -156,6 +156,8 @@
 }
 
 -(void)setPosition:(CGPoint)newPosition {
+    CGPoint velocity = ccp( newPosition.x - sprite.position.x , newPosition.y - sprite.position.y );
+    [self setDirectionWithVelocity:velocity];
     sprite.position = newPosition;
 }
 
