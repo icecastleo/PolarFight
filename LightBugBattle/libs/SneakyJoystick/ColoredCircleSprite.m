@@ -35,6 +35,7 @@
 - (void) dealloc
 {
 	free(circleVertices_);
+    [super dealloc];
 }
 
 - (id) init

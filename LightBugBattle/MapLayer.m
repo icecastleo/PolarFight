@@ -28,6 +28,7 @@
     [characters addObject:theCharacter.sprite];
     CGSize mapSize = mapBody.boundingBox.size;
     CGSize charaSize = theCharacter.sprite.boundingBox.size;
+    
     // Need to be done at map
     if(theCharacter.player == 1)
     {
@@ -113,7 +114,6 @@
 //        }
 //    }
     
-    
     // MAP LIMIT
     float mapXLimit = mapBody.boundingBox.size.width/2;
     float mapYLimit = mapBody.boundingBox.size.height/2;
@@ -125,16 +125,14 @@
     CCLOG(@"LIMITS X:%f Y:%f", mapXLimit, mapYLimit);
     CCLOG(@"CHARA POSITION X:%f Y:%f", theCharacter.position.x, theCharacter.position.y);
     
-    [theCharacter setPosition:ccp(moveX,moveY)];
+    theCharacter.position = ccp(moveX,moveY);
 }
 
--(void) moveCharacter:(Character*)theCharacter velocity:(CGPoint)amount
+-(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity
 {
-    [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, amount)];
-    //[theCharacter setPosition:ccpAdd(theCharacter.position, amount)];
+    [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
+    [theCharacter setCharacterWithVelocity:velocity];
 }
-
-
 
 -(void) dealloc
 {

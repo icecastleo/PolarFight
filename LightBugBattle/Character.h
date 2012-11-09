@@ -60,7 +60,8 @@
 
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber;
 
--(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
+//-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
+-(void) setCharacterWithVelocity:(CGPoint)velocity;
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
 -(void) getDamage:(int) damage;

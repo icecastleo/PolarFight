@@ -25,7 +25,7 @@
 @property (readwrite, assign) MapCameraControl* cameraControl;
 -(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
--(void) moveCharacter:(Character*)theCharacter velocity:(CGPoint)amount;
+-(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
 
 @end

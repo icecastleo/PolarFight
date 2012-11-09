@@ -84,9 +84,22 @@
     moveTime = arc4random() % 3 + 2;
 }
 
-// TODO: need be done at mapLayers
--(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
-    
+//// TODO: need be done at mapLayers
+//-(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
+//    
+//    if(velocity.x == 0 && velocity.y == 0) {
+//        state = stateIdle;
+//        [sprite stopAllActions];
+//        return;
+//    }
+//    
+//    state = stateMove;
+//    
+//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+//    [self setDirectionWithVelocity:velocity];
+//}
+
+-(void) setCharacterWithVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
         [sprite stopAllActions];
@@ -94,8 +107,7 @@
     }
     
     state = stateMove;
-    
-    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
     [self setDirectionWithVelocity:velocity];
 }
 
@@ -165,8 +177,8 @@
 }
 
 -(void)setPosition:(CGPoint)newPosition {
-    CGPoint velocity = ccp( newPosition.x - sprite.position.x , newPosition.y - sprite.position.y );
-    [self setDirectionWithVelocity:velocity];
+//    CGPoint velocity = ccp( newPosition.x - sprite.position.x , newPosition.y - sprite.position.y );
+//    [self setDirectionWithVelocity:velocity];
     sprite.position = newPosition;
 }
 

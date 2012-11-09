@@ -242,7 +242,6 @@ static const int nilRoleTag = 100;
 }
 
 #pragma mark draw character methods
-//=============== add and remove character methods ===============
 - (void)replaceOldRole:(CCSprite*)oldCharacter newCharacter:(CCSprite*)newCharacter inArray:(NSMutableArray *)selectedArray index:(int)index
 {
     [self addCharacter:newCharacter toPosition:oldCharacter.position];
@@ -265,7 +264,7 @@ static const int nilRoleTag = 100;
     [character removeFromParentAndCleanup:YES];
 }
 
-#pragma touch
+#pragma mark touch
 - (void)selectSpriteForTouch:(CGPoint)touchLocation
 {
     CCSprite * newSprite = nil;

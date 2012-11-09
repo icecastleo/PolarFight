@@ -14,32 +14,25 @@
 -(id)init {
     if(self = [super init]) {
         
-        mapLayer = [[MapLayer alloc] init];
+        // init MAP
+        mapLayer = [MapLayer node];
         [self addChild:mapLayer];
         
-        //first you need a MAP and a layer to put MAP
-        //*CCNode can be a layer
+        // first you need a MAP and a layer to put MAP
+        // *CCNode can be a layer
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
-        
-        //some map setting
+        // some map setting
         [map setPosition:ccp(0,0)];
         
-        
-        //the camera need to be add into the map layer
-        //(it wont display but not adding it will cause error)
+        // the camera need to be add into the map layer (it wont display but not adding it will cause error)
         [mapLayer setMap:map];
         
-        
-        
-        
-        
-        
-        
-        dPadLayer = [[DPadLayer alloc] init];
+        // init Dpad
+        dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
+        statusLayer = [[[BattleStatusLayer alloc] initWithBattleController:self] autorelease];
         [self addChild:statusLayer];
         
         characters = [[NSMutableArray alloc] init];
@@ -66,7 +59,7 @@
         currentIndex = 0;
         currentCharacter = characters[currentIndex];
         
-        //start game
+        // start game
         [statusLayer startSelectCharacter:currentCharacter];
         [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
         
@@ -110,10 +103,10 @@
         return;
     
     if(!isMove && dPadLayer.isButtonPressed) {
+        [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
         isMove = YES;
         statusLayer.startLabel.visible = NO;
         [statusLayer stopSelect];
-        return;
     }
     
     if(isMove) {
@@ -143,14 +136,10 @@
         if(dPadLayer.velocity.x!=0 && dPadLayer.velocity.y!=0)
             [currentCharacter setAttackRotation:dPadLayer.velocity.x :dPadLayer.velocity.y];
         
-        //[currentCharacter addPosition:dPadLayer.velocity time:delta];
-        //
         // CHARACTER MOVE
         //
-        // Character position control is in mapLayer
-        // so character move should call maplayer
-        CGPoint vol = ccp( dPadLayer.velocity.x * 5, dPadLayer.velocity.y * 5 );
-        [mapLayer moveCharacter:currentCharacter velocity:vol];
+        // Character's position control is in mapLayer, so character move should call mapLayer
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 40 * delta)];
     }
 }
 
@@ -167,7 +156,7 @@
     
     currentCharacter = characters[currentIndex];
     
-    //select player
+    // select player
     [statusLayer startSelectCharacter:currentCharacter];
     [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
     

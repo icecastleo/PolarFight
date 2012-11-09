@@ -2103,6 +2103,11 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				2B1C55D71643B08A007D6CEA /* Map */,
+				371B10181642A28800B7878D /* SelectLayer */,
+				9B92D2AA16416670000AF467 /* BattleScene */,
+				9BFFAE60163E9D8A00073DC5 /* SkillSet */,
+				9B92D2BB164171F5000AF467 /* Constant.h */,
 				9B062E6D1635275300E06018 /* AppDelegate.h */,
 				9B062E6E1635275300E06018 /* AppDelegate.m */,
 				9B92D2BB164171F5000AF467 /* Constant.h */,
@@ -4247,6 +4252,7 @@
 				9B92D2BE164184D1000AF467 /* MapLayer.m in Sources */,
 				9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */,
 				371B101F1642A72B00B7878D /* SelectLayer.m in Sources */,
+				2B1C55D51643B07C007D6CEA /* Map.m in Sources */,
 				9B019B1216494E8000A6976F /* Status.m in Sources */,
 				9B019B1516494F2500A6976F /* TimeStatus.m in Sources */,
 				9B019B181649542E00A6976F /* AuraStatus.m in Sources */,
