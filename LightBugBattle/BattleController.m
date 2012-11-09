@@ -133,9 +133,6 @@
             return;
         }
         
-        if(dPadLayer.velocity.x!=0 && dPadLayer.velocity.y!=0)
-            [currentCharacter setAttackRotation:dPadLayer.velocity.x :dPadLayer.velocity.y];
-        
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer

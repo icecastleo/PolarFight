@@ -67,7 +67,6 @@
 -(void) getDamage:(int) damage;
 -(void) showAttackRange:(BOOL)visible;
 -(void) end;
--(void) setAttackRotation:(float) offX:(float) offY;
 
 -(void) setPosition:(CGPoint)position;
 -(CGPoint) position;

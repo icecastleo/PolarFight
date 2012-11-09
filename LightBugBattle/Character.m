@@ -56,9 +56,9 @@
     [super dealloc];
 }
 
--(void) setAttackRotation:(float) offX:(float) offY
+-(void) setAttackRotationWithVelocity:(CGPoint)velocity
 {
-    [skillSet setRangeRotation:offX :offY];
+    [skillSet setRangeRotation:velocity.x :velocity.y];
 }
 
 -(void) makePoint
@@ -109,6 +109,7 @@
     state = stateMove;
 //    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
     [self setDirectionWithVelocity:velocity];
+    [self setAttackRotationWithVelocity:velocity];
 }
 
 -(void) setDirectionWithVelocity:(CGPoint)velocity {
@@ -154,16 +155,26 @@
 }
 
 -(void) attackEnemy:(NSMutableArray *)enemies {
+    [sprite stopAllActions];
     
     CCLOG(@"Player %d's %@ is attack",player, name);
     
     state = stateAttack;
+    // TODO: Run attack animation
     
     NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
 
     for (Character *character in effectTargets) {
         [character getDamage:attack];
     }
+    
+    // TODO: Need to be deleted when there has attack animation
+    [self finishAttack];
+}
+
+// TODO: Need to be called when attack animation finished
+-(void) finishAttack {
+    state = stateIdle;
 }
 
 -(void) showAttackRange:(BOOL)visible {

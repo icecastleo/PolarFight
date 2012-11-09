@@ -96,7 +96,7 @@
     float moveX = location.x;
     float moveY = location.y;
     
-    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
+//    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
     
     // Character Collide
 //    for( int i=0; i<characters.count; i++ )
@@ -122,8 +122,8 @@
     moveX = MIN( MAX( moveX, -1*mapXLimit + characterWidth ), mapXLimit - characterWidth);
     moveY = MIN( MAX( moveY, -1*mapYLimit + characterWidth ), mapYLimit - characterWidth);
     // MAP LIMIT END
-    CCLOG(@"LIMITS X:%f Y:%f", mapXLimit, mapYLimit);
-    CCLOG(@"CHARA POSITION X:%f Y:%f", theCharacter.position.x, theCharacter.position.y);
+//    CCLOG(@"LIMITS X:%f Y:%f", mapXLimit, mapYLimit);
+//    CCLOG(@"CHARA POSITION X:%f Y:%f", theCharacter.position.x, theCharacter.position.y);
     
     theCharacter.position = ccp(moveX,moveY);
 }

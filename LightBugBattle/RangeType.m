@@ -110,7 +110,7 @@
         loc=[rangeSprite convertToNodeSpace:loc];
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
 //            [effectTargets addObject:temp];
-            CCLOG(@"Player %d is under the range", temp.player);
+            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
             return YES;
 //            break;
         }

@@ -35,6 +35,7 @@
 - (void) dealloc
 {
 	free(squareVertices_);
+    [super dealloc];
 }
 
 - (id) init
