@@ -17,6 +17,11 @@
 		2D26FC9C1640116100C34AA4 /* EffectDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC9B1640116100C34AA4 /* EffectDamage.m */; };
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		371B101F1642A72B00B7878D /* SelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 371B101E1642A72B00B7878D /* SelectLayer.m */; };
+		372580A01643A8A2006E7FD8 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3725809F1643A8A2006E7FD8 /* SelectedRolesPostion.plist */; };
+		372580B31643BE6A006E7FD8 /* UnSelectedRolesPosition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 372580B21643BE6A006E7FD8 /* UnSelectedRolesPosition.plist */; };
+		37AF179C1647A9CC00075F4C /* mainRole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37AF179A1647A9CC00075F4C /* mainRole.jpg */; };
+		37AF179D1647A9CC00075F4C /* open_spot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37AF179B1647A9CC00075F4C /* open_spot.jpg */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -909,6 +914,12 @@
 		2D4AD590163FCD8C00A949C3 /* SkillSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSet.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
+		371B101D1642A72B00B7878D /* SelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectLayer.h; sourceTree = "<group>"; };
+		371B101E1642A72B00B7878D /* SelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectLayer.m; sourceTree = "<group>"; };
+		3725809F1643A8A2006E7FD8 /* SelectedRolesPostion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SelectedRolesPostion.plist; sourceTree = "<group>"; };
+		372580B21643BE6A006E7FD8 /* UnSelectedRolesPosition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnSelectedRolesPosition.plist; sourceTree = "<group>"; };
+		37AF179A1647A9CC00075F4C /* mainRole.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mainRole.jpg; sourceTree = "<group>"; };
+		37AF179B1647A9CC00075F4C /* open_spot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = open_spot.jpg; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* LightBugBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBugBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1998,6 +2009,19 @@
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 			);
 			name = Range;
+			sourceTree = "<group>";
+		};
+		371B10181642A28800B7878D /* SelectLayer */ = {
+			isa = PBXGroup;
+			children = (
+				37AF179A1647A9CC00075F4C /* mainRole.jpg */,
+				37AF179B1647A9CC00075F4C /* open_spot.jpg */,
+				371B101D1642A72B00B7878D /* SelectLayer.h */,
+				371B101E1642A72B00B7878D /* SelectLayer.m */,
+				3725809F1643A8A2006E7FD8 /* SelectedRolesPostion.plist */,
+				372580B21643BE6A006E7FD8 /* UnSelectedRolesPosition.plist */,
+			);
+			path = SelectLayer;
 			sourceTree = "<group>";
 		};
 		9B062CD41635275000E06018 = {
