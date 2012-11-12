@@ -83,6 +83,7 @@
 }
 
 -(void)removeCharacter:(Character *)character {
+    [mapLayer removeCharacter:character];
     [characters removeObject:character];
     [character.sprite removeFromParentAndCleanup:YES];
     [character release];
@@ -136,7 +137,7 @@
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 40 * delta)];
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 10 * delta)];
     }
 }
 

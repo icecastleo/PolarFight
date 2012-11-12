@@ -25,7 +25,7 @@
 
 -(void) addCharacter:(Character*)theCharacter
 {
-    [characters addObject:theCharacter.sprite];
+    [characters addObject:theCharacter];
     CGSize mapSize = mapBody.boundingBox.size;
     CGSize charaSize = theCharacter.sprite.boundingBox.size;
     
@@ -52,7 +52,7 @@
 
 -(void)removeCharacter:(Character *)character
 {
-    
+    [characters removeObject:character];
 }
 
 -(void) setMap:(CCSprite*)theMap
@@ -90,29 +90,42 @@
 
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location
 {
-    int x = (location.x + mapBody.boundingBox.size.width/2)/10;
-    int y = (location.y + mapBody.boundingBox.size.height/2)/10;
+    //int x = (location.x + mapBody.boundingBox.size.width/2)/10;
+    //int y = (location.y + mapBody.boundingBox.size.height/2)/10;
     
     float moveX = location.x;
     float moveY = location.y;
     
 //    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
     
-    // Character Collide
-//    for( int i=0; i<characters.count; i++ )
-//    {
-//        if( [characters objectAtIndex:i] == theCharacter )
-//        {
-//            continue;
-//        }
-//        CGPoint targetLocation = [[characters objectAtIndex:i] position];
-//        
-//        if( ccpDistance(location, targetLocation) < theCharacter.sprite.boundingBox.size.width)
-//        {
-//            moveX = theCharacter.position.x;
-//            moveY = theCharacter.position.y;
-//        }
-//    }
+    // Character Collide with Character
+    for( int i=0; i<characters.count; i++ )
+    {
+        if( [characters objectAtIndex:i] == theCharacter )
+        {
+            continue;
+        }
+        
+        CGPoint targetLocation = [[characters objectAtIndex:i] position];
+        CGPoint selfLocation = theCharacter.position;
+        
+        float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width;
+        float selfRadius = theCharacter.sprite.boundingBox.size.width;
+        
+        // redirect the location
+        if( ccpDistance(targetLocation, location ) < targetRadius + selfRadius )
+        {
+            CGPoint charaLocation = theCharacter.position;
+            float selfRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width;
+            CGPoint velocity = ccpSub( theCharacter.position, location);
+            
+                        
+        }
+        // redirect the location
+    }
+    // Character Collide with Character
+    
+    
     
     // MAP LIMIT
     float mapXLimit = mapBody.boundingBox.size.width/2;
@@ -165,6 +178,5 @@
     [cameraControl moveCameraX:-0.5*diff.x Y:-0.5*diff.y];
     
 }
-
 
 @end
