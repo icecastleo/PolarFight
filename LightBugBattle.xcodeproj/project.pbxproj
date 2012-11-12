@@ -14,6 +14,11 @@
 		2D26FC9C1640116100C34AA4 /* EffectDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC9B1640116100C34AA4 /* EffectDamage.m */; };
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		3799B7121650DCB300A9A394 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7111650DCB300A9A394 /* Party.m */; };
+		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
+		3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7191650DE3700A9A394 /* GDataXMLNode.m */; };
+		3799B71C1650DFC100A9A394 /* Party.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Party.xml */; };
+		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
 		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
 		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
@@ -913,6 +918,14 @@
 		2D4AD590163FCD8C00A949C3 /* SkillSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSet.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
+		3799B7101650DCB300A9A394 /* Party.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
+		3799B7111650DCB300A9A394 /* Party.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
+		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
+		3799B7181650DE3700A9A394 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		3799B7191650DE3700A9A394 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		3799B71B1650DFC100A9A394 /* Party.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Party.xml; sourceTree = "<group>"; };
+		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		9B019B1016494E8000A6976F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B019B1116494E8000A6976F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B019B1316494F2500A6976F /* TimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatus.h; sourceTree = "<group>"; };
@@ -1971,6 +1984,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */,
 				9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */,
 				9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */,
 				9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */,
@@ -2027,6 +2041,15 @@
 			name = Range;
 			sourceTree = "<group>";
 		};
+		3799B7171650DE2000A9A394 /* XMLSupport */ = {
+			isa = PBXGroup;
+			children = (
+				3799B7181650DE3700A9A394 /* GDataXMLNode.h */,
+				3799B7191650DE3700A9A394 /* GDataXMLNode.m */,
+			);
+			name = XMLSupport;
+			sourceTree = "<group>";
+		};
 		9B019B0F16494D7700A6976F /* Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -2074,6 +2097,7 @@
 		9B062CE21635275000E06018 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3799B71D1650E06D00A9A394 /* libxml2.dylib */,
 				9B062CE31635275000E06018 /* QuartzCore.framework */,
 				9B062CE51635275000E06018 /* OpenGLES.framework */,
 				9B062CE71635275000E06018 /* OpenAL.framework */,
@@ -2487,12 +2511,18 @@
 		9B062E7F16353A2B00E06018 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				3799B7171650DE2000A9A394 /* XMLSupport */,
 				9B92D2B416416D66000AF467 /* Character.h */,
 				9B92D2B516416D66000AF467 /* Character.m */,
 				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
 				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
 				9B062E8216353A8200E06018 /* Army */,
 				9B062E8116353A4F00E06018 /* Player */,
+				3799B7101650DCB300A9A394 /* Party.h */,
+				3799B7111650DCB300A9A394 /* Party.m */,
+				3799B7141650DDDD00A9A394 /* PartyParser.h */,
+				3799B7151650DDDD00A9A394 /* PartyParser.m */,
+				3799B71B1650DFC100A9A394 /* Party.xml */,
 			);
 			name = Character;
 			sourceTree = "<group>";
@@ -4105,6 +4135,7 @@
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
 				9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */,
+				3799B71C1650DFC100A9A394 /* Party.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4250,6 +4281,9 @@
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
+				3799B7121650DCB300A9A394 /* Party.m in Sources */,
+				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
+				3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4261,6 +4295,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4271,9 +4306,12 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -4282,6 +4320,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -4290,27 +4329,35 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
 		9B062E791635275300E06018 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LightBugBattle/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"LightBugBattle/libs/kazmath/include\"";
+				HEADER_SEARCH_PATHS = (
+					"\"LightBugBattle/libs/kazmath/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4318,17 +4365,22 @@
 		9B062E7A1635275300E06018 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LightBugBattle/Prefix.pch;
-				HEADER_SEARCH_PATHS = "\"LightBugBattle/libs/kazmath/include\"";
+				HEADER_SEARCH_PATHS = (
+					"\"LightBugBattle/libs/kazmath/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

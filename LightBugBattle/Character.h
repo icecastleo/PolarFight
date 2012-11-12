@@ -36,11 +36,13 @@
     CGContextRef context;
     
     NSMutableDictionary *statusDictionary;
+    
 }
 @property (assign) BattleController *controller;
 
 @property int player;
 @property (readonly) NSString *name;
+@property (readonly) NSString *picFilename;
 @property (readonly) int maxHp;
 
 @property (readonly) int hp;
@@ -49,6 +51,8 @@
 @property (readonly) int speed;
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
+@property (readonly) int level;
+@property (nonatomic, assign) CharacterType roleType;
 
 @property (readonly) SpriteStates state;
 
@@ -73,5 +77,7 @@
 
 -(void) addStatus:(StatusType)type withTime:(int)time;
 -(void) removeStatus:(StatusType)type;
+
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename roleType:(CharacterType)rType player:(int)pNumber level:(int)rlevel  maxHp:(int)rmaxHp hp:(int)rhp attack:(int)rattack defense:(int)rdefense speed:(int)rspeed moveSpeed:(int)rmoveSpeed moveTime:(int)rmoveTime;
 
 @end

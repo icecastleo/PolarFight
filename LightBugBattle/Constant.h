@@ -10,8 +10,8 @@
 #define LightBugBattle_Constant_h
 
 typedef enum {
-    test1,
-    test2
+    Hero,
+    Soldier
 } CharacterType;
 
 typedef enum {
@@ -33,7 +33,6 @@ typedef enum {
     statusPoison,
 } StatusType;
 
-//=============== 浩翔 ===============
 typedef enum {
     role1Tag,
     role2Tag,
