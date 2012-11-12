@@ -14,7 +14,7 @@
 //void calc(circle cir1,circle cir2)
 +(CGPoint) moveRedirectWhileCollisionP1:(CGPoint)point1 R1:(float)r1 P2:(CGPoint)point2 R2:(float)r2 Location:(CGPoint)location
 {
-    
+  
     if(ccpDistance(location, point2)>r1+r2)
         return location;
     CGPoint moveVector= ccpSub(location, point1);
@@ -22,17 +22,31 @@
     
     float originalVectorAngle = [self calculateVectorAngle:moveVector.x y:moveVector.y];
     float twoPointAngle = [self calculateVectorAngle:pointVector.x y:pointVector.y];
-    CGPoint resultVector = moveVector;
     
+    CGPoint clockWiseNew =location;
+    CGPoint counterClockWiseNew =location;
+   
+    CGPoint resultVector = moveVector;
     while (true) {
         
         resultVector= [self RotatePointAboutOrigin:resultVector Angle:M_PI/36];
-        CGPoint newLocation =ccpAdd(point1, resultVector);
-        if(ccpDistance(newLocation, point2)>r1+r2)
-            return newLocation;
+        clockWiseNew =ccpAdd(point1, resultVector);
+        if(ccpDistance(clockWiseNew, point2)>r1+r2)
+            break;
     }
+    resultVector = moveVector;
+    while (true) {
+        
+        resultVector= [self RotatePointAboutOrigin:resultVector Angle:M_PI/36*-1];
+        counterClockWiseNew =ccpAdd(point1, resultVector);
+        if(ccpDistance(counterClockWiseNew, point2)>r1+r2)
+            break;
+    }
+    if(ccpDistance(location, counterClockWiseNew)<ccpDistance(location, clockWiseNew))
+        return counterClockWiseNew;
+    else
+        return clockWiseNew;
     
-    return location;
 }
 
 +(CGPoint) RotatePointAboutOrigin:(CGPoint) point Angle:(float)angle

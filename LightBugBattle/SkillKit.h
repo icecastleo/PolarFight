@@ -13,7 +13,7 @@
 
 #import "RangeFanShape.h"
 #import "RangeCircle.h"
-
+#import "RangeLine.h"
 
 
 #import "EffectDamage.h"

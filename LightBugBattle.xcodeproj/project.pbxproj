@@ -15,6 +15,7 @@
 		2D26FC9C1640116100C34AA4 /* EffectDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC9B1640116100C34AA4 /* EffectDamage.m */; };
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
 		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
 		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
@@ -916,6 +917,8 @@
 		2D4AD590163FCD8C00A949C3 /* SkillSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkillSet.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
+		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
+		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
 		9B019B1016494E8000A6976F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B019B1116494E8000A6976F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B019B1316494F2500A6976F /* TimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatus.h; sourceTree = "<group>"; };
@@ -2018,13 +2021,14 @@
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
-				
 				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
 				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
 				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
 				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
+				2DD7058A16511724001E3155 /* RangeLine.h */,
+				2DD7058B16511724001E3155 /* RangeLine.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -4253,6 +4257,7 @@
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
 				2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
+				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
