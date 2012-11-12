@@ -2013,10 +2013,7 @@
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
-				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
-				9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */,
-				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
-				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
+				
 				9BFFAE61163E9DBB00073DC5 /* RangeType.h */,
 				9BFFAE62163E9DBB00073DC5 /* RangeType.m */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
