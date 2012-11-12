@@ -113,13 +113,12 @@
         float selfRadius = theCharacter.sprite.boundingBox.size.width;
         
         // redirect the location
-        if( ccpDistance(targetLocation, location ) < targetRadius + selfRadius )
+        if( ccpDistance(targetLocation, location ) < targetRadius )
         {
-            CGPoint charaLocation = theCharacter.position;
-            float selfRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width;
-            CGPoint velocity = ccpSub( theCharacter.position, location);
+            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
             
-                        
+            moveX = redirect.x;
+            moveY = redirect.y;
         }
         // redirect the location
     }

@@ -12,7 +12,7 @@
 @implementation Helper
 
 //void calc(circle cir1,circle cir2)
--(CGPoint) moveRedirectWhileCollisionP1:(CGPoint)point1 R1:(float)r1 P2:(CGPoint)point2 R2:(float)r2 Location:(CGPoint)location
++(CGPoint) moveRedirectWhileCollisionP1:(CGPoint)point1 R1:(float)r1 P2:(CGPoint)point2 R2:(float)r2 Location:(CGPoint)location
 {
     double x1,x2,y1,y2;//此為兩圓相交的坐標
     if(point1.y!=point2.y)//兩圓圓心Y值不同時
@@ -51,7 +51,10 @@
             y2=((-b)-sqrt(b*b-4*a*c))/(2*a);//y=(-b-√(b^2-4ac))/2a
             if(b*b-4*a*c>0)//兩交點
             {
-                printf("The cross points are (%.2lf,%.2lf) and (%.2lf,%.2lf).\n",x1,y1,x1,y2);
+                if( ccpDistance(location, ccp(x1,y1)) > ccpDistance(location, ccp(x2,y2)) )
+                {
+                    
+                }
             }
             else//一交點
             {
