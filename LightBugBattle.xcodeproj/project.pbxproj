@@ -4286,6 +4286,7 @@
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
+                2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
 				3799B7121650DCB300A9A394 /* Party.m in Sources */,
 				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
 				3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */,
