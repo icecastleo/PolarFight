@@ -14,6 +14,8 @@
 //void calc(circle cir1,circle cir2)
 +(CGPoint) moveRedirectWhileCollisionP1:(CGPoint)point1 R1:(float)r1 P2:(CGPoint)point2 R2:(float)r2 Location:(CGPoint)location
 {
+    CGPoint targetLocation = ccp(0,0);
+    
     double x1,x2,y1,y2;//此為兩圓相交的坐標
     if(point1.y!=point2.y)//兩圓圓心Y值不同時
     {//m= y=mx+k的x項系數、k= y=mx+k的k項常數、 a、b、c= x=(-b±√(b^2-4ac))/2a的係數
@@ -28,17 +30,22 @@
             y2=m*x2+k;//y=mx+k
             if(b*b-4*a*c>0)//兩交點
             {
-                printf("The cross points are (%.2lf,%.2lf) and (%.2lf,%.2lf).\n",x1,y1,x2,y2);
+                
+                if( ccpDistance(location, ccp(x1,y1)) > ccpDistance(location, ccp(x2,y2)) )
+                    targetLocation = ccp(x2, y2);
+                else
+                    targetLocation = ccp(x1, y1);
             
             }
             else//一交點
             {
-                printf("The cross points are (%.2lf,%.2lf).\n",x1,y1);
+                targetLocation = ccp(x1, y1);
             }
         }
         else//沒有交點時
         {
-            printf("No cross points.\n");
+            CCLOG(@"NO POINT");
+            targetLocation = point1;
         }
     }
     else if(point1.y==point2.y)//兩圓圓心Y值相同時
@@ -52,19 +59,22 @@
             if(b*b-4*a*c>0)//兩交點
             {
                 if( ccpDistance(location, ccp(x1,y1)) > ccpDistance(location, ccp(x2,y2)) )
-                {
-                    
-                }
+                    targetLocation = ccp(x2, y2);
+                else
+                    targetLocation = ccp(x1, y1);
             }
             else//一交點
             {
-                printf("The cross points are (%.2lf,%.2lf).\n",x1,y1);
+                targetLocation = ccp(x1, y1);
             }
         }
         else//沒有交點時
         {
-            printf("No cross points.\n");
+            CCLOG(@"NO POINT");
+            targetLocation = point1;
         }
     }
+    
+    return targetLocation;
 }
 @end
