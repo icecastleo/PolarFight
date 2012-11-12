@@ -112,10 +112,10 @@
     
     attack = arc4random() % 4 + 3;
     defense = 3;
-    speed = arc4random() % 7 + 3;
+    speed = arc4random() % 10 + 3;
     
     moveSpeed = arc4random() % 3 + 4;
-    moveTime = arc4random() % 3 + 2;
+    moveTime = arc4random() % 2 + 7;
 }
 
 //// TODO: need be done at mapLayers

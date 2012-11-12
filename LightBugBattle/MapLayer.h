@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "MapCameraControl.h"
 #import "Character.h"
+#import "Helper.h"
 
 @class Character;
 @interface MapLayer : CCLayer {

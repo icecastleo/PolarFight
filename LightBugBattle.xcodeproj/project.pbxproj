@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B51EB031643EB0000441FB1 /* debugColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B51EB021643EB0000441FB1 /* debugColor.png */; };
+		2B668FBB1650F595000E8B5E /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B668FBA1650F594000E8B5E /* Helper.m */; };
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2D26FC9A1640114D00C34AA4 /* EffectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* EffectType.m */; };
@@ -908,6 +909,8 @@
 
 /* Begin PBXFileReference section */
 		2B51EB021643EB0000441FB1 /* debugColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugColor.png; sourceTree = "<group>"; };
+		2B668FB91650F594000E8B5E /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		2B668FBA1650F594000E8B5E /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		2BBF990D163E6134005AD8B9 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* EffectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectType.h; sourceTree = "<group>"; };
@@ -2003,6 +2006,8 @@
 		2B1C55D71643B08A007D6CEA /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				9B82F78E164FB2780001A357 /* MapLayer.h */,
+				9B82F78F164FB2780001A357 /* MapLayer.m */,
 				9BFBEFDE164D401E008BB3AA /* Map.h */,
 				9BFBEFDF164D401E008BB3AA /* Map.m */,
 				9B248216164D40E3007B6E4D /* MapCameraControl.h */,
@@ -2130,6 +2135,8 @@
 				9B062E711635275300E06018 /* HelloWorldLayer.m */,
 				9B062E731635275300E06018 /* IntroLayer.h */,
 				9B062E741635275300E06018 /* IntroLayer.m */,
+				2B668FB91650F594000E8B5E /* Helper.h */,
+				2B668FBA1650F594000E8B5E /* Helper.m */,
 			);
 			path = LightBugBattle;
 			sourceTree = "<group>";
@@ -3306,8 +3313,6 @@
 				9B82F78B164FB2780001A357 /* BattleStatusLayer.m */,
 				9B82F78C164FB2780001A357 /* DPadLayer.h */,
 				9B82F78D164FB2780001A357 /* DPadLayer.m */,
-				9B82F78E164FB2780001A357 /* MapLayer.h */,
-				9B82F78F164FB2780001A357 /* MapLayer.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
