@@ -14,8 +14,8 @@
 @implementation Character
 
 @synthesize controller;
-@synthesize player,name,maxHp;
-@synthesize hp, attack, defense, speed, moveSpeed, moveTime;
+@synthesize player,name,picFilename,maxHp;
+@synthesize level, hp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
 @synthesize position;
@@ -24,6 +24,40 @@
 //+(id) characterWithController:(BattleController *)battleController player:(int)pNumber withFile:(NSString *)filename {
 //    return [[[self alloc] initWithController:battleController player:pNumber withFile:filename] autorelease];
 //}
+
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename roleType:(CharacterType)rType player:(int)pNumber level:(int)rlevel  maxHp:(int)rmaxHp hp:(int)rhp attack:(int)rattack defense:(int)rdefense speed:(int)rspeed moveSpeed:(int)rmoveSpeed moveTime:(int)rmoveTime;
+{
+    
+    if ((self = [super init])) {
+        name = rname;
+        picFilename = rfilename;
+        player = pNumber;
+        _roleType = rType;
+        level = rlevel;
+        maxHp = rmaxHp;
+        hp = rhp;
+        attack = rattack;
+        defense = rdefense;
+        speed = rspeed;
+        moveSpeed = rmoveSpeed;
+        moveTime = rmoveTime;
+        
+        sprite = [[CharacterSprite alloc] initWithCharacter:self];
+        
+        state = stateIdle;
+        
+        [self makePoint];
+        
+        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+        //        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        
+        context = UIGraphicsGetCurrentContext();
+        
+        statusDictionary = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+    
+}
 
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber{
     if(self = [super init]) {

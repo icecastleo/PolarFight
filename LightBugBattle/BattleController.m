@@ -8,6 +8,8 @@
 
 #import "BattleController.h"
 #import "BattleStatusLayer.h"
+#import "Party.h"
+#import "PartyParser.h"
 
 @implementation BattleController
 
@@ -37,17 +39,38 @@
         
         characters = [[NSMutableArray alloc] init];
         
-        int number = 2;
+        Party *party = [PartyParser loadParty];
+        NSAssert(party != nil, @"party is nil");
+        //NSLog(@"players:%d", party.players.count);
+        NSArray *roles1 = [party characterFromPlayer:1];
+        int number = roles1.count;
         
         for (int i = 0; i < number; i++) {
+            /*
             Character *character = [[Character alloc] initWithFileName:@"amg1" player:1];
+            character.controller = self;
+            [character.sprite addBloodSprite];
+            [self addCharacter:character];
+            //*/
+            Character *character = [roles1 objectAtIndex:i];
+            NSAssert(character != nil, @"character is nil");
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
-        for (int i = 0; i < number; i++) {
-            Character *character = [[Character alloc] initWithFileName:@"avt1" player:2];
+        NSArray *roles2 = [party characterFromPlayer:2];
+        int number2 = roles2.count;
+        
+        for (int i = 0; i < number2; i++) {
+            /*
+             Character *character = [[Character alloc] initWithFileName:@"amg1" player:1];
+             character.controller = self;
+             [character.sprite addBloodSprite];
+             [self addCharacter:character];
+             //*/
+            Character *character = [roles2 objectAtIndex:i];
+            NSAssert(character != nil, @"character is nil");
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
