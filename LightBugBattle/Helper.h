@@ -12,5 +12,6 @@
 @interface Helper : NSObject {
     
 }
++(CGPoint) moveRedirectWhileCollisionP1:(CGPoint)point1 R1:(float)r1 P2:(CGPoint)point2 R2:(float)r2 Location:(CGPoint)location;
 
 @end
