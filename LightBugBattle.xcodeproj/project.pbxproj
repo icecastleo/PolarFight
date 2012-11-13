@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2B51EB031643EB0000441FB1 /* debugColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B51EB021643EB0000441FB1 /* debugColor.png */; };
-		2B668FBB1650F595000E8B5E /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B668FBA1650F594000E8B5E /* Helper.m */; };
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2D26FC9A1640114D00C34AA4 /* EffectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* EffectType.m */; };
@@ -902,6 +901,7 @@
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
+		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BFBEFE0164D401E008BB3AA /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFBEFDF164D401E008BB3AA /* Map.m */; };
 		9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* RangeType.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -910,8 +910,6 @@
 
 /* Begin PBXFileReference section */
 		2B51EB021643EB0000441FB1 /* debugColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugColor.png; sourceTree = "<group>"; };
-		2B668FB91650F594000E8B5E /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
-		2B668FBA1650F594000E8B5E /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		2BBF990D163E6134005AD8B9 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* EffectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectType.h; sourceTree = "<group>"; };
@@ -1975,6 +1973,8 @@
 		9B9FC8E0164C085900D11743 /* StatusKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusKit.h; sourceTree = "<group>"; };
 		9B9FC8E2164C0C0800D11743 /* StatusFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFactory.h; sourceTree = "<group>"; };
 		9B9FC8E3164C0C0800D11743 /* StatusFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFactory.m; sourceTree = "<group>"; };
+		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BFBEFDE164D401E008BB3AA /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		9BFBEFDF164D401E008BB3AA /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* RangeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeType.h; sourceTree = "<group>"; };
@@ -2136,8 +2136,8 @@
 				9B062E711635275300E06018 /* HelloWorldLayer.m */,
 				9B062E731635275300E06018 /* IntroLayer.h */,
 				9B062E741635275300E06018 /* IntroLayer.m */,
-				2B668FB91650F594000E8B5E /* Helper.h */,
-				2B668FBA1650F594000E8B5E /* Helper.m */,
+				9BC8FD931652261D00A9EAC7 /* Helper.h */,
+				9BC8FD941652261D00A9EAC7 /* Helper.m */,
 			);
 			path = LightBugBattle;
 			sourceTree = "<group>";
@@ -4287,12 +4287,11 @@
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
-				2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
-                2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
 				3799B7121650DCB300A9A394 /* Party.m in Sources */,
 				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
 				3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */,
+				9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
