@@ -2,7 +2,7 @@
 //  PartyParser.h
 //  LightBugBattle
 //
-//  Created by  DAN on 12/11/12.
+//  Created by  浩翔 on 12/11/12.
 //
 //
 
@@ -12,7 +12,7 @@
 
 @interface PartyParser : NSObject
 
-+ (Party *)loadParty;
++ (Party *)loadPartyFromType:(int)type withPlayer:(int)player;
 + (void)saveParty:(Party *)party;
 
 @end

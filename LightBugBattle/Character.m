@@ -14,7 +14,8 @@
 @implementation Character
 
 @synthesize controller;
-@synthesize player,name,picFilename,maxHp;
+@synthesize name = _name, picFilename = _picFilename;
+@synthesize player,maxHp;
 @synthesize level, hp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
@@ -25,22 +26,13 @@
 //    return [[[self alloc] initWithController:battleController player:pNumber withFile:filename] autorelease];
 //}
 
-- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename roleType:(CharacterType)rType player:(int)pNumber level:(int)rlevel  maxHp:(int)rmaxHp hp:(int)rhp attack:(int)rattack defense:(int)rdefense speed:(int)rspeed moveSpeed:(int)rmoveSpeed moveTime:(int)rmoveTime;
+//FIXME: fix name reference.
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename
 {
-    
     if ((self = [super init])) {
-        name = rname;
-        picFilename = rfilename;
-        player = pNumber;
-        _roleType = rType;
-        level = rlevel;
-        maxHp = rmaxHp;
-        hp = rhp;
-        attack = rattack;
-        defense = rdefense;
-        speed = rspeed;
-        moveSpeed = rmoveSpeed;
-        moveTime = rmoveTime;
+        //_name = @"test";
+        _name =rname;
+        _picFilename = rfilename;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -62,7 +54,7 @@
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber{
     if(self = [super init]) {
         
-        name = filename;
+        _name = filename;
         player = pNumber;
         
         [self setRandomAbility];
@@ -173,7 +165,8 @@
 
 -(void) getDamage:(int) damage {
     
-    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, name, damage);
+    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
+    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
     
     // be attacked state;
     hp -= damage;
@@ -191,7 +184,8 @@
 -(void) attackEnemy:(NSMutableArray *)enemies {
     [sprite stopAllActions];
     
-    CCLOG(@"Player %d's %@ is attack",player, name);
+    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
+    CCLOG(@"Player %d's %@ is attack",player, self.name);
     
     state = stateAttack;
     // TODO: Run attack animation
@@ -246,6 +240,11 @@
 
 -(void)removeStatus:(StatusType)type {
     [statusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
+}
+
+- (CGRect) boundingBox
+{
+    return sprite.boundingBox;
 }
 
 @end

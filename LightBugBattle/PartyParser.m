@@ -2,7 +2,7 @@
 //  PartyParser.m
 //  LightBugBattle
 //
-//  Created by  DAN on 12/11/12.
+//  Created by  浩翔 on 12/11/12.
 //
 //
 
@@ -69,7 +69,22 @@
     }
 }
 
-+ (Party *)loadParty {
++ (Party *)loadPartyFromType:(int)type withPlayer:(int)player{
+    
+    NSString *xPath;
+    switch (type) {
+        case Hero:
+            xPath = @"//Party/Player[@type='hero']";
+            break;
+        case Soldier:
+            xPath = @"//Party/Player[@type='soldier']";
+            break;
+        case Monster:
+            xPath = @"//Party/Player[@type='monster']";
+            break;
+        default:
+            return nil;
+    }
     
     NSString *filePath = [self dataFilePath:FALSE];
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
@@ -81,14 +96,14 @@
     //NSLog(@"%@", doc.rootElement);
     
     Party *party = [[[Party alloc] init] autorelease];
-    NSArray *partyMembers = [doc nodesForXPath:@"//Party/Player" error:nil];
+    NSArray *partyMembers = [doc nodesForXPath:xPath error:nil];
     for (GDataXMLElement *partyMember in partyMembers) {
         
         // Let's fill these in!
         NSString *name;
         NSString *picFileName;
         CharacterType roleType;
-        int player;
+        //int player;
         int level;
         int maxHp;
         int hp;
@@ -112,12 +127,14 @@
             picFileName = firstPicture.stringValue;
         }
         
+        /*
         // Player
         NSArray *players = [partyMember elementsForName:@"Player"];
         if (players.count > 0) {
             GDataXMLElement *firstPlayers = (GDataXMLElement *) [players objectAtIndex:0];
             player = firstPlayers.stringValue.intValue;
         } else continue;
+        //*/
         
         // Type
         NSArray *types = [partyMember elementsForName:@"Type"];
@@ -190,7 +207,18 @@
             moveTime = firstMoveTime.stringValue.intValue;
         } else continue;
         
-        Character *role = [[Character alloc] initWithName:name fileName:picFileName roleType:roleType  player:player level:level maxHp:maxHp hp:hp attack:attack defense:defense speed:speed moveSpeed:moveSpeed moveTime:moveTime];
+        Character *role = [[Character alloc] initWithName:[name copy] fileName:[picFileName copy]];
+        
+        role.roleType = roleType;
+        role.player = player;
+        role.level = level;
+        role.maxHp = maxHp;
+        role.hp = hp;
+        role.attack = attack;
+        role.defense = defense;
+        role.speed = speed;
+        role.moveSpeed = moveSpeed;
+        role.moveTime = moveTime;
         
         [party.players addObject:role];
     }

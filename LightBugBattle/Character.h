@@ -36,28 +36,29 @@
     CGContextRef context;
     
     NSMutableDictionary *statusDictionary;
-    
+
 }
 @property (assign) BattleController *controller;
 
-@property int player;
-@property (readonly) NSString *name;
-@property (readonly) NSString *picFilename;
-@property (readonly) int maxHp;
+@property (nonatomic, assign) int player;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *picFilename;
+@property (nonatomic, assign) int maxHp;
 
-@property (readonly) int hp;
-@property (readonly) int attack;
-@property (readonly) int defense;
-@property (readonly) int speed;
-@property (readonly) int moveSpeed;
-@property (readonly) int moveTime;
-@property (readonly) int level;
+@property (nonatomic, assign) int hp;
+@property (nonatomic, assign) int attack;
+@property (nonatomic, assign) int defense;
+@property (nonatomic, assign) int speed;
+@property (nonatomic, assign) int moveSpeed;
+@property (nonatomic, assign) int moveTime;
+@property (nonatomic, assign) int level;
 @property (nonatomic, assign) CharacterType roleType;
+@property (nonatomic, assign) int tag;
 
-@property (readonly) SpriteStates state;
+@property (nonatomic) SpriteStates state;
 
 @property (readonly) CharacterSprite *sprite;
-@property (readonly) SpriteDirections direction;
+@property (nonatomic) SpriteDirections direction;
 @property CGPoint position;
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
@@ -78,6 +79,6 @@
 -(void) addStatus:(StatusType)type withTime:(int)time;
 -(void) removeStatus:(StatusType)type;
 
-- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename roleType:(CharacterType)rType player:(int)pNumber level:(int)rlevel  maxHp:(int)rmaxHp hp:(int)rhp attack:(int)rattack defense:(int)rdefense speed:(int)rspeed moveSpeed:(int)rmoveSpeed moveTime:(int)rmoveTime;
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename;
 
 @end

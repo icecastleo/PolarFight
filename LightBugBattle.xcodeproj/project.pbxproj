@@ -4287,7 +4287,6 @@
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
-				2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
                 2B668FBB1650F595000E8B5E /* Helper.m in Sources */,
 				3799B7121650DCB300A9A394 /* Party.m in Sources */,
