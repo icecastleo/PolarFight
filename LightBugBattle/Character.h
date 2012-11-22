@@ -69,8 +69,8 @@
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
 
-+(id) characterWithFileName:(NSString *) filename player:(int)pNumber;
--(id) initWithFileName:(NSString *) filename player:(int)pNumber;
++(id) characterWithFileName:(NSString *) aFilename player:(int)pNumber;
+-(id) initWithFileName:(NSString *) aFilename player:(int)pNumber;
 
 //-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 -(void) setCharacterWithVelocity:(CGPoint)velocity;

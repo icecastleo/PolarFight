@@ -213,12 +213,12 @@
         role.player = player;
         role.level = level;
         role.maxHp = maxHp;
-        role.hp = hp;
-        role.attack = attack;
-        role.defense = defense;
-        role.speed = speed;
-        role.moveSpeed = moveSpeed;
-        role.moveTime = moveTime;
+//        role.hp = hp;
+//        role.attack = attack;
+//        role.defense = defense;
+//        role.speed = speed;
+//        role.moveSpeed = moveSpeed;
+//        role.moveTime = moveTime;
         
         [party.players addObject:role];
     }

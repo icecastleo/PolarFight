@@ -13,6 +13,8 @@
 
 @implementation BattleController
 
+static int kMoveMultiplier = 40;
+
 -(id)init {
     if(self = [super init]) {
         
@@ -46,9 +48,9 @@
         int number = roles1.count;
         
         for (int i = 0; i < number; i++) {
-            Character *character = [roles1 objectAtIndex:i];
-            NSAssert(character != nil, @"character is nil");
-//            Character *character = [Character characterWithFileName:@"amg1" player:1];
+//            Character *character = [roles1 objectAtIndex:i];
+//            NSAssert(character != nil, @"character is nil");
+            Character *character = [Character characterWithFileName:@"amg1" player:1];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -59,9 +61,9 @@
         int number2 = roles2.count;
         
         for (int i = 0; i < number2; i++) {
-            Character *character = [roles2 objectAtIndex:i];
-            NSAssert(character != nil, @"character is nil");
-//            Character *character = [Character characterWithFileName:@"avt1" player:2];
+//            Character *character = [roles2 objectAtIndex:i];
+//            NSAssert(character != nil, @"character is nil");
+            Character *character = [Character characterWithFileName:@"avt1" player:2];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -92,6 +94,9 @@
 //}
 
 -(void)addCharacter:(Character *)character {
+    if (character == nil) {
+        CCLOG(@"hi");
+    }
     [characters addObject:character];
     [mapLayer addCharacter:character];
 }
@@ -149,7 +154,7 @@
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 10 * delta)];
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * kMoveMultiplier * delta)];
     }
 }
 

@@ -25,8 +25,8 @@
 @synthesize timeStatusDictionary,auraStatusDictionary;
 @synthesize pointArray;
 
-+(id) characterWithFileName:(NSString *) filename player:(int)pNumber {
-    return [[[self alloc] initWithFileName:filename player:pNumber] autorelease];
++(id) characterWithFileName:(NSString *) aFilename player:(int)pNumber {
+    return [[[self alloc] initWithFileName:aFilename player:pNumber] autorelease];
 }
 
 //FIXME: fix name reference.
@@ -58,6 +58,7 @@
     if(self = [super init]) {
         
         self.name = aFilename;
+        self.picFilename = self.name;
         self.player = pNumber;
         
         [self setRandomAbility];
@@ -110,10 +111,10 @@
     
     attack = arc4random() % 4 + 3;
     defense = 3;
-    speed = arc4random() % 10 + 3;
+    speed = arc4random() % 7 + 3;
     
     moveSpeed = arc4random() % 3 + 4;
-    moveTime = arc4random() % 2 + 7;
+    moveTime = arc4random() % 3 + 3;
 }
 
 //// TODO: need be done at mapLayers
