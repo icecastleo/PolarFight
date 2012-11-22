@@ -40,9 +40,10 @@
 }
 @property (assign) BattleController *controller;
 
-@property int player;
-@property (readonly) NSString *name;
-@property (readonly) int maxHp;
+@property (nonatomic, assign) int player;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *picFilename;
+@property (nonatomic, assign) int maxHp;
 
 @property (readonly) int hp;
 @property (readonly) int attack;
@@ -80,5 +81,7 @@
 -(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void) addAuraStatus:(StatusType)type;
 -(void)removeTimeStatus:(TimeStatusType)type;
+
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename;
 
 @end

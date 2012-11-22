@@ -17,6 +17,4 @@
 
 +(CCScene *) scene;
 
--(void) addCharacter:(CCSprite*)character toPosition:(CGPoint)position;
-
 @end

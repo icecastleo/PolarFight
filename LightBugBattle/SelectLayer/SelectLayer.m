@@ -11,16 +11,52 @@
 
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
+#import "Party.h"
+#import "PartyParser.h"
+#import "Character.h"
 
 #pragma mark - SelectLayer
+
+typedef enum {
+    //nameLabelTag = 0,
+    levelLabelTag = 0,
+    hpLabelTag,
+    attackLabelTag,
+    defenseLabelTag,
+    speedLabelTag,
+    moveSpeedLabelTag,
+    moveTimeLabelTag
+} LabelTags;
+
+
+typedef enum {
+    mainRoleTag = 1001
+} RolesTag;
 
 @interface SelectLayer()
 {
     BOOL isSelecting;
     int currentRoleIndex;
     int nextRoleIndex;
+    Party *party;
     
     CCSprite * selSprite;
+    
+    int rolelevel;
+    int hp;
+    int attack;
+    int defense;
+    int speed;
+    int moveSpeed;
+    int moveTime;
+    
+    CCNode<CCLabelProtocol>* levelLbBM;
+    CCNode<CCLabelProtocol>* hpLbBM;
+    CCNode<CCLabelProtocol>* attackLbBM;
+    CCNode<CCLabelProtocol>* defenseLbBM;
+    CCNode<CCLabelProtocol>* speedLbBM;
+    CCNode<CCLabelProtocol>* moveSpeedLbBM;
+    CCNode<CCLabelProtocol>* moveTimeLbBM;
 }
 
 @end
@@ -50,7 +86,8 @@ static const int nilRoleTag = 100;
         
         self.selectedRoles = [[NSMutableArray alloc] initWithCapacity:totalRoleNumber];
         
-        [self SetLabelsAndMenu];
+        [self SetLabels];
+        [self SetMenu];
         [self initAllSelectableRoles];
         [self initAllSelectedRoles];
         [self putMainRole];
@@ -67,7 +104,7 @@ static const int nilRoleTag = 100;
 	[super dealloc];
 }
 
-- (void)SetLabelsAndMenu
+- (void)SetLabels
 {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
@@ -92,6 +129,91 @@ static const int nilRoleTag = 100;
     moneyLabel.anchorPoint = CGPointMake(1, 1);
     moneyLabel.color = ccBLACK;
     [self addChild: moneyLabel];
+    
+    int i = 10;
+    
+    CCLabelTTF *roleLevelLabel = [CCLabelTTF labelWithString:@"Level:" fontName:@"Marker Felt" fontSize:20];
+    roleLevelLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    roleLevelLabel.anchorPoint = CGPointMake(1, 0);
+    roleLevelLabel.color = ccBLACK;
+    roleLevelLabel.tag = levelLabelTag;
+    [self addChild: roleLevelLabel];
+    levelLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    levelLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    levelLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:levelLbBM z:1];
+    i--;
+    CCLabelTTF *hpLabel = [CCLabelTTF labelWithString:@"Hp:" fontName:@"Marker Felt" fontSize:20];
+    hpLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    hpLabel.anchorPoint = CGPointMake(1, 0);
+    hpLabel.color = ccBLACK;
+    hpLabel.tag = hpLabelTag;
+    [self addChild: hpLabel];
+    hpLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    hpLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    hpLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:hpLbBM z:1];
+    i--;
+    CCLabelTTF *attackLabel = [CCLabelTTF labelWithString:@"Attack:" fontName:@"Marker Felt" fontSize:20];
+    attackLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    attackLabel.anchorPoint = CGPointMake(1, 0);
+    attackLabel.color = ccBLACK;
+    attackLabel.tag = attackLabelTag;
+    [self addChild: attackLabel];
+    attackLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    attackLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    attackLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:attackLbBM z:1];
+    i--;
+    CCLabelTTF *defenseLabel = [CCLabelTTF labelWithString:@"Defense:" fontName:@"Marker Felt" fontSize:20];
+    defenseLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    defenseLabel.anchorPoint = CGPointMake(1, 0);
+    defenseLabel.color = ccBLACK;
+    defenseLabel.tag = defenseLabelTag;
+    [self addChild: defenseLabel];
+    defenseLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    defenseLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    defenseLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:defenseLbBM z:1];
+    i--;
+    CCLabelTTF *speedLabel = [CCLabelTTF labelWithString:@"Speed:" fontName:@"Marker Felt" fontSize:20];
+    speedLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    speedLabel.anchorPoint = CGPointMake(1, 0);
+    speedLabel.color = ccBLACK;
+    speedLabel.tag = speedLabelTag;
+    [self addChild: speedLabel];
+    speedLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    speedLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    speedLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:speedLbBM z:1];
+    i--;
+    CCLabelTTF *moveSpeedLabel = [CCLabelTTF labelWithString:@"MoveSpeed:" fontName:@"Marker Felt" fontSize:20];
+    moveSpeedLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    moveSpeedLabel.anchorPoint = CGPointMake(1, 0);
+    moveSpeedLabel.color = ccBLACK;
+    moveSpeedLabel.tag = moveSpeedLabelTag;
+    [self addChild: moveSpeedLabel];
+    moveSpeedLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    moveSpeedLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    moveSpeedLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:moveSpeedLbBM z:1];
+    i--;
+    CCLabelTTF *moveTimeLabel = [CCLabelTTF labelWithString:@"MoveTime:" fontName:@"Marker Felt" fontSize:20];
+    moveTimeLabel.position =  ccp( windowSize.width*5/6 , windowSize.height*i/12);
+    moveTimeLabel.anchorPoint = CGPointMake(1, 0);
+    moveTimeLabel.color = ccBLACK;
+    moveTimeLabel.tag = moveTimeLabelTag;
+    [self addChild: moveTimeLabel];
+    moveTimeLbBM = [CCLabelBMFont labelWithString:@"0" fntFile:@"TestFont.fnt"];
+    moveTimeLbBM.position =  ccp( windowSize.width*11/12 , windowSize.height*i/12);
+    moveTimeLbBM.anchorPoint = CGPointMake(0.5, 0);
+    [self addChild:moveTimeLbBM z:1];
+    
+}
+
+- (void)SetMenu
+{
+    CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
     [CCMenuItemFont setFontSize:26];
     
@@ -130,7 +252,6 @@ static const int nilRoleTag = 100;
         [allRoleBases addObject:roleBase];
     }
 }
-
 
 - (void)initAllSelectedRoles
 {
@@ -185,42 +306,32 @@ static const int nilRoleTag = 100;
     }
 }
 
--(NSArray *)loadAllRoleCanUse // load data from file
+-(NSArray *)loadAllRolesFromFile // load data from file
 {
-    int number = 7;
-    NSMutableArray *allRoleCanUse = [[NSMutableArray alloc] initWithCapacity:number];
+    party = [[PartyParser loadPartyFromType:Hero withPlayer:player1] retain];
+    NSAssert(party != nil, @"party is nil");
     
-    CCSprite * role1 = [CCSprite spriteWithFile:@"amg1_fr2.gif"];
-    CCSprite * role2 = [CCSprite spriteWithFile:@"ftr1_fr1.gif"];
-    CCSprite * role3 = [CCSprite spriteWithFile:@"avt4_fr1.gif"];
-    CCSprite * role4 = [CCSprite spriteWithFile:@"bmg1_fr2.gif"];
-    CCSprite * role5 = [CCSprite spriteWithFile:@"chr1_fr2.gif"];
-    CCSprite * role6 = [CCSprite spriteWithFile:@"gsd1_fr2.gif"];
-    CCSprite * role7 = [CCSprite spriteWithFile:@"jli1_fr2.gif"];
+    int count = party.players.count;
     
-    role1.tag = role1Tag;
-    role2.tag = role2Tag;
-    role3.tag = role3Tag;
-    role4.tag = role4Tag;
-    role5.tag = role5Tag;
-    role6.tag = role6Tag;
-    role7.tag = role7Tag;
+    NSMutableArray *roles = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
     
+    for (int i = 0; i < count; i++) {
+        Character *role = [party.players objectAtIndex:i];
+        [role setCharacterWithVelocity:CGPointMake(0, -1)];
+        CCSprite * sprite = role.sprite;
+        sprite.tag = i;
+        [roles addObject:sprite];
+        if (i==0) {
+            [self showCharacterInfo:sprite];
+        }
+    }
     
-    [allRoleCanUse addObject:role1];
-    [allRoleCanUse addObject:role2];
-    [allRoleCanUse addObject:role3];
-    [allRoleCanUse addObject:role4];
-    [allRoleCanUse addObject:role5];
-    [allRoleCanUse addObject:role6];
-    [allRoleCanUse addObject:role7];
-    
-    return allRoleCanUse;
+    return roles;
 }
 
 - (void)loadAllRolesCanBeSelected
 {
-    NSArray *allRoleCanUse = [self loadAllRoleCanUse];
+    NSArray *allRoleCanUse = [self loadAllRolesFromFile];
     
     for(int i = 0; i < allRoleCanUse.count; i++)
     {
@@ -235,8 +346,7 @@ static const int nilRoleTag = 100;
     }
 }
 
-// =================== select roles methods ============
-
+//select roles methods
 -(BOOL)canPutRoles {
     return YES;
 }
@@ -278,6 +388,7 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
+        [self showCharacterInfo:newSprite];
         [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
@@ -302,6 +413,7 @@ static const int nilRoleTag = 100;
         }
     }
     if (newSprite != selSprite) {
+        [self showCharacterInfo:newSprite];
         [self shakyShaky:newSprite];
         selSprite = newSprite;
     }
@@ -316,6 +428,25 @@ static const int nilRoleTag = 100;
     CCRotateTo * rotRight = [CCRotateBy actionWithDuration:0.1 angle:4.0];
     CCSequence * rotSeq = [CCSequence actions:rotLeft, rotCenter, rotRight, rotCenter, nil];
     [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
+}
+
+- (void)showCharacterInfo:(CCSprite *) newSprite
+{
+    Character *role = [party.players objectAtIndex:newSprite.tag];
+    rolelevel = role.level;
+    hp = role.maxHp;
+    attack = role.attack;
+    defense = role.defense;
+    speed = role.speed;
+    moveSpeed = role.moveSpeed;
+    moveTime = role.moveTime;
+    [levelLbBM setString:[NSString stringWithFormat:@"%i", rolelevel]];
+    [hpLbBM setString:[NSString stringWithFormat:@"%i", hp]];
+    [attackLbBM setString:[NSString stringWithFormat:@"%i", attack]];
+    [defenseLbBM setString:[NSString stringWithFormat:@"%i", defense]];
+    [speedLbBM setString:[NSString stringWithFormat:@"%i", speed]];
+    [moveSpeedLbBM setString:[NSString stringWithFormat:@"%i", moveSpeed]];
+    [moveTimeLbBM setString:[NSString stringWithFormat:@"%i", moveTime]];
 }
 
 - (void)addRole:(CCSprite *)sprite

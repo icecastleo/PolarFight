@@ -8,6 +8,8 @@
 
 #import "BattleController.h"
 #import "BattleStatusLayer.h"
+#import "Party.h"
+#import "PartyParser.h"
 
 @implementation BattleController
 
@@ -37,7 +39,11 @@
         
         characters = [[NSMutableArray alloc] init];
         
-        int number = 2;
+        //TODO: will get character from aelectLayer fuction.
+        Party *party = [PartyParser loadPartyFromType:Hero withPlayer:player1];
+        NSAssert(party != nil, @"party is nil");
+        NSArray *roles1 = [party characterFromPlayer:1];
+        int number = roles1.count;
         
         for (int i = 0; i < number; i++) {
             Character *character = [Character characterWithFileName:@"amg1" player:1];
@@ -52,6 +58,7 @@
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
+        //*/
         
         canMove = YES;
         isMove = NO;
@@ -83,6 +90,7 @@
 }
 
 -(void)removeCharacter:(Character *)character {
+    [mapLayer removeCharacter:character];
     [characters removeObject:character];
 //    [mapLayer removeCharacter:character];
 }
@@ -134,7 +142,7 @@
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 40 * delta)];
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 10 * delta)];
     }
 }
 

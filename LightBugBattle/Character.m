@@ -28,10 +28,35 @@
     return [[[self alloc] initWithFileName:filename player:pNumber] autorelease];
 }
 
+//FIXME: fix name reference.
+- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename
+{
+    if ((self = [super init])) {
+        //_name = @"test";
+        _name =rname;
+        _picFilename = rfilename;
+        
+        sprite = [[CharacterSprite alloc] initWithCharacter:self];
+        
+        state = stateIdle;
+        
+        [self makePoint];
+        
+        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+        //        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        
+        context = UIGraphicsGetCurrentContext();
+        
+        statusDictionary = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+    
+}
+
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber{
     if(self = [super init]) {
         
-        name = filename;
+        _name = filename;
         player = pNumber;
         
         [self setRandomAbility];
@@ -84,10 +109,10 @@
     
     attack = arc4random() % 4 + 3;
     defense = 3;
-    speed = arc4random() % 7 + 3;
+    speed = arc4random() % 10 + 3;
     
     moveSpeed = arc4random() % 3 + 4;
-    moveTime = arc4random() % 3 + 2;
+    moveTime = arc4random() % 2 + 7;
 }
 
 //// TODO: need be done at mapLayers
@@ -146,7 +171,8 @@
 -(void) getDamage:(int) damage {
     // TODO: Replace damage to attack info
     
-    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, name, damage);
+    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
+    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
     
     // be attacked state;
     hp -= damage;
@@ -164,7 +190,8 @@
 -(void) attackEnemy:(NSMutableArray *)enemies {
     [sprite stopAllActions];
     
-    CCLOG(@"Player %d's %@ is attack",player, name);
+    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
+    CCLOG(@"Player %d's %@ is attack",player, self.name);
     
     state = stateAttack;
     // TODO: Run attack animation
@@ -242,6 +269,11 @@
 
 -(void)removeTimeStatus:(TimeStatusType)type {
     [timeStatusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
+}
+
+- (CGRect) boundingBox
+{
+    return sprite.boundingBox;
 }
 
 @end

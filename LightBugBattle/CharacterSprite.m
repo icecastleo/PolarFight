@@ -13,10 +13,10 @@
 
 -(id)initWithCharacter:(Character *)cha {
     if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",cha.name, cha.player == 1 ? @"rt" : @"lf"]])
+               [NSString stringWithFormat:@"%@_%@2.gif",cha.picFilename, cha.player == 1 ? @"rt" : @"lf"]])
     {
         character = cha;
-        [self setAnimationWithName:character.name];
+        [self setAnimationWithName:character.picFilename];
     }
     return self;
 }

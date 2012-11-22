@@ -1,0 +1,28 @@
+<Party>
+    <Player type="hero">
+        <Name>Nerdy</Name>
+        <Picture>amg1</Picture>
+        <Type>Hero</Type>
+        <Level>1</Level>
+        <MaxHp>100</MaxHp>
+        <Hp>90</Hp>
+        <Attack>10</Attack>
+        <Defense>9</Defense>
+        <Speed>8</Speed>
+        <MoveSpeed>50</MoveSpeed>
+        <MoveTime>10</MoveTime>
+    </Player>
+    <Player type="hero">
+        <Name>Geek</Name>
+        <Picture>ftr1</Picture>
+        <Type>Soldier</Type>
+        <Level>1</Level>
+        <MaxHp>50</MaxHp>
+        <Hp>50</Hp>
+        <Attack>5</Attack>
+        <Defense>4</Defense>
+        <Speed>3</Speed>
+        <MoveSpeed>13</MoveSpeed>
+        <MoveTime>1</MoveTime>
+    </Player>
+</Party>

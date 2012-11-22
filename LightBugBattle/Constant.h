@@ -10,8 +10,9 @@
 #define LightBugBattle_Constant_h
 
 typedef enum {
-    test1,
-    test2
+    Hero = 0,
+    Soldier,
+    Monster
 } CharacterType;
 
 typedef enum {
@@ -59,23 +60,14 @@ typedef enum {
 } ConditionType;
 
 typedef enum {
-    role1Tag,
-    role2Tag,
-    role3Tag,
-    role4Tag,
-    role5Tag,
-    role6Tag,
-    role7Tag,
-    role8Tag,
-    role9Tag,
-    role10Tag,
-    mainRoleTag = 1001
-} RolesTag;
-
-typedef enum {
-    level1,
+    level1 = 0,
     level2,
     level3
 } Levels;
+
+typedef enum {
+    player1 = 1,
+    player2 = 2
+} Players;
 
 #endif
