@@ -15,7 +15,8 @@
 @implementation Character
 
 @synthesize controller;
-@synthesize player,name,maxHp;
+@synthesize name = name_, picFilename = picFilename_;
+@synthesize player,maxHp;
 @synthesize hp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize attackBonus,attackMultiplier;
 @synthesize state;
@@ -29,12 +30,11 @@
 }
 
 //FIXME: fix name reference.
-- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename
+- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
 {
     if ((self = [super init])) {
-        //_name = @"test";
-        _name =rname;
-        _picFilename = rfilename;
+        self.name = aName;
+        self.picFilename = aFilename;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -47,17 +47,18 @@
         
         context = UIGraphicsGetCurrentContext();
         
-        statusDictionary = [[NSMutableDictionary alloc] init];
+        timeStatusDictionary = [[NSMutableDictionary alloc] init];
+        auraStatusDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
     
 }
 
--(id) initWithFileName:(NSString *) filename player:(int)pNumber{
+-(id) initWithFileName:(NSString *) aFilename player:(int)pNumber{
     if(self = [super init]) {
         
-        _name = filename;
-        player = pNumber;
+        self.name = aFilename;
+        self.player = pNumber;
         
         [self setRandomAbility];
 

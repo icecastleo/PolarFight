@@ -53,6 +53,11 @@
 @property (readonly) int speed;
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
+
+@property (nonatomic, assign) int level;
+@property (nonatomic, assign) CharacterType roleType;
+@property (nonatomic, assign) int tag;
+
 @property (readonly) NSMutableDictionary* timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
 @property (readonly) CharacterSprite *sprite;

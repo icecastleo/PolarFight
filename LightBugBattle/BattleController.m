@@ -46,19 +46,26 @@
         int number = roles1.count;
         
         for (int i = 0; i < number; i++) {
-            Character *character = [Character characterWithFileName:@"amg1" player:1];
+            Character *character = [roles1 objectAtIndex:i];
+            NSAssert(character != nil, @"character is nil");
+//            Character *character = [Character characterWithFileName:@"amg1" player:1];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
-        for (int i = 0; i < number; i++) {
-            Character *character = [Character characterWithFileName:@"avt1" player:2];
+        Party *party2 = [PartyParser loadPartyFromType:Hero withPlayer:player2];
+        NSArray *roles2 = [party2 characterFromPlayer:2];
+        int number2 = roles2.count;
+        
+        for (int i = 0; i < number2; i++) {
+            Character *character = [roles2 objectAtIndex:i];
+            NSAssert(character != nil, @"character is nil");
+//            Character *character = [Character characterWithFileName:@"avt1" player:2];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
-        //*/
         
         canMove = YES;
         isMove = NO;

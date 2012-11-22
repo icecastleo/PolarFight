@@ -901,6 +901,7 @@
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
+		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDAA16566FD700A9EAC7 /* AttributeModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA916566FD700A9EAC7 /* AttributeModifier.m */; };
 		9BC8FDB0165671EC00A9EAC7 /* AddModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDAF165671EC00A9EAC7 /* AddModifier.m */; };
@@ -1979,6 +1980,8 @@
 		9B9FC8E0164C085900D11743 /* StatusKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusKit.h; sourceTree = "<group>"; };
 		9B9FC8E2164C0C0800D11743 /* StatusFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFactory.h; sourceTree = "<group>"; };
 		9B9FC8E3164C0C0800D11743 /* StatusFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFactory.m; sourceTree = "<group>"; };
+		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BC8FDA11654F11900A9EAC7 /* ProbabilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProbabilityEffect.h; sourceTree = "<group>"; };
 		9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProbabilityEffect.m; sourceTree = "<group>"; };
 		9BC8FDA816566FD700A9EAC7 /* AttributeModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeModifier.h; sourceTree = "<group>"; };
@@ -4343,6 +4346,11 @@
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
+				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
+				3799B7121650DCB300A9A394 /* Party.m in Sources */,
+				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
+				3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */,
+				9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */,
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
 				9BC8FDAA16566FD700A9EAC7 /* AttributeModifier.m in Sources */,
 				9BC8FDB0165671EC00A9EAC7 /* AddModifier.m in Sources */,
