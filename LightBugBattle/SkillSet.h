@@ -17,8 +17,8 @@
     Character* character;
     NSMutableArray* effectSet;
 }
--(id) initWithRangeName:(Character*)battleCharacter rangeName:(NSString*) rangeName;
--(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range;
+-(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*) rangeName;
+-(id) initWithRange:(Character*)aCharacter range:(RangeType*) range;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;

@@ -11,9 +11,8 @@
 
 @implementation EffectDamage
 
-
--(void) doEffect:(Character *)character
-{
+-(void) doEffect:(Character *)character {
     [character getDamage:6];
 }
+
 @end

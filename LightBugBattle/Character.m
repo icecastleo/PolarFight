@@ -10,20 +10,23 @@
 #import "BattleController.h"
 #import "SkillKit.h"
 #import "StatusKit.h"
+#import "StatusFactory.h"
 
 @implementation Character
 
 @synthesize controller;
 @synthesize player,name,maxHp;
 @synthesize hp, attack, defense, speed, moveSpeed, moveTime;
+@synthesize attackBonus,attackMultiplier;
 @synthesize state;
 @synthesize sprite,direction;
 @synthesize position;
+@synthesize timeStatusDictionary,auraStatusDictionary;
 @synthesize pointArray;
 
-//+(id) characterWithController:(BattleController *)battleController player:(int)pNumber withFile:(NSString *)filename {
-//    return [[[self alloc] initWithController:battleController player:pNumber withFile:filename] autorelease];
-//}
++(id) characterWithFileName:(NSString *) filename player:(int)pNumber {
+    return [[[self alloc] initWithFileName:filename player:pNumber] autorelease];
+}
 
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber{
     if(self = [super init]) {
@@ -44,7 +47,8 @@
         
         context = UIGraphicsGetCurrentContext();
         
-        statusDictionary = [[NSMutableDictionary alloc] init];
+        timeStatusDictionary = [[NSMutableDictionary alloc] init];
+        auraStatusDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -52,7 +56,9 @@
 -(void)dealloc {
     [pointArray release];
     [skillSet release];
-    [statusDictionary release];
+    [timeStatusDictionary release];
+    [auraStatusDictionary release];
+    [sprite removeFromParentAndCleanup:YES];
     [super dealloc];
 }
 
@@ -138,6 +144,7 @@
 }
 
 -(void) getDamage:(int) damage {
+    // TODO: Replace damage to attack info
     
     CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, name, damage);
     
@@ -164,11 +171,12 @@
     
     NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
 
+    // TODO: Replace by doSkill?
     for (Character *character in effectTargets) {
         [character getDamage:attack];
     }
     
-    // TODO: Need to be deleted when there has attack animation
+    // TODO: Need to be replaced when there has attack animation
     [self finishAttack];
 }
 
@@ -197,21 +205,43 @@
     return sprite.position;
 }
 
--(void)addStatus:(StatusType)type withTime:(int)time {
-    Status *temp;
+-(void)update {
+    NSMutableArray *removedKeys = [[NSMutableArray alloc] init];
     
-    if ((temp = [statusDictionary objectForKey:[NSNumber numberWithInt:type]])) {
-        if([temp isKindOfClass:[TimeStatus class]]) {
-            TimeStatus *t = (TimeStatus*)temp;
-            [t addTime:time];
-        }
+    for (TimeStatus *status in timeStatusDictionary) {
+        [status update];
+        
+        if(status.isDead)
+            [removedKeys addObject:[NSNumber numberWithInt:status.type]];
+    }
+    
+    [timeStatusDictionary removeObjectsForKeys:removedKeys];
+    
+    [removedKeys removeAllObjects];
+    
+    for (AuraStatus *status in auraStatusDictionary) {
+        [status updateCharacter:self];
+        
+        if(status.isDead)
+            [removedKeys addObject:[NSNumber numberWithInt:status.type]];
+    }
+    
+    [auraStatusDictionary removeObjectsForKeys:removedKeys];
+}
+
+-(void)addTimeStatus:(TimeStatusType)type withTime:(int)time {
+    TimeStatus *status = [timeStatusDictionary objectForKey:[NSNumber numberWithInt:type]];
+    
+    if (status == nil) {
+        status = [StatusFactory createTimeStatus:type withTime:time toCharacter:self];
+        [timeStatusDictionary setObject:status forKey:[NSNumber numberWithInt:type]];
     } else {
-        // TODO: put status in map.
+        [status addTime:time];
     }
 }
 
--(void)removeStatus:(StatusType)type {
-    [statusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
+-(void)removeTimeStatus:(TimeStatusType)type {
+    [timeStatusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
 }
 
 @end

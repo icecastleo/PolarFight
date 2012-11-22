@@ -16,9 +16,9 @@
 -(id)initWithCharacter:(Character *)battleCharacter
 {
     if( (self=[super init]) ) {
-        rangeHeight=100;
-        rangeWidth=100;
-        character=battleCharacter;
+        rangeHeight = 100;
+        rangeWidth = 100;
+        character = battleCharacter;
         [self setParameter];
         [self showPoints];
     }
@@ -29,9 +29,9 @@
 {
     float angleRadians = atanf((float)offY / (float)offX);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-    float cocosAngle =-1* angleDegrees;
-    if (offX<0) {
-        cocosAngle +=180;
+    float cocosAngle = -1* angleDegrees;
+    if (offX < 0) {
+        cocosAngle += 180;
     }
     rangeSprite.rotation = cocosAngle;
 }
@@ -58,8 +58,8 @@
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
     rangeSprite.position=ccp(character.sprite.texture.contentSize.width/2,character.sprite.texture.contentSize.height/2);
-    rangeSprite.zOrder=-1;
-    rangeSprite.visible=NO;
+    rangeSprite.zOrder = -1;
+    rangeSprite.visible = NO;
     [character.sprite addChild:rangeSprite];
 }
 
@@ -81,18 +81,18 @@
     
     ///determine if this attack can effect self
     if(effectSelfOrNot == effectExceptSelf){
-        if(temp==character)
+        if(temp == character)
             return NO;
     }
     
     ///determine if can effect ally
     switch (effectSides) {
         case effectSideAlly:
-            if(temp.player!=character.player)
+            if(temp.player != character.player)
                 return NO;
             break;
         case effectSideEnemy:
-            if(temp.player==character.player)
+            if(temp.player == character.player)
                 return NO;
             break;
         case effectSideBoth:
@@ -101,13 +101,12 @@
             break;
     }
     
-    
-    NSMutableArray *points=temp.pointArray;
-    for (int j=0; j<[points count]; j++) {
-        CGPoint loc=[[points objectAtIndex:j] CGPointValue];
+    NSMutableArray *points = temp.pointArray;
+    for (int j = 0; j < [points count]; j++) {
+        CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // switch coordinate systems
-        loc=[temp.sprite convertToWorldSpace:loc];
-        loc=[rangeSprite convertToNodeSpace:loc];
+        loc = [temp.sprite convertToWorldSpace:loc];
+        loc = [rangeSprite convertToNodeSpace:loc];
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
 //            [effectTargets addObject:temp];
             CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);

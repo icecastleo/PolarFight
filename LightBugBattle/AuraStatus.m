@@ -7,24 +7,42 @@
 //
 
 #import "AuraStatus.h"
-#import "SkillKit.h"
+#import "Character.h"
 
+// Any concrete child of AuraStatus should implement -(id)initWithCaster:(Character*) character;
 @implementation AuraStatus
 
-// caster might not need, just for information
--(id)initWithCharacter:(Character *)cha caster:(Character *)cas {
-    if(self = [super initWithCharacter:cha]) {
-        NSAssert(range != nil, @"You should init range while extend AuraStatus!!");
-        caster = cas;
-        [self addEffect];
+-(id)initWithType:(AuraStatusType)statusType withRange:(RangeType*)rangeType {
+    if(self = [super initWithType:statusType]) {
+        range = rangeType;
+        [range retain];
     }
     return self;
 }
 
--(void)update {
+//// caster might not need, just for information
+//-(id)initWithCharacter:(Character *)cha caster:(Character *)cas {
+//    if(self = [super init]) {
+//        NSAssert(range != nil, @"You should init range while extend AuraStatus!!");
+//        caster = cas;
+//        [self addEffect];
+//    }
+//    return self;
+//}
+
+-(void)addEffectOnCharacter:(Character *)character {
+    
+}
+
+-(void)removeEffectOnCharacter:(Character *)character {
+    
+}
+
+-(void)updateCharacter:(Character *)character {
     // character is out of range
     if (![range containTarget:character]) {
-        [self removeEffect];
+        [self removeEffectOnCharacter:character];
+        isDead = YES;
     }
 }
 

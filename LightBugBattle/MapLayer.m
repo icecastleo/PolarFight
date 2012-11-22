@@ -131,6 +131,8 @@
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity
 {
     [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
+    // TODO: Give the final velocity to character.
+    // The best way is return a final velocity, and let the |setCharacterWithVelocity| out of here.
     [theCharacter setCharacterWithVelocity:velocity];
 }
 

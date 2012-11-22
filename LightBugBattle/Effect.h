@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@class BattleSprite;
-@interface EffectType : NSObject
-{
-   
+@class Character;
+
+@interface Effect : NSObject {
+
 }
--(void) doEffect:(BattleSprite*) actor;
+
+-(void) doEffect:(Character*) character;
+
 @end

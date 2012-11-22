@@ -7,14 +7,22 @@
 //
 
 #import "Status.h"
+#import "Character.h"
 
 @interface TimeStatus : Status {
     int time;
+    Character* character;
 }
 
 @property (readonly) int time;
 
--(id) initWithTime:(int) t;
+
+-(id) initWithType:(TimeStatusType)statusType withTime:(int)t toCharacter:(Character*)cha;
+
+-(void) addEffect;
+-(void) removeEffect;
+-(void) update;
+
 -(void) addTime:(int) t;
 -(void) minusTime:(int) t;
 

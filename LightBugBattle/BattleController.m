@@ -40,14 +40,14 @@
         int number = 2;
         
         for (int i = 0; i < number; i++) {
-            Character *character = [[Character alloc] initWithFileName:@"amg1" player:1];
+            Character *character = [Character characterWithFileName:@"amg1" player:1];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
         for (int i = 0; i < number; i++) {
-            Character *character = [[Character alloc] initWithFileName:@"avt1" player:2];
+            Character *character = [Character characterWithFileName:@"avt1" player:2];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -84,8 +84,6 @@
 
 -(void)removeCharacter:(Character *)character {
     [characters removeObject:character];
-    [character.sprite removeFromParentAndCleanup:YES];
-    [character release];
 //    [mapLayer removeCharacter:character];
 }
 
@@ -152,8 +150,10 @@
     currentIndex = ++currentIndex % characters.count;
     
     currentCharacter = characters[currentIndex];
+    // TODO:If the player is com, maybe need to change state here!
+    // Use state pattern for update??
     
-    // select player
+    // select character
     [statusLayer startSelectCharacter:currentCharacter];
     [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
     

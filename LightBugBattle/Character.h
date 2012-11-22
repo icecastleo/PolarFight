@@ -35,7 +35,8 @@
     SkillSet *skillSet;
     CGContextRef context;
     
-    NSMutableDictionary *statusDictionary;
+//    NSMutableDictionary *timeStatusDictionary;
+//    NSMutableDictionary *auraStatusDictionary;
 }
 @property (assign) BattleController *controller;
 
@@ -45,19 +46,24 @@
 
 @property (readonly) int hp;
 @property (readonly) int attack;
+@property int attackBonus;
+@property float attackMultiplier;
 @property (readonly) int defense;
 @property (readonly) int speed;
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
+@property (readonly) NSMutableDictionary* timeStatusDictionary;
+@property (readonly) NSMutableDictionary *auraStatusDictionary;
+@property (readonly) CharacterSprite *sprite;
 
 @property (readonly) SpriteStates state;
-
-@property (readonly) CharacterSprite *sprite;
 @property (readonly) SpriteDirections direction;
+
 @property CGPoint position;
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
 
++(id) characterWithFileName:(NSString *) filename player:(int)pNumber;
 -(id) initWithFileName:(NSString *) filename player:(int)pNumber;
 
 //-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
@@ -71,7 +77,8 @@
 -(void) setPosition:(CGPoint)position;
 -(CGPoint) position;
 
--(void) addStatus:(StatusType)type withTime:(int)time;
--(void) removeStatus:(StatusType)type;
+-(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
+//-(void) addAuraStatus:(StatusType)type;
+-(void)removeTimeStatus:(TimeStatusType)type;
 
 @end

@@ -7,23 +7,36 @@
 //
 
 #import "StatusFactory.h"
+#import "PoisonStatus.h"
+#import "AttackBuffStatus.h"
 
 @implementation StatusFactory
 
-+(Status*)createTimeStatus:(StatusType)type onCharacter:(Character *)character withTime:(int)time {
++(TimeStatus*)createTimeStatus:(TimeStatusType)type withTime:(int)time toCharacter:(Character*)character{
+//    NSAssert(type < statusTypeLine, ([NSString stringWithFormat:@"%d is not a time status",type]));
     switch (type) {
         case statusPoison:
-                
-            break;
+            return [[[PoisonStatus alloc] initWithType:statusPoison withTime:time toCharacter:character] autorelease];
             
+        default:
+            [NSException raise:@"Create status failed." format:@"No such status."];
+//            break;
+    }
+    
+//    return nil;
+}
+
++(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character *)caster {
+//    NSAssert(type > statusTypeLine, ([NSString stringWithFormat:@"%d is not a aura status",type]));
+    switch (type) {
+        case statusAttackBuff:
+            return [[[AttackBuffStatus alloc] initWithCaster:caster] autorelease];
+//            break;
         default:
             break;
     }
-    return nil;
-}
-
-+(Status*)createAuraStatus:(StatusType)type onCharacter:(Character *)character withCaster:(Character *)caster {
-    return nil;
+    [NSException raise:@"Create status failed." format:@"No such status."];
+//    return nil;
 }
 
 @end

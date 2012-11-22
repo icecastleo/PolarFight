@@ -7,13 +7,16 @@
 //
 
 #import "Status.h"
-#import "RangeType.h"
+#import "SkillKit.h"
 
 @interface AuraStatus : Status {
-    Character *caster;
     RangeType *range;
 }
 
--(id)initWithCharacter:(Character *)cha caster:(Character *)cas;
+-(id)initWithType:(AuraStatusType)type withRange:(RangeType*)range;
+
+-(void) addEffectOnCharacter:(Character*)character;
+-(void) removeEffectOnCharacter:(Character*)character;
+-(void) updateCharacter:(Character*)character;
 
 @end

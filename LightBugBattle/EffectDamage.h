@@ -6,8 +6,8 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "EffectType.h"
-@interface EffectDamage : EffectType {
+#import "Effect.h"
+@interface EffectDamage : Effect {
     
 }
 

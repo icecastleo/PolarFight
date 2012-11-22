@@ -10,4 +10,6 @@
 
 @interface PoisonStatus : TimeStatus
 
+-(id)initWithTime:(int)t toCharacter:(Character*)cha;
+
 @end

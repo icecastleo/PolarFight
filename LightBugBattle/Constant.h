@@ -28,12 +28,36 @@ typedef enum {
     directionRight
 } SpriteDirections;
 
-typedef enum {
-    statusUnknown,
-    statusPoison,
-} StatusType;
+//typedef enum {
+////    statusUnknown,
+//    // TimeStatus
+//    statusPoison,
+//    
+//    statusTypeLine = 50,
+//    // AuraStatus
+//    statusAttackBuff,
+//} StatusType;
 
-//=============== 浩翔 ===============
+typedef enum {
+    statusPoison,
+} TimeStatusType;
+
+typedef enum {
+    statusAttackBuff,
+} AuraStatusType;
+
+
+typedef enum {
+    attributeAttackBonus,
+    attributeAttackMultiplier,
+    
+} AttributeType;
+
+typedef enum {
+    ConditionMonsterAttack,
+    
+} ConditionType;
+
 typedef enum {
     role1Tag,
     role2Tag,

@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "Constant.h"
 #import "Character.h"
-#import "Status.h"
+#import "TimeStatus.h"
+#import "AuraStatus.h"
 
 @interface StatusFactory : NSObject
 
-+(Status*)createTimeStatus:(StatusType)type onCharacter:(Character*) character withTime:(int)time;
-+(Status*)createAuraStatus:(StatusType)type onCharacter:(Character*) character withCaster:(Character *)caster;
++(TimeStatus*)createTimeStatus:(TimeStatusType)type withTime:(int)time toCharacter:(Character*)character;
++(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character *)caster;
 
 @end

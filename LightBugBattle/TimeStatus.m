@@ -8,15 +8,25 @@
 
 #import "TimeStatus.h"
 
+// Any concrete child of AuraStatus should implement -(id)initWithTime:(int)t toCharacter:(Character*)cha;
 @implementation TimeStatus
 @synthesize time;
 
--(id)initWithTime:(int)t {
-    if(self = [super init]) {
+-(id) initWithType:(TimeStatusType)statusType withTime:(int)t toCharacter:(Character*)cha {
+    if(self = [super initWithType:statusType]) {
         time = t;
+        character = cha;
         [self addEffect];
     }
     return self;
+}
+
+-(void)addEffect {
+//    [NSException raise:@"Called abstract method!" format:@"You should override addEffect in CharacterStatus."];
+}
+
+-(void)removeEffect {
+//    [NSException raise:@"Called abstract method!" format:@"You should override removeEffect in CharacterStatus."];
 }
 
 -(void)addTime:(int)t {
@@ -25,9 +35,10 @@
 
 -(void)minusTime:(int)t {
     time -= t;
-    
+
     if (time <= 0) {
         [self removeEffect];
+        isDead = YES;
     }
 }
 

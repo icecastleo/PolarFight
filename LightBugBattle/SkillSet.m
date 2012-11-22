@@ -8,22 +8,24 @@
 
 #import "SkillSet.h"
 #import "Character.h"
+#import "EffectTimeStatus.h"
 
 @implementation SkillSet
 
--(id) initWithRangeName:(Character *)battleCharacter rangeName:(NSString *)rangeName {
+-(id) initWithRangeName:(Character *)aCharacter rangeName:(NSString *)rangeName {
     
-    id range = [[NSClassFromString(rangeName) alloc] initWithCharacter:battleCharacter];
-    return [self initWithRange:battleCharacter range:range];
+    id range = [[NSClassFromString(rangeName) alloc] initWithCharacter:aCharacter];
+    return [self initWithRange:aCharacter range:range];
 }
 
--(id) initWithRange:(Character*)battleCharacter range:(RangeType*) range {
+-(id) initWithRange:(Character*)aCharacter range:(RangeType*) range {
     if( (self=[super init]) ) {    
-        character = battleCharacter;
-//        effectRange=range;
+        character = aCharacter;
+//        effectRange = range;
         effectRange = [[RangeFanShape alloc] initWithCharacter:character];
         effectSet = [[NSMutableArray alloc] init];
         [effectSet addObject:[[EffectDamage alloc] init]];
+        [effectSet addObject:[EffectTimeStatus statusWithType:statusPoison withTime:3]];
     }
     
     return self;
@@ -32,9 +34,9 @@
 -(void) doSkill:(NSMutableArray *)targets
 {
     NSMutableArray *effectTargets= [self getEffectTargets:targets];
-    for (BattleSprite *sprite in effectTargets) {
-        for (EffectType *effectItem in effectSet) {
-            [effectItem doEffect:sprite];
+    for (Character* target in effectTargets) {
+        for (Effect *effectItem in effectSet) {
+            [effectItem doEffect:target];
         }
     }
 }
