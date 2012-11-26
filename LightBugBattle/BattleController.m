@@ -32,6 +32,27 @@ static int kMoveMultiplier = 40;
         // the camera need to be add into the map layer (it wont display but not adding it will cause error)
         [mapLayer setMap:map];
         
+        //testing add barriers
+        Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree setPosition:ccp(0,0)];
+        [tree setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree];
+        
+        Barrier* tree2 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree2 setPosition:ccp(100,-40)];
+        [tree2 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree2];
+        
+        Barrier* tree3 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree3 setPosition:ccp(-50,30)];
+        [tree3 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree3];
+        
+        Barrier* tree4 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree4 setPosition:ccp(50,10)];
+        [tree4 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree4];
+        
         // init Dpad
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];

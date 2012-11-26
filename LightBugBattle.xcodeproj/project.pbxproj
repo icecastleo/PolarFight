@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B51EB031643EB0000441FB1 /* debugColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B51EB021643EB0000441FB1 /* debugColor.png */; };
+		2B85A7B7166357DB00D5962F /* Barrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B85A7B6166357DB00D5962F /* Barrier.m */; };
+		2B85A7BA16635BF100D5962F /* tree01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2B85A7B916635BF100D5962F /* tree01.gif */; };
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
@@ -917,6 +919,9 @@
 
 /* Begin PBXFileReference section */
 		2B51EB021643EB0000441FB1 /* debugColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugColor.png; sourceTree = "<group>"; };
+		2B85A7B5166357DB00D5962F /* Barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barrier.h; sourceTree = "<group>"; };
+		2B85A7B6166357DB00D5962F /* Barrier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barrier.m; sourceTree = "<group>"; };
+		2B85A7B916635BF100D5962F /* tree01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tree01.gif; sourceTree = "<group>"; };
 		2BBF990D163E6134005AD8B9 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
@@ -2038,6 +2043,8 @@
 				9B248217164D40E3007B6E4D /* MapCameraControl.m */,
 				9B248218164D40E3007B6E4D /* MapControlExample.h */,
 				9B248219164D40E3007B6E4D /* MapControlExample.m */,
+				2B85A7B5166357DB00D5962F /* Barrier.h */,
+				2B85A7B6166357DB00D5962F /* Barrier.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -2171,6 +2178,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2B85A7B916635BF100D5962F /* tree01.gif */,
 				2B51EB021643EB0000441FB1 /* debugColor.png */,
 				2BBF991A163E6532005AD8B9 /* controlBall.png */,
 				2BBF990D163E6134005AD8B9 /* map.png */,
@@ -4201,6 +4209,7 @@
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
 				9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */,
 				3799B71C1650DFC100A9A394 /* Party.xml in Resources */,
+				2B85A7BA16635BF100D5962F /* tree01.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4358,6 +4367,7 @@
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
 				9BC8FDBA1657E34E00A9EAC7 /* ModifierMap.m in Sources */,
 				9BC8FDBD1657EC7E00A9EAC7 /* EffectTimeStatus.m in Sources */,
+				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
