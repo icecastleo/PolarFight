@@ -106,7 +106,7 @@ static const char* getPropertyType(objc_property_t property) {
 			else if ([propertyType isEqualToString:@"l"]) {
 				nalue = [NSString stringWithFormat:@"%llu",[[objt valueForKey:propertyName] unsignedLongLongValue]];
 			}else if ([propertyType isEqualToString:@"i"]) {
-				nalue = [NSString stringWithFormat:@"%d",[objt valueForKey:propertyName]];
+				nalue = [NSString stringWithFormat:@"%@",[objt valueForKey:propertyName]];
 			}else {
 				nalue = [NSString stringWithFormat:@"%@",[objt valueForKey:propertyName]];
 			}

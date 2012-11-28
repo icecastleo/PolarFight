@@ -4,14 +4,14 @@
     <Role>
         <roleId>001</roleId>
         <hp>90</hp>
-        <attack>10</attack>
+        <attack>11</attack>
         <type>0</type>
-        <level>1</level>
-        <name>name</name>
-        <picture>picture</picture>
+        <level>2</level>
+        <name>Nerdy</name>
+        <picture>amg1</picture>
         <speed>8</speed>
         <defense>9</defense>
-        <moveSpeed>7</moveSpeed>
+        <moveSpeed>70</moveSpeed>
         <moveTime>6</moveTime>
         <maxHp>100</maxHp>
     </Role>
@@ -21,11 +21,11 @@
         <attack>10</attack>
         <type>0</type>
         <level>1</level>
-        <name>name</name>
-        <picture>picture</picture>
+        <name>Geek</name>
+        <picture>ftr1</picture>
         <speed>8</speed>
         <defense>9</defense>
-        <moveSpeed>7</moveSpeed>
+        <moveSpeed>60</moveSpeed>
         <moveTime>6</moveTime>
         <maxHp>100</maxHp>
     </Role>

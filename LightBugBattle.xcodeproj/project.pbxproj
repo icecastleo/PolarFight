@@ -17,7 +17,6 @@
 		2D4AD591163FCD8C00A949C3 /* SkillSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* SkillSet.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
-		3799B7121650DCB300A9A394 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7111650DCB300A9A394 /* Party.m */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
 		3799B71C1650DFC100A9A394 /* Party.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Party.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
@@ -939,8 +938,6 @@
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
 		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
-		3799B7101650DCB300A9A394 /* Party.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
-		3799B7111650DCB300A9A394 /* Party.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
 		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
 		3799B71B1650DFC100A9A394 /* Party.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Party.xml; sourceTree = "<group>"; };
@@ -2583,8 +2580,6 @@
 				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
 				9B062E8216353A8200E06018 /* Army */,
 				9B062E8116353A4F00E06018 /* Player */,
-				3799B7101650DCB300A9A394 /* Party.h */,
-				3799B7111650DCB300A9A394 /* Party.m */,
 				3799B7141650DDDD00A9A394 /* PartyParser.h */,
 				3799B7151650DDDD00A9A394 /* PartyParser.m */,
 				3799B71B1650DFC100A9A394 /* Party.xml */,
@@ -4381,7 +4376,6 @@
 				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
-				3799B7121650DCB300A9A394 /* Party.m in Sources */,
 				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
 				9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */,
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
@@ -4391,6 +4385,7 @@
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
 				9BC8FDBA1657E34E00A9EAC7 /* ModifierMap.m in Sources */,
 				9BC8FDBD1657EC7E00A9EAC7 /* EffectTimeStatus.m in Sources */,
+				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
 				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
 				37DF396D1664AD48000677B2 /* XmlParser.m in Sources */,
 				37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */,

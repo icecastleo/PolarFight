@@ -11,7 +11,6 @@
 #import "SkillKit.h"
 #import "StatusKit.h"
 #import "StatusFactory.h"
-#import "Party.h"
 #import "PartyParser.h"
 #import "Role.h"
 
@@ -94,8 +93,15 @@
 
 -(void) getAbilityFromRole:(NSString *)name
 {
-    Party *party = [[PartyParser loadParty] autorelease];
-    Role *role = [[party basicRoleFromName:name] autorelease];
+    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+    Role *role;
+    
+    for (Role *tempRole in roles) {
+        if ([tempRole.name isEqualToString:name]) {
+            role = tempRole;
+            break;
+        }
+    }
     
     maxHp     = [role.maxHp integerValue];
     hp        = [role.hp integerValue];

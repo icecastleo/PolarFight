@@ -40,7 +40,7 @@
 }
 @property (assign) BattleController *controller;
 
-@property (readonly) int player;
+@property (nonatomic) int player;
 @property (readonly) NSString *name;
 @property (readonly) NSString *picFilename;
 @property (readonly) int maxHp;
@@ -67,6 +67,8 @@
 @property CGPoint position;
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
+
+- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename;
 
 //-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 -(void) setCharacterWithVelocity:(CGPoint)velocity;
