@@ -12,6 +12,7 @@
 #import "Constant.h"
 #import "DPadLayer.h"
 #import "MapLayer.h"
+#import "Barrier.h"
 
 @class BattleStatusLayer;
 @interface BattleController : CCScene {

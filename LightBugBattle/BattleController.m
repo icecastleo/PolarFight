@@ -13,6 +13,8 @@
 
 @implementation BattleController
 
+static int kMoveMultiplier = 40;
+
 -(id)init {
     if(self = [super init]) {
         
@@ -30,6 +32,27 @@
         // the camera need to be add into the map layer (it wont display but not adding it will cause error)
         [mapLayer setMap:map];
         
+        //testing add barriers
+        Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree setPosition:ccp(0,0)];
+        [tree setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree];
+        
+        Barrier* tree2 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree2 setPosition:ccp(100,-40)];
+        [tree2 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree2];
+        
+        Barrier* tree3 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree3 setPosition:ccp(-50,30)];
+        [tree3 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree3];
+        
+        Barrier* tree4 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree4 setPosition:ccp(50,10)];
+        [tree4 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree4];
+        
         // init Dpad
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
@@ -46,9 +69,9 @@
         int number = roles1.count;
         
         for (int i = 0; i < number; i++) {
-            Character *character = [roles1 objectAtIndex:i];
-            NSAssert(character != nil, @"character is nil");
-//            Character *character = [Character characterWithFileName:@"amg1" player:1];
+//            Character *character = [roles1 objectAtIndex:i];
+//            NSAssert(character != nil, @"character is nil");
+            Character *character = [Character characterWithFileName:@"amg1" player:1];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -59,9 +82,9 @@
         int number2 = roles2.count;
         
         for (int i = 0; i < number2; i++) {
-            Character *character = [roles2 objectAtIndex:i];
-            NSAssert(character != nil, @"character is nil");
-//            Character *character = [Character characterWithFileName:@"avt1" player:2];
+//            Character *character = [roles2 objectAtIndex:i];
+//            NSAssert(character != nil, @"character is nil");
+            Character *character = [Character characterWithFileName:@"avt1" player:2];
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -92,6 +115,9 @@
 //}
 
 -(void)addCharacter:(Character *)character {
+    if (character == nil) {
+        CCLOG(@"hi");
+    }
     [characters addObject:character];
     [mapLayer addCharacter:character];
 }
@@ -149,7 +175,7 @@
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * 10 * delta)];
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * kMoveMultiplier * delta)];
     }
 }
 
