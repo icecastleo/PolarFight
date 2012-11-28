@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class Party;
+@class GDataXMLDocument;
 
 @interface PartyParser : NSObject
 
-+ (Party *)loadPartyFromType:(int)type withPlayer:(int)player;
-+ (void)saveParty:(Party *)party;
++ (void)saveParty;
++ (NSMutableArray *)getRolesArrayFromXMLFile;
 
 @end

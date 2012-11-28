@@ -1,28 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
 <Party>
-    <Player type="hero">
-        <Name>Nerdy</Name>
-        <Picture>amg1</Picture>
-        <Type>Hero</Type>
-        <Level>1</Level>
-        <MaxHp>100</MaxHp>
-        <Hp>90</Hp>
-        <Attack>10</Attack>
-        <Defense>9</Defense>
-        <Speed>8</Speed>
-        <MoveSpeed>50</MoveSpeed>
-        <MoveTime>10</MoveTime>
-    </Player>
-    <Player type="hero">
-        <Name>Geek</Name>
-        <Picture>ftr1</Picture>
-        <Type>Soldier</Type>
-        <Level>1</Level>
-        <MaxHp>50</MaxHp>
-        <Hp>50</Hp>
-        <Attack>5</Attack>
-        <Defense>4</Defense>
-        <Speed>3</Speed>
-        <MoveSpeed>13</MoveSpeed>
-        <MoveTime>1</MoveTime>
-    </Player>
+    <Role>
+        <roleId>001</roleId>
+        <hp>90</hp>
+        <attack>11</attack>
+        <type>0</type>
+        <level>2</level>
+        <name>Nerdy</name>
+        <picture>amg1</picture>
+        <speed>8</speed>
+        <defense>9</defense>
+        <moveSpeed>70</moveSpeed>
+        <moveTime>6</moveTime>
+        <maxHp>100</maxHp>
+    </Role>
+    <Role>
+        <roleId>002</roleId>
+        <hp>90</hp>
+        <attack>10</attack>
+        <type>0</type>
+        <level>1</level>
+        <name>Geek</name>
+        <picture>ftr1</picture>
+        <speed>8</speed>
+        <defense>9</defense>
+        <moveSpeed>60</moveSpeed>
+        <moveTime>6</moveTime>
+        <maxHp>100</maxHp>
+    </Role>
 </Party>

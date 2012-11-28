@@ -8,8 +8,8 @@
 
 #import "BattleController.h"
 #import "BattleStatusLayer.h"
-#import "Party.h"
 #import "PartyParser.h"
+#import "Role.h"
 
 @implementation BattleController
 
@@ -63,28 +63,22 @@ static int kMoveMultiplier = 40;
         characters = [[NSMutableArray alloc] init];
         
         //TODO: will get character from aelectLayer fuction.
-        Party *party = [PartyParser loadPartyFromType:Hero withPlayer:player1];
-        NSAssert(party != nil, @"party is nil");
-        NSArray *roles1 = [party characterFromPlayer:1];
-        int number = roles1.count;
+        //Party *party = [PartyParser loadParty];
+        //NSAssert(party != nil, @"party is nil");
+        NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+        //int number = roles1.count;
         
-        for (int i = 0; i < number; i++) {
-//            Character *character = [roles1 objectAtIndex:i];
-//            NSAssert(character != nil, @"character is nil");
-            Character *character = [Character characterWithFileName:@"amg1" player:1];
+        for (Role *role in roles) {
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            character.player = 1;
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
-        Party *party2 = [PartyParser loadPartyFromType:Hero withPlayer:player2];
-        NSArray *roles2 = [party2 characterFromPlayer:2];
-        int number2 = roles2.count;
-        
-        for (int i = 0; i < number2; i++) {
-//            Character *character = [roles2 objectAtIndex:i];
-//            NSAssert(character != nil, @"character is nil");
-            Character *character = [Character characterWithFileName:@"avt1" player:2];
+        for (Role *role in roles) {
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            character.player = 2;
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];

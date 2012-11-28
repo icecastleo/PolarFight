@@ -40,10 +40,10 @@
 }
 @property (assign) BattleController *controller;
 
-@property (nonatomic, assign) int player;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *picFilename;
-@property (nonatomic, assign) int maxHp;
+@property (nonatomic) int player;
+@property (readonly) NSString *name;
+@property (readonly) NSString *picFilename;
+@property (readonly) int maxHp;
 
 @property (readonly) int hp;
 @property (readonly) int attack;
@@ -54,9 +54,8 @@
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
 
-@property (nonatomic, assign) int level;
-@property (nonatomic, assign) CharacterType roleType;
-@property (nonatomic, assign) int tag;
+@property (readonly) int level;
+@property (readonly) CharacterType roleType;
 
 @property (readonly) NSMutableDictionary* timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
@@ -69,8 +68,7 @@
 
 @property (nonatomic, retain) NSMutableArray *pointArray;
 
-+(id) characterWithFileName:(NSString *) aFilename player:(int)pNumber;
--(id) initWithFileName:(NSString *) aFilename player:(int)pNumber;
+- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename;
 
 //-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 -(void) setCharacterWithVelocity:(CGPoint)velocity;
@@ -86,7 +84,5 @@
 -(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void) addAuraStatus:(StatusType)type;
 -(void)removeTimeStatus:(TimeStatusType)type;
-
-- (id)initWithName:(NSString *)rname fileName:(NSString *)rfilename;
 
 @end
