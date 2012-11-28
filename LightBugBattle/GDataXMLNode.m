@@ -378,7 +378,6 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
 
   if (xmlNode_ && shouldFreeXMLNode_) {
     xmlFreeNode(xmlNode_);
-    xmlNode_ = NULL;
   }
 
   [self releaseCachedValues];
@@ -768,7 +767,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
             int result = xmlXPathRegisterNs(xpathCtx, prefix, nsPtr->href);
             if (result != 0) {
 #if DEBUG
-              NSCAssert1(result == 0, @"GDataXMLNode XPath namespace %s issue",
+              NSCAssert1(result == 0, @"GDataXMLNode XPath namespace %@ issue",
                         prefix);
 #endif
             }
@@ -919,7 +918,6 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
       xmlNodePtr root = xmlDocGetRootElement(doc);
       if (root) {
         xmlNode_ = xmlCopyNode(root, 1); // 1: recursive
-        shouldFreeXMLNode_ = YES;
       }
       xmlFreeDoc(doc);
     }
@@ -979,10 +977,10 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
 
     // add a namespace for each object in the array
     NSEnumerator *enumerator = [namespaces objectEnumerator];
-    GDataXMLNode *namespaceNode;
-    while ((namespaceNode = [enumerator nextObject]) != nil) {
+    GDataXMLNode *namespace;
+    while ((namespace = [enumerator nextObject]) != nil) {
 
-      xmlNsPtr ns = (xmlNsPtr) [namespaceNode XMLNode];
+      xmlNsPtr ns = (xmlNsPtr) [namespace XMLNode];
       if (ns) {
         (void)xmlNewNs(xmlNode_, ns->href, ns->prefix);
       }
@@ -1519,7 +1517,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
     NSValue *replacementNS = [nsMap objectForKey:currNS];
 
     if (replacementNS != nil) {
-      xmlNsPtr replaceNSPtr = (xmlNsPtr)[replacementNS pointerValue];
+      xmlNsPtr replaceNSPtr = [replacementNS pointerValue];
 
       xmlSetNs(nodeToFix, replaceNSPtr);
     }
@@ -1618,7 +1616,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
     const char *encoding = NULL;
 
     // NOTE: We are assuming [data length] fits into an int.
-    xmlDoc_ = xmlReadMemory((const char*)[data bytes], (int)[data length], baseURL, encoding,
+    xmlDoc_ = xmlReadMemory([data bytes], (int)[data length], baseURL, encoding,
                             kGDataXMLParseOptions); // TODO(grobbins) map option values
     if (xmlDoc_ == NULL) {
       if (error) {
@@ -1626,8 +1624,8 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
                                     code:-1
                                 userInfo:nil];
         // TODO(grobbins) use xmlSetGenericErrorFunc to capture error
+        [self release];
       }
-      [self release];
       return nil;
     } else {
       if (error) *error = NULL;

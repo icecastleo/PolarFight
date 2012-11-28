@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class Character;
+@class Role, Character;
 
 @interface Party : NSObject
 
-@property (nonatomic, retain) NSMutableArray *players;
+@property (nonatomic, copy) NSMutableArray *roles;
+@property (nonatomic, copy) NSMutableArray *players;
 
+- (Role *)basicRoleFromName:(NSString *)name;
 
-- (Character *)characterFromName:(NSString *)name player:(int)pNumber;
-
-- (NSArray *)characterFromPlayer:(int)pNumber;
+//- (Character *)characterFromName:(NSString *)name player:(int)pNumber;
 
 @end

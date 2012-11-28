@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class Party;
+@class Party, GDataXMLDocument;
 
 @interface PartyParser : NSObject
+{
+    GDataXMLDocument *_doc;
+}
 
-+ (Party *)loadPartyFromType:(int)type withPlayer:(int)player;
+@property (readonly) GDataXMLDocument *doc;
+
++ (Party *)loadParty;
 + (void)saveParty:(Party *)party;
 
+
+
+//- (NSDictionary *)attributesForNode:(NSString *)nodeName;
++ (id) initWithXmlFile:(NSString *) fileName;
 @end

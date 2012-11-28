@@ -7,27 +7,33 @@
 //
 
 #import "Party.h"
+#import "Role.h"
 #import "Character.h"
 
 @implementation Party
+@synthesize roles = _roles, players = _players;
 
-- (id)init {
+- (id) init {
     
     if ((self = [super init])) {
-        self.players = [[[NSMutableArray alloc] init] autorelease];
+        _roles = [[[NSMutableArray alloc] init] autorelease];
+        _players = [[[NSMutableArray alloc] init] autorelease];
     }
     return self;
     
 }
 
 - (void) dealloc {
+    self.roles = nil;
     self.players = nil;
+    [self.roles release];
+    [self.players release];
     [super dealloc];
 }
 
-- (Character *)characterFromName:(NSString *)name player:(int)pNumber
+- (Role *) basicRoleFromName:(NSString *)name
 {
-    for (Character *role in self.players) {
+    for (Role *role in self.roles) {
         if ([role.name isEqualToString:name]) {
             return role;
         }
@@ -35,16 +41,13 @@
     return nil;
 }
 
-- (NSArray *)characterFromPlayer:(int)pNumber
+- (NSMutableArray *) players
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (Character *role in self.players) {
-        if (role.player == pNumber) {
-            [array addObject:role];
-        }
+    for (Role *role in self.roles) {
+        //Character *character = [Character alloc]
     }
-    return array;
+    
+    return nil;
 }
-//*/
- 
+
 @end

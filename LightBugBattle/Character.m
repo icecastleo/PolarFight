@@ -11,6 +11,9 @@
 #import "SkillKit.h"
 #import "StatusKit.h"
 #import "StatusFactory.h"
+#import "Party.h"
+#import "PartyParser.h"
+#import "Role.h"
 
 @implementation Character
 
@@ -25,16 +28,12 @@
 @synthesize timeStatusDictionary,auraStatusDictionary;
 @synthesize pointArray;
 
-+(id) characterWithFileName:(NSString *) filename player:(int)pNumber {
-    return [[[self alloc] initWithFileName:filename player:pNumber] autorelease];
-}
-
 //FIXME: fix name reference.
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
 {
     if ((self = [super init])) {
-        self.name = aName;
-        self.picFilename = aFilename;
+        name_ = aName;
+        picFilename_ = aFilename;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -49,34 +48,11 @@
         
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         auraStatusDictionary = [[NSMutableDictionary alloc] init];
+        
+        [self getAbilityFromRole:aName];
     }
     return self;
     
-}
-
--(id) initWithFileName:(NSString *) aFilename player:(int)pNumber{
-    if(self = [super init]) {
-        
-        self.name = aFilename;
-        self.player = pNumber;
-        
-        [self setRandomAbility];
-
-        sprite = [[CharacterSprite alloc] initWithCharacter:self];
-        
-        state = stateIdle;
-        
-        [self makePoint];
-        
-        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
-//        attackType = [[CircleAttackType alloc] initWithSprite:self];
-        
-        context = UIGraphicsGetCurrentContext();
-        
-        timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        auraStatusDictionary = [[NSMutableDictionary alloc] init];
-    }
-    return self;
 }
 
 -(void)dealloc {
@@ -114,6 +90,20 @@
     
     moveSpeed = arc4random() % 3 + 4;
     moveTime = arc4random() % 2 + 7;
+}
+
+-(void) getAbilityFromRole:(NSString *)name
+{
+    Party *party = [[PartyParser loadParty] autorelease];
+    Role *role = [[party basicRoleFromName:name] autorelease];
+    
+    maxHp     = [role.maxHp integerValue];
+    hp        = [role.hp integerValue];
+    attack    = [role.attack integerValue];
+    defense   = [role.defense integerValue];
+    speed     = [role.speed integerValue];
+    moveSpeed = [role.moveSpeed integerValue];
+    moveTime  = [role.moveTime integerValue];
 }
 
 //// TODO: need be done at mapLayers

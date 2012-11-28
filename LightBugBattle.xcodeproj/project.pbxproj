@@ -17,9 +17,14 @@
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3799B7121650DCB300A9A394 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7111650DCB300A9A394 /* Party.m */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
-		3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7191650DE3700A9A394 /* GDataXMLNode.m */; };
 		3799B71C1650DFC100A9A394 /* Party.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Party.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
+		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; };
+		37DF396D1664AD48000677B2 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39651664AD48000677B2 /* XmlParser.m */; };
+		37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39671664AD48000677B2 /* TypeMapping.m */; };
+		37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39691664AD48000677B2 /* GDataXMLNode.m */; };
+		37DF39701664AD48000677B2 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF396B1664AD48000677B2 /* Util.m */; };
+		37DF397D1664BA2C000677B2 /* Role.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF397C1664BA2C000677B2 /* Role.m */; };
 		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
 		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
 		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
@@ -933,10 +938,20 @@
 		3799B7111650DCB300A9A394 /* Party.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
 		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
-		3799B7181650DE3700A9A394 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		3799B7191650DE3700A9A394 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		3799B71B1650DFC100A9A394 /* Party.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Party.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
+		37DF39631664AD48000677B2 /* XmlHeaderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlHeaderHelper.m; sourceTree = "<group>"; };
+		37DF39641664AD48000677B2 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
+		37DF39651664AD48000677B2 /* XmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParser.m; sourceTree = "<group>"; };
+		37DF39661664AD48000677B2 /* TypeMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeMapping.h; sourceTree = "<group>"; };
+		37DF39671664AD48000677B2 /* TypeMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeMapping.m; sourceTree = "<group>"; };
+		37DF39681664AD48000677B2 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		37DF39691664AD48000677B2 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		37DF396A1664AD48000677B2 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		37DF396B1664AD48000677B2 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		37DF397B1664BA2C000677B2 /* Role.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Role.h; sourceTree = "<group>"; };
+		37DF397C1664BA2C000677B2 /* Role.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Role.m; sourceTree = "<group>"; };
 		9B019B1016494E8000A6976F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B019B1116494E8000A6976F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B019B1316494F2500A6976F /* TimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatus.h; sourceTree = "<group>"; };
@@ -2075,8 +2090,16 @@
 		3799B7171650DE2000A9A394 /* XMLSupport */ = {
 			isa = PBXGroup;
 			children = (
-				3799B7181650DE3700A9A394 /* GDataXMLNode.h */,
-				3799B7191650DE3700A9A394 /* GDataXMLNode.m */,
+				37DF39621664AD48000677B2 /* XmlHeaderHelper.h */,
+				37DF39631664AD48000677B2 /* XmlHeaderHelper.m */,
+				37DF39641664AD48000677B2 /* XmlParser.h */,
+				37DF39651664AD48000677B2 /* XmlParser.m */,
+				37DF39661664AD48000677B2 /* TypeMapping.h */,
+				37DF39671664AD48000677B2 /* TypeMapping.m */,
+				37DF39681664AD48000677B2 /* GDataXMLNode.h */,
+				37DF39691664AD48000677B2 /* GDataXMLNode.m */,
+				37DF396A1664AD48000677B2 /* Util.h */,
+				37DF396B1664AD48000677B2 /* Util.m */,
 			);
 			name = XMLSupport;
 			sourceTree = "<group>";
@@ -2564,6 +2587,8 @@
 		9B062E8116353A4F00E06018 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				37DF397B1664BA2C000677B2 /* Role.h */,
+				37DF397C1664BA2C000677B2 /* Role.m */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -4349,7 +4374,6 @@
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
 				3799B7121650DCB300A9A394 /* Party.m in Sources */,
 				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
-				3799B71A1650DE3700A9A394 /* GDataXMLNode.m in Sources */,
 				9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */,
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
 				9BC8FDAA16566FD700A9EAC7 /* AttributeModifier.m in Sources */,
@@ -4358,6 +4382,12 @@
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
 				9BC8FDBA1657E34E00A9EAC7 /* ModifierMap.m in Sources */,
 				9BC8FDBD1657EC7E00A9EAC7 /* EffectTimeStatus.m in Sources */,
+				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
+				37DF396D1664AD48000677B2 /* XmlParser.m in Sources */,
+				37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */,
+				37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */,
+				37DF39701664AD48000677B2 /* Util.m in Sources */,
+				37DF397D1664BA2C000677B2 /* Role.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
