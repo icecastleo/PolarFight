@@ -6,9 +6,9 @@
 //
 //
 
-#import "EffectTimeStatus.h"
+#import "TimeStatusEffect.h"
 
-@implementation EffectTimeStatus
+@implementation TimeStatusEffect
 
 +(id)statusWithType:(TimeStatusType)statusType withTime:(int)t {
     return [[[self alloc] initWithType:statusType withTime:t] autorelease];

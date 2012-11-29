@@ -65,7 +65,7 @@
 
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies
 {
-    NSMutableArray *effectTargets=   [[NSMutableArray alloc] init];
+    NSMutableArray *effectTargets=   [NSMutableArray array];
     for(int i = 0; i<[enemies count];i++)
     {
         Character *temp = (Character*)[enemies objectAtIndex:i];

@@ -29,7 +29,7 @@
     return [[[self alloc] initWithFileName:aFilename player:pNumber] autorelease];
 }
 
-//FIXME: fix name reference.
+// FIXME: fix name reference.
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
 {
     if ((self = [super init])) {
@@ -42,8 +42,8 @@
         
         [self makePoint];
         
-        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
-        //        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+//        attackType = [[CircleAttackType alloc] initWithSprite:self];
         
         context = UIGraphicsGetCurrentContext();
         
@@ -69,7 +69,7 @@
         
         [self makePoint];
         
-        skillSet = [[SkillSet alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
 //        attackType = [[CircleAttackType alloc] initWithSprite:self];
         
         context = UIGraphicsGetCurrentContext();
@@ -82,7 +82,7 @@
 
 -(void)dealloc {
     [pointArray release];
-    [skillSet release];
+    [skill release];
     [timeStatusDictionary release];
     [auraStatusDictionary release];
     [sprite removeFromParentAndCleanup:YES];
@@ -91,7 +91,7 @@
 
 -(void) setAttackRotationWithVelocity:(CGPoint)velocity
 {
-    [skillSet setRangeRotation:velocity.x :velocity.y];
+    [skill setRangeRotation:velocity.x :velocity.y];
 }
 
 -(void) makePoint
@@ -117,21 +117,6 @@
     moveTime = arc4random() % 3 + 3;
 }
 
-//// TODO: need be done at mapLayers
-//-(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
-//    
-//    if(velocity.x == 0 && velocity.y == 0) {
-//        state = stateIdle;
-//        [sprite stopAllActions];
-//        return;
-//    }
-//    
-//    state = stateMove;
-//    
-//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
-//    [self setDirectionWithVelocity:velocity];
-//}
-
 -(void) setCharacterWithVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
@@ -140,7 +125,7 @@
     }
     
     state = stateMove;
-//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+    
     [self setDirectionWithVelocity:velocity];
     [self setAttackRotationWithVelocity:velocity];
 }
@@ -173,7 +158,6 @@
 -(void) getDamage:(int) damage {
     // TODO: Replace damage to attack info
     
-    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
     CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
     
     // be attacked state;
@@ -192,13 +176,12 @@
 -(void) attackEnemy:(NSMutableArray *)enemies {
     [sprite stopAllActions];
     
-    NSAssert([self.name isKindOfClass:[NSString class]], @"name is not a NSString");
     CCLOG(@"Player %d's %@ is attack",player, self.name);
     
     state = stateAttack;
     // TODO: Run attack animation
     
-    NSMutableArray *effectTargets = [skillSet getEffectTargets:enemies];
+    NSMutableArray *effectTargets = [skill getEffectTargets:enemies];
 
     // TODO: Replace by doSkill?
     for (Character *character in effectTargets) {
@@ -215,7 +198,7 @@
 }
 
 -(void) showAttackRange:(BOOL)visible {
-    [skillSet showAttackRange:visible];
+    [skill showAttackRange:visible];
 }
 
 -(void) end {
@@ -235,7 +218,7 @@
 }
 
 -(void)update {
-    NSMutableArray *removedKeys = [[NSMutableArray alloc] init];
+    NSMutableArray *removedKeys = [NSMutableArray array];
     
     for (TimeStatus *status in timeStatusDictionary) {
         [status update];

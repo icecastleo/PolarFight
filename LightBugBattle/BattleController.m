@@ -94,17 +94,16 @@ static int kMoveMultiplier = 40;
 //}
 
 -(void)addCharacter:(Character *)character {
-    if (character == nil) {
-        CCLOG(@"hi");
-    }
     [characters addObject:character];
     [mapLayer addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
+    CCLOG(@"%d",[character retainCount]);
     [mapLayer removeCharacter:character];
     [characters removeObject:character];
 //    [mapLayer removeCharacter:character];
+    CCLOG(@"%d",[character retainCount]);
 }
 
 -(void)dealloc {    
@@ -182,6 +181,9 @@ static int kMoveMultiplier = 40;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     
     canMove = YES;
+    
+    CCLOG(@"%d",[currentCharacter retainCount]);
+
 }
 
 @end

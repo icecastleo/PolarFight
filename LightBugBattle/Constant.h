@@ -16,6 +16,11 @@ typedef enum {
 } CharacterType;
 
 typedef enum {
+    attAttackBonus,
+    attAttackMultiplier,
+} CharacterAttribute;
+
+typedef enum {
     stateAttack,
     stateMove,
     stateIdle,
@@ -46,13 +51,6 @@ typedef enum {
 typedef enum {
     statusAttackBuff,
 } AuraStatusType;
-
-
-typedef enum {
-    attributeAttackBonus,
-    attributeAttackMultiplier,
-    
-} AttributeType;
 
 typedef enum {
     ConditionMonsterAttack,

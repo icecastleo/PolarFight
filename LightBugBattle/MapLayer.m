@@ -172,12 +172,8 @@
     CGPoint lastPoint = [touch previousLocationInView:touch.view];
     lastPoint = [[CCDirector sharedDirector] convertToGL:lastPoint];
     
-    
-    
-    
     CGPoint diff = ccp( location.x - lastPoint.x, location.y - lastPoint.y );
     [cameraControl moveCameraX:-0.5*diff.x Y:-0.5*diff.y];
-    
 }
 
 @end

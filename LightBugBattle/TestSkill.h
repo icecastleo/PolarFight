@@ -1,5 +1,5 @@
 //
-//  SkillSet.h
+//  Skill.h
 //  LightBugBattle
 //
 //  Created by 陳 謙 on 12/10/30.
@@ -11,16 +11,16 @@
 #import "RangeType.h"
 
 @class  Character;
-@interface SkillSet : NSObject {
+@interface TestSkill : NSObject {
     NSString *name;
     RangeType *effectRange;
-    Character* character;
-    NSMutableArray* effectSet;
+    Character *character;
+    NSMutableArray *effectSet;
 }
 -(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*) rangeName;
 -(id) initWithRange:(Character*)aCharacter range:(RangeType*) range;
--(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
+-(NSMutableArray*) getEffectTargets:(NSMutableArray*)enemies;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;
--(void) doSkill:(NSMutableArray *)targets;
+-(void) doSkill:(NSMutableArray*)targets;
 @end

@@ -12,7 +12,7 @@
 
 -(id)initWithTime:(int)t toCharacter:(Character*)cha{
     if(self = [super initWithType:statusPoison withTime:t toCharacter:cha]) {
-        [modifierMap addAttributeModifier:[AddModifier modifierWithValue:-30] toAttribute:attributeAttackBonus onCondition:ConditionMonsterAttack];
+        [modifierMap addAttributeModifier:[AddModifier modifierWithValue:-30] toAttribute:attAttackBonus onCondition:ConditionMonsterAttack];
     }
     return self;
 }

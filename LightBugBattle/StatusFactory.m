@@ -26,7 +26,7 @@
 //    return nil;
 }
 
-+(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character *)caster {
++(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character*)caster {
 //    NSAssert(type > statusTypeLine, ([NSString stringWithFormat:@"%d is not a aura status",type]));
     switch (type) {
         case statusAttackBuff:

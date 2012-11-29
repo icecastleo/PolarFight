@@ -1,18 +1,18 @@
 //
-//  SkillSet.m
+//  Skill.m
 //  LightBugBattle
 //
 //  Created by 陳 謙 on 12/10/30.
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "SkillSet.h"
+#import "TestSkill.h"
 #import "Character.h"
-#import "EffectTimeStatus.h"
+#import "TimeStatusEffect.h"
 
-@implementation SkillSet
+@implementation TestSkill
 
--(id) initWithRangeName:(Character *)aCharacter rangeName:(NSString *)rangeName {
+-(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*)rangeName {
     
     id range = [[NSClassFromString(rangeName) alloc] initWithCharacter:aCharacter];
     return [self initWithRange:aCharacter range:range];
@@ -24,14 +24,14 @@
 //        effectRange = range;
         effectRange = [[RangeFanShape alloc] initWithCharacter:character];
         effectSet = [[NSMutableArray alloc] init];
-        [effectSet addObject:[[EffectDamage alloc] init]];
-        [effectSet addObject:[EffectTimeStatus statusWithType:statusPoison withTime:3]];
+//        [effectSet addObject:[[EffectDamage alloc] init]];
+        [effectSet addObject:[TimeStatusEffect statusWithType:statusPoison withTime:3]];
     }
     
     return self;
 }
 
--(void) doSkill:(NSMutableArray *)targets
+-(void) doSkill:(NSMutableArray*)targets
 {
     NSMutableArray *effectTargets= [self getEffectTargets:targets];
     for (Character* target in effectTargets) {

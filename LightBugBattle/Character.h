@@ -32,7 +32,7 @@
 //    SpriteDirections direction;
     
     NSMutableArray *pointArray;
-    SkillSet *skillSet;
+    TestSkill *skill;
     CGContextRef context;
     
 //    NSMutableDictionary *timeStatusDictionary;

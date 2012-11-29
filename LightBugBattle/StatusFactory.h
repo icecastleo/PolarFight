@@ -15,6 +15,6 @@
 @interface StatusFactory : NSObject
 
 +(TimeStatus*)createTimeStatus:(TimeStatusType)type withTime:(int)time toCharacter:(Character*)character;
-+(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character *)caster;
++(AuraStatus*)createAuraStatus:(AuraStatusType)type withCaster:(Character*)caster;
 
 @end
