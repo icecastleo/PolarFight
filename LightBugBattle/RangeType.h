@@ -38,8 +38,8 @@ typedef enum{
     int rangeWidth;
 }
 
-@property (nonatomic, retain) Character *character;
-@property (nonatomic, retain) CCSprite *rangeSprite;
+@property (nonatomic, strong) Character *character;
+@property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
 -(id) initWithCharacter:(Character*) battleCharacter;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;

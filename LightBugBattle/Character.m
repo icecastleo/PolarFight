@@ -55,12 +55,7 @@
 }
 
 -(void)dealloc {
-    [pointArray release];
-    [skillSet release];
-    [timeStatusDictionary release];
-    [auraStatusDictionary release];
     [sprite removeFromParentAndCleanup:YES];
-    [super dealloc];
 }
 
 -(void) setAttackRotationWithVelocity:(CGPoint)velocity
@@ -75,7 +70,6 @@
                 [NSValue valueWithCGPoint:ccp(32, 32)],
                 [NSValue valueWithCGPoint:ccp(32, 0)],
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
-    [pointArray retain];
 }
 
 

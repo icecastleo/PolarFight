@@ -22,34 +22,4 @@
 @synthesize moveTime;
 @synthesize roleId;
 
--(void)dealloc
-{
-    name = nil;
-    picture = nil;
-    type = nil;
-    level = nil;
-    maxHp = nil;
-    hp = nil;
-    attack = nil;
-    defense = nil;
-    speed = nil;
-    moveSpeed = nil;
-    moveTime = nil;
-    roleId = nil;
-    
-    [name release];
-    [picture release];
-    [type release];
-    [level release];
-    [maxHp release];
-    [hp release];
-    [attack release];
-    [defense release];
-    [speed release];
-    [moveSpeed release];
-    [moveTime release];
-    [roleId release];
-    
-    [super dealloc];
-}
 @end

@@ -38,11 +38,11 @@
 //    NSMutableDictionary *timeStatusDictionary;
 //    NSMutableDictionary *auraStatusDictionary;
 }
-@property (assign) BattleController *controller;
+@property (unsafe_unretained) BattleController *controller;
 
 @property (nonatomic) int player;
-@property (readonly) NSString *name;
-@property (readonly) NSString *picFilename;
+@property (unsafe_unretained, readonly) NSString *name;
+@property (unsafe_unretained, readonly) NSString *picFilename;
 @property (readonly) int maxHp;
 
 @property (readonly) int hp;
@@ -66,7 +66,7 @@
 
 @property CGPoint position;
 
-@property (nonatomic, retain) NSMutableArray *pointArray;
+@property (nonatomic, strong) NSMutableArray *pointArray;
 
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename;
 

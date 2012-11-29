@@ -17,7 +17,7 @@
     CCSprite* mapBody;
 }
 
-@property (readwrite, assign) MapCameraControl* cameraControl;
+@property (readwrite, unsafe_unretained) MapCameraControl* cameraControl;
 -(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
 -(void) addCharacter:(CCSprite*) theCharacter position:(CGPoint)location;

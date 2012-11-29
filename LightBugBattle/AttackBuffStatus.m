@@ -12,7 +12,7 @@
 @implementation AttackBuffStatus
 
 -(id)initWithCaster:(Character *)character {
-    RangeType *myRange = [[[RangeCircle alloc] initWithCharacter:character] autorelease];
+    RangeType *myRange = [[RangeCircle alloc] initWithCharacter:character];
     
     if(self = [super initWithType:statusAttackBuff withRange:myRange]) {
     

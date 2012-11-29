@@ -46,7 +46,6 @@
         
         CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
         selectAction = [CCRepeatForever actionWithAction:selectAnimate];
-        [selectAction retain];
         
         // TODO: init other view like playing queue.
     }

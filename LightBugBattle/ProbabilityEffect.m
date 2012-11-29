@@ -11,7 +11,7 @@
 @implementation ProbabilityEffect
 
 +(id)effectWithEffect:(Effect *)effect probability:(int)prob {
-    return [[[self alloc]initWithEffect:effect probability:prob]autorelease];
+    return [[self alloc]initWithEffect:effect probability:prob];
 }
 
 -(id)initWithEffect:(Effect *)effect probability:(int)prob {

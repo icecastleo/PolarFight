@@ -57,7 +57,7 @@ static int kMoveMultiplier = 40;
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[[BattleStatusLayer alloc] initWithBattleController:self] autorelease];
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
         characters = [[NSMutableArray alloc] init];
@@ -122,13 +122,6 @@ static int kMoveMultiplier = 40;
 //    [mapLayer removeCharacter:character];
 }
 
--(void)dealloc {    
-    [characters release];
-    [statusLayer release];
-    [dPadLayer release];
-    [mapLayer release];
-    [super dealloc];
-}
 
 - (void) update:(ccTime) delta {
     

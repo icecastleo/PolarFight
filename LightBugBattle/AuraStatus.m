@@ -15,7 +15,6 @@
 -(id)initWithType:(AuraStatusType)statusType withRange:(RangeType*)rangeType {
     if(self = [super initWithType:statusType]) {
         range = rangeType;
-        [range retain];
     }
     return self;
 }

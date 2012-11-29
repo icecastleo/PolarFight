@@ -27,7 +27,7 @@
 -(void) addBarrier:(Barrier *)theBarrier;
 //-(void) removeBarrier:(Barrier*)
 
-@property (readwrite, assign) MapCameraControl* cameraControl;
+@property (readwrite, unsafe_unretained) MapCameraControl* cameraControl;
 -(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;

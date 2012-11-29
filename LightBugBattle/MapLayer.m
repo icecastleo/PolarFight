@@ -177,12 +177,6 @@
     [theCharacter setCharacterWithVelocity:velocity];
 }
 
--(void) dealloc
-{
-    [characters release];
-    [barriers release];
-    [super dealloc];
-}
 
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event

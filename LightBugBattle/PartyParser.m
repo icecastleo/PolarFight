@@ -39,9 +39,9 @@
     NSString *filePath = [self dataFilePath:@"Party.xml" forSave:NO];
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
     
-    XmlParser *parser = [[[XmlParser alloc] init] autorelease];
+    XmlParser *parser = [[XmlParser alloc] init];
     
-    Role *role = [[[Role alloc] init] autorelease];
+    Role *role = [[Role alloc] init];
     
     NSString *str = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
     

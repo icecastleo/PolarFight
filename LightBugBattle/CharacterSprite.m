@@ -21,17 +21,6 @@
     return self;
 }
 
--(void)dealloc {
-    if(bloodSprite) {
-        [bloodSprite release];
-    }
-    
-    [upAction release];
-    [downAction release];
-    [leftAction release];
-    [rightAction release];
-    [super dealloc];
-}
 
 -(void)addBloodSprite {
     bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
