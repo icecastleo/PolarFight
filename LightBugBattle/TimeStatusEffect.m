@@ -11,7 +11,7 @@
 @implementation TimeStatusEffect
 
 +(id)statusWithType:(TimeStatusType)statusType withTime:(int)t {
-    return [[[self alloc] initWithType:statusType withTime:t] autorelease];
+    return [[self alloc] initWithType:statusType withTime:t];
 }
 
 -(id)initWithType:(TimeStatusType)statusType withTime:(int)t {

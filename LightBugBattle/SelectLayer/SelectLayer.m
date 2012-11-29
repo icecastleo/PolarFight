@@ -11,8 +11,8 @@
 
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
-#import "Party.h"
 #import "PartyParser.h"
+#import "Role.h"
 #import "Character.h"
 
 #pragma mark - SelectLayer
@@ -38,7 +38,8 @@ typedef enum {
     BOOL isSelecting;
     int currentRoleIndex;
     int nextRoleIndex;
-    Party *party;
+    //Party *party;
+    NSMutableArray *pool;
     
     CCSprite * selSprite;
     
@@ -99,10 +100,6 @@ static const int nilRoleTag = 100;
 	return self;
 }
 
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 - (void)SetLabels
 {
@@ -308,23 +305,37 @@ static const int nilRoleTag = 100;
 
 -(NSArray *)loadAllRolesFromFile // load data from file
 {
-    party = [[PartyParser loadPartyFromType:Hero withPlayer:player1] retain];
+    //party = [[PartyParser loadParty] retain];
+    NSArray *party = [PartyParser getRolesArrayFromXMLFile];
     NSAssert(party != nil, @"party is nil");
     
-    int count = party.players.count;
-    
-    NSMutableArray *roles = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
+    int count = party.count;
+    pool = [[NSMutableArray alloc] initWithCapacity:count];
+    NSMutableArray *roles = [[NSMutableArray alloc] initWithCapacity:count];
     
     for (int i = 0; i < count; i++) {
-        Character *role = [party.players objectAtIndex:i];
-        [role setCharacterWithVelocity:CGPointMake(0, -1)];
-        CCSprite * sprite = role.sprite;
+        Role *role = [party objectAtIndex:i];
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        [character setCharacterWithVelocity:CGPointMake(0, -1)];
+        CCSprite * sprite = character.sprite;
         sprite.tag = i;
         [roles addObject:sprite];
+        [pool addObject:character];
         if (i==0) {
             [self showCharacterInfo:sprite];
         }
     }
+
+//    for (int i = 0; i < count; i++) {
+//        Character *role = [party.players objectAtIndex:i];
+//        [role setCharacterWithVelocity:CGPointMake(0, -1)];
+//        CCSprite * sprite = role.sprite;
+//        sprite.tag = i;
+//        [roles addObject:sprite];
+//        if (i==0) {
+//            [self showCharacterInfo:sprite];
+//        }
+//    }
     
     return roles;
 }
@@ -432,7 +443,7 @@ static const int nilRoleTag = 100;
 
 - (void)showCharacterInfo:(CCSprite *) newSprite
 {
-    Character *role = [party.players objectAtIndex:newSprite.tag];
+    Character *role = [pool objectAtIndex:newSprite.tag];
     rolelevel = role.level;
     hp = role.maxHp;
     attack = role.attack;

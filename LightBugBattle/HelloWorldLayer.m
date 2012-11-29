@@ -62,16 +62,12 @@
 		CCMenuItem *defaultMenu = [CCMenuItemFont itemWithString:@"Battle Scene" block:^(id sender) {
             [[CCDirector sharedDirector] replaceScene:[BattleController node]];
         }];
-		
-        CCMenuItem *mapItem = [CCMenuItemFont itemWithString:@"MapCameraTest" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[MapControlExample scene]];
-        }];
         
         CCMenuItem *selectScene = [CCMenuItemFont itemWithString:@"Select Scene" block:^(id sender) {
             [[CCDirector sharedDirector] replaceScene:[SelectLayer node]];
         }];
         
-		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, mapItem, selectScene, nil];
+		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, nil];
 		
         [menu alignItemsVerticallyWithPadding:30];
 		[menu setPosition:ccp( size.width/2, size.height/2-20 )];
@@ -84,14 +80,5 @@
 }
 
 // on "dealloc" you need to release all your retained objects
-- (void) dealloc
-{
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
-	
-	// don't forget to call "super dealloc"
-	[super dealloc];
-}
 
 @end

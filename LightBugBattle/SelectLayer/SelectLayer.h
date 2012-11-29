@@ -13,7 +13,7 @@
     NSMutableArray * allRoleBases;
 }
 
-@property (nonatomic,retain) NSMutableArray *selectedRoles;
+@property (nonatomic,strong) NSMutableArray *selectedRoles;
 
 +(CCScene *) scene;
 

@@ -11,19 +11,23 @@
 #import "MapCameraControl.h"
 #import "Character.h"
 #import "Helper.h"
+#import "Barrier.h"
 
 @class Character;
 @interface MapLayer : CCLayer {
     int mapBlock[128][53];
     NSMutableArray* characters;
+    NSMutableArray* barriers;
     CCSprite* mapBody;
 }
 
 -(void) addCharacter:(Character*)theCharacter;
 -(void) removeCharacter:(Character*)theCharacter;
 
+-(void) addBarrier:(Barrier *)theBarrier;
+//-(void) removeBarrier:(Barrier*)
 
-@property (readwrite, assign) MapCameraControl* cameraControl;
+@property (readwrite, unsafe_unretained) MapCameraControl* cameraControl;
 -(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;

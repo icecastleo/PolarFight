@@ -22,10 +22,6 @@
     CGPathCloseSubpath(attackRange);
     CGPathRetain(attackRange);
 }
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 
 @end

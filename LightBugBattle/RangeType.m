@@ -180,7 +180,6 @@ CGContextRef CreateARGBBitmapContext(CGSize size)
 - (void) dealloc
 {
     CGPathRelease(attackRange);
-	[super dealloc];
 }
 
 @end

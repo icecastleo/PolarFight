@@ -17,6 +17,7 @@
     {
         cameraControl = [MapCameraControl node];
         characters = [[NSMutableArray alloc] init];
+        barriers = [[NSMutableArray alloc] init];
         
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
     }
@@ -47,7 +48,13 @@
             );
     }
     
-    [self addChild:theCharacter.sprite];
+    [self addChild:theCharacter.sprite z:1000 - theCharacter.position.y];
+}
+
+-(void) addBarrier:(Barrier *)theBarrier
+{
+    [barriers addObject:theBarrier];
+    [self addChild:theBarrier z:1000 - theBarrier.center.y];
 }
 
 -(void)removeCharacter:(Character *)character
@@ -61,7 +68,7 @@
     [cameraControl setMap:theMap mapLayer:self];
     
     [self addChild:cameraControl];
-    [self addChild:mapBody];
+    [self addChild:mapBody z:0];
     CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
 }
 
@@ -124,7 +131,27 @@
     }
     // Character Collide with Character
     
-    
+    // Character Collide with Barriers
+    for( int i=0; i<barriers.count; i++ )
+    {
+        CGPoint targetLocation = [[barriers objectAtIndex:i] center];
+        CGPoint selfLocation = theCharacter.position;
+        
+        float targetRadius = [[barriers objectAtIndex:i] radius];
+        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+        
+        // redirect the location
+        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
+        {
+            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
+            
+            moveX = redirect.x;
+            moveY = redirect.y;
+        }
+        // redirect the location
+    }
+    // Character Collide with Barriers
+
     
     // MAP LIMIT
     float mapXLimit = mapBody.boundingBox.size.width/2;
@@ -137,6 +164,8 @@
 //    CCLOG(@"LIMITS X:%f Y:%f", mapXLimit, mapYLimit);
 //    CCLOG(@"CHARA POSITION X:%f Y:%f", theCharacter.position.x, theCharacter.position.y);
     
+    [self reorderChild:theCharacter.sprite z: 1000 - moveY];
+    
     theCharacter.position = ccp(moveX,moveY);
 }
 
@@ -148,11 +177,6 @@
     [theCharacter setCharacterWithVelocity:velocity];
 }
 
--(void) dealloc
-{
-    [characters release];
-    [super dealloc];
-}
 
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event

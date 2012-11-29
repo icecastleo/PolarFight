@@ -11,6 +11,8 @@
 #import "SkillKit.h"
 #import "StatusKit.h"
 #import "StatusFactory.h"
+#import "PartyParser.h"
+#import "Role.h"
 
 @implementation Character
 
@@ -33,14 +35,22 @@
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
 {
     if ((self = [super init])) {
-        self.name = aName;
-        self.picFilename = aFilename;
+        name_ = aName;
+        picFilename_ = aFilename;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
         state = stateIdle;
         
         [self makePoint];
+        
+        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
+//        attackType = [[CircleAttackType alloc] initWithSprite:self];
+        
+        context = UIGraphicsGetCurrentContext();
+        
+        timeStatusDictionary = [[NSMutableDictionary alloc] init];
+        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         
         skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
 //        attackType = [[CircleAttackType alloc] initWithSprite:self];
@@ -54,39 +64,12 @@
     
 }
 
--(id) initWithFileName:(NSString *) aFilename player:(int)pNumber{
-    if(self = [super init]) {
-        
-        self.name = aFilename;
-        self.picFilename = self.name;
-        self.player = pNumber;
-        
-        [self setRandomAbility];
-
-        sprite = [[CharacterSprite alloc] initWithCharacter:self];
-        
-        state = stateIdle;
-        
-        [self makePoint];
-        
-        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
-//        attackType = [[CircleAttackType alloc] initWithSprite:self];
-        
-        context = UIGraphicsGetCurrentContext();
-        
-        timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        auraStatusDictionary = [[NSMutableDictionary alloc] init];
-    }
-    return self;
-}
-
 -(void)dealloc {
     [pointArray release];
     [skill release];
     [timeStatusDictionary release];
     [auraStatusDictionary release];
     [sprite removeFromParentAndCleanup:YES];
-    [super dealloc];
 }
 
 -(void) setAttackRotationWithVelocity:(CGPoint)velocity
@@ -101,7 +84,6 @@
                 [NSValue valueWithCGPoint:ccp(32, 32)],
                 [NSValue valueWithCGPoint:ccp(32, 0)],
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
-    [pointArray retain];
 }
 
 

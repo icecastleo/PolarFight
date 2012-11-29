@@ -16,7 +16,7 @@
 //    NSAssert(type < statusTypeLine, ([NSString stringWithFormat:@"%d is not a time status",type]));
     switch (type) {
         case statusPoison:
-            return [[[PoisonStatus alloc] initWithType:statusPoison withTime:time toCharacter:character] autorelease];
+            return [[PoisonStatus alloc] initWithType:statusPoison withTime:time toCharacter:character];
             
         default:
             [NSException raise:@"Create status failed." format:@"No such status."];
@@ -30,7 +30,7 @@
 //    NSAssert(type > statusTypeLine, ([NSString stringWithFormat:@"%d is not a aura status",type]));
     switch (type) {
         case statusAttackBuff:
-            return [[[AttackBuffStatus alloc] initWithCaster:caster] autorelease];
+            return [[AttackBuffStatus alloc] initWithCaster:caster];
 //            break;
         default:
             break;

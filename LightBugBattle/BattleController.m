@@ -8,8 +8,8 @@
 
 #import "BattleController.h"
 #import "BattleStatusLayer.h"
-#import "Party.h"
 #import "PartyParser.h"
+#import "Role.h"
 
 @implementation BattleController
 
@@ -32,38 +32,53 @@ static int kMoveMultiplier = 40;
         // the camera need to be add into the map layer (it wont display but not adding it will cause error)
         [mapLayer setMap:map];
         
+        //testing add barriers
+        Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree setPosition:ccp(0,0)];
+        [tree setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree];
+        
+        Barrier* tree2 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree2 setPosition:ccp(100,-40)];
+        [tree2 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree2];
+        
+        Barrier* tree3 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree3 setPosition:ccp(-50,30)];
+        [tree3 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree3];
+        
+        Barrier* tree4 = [Barrier spriteWithFile:@"tree01.gif"];
+        [tree4 setPosition:ccp(50,10)];
+        [tree4 setShapeRoundRadius:10 center:ccp(10,-30)];
+        [mapLayer addBarrier:tree4];
+        
         // init Dpad
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[[BattleStatusLayer alloc] initWithBattleController:self] autorelease];
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
         characters = [[NSMutableArray alloc] init];
         
         //TODO: will get character from aelectLayer fuction.
-        Party *party = [PartyParser loadPartyFromType:Hero withPlayer:player1];
-        NSAssert(party != nil, @"party is nil");
-        NSArray *roles1 = [party characterFromPlayer:1];
-        int number = roles1.count;
+        //Party *party = [PartyParser loadParty];
+        //NSAssert(party != nil, @"party is nil");
+        NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+        //int number = roles1.count;
         
-        for (int i = 0; i < number; i++) {
-//            Character *character = [roles1 objectAtIndex:i];
-//            NSAssert(character != nil, @"character is nil");
-            Character *character = [Character characterWithFileName:@"amg1" player:1];
+        for (Role *role in roles) {
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            character.player = 1;
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
         }
         
-        Party *party2 = [PartyParser loadPartyFromType:Hero withPlayer:player2];
-        NSArray *roles2 = [party2 characterFromPlayer:2];
-        int number2 = roles2.count;
-        
-        for (int i = 0; i < number2; i++) {
-//            Character *character = [roles2 objectAtIndex:i];
-//            NSAssert(character != nil, @"character is nil");
-            Character *character = [Character characterWithFileName:@"avt1" player:2];
+        for (Role *role in roles) {
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            character.player = 2;
             character.controller = self;
             [character.sprite addBloodSprite];
             [self addCharacter:character];
@@ -106,13 +121,6 @@ static int kMoveMultiplier = 40;
     CCLOG(@"%d",[character retainCount]);
 }
 
--(void)dealloc {    
-    [characters release];
-    [statusLayer release];
-    [dPadLayer release];
-    [mapLayer release];
-    [super dealloc];
-}
 
 - (void) update:(ccTime) delta {
     
