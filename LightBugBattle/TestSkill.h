@@ -14,7 +14,7 @@
 @interface TestSkill : NSObject {
     NSString *name;
     RangeType *effectRange;
-    Character *character;
+    __weak Character *character;
     NSMutableArray *effectSet;
 }
 -(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*) rangeName;

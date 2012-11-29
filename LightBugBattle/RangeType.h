@@ -29,7 +29,7 @@ typedef enum{
 @interface RangeType : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
-    Character* character;
+    __weak Character* character;
     EffectNums effectNums;
     EffectSides effectSides;
     EffectSelfOrNot effectSelfOrNot;
@@ -38,7 +38,7 @@ typedef enum{
     int rangeWidth;
 }
 
-@property (nonatomic, strong) Character *character;
+@property (nonatomic, weak) Character *character;
 @property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
 -(id) initWithCharacter:(Character*) battleCharacter;

@@ -27,10 +27,6 @@
 @synthesize timeStatusDictionary,auraStatusDictionary;
 @synthesize pointArray;
 
-+(id) characterWithFileName:(NSString *) aFilename player:(int)pNumber {
-    return [[[self alloc] initWithFileName:aFilename player:pNumber] autorelease];
-}
-
 // FIXME: fix name reference.
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
 {
@@ -52,23 +48,13 @@
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         auraStatusDictionary = [[NSMutableDictionary alloc] init];
         
-        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
-//        attackType = [[CircleAttackType alloc] initWithSprite:self];
-        
-        context = UIGraphicsGetCurrentContext();
-        
-        timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        auraStatusDictionary = [[NSMutableDictionary alloc] init];
+        [self getAbilityFromRole:aName];
     }
     return self;
-    
 }
 
 -(void)dealloc {
-    [pointArray release];
-    [skill release];
-    [timeStatusDictionary release];
-    [auraStatusDictionary release];
+//    CCLOG(@"Player %i's %@ is dealloc.", player, self.name);
     [sprite removeFromParentAndCleanup:YES];
 }
 
@@ -98,6 +84,42 @@
     moveSpeed = arc4random() % 3 + 4;
     moveTime = arc4random() % 3 + 3;
 }
+
+-(void) getAbilityFromRole:(NSString *)name
+{
+    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+    Role *role;
+    
+    for (Role *tempRole in roles) {
+        if ([tempRole.name isEqualToString:name]) {
+            role = tempRole;
+            break;
+        }
+    }
+    
+    maxHp     = [role.maxHp integerValue];
+    hp        = [role.hp integerValue];
+    attack    = [role.attack integerValue];
+    defense   = [role.defense integerValue];
+    speed     = [role.speed integerValue];
+    moveSpeed = [role.moveSpeed integerValue];
+    moveTime  = [role.moveTime integerValue];
+}
+
+//// TODO: need be done at mapLayers
+//-(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
+//    
+//    if(velocity.x == 0 && velocity.y == 0) {
+//        state = stateIdle;
+//        [sprite stopAllActions];
+//        return;
+//    }
+//    
+//    state = stateMove;
+//    
+//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
+//    [self setDirectionWithVelocity:velocity];
+//}
 
 -(void) setCharacterWithVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {

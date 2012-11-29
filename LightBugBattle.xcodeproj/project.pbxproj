@@ -4457,6 +4457,13 @@
 				9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */,
 				9B2AB06816665C0500B78136 /* Skill.m in Sources */,
 				9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */,
+				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
+				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
+				37DF396D1664AD48000677B2 /* XmlParser.m in Sources */,
+				37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */,
+				37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */,
+				37DF39701664AD48000677B2 /* Util.m in Sources */,
+				37DF397D1664BA2C000677B2 /* Role.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4574,6 +4581,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -4598,6 +4606,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -4619,6 +4628,7 @@
 				37E02E1C16676A2D00BAF11B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B062CD91635275000E06018 /* Build configuration list for PBXProject "LightBugBattle" */ = {
 			isa = XCConfigurationList;

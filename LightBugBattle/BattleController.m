@@ -114,11 +114,10 @@ static int kMoveMultiplier = 40;
 }
 
 -(void)removeCharacter:(Character *)character {
-    CCLOG(@"%d",[character retainCount]);
     [mapLayer removeCharacter:character];
     [characters removeObject:character];
 //    [mapLayer removeCharacter:character];
-    CCLOG(@"%d",[character retainCount]);
+    
 }
 
 
@@ -189,9 +188,6 @@ static int kMoveMultiplier = 40;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     
     canMove = YES;
-    
-    CCLOG(@"%d",[currentCharacter retainCount]);
-
 }
 
 @end
