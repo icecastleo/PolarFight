@@ -57,6 +57,18 @@
     return CGPointMake(c * point.x - s * point.y, s * point.x + c * point.y);
 }
 
++(CGPoint) CGPointRotate_Axis:(CGPoint)axis Point:(CGPoint)point Angle:(float)angle
+{
+    float sin = sinf(angle);
+    float cos = cosf(angle);
+    
+    float x = ( point.x - axis.x )*cos + ( point.y - axis.y )*sin + axis.x;
+    float y = ( point.x - axis.x )*sin + ( point.y - axis.y )*cos + axis.y;
+    
+    return ccp( x, y );
+    
+}
+
 +(float) calculateVectorAngle:(float)x y:(float)y
 {
     float angleRadians = atanf(x/y);

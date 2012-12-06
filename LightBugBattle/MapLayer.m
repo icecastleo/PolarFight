@@ -100,12 +100,32 @@
     //int x = (location.x + mapBody.boundingBox.size.width/2)/10;
     //int y = (location.y + mapBody.boundingBox.size.height/2)/10;
     
-    float moveX = location.x;
-    float moveY = location.y;
+    float moveX = theCharacter.sprite.position.x;
+    float moveY = theCharacter.sprite.position.y;
     
-//    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
     
-    // Character Collide with Character
+    
+    CGPoint possibleLocation[7];
+    Boolean possibleLocationKey[7];
+    
+    possibleLocationKey[0] = YES;
+    possibleLocationKey[1] = YES;
+    possibleLocationKey[2] = YES;
+    possibleLocationKey[3] = YES;
+    possibleLocationKey[4] = YES;
+    possibleLocationKey[5] = YES;
+    possibleLocationKey[6] = YES;
+    
+    possibleLocation[0] = location;
+    possibleLocation[1] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:0.4];
+    possibleLocation[2] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:0.8];
+    possibleLocation[3] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:1.2];
+    possibleLocation[4] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:-0.4];
+    possibleLocation[5] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:-0.8];
+    possibleLocation[6] = [Helper CGPointRotate_Axis:theCharacter.position Point:location Angle:-1.2];
+    
+    
+    // check character collide
     for( int i=0; i<characters.count; i++ )
     {
         if( [characters objectAtIndex:i] == theCharacter )
@@ -113,45 +133,108 @@
             continue;
         }
         
-        CGPoint targetLocation = [[characters objectAtIndex:i] position];
-        CGPoint selfLocation = theCharacter.position;
-        
-        float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width/2;
-        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-        
-        // redirect the location
-        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
+        for( int x=0; x<7; x++ )
         {
-            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
+            if( !possibleLocationKey[x] )
+            {
+                continue;
+            }
+        
+            CGPoint targetLocation = [[characters objectAtIndex:i] sprite].position;
+            float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width/2;
+            float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
             
-            moveX = redirect.x;
-            moveY = redirect.y;
+            if( ccpDistance(possibleLocation[x], targetLocation) < ( targetRadius + selfRadius ))
+            {
+                possibleLocationKey[x] = false;
+            }
         }
-        // redirect the location
+        
     }
-    // Character Collide with Character
     
-    // Character Collide with Barriers
+    // check barrier collide
     for( int i=0; i<barriers.count; i++ )
     {
-        CGPoint targetLocation = [[barriers objectAtIndex:i] center];
-        CGPoint selfLocation = theCharacter.position;
-        
-        float targetRadius = [[barriers objectAtIndex:i] radius];
-        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-        
-        // redirect the location
-        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
+        for( int x=0; x<7; x++ )
         {
-            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
+            if( !possibleLocationKey[x] )
+            {
+                continue;
+            }
             
-            moveX = redirect.x;
-            moveY = redirect.y;
+            CGPoint targetLocation = [[barriers objectAtIndex:i] center];
+            
+            float targetRadius = [[barriers objectAtIndex:i] radius];
+            float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+            
+            if( ccpDistance(possibleLocation[x], targetLocation) < ( targetRadius + selfRadius ))
+            {
+                possibleLocationKey[x] = false;
+            }
         }
-        // redirect the location
     }
-    // Character Collide with Barriers
+    
+    // decide which point to walk
+    for( int i=0; i<7; i++ )
+    {
+        if( possibleLocationKey[i] )
+        {
+            moveX = possibleLocation[i].x;
+            moveY = possibleLocation[i].y;
+            break;
+        }
+    }
+    
+////    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
+//    
+//    // Character Collide with Character
+//    for( int i=0; i<characters.count; i++ )
+//    {
+//        if( [characters objectAtIndex:i] == theCharacter )
+//        {
+//            continue;
+//        }
+//        
+//        CGPoint targetLocation = [[characters objectAtIndex:i] position];
+//        CGPoint selfLocation = theCharacter.position;
+//        
+//        float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width/2;
+//        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+//        
+//        // redirect the location
+//        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
+//        {
+//            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
+//            
+//            moveX = redirect.x;
+//            moveY = redirect.y;
+//        }
+//        // redirect the location
+//    }
+//    // Character Collide with Character
+//    
+//    // Character Collide with Barriers
+//    for( int i=0; i<barriers.count; i++ )
+//    {
+//        CGPoint targetLocation = [[barriers objectAtIndex:i] center];
+//        CGPoint selfLocation = theCharacter.position;
+//        
+//        float targetRadius = [[barriers objectAtIndex:i] radius];
+//        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+//        
+//        // redirect the location
+//        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
+//        {
+//            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
+//            
+//            moveX = redirect.x;
+//            moveY = redirect.y;
+//        }
+//        // redirect the location
+//    }
+//    // Character Collide with Barriers
 
+    
     
     // MAP LIMIT
     float mapXLimit = mapBody.boundingBox.size.width/2;
