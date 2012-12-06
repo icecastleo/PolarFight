@@ -890,6 +890,9 @@
 		9B114123163E4CAD0074969E /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B114122163E4CAD0074969E /* blood.png */; };
 		9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248217164D40E3007B6E4D /* MapCameraControl.m */; };
 		9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248219164D40E3007B6E4D /* MapControlExample.m */; };
+		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
+		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
+		9B28820E166FCAA00041604F /* AttackEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B28820D166FCAA00041604F /* AttackEventHandler.m */; };
 		9B2AB06816665C0500B78136 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* Skill.m */; };
 		9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
 		9B520C1C1639128100057A3D /* select-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520C191639128100057A3D /* select-1.png */; };
@@ -917,6 +920,7 @@
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
 		9BC8FDBA1657E34E00A9EAC7 /* ModifierMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB91657E34E00A9EAC7 /* ModifierMap.m */; };
 		9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */; };
+		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BFBEFE0164D401E008BB3AA /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFBEFDF164D401E008BB3AA /* Map.m */; };
 		9BFFAE67163E9DBB00073DC5 /* RangeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* RangeType.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -1984,6 +1988,12 @@
 		9B248217164D40E3007B6E4D /* MapCameraControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCameraControl.m; sourceTree = "<group>"; };
 		9B248218164D40E3007B6E4D /* MapControlExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlExample.h; sourceTree = "<group>"; };
 		9B248219164D40E3007B6E4D /* MapControlExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlExample.m; sourceTree = "<group>"; };
+		9B288204166FA61C0041604F /* AttackEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEffect.h; sourceTree = "<group>"; };
+		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
+		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
+		9B288209166FA76D0041604F /* Armor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Armor.m; sourceTree = "<group>"; };
+		9B28820C166FCAA00041604F /* AttackEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEventHandler.h; sourceTree = "<group>"; };
+		9B28820D166FCAA00041604F /* AttackEventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEventHandler.m; sourceTree = "<group>"; };
 		9B2AB06616665C0400B78136 /* Skill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
 		9B2AB06716665C0500B78136 /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
@@ -2031,6 +2041,8 @@
 		9BC8FDB91657E34E00A9EAC7 /* ModifierMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifierMap.m; sourceTree = "<group>"; };
 		9BC8FDBB1657EC7E00A9EAC7 /* TimeStatusEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatusEffect.h; sourceTree = "<group>"; };
 		9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeStatusEffect.m; sourceTree = "<group>"; };
+		9BDC077F166E3913009559C3 /* AttackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEvent.h; sourceTree = "<group>"; };
+		9BDC0780166E3913009559C3 /* AttackEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEvent.m; sourceTree = "<group>"; };
 		9BFBEFDE164D401E008BB3AA /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		9BFBEFDF164D401E008BB3AA /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* RangeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeType.h; sourceTree = "<group>"; };
@@ -2093,6 +2105,8 @@
 			children = (
 				2D26FC981640114D00C34AA4 /* Effect.h */,
 				2D26FC991640114D00C34AA4 /* Effect.m */,
+				9B288204166FA61C0041604F /* AttackEffect.h */,
+				9B288205166FA61C0041604F /* AttackEffect.m */,
 				9BC8FDA11654F11900A9EAC7 /* ProbabilityEffect.h */,
 				9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */,
 				9BC8FDBB1657EC7E00A9EAC7 /* TimeStatusEffect.h */,
@@ -2580,6 +2594,9 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				9B28820B166FC7EE0041604F /* Battle */,
+				9B28820C166FCAA00041604F /* AttackEventHandler.h */,
+				9B28820D166FCAA00041604F /* AttackEventHandler.m */,
 				9B82F787164FB2510001A357 /* BattleScene */,
 				9B062E7F16353A2B00E06018 /* Character */,
 				2B1C55D71643B08A007D6CEA /* Map */,
@@ -3402,6 +3419,15 @@
 			path = "last-guardian-sprites";
 			sourceTree = "<group>";
 		};
+		9B28820B166FC7EE0041604F /* Battle */ = {
+			isa = PBXGroup;
+			children = (
+				9BDC077D166E3719009559C3 /* Attack */,
+				9BDC0782166E392B009559C3 /* Armor */,
+			);
+			name = Battle;
+			sourceTree = "<group>";
+		};
 		9B82F787164FB2510001A357 /* BattleScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -3459,6 +3485,24 @@
 				9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */,
 			);
 			name = AuraStatus;
+			sourceTree = "<group>";
+		};
+		9BDC077D166E3719009559C3 /* Attack */ = {
+			isa = PBXGroup;
+			children = (
+				9BDC077F166E3913009559C3 /* AttackEvent.h */,
+				9BDC0780166E3913009559C3 /* AttackEvent.m */,
+			);
+			name = Attack;
+			sourceTree = "<group>";
+		};
+		9BDC0782166E392B009559C3 /* Armor */ = {
+			isa = PBXGroup;
+			children = (
+				9B288208166FA76D0041604F /* Armor.h */,
+				9B288209166FA76D0041604F /* Armor.m */,
+			);
+			name = Armor;
 			sourceTree = "<group>";
 		};
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
@@ -4464,6 +4508,10 @@
 				37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */,
 				37DF39701664AD48000677B2 /* Util.m in Sources */,
 				37DF397D1664BA2C000677B2 /* Role.m in Sources */,
+				9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */,
+				9B288206166FA61C0041604F /* AttackEffect.m in Sources */,
+				9B28820A166FA76D0041604F /* Armor.m in Sources */,
+				9B28820E166FCAA00041604F /* AttackEventHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

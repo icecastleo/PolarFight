@@ -13,12 +13,12 @@
 @synthesize character,attackRange,rangeSprite;
 
 
--(id)initWithCharacter:(Character *)battleCharacter
+-(id)initWithCharacter:(Character *)aCharacter
 {
     if( (self=[super init]) ) {
+        character = aCharacter;
         rangeHeight = 100;
         rangeWidth = 100;
-        character = battleCharacter;
         [self setParameter];
         [self showPoints];
     }

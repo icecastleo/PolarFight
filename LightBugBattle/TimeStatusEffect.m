@@ -22,8 +22,8 @@
     return self;
 }
 
--(void)doEffect:(Character *)character {
-    [character addTimeStatus:type withTime:time];
+-(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
+    [bCharacter addTimeStatus:type withTime:time];
 }
 
 @end

@@ -143,7 +143,7 @@ static int kMoveMultiplier = 40;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
         if(countdown == 0) {
-            [currentCharacter end];
+            [currentCharacter endRound];
             [self endMove];
             return;
         }

@@ -17,8 +17,8 @@
     __weak Character *character;
     NSMutableArray *effectSet;
 }
--(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*) rangeName;
--(id) initWithRange:(Character*)aCharacter range:(RangeType*) range;
+-(id) initWithCharacter:(Character*)aCharacter rangeName:(NSString*) rangeName;
+-(id) initWithCharacter:(Character*)aCharacter rangeType:(RangeType*) range;
 -(NSMutableArray*) getEffectTargets:(NSMutableArray*)enemies;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;

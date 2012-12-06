@@ -21,11 +21,11 @@
 }
 
 -(void)addEffectOnCharacter:(Character *)character {
-    character.attackBonus += 50;
+//    character.attackBonus += 50;
 }
 
 -(void)removeEffectOnCharacter:(Character *)character {
-    character.attackBonus -= 50;
+//    character.attackBonus -= 50;
 }
 
 @end

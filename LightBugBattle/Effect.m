@@ -11,7 +11,7 @@
 
 @implementation Effect
 
--(void) doEffect:(Character *)character {
+-(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
     [NSException raise:@"Called abstract method!" format:@"You have to override doEffect method."];
 }
 @end

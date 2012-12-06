@@ -16,8 +16,7 @@ typedef enum {
 } CharacterType;
 
 typedef enum {
-    attAttackBonus,
-    attAttackMultiplier,
+    kCharacterAttributeHp,
 } CharacterAttribute;
 
 typedef enum {
@@ -25,14 +24,22 @@ typedef enum {
     stateMove,
     stateIdle,
     stateDead
-} SpriteStates;
+} CharacterState;
 
 typedef enum {
-    directionUp,
-    directionDown,
-    directionLeft,
-    directionRight
-} SpriteDirections;
+    kCharacterDirectionUp = 1,
+    kCharacterDirectionDown,
+    kCharacterDirectionLeft,
+    kCharacterDirectionRight
+} CharacterDirection;
+
+typedef enum {
+    kAttackNoraml
+} AttackType;
+
+typedef enum {
+    kArmorNoraml,
+} ArmorType;
 
 //typedef enum {
 ////    statusUnknown,

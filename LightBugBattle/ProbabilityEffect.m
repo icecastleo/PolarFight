@@ -22,9 +22,9 @@
     return self;
 }
 
--(void)doEffect:(Character *)character {
+-(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
     if(arc4random() % 100 + 1 > probability) {
-        [base doEffect:character];
+        [base doEffectFromCharacter:aCharacter toCharacter:bCharacter];
     }
 }
 

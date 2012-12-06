@@ -9,23 +9,24 @@
 #import "TestSkill.h"
 #import "Character.h"
 #import "TimeStatusEffect.h"
+#import "AttackEffect.h"
 
 @implementation TestSkill
 
--(id) initWithRangeName:(Character*)aCharacter rangeName:(NSString*)rangeName {
+-(id) initWithCharacter:(Character*)aCharacter rangeName:(NSString*)rangeName {
     
     id range = [[NSClassFromString(rangeName) alloc] initWithCharacter:aCharacter];
-    return [self initWithRange:aCharacter range:range];
+    return [self initWithCharacter:aCharacter rangeType:range];
 }
 
--(id) initWithRange:(Character*)aCharacter range:(RangeType*) range {
+-(id) initWithCharacter:(Character*)aCharacter rangeType:(RangeType*) range {
     if( (self=[super init]) ) {    
         character = aCharacter;
 //        effectRange = range;
         effectRange = [[RangeFanShape alloc] initWithCharacter:character];
         effectSet = [[NSMutableArray alloc] init];
-//        [effectSet addObject:[[EffectDamage alloc] init]];
-        [effectSet addObject:[TimeStatusEffect statusWithType:statusPoison withTime:3]];
+        [effectSet addObject:[[AttackEffect alloc] initWithAttackType:kAttackNoraml]];
+//        [effectSet addObject:[TimeStatusEffect statusWithType:statusPoison withTime:3]];
     }
     
     return self;
@@ -36,7 +37,7 @@
     NSMutableArray *effectTargets= [self getEffectTargets:targets];
     for (Character* target in effectTargets) {
         for (Effect *effectItem in effectSet) {
-            [effectItem doEffect:target];
+            [effectItem doEffectFromCharacter:character toCharacter:target];
         }
     }
 }

@@ -13,14 +13,15 @@
 #import "StatusFactory.h"
 #import "PartyParser.h"
 #import "Role.h"
+#import "AttackEventHandler.h"
 
 @implementation Character
 
 @synthesize controller;
-@synthesize name = name_, picFilename = picFilename_;
-@synthesize player,maxHp;
-@synthesize hp, attack, defense, speed, moveSpeed, moveTime;
-@synthesize attackBonus,attackMultiplier;
+@synthesize player;
+//@synthesize attackType;
+@synthesize armorType;
+@synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
 @synthesize position;
@@ -28,11 +29,10 @@
 @synthesize pointArray;
 
 // FIXME: fix name reference.
-- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename
-{
+- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename {
     if ((self = [super init])) {
-        name_ = aName;
-        picFilename_ = aFilename;
+        _name = aName;
+        _picFilename = aFilename;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -40,8 +40,10 @@
         
         [self makePoint];
         
-        skill = [[TestSkill alloc] initWithRangeName:self rangeName:@"RangeFanShape"];
-//        attackType = [[CircleAttackType alloc] initWithSprite:self];
+//        attackType = kAttackNoraml;
+        armorType = kArmorNoraml;
+        
+        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeFanShape"];
         
         context = UIGraphicsGetCurrentContext();
         
@@ -58,11 +60,6 @@
     [sprite removeFromParentAndCleanup:YES];
 }
 
--(void) setAttackRotationWithVelocity:(CGPoint)velocity
-{
-    [skill setRangeRotation:velocity.x :velocity.y];
-}
-
 -(void) makePoint
 {
     pointArray=[NSMutableArray arrayWithObjects:
@@ -75,7 +72,7 @@
 
 -(void) setRandomAbility {
     maxHp = 30;
-    hp = 30;
+    currentHp = 30;
     
     attack = arc4random() % 4 + 3;
     defense = 3;
@@ -98,7 +95,7 @@
     }
     
     maxHp     = [role.maxHp integerValue];
-    hp        = [role.hp integerValue];
+    currentHp        = [role.hp integerValue];
     attack    = [role.attack integerValue];
     defense   = [role.defense integerValue];
     speed     = [role.speed integerValue];
@@ -121,6 +118,26 @@
 //    [self setDirectionWithVelocity:velocity];
 //}
 
+-(void) setDefaultAttackRotation {
+    switch (direction) {
+        case kCharacterDirectionLeft:
+            [self setAttackRotationWithVelocity:ccp(-1, 0)];
+            break;
+        case kCharacterDirectionRight:
+            [self setAttackRotationWithVelocity:ccp(1, 0)];
+            break;
+        case kCharacterDirectionUp:
+            [self setAttackRotationWithVelocity:ccp(0, 1)];
+            break;
+        case kCharacterDirectionDown:
+            [self setAttackRotationWithVelocity:ccp(0, -1)];
+            break;
+        default:
+            [NSException raise:@"Character direction error." format:@"%d is not a correct direction value",direction];
+            ;
+    }
+}
+
 -(void) setCharacterWithVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
@@ -135,19 +152,19 @@
 }
 
 -(void) setDirectionWithVelocity:(CGPoint)velocity {
-    SpriteDirections newDirection;
+    CharacterDirection newDirection;
     
     if(fabsf(velocity.x) >= fabsf(velocity.y)) {
         if(velocity.x > 0) {
-            newDirection = directionRight;
+            newDirection = kCharacterDirectionRight;
         } else {
-            newDirection = directionLeft;
+            newDirection = kCharacterDirectionLeft;
         }
     } else {
         if(velocity.y > 0) {
-            newDirection = directionUp;
+            newDirection = kCharacterDirectionUp;
         } else {
-            newDirection = directionDown;
+            newDirection = kCharacterDirectionDown;
         }
     }
     
@@ -159,22 +176,8 @@
     [sprite runDirectionAnimate];
 }
 
--(void) getDamage:(int) damage {
-    // TODO: Replace damage to attack info
-    
-    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
-    
-    // be attacked state;
-    hp -= damage;
-    [sprite updateBloodSprite];
-    
-    if(hp <= 0) {
-        state = stateDead;
-        
-        // dead animation + cleanup
-        if(controller)
-            [controller removeCharacter:self];
-    }
+-(void) setAttackRotationWithVelocity:(CGPoint)velocity {
+    [skill setRangeRotation:velocity.x :velocity.y];
 }
 
 -(void) attackEnemy:(NSMutableArray *)enemies {
@@ -185,15 +188,42 @@
     state = stateAttack;
     // TODO: Run attack animation
     
-    NSMutableArray *effectTargets = [skill getEffectTargets:enemies];
+//    NSMutableArray *effectTargets = [skill getEffectTargets:enemies];
+//
+//    // TODO: Replace by doSkill?
+//    for (Character *character in effectTargets) {
+//        [character getDamage:attack];
+//    }
 
-    // TODO: Replace by doSkill?
-    for (Character *character in effectTargets) {
-        [character getDamage:attack];
-    }
+    [skill doSkill:enemies];
     
     // TODO: Need to be replaced when there has attack animation
     [self finishAttack];
+}
+
+-(void) getAttackEvent:(AttackEvent*)attackEvent {
+    [AttackEventHandler handleAttackEvent:attackEvent toCharacter:self];
+    
+    [self getDamage:[attackEvent getDamage]];
+}
+
+-(void) getDamage:(int) damage {
+    // TODO: Replace damage to attack info
+    
+    CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
+    
+    // be attacked state;
+    currentHp -= damage;
+    
+    if(currentHp > 0) {
+        [sprite updateBloodSprite];
+    } else { // currentHp <= 0
+        state = stateDead;
+        
+        // dead animation + cleanup
+        if(controller)
+            [controller removeCharacter:self];
+    }
 }
 
 // TODO: Need to be called when attack animation finished
@@ -205,7 +235,7 @@
     [skill showAttackRange:visible];
 }
 
--(void) end {
+-(void) endRound {
     // 回合結束
     [sprite stopAllActions];
     state = stateIdle;

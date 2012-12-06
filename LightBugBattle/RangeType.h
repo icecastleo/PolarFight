@@ -41,7 +41,8 @@ typedef enum{
 @property (nonatomic, weak) Character *character;
 @property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
--(id) initWithCharacter:(Character*) battleCharacter;
+
+-(id) initWithCharacter:(Character*) aCharacter;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(BOOL) containTarget:(Character *)temp;
 -(void) setRotation:(float) offX:(float) offY;

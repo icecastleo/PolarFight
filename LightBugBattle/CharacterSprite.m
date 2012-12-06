@@ -12,6 +12,7 @@
 @implementation CharacterSprite
 
 -(id)initWithCharacter:(Character *)cha {
+    // FIXME: replace player with direction.
     if(self = [super initWithFile:
                [NSString stringWithFormat:@"%@_%@2.gif",cha.picFilename, cha.player == 1 ? @"rt" : @"lf"]])
     {
@@ -77,23 +78,23 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
 
 -(void) runDirectionAnimate {
-    SpriteDirections direction = character.direction;
+    CharacterDirection direction = character.direction;
     
     [self stopAllActions];
     
-    if(direction == directionUp) {
+    if(direction == kCharacterDirectionUp) {
         [self runAction:upAction];
-    } else if (direction == directionDown) {
+    } else if (direction == kCharacterDirectionDown) {
         [self runAction:downAction];
-    } else if (direction == directionLeft) {
+    } else if (direction == kCharacterDirectionLeft) {
         [self runAction:leftAction];
-    } else if (direction == directionRight) {
+    } else if (direction == kCharacterDirectionRight) {
         [self runAction:rightAction];
     }
 }
 
 -(void) updateBloodSprite {
-    bloodSprite.scaleX = (float)character.hp/ character.maxHp;
+    bloodSprite.scaleX = (float)character.currentHp/ character.maxHp;
     bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
 }
 

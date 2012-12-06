@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "CharacterSprite.h"
 #import "SkillKit.h"
+#import "AttackEvent.h"
 
 @class BattleController;
 
@@ -38,31 +39,33 @@
 //    NSMutableDictionary *timeStatusDictionary;
 //    NSMutableDictionary *auraStatusDictionary;
 }
-@property (unsafe_unretained) BattleController *controller;
-
+@property (weak) BattleController *controller;
 @property (nonatomic) int player;
-@property (unsafe_unretained, readonly) NSString *name;
-@property (unsafe_unretained, readonly) NSString *picFilename;
-@property (readonly) int maxHp;
 
-@property (readonly) int hp;
+@property (readonly) CharacterType roleType;
+//@property (readonly) AttackType attackType;
+@property (readonly) ArmorType armorType;
+
+@property (retain, readonly) NSString *name;
+@property (retain, readonly) NSString *picFilename;
+
+@property (readonly) int level;
+
+@property (readonly) int maxHp;
+@property (readonly) int currentHp;
+
 @property (readonly) int attack;
-@property int attackBonus;
-@property float attackMultiplier;
 @property (readonly) int defense;
 @property (readonly) int speed;
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
 
-@property (readonly) int level;
-@property (readonly) CharacterType roleType;
-
 @property (readonly) NSMutableDictionary* timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
 @property (readonly) CharacterSprite *sprite;
 
-@property (readonly) SpriteStates state;
-@property (readonly) SpriteDirections direction;
+@property (readonly) CharacterState state;
+@property (readonly) CharacterDirection direction;
 
 @property CGPoint position;
 
@@ -70,19 +73,19 @@
 
 - (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename;
 
-//-(void) addPosition:(CGPoint)velocity time:(ccTime)delta;
 -(void) setCharacterWithVelocity:(CGPoint)velocity;
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
--(void) getDamage:(int) damage;
+-(void) getAttackEvent:(AttackEvent*)attackEvent;
+//-(void) getDamage:(int) damage;
 -(void) showAttackRange:(BOOL)visible;
--(void) end;
+-(void) endRound;
 
 -(void) setPosition:(CGPoint)position;
 -(CGPoint) position;
 
 -(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void) addAuraStatus:(StatusType)type;
--(void)removeTimeStatus:(TimeStatusType)type;
+-(void) removeTimeStatus:(TimeStatusType)type;
 
 @end

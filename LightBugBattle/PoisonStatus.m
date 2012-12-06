@@ -12,21 +12,21 @@
 
 -(id)initWithTime:(int)t toCharacter:(Character*)cha{
     if(self = [super initWithType:statusPoison withTime:t toCharacter:cha]) {
-        [modifierMap addAttributeModifier:[AddModifier modifierWithValue:-30] toAttribute:attAttackBonus onCondition:ConditionMonsterAttack];
+//        [modifierMap addAttributeModifier:[AddModifier modifierWithValue:-30] toAttribute:attAttackBonus onCondition:ConditionMonsterAttack];
     }
     return self;
 }
 
 -(void)addEffec {
-    character.attackBonus -= 50;
+//    character.attackBonus -= 50;
 }
 
 -(void)removeEffect {
-    character.attackBonus += 50;
+//    character.attackBonus += 50;
 }
 
 -(void)update {
-    [character getDamage:character.maxHp / 5];
+//    [character getDamage:character.maxHp / 5];
     [super update];
 }
 
