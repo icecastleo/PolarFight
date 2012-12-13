@@ -7,7 +7,6 @@
 //
 
 #import "Effect.h"
-#import "Character.h"
 
 @implementation Effect
 

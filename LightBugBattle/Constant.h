@@ -10,6 +10,12 @@
 #define LightBugBattle_Constant_h
 
 typedef enum {
+    kGameStateRoundStart,
+    kGameStateCharacterMove,
+    kGameStateRoundEnd,
+} GameState;
+
+typedef enum {
     Hero = 0,
     Soldier,
     Monster
@@ -36,6 +42,12 @@ typedef enum {
 typedef enum {
     kAttackNoraml
 } AttackType;
+
+typedef enum {
+    kDamageTypePhysical,
+    kDamageTypeMagical,
+    // fire, water?
+} DamageType;
 
 typedef enum {
     kArmorNoraml,

@@ -38,6 +38,8 @@
     
 //    NSMutableDictionary *timeStatusDictionary;
 //    NSMutableDictionary *auraStatusDictionary;
+    
+    NSMutableDictionary *statePremissionDictionary;
 }
 @property (weak) BattleController *controller;
 @property (nonatomic) int player;
@@ -60,7 +62,7 @@
 @property (readonly) int moveSpeed;
 @property (readonly) int moveTime;
 
-@property (readonly) NSMutableDictionary* timeStatusDictionary;
+@property (readonly) NSMutableDictionary *timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
 @property (readonly) CharacterSprite *sprite;
 
@@ -77,7 +79,7 @@
 
 -(void) attackEnemy:(NSMutableArray*) enemies;
 -(void) getAttackEvent:(AttackEvent*)attackEvent;
-//-(void) getDamage:(int) damage;
+-(void) getDamage:(int) damage;
 -(void) showAttackRange:(BOOL)visible;
 -(void) endRound;
 
@@ -87,5 +89,7 @@
 -(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void) addAuraStatus:(StatusType)type;
 -(void) removeTimeStatus:(TimeStatusType)type;
+
+-(void) setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
 
 @end

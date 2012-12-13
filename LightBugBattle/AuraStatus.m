@@ -9,7 +9,6 @@
 #import "AuraStatus.h"
 #import "Character.h"
 
-// Any concrete child of AuraStatus should implement -(id)initWithCaster:(Character*) character;
 @implementation AuraStatus
 
 -(id)initWithType:(AuraStatusType)statusType withRange:(RangeType*)rangeType {

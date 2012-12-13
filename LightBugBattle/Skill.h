@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Character;
+#import "EffectKit.h"
 
 @interface Skill : NSObject {
     Character *owner;

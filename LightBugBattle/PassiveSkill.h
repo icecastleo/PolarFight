@@ -8,14 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Skill.h"
-@class Character;
+#import "CharacterEventHandler.h"
 
-@interface PassiveSkill : Skill {
+@interface PassiveSkill : Skill <CharacterEventHandler> {
     
 }
-
-//-(void)receiveAttackEvent:(Character)
-//
-//
 
 @end

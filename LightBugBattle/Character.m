@@ -19,6 +19,7 @@
 
 @synthesize controller;
 @synthesize player;
+@synthesize level;
 //@synthesize attackType;
 @synthesize armorType;
 @synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
@@ -33,6 +34,8 @@
     if ((self = [super init])) {
         _name = aName;
         _picFilename = aFilename;
+        
+        level = 1;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -49,6 +52,9 @@
         
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         auraStatusDictionary = [[NSMutableDictionary alloc] init];
+        
+        // TODO: Let change state or something to use this map...
+        statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
         [self getAbilityFromRole:aName];
     }
@@ -207,8 +213,7 @@
     [self getDamage:[attackEvent getDamage]];
 }
 
--(void) getDamage:(int) damage {
-    // TODO: Replace damage to attack info
+-(void) getDamage:(int)damage {
     
     CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
     
@@ -236,6 +241,7 @@
 }
 
 -(void) endRound {
+    // TODO: Move this to battle controller.
     // 回合結束
     [sprite stopAllActions];
     state = stateIdle;
@@ -290,9 +296,22 @@
     [timeStatusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
 }
 
-- (CGRect) boundingBox
-{
+-(CGRect)boundingBox {
     return sprite.boundingBox;
+}
+
+-(BOOL)getCharacterStatePermission:(CharacterState)aState {
+    NSNumber *result = [statePremissionDictionary objectForKey:[NSNumber numberWithInt:aState]];
+    
+    if(result == nil) {
+        return YES;
+    } else {
+        return [result boolValue];
+    }
+}
+
+-(void)setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool {
+    [statePremissionDictionary setObject:[NSNumber numberWithBool:aBool] forKey:[NSNumber numberWithInt:aState]];
 }
 
 @end

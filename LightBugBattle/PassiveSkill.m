@@ -7,7 +7,6 @@
 //
 
 #import "PassiveSkill.h"
-#import "Character.h"
 
 @implementation PassiveSkill
 
