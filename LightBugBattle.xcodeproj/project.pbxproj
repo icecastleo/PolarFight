@@ -2232,7 +2232,6 @@
 			children = (
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */,
-				9B3E4FE81675F1E0000CFFFB /* Supporting Files */,
 				9B062CE21635275000E06018 /* Frameworks */,
 				9B062CF51635275000E06018 /* LightBugBattle */,
 				9B062CE01635275000E06018 /* Products */,
@@ -3141,6 +3140,7 @@
 				9B3E4E891675F139000CFFFB /* cocos2d */,
 				9B3E4F4C1675F139000CFFFB /* CocosDenshion */,
 				9B3E4F561675F139000CFFFB /* kazmath */,
+				9B3E4FE81675F1E0000CFFFB /* Supporting Files */,
 				9B3E4F791675F139000CFFFB /* LICENSE_cocos2d.txt */,
 				9B3E4F7A1675F139000CFFFB /* LICENSE_CocosDenshion.txt */,
 				9B3E4F7B1675F139000CFFFB /* LICENSE_Kazmath.txt */,
@@ -4464,6 +4464,7 @@
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
 				9B06F8491679DA4700E1B09D /* FluidAttribute.m in Sources */,
+				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
