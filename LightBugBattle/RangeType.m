@@ -45,7 +45,7 @@
     CGContextRef context = NULL;
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
     context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
-    CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.4 );
+    CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.8 );
     
     
     
