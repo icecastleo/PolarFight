@@ -11,7 +11,7 @@
         <picture>amg1</picture>
         <speed>8</speed>
         <defense>9</defense>
-        <moveSpeed>70</moveSpeed>
+        <moveSpeed>15</moveSpeed>
         <moveTime>6</moveTime>
         <maxHp>100</maxHp>
     </Role>
@@ -25,7 +25,7 @@
         <picture>ftr1</picture>
         <speed>8</speed>
         <defense>9</defense>
-        <moveSpeed>60</moveSpeed>
+        <moveSpeed>5</moveSpeed>
         <moveTime>6</moveTime>
         <maxHp>100</maxHp>
     </Role>

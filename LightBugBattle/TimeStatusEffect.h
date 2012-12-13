@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "TimeStatus.h"
 
-@interface EffectTimeStatus : Effect {
+@interface TimeStatusEffect : Effect {
     TimeStatusType type;
     int time;
 }

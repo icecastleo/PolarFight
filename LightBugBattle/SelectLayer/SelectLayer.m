@@ -100,10 +100,6 @@ static const int nilRoleTag = 100;
 	return self;
 }
 
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 - (void)SetLabels
 {
@@ -310,12 +306,12 @@ static const int nilRoleTag = 100;
 -(NSArray *)loadAllRolesFromFile // load data from file
 {
     //party = [[PartyParser loadParty] retain];
-    NSArray *party = [[PartyParser getRolesArrayFromXMLFile] autorelease];
+    NSArray *party = [PartyParser getRolesArrayFromXMLFile];
     NSAssert(party != nil, @"party is nil");
     
     int count = party.count;
-    pool = [[[NSMutableArray alloc] initWithCapacity:count] retain];
-    NSMutableArray *roles = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
+    pool = [[NSMutableArray alloc] initWithCapacity:count];
+    NSMutableArray *roles = [[NSMutableArray alloc] initWithCapacity:count];
     
     for (int i = 0; i < count; i++) {
         Role *role = [party objectAtIndex:i];

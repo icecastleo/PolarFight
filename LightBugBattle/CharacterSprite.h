@@ -11,7 +11,7 @@
 
 @class Character;
 @interface CharacterSprite : CCSprite {
-    Character *character;
+    __weak Character *character;
     
     CCSprite *bloodSprite;
     

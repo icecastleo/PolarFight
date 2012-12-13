@@ -16,18 +16,30 @@ typedef enum {
 } CharacterType;
 
 typedef enum {
+    kCharacterAttributeHp,
+} CharacterAttribute;
+
+typedef enum {
     stateAttack,
     stateMove,
     stateIdle,
     stateDead
-} SpriteStates;
+} CharacterState;
 
 typedef enum {
-    directionUp,
-    directionDown,
-    directionLeft,
-    directionRight
-} SpriteDirections;
+    kCharacterDirectionUp = 1,
+    kCharacterDirectionDown,
+    kCharacterDirectionLeft,
+    kCharacterDirectionRight
+} CharacterDirection;
+
+typedef enum {
+    kAttackNoraml
+} AttackType;
+
+typedef enum {
+    kArmorNoraml,
+} ArmorType;
 
 //typedef enum {
 ////    statusUnknown,
@@ -46,13 +58,6 @@ typedef enum {
 typedef enum {
     statusAttackBuff,
 } AuraStatusType;
-
-
-typedef enum {
-    attributeAttackBonus,
-    attributeAttackMultiplier,
-    
-} AttributeType;
 
 typedef enum {
     ConditionMonsterAttack,

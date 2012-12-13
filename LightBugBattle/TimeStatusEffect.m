@@ -6,12 +6,12 @@
 //
 //
 
-#import "EffectTimeStatus.h"
+#import "TimeStatusEffect.h"
 
-@implementation EffectTimeStatus
+@implementation TimeStatusEffect
 
 +(id)statusWithType:(TimeStatusType)statusType withTime:(int)t {
-    return [[[self alloc] initWithType:statusType withTime:t] autorelease];
+    return [[self alloc] initWithType:statusType withTime:t];
 }
 
 -(id)initWithType:(TimeStatusType)statusType withTime:(int)t {
@@ -22,8 +22,8 @@
     return self;
 }
 
--(void)doEffect:(Character *)character {
-    [character addTimeStatus:type withTime:time];
+-(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
+    [bCharacter addTimeStatus:type withTime:time];
 }
 
 @end

@@ -12,7 +12,7 @@
 @implementation AttackBuffStatus
 
 -(id)initWithCaster:(Character *)character {
-    RangeType *myRange = [[[RangeCircle alloc] initWithCharacter:character] autorelease];
+    RangeType *myRange = [[RangeCircle alloc] initWithCharacter:character];
     
     if(self = [super initWithType:statusAttackBuff withRange:myRange]) {
     
@@ -21,11 +21,11 @@
 }
 
 -(void)addEffectOnCharacter:(Character *)character {
-    character.attackBonus += 50;
+//    character.attackBonus += 50;
 }
 
 -(void)removeEffectOnCharacter:(Character *)character {
-    character.attackBonus -= 50;
+//    character.attackBonus -= 50;
 }
 
 @end

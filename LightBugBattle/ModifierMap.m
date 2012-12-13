@@ -18,7 +18,7 @@
     return self;
 }
 
--(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(AttributeType)attribute onCondition:(ConditionType)condition {
+-(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition {
     NSNumber *key = [NSNumber numberWithInt:attribute];
     
     NSMutableDictionary *temp = [map objectForKey:key];
@@ -31,7 +31,7 @@
     [temp setObject:modifier forKey:[NSNumber numberWithInt:condition]];
 }
 
--(float)modifyAttributeValue:(float)value onAttribute:(AttributeType)attribute onCondition:(ConditionType)condition {
+-(float)modifyAttributeValue:(float)value onAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition {
     NSMutableDictionary *temp = [map objectForKey:[NSNumber numberWithInt:attribute]];
     
     if(temp == nil) {

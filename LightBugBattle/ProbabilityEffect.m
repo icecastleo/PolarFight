@@ -11,7 +11,7 @@
 @implementation ProbabilityEffect
 
 +(id)effectWithEffect:(Effect *)effect probability:(int)prob {
-    return [[[self alloc]initWithEffect:effect probability:prob]autorelease];
+    return [[self alloc]initWithEffect:effect probability:prob];
 }
 
 -(id)initWithEffect:(Effect *)effect probability:(int)prob {
@@ -22,9 +22,9 @@
     return self;
 }
 
--(void)doEffect:(Character *)character {
+-(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
     if(arc4random() % 100 + 1 > probability) {
-        [base doEffect:character];
+        [base doEffectFromCharacter:aCharacter toCharacter:bCharacter];
     }
 }
 

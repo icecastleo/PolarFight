@@ -13,6 +13,6 @@
 
 }
 
--(void) doEffect:(Character*) character;
+-(void) doEffectFromCharacter:(Character*) aCharacter toCharacter:(Character*)bCharacter;
 
 @end

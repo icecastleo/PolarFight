@@ -28,6 +28,6 @@
 
 //-(id) initWithType:(StatusType)statusType;
 -(id) initWithType:(int)statusType;
--(float) modifyAttributeValue:(float)value onAttribute:(AttributeType)attribute onCondition:(ConditionType)condition;
+-(float) modifyAttributeValue:(float)value onAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition;
 
 @end

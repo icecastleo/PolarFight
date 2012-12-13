@@ -97,9 +97,4 @@
     //[theCharacter setPosition:ccpAdd(theCharacter.position, amount)];
 }
 
--(void) dealloc
-{
-    [characters release];
-    [super dealloc];
-}
 @end

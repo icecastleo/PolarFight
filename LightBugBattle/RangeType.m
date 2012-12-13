@@ -13,12 +13,12 @@
 @synthesize character,attackRange,rangeSprite;
 
 
--(id)initWithCharacter:(Character *)battleCharacter
+-(id)initWithCharacter:(Character *)aCharacter
 {
     if( (self=[super init]) ) {
+        character = aCharacter;
         rangeHeight = 100;
         rangeWidth = 100;
-        character = battleCharacter;
         [self setParameter];
         [self showPoints];
     }
@@ -65,7 +65,7 @@
 
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies
 {
-    NSMutableArray *effectTargets=   [[NSMutableArray alloc] init];
+    NSMutableArray *effectTargets=   [NSMutableArray array];
     for(int i = 0; i<[enemies count];i++)
     {
         Character *temp = (Character*)[enemies objectAtIndex:i];
@@ -180,7 +180,6 @@ CGContextRef CreateARGBBitmapContext(CGSize size)
 - (void) dealloc
 {
     CGPathRelease(attackRange);
-	[super dealloc];
 }
 
 @end

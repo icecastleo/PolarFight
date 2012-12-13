@@ -16,7 +16,7 @@
 
 -(id)init;
 
--(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(AttributeType)attribute onCondition:(ConditionType)condition;
--(float)modifyAttributeValue:(float)value onAttribute:(AttributeType)attribute onCondition:(ConditionType)condition;
+-(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition;
+-(float)modifyAttributeValue:(float)value onAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition;
 
 @end

@@ -57,7 +57,7 @@ static int kMoveMultiplier = 40;
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[[BattleStatusLayer alloc] initWithBattleController:self] autorelease];
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
         characters = [[NSMutableArray alloc] init];
@@ -109,9 +109,6 @@ static int kMoveMultiplier = 40;
 //}
 
 -(void)addCharacter:(Character *)character {
-    if (character == nil) {
-        CCLOG(@"hi");
-    }
     [characters addObject:character];
     [mapLayer addCharacter:character];
 }
@@ -120,15 +117,9 @@ static int kMoveMultiplier = 40;
     [mapLayer removeCharacter:character];
     [characters removeObject:character];
 //    [mapLayer removeCharacter:character];
+    
 }
 
--(void)dealloc {    
-    [characters release];
-    [statusLayer release];
-    [dPadLayer release];
-    [mapLayer release];
-    [super dealloc];
-}
 
 - (void) update:(ccTime) delta {
     
@@ -152,7 +143,7 @@ static int kMoveMultiplier = 40;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
         if(countdown == 0) {
-            [currentCharacter end];
+            [currentCharacter endRound];
             [self endMove];
             return;
         }

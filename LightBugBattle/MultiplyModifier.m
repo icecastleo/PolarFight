@@ -11,7 +11,7 @@
 @implementation MultiplyModifier
 
 +(id)modifierWithValue:(float)value {
-    return [[[self alloc] initWithValue:value] autorelease];
+    return [[self alloc] initWithValue:value];
 }
 
 -(id)initWithValue:(float)value {

@@ -33,8 +33,8 @@
         
         
         selectSprite = [[CCSprite alloc] init];
-//        selectSprite.visible = NO;
-        //[self addChild:selectSprite];
+        selectSprite.visible = NO;
+//        [self addChild:selectSprite];
         
         CCAnimation *animation = [CCAnimation animation];
         
@@ -46,7 +46,6 @@
         
         CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
         selectAction = [CCRepeatForever actionWithAction:selectAnimate];
-        [selectAction retain];
         
         // TODO: init other view like playing queue.
     }
@@ -55,8 +54,8 @@
 
 -(void) startSelectCharacter:(Character*)character {
     
-    //selectSprite should be on the same layer as the character
-    [[[character sprite] parent] addChild:selectSprite];
+//    selectSprite should be on the same layer as the character
+    [character.sprite.parent addChild:selectSprite];
     selectSprite.position = character.position;
     [selectSprite runAction:selectAction];
     selectSprite.visible = YES;    
