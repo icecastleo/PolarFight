@@ -46,7 +46,7 @@
 //        attackType = kAttackNoraml;
         armorType = kArmorNoraml;
         
-        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeFanShape"];
+        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
         
         context = UIGraphicsGetCurrentContext();
         

@@ -23,7 +23,7 @@
     if( (self=[super init]) ) {    
         character = aCharacter;
 //        effectRange = range;
-        effectRange = [[RangeFanShape alloc] initWithCharacter:character];
+        effectRange = [range initWithCharacter:character];
         effectSet = [[NSMutableArray alloc] init];
         [effectSet addObject:[[AttackEffect alloc] initWithAttackType:kAttackNoraml]];
 //        [effectSet addObject:[TimeStatusEffect statusWithType:statusPoison withTime:3]];

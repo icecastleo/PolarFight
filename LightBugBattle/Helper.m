@@ -26,7 +26,7 @@
     CGPoint resultVector = moveVector;
     int i  = 0;
     int j =0;
-    for(;i<=9;i++)
+    for(;i<10;i++)
     {
         resultVector= [self RotatePointAboutOrigin:resultVector Angle:M_PI/36];
         clockWiseNew =ccpAdd(point1, resultVector);
@@ -34,14 +34,14 @@
             break;
     }
     resultVector = moveVector;
-    for(;j<=9;j++)
+    for(;j<10;j++)
     {
         resultVector= [self RotatePointAboutOrigin:resultVector Angle:M_PI/36*-1];
         counterClockWiseNew =ccpAdd(point1, resultVector);
         if(ccpDistance(counterClockWiseNew, point2)>r1+r2)
             break;
     }
-    if(i+j==18)
+    if(i+j==20)
         return point1;
     if(ccpDistance(location, counterClockWiseNew)<ccpDistance(location, clockWiseNew))
         return counterClockWiseNew;
