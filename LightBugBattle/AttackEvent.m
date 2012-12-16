@@ -8,6 +8,7 @@
 
 #import "AttackEvent.h"
 #import "Character.h"
+#import "Attribute.h"
 
 @implementation AttackEvent
 @synthesize attacker,type;
@@ -32,7 +33,11 @@
 }
 
 -(int)getDamage {
-    return (attacker.attack + bonus) * multiplier;
+    Attribute *attack = [attacker getAttribute:kCharacterAttributeAttack];
+    
+    NSAssert(attack != nil, @"How can you let a character without attack point to attack?");
+    
+    return (attack.value + bonus) * multiplier;
 }
 
 @end

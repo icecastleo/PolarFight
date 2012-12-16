@@ -15,6 +15,10 @@
 #import "Role.h"
 #import "AttackEventHandler.h"
 
+
+// TODO: Delete it after init moved to other class.
+#import "AttributeFactory.h"
+
 @implementation Character
 
 @synthesize controller;
@@ -22,7 +26,7 @@
 @synthesize level;
 //@synthesize attackType;
 @synthesize armorType;
-@synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
+//@synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
 @synthesize position;
@@ -30,12 +34,11 @@
 @synthesize pointArray;
 
 // FIXME: fix name reference.
-- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename {
+- (id)initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel{
     if ((self = [super init])) {
         _name = aName;
         _picFilename = aFilename;
-        
-        level = 1;
+        level = aLevel;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -53,10 +56,11 @@
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         auraStatusDictionary = [[NSMutableDictionary alloc] init];
         
+        attributeDictionary = [[NSMutableDictionary alloc] init];
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
-        [self getAbilityFromRole:aName];
+        [self getAttributeFromRole:aName];
     }
     return self;
 }
@@ -64,6 +68,14 @@
 -(void)dealloc {
 //    CCLOG(@"Player %i's %@ is dealloc.", player, self.name);
     [sprite removeFromParentAndCleanup:YES];
+}
+
+-(void)setAttribute:(Attribute *)anAttribute withType:(CharacterAttribute)type {
+    [attributeDictionary setObject:anAttribute forKey:[NSNumber numberWithInt:type]];
+}
+
+-(Attribute *)getAttribute:(CharacterAttribute)type {
+    return [attributeDictionary objectForKey:[NSNumber numberWithInt:type]];
 }
 
 -(void) makePoint
@@ -75,24 +87,25 @@
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
 }
 
+//-(void) setRandomAbility {
+//    maxHp = 30;
+//    currentHp = 30;
+//    
+//    attack = arc4random() % 4 + 3;
+//    defense = 3;
+//    speed = arc4random() % 7 + 3;
+//    
+//    moveSpeed = arc4random() % 3 + 4;
+//    moveTime = arc4random() % 3 + 3;
+//}
 
--(void) setRandomAbility {
-    maxHp = 30;
-    currentHp = 30;
-    
-    attack = arc4random() % 4 + 3;
-    defense = 3;
-    speed = arc4random() % 7 + 3;
-    
-    moveSpeed = arc4random() % 3 + 4;
-    moveTime = arc4random() % 3 + 3;
-}
-
--(void) getAbilityFromRole:(NSString *)name
+-(void) getAttributeFromRole:(NSString *)name
 {
+    // FIXME: Need to be deleted.
+    
     NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
     Role *role;
-    
+
     for (Role *tempRole in roles) {
         if ([tempRole.name isEqualToString:name]) {
             role = tempRole;
@@ -100,29 +113,21 @@
         }
     }
     
-    maxHp     = [role.maxHp integerValue];
-    currentHp        = [role.hp integerValue];
-    attack    = [role.attack integerValue];
-    defense   = [role.defense integerValue];
-    speed     = [role.speed integerValue];
-    moveSpeed = [role.moveSpeed integerValue];
-    moveTime  = [role.moveTime integerValue];
-}
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeHp withQuadratic:0 withLinear:0 withConstantTerm:[role.hp integerValue]] withType:kCharacterAttributeHp];
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeAttack withQuadratic:0 withLinear:0 withConstantTerm:[role.attack integerValue]] withType:kCharacterAttributeAttack];
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeDefense withQuadratic:0 withLinear:0 withConstantTerm:[role.defense integerValue]] withType:kCharacterAttributeDefense];
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeAgile withQuadratic:0 withLinear:0 withConstantTerm:[role.speed integerValue]] withType:kCharacterAttributeAgile];
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeSpeed withQuadratic:0 withLinear:0 withConstantTerm:[role.moveSpeed integerValue]] withType:kCharacterAttributeSpeed];
+    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeTime withQuadratic:0 withLinear:0 withConstantTerm:[role.moveTime integerValue]] withType:kCharacterAttributeTime];
 
-//// TODO: need be done at mapLayers
-//-(void)addPosition:(CGPoint)velocity time:(ccTime) delta{
-//    
-//    if(velocity.x == 0 && velocity.y == 0) {
-//        state = stateIdle;
-//        [sprite stopAllActions];
-//        return;
-//    }
-//    
-//    state = stateMove;
-//    
-//    sprite.position = ccpAdd(sprite.position, ccpMult(velocity, moveSpeed * 40 * delta ));
-//    [self setDirectionWithVelocity:velocity];
-//}
+//    maxHp     = [role.maxHp integerValue];
+//    currentHp        = [role.hp integerValue];
+//    attack    = [role.attack integerValue];
+//    defense   = [role.defense integerValue];
+//    speed     = [role.speed integerValue];
+//    moveSpeed = [role.moveSpeed integerValue];
+//    moveTime  = [role.moveTime integerValue];
+}
 
 -(void) setDefaultAttackRotation {
     switch (direction) {
@@ -208,6 +213,8 @@
 }
 
 -(void) getAttackEvent:(AttackEvent*)attackEvent {
+    state = kCharacterStateDefense;
+    
     [AttackEventHandler handleAttackEvent:attackEvent toCharacter:self];
     
     [self getDamage:[attackEvent getDamage]];
@@ -217,10 +224,14 @@
     
     CCLOG(@"Player %i's %@ is under attacked, and it gets %d damage!", player, self.name, damage);
     
-    // be attacked state;
-    currentHp -= damage;
+    Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
     
-    if(currentHp > 0) {
+    NSAssert(hp != nil, @"A character without hp gets damage...");
+  
+    [hp decreaseCurrentValue:damage];
+    
+    
+    if (hp.currentValue > 0) {
         [sprite updateBloodSprite];
     } else { // currentHp <= 0
         state = stateDead;
@@ -228,7 +239,19 @@
         // dead animation + cleanup
         if(controller)
             [controller removeCharacter:self];
+        
     }
+//    currentHp -= damage;
+//    
+//    if(currentHp > 0) {
+//        [sprite updateBloodSprite];
+//    } else { // currentHp <= 0
+//        state = stateDead;
+//        
+//        // dead animation + cleanup
+//        if(controller)
+//            [controller removeCharacter:self];
+//    }
 }
 
 // TODO: Need to be called when attack animation finished

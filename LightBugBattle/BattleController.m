@@ -69,7 +69,7 @@ static int kMoveMultiplier = 40;
         //int number = roles1.count;
         
         for (Role *role in roles) {
-            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture andLevel:1];
             character.player = 1;
             character.controller = self;
             [character.sprite addBloodSprite];
@@ -77,7 +77,7 @@ static int kMoveMultiplier = 40;
         }
         
         for (Role *role in roles) {
-            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture andLevel:1];
             character.player = 2;
             character.controller = self;
             [character.sprite addBloodSprite];
@@ -94,7 +94,8 @@ static int kMoveMultiplier = 40;
         [statusLayer startSelectCharacter:currentCharacter];
         [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
         
-        countdown = currentCharacter.moveTime;
+        countdown = [currentCharacter getAttribute:kCharacterAttributeTime].value;
+//        countdown = currentCharacter.moveTime;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         [currentCharacter showAttackRange:YES];
         
@@ -160,7 +161,8 @@ static int kMoveMultiplier = 40;
         // CHARACTER MOVE
         //
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * kMoveMultiplier * delta)];
+        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
+//        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * kMoveMultiplier * delta)];
     }
 }
 
@@ -173,6 +175,8 @@ static int kMoveMultiplier = 40;
     [currentCharacter showAttackRange:NO];
     statusLayer.startLabel.visible = YES;
     
+    // TODO: Where is play queue??
+    // FIXME: It will caused wrong sequence after someone's dead.
     currentIndex = ++currentIndex % characters.count;
     
     currentCharacter = characters[currentIndex];
@@ -184,7 +188,8 @@ static int kMoveMultiplier = 40;
     [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
     
     [currentCharacter showAttackRange:YES];
-    countdown = currentCharacter.moveTime;
+    countdown  = [currentCharacter getAttribute:kCharacterAttributeTime].value;
+//    countdown = currentCharacter.moveTime;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     
     canMove = YES;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DependentAttribute.h"
 
 @class Character;
 
@@ -18,9 +19,13 @@
     int baseValue;
     int bonus;
     float multiplier;
+    
+//    DependentAttribute *dependent;
 }
 
 @property (readonly) int value;
+@property (strong) DependentAttribute *dependent;
+@property (readonly) int currentValue;
 
 // Init with a quadratic equation.
 -(id)initWithQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
@@ -29,5 +34,8 @@
 -(void)addMultiplier:(float)aMultiplier;
 -(void)subtractMultiplier:(float)aMultiplier;
 -(void)updateValueWithLevel:(int)level;
+
+-(void)increaseCurrentValue:(int)aValue;
+-(void)decreaseCurrentValue:(int)aValue;
 
 @end

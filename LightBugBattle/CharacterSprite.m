@@ -94,7 +94,12 @@
 }
 
 -(void) updateBloodSprite {
-    bloodSprite.scaleX = (float)character.currentHp/ character.maxHp;
+    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
+    
+    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
+    
+    bloodSprite.scaleX = (float) hp.currentValue / hp.value;
+//    bloodSprite.scaleX = (float)character.currentHp/ character.maxHp;
     bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
 }
 

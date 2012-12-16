@@ -315,7 +315,7 @@ static const int nilRoleTag = 100;
     
     for (int i = 0; i < count; i++) {
         Role *role = [party objectAtIndex:i];
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture andLevel:1];
         [character setCharacterWithVelocity:CGPointMake(0, -1)];
         CCSprite * sprite = character.sprite;
         sprite.tag = i;
@@ -445,12 +445,20 @@ static const int nilRoleTag = 100;
 {
     Character *role = [pool objectAtIndex:newSprite.tag];
     rolelevel = role.level;
-    hp = role.maxHp;
-    attack = role.attack;
-    defense = role.defense;
-    speed = role.speed;
-    moveSpeed = role.moveSpeed;
-    moveTime = role.moveTime;
+    
+    hp = [role getAttribute:kCharacterAttributeHp].value;
+    attack = [role getAttribute:kCharacterAttributeAttack].value;
+    defense = [role getAttribute:kCharacterAttributeDefense].value;
+    speed = [role getAttribute:kCharacterAttributeAgile].value;
+    moveSpeed = [role getAttribute:kCharacterAttributeSpeed].value;
+    moveTime = [role getAttribute:kCharacterAttributeTime].value;
+    
+//    hp = role.maxHp;
+//    attack = role.attack;
+//    defense = role.defense;
+//    speed = role.speed;
+//    moveSpeed = role.moveSpeed;
+//    moveTime = role.moveTime;
     [levelLbBM setString:[NSString stringWithFormat:@"%i", rolelevel]];
     [hpLbBM setString:[NSString stringWithFormat:@"%i", hp]];
     [attackLbBM setString:[NSString stringWithFormat:@"%i", attack]];
