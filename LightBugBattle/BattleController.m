@@ -62,27 +62,7 @@ static int kMoveMultiplier = 40;
         
         characters = [[NSMutableArray alloc] init];
         
-        //TODO: will get character from aelectLayer fuction.
-        //Party *party = [PartyParser loadParty];
-        //NSAssert(party != nil, @"party is nil");
-        NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
-        //int number = roles1.count;
-        
-        for (Role *role in roles) {
-            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-            character.player = 1;
-            character.controller = self;
-            [character.sprite addBloodSprite];
-            [self addCharacter:character];
-        }
-        
-        for (Role *role in roles) {
-            Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-            character.player = 2;
-            character.controller = self;
-            [character.sprite addBloodSprite];
-            [self addCharacter:character];
-        }
+        [self setCharacterArrayFromSelectLayer];
         
         canMove = YES;
         isMove = NO;
@@ -101,6 +81,59 @@ static int kMoveMultiplier = 40;
         [self scheduleUpdate];
     }
     return self;
+}
+
+- (void)setCharacterArrayFromSelectLayer
+{
+    //TODO: will get character from selectLayer fuction.
+    //Party *party = [PartyParser loadParty];
+    //NSAssert(party != nil, @"party is nil");
+    
+    /*
+    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+    //int number = roles1.count;
+    
+    for (Role *role in roles) {
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        character.player = 1;
+        character.controller = self;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+    }
+    
+    for (Role *role in roles) {
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        character.player = 2;
+        character.controller = self;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+    }
+    //*/
+    
+    //here is only for test before selectLayer has done.
+    NSNumber *chrId1 = [[NSNumber alloc] initWithInt:1];
+    NSNumber *chrId2 = [[NSNumber alloc] initWithInt:2];
+    NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
+    
+    //characterParty
+    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+    for (Role *role in roles) {
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        character.player = 1;
+        character.controller = self;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+    }
+    
+    for (Role *role in roles) {
+        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+        character.player = 2;
+        character.controller = self;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+    }
+    
+    //return roles;
 }
 
 //-(Character *)createCharacterWithType:(CharacterType)type {

@@ -41,14 +41,14 @@
     
     XmlParser *parser = [[XmlParser alloc] init];
     
-    Role *role = [[Role alloc] init];
+//    Role *role = [[Role alloc] init];
     
     NSString *str = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
     
-    NSMutableArray *rolesArray = [parser fromXml:str withObject:role];
-    
+//    NSMutableArray *rolesArray = [parser fromXml:str withObject:role];
+    //============
 //    NSLog(@"userArray :: %@", rolesArray);
-//    
+//
 //    for (Role *roo in rolesArray) {
 //        NSLog(@"name :: %@",roo.name);
 //        NSLog(@"picture :: %@",roo.picture);
@@ -56,8 +56,9 @@
 //        NSLog(@"maxHp :: %@",roo.maxHp);
 //        NSLog(@"roleId ::%@",roo.roleId);
 //    }
-    
-    return rolesArray;
+    //============  
+//    return rolesArray;
+    return nil;
 }
 
 + (NSString *)dataFilePath:(NSString *) fileName forSave:(BOOL) save
