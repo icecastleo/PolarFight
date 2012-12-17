@@ -777,7 +777,7 @@
 		9B063A2E1635414C00E06018 /* zph1_rt1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375D1635414C00E06018 /* zph1_rt1.gif */; };
 		9B063A2F1635414C00E06018 /* zph1_rt2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375E1635414C00E06018 /* zph1_rt2.gif */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
-		9B06F8491679DA4700E1B09D /* FluidAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F8481679DA4700E1B09D /* FluidAttribute.m */; };
+		9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F850167A18DA00E1B09D /* AttributeFactory.m */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
 		9B114123163E4CAD0074969E /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B114122163E4CAD0074969E /* blood.png */; };
@@ -918,6 +918,7 @@
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
+		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDAA16566FD700A9EAC7 /* AttributeModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA916566FD700A9EAC7 /* AttributeModifier.m */; };
@@ -1760,8 +1761,8 @@
 		9B06375E1635414C00E06018 /* zph1_rt2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt2.gif; sourceTree = "<group>"; };
 		9B06F83E16787F3800E1B09D /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
-		9B06F8471679DA4700E1B09D /* FluidAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FluidAttribute.h; sourceTree = "<group>"; };
-		9B06F8481679DA4700E1B09D /* FluidAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FluidAttribute.m; sourceTree = "<group>"; };
+		9B06F84F167A18DA00E1B09D /* AttributeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeFactory.h; sourceTree = "<group>"; };
+		9B06F850167A18DA00E1B09D /* AttributeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeFactory.m; sourceTree = "<group>"; };
 		9B10C678167745160026E796 /* DamageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEffect.h; sourceTree = "<group>"; };
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
@@ -2045,6 +2046,8 @@
 		9B9FC8E0164C085900D11743 /* StatusKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusKit.h; sourceTree = "<group>"; };
 		9B9FC8E2164C0C0800D11743 /* StatusFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusFactory.h; sourceTree = "<group>"; };
 		9B9FC8E3164C0C0800D11743 /* StatusFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusFactory.m; sourceTree = "<group>"; };
+		9BA147FC167BAE920012F2C0 /* DependentAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DependentAttribute.h; sourceTree = "<group>"; };
+		9BA147FD167BAE920012F2C0 /* DependentAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DependentAttribute.m; sourceTree = "<group>"; };
 		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BC8FDA11654F11900A9EAC7 /* ProbabilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProbabilityEffect.h; sourceTree = "<group>"; };
@@ -3097,8 +3100,10 @@
 			children = (
 				9B06F83E16787F3800E1B09D /* Attribute.h */,
 				9B06F83F16787F3800E1B09D /* Attribute.m */,
-				9B06F8471679DA4700E1B09D /* FluidAttribute.h */,
-				9B06F8481679DA4700E1B09D /* FluidAttribute.m */,
+				9B06F84F167A18DA00E1B09D /* AttributeFactory.h */,
+				9B06F850167A18DA00E1B09D /* AttributeFactory.m */,
+				9BA147FC167BAE920012F2C0 /* DependentAttribute.h */,
+				9BA147FD167BAE920012F2C0 /* DependentAttribute.m */,
 			);
 			name = Attribute;
 			sourceTree = "<group>";
@@ -4463,8 +4468,9 @@
 				9B10C67A167745160026E796 /* DamageEffect.m in Sources */,
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
-				9B06F8491679DA4700E1B09D /* FluidAttribute.m in Sources */,
 				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
+				9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */,
+				9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,11 +22,24 @@ typedef enum {
 } CharacterType;
 
 typedef enum {
+    // Fluid attributes
     kCharacterAttributeHp,
+    kCharacterAttributeMp,
+    
+    // For seperation.
+    kCharacterAttributeBoundary,
+    
+    // Other attributes.
+    kCharacterAttributeAttack,
+    kCharacterAttributeDefense,
+    kCharacterAttributeAgile,
+    kCharacterAttributeSpeed,
+    kCharacterAttributeTime,
 } CharacterAttribute;
 
 typedef enum {
     stateAttack,
+    kCharacterStateDefense,
     stateMove,
     stateIdle,
     stateDead
