@@ -7,7 +7,20 @@
 //
 
 #import "RegenerationSkill.h"
+#import "Character.h"
 
 @implementation RegenerationSkill
+
+-(id)initWithValue:(int)aValue {
+    if(self = [super init]) {
+        value = aValue;
+    }
+    return self;
+}
+
+-(void)handleRoundEndEvent {
+    [self.owner getHeal:value];
+}
+
 
 @end

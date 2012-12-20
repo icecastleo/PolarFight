@@ -915,6 +915,8 @@
 		9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */; };
 		9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F799164FB38A0001A357 /* SelectLayer.m */; };
 		9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */; };
+		9B92B1A71680F2F300D965AF /* ReflectAttackDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */; };
+		9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1AA1681D63D00D965AF /* DamageEvent.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
@@ -2039,6 +2041,10 @@
 		9B82F798164FB38A0001A357 /* SelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectLayer.h; path = SelectLayer/SelectLayer.h; sourceTree = "<group>"; };
 		9B82F799164FB38A0001A357 /* SelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectLayer.m; path = SelectLayer/SelectLayer.m; sourceTree = "<group>"; };
 		9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UnSelectedRolesPosition.plist; path = SelectLayer/UnSelectedRolesPosition.plist; sourceTree = "<group>"; };
+		9B92B1A51680F2F300D965AF /* ReflectAttackDamage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackDamage.h; sourceTree = "<group>"; };
+		9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackDamage.m; sourceTree = "<group>"; };
+		9B92B1A91681D63D00D965AF /* DamageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEvent.h; sourceTree = "<group>"; };
+		9B92B1AA1681D63D00D965AF /* DamageEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEvent.m; sourceTree = "<group>"; };
 		9B92D2B416416D66000AF467 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		9B92D2B516416D66000AF467 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		9B92D2BF16424E74000AF467 /* CharacterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSprite.h; sourceTree = "<group>"; };
@@ -3116,6 +3122,8 @@
 				9B28820C166FCAA00041604F /* AttackEventHandler.h */,
 				9B28820D166FCAA00041604F /* AttackEventHandler.m */,
 				9B38813F16766F7500E1FBF4 /* CharacterEventHandler.h */,
+				9B92B1A91681D63D00D965AF /* DamageEvent.h */,
+				9B92B1AA1681D63D00D965AF /* DamageEvent.m */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -3127,6 +3135,8 @@
 				9B3881421676728800E1FBF4 /* CounterAttackSkill.m */,
 				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
+				9B92B1A51680F2F300D965AF /* ReflectAttackDamage.h */,
+				9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -4471,6 +4481,8 @@
 				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
 				9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */,
 				9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */,
+				9B92B1A71680F2F300D965AF /* ReflectAttackDamage.m in Sources */,
+				9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,36 +13,23 @@
 #import "SkillKit.h"
 #import "AttackEvent.h"
 #import "Attribute.h"
+#import "PassiveSkill.h"
+#import "DamageEvent.h"
+#import "CharacterEventHandler.h"
 
 @class BattleController;
 
-@interface Character : NSObject {
-    //    BattleController *controller;
-//    CharacterSprite *sprite;
-    //    NSString *name;
-    //    int maxHp;
-    
-    //    int hp;
-    //    int attack;
-    //    int defense;
-    //    int speed;
-    //
-    //    int moveSpeed;
-    //    int moveTime;
-    
-    //    SpriteStates state;
-//    SpriteDirections direction;
-    
+@interface Character : NSObject<CharacterEventHandler> {
     NSMutableArray *pointArray;
     TestSkill *skill;
     CGContextRef context;
     
-//    NSMutableDictionary *timeStatusDictionary;
-//    NSMutableDictionary *auraStatusDictionary;
-    
     NSMutableDictionary *attributeDictionary;
     NSMutableDictionary *statePremissionDictionary;
+    
+    NSMutableArray *passiveSkillArray;
 }
+
 @property (weak) BattleController *controller;
 @property (nonatomic) int player;
 
@@ -66,6 +53,8 @@
 
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
+
+// TODO: Move bloodsprite to hp attribute?
 @property (readonly) CharacterSprite *sprite;
 
 @property (readonly) CharacterState state;
@@ -75,26 +64,29 @@
 
 @property (nonatomic, strong) NSMutableArray *pointArray;
 
--(id) initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel;
+-(id)initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel;
 
 -(void)setAttribute:(Attribute*)anAttribute withType:(CharacterAttribute)type;
 -(Attribute*)getAttribute:(CharacterAttribute)type;
 
--(void) setCharacterWithVelocity:(CGPoint)velocity;
+-(void)addPassiveSkill:(PassiveSkill*)aSkill;
 
--(void) attackEnemy:(NSMutableArray*)enemies;
--(void) getAttackEvent:(AttackEvent*)attackEvent;
--(void) getDamage:(int)damage;
--(void) showAttackRange:(BOOL)visible;
--(void) endRound;
+-(void)setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
+-(void)setCharacterWithVelocity:(CGPoint)velocity;
 
--(void) setPosition:(CGPoint)position;
+-(void)useSkill:(NSMutableArray*)characters;
+-(void)attackCharacter:(Character*)target withAttackType:(AttackType)type;
+
+// TODO: Does "CharacterEventHandler" need to add this method?
+-(void)handleReceiveAttackEvent:(AttackEvent*)event;
+-(void)getHeal:(int)heal;
+-(void)showAttackRange:(BOOL)visible;
+
+-(void)setPosition:(CGPoint)position;
 -(CGPoint) position;
 
--(void) addTimeStatus:(TimeStatusType)type withTime:(int)time;
-//-(void) addAuraStatus:(StatusType)type;
--(void) removeTimeStatus:(TimeStatusType)type;
-
--(void) setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
+-(void)addTimeStatus:(TimeStatusType)type withTime:(int)time;
+//-(void)addAuraStatus:(StatusType)type;
+-(void)removeTimeStatus:(TimeStatusType)type;
 
 @end

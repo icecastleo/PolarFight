@@ -10,9 +10,9 @@
 #import "EffectKit.h"
 
 @interface Skill : NSObject {
-    Character *owner;
+
 }
 
-@property (retain) Character *owner;
+@property (weak,readwrite) Character *owner;
 
 @end

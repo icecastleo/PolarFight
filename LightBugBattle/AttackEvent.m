@@ -11,12 +11,12 @@
 #import "Attribute.h"
 
 @implementation AttackEvent
-@synthesize attacker,type;
 
--(id)initWithAttacker:(Character *)aCharacter withAttackType:(AttackType)aType{
+-(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender {
     if(self = [super init]) {
-        attacker = aCharacter;
-        type = aType;
+        _attacker = anAttacker;
+        _defender = aDefender;
+        _type = aType;
         bonus = 0;
         multiplier = 1;
     }
@@ -24,20 +24,32 @@
 }
 
 
--(void)addToBonus:(float)aBonus {
+-(void)addAttack:(float)aBonus {
     bonus += aBonus;
 }
 
--(void)addToMultiplier:(float)aMultiplier {
+-(void)subtractAttack:(float)aBonus {
+    bonus -= aBonus;
+}
+
+-(void)addMultiplier:(float)aMultiplier {
     multiplier *= multiplier;
 }
 
+-(void)subtractMultiplier:(float)aMultiplier {
+    multiplier /= multiplier;
+}
+
 -(int)getDamage {
-    Attribute *attack = [attacker getAttribute:kCharacterAttributeAttack];
+    Attribute *attack = [_attacker getAttribute:kCharacterAttributeAttack];
     
     NSAssert(attack != nil, @"How can you let a character without attack point to attack?");
     
     return (attack.value + bonus) * multiplier;
+}
+
+-(DamageEvent*)convertToDamageEvent {
+    return [[DamageEvent alloc] initWithBaseDamage:[self getDamage] damageType:kDamageTypeAttack damager:_attacker];
 }
 
 @end

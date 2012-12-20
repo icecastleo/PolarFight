@@ -10,8 +10,4 @@
 
 @implementation Skill
 
-@synthesize owner;
-
-
-
 @end

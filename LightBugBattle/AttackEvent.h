@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Constant.h"
+#import "DamageEvent.h"
 @class Character;
 
 @interface AttackEvent : NSObject {
@@ -16,12 +17,18 @@
 }
 
 @property (retain,readonly) Character *attacker;
+@property (retain,readonly) Character *defender;
 @property (readonly) AttackType type;
 
--(id)initWithAttacker:(Character*)aCharacter withAttackType:(AttackType)aType;
+-(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender;
 
--(int)getDamage;
--(void)addToBonus:(float)aBonus;
--(void)addToMultiplier:(float)aMultiplier;
+//-(int)getDamage;
+
+-(void)addAttack:(float)aBonus;
+-(void)subtractAttack:(float)aBonus;
+-(void)addMultiplier:(float)aMultiplier;
+-(void)subtractMultiplier:(float)aMultiplier;
+
+-(DamageEvent*)convertToDamageEvent;
 
 @end

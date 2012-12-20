@@ -9,11 +9,11 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
-typedef enum {
-    kGameStateRoundStart,
-    kGameStateCharacterMove,
-    kGameStateRoundEnd,
-} GameState;
+//typedef enum {
+//    kGameStateRoundStart,
+//    kGameStateCharacterMove,
+//    kGameStateRoundEnd,
+//} GameState;
 
 typedef enum {
     Hero = 0,
@@ -38,8 +38,8 @@ typedef enum {
 } CharacterAttribute;
 
 typedef enum {
-    stateAttack,
-    kCharacterStateDefense,
+    kCharacterStateUseSkill,
+    kCharacterStateGetDamage,
     stateMove,
     stateIdle,
     stateDead
@@ -57,8 +57,11 @@ typedef enum {
 } AttackType;
 
 typedef enum {
-    kDamageTypePhysical,
-    kDamageTypeMagical,
+    kDamageTypeAttack,
+    kDamageTypeSkill,
+    kDamageTypePassiveSkill,
+//    kDamageTypePhysical,
+//    kDamageTypeMagical,
     // fire, water?
 } DamageType;
 

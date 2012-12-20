@@ -7,6 +7,7 @@
 //
 
 #import "TimeStatus.h"
+#import "Character.h"
 
 // Any concrete child of AuraStatus should implement -(id)initWithTime:(int)t toCharacter:(Character*)cha;
 @implementation TimeStatus

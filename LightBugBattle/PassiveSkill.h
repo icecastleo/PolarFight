@@ -10,7 +10,7 @@
 #import "Skill.h"
 #import "CharacterEventHandler.h"
 
-@interface PassiveSkill : Skill <CharacterEventHandler> {
+@interface PassiveSkill : Skill<CharacterEventHandler> {
     
 }
 

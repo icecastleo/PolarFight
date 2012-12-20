@@ -8,6 +8,10 @@
 
 #import "PassiveSkill.h"
 
-@interface RegenerationSkill : PassiveSkill
+@interface RegenerationSkill : PassiveSkill {
+    int value;
+}
+
+-(id)initWithValue:(int)aValue;
 
 @end

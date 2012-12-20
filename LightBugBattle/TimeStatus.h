@@ -7,7 +7,7 @@
 //
 
 #import "Status.h"
-#import "Character.h"
+@class Character;
 
 @interface TimeStatus : Status {
     int time;

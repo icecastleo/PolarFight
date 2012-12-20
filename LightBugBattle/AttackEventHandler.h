@@ -12,6 +12,6 @@
 
 @interface AttackEventHandler : NSObject
 
-+(void) handleAttackEvent:(AttackEvent*)attackEvent toCharacter:(Character*)defender;
++(void)handleAttackEvent:(AttackEvent*)attackEvent toCharacter:(Character*)defender;
 
 @end
