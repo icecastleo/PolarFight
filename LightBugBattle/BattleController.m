@@ -22,19 +22,6 @@
 
 @end
 
-
-@interface SwitchCharacterState : NSObject<GameState>
-@end
-
-@implementation SwitchCharacterState
-
--(void)update:(ccTime)delta {
-    
-}
-
-@end
-
-
 @implementation BattleController
 
 static int kMoveMultiplier = 40;

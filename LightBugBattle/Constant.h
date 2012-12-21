@@ -34,7 +34,7 @@ typedef enum {
     kCharacterAttributeDefense,
     kCharacterAttributeAgile,
     kCharacterAttributeSpeed,
-    kCharacterAttributeTime
+    kCharacterAttributeTime,
 } CharacterAttributeType;
 
 typedef enum {

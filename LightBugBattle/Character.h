@@ -84,10 +84,10 @@
 -(void)setPosition:(CGPoint)position;
 -(CGPoint) position;
 
+-(id)initWithXmlElement:(GDataXMLElement *)aElement;
+
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void)addAuraStatus:(StatusType)type;
 -(void)removeTimeStatus:(TimeStatusType)type;
-
--(id)initWithXmlElement:(GDataXMLElement *)aElement;
 
 @end

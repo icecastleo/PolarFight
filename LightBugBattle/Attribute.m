@@ -8,7 +8,6 @@
 
 #import "Attribute.h"
 #import "Character.h"
-#import "AttributeFactory.h"
 
 @implementation Attribute
 
