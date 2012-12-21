@@ -24,8 +24,10 @@
 
 @property (readonly) CharacterAttributeType type;
 @property (readonly) int value;
-@property (strong) DependentAttribute *dependent;
-@property (readonly) int currentValue;
+
+@property (readonly, strong) DependentAttribute *dependent;
+@property int currentValue;
+
 
 // Init with a quadratic equation.
 -(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
