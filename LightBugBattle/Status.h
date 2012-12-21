@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 #import "ModifierMap.h"
 #import "AttributeModifier.h"
 #import "AddModifier.h"
@@ -28,6 +27,6 @@
 
 //-(id) initWithType:(StatusType)statusType;
 -(id) initWithType:(int)statusType;
--(float) modifyAttributeValue:(float)value onAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition;
+-(float) modifyAttributeValue:(float)value onAttribute:(CharacterAttributeType)attribute onCondition:(ConditionType)condition;
 
 @end

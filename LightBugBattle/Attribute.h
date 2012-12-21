@@ -19,16 +19,17 @@
     int baseValue;
     int bonus;
     float multiplier;
-    
-//    DependentAttribute *dependent;
 }
 
+@property (readonly) CharacterAttributeType type;
 @property (readonly) int value;
-@property (strong) DependentAttribute *dependent;
-@property (readonly) int currentValue;
+
+@property (readonly, strong) DependentAttribute *dependent;
+@property int currentValue;
+
 
 // Init with a quadratic equation.
--(id)initWithQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
+-(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
 -(void)addBonus:(int)aBonus;
 -(void)subtractBonus:(int)aBonus;
 -(void)addMultiplier:(float)aMultiplier;

@@ -9,9 +9,10 @@
 #import "PassiveSkill.h"
 
 @interface ReflectAttackDamage : PassiveSkill {
-    
+    int probability;
+    int percent;
 }
 
--(id)initWithProbability:(int)probability damagePercent:(int)percent;
+-(id)initWithProbability:(int)aProbability damagePercent:(int)aPercent;
 
 @end

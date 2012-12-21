@@ -15,6 +15,7 @@
 -(void)handleRoundStartEvent;
 -(void)handleSendAttackEvent:(AttackEvent*)event;
 -(void)handleReceiveDamageEvent:(DamageEvent*)event;
+-(void)handleReceiveDamage:(int)damage;
 -(void)handleRoundEndEvent;
 
 @end

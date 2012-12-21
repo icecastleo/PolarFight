@@ -7,8 +7,6 @@
 //
 
 #import "SelectLayer.h"
-#import "Constant.h"
-
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
 #import "PartyParser.h"

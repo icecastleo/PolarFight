@@ -10,4 +10,12 @@
 
 @implementation ReflectAttackDamage
 
+-(id)initWithProbability:(int)aProbability damagePercent:(int)aPercent {
+    if(self = [super init]) {
+        probability = aProbability;
+        percent = aPercent;
+    }
+    return self;
+}
+
 @end

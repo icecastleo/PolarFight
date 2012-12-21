@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Constant.h"
 #import "CharacterSprite.h"
 #import "SkillKit.h"
 #import "AttackEvent.h"
@@ -66,8 +65,8 @@
 
 -(id)initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel;
 
--(void)setAttribute:(Attribute*)anAttribute withType:(CharacterAttribute)type;
--(Attribute*)getAttribute:(CharacterAttribute)type;
+-(void)addAttribute:(Attribute*)attribute;
+-(Attribute*)getAttribute:(CharacterAttributeType)type;
 
 -(void)addPassiveSkill:(PassiveSkill*)aSkill;
 

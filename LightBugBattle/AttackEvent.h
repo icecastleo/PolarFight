@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 #import "DamageEvent.h"
 @class Character;
 

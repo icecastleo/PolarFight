@@ -777,7 +777,6 @@
 		9B063A2E1635414C00E06018 /* zph1_rt1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375D1635414C00E06018 /* zph1_rt1.gif */; };
 		9B063A2F1635414C00E06018 /* zph1_rt2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375E1635414C00E06018 /* zph1_rt2.gif */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
-		9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F850167A18DA00E1B09D /* AttributeFactory.m */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
 		9B114123163E4CAD0074969E /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B114122163E4CAD0074969E /* blood.png */; };
@@ -788,7 +787,6 @@
 		9B28820E166FCAA00041604F /* AttackEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B28820D166FCAA00041604F /* AttackEventHandler.m */; };
 		9B2AB06816665C0500B78136 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* Skill.m */; };
 		9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
-		9B3881351675F40100E1FBF4 /* CCNavigationViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1A16676B8B00BAF11B /* HelloWorldScene.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -981,8 +979,6 @@
 		37DF396B1664AD48000677B2 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		37DF397B1664BA2C000677B2 /* Role.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Role.h; sourceTree = "<group>"; };
 		37DF397C1664BA2C000677B2 /* Role.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Role.m; sourceTree = "<group>"; };
-		37E02F1316676B8B00BAF11B /* CCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationViewController.h; sourceTree = "<group>"; };
-		37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCNavigationViewController.mm; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1763,8 +1759,6 @@
 		9B06375E1635414C00E06018 /* zph1_rt2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt2.gif; sourceTree = "<group>"; };
 		9B06F83E16787F3800E1B09D /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
-		9B06F84F167A18DA00E1B09D /* AttributeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeFactory.h; sourceTree = "<group>"; };
-		9B06F850167A18DA00E1B09D /* AttributeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeFactory.m; sourceTree = "<group>"; };
 		9B10C678167745160026E796 /* DamageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEffect.h; sourceTree = "<group>"; };
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
@@ -2184,8 +2178,6 @@
 		37E02F1216676B8B00BAF11B /* SneakyJoystick */ = {
 			isa = PBXGroup;
 			children = (
-				37E02F1316676B8B00BAF11B /* CCNavigationViewController.h */,
-				37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */,
 				37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */,
 				37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */,
 				37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */,
@@ -3106,8 +3098,6 @@
 			children = (
 				9B06F83E16787F3800E1B09D /* Attribute.h */,
 				9B06F83F16787F3800E1B09D /* Attribute.m */,
-				9B06F84F167A18DA00E1B09D /* AttributeFactory.h */,
-				9B06F850167A18DA00E1B09D /* AttributeFactory.m */,
 				9BA147FC167BAE920012F2C0 /* DependentAttribute.h */,
 				9BA147FD167BAE920012F2C0 /* DependentAttribute.m */,
 			);
@@ -4417,7 +4407,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B3881351675F40100E1FBF4 /* CCNavigationViewController.mm in Sources */,
 				9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */,
 				9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */,
 				9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */,
@@ -4479,7 +4468,6 @@
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
 				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
-				9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */,
 				9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */,
 				9B92B1A71680F2F300D965AF /* ReflectAttackDamage.m in Sources */,
 				9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */,

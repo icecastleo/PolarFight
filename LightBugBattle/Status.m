@@ -40,11 +40,11 @@
 //    [NSException raise:@"Called abstract method!" format:@"You should override update in CharacterStatus."];
 //}
 
--(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition {
+-(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(CharacterAttributeType)attribute onCondition:(ConditionType)condition {
     [modifierMap addAttributeModifier:modifier toAttribute:attribute onCondition:condition];
 }
 
--(float)modifyAttributeValue:(float)value onAttribute:(CharacterAttribute)attribute onCondition:(ConditionType)condition {
+-(float)modifyAttributeValue:(float)value onAttribute:(CharacterAttributeType)attribute onCondition:(ConditionType)condition {
     return [modifierMap modifyAttributeValue:value onAttribute:attribute onCondition:condition];
 }
 

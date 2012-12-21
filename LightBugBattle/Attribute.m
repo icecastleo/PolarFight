@@ -13,8 +13,10 @@
 
 @dynamic currentValue;
 
--(id)initWithQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
+-(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
     if(self = [super init]) {
+        _type = aType;
+        
         quadratic = a;
         linear = b;
         constantTerm = c;
@@ -23,6 +25,10 @@
         multiplier = 1;
         
         [self updateValueWithLevel:1];
+        
+        if (_type < kCharacterAttributeBoundary) {
+            _dependent = [[DependentAttribute alloc] initWithAttribute:self];
+        }
     }
     return self;
 }
@@ -72,10 +78,6 @@
     [self updateValue];
 }
 
-//-(void)addDependentAttribute {
-//    dependent = [[DependentAttribute alloc] initWithAttribute:self];
-//}
-
 -(void)increaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
@@ -88,10 +90,15 @@
     [_dependent decreaseValue:aValue];
 }
 
+-(void)setCurrentValue:(int)currentValue {
+    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
+    
+    _dependent.value = currentValue;
+}
+
 -(int)currentValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
     return _dependent.value;
 }
-
 @end

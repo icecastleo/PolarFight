@@ -18,10 +18,6 @@
 // TODO: Delete after test.
 #import "RegenerationSkill.h"
 
-
-// TODO: Delete it after init moved to other class.
-#import "AttributeFactory.h"
-
 @implementation Character
 
 @synthesize controller;
@@ -112,12 +108,12 @@
         }
     }
     
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeHp withQuadratic:0 withLinear:0 withConstantTerm:[role.hp integerValue]] withType:kCharacterAttributeHp];
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeAttack withQuadratic:0 withLinear:0 withConstantTerm:[role.attack integerValue]] withType:kCharacterAttributeAttack];
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeDefense withQuadratic:0 withLinear:0 withConstantTerm:[role.defense integerValue]] withType:kCharacterAttributeDefense];
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeAgile withQuadratic:0 withLinear:0 withConstantTerm:[role.speed integerValue]] withType:kCharacterAttributeAgile];
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeSpeed withQuadratic:0 withLinear:0 withConstantTerm:[role.moveSpeed integerValue]] withType:kCharacterAttributeSpeed];
-    [self setAttribute:[AttributeFactory createAttributeWithType:kCharacterAttributeTime withQuadratic:0 withLinear:0 withConstantTerm:[role.moveTime integerValue]] withType:kCharacterAttributeTime];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeHp withQuadratic:0 withLinear:0 withConstantTerm:[role.hp integerValue]]];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeAttack withQuadratic:0 withLinear:0 withConstantTerm:[role.attack integerValue]]];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeDefense withQuadratic:0 withLinear:0 withConstantTerm:[role.defense integerValue]]];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeAgile withQuadratic:0 withLinear:0 withConstantTerm:[role.speed integerValue]]];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeSpeed withQuadratic:0 withLinear:0 withConstantTerm:[role.moveSpeed integerValue]]];
+    [self addAttribute:[[Attribute alloc] initWithType:kCharacterAttributeTime withQuadratic:0 withLinear:0 withConstantTerm:[role.moveTime integerValue]]];
     
     //    maxHp     = [role.maxHp integerValue];
     //    currentHp        = [role.hp integerValue];
@@ -128,11 +124,11 @@
     //    moveTime  = [role.moveTime integerValue];
 }
 
--(void)setAttribute:(Attribute *)anAttribute withType:(CharacterAttribute)type {
-    [attributeDictionary setObject:anAttribute forKey:[NSNumber numberWithInt:type]];
+-(void)addAttribute:(Attribute *)attribute {
+    [attributeDictionary setObject:attribute forKey:[NSNumber numberWithInt:attribute.type]];
 }
 
--(Attribute *)getAttribute:(CharacterAttribute)type {
+-(Attribute *)getAttribute:(CharacterAttributeType)type {
     return [attributeDictionary objectForKey:[NSNumber numberWithInt:type]];
 }
 
@@ -269,6 +265,12 @@
     NSAssert(hp != nil, @"A character without hp gets damage...");
     
     [hp decreaseCurrentValue:event.damage];
+    
+    for (PassiveSkill *p in passiveSkillArray) {
+        if ([p respondsToSelector:@selector(handleReceiveDamage:)]) {
+            [p handleReceiveDamage:event.damage];
+        }
+    }
     
     state = kCharacterStateGetDamage;
     
