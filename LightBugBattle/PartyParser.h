@@ -13,7 +13,6 @@
 @interface PartyParser : NSObject
 
 + (void)saveParty;
-+ (NSMutableArray *)getRolesArrayFromXMLFile;
 
 + (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName TagName:(NSString *)tagName tagId:(NSString *)tagId;
 

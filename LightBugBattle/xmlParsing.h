@@ -2,7 +2,7 @@
 //  xmlParsing.h
 //  LightBugBattle
 //
-//  Created by  DAN on 12/12/20.
+//  Created by  浩翔 on 12/12/20.
 //
 //
 
@@ -11,6 +11,6 @@
 
 @protocol xmlParsing <NSObject>
 
-- (id)initWithDom:(GDataXMLElement *)dom;
+- (id)initWithXmlElement:(GDataXMLElement *)aElement;
 
 @end

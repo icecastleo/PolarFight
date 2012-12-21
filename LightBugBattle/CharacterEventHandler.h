@@ -13,8 +13,9 @@
 
 @optional
 -(void)handleRoundStartEvent;
--(void)handleAttackEvent:(AttackEvent*)event;
--(void)handleDefenseEvent:(AttackEvent*)event;
+-(void)handleSendAttackEvent:(AttackEvent*)event;
+-(void)handleReceiveDamageEvent:(DamageEvent*)event;
+-(void)handleReceiveDamage:(int)damage;
 -(void)handleRoundEndEvent;
 
 @end

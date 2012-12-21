@@ -14,8 +14,10 @@
 
 @dynamic currentValue;
 
--(id)initWithQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
+-(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
     if(self = [super init]) {
+        _type = aType;
+        
         quadratic = a;
         linear = b;
         constantTerm = c;
@@ -24,6 +26,10 @@
         multiplier = 1;
         
         [self updateValueWithLevel:1];
+        
+        if (_type < kCharacterAttributeBoundary) {
+            _dependent = [[DependentAttribute alloc] initWithAttribute:self];
+        }
     }
     return self;
 }
@@ -73,10 +79,6 @@
     [self updateValue];
 }
 
-//-(void)addDependentAttribute {
-//    dependent = [[DependentAttribute alloc] initWithAttribute:self];
-//}
-
 -(void)increaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
@@ -89,24 +91,30 @@
     [_dependent decreaseValue:aValue];
 }
 
+-(void)setCurrentValue:(int)currentValue {
+    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
+    
+    _dependent.value = currentValue;
+}
+
 -(int)currentValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
     return _dependent.value;
 }
 
--(id)initWithDom:(GDataXMLElement *)dom {
-    CharacterAttribute characterType;
+-(id)initWithXmlElement:(GDataXMLElement *)aElement {
+    CharacterAttributeType attributeType;
     int tempQuadratic = 0;
     int tempLinear = 0;
     int tempConstantTerm = 0;
     
-    for (GDataXMLNode *attribute in dom.attributes) {
+    for (GDataXMLNode *attribute in aElement.attributes) {
         NSLog(@"attribute.name :: %@",attribute.name);
         NSLog(@"attribute.value :: %@",attribute.stringValue);
         
         if ([attribute.name isEqualToString:@"name"]) {
-            characterType = [self getCharacterTypeFromAttributeName:attribute.stringValue];
+            attributeType = [self getAttributeTypeFromAttributeName:attribute.stringValue];
         }else if ([attribute.name isEqualToString:@"a"]) {
             tempQuadratic = attribute.stringValue.intValue;
         }else if ([attribute.name isEqualToString:@"b"]) {
@@ -115,18 +123,27 @@
             tempConstantTerm = attribute.stringValue.intValue;
         }
     }
-    self = [AttributeFactory createAttributeWithType:characterType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
+    self = [[Attribute alloc] initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
     return self;
 }
 
--(CharacterAttribute)getCharacterTypeFromAttributeName:(NSString *)attributeName {
-    if([attributeName isEqualToString:@"maxHp"])
-    {
+-(CharacterAttributeType)getAttributeTypeFromAttributeName:(NSString *)attributeName {
+    if([attributeName isEqualToString:@"maxHp"]) {
         return kCharacterAttributeHp;
-    }else if ([attributeName isEqualToString:@"hp"]){
-        
+    }else if ([attributeName isEqualToString:@"maxMp"]) {
+        return kCharacterAttributeMp;
+    }else if ([attributeName isEqualToString:@"attack"]) {
+        return kCharacterAttributeAttack;
+    }else if ([attributeName isEqualToString:@"defense"]) {
+        return kCharacterAttributeDefense;
+    }else if ([attributeName isEqualToString:@"agile"]) {
+        return kCharacterAttributeAgile;
+    }else if ([attributeName isEqualToString:@"speed"]) {
+        return kCharacterAttributeSpeed;
+    }else if ([attributeName isEqualToString:@"moveTime"]) {
+        return kCharacterAttributeTime;
     }
-    
-    return nil;
+    return 0;
 }
+
 @end

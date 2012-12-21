@@ -9,8 +9,19 @@
 #import "BattleController.h"
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
-#import "Role.h"
 #import "Character.h"
+
+@interface SwitchCharacterState : NSObject<GameState>
+@end
+
+@implementation SwitchCharacterState
+
+-(void)update:(ccTime)delta {
+    
+}
+
+@end
+
 
 @implementation BattleController
 
@@ -85,73 +96,29 @@ static int kMoveMultiplier = 40;
     return self;
 }
 
-- (void)setCharacterArrayFromSelectLayer
-{
+- (void)setCharacterArrayFromSelectLayer {
     //TODO: will get character from selectLayer fuction.
-    //Party *party = [PartyParser loadParty];
-    //NSAssert(party != nil, @"party is nil");
-    
-    /*
-    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
-    //int number = roles1.count;
-    
-    for (Role *role in roles) {
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-        character.player = 1;
-        character.controller = self;
-        [character.sprite addBloodSprite];
-        [self addCharacter:character];
-    }
-    
-    for (Role *role in roles) {
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-        character.player = 2;
-        character.controller = self;
-        [character.sprite addBloodSprite];
-        [self addCharacter:character];
-    }
-    //*/
     
     //here is only for test before selectLayer has done.
-    NSNumber *chrId1 = [[NSNumber alloc] initWithInt:1];
-    NSNumber *chrId2 = [[NSNumber alloc] initWithInt:2];
+    NSString *chrId1 = @"001";
+    NSString *chrId2 = @"002";
     NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
     
-    //characterParty
-//    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
-//    for (Role *role in roles) {
-//        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-//        character.player = 1;
-//        character.controller = self;
-//        [character.sprite addBloodSprite];
-//        [self addCharacter:character];
-//    }
-//    
-//    for (Role *role in roles) {
-//        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
-//        character.player = 2;
-//        character.controller = self;
-//        [character.sprite addBloodSprite];
-//        [self addCharacter:character];
-//    }
-    
-    //return roles;
-    
-    for (NSNumber *characterId in testCharacterIdArray) {
-        Character *character = [[Character alloc] initWithDom:[PartyParser getNodeFromXmlFile:@"Party.xml" TagName:@"character" tagId:characterId.stringValue]];
+    for (NSString *characterId in testCharacterIdArray) {
+        Character *character = [[Character alloc] initWithXmlElement:[PartyParser getNodeFromXmlFile:@"Save.xml" TagName:@"character" tagId:characterId]];
         character.player = 1;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
-    for (NSNumber *characterId in testCharacterIdArray) {
-        Character *character = [[Character alloc] initWithDom:[PartyParser getNodeFromXmlFile:@"Party.xml" TagName:@"character" tagId:characterId.stringValue]];
+    for (NSString *characterId in testCharacterIdArray) {
+        Character *character = [[Character alloc] initWithXmlElement:[PartyParser getNodeFromXmlFile:@"Save.xml" TagName:@"character" tagId:characterId]];
         character.player = 2;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
-    
+
 }
 
 //-(Character *)createCharacterWithType:(CharacterType)type {
@@ -166,13 +133,11 @@ static int kMoveMultiplier = 40;
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
-    [characters removeObject:character];
-//    [mapLayer removeCharacter:character];
-    
+    [characters removeObject:character];    
 }
 
 
-- (void) update:(ccTime) delta {
+-(void)update:(ccTime)delta {
     
     if(!canMove)
         return;
@@ -194,25 +159,22 @@ static int kMoveMultiplier = 40;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
         if(countdown == 0) {
-            [currentCharacter endRound];
             [self endMove];
             return;
         }
         
-        if(currentCharacter.state == stateAttack && currentCharacter.sprite.numberOfRunningActions != 0) {
+        if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
             return;
         }
         
         if(dPadLayer.isButtonPressed) {
-            [currentCharacter attackEnemy:characters];
+            [currentCharacter useSkill:characters];
             return;
         }
         
-        // CHARACTER MOVE
-        //
+        // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
         [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
-//        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, currentCharacter.moveSpeed * kMoveMultiplier * delta)];
     }
 }
 
@@ -220,11 +182,9 @@ static int kMoveMultiplier = 40;
     canMove = NO;
     
     // 回合結束的檢查 && 設定參數
-    
     isMove = NO;
-    [currentCharacter showAttackRange:NO];
-    statusLayer.startLabel.visible = YES;
-    
+    [currentCharacter handleRoundEndEvent];
+
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
     currentIndex = ++currentIndex % characters.count;
@@ -237,11 +197,13 @@ static int kMoveMultiplier = 40;
     [statusLayer startSelectCharacter:currentCharacter];
     [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
     
-    [currentCharacter showAttackRange:YES];
     countdown  = [currentCharacter getAttribute:kCharacterAttributeTime].value;
 //    countdown = currentCharacter.moveTime;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     
+    [currentCharacter handleRoundStartEvent];
+    
+    statusLayer.startLabel.visible = YES;
     canMove = YES;
 }
 

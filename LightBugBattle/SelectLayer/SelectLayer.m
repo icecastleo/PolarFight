@@ -11,7 +11,6 @@
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
 #import "PartyParser.h"
-#import "Role.h"
 #import "Character.h"
 
 #pragma mark - SelectLayer
@@ -304,26 +303,27 @@ static const int nilRoleTag = 100;
 
 -(NSArray *)loadAllRolesFromFile // load data from file
 {
+    //FIXME: fix here later
     //party = [[PartyParser loadParty] retain];
-    NSArray *party = [PartyParser getRolesArrayFromXMLFile];
-    NSAssert(party != nil, @"party is nil");
-    
-    int count = party.count;
-    pool = [[NSMutableArray alloc] initWithCapacity:count];
-    NSMutableArray *roles = [[NSMutableArray alloc] initWithCapacity:count];
-    
-    for (int i = 0; i < count; i++) {
-        Role *role = [party objectAtIndex:i];
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture andLevel:1];
-        [character setCharacterWithVelocity:CGPointMake(0, -1)];
-        CCSprite * sprite = character.sprite;
-        sprite.tag = i;
-        [roles addObject:sprite];
-        [pool addObject:character];
-        if (i==0) {
-            [self showCharacterInfo:sprite];
-        }
-    }
+//    NSArray *party = [PartyParser getRolesArrayFromXMLFile];
+//    NSAssert(party != nil, @"party is nil");
+//    
+//    int count = party.count;
+//    pool = [[NSMutableArray alloc] initWithCapacity:count];
+//    NSMutableArray *roles = [[NSMutableArray alloc] initWithCapacity:count];
+//    
+//    for (int i = 0; i < count; i++) {
+//        Role *role = [party objectAtIndex:i];
+//        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture andLevel:1];
+//        [character setCharacterWithVelocity:CGPointMake(0, -1)];
+//        CCSprite * sprite = character.sprite;
+//        sprite.tag = i;
+//        [roles addObject:sprite];
+//        [pool addObject:character];
+//        if (i==0) {
+//            [self showCharacterInfo:sprite];
+//        }
+//    }
 
 //    for (int i = 0; i < count; i++) {
 //        Character *role = [party.players objectAtIndex:i];
@@ -336,7 +336,8 @@ static const int nilRoleTag = 100;
 //        }
 //    }
     
-    return roles;
+//    return roles;
+    return nil;
 }
 
 - (void)loadAllRolesCanBeSelected

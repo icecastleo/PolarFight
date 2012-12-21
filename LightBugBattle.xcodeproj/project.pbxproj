@@ -17,16 +17,15 @@
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
-		374070851683144A007BEDDF /* xmlParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 374070841683144A007BEDDF /* xmlParsing.m */; };
+		378B847A1684A72A0049D319 /* Save.xml in Resources */ = {isa = PBXBuildFile; fileRef = 378B84791684A7290049D319 /* Save.xml */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
-		3799B71C1650DFC100A9A394 /* Party.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Party.xml */; };
+		3799B71C1650DFC100A9A394 /* Basic.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Basic.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF396D1664AD48000677B2 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39651664AD48000677B2 /* XmlParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39671664AD48000677B2 /* TypeMapping.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39691664AD48000677B2 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF39701664AD48000677B2 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF396B1664AD48000677B2 /* Util.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37DF397D1664BA2C000677B2 /* Role.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF397C1664BA2C000677B2 /* Role.m */; };
 		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
 		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
 		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
@@ -778,7 +777,6 @@
 		9B063A2E1635414C00E06018 /* zph1_rt1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375D1635414C00E06018 /* zph1_rt1.gif */; };
 		9B063A2F1635414C00E06018 /* zph1_rt2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375E1635414C00E06018 /* zph1_rt2.gif */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
-		9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F850167A18DA00E1B09D /* AttributeFactory.m */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
 		9B114123163E4CAD0074969E /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B114122163E4CAD0074969E /* blood.png */; };
@@ -789,7 +787,6 @@
 		9B28820E166FCAA00041604F /* AttackEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B28820D166FCAA00041604F /* AttackEventHandler.m */; };
 		9B2AB06816665C0500B78136 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* Skill.m */; };
 		9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
-		9B3881351675F40100E1FBF4 /* CCNavigationViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1A16676B8B00BAF11B /* HelloWorldScene.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -916,6 +913,8 @@
 		9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */; };
 		9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F799164FB38A0001A357 /* SelectLayer.m */; };
 		9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */; };
+		9B92B1A71680F2F300D965AF /* ReflectAttackDamage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */; };
+		9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1AA1681D63D00D965AF /* DamageEvent.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
@@ -965,10 +964,10 @@
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
 		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
 		374070831683144A007BEDDF /* xmlParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlParsing.h; sourceTree = "<group>"; };
-		374070841683144A007BEDDF /* xmlParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xmlParsing.m; sourceTree = "<group>"; };
+		378B84791684A7290049D319 /* Save.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Save.xml; sourceTree = "<group>"; };
 		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
-		3799B71B1650DFC100A9A394 /* Party.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Party.xml; sourceTree = "<group>"; };
+		3799B71B1650DFC100A9A394 /* Basic.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Basic.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
 		37DF39631664AD48000677B2 /* XmlHeaderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlHeaderHelper.m; sourceTree = "<group>"; };
@@ -980,10 +979,6 @@
 		37DF39691664AD48000677B2 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		37DF396A1664AD48000677B2 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		37DF396B1664AD48000677B2 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
-		37DF397B1664BA2C000677B2 /* Role.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Role.h; sourceTree = "<group>"; };
-		37DF397C1664BA2C000677B2 /* Role.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Role.m; sourceTree = "<group>"; };
-		37E02F1316676B8B00BAF11B /* CCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationViewController.h; sourceTree = "<group>"; };
-		37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCNavigationViewController.mm; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1764,8 +1759,6 @@
 		9B06375E1635414C00E06018 /* zph1_rt2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt2.gif; sourceTree = "<group>"; };
 		9B06F83E16787F3800E1B09D /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
-		9B06F84F167A18DA00E1B09D /* AttributeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeFactory.h; sourceTree = "<group>"; };
-		9B06F850167A18DA00E1B09D /* AttributeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeFactory.m; sourceTree = "<group>"; };
 		9B10C678167745160026E796 /* DamageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEffect.h; sourceTree = "<group>"; };
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
@@ -2042,6 +2035,10 @@
 		9B82F798164FB38A0001A357 /* SelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectLayer.h; path = SelectLayer/SelectLayer.h; sourceTree = "<group>"; };
 		9B82F799164FB38A0001A357 /* SelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectLayer.m; path = SelectLayer/SelectLayer.m; sourceTree = "<group>"; };
 		9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UnSelectedRolesPosition.plist; path = SelectLayer/UnSelectedRolesPosition.plist; sourceTree = "<group>"; };
+		9B92B1A51680F2F300D965AF /* ReflectAttackDamage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackDamage.h; sourceTree = "<group>"; };
+		9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackDamage.m; sourceTree = "<group>"; };
+		9B92B1A91681D63D00D965AF /* DamageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEvent.h; sourceTree = "<group>"; };
+		9B92B1AA1681D63D00D965AF /* DamageEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEvent.m; sourceTree = "<group>"; };
 		9B92D2B416416D66000AF467 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		9B92D2B516416D66000AF467 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		9B92D2BF16424E74000AF467 /* CharacterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSprite.h; sourceTree = "<group>"; };
@@ -2181,8 +2178,6 @@
 		37E02F1216676B8B00BAF11B /* SneakyJoystick */ = {
 			isa = PBXGroup;
 			children = (
-				37E02F1316676B8B00BAF11B /* CCNavigationViewController.h */,
-				37E02F1416676B8B00BAF11B /* CCNavigationViewController.mm */,
 				37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */,
 				37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */,
 				37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */,
@@ -2349,9 +2344,9 @@
 				9B062E8116353A4F00E06018 /* Player */,
 				3799B7141650DDDD00A9A394 /* PartyParser.h */,
 				3799B7151650DDDD00A9A394 /* PartyParser.m */,
-				3799B71B1650DFC100A9A394 /* Party.xml */,
+				3799B71B1650DFC100A9A394 /* Basic.xml */,
 				374070831683144A007BEDDF /* xmlParsing.h */,
-				374070841683144A007BEDDF /* xmlParsing.m */,
+				378B84791684A7290049D319 /* Save.xml */,
 			);
 			name = Character;
 			sourceTree = "<group>";
@@ -2359,8 +2354,6 @@
 		9B062E8116353A4F00E06018 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				37DF397B1664BA2C000677B2 /* Role.h */,
-				37DF397C1664BA2C000677B2 /* Role.m */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -3105,8 +3098,6 @@
 			children = (
 				9B06F83E16787F3800E1B09D /* Attribute.h */,
 				9B06F83F16787F3800E1B09D /* Attribute.m */,
-				9B06F84F167A18DA00E1B09D /* AttributeFactory.h */,
-				9B06F850167A18DA00E1B09D /* AttributeFactory.m */,
 				9BA147FC167BAE920012F2C0 /* DependentAttribute.h */,
 				9BA147FD167BAE920012F2C0 /* DependentAttribute.m */,
 			);
@@ -3121,6 +3112,8 @@
 				9B28820C166FCAA00041604F /* AttackEventHandler.h */,
 				9B28820D166FCAA00041604F /* AttackEventHandler.m */,
 				9B38813F16766F7500E1FBF4 /* CharacterEventHandler.h */,
+				9B92B1A91681D63D00D965AF /* DamageEvent.h */,
+				9B92B1AA1681D63D00D965AF /* DamageEvent.m */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -3132,6 +3125,8 @@
 				9B3881421676728800E1FBF4 /* CounterAttackSkill.m */,
 				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
+				9B92B1A51680F2F300D965AF /* ReflectAttackDamage.h */,
+				9B92B1A61680F2F300D965AF /* ReflectAttackDamage.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -4400,8 +4395,9 @@
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
 				9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */,
-				3799B71C1650DFC100A9A394 /* Party.xml in Resources */,
+				3799B71C1650DFC100A9A394 /* Basic.xml in Resources */,
 				2B85A7BA16635BF100D5962F /* tree01.gif in Resources */,
+				378B847A1684A72A0049D319 /* Save.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4412,7 +4408,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B3881351675F40100E1FBF4 /* CCNavigationViewController.mm in Sources */,
 				9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */,
 				9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */,
 				9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */,
@@ -4464,7 +4459,6 @@
 				37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */,
 				37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */,
 				37DF39701664AD48000677B2 /* Util.m in Sources */,
-				37DF397D1664BA2C000677B2 /* Role.m in Sources */,
 				9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */,
 				9B288206166FA61C0041604F /* AttackEffect.m in Sources */,
 				9B28820A166FA76D0041604F /* Armor.m in Sources */,
@@ -4474,9 +4468,9 @@
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
 				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
-				9B06F851167A18DA00E1B09D /* AttributeFactory.m in Sources */,
 				9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */,
-				374070851683144A007BEDDF /* xmlParsing.m in Sources */,
+				9B92B1A71680F2F300D965AF /* ReflectAttackDamage.m in Sources */,
+				9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

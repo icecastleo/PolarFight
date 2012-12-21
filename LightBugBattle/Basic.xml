@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<party>
+    <character id="001" name="test" img="amg1">
+        <attributes>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
+            <attribute name="maxMp" a="0" b="0" c="90"></attribute>
+            <attribute name="attack" a="0" b="0" c="80"></attribute>
+            <attribute name="defense" a="0" b="0" c="70"></attribute>
+            <attribute name="agile" a="0" b="0" c="60"></attribute>
+            <attribute name="speed" a="0" b="0" c="50"></attribute>
+            <attribute name="moveTime" a="0" b="0" c="3"></attribute>
+        </attributes>
+        <skill range="">
+            <effects>
+                <effect></effect>
+            </effects>
+        </skill>
+        <passiveskill>
+        </passiveskill>
+    </character>
+    <character id="002" name="test2" img="ftr1">
+        <attributes>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
+            <attribute name="maxMp" a="0" b="0" c="90"></attribute>
+            <attribute name="attack" a="0" b="0" c="80"></attribute>
+            <attribute name="defense" a="0" b="0" c="70"></attribute>
+            <attribute name="agile" a="0" b="0" c="60"></attribute>
+            <attribute name="speed" a="0" b="0" c="15"></attribute>
+            <attribute name="moveTime" a="0" b="0" c="3"></attribute>
+        </attributes>
+        <skill range="">
+            <effects>
+                <effect></effect>
+            </effects>
+        </skill>
+        <passiveskill>
+        </passiveskill>
+    </character>
+</party>

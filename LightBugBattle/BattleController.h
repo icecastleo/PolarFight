@@ -14,11 +14,18 @@
 #import "Barrier.h"
 
 @class BattleStatusLayer;
+
+@protocol GameState <NSObject>
+-(void)update:(ccTime)delta;
+@end
+
 @interface BattleController : CCScene {
     
     BattleStatusLayer *statusLayer;
     DPadLayer *dPadLayer;
     MapLayer *mapLayer;
+    
+//    id<GameState> state;
     
     Character *currentCharacter;
     NSMutableArray *characters;
@@ -30,9 +37,14 @@
     int currentIndex;
 }
 
-//-(Character*) createCharacterWithType:(CharacterType)type;
+//@property (readonly) DPadLayer *dPadLayer;
+//@property (readonly) BattleStatusLayer *statusLayer;
+//@property MapLayer *mapLayer;
 
--(void) addCharacter:(Character*)character;
--(void) removeCharacter:(Character*)character;
+-(void)addCharacter:(Character*)character;
+-(void)removeCharacter:(Character*)character;
+
+
 
 @end
+

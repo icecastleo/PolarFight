@@ -7,6 +7,7 @@
 //
 
 #import "TimeStatusEffect.h"
+#import "Character.h"
 
 @implementation TimeStatusEffect
 
