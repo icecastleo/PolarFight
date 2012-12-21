@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Constant.h"
 #import "CharacterSprite.h"
 #import "SkillKit.h"
 #import "AttackEvent.h"
@@ -16,7 +15,7 @@
 
 @class BattleController;
 
-@interface Character : NSObject {
+@interface Character : NSObject <xmlParsing>{
     //    BattleController *controller;
 //    CharacterSprite *sprite;
     //    NSString *name;
@@ -96,5 +95,7 @@
 -(void) removeTimeStatus:(TimeStatusType)type;
 
 -(void) setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
+
+-(id)initWithDom:(GDataXMLElement *)dom;
 
 @end

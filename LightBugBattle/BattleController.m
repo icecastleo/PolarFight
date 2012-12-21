@@ -10,6 +10,7 @@
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Role.h"
+#import "Character.h"
 
 @implementation BattleController
 
@@ -117,24 +118,40 @@ static int kMoveMultiplier = 40;
     NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
     
     //characterParty
-    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
-    for (Role *role in roles) {
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+//    NSArray *roles = [PartyParser getRolesArrayFromXMLFile];
+//    for (Role *role in roles) {
+//        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+//        character.player = 1;
+//        character.controller = self;
+//        [character.sprite addBloodSprite];
+//        [self addCharacter:character];
+//    }
+//    
+//    for (Role *role in roles) {
+//        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+//        character.player = 2;
+//        character.controller = self;
+//        [character.sprite addBloodSprite];
+//        [self addCharacter:character];
+//    }
+    
+    //return roles;
+    
+    for (NSNumber *characterId in testCharacterIdArray) {
+        Character *character = [[Character alloc] initWithDom:[PartyParser getNodeFromXmlFile:@"Party.xml" TagName:@"character" tagId:characterId.stringValue]];
         character.player = 1;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
-    
-    for (Role *role in roles) {
-        Character *character = [[Character alloc] initWithName:role.name fileName:role.picture];
+    for (NSNumber *characterId in testCharacterIdArray) {
+        Character *character = [[Character alloc] initWithDom:[PartyParser getNodeFromXmlFile:@"Party.xml" TagName:@"character" tagId:characterId.stringValue]];
         character.player = 2;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    //return roles;
 }
 
 //-(Character *)createCharacterWithType:(CharacterType)type {

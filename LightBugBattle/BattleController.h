@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Character.h"
-#import "Constant.h"
 #import "DPadLayer.h"
 #import "MapLayer.h"
 #import "Barrier.h"

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Attribute.h"
-#import "Constant.h"
 
 @interface AttributeFactory : NSObject
 

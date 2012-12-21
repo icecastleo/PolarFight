@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 #import "AttributeModifier.h"
 
 @interface ModifierMap : NSObject {

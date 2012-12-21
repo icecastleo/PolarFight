@@ -7,7 +7,6 @@
 //
 
 #import "Effect.h"
-#import "Constant.h"
 
 @interface AttackEffect : Effect {
     AttackType type;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<Party>
+<party>
     <Role>
         <roleId>001</roleId>
         <hp>90</hp>
@@ -29,4 +29,31 @@
         <moveTime>6</moveTime>
         <maxHp>100</maxHp>
     </Role>
-</Party>
+    
+    
+    <character id="01" name="test" img="amg1">
+        <attributes>
+            <attribute name="maxhp" a="0" b="0" c="100"></attribute>
+            <attribute name="maxhp" a="0" b="0" c="100"></attribute>
+        </attributes>
+        <skill range="">
+            <effects>
+                <effect></effect>
+            </effects>
+        </skill>
+        <passiveskill>
+        </passiveskill>
+    </character>
+    <character id="02" name="test2" img="ftr1">
+        <attributes>
+            <attribute name="maxhp" a="0" b="0" c="100"></attribute>
+        </attributes>
+        <skill range="">
+            <effects>
+                <effect></effect>
+            </effects>
+        </skill>
+        <passiveskill>
+        </passiveskill>
+    </character>
+</party>

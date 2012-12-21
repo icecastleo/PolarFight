@@ -7,7 +7,6 @@
 //
 
 #import "Effect.h"
-#import "Constant.h"
 #import "TimeStatus.h"
 
 @interface TimeStatusEffect : Effect {

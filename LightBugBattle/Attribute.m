@@ -8,6 +8,7 @@
 
 #import "Attribute.h"
 #import "Character.h"
+#import "AttributeFactory.h"
 
 @implementation Attribute
 
@@ -94,4 +95,38 @@
     return _dependent.value;
 }
 
+-(id)initWithDom:(GDataXMLElement *)dom {
+    CharacterAttribute characterType;
+    int tempQuadratic = 0;
+    int tempLinear = 0;
+    int tempConstantTerm = 0;
+    
+    for (GDataXMLNode *attribute in dom.attributes) {
+        NSLog(@"attribute.name :: %@",attribute.name);
+        NSLog(@"attribute.value :: %@",attribute.stringValue);
+        
+        if ([attribute.name isEqualToString:@"name"]) {
+            characterType = [self getCharacterTypeFromAttributeName:attribute.stringValue];
+        }else if ([attribute.name isEqualToString:@"a"]) {
+            tempQuadratic = attribute.stringValue.intValue;
+        }else if ([attribute.name isEqualToString:@"b"]) {
+            tempLinear = attribute.stringValue.intValue;
+        }else if ([attribute.name isEqualToString:@"c"]) {
+            tempConstantTerm = attribute.stringValue.intValue;
+        }
+    }
+    self = [AttributeFactory createAttributeWithType:characterType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
+    return self;
+}
+
+-(CharacterAttribute)getCharacterTypeFromAttributeName:(NSString *)attributeName {
+    if([attributeName isEqualToString:@"maxHp"])
+    {
+        return kCharacterAttributeHp;
+    }else if ([attributeName isEqualToString:@"hp"]){
+        
+    }
+    
+    return nil;
+}
 @end

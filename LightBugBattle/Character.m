@@ -337,4 +337,40 @@
     [statePremissionDictionary setObject:[NSNumber numberWithBool:aBool] forKey:[NSNumber numberWithInt:aState]];
 }
 
+-(id)initWithDom:(GDataXMLElement *)dom
+{
+    NSString *tempName;
+    NSString *tempFileName;
+    
+    for (GDataXMLNode *attribute in dom.attributes) {
+//        NSLog(@"attribute.name :: %@",attribute.name);
+//        NSLog(@"attribute.value :: %@",attribute.stringValue);
+        if ([attribute.name isEqualToString:@"name"]) {
+            tempName = attribute.stringValue;
+        }else if ([attribute.name isEqualToString:@"img"]) {
+            tempFileName = attribute.stringValue;
+        }
+    }
+    
+//    NSMutableArray *attributes;
+    
+    for (GDataXMLElement *element in dom.children) {
+        NSLog(@"element :: %@",element.name);
+        NSLog(@"element :: %@",element.stringValue);
+        if ([element.name isEqualToString:@"attributes"]) {
+            for (GDataXMLElement *attribute in element.children) {
+                Attribute *attr = [[Attribute alloc] initWithDom:attribute];
+                [self setAttribute:attr withType:attr.type];
+            }
+            
+        }else if ([element.name isEqualToString:@"skill"]){
+            
+        }
+    }
+    
+    self = [self initWithName:tempName fileName:tempFileName andLevel:1];
+    
+    return self;
+}
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 @class Character;
 
 @interface AttackEvent : NSObject {

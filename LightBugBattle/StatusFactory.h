@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 #import "Character.h"
 #import "TimeStatus.h"
 #import "AuraStatus.h"

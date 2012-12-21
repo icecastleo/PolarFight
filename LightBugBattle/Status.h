@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Constant.h"
 #import "ModifierMap.h"
 #import "AttributeModifier.h"
 #import "AddModifier.h"

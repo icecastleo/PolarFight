@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "DependentAttribute.h"
+#import "xmlParsing.h"
 
 @class Character;
 
-@interface Attribute : NSObject {    
+@interface Attribute : NSObject <xmlParsing> {
     float quadratic;
     float linear;
     float constantTerm;
@@ -26,6 +27,7 @@
 @property (readonly) int value;
 @property (strong) DependentAttribute *dependent;
 @property (readonly) int currentValue;
+@property (readonly) CharacterAttribute type;
 
 // Init with a quadratic equation.
 -(id)initWithQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
@@ -37,5 +39,7 @@
 
 -(void)increaseCurrentValue:(int)aValue;
 -(void)decreaseCurrentValue:(int)aValue;
+
+-(id)initWithDom:(GDataXMLElement *)dom;
 
 @end
