@@ -40,6 +40,6 @@
 -(void)increaseCurrentValue:(int)aValue;
 -(void)decreaseCurrentValue:(int)aValue;
 
--(id)initWithXmlElement:(GDataXMLElement *)aElement;
+-(id)initWithXMLElement:(GDataXMLElement *)aElement;
 
 @end

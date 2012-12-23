@@ -104,14 +104,14 @@ static int kMoveMultiplier = 40;
     NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
     
     for (NSString *characterId in testCharacterIdArray) {
-        Character *character = [[Character alloc] initWithXmlElement:[PartyParser getNodeFromXmlFile:@"Save.xml" TagName:@"character" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
         character.player = 1;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     for (NSString *characterId in testCharacterIdArray) {
-        Character *character = [[Character alloc] initWithXmlElement:[PartyParser getNodeFromXmlFile:@"Save.xml" TagName:@"character" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
         character.player = 2;
         character.controller = self;
         [character.sprite addBloodSprite];

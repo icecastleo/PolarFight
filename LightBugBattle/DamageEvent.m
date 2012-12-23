@@ -40,7 +40,11 @@
 }
 
 -(int)damage {
-    return MAX(0, baseDamage * multiplier - bonus);
+    if (multiplier == 0) {
+        return 0;
+    }
+    
+    return MAX(1, baseDamage * multiplier + bonus);
 }
 
 @end

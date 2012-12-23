@@ -14,6 +14,6 @@
 
 + (void)saveParty;
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName TagName:(NSString *)tagName tagId:(NSString *)tagId;
++ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagId:(NSString *)tagId;
 
 @end

@@ -42,7 +42,7 @@
     }
 }
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName TagName:(NSString *)tagName tagId:(NSString *)tagId
++ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagId:(NSString *)tagId
 {
     //ex: fileName = @"Save.xml"
     NSString *filePath = [self dataFilePath:fileName forSave:NO];

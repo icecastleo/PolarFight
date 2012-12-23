@@ -215,6 +215,15 @@
 }
 
 -(void)handleReceiveAttackEvent:(AttackEvent *)event {
+    Attribute *defense = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeDefense]];
+    
+     CCLOG(@"%d",defense == nil);
+    
+    if (defense != nil) {
+        [event subtractAttack:defense.value];
+        CCLOG(@"%d",defense.value);
+    }
+    
     [self handleReceiveDamageEvent:[event convertToDamageEvent]];
 }
 
@@ -345,39 +354,39 @@
     return sprite.boundingBox;
 }
 
--(id)initWithXmlElement:(GDataXMLElement *)aElement
-{
+-(id)initWithXMLElement:(GDataXMLElement *)element {
     NSString *tempId;
     NSString *tempLevel;
-    for (GDataXMLNode *attribute in aElement.attributes) {
+    for (GDataXMLNode *attribute in element.attributes) {
         if ([attribute.name isEqualToString:@"id"]) {
             tempId = attribute.stringValue;
-        }else if ([attribute.name isEqualToString:@"level"]) {
+        } else if ([attribute.name isEqualToString:@"level"]) {
             tempLevel = attribute.stringValue;
         }
     }
-    GDataXMLElement *aBasicElement = [PartyParser getNodeFromXmlFile:@"Basic.xml" TagName:@"character" tagId:tempId];;
+    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:tempId];;
     
     NSString *tempName;
     NSString *tempFileName;
-    for (GDataXMLNode *attribute in aBasicElement.attributes) {
+    for (GDataXMLNode *attribute in characterElement.attributes) {
         if ([attribute.name isEqualToString:@"name"]) {
             tempName = attribute.stringValue;
-        }else if ([attribute.name isEqualToString:@"img"]) {
+        } else if ([attribute.name isEqualToString:@"img"]) {
             tempFileName = attribute.stringValue;
         }
     }
     
     self = [self initWithName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
-    for (GDataXMLElement *element in aBasicElement.children) {
-        if ([element.name isEqualToString:@"attributes"]) {
-            for (GDataXMLElement *attribute in element.children) {
-                Attribute *attr = [[Attribute alloc] initWithXmlElement:attribute];
+    
+    for (GDataXMLElement *e in characterElement.children) {
+        if ([e.name isEqualToString:@"attributes"]) {
+            for (GDataXMLElement *attribute in e.children) {
+                Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
                 [self addAttribute:attr];
             }
         }
         //TODO: skill part
-        else if ([element.name isEqualToString:@"skill"]) {
+        else if ([e.name isEqualToString:@"skill"]) {
             
         }
     }

@@ -35,7 +35,7 @@
     bloodSprite = nil;
 }
 
--(void) setAnimationWithName:(NSString*) name {
+-(void)setAnimationWithName:(NSString*)name {
     
     CCAnimation *animation = [CCAnimation animation];
     
@@ -77,7 +77,7 @@
     
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
 
--(void) runDirectionAnimate {
+-(void)runDirectionAnimate {
     CharacterDirection direction = character.direction;
     
     [self stopAllActions];
@@ -93,7 +93,7 @@
     }
 }
 
--(void) updateBloodSprite {
+-(void)updateBloodSprite {
     Attribute *hp = [character getAttribute:kCharacterAttributeHp];
     
     NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");

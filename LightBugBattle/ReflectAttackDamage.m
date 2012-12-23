@@ -18,4 +18,8 @@
     return self;
 }
 
+-(void)handleReceiveDamage:(int)damage {
+    
+}
+
 @end

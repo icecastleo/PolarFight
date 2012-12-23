@@ -102,7 +102,7 @@
     return _dependent.value;
 }
 
--(id)initWithXmlElement:(GDataXMLElement *)aElement {
+-(id)initWithXMLElement:(GDataXMLElement *)aElement {
     CharacterAttributeType attributeType;
     int tempQuadratic = 0;
     int tempLinear = 0;

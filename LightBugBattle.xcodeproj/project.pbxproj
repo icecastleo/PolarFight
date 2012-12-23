@@ -19,7 +19,7 @@
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		378B847A1684A72A0049D319 /* Save.xml in Resources */ = {isa = PBXBuildFile; fileRef = 378B84791684A7290049D319 /* Save.xml */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
-		3799B71C1650DFC100A9A394 /* Basic.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* Basic.xml */; };
+		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF396D1664AD48000677B2 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39651664AD48000677B2 /* XmlParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -796,7 +796,6 @@
 		9B38813C1675F40100E1FBF4 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F2216676B8B00BAF11B /* SneakyJoystickSkinnedBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B38813D1675F40100E1FBF4 /* SneakyJoystickSkinnedDPadExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B38813E1675F40100E1FBF4 /* SneakyJoystickSkinnedJoystickExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9B3881431676728800E1FBF4 /* CounterAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3881421676728800E1FBF4 /* CounterAttackSkill.m */; };
 		9B3E4D261675F004000CFFFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CEF1635275000E06018 /* Foundation.framework */; };
 		9B3E4F7C1675F139000CFFFB /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E4E8B1675F139000CFFFB /* CCAction.m */; };
 		9B3E4F7D1675F139000CFFFB /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E4E8D1675F139000CFFFB /* CCActionCamera.m */; };
@@ -967,7 +966,7 @@
 		378B84791684A7290049D319 /* Save.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Save.xml; sourceTree = "<group>"; };
 		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
-		3799B71B1650DFC100A9A394 /* Basic.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Basic.xml; sourceTree = "<group>"; };
+		3799B71B1650DFC100A9A394 /* CharacterData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CharacterData.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
 		37DF39631664AD48000677B2 /* XmlHeaderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlHeaderHelper.m; sourceTree = "<group>"; };
@@ -1779,8 +1778,6 @@
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
 		9B2AB06A16668F6A00B78136 /* PassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveSkill.m; sourceTree = "<group>"; };
 		9B38813F16766F7500E1FBF4 /* CharacterEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterEventHandler.h; sourceTree = "<group>"; };
-		9B3881411676728800E1FBF4 /* CounterAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounterAttackSkill.h; sourceTree = "<group>"; };
-		9B3881421676728800E1FBF4 /* CounterAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounterAttackSkill.m; sourceTree = "<group>"; };
 		9B38814416773EFB00E1FBF4 /* EffectKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectKit.h; sourceTree = "<group>"; };
 		9B3E4D251675F004000CFFFB /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3E4E8A1675F139000CFFFB /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
@@ -2344,7 +2341,7 @@
 				9B062E8116353A4F00E06018 /* Player */,
 				3799B7141650DDDD00A9A394 /* PartyParser.h */,
 				3799B7151650DDDD00A9A394 /* PartyParser.m */,
-				3799B71B1650DFC100A9A394 /* Basic.xml */,
+				3799B71B1650DFC100A9A394 /* CharacterData.xml */,
 				374070831683144A007BEDDF /* xmlParsing.h */,
 				378B84791684A7290049D319 /* Save.xml */,
 			);
@@ -3121,8 +3118,6 @@
 		9B3881401676716D00E1FBF4 /* PassiveSkill */ = {
 			isa = PBXGroup;
 			children = (
-				9B3881411676728800E1FBF4 /* CounterAttackSkill.h */,
-				9B3881421676728800E1FBF4 /* CounterAttackSkill.m */,
 				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
 				9B92B1A51680F2F300D965AF /* ReflectAttackDamage.h */,
@@ -4395,7 +4390,7 @@
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
 				9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */,
-				3799B71C1650DFC100A9A394 /* Basic.xml in Resources */,
+				3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */,
 				2B85A7BA16635BF100D5962F /* tree01.gif in Resources */,
 				378B847A1684A72A0049D319 /* Save.xml in Resources */,
 			);
@@ -4463,7 +4458,6 @@
 				9B288206166FA61C0041604F /* AttackEffect.m in Sources */,
 				9B28820A166FA76D0041604F /* Armor.m in Sources */,
 				9B28820E166FCAA00041604F /* AttackEventHandler.m in Sources */,
-				9B3881431676728800E1FBF4 /* CounterAttackSkill.m in Sources */,
 				9B10C67A167745160026E796 /* DamageEffect.m in Sources */,
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
