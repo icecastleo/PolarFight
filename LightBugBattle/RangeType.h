@@ -16,11 +16,6 @@ typedef enum {
     effectSideBoth
 } EffectSides;
 
-typedef enum {
-     effectNumsSingleByDistance,
-     effectNumsMulti
-} EffectNums;
-
 typedef enum{
     effectExceptSelf,
     effectSelf
@@ -30,7 +25,6 @@ typedef enum{
     NSString *name;
     CGMutablePathRef attackRange;
     __weak Character* character;
-    EffectNums effectNums;
     EffectSides effectSides;
     EffectSelfOrNot effectSelfOrNot;
     CCSprite *rangeSprite;
@@ -42,8 +36,10 @@ typedef enum{
 @property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
 
++(id)initWithParameters:(NSMutableDictionary*) dict;
 -(id) initWithCharacter:(Character*) aCharacter;
 -(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
 -(BOOL) containTarget:(Character *)temp;
 -(void) setRotation:(float) offX:(float) offY;
+-(void)showPoints;
 @end

@@ -9,17 +9,56 @@
 #import "RangeFarCircle.h"
 
 @implementation RangeFarCircle
--(void)setParameter {
-    rangeWidth=400;
-    rangeHeight=400;
-    effectSides = effectSideEnemy;
-    effectNums= effectNumsMulti;
-    effectSelfOrNot = effectExceptSelf;
+//NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeFarCircle",@"rangeName",@120,@"effectDistance",@40,@"effectRadius",nil];//FarCircle
+//EffectSides:0=effectSideEnemy,1=effectSideAlly,2=effectSideBoth
+//effectRadius=攻擊半徑
+//effectDistance=攻擊距離
+
+
+-(void)setParameter:(NSMutableDictionary*) dict {
+    
+    NSNumber *sides = [dict valueForKey:@"effectSides"];
+    if(sides!=nil)
+    {
+        effectSides= [sides intValue]>3?0:[sides intValue];
+    }else{
+        effectSides = effectSideEnemy;
+    }
+    NSNumber *selfOrNot = [dict valueForKey:@"effectSelfOrNot"];
+    if(selfOrNot!=nil)
+    {
+        effectSelfOrNot= [selfOrNot intValue]>3?0:[selfOrNot intValue];
+    }else{
+        effectSelfOrNot = effectExceptSelf;
+    }
+    int rangeDistance=120;
+    
+    NSNumber *distance = [dict valueForKey:@"effectDistance"];
+    if(distance!=nil)
+    {
+         rangeDistance= [distance intValue]<=0?120:[distance intValue];
+      
+    }
+    
+    
+    int effectRadius=40;
+    NSNumber *radius = [dict valueForKey:@"effectRadius"];
+    if(radius!=nil)
+    {
+        effectRadius = [radius intValue]<=0?20:[radius intValue];
+        
+    }
+    
+    
+    rangeWidth= (effectRadius+rangeDistance)*2;
+;
+    rangeHeight=(effectRadius+rangeDistance)*2;
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2+120,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2+120, rangeHeight/2, 40, 0, M_PI*2,NO);
+    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2+rangeDistance,rangeHeight/2);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2+rangeDistance, rangeHeight/2, effectRadius, 0, M_PI*2,NO);
     CGPathCloseSubpath(attackRange);
     CGPathRetain(attackRange);
 }
+
 @end
