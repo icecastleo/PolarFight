@@ -269,26 +269,29 @@
     [theCharacter setCharacterWithVelocity:velocity];
 }
 
--(void) knockOut:(Character*)theCharacter vel:(CGPoint)velocity
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity
 {
-    KnockOutObject* objs = [KnockOutObject node];
-    [objs setChar:theCharacter vel:velocity];
+    KnockOutObject* obj = [KnockOutObject node];
+    [obj setChar:character vel:velocity];
+    
+     [knockOutObjs addObject:obj];
     
     [self schedule:@selector(followUpdate:)];
 }
 
--(void) followUpdate:(ccTime) dt
+-(void)followUpdate:(ccTime)dt
 {
     //prevent index errors
     NSMutableArray* objsToRemove = [[NSMutableArray alloc] init];
     
-    for ( int i=0; i<knockOutObjs.count; i++)
+    for(int i = 0; i<knockOutObjs.count; i++)
     {
         KnockOutObject* temp = [knockOutObjs objectAtIndex:i];
         float ratio = powf( 0.9, temp.decreaseCount);
         CGPoint vel = ccpMult( temp.velocity, ratio);
         
         temp.character.position = ccpAdd( temp.character.position, vel);
+        temp.decreaseCount++;
         
         if( temp.decreaseCount >= 100 )
             [objsToRemove addObject:knockOutObjs];

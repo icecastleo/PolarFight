@@ -40,5 +40,5 @@
 -(void) setMapBlocks;
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
--(void) knockOut:(Character*)theCharacter vel:(CGPoint)velocity;
+-(void) knockOut:(Character*)character velocity:(CGPoint)velocity;
 @end

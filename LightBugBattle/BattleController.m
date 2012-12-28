@@ -154,6 +154,10 @@ static BattleController* currentInstance;
     }
 }
 
+-(void)knockOut:(Character *)character velocity:(CGPoint)velocity {
+    [mapLayer knockOut:character velocity:velocity];
+}
+
 -(void)update:(ccTime)delta {
     
     if(!canMove)

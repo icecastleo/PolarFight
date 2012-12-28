@@ -253,8 +253,6 @@
         }
     }
     
-    
-    
     [event.defender receiveAttackEvent:event];
 }
 
@@ -294,6 +292,16 @@
     }
     
     state = kCharacterStateGetDamage;
+    
+    if (controller != nil) {
+        // knock out effect
+        if (damage.type == kDamageTypeAttack) {
+            CGPoint velocity = ccpSub(self.position, damage.damager.position);
+            CCLOG(@"%f,%f", velocity.x,velocity.y);
+            velocity = ccpMult(velocity, 0.05);
+            [controller knockOut:self velocity:velocity];
+        }
+    }
     
     if (hp.currentValue > 0) {
         [sprite updateBloodSprite];
