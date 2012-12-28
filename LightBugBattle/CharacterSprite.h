@@ -11,7 +11,7 @@
 #import "Attribute.h"
 
 @class Character;
-@interface CharacterSprite : CCSprite <AttributeDelegate>{
+@interface CharacterSprite : CCSprite {
     __weak Character *character;
     
     CCSprite *bloodSprite;

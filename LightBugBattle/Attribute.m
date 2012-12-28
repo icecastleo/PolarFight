@@ -81,14 +81,12 @@
 -(void)increaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
-    [self.delegate bloodHint:aValue IsCreased:YES];
     [_dependent increaseValue:aValue];
 }
 
 -(void)decreaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
-    [self.delegate bloodHint:aValue IsCreased:NO];
     [_dependent decreaseValue:aValue];
 }
 

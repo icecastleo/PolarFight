@@ -96,24 +96,12 @@
 
 -(void)updateBloodSprite {
     Attribute *hp = [character getAttribute:kCharacterAttributeHp];
-    hp.delegate = self;
+    
     NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
     
     bloodSprite.scaleX = (float) hp.currentValue / hp.value;
 //    bloodSprite.scaleX = (float)character.currentHp/ character.maxHp;
     bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
-}
-
--(void)bloodHint:(int)value IsCreased:(BOOL)increased {
-    CCNode<CCLabelProtocol>* hpLbBM;
-    
-    NSString *valueString = [[NSString alloc] initWithFormat:@"%d", value];
-    hpLbBM = [CCLabelBMFont labelWithString:valueString fntFile:@"TestFont.fnt"];
-    
-    hpLbBM.position =  ccp([self boundingBox].size.width / 2, [self boundingBox].size.height);
-    hpLbBM.anchorPoint = CGPointMake(0.5, 1);
-    [self addChild:hpLbBM z:1];
-    
 }
 
 @end

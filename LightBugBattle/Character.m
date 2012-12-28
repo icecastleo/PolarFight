@@ -266,6 +266,8 @@
     
     [hp decreaseCurrentValue:event.damage];
     
+    [self bloodHint:event.damage IsCreased:NO];
+    
     for (PassiveSkill *p in passiveSkillArray) {
         if ([p respondsToSelector:@selector(handleReceiveDamage:)]) {
             [p handleReceiveDamage:event.damage];
@@ -287,7 +289,7 @@
 
 -(void)getHeal:(int)heal {
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
-    
+    [self bloodHint:heal IsCreased:YES];
     NSAssert(hp != nil, @"A character without hp gets heal...");
     
     [hp increaseCurrentValue:heal];
@@ -389,8 +391,6 @@
         }
     }
     
-    //self = [self initWithName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
-    //self = [self getClassFromCharacterName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
     self = [self initWithId:tempId andLevel:tempLevel.intValue];
 
     return self;
@@ -406,6 +406,33 @@
     if ([aName isEqualToString:@"Swordsman"]) {
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
     }
+}
+
+-(void)bloodHint:(int)aValue IsCreased:(BOOL)increased {
+    NSString *valueString = [[NSString alloc] initWithFormat:@"%d", aValue];
+    if (increased) {
+        [self displayMessage:valueString R:0 G:255 B:0];
+    }else {
+        [self displayMessage:valueString R:255 G:0 B:0];
+    }
+}
+
+-(void)displayMessage:(NSString*)message R:(int)red G:(int)green B:(int)blue {
+	CCLabelTTF *label = [CCLabelBMFont labelWithString:message fntFile:@"WhiteFont.fnt"];
+    label.position =  ccp([self boundingBox].size.width / 2, [self boundingBox].size.height);
+    label.anchorPoint = CGPointMake(0.5, 0);
+    [self.sprite addChild:label z:1];
+    [label setColor:(ccColor3B) {red, green, blue}];
+    
+	id scaleTo = [CCScaleTo actionWithDuration:0.1f scale:1.3f];
+	id scaleBack = [CCScaleTo actionWithDuration:0.3f scale:0.1];
+	id seq = [CCSequence actions:scaleTo, scaleBack, [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)], nil];
+	[label runAction:seq];
+    
+}
+
+-(void)removeLabel:(id)sender {
+	[self.sprite removeChild:sender cleanup:YES];
 }
 
 @end
