@@ -11,6 +11,6 @@
 
 @protocol xmlParsing <NSObject>
 
-- (id)initWithXMLElement:(GDataXMLElement *)aElement;
+- (id)initWithXMLElement:(GDataXMLElement *)anElement;
 
 @end

@@ -12,6 +12,11 @@
 
 @class Character;
 
+@protocol AttributeDelegate <NSObject>
+@optional
+-(void)bloodHint:(int)value IsCreased:(BOOL)increased;
+@end
+
 @interface Attribute : NSObject <xmlParsing> {
     float quadratic;
     float linear;
@@ -22,6 +27,7 @@
     float multiplier;
 }
 
+@property (nonatomic) id <AttributeDelegate> delegate;
 @property (readonly) CharacterAttributeType type;
 @property (readonly) int value;
 
@@ -40,6 +46,6 @@
 -(void)increaseCurrentValue:(int)aValue;
 -(void)decreaseCurrentValue:(int)aValue;
 
--(id)initWithXMLElement:(GDataXMLElement *)aElement;
+-(id)initWithXMLElement:(GDataXMLElement *)anElement;
 
 @end

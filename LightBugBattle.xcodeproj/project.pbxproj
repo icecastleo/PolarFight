@@ -2332,7 +2332,6 @@
 			isa = PBXGroup;
 			children = (
 				9B06F83C1678705600E1B09D /* Attribute */,
-				3799B7171650DE2000A9A394 /* XMLSupport */,
 				9B92D2B416416D66000AF467 /* Character.h */,
 				9B92D2B516416D66000AF467 /* Character.m */,
 				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
@@ -2341,8 +2340,9 @@
 				9B062E8116353A4F00E06018 /* Player */,
 				3799B7141650DDDD00A9A394 /* PartyParser.h */,
 				3799B7151650DDDD00A9A394 /* PartyParser.m */,
-				3799B71B1650DFC100A9A394 /* CharacterData.xml */,
 				374070831683144A007BEDDF /* xmlParsing.h */,
+				3799B7171650DE2000A9A394 /* XMLSupport */,
+				3799B71B1650DFC100A9A394 /* CharacterData.xml */,
 				378B84791684A7290049D319 /* Save.xml */,
 			);
 			name = Character;

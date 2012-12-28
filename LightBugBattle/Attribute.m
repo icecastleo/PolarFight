@@ -81,12 +81,14 @@
 -(void)increaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
+    [self.delegate bloodHint:aValue IsCreased:YES];
     [_dependent increaseValue:aValue];
 }
 
 -(void)decreaseCurrentValue:(int)aValue {
     NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
+    [self.delegate bloodHint:aValue IsCreased:NO];
     [_dependent decreaseValue:aValue];
 }
 
@@ -102,13 +104,13 @@
     return _dependent.value;
 }
 
--(id)initWithXMLElement:(GDataXMLElement *)aElement {
+-(id)initWithXMLElement:(GDataXMLElement *)anElement {
     CharacterAttributeType attributeType;
     int tempQuadratic = 0;
     int tempLinear = 0;
     int tempConstantTerm = 0;
     
-    for (GDataXMLNode *attribute in aElement.attributes) {
+    for (GDataXMLNode *attribute in anElement.attributes) {
         NSLog(@"attribute.name :: %@",attribute.name);
         NSLog(@"attribute.value :: %@",attribute.stringValue);
         
