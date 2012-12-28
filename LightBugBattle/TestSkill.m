@@ -21,7 +21,7 @@
     //NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeLine",@"rangeName",@700,@"effectDistance",@40,@"effectWidth",nil];//Line
      NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeFarCircle",@"rangeName",@120,@"effectDistance",@40,@"effectRadius",nil];//FarCircle
     
-    id range =  [RangeType initWithParameters:dict];
+    id range =  [Range initWithParameters:dict];
 
     return [self initWithCharacter:aCharacter rangeType:range];
 }
