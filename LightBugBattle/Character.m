@@ -77,23 +77,30 @@
 //        attackType = kAttackNoraml;
         armorType = kArmorNoraml;
         
-//        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
         [self setSkillForCharacter:_name];
-        
-        context = UIGraphicsGetCurrentContext();
         
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
-        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:25 damagePercent:100]];
-        [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
-//        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
+        [self setSkillForCharacter:_name];
         [self setPassiveSkillForCharacter:_name];
     }
     return self;
 }
 
+-(void)setSkillForCharacter:(NSString *)aName {
+    if ([aName isEqualToString:@"Swordsman"]) {
+        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
+    }
+}
+
+-(void)setPassiveSkillForCharacter:(NSString *)aName {
+    if ([aName isEqualToString:@"Swordsman"]) {
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:25 damagePercent:100]];
+        [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
+    }
+}
 
 -(id)initWithXMLElement:(GDataXMLElement *)anElement {
     NSString *tempId;
@@ -287,7 +294,7 @@
     
     [hp decreaseCurrentValue:damage.value];
     
-    [self bloodHint:damage.value IsCreased:NO];
+    [self bloodHint:damage.value isIncreased:NO];
     
     for (PassiveSkill *p in passiveSkillArray) {
         if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
@@ -297,12 +304,10 @@
     
     state = kCharacterStateGetDamage;
     
+    // Knock out effect
     if (controller != nil) {
-        // knock out effect
         if (damage.type == kDamageTypeAttack) {
             CGPoint velocity = ccpSub(self.position, damage.damager.position);
-            CCLOG(@"%f,%f", velocity.x,velocity.y);
-            velocity = ccpMult(velocity, 0.05);
             [controller knockOut:self velocity:velocity];
         }
     }
@@ -320,7 +325,7 @@
 
 -(void)getHeal:(int)heal {
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
-    [self bloodHint:heal IsCreased:YES];
+    [self bloodHint:heal isIncreased:YES];
     NSAssert(hp != nil, @"A character without hp gets heal...");
     
     [hp increaseCurrentValue:heal];
@@ -406,19 +411,7 @@
     return sprite.boundingBox;
 }
 
--(void)setSkillForCharacter:(NSString *)aName {
-    if ([aName isEqualToString:@"Swordsman"]) {
-        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
-    }
-}
-
--(void)setPassiveSkillForCharacter:(NSString *)aName {
-    if ([aName isEqualToString:@"Swordsman"]) {
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
-    }
-}
-
--(void)bloodHint:(int)aValue IsCreased:(BOOL)increased {
+-(void)bloodHint:(int)aValue isIncreased:(BOOL)increased {
     NSString *valueString = [[NSString alloc] initWithFormat:@"%d", aValue];
     if (increased) {
         [self displayMessage:valueString R:0 G:255 B:0];
@@ -438,7 +431,6 @@
 	id scaleBack = [CCScaleTo actionWithDuration:0.3f scale:0.1];
 	id seq = [CCSequence actions:scaleTo, scaleBack, [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)], nil];
 	[label runAction:seq];
-    
 }
 
 -(void)removeLabel:(id)sender {

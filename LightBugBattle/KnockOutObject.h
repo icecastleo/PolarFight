@@ -14,9 +14,9 @@
     
 }
 
-@property (readwrite, assign) Character* character;
-@property (readwrite, assign) CGPoint velocity;
-@property (readwrite, assign) int decreaseCount;
+@property (readwrite, weak) Character* character;
+@property (readwrite) CGPoint velocity;
+@property (readwrite) int decreaseCount;
 
 -(void) setChar:(Character*) theCharacter vel:(CGPoint)theVelocity;
 

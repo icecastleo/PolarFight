@@ -271,6 +271,8 @@
 
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity
 {
+    velocity = ccpMult(velocity, 0.05);
+    
     KnockOutObject* obj = [KnockOutObject node];
     [obj setChar:character vel:velocity];
     

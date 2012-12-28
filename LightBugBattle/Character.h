@@ -21,7 +21,6 @@
 @interface Character : NSObject <XMLParsingDelegate> {
     NSMutableArray *pointArray;
     TestSkill *skill;
-    CGContextRef context;
     
     NSMutableDictionary *attributeDictionary;
     NSMutableDictionary *statePremissionDictionary;
