@@ -28,9 +28,10 @@
 //@synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
-@synthesize position;
 @synthesize timeStatusDictionary,auraStatusDictionary;
 @synthesize pointArray;
+
+@dynamic position;
 
 // FIXME: fix name reference.
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
@@ -201,33 +202,30 @@
     
     state = stateMove;
     
-    [self setDirectionWithVelocity:velocity];
+    CharacterDirection newDirection = [self getDirectionByVelocity:velocity];
+    
+    if([sprite numberOfRunningActions] == 0 || direction != newDirection) {
+        direction = newDirection;
+        [sprite runDirectionAnimate];
+    }
+
     [self setAttackRotationWithVelocity:velocity];
 }
 
--(void)setDirectionWithVelocity:(CGPoint)velocity {
-    CharacterDirection newDirection;
-    
+-(CharacterDirection)getDirectionByVelocity:(CGPoint)velocity {
     if(fabsf(velocity.x) >= fabsf(velocity.y)) {
         if(velocity.x > 0) {
-            newDirection = kCharacterDirectionRight;
+            return kCharacterDirectionRight;
         } else {
-            newDirection = kCharacterDirectionLeft;
+            return kCharacterDirectionLeft;
         }
     } else {
         if(velocity.y > 0) {
-            newDirection = kCharacterDirectionUp;
+            return kCharacterDirectionUp;
         } else {
-            newDirection = kCharacterDirectionDown;
+            return kCharacterDirectionDown;
         }
     }
-    
-    if(direction == newDirection && [sprite numberOfRunningActions] != 0) {
-        return;
-    }
-    
-    direction = newDirection;
-    [sprite runDirectionAnimate];
 }
 
 -(void)setAttackRotationWithVelocity:(CGPoint)velocity {
@@ -294,7 +292,7 @@
     
     [hp decreaseCurrentValue:damage.value];
     
-    [self bloodHint:damage.value isIncreased:NO];
+    [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
     
     for (PassiveSkill *p in passiveSkillArray) {
         if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
@@ -325,10 +323,13 @@
 
 -(void)getHeal:(int)heal {
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
-    [self bloodHint:heal isIncreased:YES];
+  
     NSAssert(hp != nil, @"A character without hp gets heal...");
     
     [hp increaseCurrentValue:heal];
+    
+    [self displayString:[NSString stringWithFormat:@"+%d",hp.value] withColor:ccGREEN];
+    
     [sprite updateBloodSprite];
     
     // TODO: When there is AI, there maybe need to change from dangerous to good state.
@@ -411,30 +412,28 @@
     return sprite.boundingBox;
 }
 
--(void)bloodHint:(int)aValue isIncreased:(BOOL)increased {
-    NSString *valueString = [[NSString alloc] initWithFormat:@"%d", aValue];
-    if (increased) {
-        [self displayMessage:valueString R:0 G:255 B:0];
-    }else {
-        [self displayMessage:valueString R:255 G:0 B:0];
-    }
-}
-
--(void)displayMessage:(NSString*)message R:(int)red G:(int)green B:(int)blue {
-	CCLabelTTF *label = [CCLabelBMFont labelWithString:message fntFile:@"WhiteFont.fnt"];
+-(void)displayString:(NSString *)string withColor:(ccColor3B)color {
+    CCLabelTTF *label = [CCLabelBMFont labelWithString:string fntFile:@"WhiteFont.fnt"];
+    label.color = color;
     label.position =  ccp([self boundingBox].size.width / 2, [self boundingBox].size.height);
     label.anchorPoint = CGPointMake(0.5, 0);
-    [self.sprite addChild:label z:1];
-    [label setColor:(ccColor3B) {red, green, blue}];
-    
-	id scaleTo = [CCScaleTo actionWithDuration:0.1f scale:1.3f];
-	id scaleBack = [CCScaleTo actionWithDuration:0.3f scale:0.1];
-	id seq = [CCSequence actions:scaleTo, scaleBack, [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)], nil];
-	[label runAction:seq];
+    [self.sprite addChild:label];
+
+    [label runAction:[CCSequence actions:
+                      [CCScaleTo actionWithDuration:0.1f scale:1.3f],
+                      [CCSpawn actions:
+                       [CCScaleTo actionWithDuration:0.3f scale:0.1f],
+                       [CCFadeOut actionWithDuration:0.3f],nil],
+                      [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)],
+                      nil]];
+}
+
+-(void)displayString:(NSString*)string R:(int)red G:(int)green B:(int)blue {
+	[self displayString:string withColor:ccc3(red, green, blue)];
 }
 
 -(void)removeLabel:(id)sender {
-	[self.sprite removeChild:sender cleanup:YES];
+	[sender removeFromParentAndCleanup:YES];
 }
 
 @end

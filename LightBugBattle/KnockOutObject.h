@@ -10,14 +10,14 @@
 #import "cocos2d.h"
 #import "Character.h"
 
-@interface KnockOutObject : CCNode {
+@interface KnockOutObject : NSObject {
     
 }
 
-@property (readwrite, weak) Character* character;
-@property (readwrite) CGPoint velocity;
-@property (readwrite) int decreaseCount;
+@property (weak, readonly) Character* character;
+@property (readonly) CGPoint velocity;
+@property (readwrite) int count;
 
--(void) setChar:(Character*) theCharacter vel:(CGPoint)theVelocity;
+-(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity;
 
 @end

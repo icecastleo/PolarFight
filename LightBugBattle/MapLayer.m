@@ -269,44 +269,28 @@
     [theCharacter setCharacterWithVelocity:velocity];
 }
 
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity
-{
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity {
     velocity = ccpMult(velocity, 0.05);
     
-    KnockOutObject* obj = [KnockOutObject node];
-    [obj setChar:character vel:velocity];
+    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity];
     
-     [knockOutObjs addObject:obj];
-    
-    [self schedule:@selector(followUpdate:)];
+    [NSTimer scheduledTimerWithTimeInterval:0.025f target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
 }
 
--(void)followUpdate:(ccTime)dt
-{
-    //prevent index errors
-    NSMutableArray* objsToRemove = [[NSMutableArray alloc] init];
-    
-    for(int i = 0; i<knockOutObjs.count; i++)
-    {
-        KnockOutObject* temp = [knockOutObjs objectAtIndex:i];
-        float ratio = powf( 0.9, temp.decreaseCount);
-        CGPoint vel = ccpMult( temp.velocity, ratio);
-        
-        temp.character.position = ccpAdd( temp.character.position, vel);
-        temp.decreaseCount++;
-        
-        if( temp.decreaseCount >= 100 )
-            [objsToRemove addObject:knockOutObjs];
-    }
-    
-    for( int i=0; i<objsToRemove.count; i++)
-    {
-        [knockOutObjs removeObject:[objsToRemove objectAtIndex:i]];
-    }
-    
-    [objsToRemove removeAllObjects];
-}
+-(void)knockOutUpdate:(NSTimer *)timer {
 
+    KnockOutObject *obj = timer.userInfo;
+    
+    if (obj.count >= 20) {
+        [timer invalidate];
+    } else {
+        float ratio = powf( 0.9, obj.count);
+        CGPoint vel = ccpMult(obj.velocity, ratio);
+        
+        obj.character.position = ccpAdd(obj.character.position, vel);
+        obj.count++;
+    }
+}
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
 //    [cameraControl followTarget:NULL];
