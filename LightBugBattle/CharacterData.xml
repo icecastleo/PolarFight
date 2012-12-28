@@ -8,7 +8,7 @@
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="9"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="600"></attribute>
         </attributes>
         <skill range="">
@@ -26,7 +26,7 @@
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="15"></attribute>
+            <attribute name="speed" a="0" b="0" c="5"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -44,7 +44,7 @@
             <attribute name="attack" a="0" b="0" c="20"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="9"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -80,7 +80,7 @@
             <attribute name="attack" a="0" b="0" c="50"></attribute>
             <attribute name="defense" a="0" b="0" c="5"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="15"></attribute>
+            <attribute name="speed" a="0" b="0" c="5"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -98,7 +98,7 @@
             <attribute name="attack" a="0" b="0" c="40"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="9"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -116,7 +116,7 @@
             <attribute name="attack" a="0" b="0" c="40"></attribute>
             <attribute name="defense" a="0" b="0" c="25"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="6"></attribute>
+            <attribute name="speed" a="0" b="0" c="2"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -134,7 +134,7 @@
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="12"></attribute>
+            <attribute name="speed" a="0" b="0" c="4"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
