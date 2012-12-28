@@ -12,11 +12,11 @@
 @implementation AttackBuffStatus
 
 -(id)initWithCaster:(Character *)character {
-    Range *myRange = [[RangeCircle alloc] initWithCharacter:character];
+//    Range *myRange = [[RangeCircle alloc] initWithCharacter:character];
     
-    if(self = [super initWithType:statusAttackBuff withRange:myRange]) {
-    
-    }
+//    if(self = [super initWithType:statusAttackBuff withRange:myRange]) {
+//    
+//    }
     return self;
 }
 

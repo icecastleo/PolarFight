@@ -11,17 +11,52 @@
 
 @implementation RangeFanShape
 
--(void)setParameter {
-    effectSides = effectSideEnemy;
-    effectNums= effectNumsMulti;
-    effectSelfOrNot = effectExceptSelf;
+
+// NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@1,@"effectSides",@0,@"effectSelfOrNot",@"RangeFanShape",@"rangeName",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];    //FanShape
+//EffectSides:0=effectSideEnemy,1=effectSideAlly,2=effectSideBoth
+//effectRadius=攻擊半徑
+//effectAngle=攻擊角度
+
+-(void)setParameter:(NSMutableDictionary*) dict {
+    
+    NSNumber *sides = [dict valueForKey:@"effectSides"];
+    if(sides!=nil)
+    {
+        effectSides= [sides intValue]>3?0:[sides intValue];
+    }else{
+        effectSides = effectSideEnemy;
+    }
+    NSNumber *selfOrNot = [dict valueForKey:@"effectSelfOrNot"];
+    if(selfOrNot!=nil)
+    {
+        effectSelfOrNot= [selfOrNot intValue]>3?0:[selfOrNot intValue];
+    }else{
+        effectSelfOrNot = effectExceptSelf;
+    }
+    
+    int rangeRadius=50;
+    NSNumber *radius = [dict valueForKey:@"effectRadius"];
+    if(radius!=nil)
+    {
+        rangeRadius = [radius intValue]<=0?100:[radius intValue];
+       
+    }
+    rangeWidth= rangeRadius*2;
+    rangeHeight=rangeRadius*2;
+    double rangeAngle= M_PI/2;
+    
+    NSNumber *angle = [dict valueForKey:@"effectAngle"];
+    if(angle!=nil)
+    {
+        rangeAngle = ([angle doubleValue]<M_PI*-2||[angle doubleValue]>M_PI*2)? M_PI/2:[angle doubleValue];
+       
+    }
     
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, 50, M_PI/4*7, M_PI/4*1,NO);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, 50, rangeAngle/(-2), rangeAngle/2,NO);
     CGPathCloseSubpath(attackRange);
     CGPathRetain(attackRange);
 }
-
 
 @end
