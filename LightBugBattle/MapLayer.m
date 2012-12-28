@@ -16,6 +16,8 @@
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
         
+        knockOutObjs = [[NSMutableArray alloc] init];
+        
         cameraControl = [MapCameraControl node];
         
         mapBody = aSprite;
@@ -266,6 +268,40 @@
     // The best way is return a final velocity, and let the |setCharacterWithVelocity| out of here.
     [theCharacter setCharacterWithVelocity:velocity];
 }
+
+-(void) knockOut:(Character*)theCharacter vel:(CGPoint)velocity
+{
+    KnockOutObject* objs = [KnockOutObject node];
+    [objs setChar:theCharacter vel:velocity];
+    
+    [self schedule:@selector(followUpdate:)];
+}
+
+-(void) followUpdate:(ccTime) dt
+{
+    //prevent index errors
+    NSMutableArray* objsToRemove = [[NSMutableArray alloc] init];
+    
+    for ( int i=0; i<knockOutObjs.count; i++)
+    {
+        KnockOutObject* temp = [knockOutObjs objectAtIndex:i];
+        float ratio = powf( 0.9, temp.decreaseCount);
+        CGPoint vel = ccpMult( temp.velocity, ratio);
+        
+        temp.character.position = ccpAdd( temp.character.position, vel);
+        
+        if( temp.decreaseCount >= 100 )
+            [objsToRemove addObject:knockOutObjs];
+    }
+    
+    for( int i=0; i<objsToRemove.count; i++)
+    {
+        [knockOutObjs removeObject:[objsToRemove objectAtIndex:i]];
+    }
+    
+    [objsToRemove removeAllObjects];
+}
+
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
 //    [cameraControl followTarget:NULL];

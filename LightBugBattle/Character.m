@@ -253,6 +253,8 @@
         }
     }
     
+    
+    
     [event.defender receiveAttackEvent:event];
 }
 

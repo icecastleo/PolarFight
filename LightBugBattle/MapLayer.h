@@ -12,6 +12,7 @@
 #import "Character.h"
 #import "Helper.h"
 #import "Barrier.h"
+#import "KnockOutObject.h"
 
 @class Character;
 @interface MapLayer : CCLayer {
@@ -19,6 +20,9 @@
 //    NSMutableArray* characters;
     NSMutableArray* barriers;
     CCSprite* mapBody;
+    
+    NSMutableArray* knockOutObjs;
+    
 }
 
 @property (strong, readonly) NSMutableArray* characters;
@@ -36,5 +40,5 @@
 -(void) setMapBlocks;
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
-
+-(void) knockOut:(Character*)theCharacter vel:(CGPoint)velocity;
 @end
