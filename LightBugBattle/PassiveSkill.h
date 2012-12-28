@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Skill.h"
-#import "CharacterEventHandler.h"
+#import "CharacterEventDelegate.h"
 
-@interface PassiveSkill : Skill<CharacterEventHandler> {
+@interface PassiveSkill : NSObject<CharacterEventDelegate> {
     
 }
 

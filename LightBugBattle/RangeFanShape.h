@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "RangeType.h"
+#import "Range.h"
 
-@interface RangeFanShape : RangeType {
+@interface RangeFanShape : Range {
     
 }
 

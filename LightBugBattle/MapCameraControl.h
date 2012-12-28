@@ -27,6 +27,6 @@
 -(void) setMap:(CCSprite*)theMap mapLayer:(CCNode*)mapLayer;
 -(void) moveCameraX:(float)moveX Y:(float)moveY;
 -(void) moveCameraToX:(float)moveX Y:(float)moveY;
--(void) followTarget:(CCSprite*)theTarget;
+//-(void) followTarget:(CCSprite*)theTarget;
 
 @end

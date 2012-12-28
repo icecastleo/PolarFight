@@ -21,7 +21,7 @@
 -(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
     DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeSkill damager:aCharacter];
     
-    [bCharacter handleReceiveDamageEvent:event];
+    [bCharacter receiveDamageEvent:event];
 }
 
 @end

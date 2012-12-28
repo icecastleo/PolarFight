@@ -17,34 +17,22 @@
         baseDamage = aNumber;
         _type = aType;
         _damager = aCharacter;
-        bonus = 0;
-        multiplier = 1;
+        _bonus = 0;
+        _multiplier = 1;
     }
     return self;
 }
 
--(void)addDamage:(float)aBonus {
-    bonus += aBonus;
-}
-
--(void)subtractDamage:(float)aBonus {
-    bonus -= aBonus;
-}
-
--(void)addMultiplier:(float)aMultiplier {
-    multiplier *= multiplier;
-}
-
--(void)subtractMultiplier:(float)aMultiplier {
-    multiplier /= multiplier;
-}
-
 -(int)damage {
-    if (multiplier == 0) {
+    if (_multiplier == 0) {
         return 0;
     }
     
-    return MAX(1, baseDamage * multiplier + bonus);
+    return MAX(1, baseDamage * _multiplier + _bonus);
+}
+
+-(Damage *)convertToDamage {
+    return [[Damage alloc] initWithValue:self.damage damageType:_type damager:_damager];
 }
 
 @end

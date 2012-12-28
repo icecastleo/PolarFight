@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "DependentAttribute.h"
-#import "xmlParsing.h"
+#import "XMLParsingDelegate.h"
 
 @class Character;
 
-@interface Attribute : NSObject <xmlParsing> {
+@interface Attribute : NSObject <XMLParsingDelegate> {
     float quadratic;
     float linear;
     float constantTerm;

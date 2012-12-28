@@ -22,7 +22,6 @@
     if(self = [super init]) {
 //        NSAssert(type == statusUnknown, @"Every CharacterStatus should init its type!!");
         type = statusType;
-        modifierMap = [[ModifierMap alloc] init];
         isDead = false;
     }
     return self;
@@ -39,13 +38,5 @@
 //-(void)update {
 //    [NSException raise:@"Called abstract method!" format:@"You should override update in CharacterStatus."];
 //}
-
--(void)addAttributeModifier:(AttributeModifier*)modifier toAttribute:(CharacterAttributeType)attribute onCondition:(ConditionType)condition {
-    [modifierMap addAttributeModifier:modifier toAttribute:attribute onCondition:condition];
-}
-
--(float)modifyAttributeValue:(float)value onAttribute:(CharacterAttributeType)attribute onCondition:(ConditionType)condition {
-    return [modifierMap modifyAttributeValue:value onAttribute:attribute onCondition:condition];
-}
 
 @end
