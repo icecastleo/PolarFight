@@ -24,16 +24,13 @@
 
 -(id) init
 {
-
 	if( (self=[super init]) ) {
 		
         CGSize size = [CCDirector sharedDirector].winSize;
         
-        
-        
         //first you need a MAP and a layer to put MAP
         //*CCNode can be a layer
-        layerMap = [Map node];
+        
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
         
@@ -43,9 +40,8 @@
         
         //the camera need to be add into the map layer
         //(it wont display but not adding it will cause error)
-        [layerMap setMap:map];
         
-        
+        layerMap = [[MapLayer alloc] initWithMapSprite:map];
         
         //Some setting for testing the CameraControl
         moveMap = false;
@@ -65,13 +61,13 @@
         man2 = [CCSprite spriteWithFile:@"ftr1_fr1.gif"];
         man3 = [CCSprite spriteWithFile:@"avt4_fr1.gif"];
         
-        [layerMap addCharacter:man1 position:ccp(100,200)];
-        [layerMap addCharacter:man2 position:ccp(200,300)];
-        [layerMap addCharacter:man3 position:ccp(-200,100)];
-        
-        [man1 setPosition:ccp( 0, 100)];
-        [man2 setPosition:ccp( -100, 0)];
-        [man3 setPosition:ccp( -300,100)];
+//        [layerMap addCharacter:man1 position:ccp(100,200)];
+//        [layerMap addCharacter:man2 position:ccp(200,300)];
+//        [layerMap addCharacter:man3 position:ccp(-200,100)];
+//        
+//        [man1 setPosition:ccp( 0, 100)];
+//        [man2 setPosition:ccp( -100, 0)];
+//        [man3 setPosition:ccp( -300,100)];
         
         
         [self addChild:layerMap];
@@ -101,17 +97,17 @@
         if( temp < 0.3 )
         {
             moveTarget = man1;
-            [[layerMap cameraControl] followTarget:man1];
+//            [[layerMap cameraControl] followTarget:man1];
         }
         else if( temp < 0.6)
         {
             moveTarget = man2;
-            [[layerMap cameraControl] followTarget:man2];
+//            [[layerMap cameraControl] followTarget:man2];
         }
         else
         {
             moveTarget = man3;
-            [[layerMap cameraControl] followTarget:man3];
+//            [[layerMap cameraControl] followTarget:man3];
         }
         
         return YES;
@@ -122,7 +118,7 @@
         return YES;
     }
     moveMap = true;
-    [[layerMap cameraControl] followTarget:NULL];
+//    [[layerMap cameraControl] followTarget:NULL];
     return YES;
 }
 
@@ -163,7 +159,8 @@
 }
 -(void) moveUpdate:(ccTime) dt
 {
-    [layerMap moveCharacter:moveTarget velocity:ccp(moveAmount.x*dt, moveAmount.y*dt )];
+//    [layerMap moveCharacter:moveTarget withVelocity:ccp(moveAmount.x*dt, moveAmount.y*dt)];
+
     //[moveTarget setPosition:ccpAdd(moveTarget.position, ccp(moveAmount.x*dt, moveAmount.y*dt ) )];
 }
 

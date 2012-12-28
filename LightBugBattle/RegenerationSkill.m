@@ -18,8 +18,8 @@
     return self;
 }
 
--(void)handleRoundEndEvent {
-    [self.owner getHeal:value];
+-(void)characterDidRoundEnd:(Character *)sender {
+    [sender getHeal:value];
 }
 
 

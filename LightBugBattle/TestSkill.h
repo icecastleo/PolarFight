@@ -8,19 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "RangeType.h"
+#import "Range.h"
 
 @class  Character;
 @interface TestSkill : NSObject {
     NSString *name;
-    RangeType *effectRange;
+    Range *effectRange;
     __weak Character *character;
     NSMutableArray *effectSet;
 }
 -(id) initWithCharacter:(Character*)aCharacter rangeName:(NSString*) rangeName;
--(id) initWithCharacter:(Character*)aCharacter rangeType:(RangeType*) range;
--(NSMutableArray*) getEffectTargets:(NSMutableArray*)enemies;
+-(id) initWithCharacter:(Character*)aCharacter rangeType:(Range*) range;
 -(void) showAttackRange:(BOOL)visible;
 -(void) setRangeRotation:(float) offX:(float) offY;
--(void) doSkill:(NSMutableArray*)targets;
+-(void) execute;
 @end

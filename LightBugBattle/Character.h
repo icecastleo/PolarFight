@@ -14,11 +14,11 @@
 #import "Attribute.h"
 #import "PassiveSkill.h"
 #import "DamageEvent.h"
-#import "CharacterEventHandler.h"
+#import "CharacterEventDelegate.h"
 
 @class BattleController;
 
-@interface Character : NSObject <xmlParsing,CharacterEventHandler> {
+@interface Character : NSObject <XMLParsingDelegate> {
     NSMutableArray *pointArray;
     TestSkill *skill;
     CGContextRef context;
@@ -73,13 +73,15 @@
 -(void)setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
 -(void)setCharacterWithVelocity:(CGPoint)velocity;
 
--(void)useSkill:(NSMutableArray*)characters;
+-(void)useSkill;
 -(void)attackCharacter:(Character*)target withAttackType:(AttackType)type;
 
-// TODO: Does "CharacterEventHandler" need to add this method?
--(void)handleReceiveAttackEvent:(AttackEvent*)event;
+-(void)receiveAttackEvent:(AttackEvent*)event;
+-(void)receiveDamageEvent:(DamageEvent *)event;
 -(void)getHeal:(int)heal;
--(void)showAttackRange:(BOOL)visible;
+
+-(void)handleRoundStartEvent;
+-(void)handleRoundEndEvent;
 
 -(void)setPosition:(CGPoint)position;
 -(CGPoint) position;

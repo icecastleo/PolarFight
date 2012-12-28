@@ -19,6 +19,8 @@
 
 -(void)setCharacter:(Character *)character {
     // TODO: Maybe add some defense or?
+    
+    // TODO: Handle strengths and weaknesses?
 }
 
 @end

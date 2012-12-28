@@ -28,7 +28,7 @@
 //    id<GameState> state;
     
     Character *currentCharacter;
-    NSMutableArray *characters;
+//    NSMutableArray *characters;
     
     bool canMove;
     bool isMove;
@@ -41,10 +41,12 @@
 //@property (readonly) BattleStatusLayer *statusLayer;
 //@property MapLayer *mapLayer;
 
--(void)addCharacter:(Character*)character;
--(void)removeCharacter:(Character*)character;
+@property (readonly) NSMutableArray *characters;
 
++(BattleController *)currentInstance;
 
+-(void)addCharacter:(Character *)character;
+-(void)removeCharacter:(Character *)character;
 
 @end
 

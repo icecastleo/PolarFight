@@ -11,29 +11,38 @@
 @implementation MapLayer
 @synthesize cameraControl;
 
--(id) init
-{
-    if((self=[super init]))
-    {
-        cameraControl = [MapCameraControl node];
-        characters = [[NSMutableArray alloc] init];
+-(id)initWithMapSprite:(CCSprite*)aSprite {
+    if((self=[super init])) {
+        _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
         
+        cameraControl = [MapCameraControl node];
+        
+        mapBody = aSprite;
+//        [mapBody setPosition:ccp(0,0)];
+        
+        [cameraControl setMap:mapBody mapLayer:self];
+        
+        [self addChild:cameraControl];
+        [self addChild:mapBody z:0];
+        
+        CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
+
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
+        
     }
     return self;
 }
 
--(void) addCharacter:(Character*)theCharacter
-{
-    [characters addObject:theCharacter];
+-(void)addCharacter:(Character*)aCharacter {
+    [_characters addObject:aCharacter];
     CGSize mapSize = mapBody.boundingBox.size;
-    CGSize charaSize = theCharacter.sprite.boundingBox.size;
+    CGSize charaSize = aCharacter.sprite.boundingBox.size;
     
     // Need to be done at map
-    if(theCharacter.player == 1)
+    if(aCharacter.player == 1)
     {
-        theCharacter.position =
+        aCharacter.position =
         ccp(
             -1*CCRANDOM_0_1()*mapSize.width/2*0.8 + charaSize.width/2,
             CCRANDOM_0_1()*mapSize.height*0.8 - mapSize.height/2
@@ -41,38 +50,35 @@
     }
     else
     {
-        theCharacter.position =
+        aCharacter.position =
         ccp(
             CCRANDOM_0_1()*mapSize.width/2*0.8 - charaSize.width/2,
             CCRANDOM_0_1()*mapSize.height*0.8 - mapSize.height/2
             );
     }
     
-    [self addChild:theCharacter.sprite z:1000 - theCharacter.position.y];
+    [self addChild:aCharacter.sprite z:1000 - aCharacter.position.y];
 }
 
--(void) addBarrier:(Barrier *)theBarrier
-{
+-(void)addBarrier:(Barrier *)theBarrier {
     [barriers addObject:theBarrier];
     [self addChild:theBarrier z:1000 - theBarrier.center.y];
 }
 
--(void)removeCharacter:(Character *)character
-{
-    [characters removeObject:character];
+-(void)removeCharacter:(Character *)character {
+    [_characters removeObject:character];
 }
 
--(void) setMap:(CCSprite*)theMap
-{
-    mapBody = theMap;
-    [cameraControl setMap:theMap mapLayer:self];
-    
-    [self addChild:cameraControl];
-    [self addChild:mapBody z:0];
-    CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
-}
+//-(void)setMap:(CCSprite*)theMap {
+//    mapBody = theMap;
+//    [cameraControl setMap:theMap mapLayer:self];
+//    
+//    [self addChild:cameraControl];
+//    [self addChild:mapBody z:0];
+//    CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
+//}
 
--(void) setMapBlocks
+-(void)setMapBlocks
 {
     for( int x=0; x<128; x++ )
     {
@@ -95,15 +101,12 @@
     }
 }
 
--(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location
-{
+-(void)moveCharacterTo:(Character*)theCharacter position:(CGPoint)location {
     //int x = (location.x + mapBody.boundingBox.size.width/2)/10;
     //int y = (location.y + mapBody.boundingBox.size.height/2)/10;
     
     float moveX = theCharacter.sprite.position.x;
     float moveY = theCharacter.sprite.position.y;
-    
-    
     
     CGPoint possibleLocation[7];
     Boolean possibleLocationKey[7];
@@ -126,9 +129,9 @@
     
     
     // check character collide
-    for( int i=0; i<characters.count; i++ )
+    for( int i=0; i<_characters.count; i++ )
     {
-        if( [characters objectAtIndex:i] == theCharacter )
+        if( [_characters objectAtIndex:i] == theCharacter )
         {
             continue;
         }
@@ -140,8 +143,8 @@
                 continue;
             }
         
-            CGPoint targetLocation = [[characters objectAtIndex:i] sprite].position;
-            float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width/2;
+            CGPoint targetLocation = [[_characters objectAtIndex:i] sprite].position;
+            float targetRadius = [[_characters objectAtIndex:i] sprite].boundingBox.size.width/2;
             float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
             
             if( ccpDistance(possibleLocation[x], targetLocation) < ( targetRadius + selfRadius ))
@@ -250,29 +253,29 @@
     [self reorderChild:theCharacter.sprite z: 1000 - moveY];
     
     theCharacter.position = ccp(moveX,moveY);
+    
+    [cameraControl moveCameraToX:moveX Y:moveY];
 }
 
--(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity
-{
-    [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
+-(void)moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity {
+    if (velocity.x != 0 && velocity.y != 0) {
+        [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
+    }
+    
     // TODO: Give the final velocity to character.
     // The best way is return a final velocity, and let the |setCharacterWithVelocity| out of here.
     [theCharacter setCharacterWithVelocity:velocity];
 }
 
-
-
--(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    [cameraControl followTarget:NULL];
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+//    [cameraControl followTarget:NULL];
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
     return YES;
 }
 
--(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
-{
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
@@ -280,7 +283,7 @@
     lastPoint = [[CCDirector sharedDirector] convertToGL:lastPoint];
     
     CGPoint diff = ccp( location.x - lastPoint.x, location.y - lastPoint.y );
-    [cameraControl moveCameraX:-0.5*diff.x Y:-0.5*diff.y];
+    [cameraControl moveCameraX: -0.5 * diff.x Y: -0.5 * diff.y];
 }
 
 @end

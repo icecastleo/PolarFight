@@ -26,7 +26,7 @@
     return [self initWithCharacter:aCharacter rangeType:range];
 }
 
--(id) initWithCharacter:(Character*)aCharacter rangeType:(RangeType*) range {
+-(id) initWithCharacter:(Character*)aCharacter rangeType:(Range*)range {
     if( (self=[super init]) ) {    
         character = aCharacter;
         [range setCharacter:character];
@@ -40,9 +40,8 @@
     return self;
 }
 
--(void) doSkill:(NSMutableArray*)targets
-{
-    NSMutableArray *effectTargets= [self getEffectTargets:targets];
+-(void) execute {
+    NSMutableArray *effectTargets= [effectRange getEffectTargets];
     for (Character* target in effectTargets) {
         for (Effect *effectItem in effectSet) {
             [effectItem doEffectFromCharacter:character toCharacter:target];
@@ -50,17 +49,11 @@
     }
 }
 
--(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies
-{
-    return [effectRange getEffectTargets:enemies];
-}
--(void) showAttackRange:(BOOL)visible
-{
+-(void) showAttackRange:(BOOL)visible {
     effectRange.rangeSprite.visible = visible;
 }
 
--(void) setRangeRotation:(float) offX:(float) offY
-{
+-(void) setRangeRotation:(float)offX :(float)offY {
     [effectRange setRotation:offX :offY];
 }
 

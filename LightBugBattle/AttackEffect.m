@@ -8,7 +8,7 @@
 
 #import "AttackEffect.h"
 #import "AttackEvent.h"
-#import "AttackEventHandler.h"
+#import "Character.h"
 
 @implementation AttackEffect
 
@@ -20,9 +20,7 @@
 }
 
 -(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
-    AttackEvent *attackEvent = [[AttackEvent alloc] initWithAttacker:aCharacter attackType:kAttackNoraml defender:bCharacter];
-    
-    [bCharacter handleReceiveAttackEvent:attackEvent];
+    [aCharacter attackCharacter:bCharacter withAttackType:type];
 }
 
 @end

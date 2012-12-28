@@ -11,39 +11,59 @@
 #import "PartyParser.h"
 #import "Character.h"
 
-@interface SwitchCharacterState : NSObject<GameState>
-@end
-
-@implementation SwitchCharacterState
-
--(void)update:(ccTime)delta {
-    
-}
-
-@end
+//@interface SwitchCharacterState : NSObject<GameState> {
+//    BOOL run;
+//}
+//
+//@end
+//
+//@implementation SwitchCharacterState
+//
+//-(id)init {
+//    if(self = [super init]) {
+//        run = NO;
+//    }
+//    return self;
+//}
+//
+//-(void)update:(ccTime)delta {
+//    if (run == YES) {
+//        return;
+//    }
+//    
+//    run = YES;
+//    
+//    
+//    run = NO;
+//}
+//
+//@end
 
 @implementation BattleController
+@dynamic characters;
 
 static int kMoveMultiplier = 40;
 
+static BattleController* currentInstance;
+
++(BattleController *)currentInstance {
+    return currentInstance;
+}
+
 -(id)init {
     if(self = [super init]) {
-        
-        // init MAP
-        mapLayer = [MapLayer node];
-        [self addChild:mapLayer];
-        
-        // first you need a MAP and a layer to put MAP
-        // *CCNode can be a layer
+        // You need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
-        // some map setting
-        [map setPosition:ccp(0,0)];
+        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
         
-        // the camera need to be add into the map layer (it wont display but not adding it will cause error)
-        [mapLayer setMap:map];
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+
+        [mapLayer setPosition:ccp(winSize.width/2, winSize.height/2)];
         
-        //testing add barriers
+        [self addChild:mapLayer];
+        
+        // Testing add barriers
         Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
         [tree setPosition:ccp(0,0)];
         [tree setShapeRoundRadius:10 center:ccp(10,-30)];
@@ -71,28 +91,31 @@ static int kMoveMultiplier = 40;
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
-        characters = [[NSMutableArray alloc] init];
-        
         [self setCharacterArrayFromSelectLayer];
         
         canMove = YES;
         isMove = NO;
         
         currentIndex = 0;
-        currentCharacter = characters[currentIndex];
+        currentCharacter = self.characters[currentIndex];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
         [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
         
         countdown = [currentCharacter getAttribute:kCharacterAttributeTime].value;
-//        countdown = currentCharacter.moveTime;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
-        [currentCharacter showAttackRange:YES];
+        [currentCharacter handleRoundStartEvent];
         
         [self scheduleUpdate];
     }
+    currentInstance = self;
+    
     return self;
+}
+
+-(NSMutableArray *)characters {
+    return mapLayer.characters;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
@@ -117,24 +140,19 @@ static int kMoveMultiplier = 40;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
-
 }
 
-//-(Character *)createCharacterWithType:(CharacterType)type {
-//    // TODO: All
-//    return nil;
-//}
-
 -(void)addCharacter:(Character *)character {
-    [characters addObject:character];
     [mapLayer addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
-    [characters removeObject:character];    
+    
+    if(currentCharacter == character) {
+        [self endMove];
+    }
 }
-
 
 -(void)update:(ccTime)delta {
     
@@ -142,7 +160,6 @@ static int kMoveMultiplier = 40;
         return;
     
     if(!isMove && dPadLayer.isButtonPressed) {
-        [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
         isMove = YES;
         statusLayer.startLabel.visible = NO;
         [statusLayer stopSelect];
@@ -167,7 +184,7 @@ static int kMoveMultiplier = 40;
         }
         
         if(dPadLayer.isButtonPressed) {
-            [currentCharacter useSkill:characters];
+            [currentCharacter useSkill];
             return;
         }
         
@@ -186,20 +203,20 @@ static int kMoveMultiplier = 40;
 
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
-    currentIndex = ++currentIndex % characters.count;
+    currentIndex = ++currentIndex % self.characters.count;
     
-    currentCharacter = characters[currentIndex];
+    currentCharacter = self.characters[currentIndex];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
     
     // select character
     [statusLayer startSelectCharacter:currentCharacter];
-    [[mapLayer cameraControl] followTarget:currentCharacter.sprite];
     
     countdown  = [currentCharacter getAttribute:kCharacterAttributeTime].value;
 //    countdown = currentCharacter.moveTime;
     [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
     
+    [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
     [currentCharacter handleRoundStartEvent];
     
     statusLayer.startLabel.visible = YES;
