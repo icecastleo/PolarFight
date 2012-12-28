@@ -63,7 +63,7 @@
 
 @property (nonatomic, strong) NSMutableArray *pointArray;
 
--(id)initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel;
+-(id)initWithId:(NSString *)anId andLevel:(int)aLevel;
 
 -(void)addAttribute:(Attribute*)attribute;
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
@@ -86,7 +86,7 @@
 -(void)setPosition:(CGPoint)position;
 -(CGPoint) position;
 
--(id)initWithXMLElement:(GDataXMLElement *)aElement;
+-(id)initWithXMLElement:(GDataXMLElement *)anElement;
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void)addAuraStatus:(StatusType)type;

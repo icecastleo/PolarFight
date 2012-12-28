@@ -6,8 +6,9 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "Character.h"
+
 #import "CharacterSprite.h"
+#import "Character.h"
 
 @implementation CharacterSprite
 

@@ -33,10 +33,39 @@
 @synthesize pointArray;
 
 // FIXME: fix name reference.
--(id)initWithName:(NSString *)aName fileName:(NSString *)aFilename andLevel:(int)aLevel {
+-(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
     if ((self = [super init])) {
-        _name = aName;
-        _picFilename = aFilename;
+        
+        timeStatusDictionary = [[NSMutableDictionary alloc] init];
+        auraStatusDictionary = [[NSMutableDictionary alloc] init];
+        attributeDictionary = [[NSMutableDictionary alloc] init];
+        passiveSkillArray = [[NSMutableArray alloc] init];
+        
+        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:anId];;
+        
+        //get tag's attributes
+        for (GDataXMLNode *attribute in characterElement.attributes) {
+            if ([attribute.name isEqualToString:@"name"]) {
+                _name = attribute.stringValue;
+            } else if ([attribute.name isEqualToString:@"img"]) {
+                _picFilename = attribute.stringValue;
+            }
+        }
+        
+        //get tag's children
+        for (GDataXMLElement *element in characterElement.children) {
+            if ([element.name isEqualToString:@"attributes"]) {
+                for (GDataXMLElement *attribute in element.children) {
+                    Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
+                    [self addAttribute:attr];
+                }
+            }
+            //TODO: skill part
+            else if ([element.name isEqualToString:@"skill"]) {
+                
+            }
+        }
+        
         level = aLevel;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
@@ -48,16 +77,10 @@
 //        attackType = kAttackNoraml;
         armorType = kArmorNoraml;
         
-        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
+//        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
+        [self setSkillForCharacter:_name];
         
         context = UIGraphicsGetCurrentContext();
-        
-        timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        auraStatusDictionary = [[NSMutableDictionary alloc] init];
-        
-        attributeDictionary = [[NSMutableDictionary alloc] init];
-        
-        passiveSkillArray = [[NSMutableArray alloc] init];
         
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
@@ -65,46 +88,25 @@
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
         [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:25 damagePercent:100]];
         [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
+//        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
+        [self setPassiveSkillForCharacter:_name];
     }
     return self;
 }
 
--(id)initWithXMLElement:(GDataXMLElement *)element {
+
+-(id)initWithXMLElement:(GDataXMLElement *)anElement {
     NSString *tempId;
     NSString *tempLevel;
-    for (GDataXMLNode *attribute in element.attributes) {
+    for (GDataXMLNode *attribute in anElement.attributes) {
         if ([attribute.name isEqualToString:@"id"]) {
             tempId = attribute.stringValue;
         } else if ([attribute.name isEqualToString:@"level"]) {
             tempLevel = attribute.stringValue;
         }
     }
-    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:tempId];;
     
-    NSString *tempName;
-    NSString *tempFileName;
-    for (GDataXMLNode *attribute in characterElement.attributes) {
-        if ([attribute.name isEqualToString:@"name"]) {
-            tempName = attribute.stringValue;
-        } else if ([attribute.name isEqualToString:@"img"]) {
-            tempFileName = attribute.stringValue;
-        }
-    }
-    
-    self = [self initWithName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
-    
-    for (GDataXMLElement *e in characterElement.children) {
-        if ([e.name isEqualToString:@"attributes"]) {
-            for (GDataXMLElement *attribute in e.children) {
-                Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
-                [self addAttribute:attr];
-            }
-        }
-        //TODO: skill part
-        else if ([e.name isEqualToString:@"skill"]) {
-            
-        }
-    }
+    self = [self initWithId:tempId andLevel:tempLevel.intValue];
     
     return self;
 }
@@ -285,6 +287,8 @@
     
     [hp decreaseCurrentValue:damage.value];
     
+    [self bloodHint:damage.value IsCreased:NO];
+    
     for (PassiveSkill *p in passiveSkillArray) {
         if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
             [p character:self didReceiveDamage:damage];
@@ -316,7 +320,7 @@
 
 -(void)getHeal:(int)heal {
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
-    
+    [self bloodHint:heal IsCreased:YES];
     NSAssert(hp != nil, @"A character without hp gets heal...");
     
     [hp increaseCurrentValue:heal];
@@ -400,6 +404,45 @@
 
 -(CGRect)boundingBox {
     return sprite.boundingBox;
+}
+
+-(void)setSkillForCharacter:(NSString *)aName {
+    if ([aName isEqualToString:@"Swordsman"]) {
+        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
+    }
+}
+
+-(void)setPassiveSkillForCharacter:(NSString *)aName {
+    if ([aName isEqualToString:@"Swordsman"]) {
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
+    }
+}
+
+-(void)bloodHint:(int)aValue IsCreased:(BOOL)increased {
+    NSString *valueString = [[NSString alloc] initWithFormat:@"%d", aValue];
+    if (increased) {
+        [self displayMessage:valueString R:0 G:255 B:0];
+    }else {
+        [self displayMessage:valueString R:255 G:0 B:0];
+    }
+}
+
+-(void)displayMessage:(NSString*)message R:(int)red G:(int)green B:(int)blue {
+	CCLabelTTF *label = [CCLabelBMFont labelWithString:message fntFile:@"WhiteFont.fnt"];
+    label.position =  ccp([self boundingBox].size.width / 2, [self boundingBox].size.height);
+    label.anchorPoint = CGPointMake(0.5, 0);
+    [self.sprite addChild:label z:1];
+    [label setColor:(ccColor3B) {red, green, blue}];
+    
+	id scaleTo = [CCScaleTo actionWithDuration:0.1f scale:1.3f];
+	id scaleBack = [CCScaleTo actionWithDuration:0.3f scale:0.1];
+	id seq = [CCSequence actions:scaleTo, scaleBack, [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)], nil];
+	[label runAction:seq];
+    
+}
+
+-(void)removeLabel:(id)sender {
+	[self.sprite removeChild:sender cleanup:YES];
 }
 
 @end
