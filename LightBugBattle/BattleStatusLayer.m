@@ -54,7 +54,7 @@
 
 -(void) startSelectCharacter:(Character*)character {
     
-//    selectSprite should be on the same layer as the character
+//    Select sprite should be on the same layer as the character is.
     [character.sprite.parent addChild:selectSprite];
     selectSprite.position = character.position;
     [selectSprite runAction:selectAction];

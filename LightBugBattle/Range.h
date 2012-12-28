@@ -26,7 +26,7 @@ typedef enum{
     effectSelf
 }EffectSelfOrNot;
 
-@interface RangeType : NSObject {
+@interface Range : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
     __weak Character* character;
@@ -43,7 +43,7 @@ typedef enum{
 @property (nonatomic) CGMutablePathRef attackRange;
 
 -(id) initWithCharacter:(Character*) aCharacter;
--(NSMutableArray *) getEffectTargets:(NSMutableArray *)enemies;
+-(NSMutableArray *) getEffectTargets;
 -(BOOL) containTarget:(Character *)temp;
 -(void) setRotation:(float) offX:(float) offY;
 @end

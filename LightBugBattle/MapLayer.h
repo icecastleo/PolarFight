@@ -16,10 +16,15 @@
 @class Character;
 @interface MapLayer : CCLayer {
     int mapBlock[128][53];
-    NSMutableArray* characters;
+//    NSMutableArray* characters;
     NSMutableArray* barriers;
     CCSprite* mapBody;
 }
+
+@property (strong, readonly) NSMutableArray* characters;
+@property (weak, readonly) MapCameraControl* cameraControl;
+
+-(id)initWithMapSprite:(CCSprite*)aSprite;
 
 -(void) addCharacter:(Character*)theCharacter;
 -(void) removeCharacter:(Character*)theCharacter;
@@ -27,8 +32,7 @@
 -(void) addBarrier:(Barrier *)theBarrier;
 //-(void) removeBarrier:(Barrier*)
 
-@property (readwrite, unsafe_unretained) MapCameraControl* cameraControl;
--(void) setMap:(CCSprite*)theMap;
+//-(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
 -(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;

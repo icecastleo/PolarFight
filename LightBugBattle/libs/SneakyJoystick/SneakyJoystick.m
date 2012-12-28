@@ -92,7 +92,7 @@ deadRadius;
 
 	float angle = atan2f(dy, dx); // in radians
 	if(angle < 0){
-		angle		+= SJ_PI_X_2;
+		angle += SJ_PI_X_2;
 	}
 	float cosAngle;
 	float sinAngle;

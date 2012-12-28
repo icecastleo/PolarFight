@@ -6,8 +6,8 @@
 //
 //
 
-#import "RangeType.h"
+#import "Range.h"
 
-@interface RangeFarCircle : RangeType
+@interface RangeFarCircle : Range
 
 @end

@@ -10,10 +10,10 @@
 #import "SkillKit.h"
 
 @interface AuraStatus : Status {
-    RangeType *range;
+    Range *range;
 }
 
--(id)initWithType:(AuraStatusType)type withRange:(RangeType*)range;
+-(id)initWithType:(AuraStatusType)type withRange:(Range*)range;
 
 -(void) addEffectOnCharacter:(Character*)character;
 -(void) removeEffectOnCharacter:(Character*)character;

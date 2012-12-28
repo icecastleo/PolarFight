@@ -11,7 +11,7 @@
 
 @implementation AuraStatus
 
--(id)initWithType:(AuraStatusType)statusType withRange:(RangeType*)rangeType {
+-(id)initWithType:(AuraStatusType)statusType withRange:(Range*)rangeType {
     if(self = [super initWithType:statusType]) {
         range = rangeType;
     }

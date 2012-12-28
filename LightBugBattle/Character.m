@@ -12,10 +12,11 @@
 #import "StatusKit.h"
 #import "StatusFactory.h"
 #import "PartyParser.h"
-#import "AttackEventHandler.h"
 
 // TODO: Delete after test.
 #import "RegenerationSkill.h"
+#import "ReflectAttackDamageSkill.h"
+#import "ContinuousAttackSkill.h"
 
 @implementation Character
 
@@ -62,7 +63,49 @@
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:25 damagePercent:100]];
+        [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
     }
+    return self;
+}
+
+-(id)initWithXMLElement:(GDataXMLElement *)element {
+    NSString *tempId;
+    NSString *tempLevel;
+    for (GDataXMLNode *attribute in element.attributes) {
+        if ([attribute.name isEqualToString:@"id"]) {
+            tempId = attribute.stringValue;
+        } else if ([attribute.name isEqualToString:@"level"]) {
+            tempLevel = attribute.stringValue;
+        }
+    }
+    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:tempId];;
+    
+    NSString *tempName;
+    NSString *tempFileName;
+    for (GDataXMLNode *attribute in characterElement.attributes) {
+        if ([attribute.name isEqualToString:@"name"]) {
+            tempName = attribute.stringValue;
+        } else if ([attribute.name isEqualToString:@"img"]) {
+            tempFileName = attribute.stringValue;
+        }
+    }
+    
+    self = [self initWithName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
+    
+    for (GDataXMLElement *e in characterElement.children) {
+        if ([e.name isEqualToString:@"attributes"]) {
+            for (GDataXMLElement *attribute in e.children) {
+                Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
+                [self addAttribute:attr];
+            }
+        }
+        //TODO: skill part
+        else if ([e.name isEqualToString:@"skill"]) {
+            
+        }
+    }
+    
     return self;
 }
 
@@ -101,7 +144,6 @@
 
 -(void)addPassiveSkill:(PassiveSkill *)aSkill {
     // TODO: How to handle the same skill? (some might have problem)
-    [aSkill setOwner:self];
     [passiveSkillArray addObject:aSkill];
 }
 
@@ -183,7 +225,7 @@
     [skill setRangeRotation:velocity.x :velocity.y];
 }
 
--(void)useSkill:(NSMutableArray *)characters {
+-(void)useSkill {
     [sprite stopAllActions];
     
     CCLOG(@"Player %d's %@ is using skill",player, self.name);
@@ -191,7 +233,7 @@
     state = kCharacterStateUseSkill;
     // TODO: Run skill animation
 
-    [skill doSkill:characters];
+    [skill execute];
     
     // TODO: Need to be called after skill animation
     [self finishAttack];
@@ -201,50 +243,51 @@
     // TODO: Define attack type.
     AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self attackType:type defender:target];
     
-    [self handleSendAttackEvent:event];
+    [self sendAttackEvent:event];
 }
 
--(void)handleSendAttackEvent:(AttackEvent *)event {
+-(void)sendAttackEvent:(AttackEvent *)event {
     for (PassiveSkill *p in passiveSkillArray) {
-        if ([p respondsToSelector:@selector(handleSendAttackEvent:)]) {
-            [p handleSendAttackEvent:event];
+        if ([p respondsToSelector:@selector(character:willSendAttackEvent:)]) {
+            [p character:self willSendAttackEvent:event];
         }
     }
     
-    [event.defender handleReceiveAttackEvent:event];
+    [event.defender receiveAttackEvent:event];
 }
 
--(void)handleReceiveAttackEvent:(AttackEvent *)event {
+-(void)receiveAttackEvent:(AttackEvent *)event {
     Attribute *defense = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeDefense]];
     
-     CCLOG(@"%d",defense == nil);
-    
     if (defense != nil) {
-        [event subtractAttack:defense.value];
-        CCLOG(@"%d",defense.value);
+        event.bonus -= defense.value;
     }
     
-    [self handleReceiveDamageEvent:[event convertToDamageEvent]];
+    [self receiveDamageEvent:[event convertToDamageEvent]];
 }
 
--(void)handleReceiveDamageEvent:(DamageEvent *)event {
+-(void)receiveDamageEvent:(DamageEvent *)event {
     for (PassiveSkill *p in passiveSkillArray) {
-        if ([p respondsToSelector:@selector(handleReceiveDamageEvent:)]) {
-            [p handleReceiveDamageEvent:event];
+        if ([p respondsToSelector:@selector(character:didReceiveDamageEvent:)]) {
+            [p character:self didReceiveDamageEvent:event];
         }
     }
     
-    CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, event.damage);
+    [self receiveDamage:[event convertToDamage]];
+}
+
+-(void)receiveDamage:(Damage *)damage {
+    CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, damage.value);
     
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
     
     NSAssert(hp != nil, @"A character without hp gets damage...");
     
-    [hp decreaseCurrentValue:event.damage];
+    [hp decreaseCurrentValue:damage.value];
     
     for (PassiveSkill *p in passiveSkillArray) {
-        if ([p respondsToSelector:@selector(handleReceiveDamage:)]) {
-            [p handleReceiveDamage:event.damage];
+        if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
+            [p character:self didReceiveDamage:damage];
         }
     }
     
@@ -277,18 +320,13 @@
     state = stateIdle;
 }
 
--(void)showAttackRange:(BOOL)visible {
-    [skill showAttackRange:visible];
-}
-
 -(void)handleRoundStartEvent {
-    [skill showAttackRange:YES];
-    
     for (PassiveSkill *p in passiveSkillArray) {
-        if ([p respondsToSelector:@selector(handleRoundStartEvent)]) {
-            [p handleRoundStartEvent];
+        if ([p respondsToSelector:@selector(characterShouldStartRound:)]) {
+            [p characterShouldStartRound:self];
         }
     }
+    [skill showAttackRange:YES];
 }
 
 -(void)handleRoundEndEvent {
@@ -297,8 +335,8 @@
     state = stateIdle;
     
     for (PassiveSkill *p in passiveSkillArray) {
-        if ([p respondsToSelector:@selector(handleRoundEndEvent)]) {
-            [p handleRoundEndEvent];
+        if ([p respondsToSelector:@selector(characterDidRoundEnd:)]) {
+            [p characterDidRoundEnd:self];
         }
     }
 }
@@ -352,46 +390,6 @@
 
 -(CGRect)boundingBox {
     return sprite.boundingBox;
-}
-
--(id)initWithXMLElement:(GDataXMLElement *)element {
-    NSString *tempId;
-    NSString *tempLevel;
-    for (GDataXMLNode *attribute in element.attributes) {
-        if ([attribute.name isEqualToString:@"id"]) {
-            tempId = attribute.stringValue;
-        } else if ([attribute.name isEqualToString:@"level"]) {
-            tempLevel = attribute.stringValue;
-        }
-    }
-    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:tempId];;
-    
-    NSString *tempName;
-    NSString *tempFileName;
-    for (GDataXMLNode *attribute in characterElement.attributes) {
-        if ([attribute.name isEqualToString:@"name"]) {
-            tempName = attribute.stringValue;
-        } else if ([attribute.name isEqualToString:@"img"]) {
-            tempFileName = attribute.stringValue;
-        }
-    }
-    
-    self = [self initWithName:tempName fileName:tempFileName andLevel:tempLevel.intValue];
-    
-    for (GDataXMLElement *e in characterElement.children) {
-        if ([e.name isEqualToString:@"attributes"]) {
-            for (GDataXMLElement *attribute in e.children) {
-                Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
-                [self addAttribute:attr];
-            }
-        }
-        //TODO: skill part
-        else if ([e.name isEqualToString:@"skill"]) {
-            
-        }
-    }
-    
-    return self;
 }
 
 @end

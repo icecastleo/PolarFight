@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
 
-@protocol xmlParsing <NSObject>
+@protocol XMLParsingDelegate<NSObject>
 
-- (id)initWithXMLElement:(GDataXMLElement *)aElement;
+-(id)initWithXMLElement:(GDataXMLElement *)aElement;
 
 @end

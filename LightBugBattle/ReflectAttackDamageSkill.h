@@ -8,7 +8,7 @@
 
 #import "PassiveSkill.h"
 
-@interface ReflectAttackDamage : PassiveSkill {
+@interface ReflectAttackDamageSkill : PassiveSkill {
     int probability;
     int percent;
 }

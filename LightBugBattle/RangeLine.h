@@ -6,8 +6,8 @@
 //
 //
 
-#import "RangeType.h"
+#import "Range.h"
 
-@interface RangeLine : RangeType
+@interface RangeLine : Range
 
 @end
