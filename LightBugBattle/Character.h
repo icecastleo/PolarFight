@@ -29,7 +29,7 @@
 }
 
 @property (weak) BattleController *controller;
-@property (nonatomic) int player;
+@property int player;
 
 @property (readonly) CharacterType roleType;
 //@property (readonly) AttackType attackType;
@@ -41,15 +41,6 @@
 
 @property (readonly) int level;
 
-//@property (readonly) int maxHp;
-//@property (readonly) int currentHp;
-//
-//@property (readonly) int attack;
-//@property (readonly) int defense;
-//@property (readonly) int speed;
-//@property (readonly) int moveSpeed;
-//@property (readonly) int moveTime;
-
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
 @property (readonly) NSMutableDictionary *auraStatusDictionary;
 
@@ -59,7 +50,7 @@
 @property (readonly) CharacterState state;
 @property (readonly) CharacterDirection direction;
 
-@property CGPoint position;
+@property (readwrite) CGPoint position;
 
 @property (nonatomic, strong) NSMutableArray *pointArray;
 
@@ -83,13 +74,13 @@
 -(void)handleRoundStartEvent;
 -(void)handleRoundEndEvent;
 
--(void)setPosition:(CGPoint)position;
--(CGPoint) position;
-
 -(id)initWithXMLElement:(GDataXMLElement *)anElement;
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void)addAuraStatus:(StatusType)type;
 -(void)removeTimeStatus:(TimeStatusType)type;
+
+-(void)displayString:(NSString *)string withColor:(ccColor3B)color;
+-(void)displayString:(NSString*)string R:(int)red G:(int)green B:(int)blue;
 
 @end

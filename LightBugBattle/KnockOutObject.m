@@ -10,12 +10,14 @@
 
 
 @implementation KnockOutObject
-@synthesize character, velocity, decreaseCount;
 
--(void) setChar:(Character*) theCharacter vel:(CGPoint)theVelocity
-{
-    character = theCharacter;
-    velocity = theVelocity;
-    decreaseCount = 0;
+-(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity {
+    if(self = [super init]) {
+        _character = aCharacter;
+        _velocity = aVelocity;
+        _count = 0;
+    }
+    return self;
 }
+
 @end
