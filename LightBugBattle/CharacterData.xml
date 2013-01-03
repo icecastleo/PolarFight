@@ -8,8 +8,8 @@
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
-            <attribute name="speed" a="0" b="0" c="3"></attribute>
-            <attribute name="moveTime" a="0" b="0" c="600"></attribute>
+            <attribute name="speed" a="0" b="0" c="5"></attribute>
+            <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
             <effects>
@@ -37,7 +37,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="003" name="Enchanter" img="ftr1">
+    <character id="003" name="Enchanter" img="avt1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="200"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -55,7 +55,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="004" name="Priest" img="ftr1">
+    <character id="004" name="Priest" img="bmg1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="200"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -73,7 +73,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="005" name="God" img="ftr1">
+    <character id="005" name="God" img="chr1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -91,7 +91,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="006" name="Bomber" img="ftr1">
+    <character id="006" name="Bomber" img="dvl1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="200"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -109,7 +109,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="007" name="Tank" img="ftr1">
+    <character id="007" name="Tank" img="gsd1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="500"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -127,7 +127,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="008" name="Archer" img="ftr1">
+    <character id="008" name="Archer" img="isd1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="200"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>

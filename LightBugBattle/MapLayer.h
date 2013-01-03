@@ -38,7 +38,7 @@
 
 //-(void) setMap:(CCSprite*)theMap;
 -(void) setMapBlocks;
--(void) moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity;
+-(void) moveCharacter:(Character*)theCharacter velocity:(CGPoint)velocity;
 -(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
 -(void) knockOut:(Character*)character velocity:(CGPoint)velocity;
 @end

@@ -122,9 +122,12 @@ static BattleController* currentInstance;
     //TODO: will get character from selectLayer fuction.
     
     //here is only for test before selectLayer has done.
-    NSString *chrId1 = @"001";
-    NSString *chrId2 = @"002";
-    NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
+//    NSString *chrId1 = @"001";
+//    NSString *chrId2 = @"002";
+//    NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
+    NSArray *testCharacterIdArray = @[@"001",@"002",@"003",@"004"];
+    
+//    NSArray *testCharacterIdArray = @[@"001"];
     
     for (NSString *characterId in testCharacterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
@@ -194,7 +197,7 @@ static BattleController* currentInstance;
         
         // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [mapLayer moveCharacter:currentCharacter withVelocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
+        [mapLayer moveCharacter:currentCharacter velocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }
 }
 

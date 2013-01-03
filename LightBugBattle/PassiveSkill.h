@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Skill.h"
+#import "PositiveSkill.h"
 #import "CharacterEventDelegate.h"
 
 @interface PassiveSkill : NSObject<CharacterEventDelegate> {

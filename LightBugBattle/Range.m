@@ -13,64 +13,78 @@
 @implementation Range
 @synthesize character,attackRange,rangeSprite;
 
-+(id)initWithParameters:(NSMutableDictionary*) dict
-{
-    NSString* rangeName =[dict objectForKey:@"rangeName"];
-    id range=  [NSClassFromString(rangeName) alloc];
++(id)rangeWithParameters:(NSMutableDictionary*)dict {
+    NSString* rangeName = [dict objectForKey:@"rangeType"];
+    Range *range=  [NSClassFromString(rangeName) alloc];
     [range setParameter:dict];
+    [range setSpecialParameter:dict];
     return range;
-    
 }
 
--(void) setCharacter:(Character *)acharacter
-{
-    character = acharacter;
+-(void)setCharacter:(Character *)aCharacter {
+    character = aCharacter;
+    [self setRangeSprite];
+    [character.sprite addChild:rangeSprite];
 }
 
-
--(void) setRotation:(float) offX:(float) offY
-{
-    float angleRadians = atanf((float)offY / (float)offX);
+-(void)setRotation:(float)offX :(float)offY {
+    float angleRadians = atan2f(offY, offX);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-    float cocosAngle = -1* angleDegrees;
-    if (offX < 0) {
-        cocosAngle += 180;
-    }
+    float cocosAngle = -1 * angleDegrees;
+
     rangeSprite.rotation = cocosAngle;
 }
 
-
--(void)setParameter:(NSMutableDictionary*) dict
-{
+-(void)setParameter:(NSMutableDictionary *)dict {
+    sides = [dict valueForKey:@"rangeSides"];
     
-
+    NSAssert(sides != nil, @"You must define rangeSides for a range");
     
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-
+    filters = [dict valueForKey:@"rangeFilters"];
+    
+//    NSNumber *side = [dict valueForKey:@"rangeSide"];
+//    
+//    NSAssert(side != nil, @"You must set a range side.");
+//    NSAssert([side intValue] > kRangeSideBoth, @"You have a wrong value for rangeSide.");
+//    
+//    rangeSide = [side intValue];
+//    
+//    NSNumber *b = [dict valueForKey:@"containSelf"];
+//    if(b != nil)
+//    {
+//        NSAssert([side intValue] > 2, @"You have a wrong value for containSelf.");
+//        containSelf = [b boolValue];
+//    }else{
+//        containSelf = false;
+//    }
 }
 
--(void)showPoints {
+-(void)setSpecialParameter:(NSMutableDictionary *)dict {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
+-(void)setRangeSprite {
     
-    CGContextRef context = NULL;
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-    context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
+    CGContextRef context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
     CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.8 );
     
     CGContextAddPath(context, attackRange);
     CGContextFillPath(context);
     
     // Get CGImageRef
-    CGImageRef imgRef = CGBitmapContextCreateImage( context );
+    CGImageRef imgRef = CGBitmapContextCreateImage(context);
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
-    rangeSprite.position=ccp(character.sprite.texture.contentSize.width/2,character.sprite.texture.contentSize.height/2);
+    rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
-    rangeSprite.visible = NO;
-    [character.sprite addChild:rangeSprite];
+    rangeSprite.visible = YES;
 }
 
--(NSMutableArray *)getEffectTargets {
+-(NSMutableArray *)getEffectTargets {    
+    [self setRotation:character.directionVelocity.x :character.directionVelocity.y];
+    
     NSMutableArray *effectTargets = [NSMutableArray array];
     
     for(Character* temp in [BattleController currentInstance].characters)
@@ -84,32 +98,19 @@
 
 -(BOOL)containTarget:(Character *)temp {
     
-    ///determine if this attack can effect self
-    if(effectSelfOrNot == effectExceptSelf){
-        if(temp == character)
-            return NO;
+    if (![self checkSide:temp]) {
+        return NO;
     }
     
-    ///determine if can effect ally
-    switch (effectSides) {
-        case effectSideAlly:
-            if(temp.player != character.player)
-                return NO;
-            break;
-        case effectSideEnemy:
-            if(temp.player == character.player)
-                return NO;
-            break;
-        case effectSideBoth:
-            break;
-        default:
-            break;
+    if ([self checkFilter:temp]) {
+        return NO;
     }
     
     NSMutableArray *points = temp.pointArray;
+    
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
-        // switch coordinate systems
+        // Switch coordinate systems
         loc = [temp.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
@@ -120,9 +121,37 @@
     return NO;
 }
 
-
--(void)dealloc {
-    CGPathRelease(attackRange);
+-(BOOL)checkSide:(Character *)temp {
+    if ([sides containsObject:kRangeSideAlly]) {
+        if (temp.player == character.player) {
+            return YES;
+        }
+    }
+    
+    if ([sides containsObject:kRangeSideEnemy]) {
+        if (temp.player != character.player) {
+            return YES;
+        }
+    }
+    return NO;
 }
+
+-(BOOL)checkFilter:(Character *)temp {
+    if (filters == nil) {
+        return NO;
+    }
+    
+    if ([filters containsObject:kRangeFilterSelf]) {
+        if (temp == character) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+//-(void)dealloc {
+//    CGPathRelease(attackRange);
+//}
 
 @end

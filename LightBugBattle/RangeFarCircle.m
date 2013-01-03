@@ -15,22 +15,8 @@
 //effectDistance=攻擊距離
 
 
--(void)setParameter:(NSMutableDictionary*) dict {
+-(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
-    NSNumber *sides = [dict valueForKey:@"effectSides"];
-    if(sides!=nil)
-    {
-        effectSides= [sides intValue]>3?0:[sides intValue];
-    }else{
-        effectSides = effectSideEnemy;
-    }
-    NSNumber *selfOrNot = [dict valueForKey:@"effectSelfOrNot"];
-    if(selfOrNot!=nil)
-    {
-        effectSelfOrNot= [selfOrNot intValue]>3?0:[selfOrNot intValue];
-    }else{
-        effectSelfOrNot = effectExceptSelf;
-    }
     int rangeDistance=120;
     
     NSNumber *distance = [dict valueForKey:@"effectDistance"];
@@ -39,8 +25,7 @@
          rangeDistance= [distance intValue]<=0?120:[distance intValue];
       
     }
-    
-    
+
     int effectRadius=40;
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
     if(radius!=nil)
@@ -48,10 +33,9 @@
         effectRadius = [radius intValue]<=0?20:[radius intValue];
         
     }
-    
-    
+        
     rangeWidth= (effectRadius+rangeDistance)*2;
-;
+
     rangeHeight=(effectRadius+rangeDistance)*2;
     
     attackRange = CGPathCreateMutable();

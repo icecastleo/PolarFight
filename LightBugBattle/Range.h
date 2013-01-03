@@ -10,23 +10,18 @@
 #import "cocos2d.h"
 
 @class Character;
-typedef enum {
-    effectSideEnemy,
-    effectSideAlly,
-    effectSideBoth
-} EffectSides;
-
-typedef enum{
-    effectExceptSelf,
-    effectSelf
-}EffectSelfOrNot;
 
 @interface Range : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
     __weak Character* character;
-    EffectSides effectSides;
-    EffectSelfOrNot effectSelfOrNot;
+    
+//    RangeSide rangeSide;
+//    EffectSelfOrNot effectSelfOrNot;
+    
+    NSArray *sides;
+    NSArray *filters;
+    
     CCSprite *rangeSprite;
     int rangeHeight;
     int rangeWidth;
@@ -36,9 +31,9 @@ typedef enum{
 @property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
 
-+(id)initWithParameters:(NSMutableDictionary*) dict;
++(id)rangeWithParameters:(NSMutableDictionary *)dict;
 -(NSMutableArray *) getEffectTargets;
 -(BOOL) containTarget:(Character *)temp;
 -(void) setRotation:(float) offX:(float) offY;
--(void)showPoints;
+-(void)setRangeSprite;
 @end

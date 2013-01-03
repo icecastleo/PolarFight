@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "EffectKit.h"
 
-@interface Skill : NSObject {
+@interface PositiveSkill : NSObject {
 
 }
 
 @property (weak,readwrite) Character *owner;
+-(void)execute;
 
 @end

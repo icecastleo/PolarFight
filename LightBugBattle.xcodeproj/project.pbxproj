@@ -787,7 +787,7 @@
 		9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248219164D40E3007B6E4D /* MapControlExample.m */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
-		9B2AB06816665C0500B78136 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* Skill.m */; };
+		9B2AB06816665C0500B78136 /* PositiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* PositiveSkill.m */; };
 		9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -927,6 +927,8 @@
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
 		9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
+		9BE01A391695E81900B9C427 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
+		9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */; };
 		9BF2DDE6168C8F0300545940 /* ContinuousAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */; };
 		9BFFAE67163E9DBB00073DC5 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -1775,8 +1777,8 @@
 		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
 		9B288209166FA76D0041604F /* Armor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Armor.m; sourceTree = "<group>"; };
-		9B2AB06616665C0400B78136 /* Skill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
-		9B2AB06716665C0500B78136 /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
+		9B2AB06616665C0400B78136 /* PositiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositiveSkill.h; sourceTree = "<group>"; };
+		9B2AB06716665C0500B78136 /* PositiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositiveSkill.m; sourceTree = "<group>"; };
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
 		9B2AB06A16668F6A00B78136 /* PassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveSkill.m; sourceTree = "<group>"; };
 		9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterEventDelegate.h; sourceTree = "<group>"; };
@@ -2061,6 +2063,10 @@
 		9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeStatusEffect.m; sourceTree = "<group>"; };
 		9BDC077F166E3913009559C3 /* AttackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEvent.h; sourceTree = "<group>"; };
 		9BDC0780166E3913009559C3 /* AttackEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEvent.m; sourceTree = "<group>"; };
+		9BE01A371695E81900B9C427 /* HealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealSkill.h; sourceTree = "<group>"; };
+		9BE01A381695E81900B9C427 /* HealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealSkill.m; sourceTree = "<group>"; };
+		9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwordmanSkill.h; sourceTree = "<group>"; };
+		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BF2DDBC168B3A0F00545940 /* BattleControllerEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattleControllerEventDelegate.h; sourceTree = "<group>"; };
 		9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuousAttackSkill.h; sourceTree = "<group>"; };
 		9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuousAttackSkill.m; sourceTree = "<group>"; };
@@ -3548,17 +3554,29 @@
 			name = Armor;
 			sourceTree = "<group>";
 		};
+		9BE01A351695E21600B9C427 /* PositiveSkill */ = {
+			isa = PBXGroup;
+			children = (
+				9BE01A371695E81900B9C427 /* HealSkill.h */,
+				9BE01A381695E81900B9C427 /* HealSkill.m */,
+				9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */,
+				9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */,
+			);
+			name = PositiveSkill;
+			sourceTree = "<group>";
+		};
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				9BE01A351695E21600B9C427 /* PositiveSkill */,
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
 				2D26FC961640111500C34AA4 /* Effect */,
 				2D4AD598163FDDC400A949C3 /* Range */,
 				2D4AD58F163FCD8C00A949C3 /* TestSkill.h */,
 				2D4AD590163FCD8C00A949C3 /* TestSkill.m */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
-				9B2AB06616665C0400B78136 /* Skill.h */,
-				9B2AB06716665C0500B78136 /* Skill.m */,
+				9B2AB06616665C0400B78136 /* PositiveSkill.h */,
+				9B2AB06716665C0500B78136 /* PositiveSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
 			);
@@ -4433,7 +4451,7 @@
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
 				9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */,
-				9B2AB06816665C0500B78136 /* Skill.m in Sources */,
+				9B2AB06816665C0500B78136 /* PositiveSkill.m in Sources */,
 				9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */,
 				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
 				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
@@ -4455,6 +4473,8 @@
 				9B514DF0168866A400359C2A /* AssassinSkill.m in Sources */,
 				9BF2DDE6168C8F0300545940 /* ContinuousAttackSkill.m in Sources */,
 				2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */,
+				9BE01A391695E81900B9C427 /* HealSkill.m in Sources */,
+				9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

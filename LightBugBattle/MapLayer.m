@@ -21,7 +21,6 @@
         cameraControl = [MapCameraControl node];
         
         mapBody = aSprite;
-//        [mapBody setPosition:ccp(0,0)];
         
         [cameraControl setMap:mapBody mapLayer:self];
         
@@ -41,7 +40,6 @@
     CGSize mapSize = mapBody.boundingBox.size;
     CGSize charaSize = aCharacter.sprite.boundingBox.size;
     
-    // Need to be done at map
     if(aCharacter.player == 1)
     {
         aCharacter.position =
@@ -70,15 +68,6 @@
 -(void)removeCharacter:(Character *)character {
     [_characters removeObject:character];
 }
-
-//-(void)setMap:(CCSprite*)theMap {
-//    mapBody = theMap;
-//    [cameraControl setMap:theMap mapLayer:self];
-//    
-//    [self addChild:cameraControl];
-//    [self addChild:mapBody z:0];
-//    CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
-//}
 
 -(void)setMapBlocks
 {
@@ -259,14 +248,14 @@
     [cameraControl moveCameraToX:moveX Y:moveY];
 }
 
--(void)moveCharacter:(Character*)theCharacter withVelocity:(CGPoint)velocity {
+-(void)moveCharacter:(Character*)theCharacter velocity:(CGPoint)velocity {
     if (velocity.x != 0 && velocity.y != 0) {
         [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
     }
     
     // TODO: Give the final velocity to character.
     // The best way is return a final velocity, and let the |setCharacterWithVelocity| out of here.
-    [theCharacter setCharacterWithVelocity:velocity];
+    [theCharacter setDirectionVelocity:velocity];
 }
 
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity {
@@ -281,7 +270,7 @@
 
     KnockOutObject *obj = timer.userInfo;
     
-    if (obj.count >= 20) {
+    if (obj.count >= 10) {
         [timer invalidate];
     } else {
         float ratio = powf( 0.9, obj.count);

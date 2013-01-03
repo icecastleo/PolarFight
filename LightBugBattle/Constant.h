@@ -87,21 +87,30 @@ typedef enum {
     statusAttackBuff,
 } AuraStatusType;
 
-typedef enum {
-    ConditionMonsterAttack,
-    
-} ConditionType;
+//typedef enum {
+//    kRangeTypeCircle,
+//    kRangeTypeFanShape,
+//    kRangeTypeLine,
+//} RangeType;
 
-typedef enum {
-    level1 = 0,
-    level2,
-    level3
-} Levels;
+//typedef enum {
+//    kRangeSideAlly,
+//    kRangeSideEnemy,
+//    kRangeSideBoth,
+//} RangeSide;
 
-typedef enum {
-    player1 = 1,
-    player2 = 2
-} Players;
+// RangeType
+#define kRangeTypeCircle @"RangeCircle"
+#define kRangeTypeFanShape @"RangeFanShape"
+#define kRangeTypeLine @"RangeLine"
+#define kRangeTypeFarCircle @"RangeFarCircle"
+
+// RangeSide
+#define kRangeSideAlly @"Ally"
+#define kRangeSideEnemy @"Enemy"
+
+// RangeFilter
+#define kRangeFilterSelf @"Self"
 
 #endif
 

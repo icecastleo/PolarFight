@@ -12,39 +12,28 @@
 @implementation RangeCircle
 
 
-//NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeCircle",@"rangeName",@50,"@radius" nil];//Circle
+//NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"rangeSides",@0,@"effectSelfOrNot",@"RangeCircle",@"rangeName",@50,"@radius" nil];//Circle
 //EffectSides:0=effectSideEnemy,1=effectSideAlly,2=effectSideBoth
 //effectRadius=攻擊半徑:50
 
--(void)setParameter:(NSMutableDictionary*) dict {
+-(void)setSpecialParameter:(NSMutableDictionary*)dict {
+        
+    int effectRadius;
     
-    NSNumber *sides = [dict valueForKey:@"effectSides"];
-    if(sides!=nil)
-    {
-        effectSides= [sides intValue]>3?0:[sides intValue];
-    }else{
-        effectSides = effectSideEnemy;
-    }
-    NSNumber *selfOrNot = [dict valueForKey:@"effectSelfOrNot"];
-    if(selfOrNot!=nil)
-    {
-        effectSelfOrNot= [selfOrNot intValue]>3?0:[selfOrNot intValue];
-    }else{
-        effectSelfOrNot = effectExceptSelf;
-    }
-    
-    int rangeRadius=50;
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
-    if(radius!=nil)
-    {
-        rangeRadius = [radius intValue]<=0?100:[radius intValue];
-       
+    
+    if(radius != nil) {
+        NSAssert([radius intValue] > 0,@"You can not set a radius value below 0.");
+        effectRadius = [radius intValue];
+    } else {
+        effectRadius = 50;
     }
-    rangeWidth= rangeRadius*2;
-    rangeHeight=rangeRadius*2;
+    
+    rangeWidth = effectRadius*2;
+    rangeHeight = effectRadius*2;
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeRadius, rangeRadius, 0, M_PI*2,NO);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2, effectRadius, effectRadius, 0, M_PI*2,NO);
     CGPathCloseSubpath(attackRange);
     CGPathRetain(attackRange);
 }

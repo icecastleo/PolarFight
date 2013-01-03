@@ -19,9 +19,9 @@
     
    // NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeFanShape",@"rangeName",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];    //FanShape
     //NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeLine",@"rangeName",@700,@"effectDistance",@40,@"effectWidth",nil];//Line
-     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"effectSides",@0,@"effectSelfOrNot",@"RangeFarCircle",@"rangeName",@120,@"effectDistance",@40,@"effectRadius",nil];//FarCircle
+     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy,kRangeSideAlly],@"rangeSides",kRangeTypeCircle,@"rangeType",@120,@"effectDistance",@40,@"effectRadius",nil];//FarCircle
     
-    id range =  [Range initWithParameters:dict];
+    Range *range =  [Range rangeWithParameters:dict];
 
     return [self initWithCharacter:aCharacter rangeType:range];
 }
@@ -30,11 +30,10 @@
     if( (self=[super init]) ) {    
         character = aCharacter;
         [range setCharacter:character];
-        [range showPoints];
+        
         effectRange = range;
         effectSet = [[NSMutableArray alloc] init];
         [effectSet addObject:[[AttackEffect alloc] initWithAttackType:kAttackNoraml]];
-//        [effectSet addObject:[TimeStatusEffect statusWithType:statusPoison withTime:3]];
     }
     
     return self;

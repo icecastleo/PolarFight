@@ -17,6 +17,8 @@
 #import "RegenerationSkill.h"
 #import "ReflectAttackDamageSkill.h"
 #import "ContinuousAttackSkill.h"
+#import "HealSkill.h"
+#import "SwordmanSkill.h"
 
 @implementation Character
 
@@ -49,6 +51,7 @@
             if ([attribute.name isEqualToString:@"name"]) {
                 _name = attribute.stringValue;
             } else if ([attribute.name isEqualToString:@"img"]) {
+                CCLOG(@"hi + %@",attribute.stringValue);
                 _picFilename = attribute.stringValue;
             }
         }
@@ -89,17 +92,22 @@
     return self;
 }
 
--(void)setSkillForCharacter:(NSString *)aName {
-    if ([aName isEqualToString:@"Swordsman"]) {
-        skill = [[TestSkill alloc] initWithCharacter:self rangeName:@"RangeLine"];
+-(void)setSkillForCharacter:(NSString *)name {
+    if ([name isEqualToString:@"Swordsman"]) {
+        skill = [[SwordmanSkill alloc] init];
+    } else if ([name isEqualToString:@"Priest"]) {
+        skill = [[HealSkill alloc] init];
     }
+    
+    skill.owner = self;
 }
 
--(void)setPassiveSkillForCharacter:(NSString *)aName {
-    if ([aName isEqualToString:@"Swordsman"]) {
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:30]];
-        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:25 damagePercent:100]];
+-(void)setPassiveSkillForCharacter:(NSString *)name {
+    if ([name isEqualToString:@"Swordsman"]) {
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 damagePercent:100]];
         [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
+    } else if ([name isEqualToString:@"Priest"]) {
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:10]];
     }
 }
 
@@ -173,32 +181,58 @@
     [statePremissionDictionary setObject:[NSNumber numberWithBool:aBool] forKey:[NSNumber numberWithInt:aState]];
 }
 
--(void)setDefaultAttackRotation {
-    switch (direction) {
-        case kCharacterDirectionLeft:
-            [self setAttackRotationWithVelocity:ccp(-1, 0)];
-            break;
-        case kCharacterDirectionRight:
-            [self setAttackRotationWithVelocity:ccp(1, 0)];
-            break;
-        case kCharacterDirectionUp:
-            [self setAttackRotationWithVelocity:ccp(0, 1)];
-            break;
-        case kCharacterDirectionDown:
-            [self setAttackRotationWithVelocity:ccp(0, -1)];
-            break;
-        default:
-            [NSException raise:@"Character direction error." format:@"%d is not a correct direction value",direction];
-            ;
-    }
-}
+// FIXME: Set default directionVelocity
 
--(void)setCharacterWithVelocity:(CGPoint)velocity {
+//-(void)setDefaultAttackRotation {
+//    switch (direction) {
+//        case kCharacterDirectionLeft:
+//            [self setAttackRotationWithVelocity:ccp(-1, 0)];
+//            break;
+//        case kCharacterDirectionRight:
+//            [self setAttackRotationWithVelocity:ccp(1, 0)];
+//            break;
+//        case kCharacterDirectionUp:
+//            [self setAttackRotationWithVelocity:ccp(0, 1)];
+//            break;
+//        case kCharacterDirectionDown:
+//            [self setAttackRotationWithVelocity:ccp(0, -1)];
+//            break;
+//        default:
+//            [NSException raise:@"Character direction error." format:@"%d is not a correct direction value",direction];
+//            ;
+//    }
+//}
+
+//-(void)setDefault {
+//    switch (direction) {
+//        case kCharacterDirectionLeft:
+//            [self setAttackRotationWithVelocity:ccp(-1, 0)];
+//            break;
+//        case kCharacterDirectionRight:
+//            [self setAttackRotationWithVelocity:ccp(1, 0)];
+//            break;
+//        case kCharacterDirectionUp:
+//            [self setAttackRotationWithVelocity:ccp(0, 1)];
+//            break;
+//        case kCharacterDirectionDown:
+//            [self setAttackRotationWithVelocity:ccp(0, -1)];
+//            break;
+//        default:
+//            [NSException raise:@"Character direction error." format:@"%d is not a correct direction value",direction];
+//            ;
+//    }
+//}
+
+
+-(void)setDirectionVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
         [sprite stopAllActions];
         return;
     }
+    
+    // Set here to keep privious rotation.
+    _directionVelocity = velocity;
     
     state = stateMove;
     
@@ -209,7 +243,7 @@
         [sprite runDirectionAnimate];
     }
 
-    [self setAttackRotationWithVelocity:velocity];
+//    [self setAttackRotationWithVelocity:velocity];
 }
 
 -(CharacterDirection)getDirectionByVelocity:(CGPoint)velocity {
@@ -228,9 +262,9 @@
     }
 }
 
--(void)setAttackRotationWithVelocity:(CGPoint)velocity {
-    [skill setRangeRotation:velocity.x :velocity.y];
-}
+//-(void)setAttackRotationWithVelocity:(CGPoint)velocity {
+//    [skill setRangeRotation:velocity.x :velocity.y];
+//}
 
 -(void)useSkill {
     [sprite stopAllActions];
@@ -328,7 +362,8 @@
     
     [hp increaseCurrentValue:heal];
     
-    [self displayString:[NSString stringWithFormat:@"+%d",hp.value] withColor:ccGREEN];
+    //FIXME: It may exceed the maxHp...
+    [self displayString:[NSString stringWithFormat:@"+%d",heal] withColor:ccGREEN];
     
     [sprite updateBloodSprite];
     
@@ -346,11 +381,11 @@
             [p characterShouldStartRound:self];
         }
     }
-    [skill showAttackRange:YES];
+//    [skill showAttackRange:YES];
 }
 
 -(void)handleRoundEndEvent {
-    [skill showAttackRange:NO];
+//    [skill showAttackRange:NO];
     [sprite stopAllActions];
     state = stateIdle;
     

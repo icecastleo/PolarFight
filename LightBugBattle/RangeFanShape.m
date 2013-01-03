@@ -17,22 +17,7 @@
 //effectRadius=攻擊半徑
 //effectAngle=攻擊角度
 
--(void)setParameter:(NSMutableDictionary*) dict {
-    
-    NSNumber *sides = [dict valueForKey:@"effectSides"];
-    if(sides!=nil)
-    {
-        effectSides= [sides intValue]>3?0:[sides intValue];
-    }else{
-        effectSides = effectSideEnemy;
-    }
-    NSNumber *selfOrNot = [dict valueForKey:@"effectSelfOrNot"];
-    if(selfOrNot!=nil)
-    {
-        effectSelfOrNot= [selfOrNot intValue]>3?0:[selfOrNot intValue];
-    }else{
-        effectSelfOrNot = effectExceptSelf;
-    }
+-(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
     int rangeRadius=50;
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
