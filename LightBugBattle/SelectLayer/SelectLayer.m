@@ -7,16 +7,16 @@
 //
 
 #import "SelectLayer.h"
-
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
-#import "PartyParser.h"
 #import "Character.h"
+
+#import "PartyParser.h"
+#import "GDataXMLNode.h"
 
 #pragma mark - SelectLayer
 
 typedef enum {
-    //nameLabelTag = 0,
     levelLabelTag = 0,
     hpLabelTag,
     attackLabelTag,
@@ -31,13 +31,12 @@ typedef enum {
     mainRoleTag = 1001
 } RolesTag;
 
-@interface SelectLayer()
-{
+@interface SelectLayer() {
     BOOL isSelecting;
     int currentRoleIndex;
     int nextRoleIndex;
     //Party *party;
-    NSMutableArray *pool;
+    NSArray *characterParty;
     
     CCSprite * selSprite;
     
@@ -65,10 +64,8 @@ typedef enum {
 static const int totalRoleNumber = 6;
 static const int mainRolePosition = 0;
 static const int nilRoleTag = 100;
-//static const int mainRoleTag = 1001;
 
-+(CCScene *) scene
-{
++(CCScene *) scene {
 	CCScene *scene = [CCScene node];
 	SelectLayer *layer = [SelectLayer node];
 	[scene addChild: layer];
@@ -76,14 +73,13 @@ static const int nilRoleTag = 100;
 	return scene;
 }
 
--(id) init
-{
+-(id) init {
     if( (self=[super initWithColor:ccc4(255, 255, 255, 255)]) ) {
                 
         // 1 - Initialize
         self.isTouchEnabled = YES;
         
-        self.selectedRoles = [[NSMutableArray alloc] initWithCapacity:totalRoleNumber];
+        //self.selectedRoles = [[NSMutableArray alloc] initWithCapacity:totalRoleNumber];
         
         [self SetLabels];
         [self SetMenu];
@@ -98,9 +94,7 @@ static const int nilRoleTag = 100;
 	return self;
 }
 
-
-- (void)SetLabels
-{
+- (void)SetLabels {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
     NSString *currentLevel = [self loadCurrentLevel];
@@ -206,8 +200,7 @@ static const int nilRoleTag = 100;
     
 }
 
-- (void)SetMenu
-{
+- (void)SetMenu {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
     [CCMenuItemFont setFontSize:26];
@@ -217,7 +210,7 @@ static const int nilRoleTag = 100;
     }];
     
     CCMenuItem *startMenuItem = [CCMenuItemFont itemWithString:@"開始任務" block:^(id sender) {
-        [[CCDirector sharedDirector] replaceScene:[BattleController node]];
+        [self startMenuDidPress];
     }];
     
     CCMenu *menu = [CCMenu menuWithItems:cancelMenuItem, startMenuItem, nil];
@@ -229,8 +222,7 @@ static const int nilRoleTag = 100;
     [self addChild:menu];
 }
 
-- (void)initAllSelectableRoles
-{
+- (void)initAllSelectableRoles {
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"UnSelectedRolesPosition" ofType:@"plist"];
     NSArray * rolePositions = [NSArray arrayWithContentsOfFile:plistPath];
     allRoleBases = [[NSMutableArray alloc] initWithCapacity:10];
@@ -248,16 +240,14 @@ static const int nilRoleTag = 100;
     }
 }
 
-- (void)initAllSelectedRoles
-{
+- (void)initAllSelectedRoles {
     isSelecting = NO;
     currentRoleIndex = mainRolePosition;
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"SelectedRolesPostion" ofType:@"plist"];
     NSArray * rolePositions = [NSArray arrayWithContentsOfFile:plistPath];
     self.selectedRoles = [[NSMutableArray alloc] initWithCapacity:totalRoleNumber];
     
-    for(NSDictionary * rolePos in rolePositions)
-    {
+    for(NSDictionary * rolePos in rolePositions) {
         CCSprite * roleBase;
         roleBase = [CCSprite spriteWithFile:@"open_spot.jpg"];
         [roleBase setPosition:ccp([[rolePos objectForKey:@"x"] intValue],[[rolePos objectForKey:@"y"] intValue])];
@@ -269,26 +259,22 @@ static const int nilRoleTag = 100;
 
 #pragma LoadData
 
-- (NSString *)loadCurrentLevel
-{
+- (NSString *)loadCurrentLevel {
     //load data from file...
     return @"Level: 1";
 }
 
-- (NSString *)loadCurrentGoal
-{
+- (NSString *)loadCurrentGoal {
     //load data from file...
     return @"Goal: Who let the dogs out?";
 }
 
-- (NSString *)loadCurrentMoney
-{
+- (NSString *)loadCurrentMoney {
     //load data from file...
     return @"Money: 100元";
 }
 
--(void)putMainRole
-{
+-(void)putMainRole {
     CCSprite *oldMainRole = [self.selectedRoles objectAtIndex:mainRolePosition];
     
     CCSprite *mainRole = [CCSprite spriteWithFile:@"mainRole.jpg"];
@@ -301,8 +287,29 @@ static const int nilRoleTag = 100;
     }
 }
 
+//FIXME: load All Roles From File
 -(NSArray *)loadAllRolesFromFile // load data from file
 {
+    NSMutableArray *characterSprites = [[NSMutableArray alloc] init];
+    NSArray *characters = [self loadAllCharacterFromFile];
+    
+    int count = characters.count;
+    for (int i=0; i < count; i++) {
+        Character *chr = [characters objectAtIndex:i];
+        CCTexture2D *tx = [chr.sprite texture];
+        CCSprite * sprite = [CCSprite spriteWithTexture:tx];
+        sprite.tag = i;
+        [characterSprites addObject:sprite];
+        if (i==0) {
+            [self showCharacterInfo:sprite];
+        }
+    }
+    return characterSprites;
+    /*
+    for (Character *chr in characterParty) {
+        NSLog(@"%@ say hello",chr.name);
+    }//*/
+    
     //FIXME: fix here later
     //party = [[PartyParser loadParty] retain];
 //    NSArray *party = [PartyParser getRolesArrayFromXMLFile];
@@ -337,18 +344,27 @@ static const int nilRoleTag = 100;
 //    }
     
 //    return roles;
-    return nil;
 }
 
-- (void)loadAllRolesCanBeSelected
-{
-    NSArray *allRoleCanUse = [self loadAllRolesFromFile];
+-(NSArray *)loadAllCharacterFromFile {
+    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagName:@"character"];
+    NSMutableArray *characters = [[NSMutableArray alloc] init];
+    for (NSString *characterId in characterIdArray) {
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
+        [characters addObject:character];
+    }
+    return characters;
+}
+
+- (void)loadAllRolesCanBeSelected {
+    characterParty = [self loadAllCharacterFromFile];
+    NSArray *characterSpritParty = [self loadAllRolesFromFile];
     
-    for(int i = 0; i < allRoleCanUse.count; i++)
+    for(int i = 0; i < characterSpritParty.count; i++)
     {
         if ([[allRoleBases objectAtIndex:i] tag]) {
             if ([[allRoleBases objectAtIndex:i] tag] == nilRoleTag){
-                CCSprite *newRole = [allRoleCanUse objectAtIndex:i];
+                CCSprite *newRole = [characterSpritParty objectAtIndex:i];
                 newRole.tag = i;
                 
                 [self replaceOldRole:[allRoleBases objectAtIndex:i] newCharacter:newRole inArray:allRoleBases index:i];
@@ -363,8 +379,8 @@ static const int nilRoleTag = 100;
 }
 
 #pragma mark draw character methods
-- (void)replaceOldRole:(CCSprite*)oldCharacter newCharacter:(CCSprite*)newCharacter inArray:(NSMutableArray *)selectedArray index:(int)index
-{
+- (void)replaceOldRole:(CCSprite*)oldCharacter newCharacter:(CCSprite*)newCharacter inArray:(NSMutableArray *)selectedArray index:(int)index {
+    
     [self addCharacter:newCharacter toPosition:oldCharacter.position];
     [selectedArray replaceObjectAtIndex:index withObject:newCharacter];
     [self removeCharacter:oldCharacter];
@@ -377,7 +393,6 @@ static const int nilRoleTag = 100;
 -(void) addCharacter:(CCSprite*)character toPosition:(CGPoint)position{
     
     character.position = position;
-    
     [self addChild:character];
 }
 
@@ -386,8 +401,7 @@ static const int nilRoleTag = 100;
 }
 
 #pragma mark touch
-- (void)selectSpriteForTouch:(CGPoint)touchLocation
-{
+- (void)selectSpriteForTouch:(CGPoint)touchLocation {
     CCSprite * newSprite = nil;
     for (CCSprite *sprite in allRoleBases) {
         if(sprite.tag != nilRoleTag)
@@ -410,8 +424,7 @@ static const int nilRoleTag = 100;
     }
 }
 
-- (void)selectRolesInReadyArrayForTouch:(CGPoint)touchLocation
-{
+- (void)selectRolesInReadyArrayForTouch:(CGPoint)touchLocation {
     CCSprite * newSprite = nil;
     for (CCSprite *sprite in self.selectedRoles) {
         if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {
@@ -430,8 +443,7 @@ static const int nilRoleTag = 100;
     }
 }
 
-- (void)shakyShaky:(CCSprite *) newSprite
-{
+- (void)shakyShaky:(CCSprite *) newSprite {
     [selSprite stopAllActions];
     [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
     CCRotateTo * rotLeft = [CCRotateBy actionWithDuration:0.1 angle:-4.0];
@@ -441,9 +453,8 @@ static const int nilRoleTag = 100;
     [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
 }
 
-- (void)showCharacterInfo:(CCSprite *) newSprite
-{
-    Character *role = [pool objectAtIndex:newSprite.tag];
+- (void)showCharacterInfo:(CCSprite *) newSprite {
+    Character *role = [characterParty objectAtIndex:newSprite.tag];
     rolelevel = role.level;
     
     hp = [role getAttribute:kCharacterAttributeHp].value;
@@ -468,8 +479,7 @@ static const int nilRoleTag = 100;
     [moveTimeLbBM setString:[NSString stringWithFormat:@"%i", moveTime]];
 }
 
-- (void)addRole:(CCSprite *)sprite
-{
+- (void)addRole:(CCSprite *)sprite {
     if (isSelecting) {
         nextRoleIndex = currentRoleIndex;
         isSelecting = NO;
@@ -492,8 +502,7 @@ static const int nilRoleTag = 100;
     
 }
 
-- (BOOL)IsPositionFull
-{
+- (BOOL)IsPositionFull {
     for (CCSprite *sprite in self.selectedRoles) {
         if (sprite.tag == nilRoleTag) {
             return NO;
@@ -502,11 +511,29 @@ static const int nilRoleTag = 100;
     return YES;
 }
 
-- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [self selectSpriteForTouch:touchLocation];
+}
+
+- (void)startMenuDidPress {
+    NSMutableArray *saveCharacterArray = [[NSMutableArray alloc] init];
+    for (CCSprite *sprite in self.selectedRoles) {
+        if (sprite.tag != nilRoleTag && sprite.tag != mainRoleTag) {
+            Character *chr = [characterParty objectAtIndex:sprite.tag];
+            [saveCharacterArray addObject:chr];
+        }
+    }
+    
+    if (saveCharacterArray.count < 5) {
+        for (Character *chr in saveCharacterArray) {
+            NSLog(@"Character name :: %@", chr.name);
+        }
+    }else {
+        [PartyParser saveParty:saveCharacterArray fileName:@"SelectedCharacters.xml"];
+        [[CCDirector sharedDirector] replaceScene:[BattleController node]];
+    }
 }
 
 @end

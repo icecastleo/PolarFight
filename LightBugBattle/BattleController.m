@@ -129,14 +129,14 @@ static BattleController* currentInstance;
     
 //    NSArray *testCharacterIdArray = @[@"001"];
     
-    for (NSString *characterId in testCharacterIdArray) {
+    for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
         character.player = 1;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
-    for (NSString *characterId in testCharacterIdArray) {
+    for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
         character.player = 2;
         character.controller = self;

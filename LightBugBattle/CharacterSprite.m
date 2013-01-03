@@ -15,7 +15,7 @@
 -(id)initWithCharacter:(Character *)cha {
     // FIXME: replace player with direction.
     if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",cha.picFilename, cha.player == 1 ? @"rt" : @"lf"]])
+               [NSString stringWithFormat:@"%@_%@2.gif",cha.picFilename, cha.player == 1 ? @"rt" : @"fr"]])
     {
         character = cha;
         [self setAnimationWithName:character.picFilename];

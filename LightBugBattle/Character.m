@@ -70,6 +70,8 @@
             }
         }
         
+        _characterId = anId;
+        
         level = aLevel;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];

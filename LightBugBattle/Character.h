@@ -36,6 +36,7 @@
 //@property (readonly) AttackType attackType;
 @property (readonly) ArmorType armorType;
 
+@property (readonly) NSString *characterId;
 @property (retain, readonly) NSString *name;
 @property (retain, readonly) NSString *picFilename;
 
