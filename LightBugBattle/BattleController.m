@@ -122,12 +122,17 @@ static BattleController* currentInstance;
     //TODO: will get character from selectLayer fuction.
     
     //here is only for test before selectLayer has done.
-//    NSString *chrId1 = @"001";
-//    NSString *chrId2 = @"002";
-//    NSArray *testCharacterIdArray = [[NSArray alloc] initWithObjects:chrId1,chrId2,nil];
-    NSArray *testCharacterIdArray = @[@"001",@"002",@"003",@"004"];
+    NSArray *characterIdArray;
+    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character"]) {
+        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character"];
+    }else {
+        characterIdArray = @[@"001",@"002",@"003",@"004"];
+    }
+    // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
     
-//    NSArray *testCharacterIdArray = @[@"001"];
+    //This code is really need after test.
+    //NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character"];
+    NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
