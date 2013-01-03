@@ -109,8 +109,8 @@
     int tempConstantTerm = 0;
     
     for (GDataXMLNode *attribute in anElement.attributes) {
-        NSLog(@"attribute.name :: %@",attribute.name);
-        NSLog(@"attribute.value :: %@",attribute.stringValue);
+        //NSLog(@"attribute.name :: %@",attribute.name);
+        //NSLog(@"attribute.value :: %@",attribute.stringValue);
         
         if ([attribute.name isEqualToString:@"name"]) {
             attributeType = [self getAttributeTypeFromAttributeName:attribute.stringValue];
