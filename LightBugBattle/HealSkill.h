@@ -10,7 +10,7 @@
 #import "Range.h"
 
 @interface HealSkill : PositiveSkill {
-    Range *range;
+
 }
 
 @end

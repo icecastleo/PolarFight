@@ -11,24 +11,20 @@
 
 @implementation HealSkill
 
--(id)init {
-    if (self = [super init]) {
+-(id)initWithCharacter:(Character *)aCharacter {
+    if (self = [super initWithCharacter:aCharacter]) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@50,@"radius",nil];
 
-        range = [Range rangeWithParameters:dictionary];
+        range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
     }
     return self;
 }
 
--(void)execute {
-    if (range.character == nil) {
-        range.character = self.owner;
-    }
+-(void)execute {    
+    int attack = [character getAttribute:kCharacterAttributeAttack].value;
     
-    int attack = [self.owner getAttribute:kCharacterAttributeAttack].value;
-    
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 2 damageType:kDamageTypeSkill damager:self.owner];
-    [self.owner receiveDamageEvent:event];
+    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 2 damageType:kDamageTypeSkill damager:character];
+    [character receiveDamageEvent:event];
     
     for (Character *target in [range getEffectTargets]) {
         [target getHeal:attack];

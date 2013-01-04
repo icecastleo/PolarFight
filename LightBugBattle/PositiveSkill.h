@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "EffectKit.h"
+#import "Range.h"
 
 @interface PositiveSkill : NSObject {
-
+    Range *range;
+    __weak Character *character;
 }
 
-@property (weak,readwrite) Character *owner;
+-(id)initWithCharacter:(Character*)aCharacter;
 -(void)execute;
+
+-(void)showAttackRange:(BOOL)visible;
+-(void)setRangeRotation:(float)offX :(float)offY;
 
 @end

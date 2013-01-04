@@ -10,7 +10,7 @@
 #import "Range.h"
 
 @interface SwordmanSkill : PositiveSkill {
-    Range *range;
+
 }
 
 @end
