@@ -64,6 +64,7 @@ typedef enum {
 static const int totalRoleNumber = 6;
 static const int mainRolePosition = 0;
 static const int nilRoleTag = 100;
+static const int characterMinNumber = 1;
 
 +(CCScene *) scene {
 	CCScene *scene = [CCScene node];
@@ -526,7 +527,7 @@ static const int nilRoleTag = 100;
         }
     }
     
-    if (saveCharacterArray.count < 5) {
+    if (saveCharacterArray.count < characterMinNumber) {
         for (Character *chr in saveCharacterArray) {
             NSLog(@"Character name :: %@", chr.name);
         }

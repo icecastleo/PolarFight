@@ -13,11 +13,12 @@
 @implementation Range
 @synthesize character,attackRange,rangeSprite;
 
-+(id)rangeWithParameters:(NSMutableDictionary*)dict {
++(id)rangeWithParameters:(NSMutableDictionary*)dict onCharacter:(Character *)aCharacter {
     NSString* rangeName = [dict objectForKey:@"rangeType"];
     Range *range=  [NSClassFromString(rangeName) alloc];
     [range setParameter:dict];
     [range setSpecialParameter:dict];
+    range.character = aCharacter;
     return range;
 }
 
@@ -41,22 +42,6 @@
     NSAssert(sides != nil, @"You must define rangeSides for a range");
     
     filters = [dict valueForKey:@"rangeFilters"];
-    
-//    NSNumber *side = [dict valueForKey:@"rangeSide"];
-//    
-//    NSAssert(side != nil, @"You must set a range side.");
-//    NSAssert([side intValue] > kRangeSideBoth, @"You have a wrong value for rangeSide.");
-//    
-//    rangeSide = [side intValue];
-//    
-//    NSNumber *b = [dict valueForKey:@"containSelf"];
-//    if(b != nil)
-//    {
-//        NSAssert([side intValue] > 2, @"You have a wrong value for containSelf.");
-//        containSelf = [b boolValue];
-//    }else{
-//        containSelf = false;
-//    }
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -79,7 +64,7 @@
 
     rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
-    rangeSprite.visible = YES;
+    rangeSprite.visible = NO;
 }
 
 -(NSMutableArray *)getEffectTargets {    

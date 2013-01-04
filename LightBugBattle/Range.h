@@ -31,9 +31,9 @@
 @property (nonatomic, strong) CCSprite *rangeSprite;
 @property (nonatomic) CGMutablePathRef attackRange;
 
-+(id)rangeWithParameters:(NSMutableDictionary *)dict;
++(id)rangeWithParameters:(NSMutableDictionary *)dict onCharacter:(Character *)aCharacter;
 -(NSMutableArray *) getEffectTargets;
--(BOOL) containTarget:(Character *)temp;
--(void) setRotation:(float) offX:(float) offY;
+-(BOOL)containTarget:(Character *)temp;
+-(void)setRotation:(float)offX :(float)offY;
 -(void)setRangeSprite;
 @end

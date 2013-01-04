@@ -51,7 +51,6 @@
             if ([attribute.name isEqualToString:@"name"]) {
                 _name = attribute.stringValue;
             } else if ([attribute.name isEqualToString:@"img"]) {
-                CCLOG(@"hi + %@",attribute.stringValue);
                 _picFilename = attribute.stringValue;
             }
         }
@@ -96,12 +95,10 @@
 
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-        skill = [[SwordmanSkill alloc] init];
+        skill = [[SwordmanSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
-        skill = [[HealSkill alloc] init];
+        skill = [[HealSkill alloc] initWithCharacter:self];
     }
-    
-    skill.owner = self;
 }
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
@@ -245,6 +242,7 @@
         [sprite runDirectionAnimate];
     }
 
+    [skill setRangeRotation:velocity.x :velocity.y];
 //    [self setAttackRotationWithVelocity:velocity];
 }
 
@@ -383,11 +381,11 @@
             [p characterShouldStartRound:self];
         }
     }
-//    [skill showAttackRange:YES];
+    [skill showAttackRange:YES];
 }
 
 -(void)handleRoundEndEvent {
-//    [skill showAttackRange:NO];
+    [skill showAttackRange:NO];
     [sprite stopAllActions];
     state = stateIdle;
     

@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Range.h"
+#import "PositiveSkill.h"
 
 @class  Character;
-@interface TestSkill : NSObject {
-    NSString *name;
-    Range *effectRange;
-    __weak Character *character;
-    NSMutableArray *effectSet;
+@interface TestSkill : PositiveSkill {
+//    NSString *name;
+//    Range *effectRange;
+//    __weak Character *character;
+//    NSMutableArray *effectSet;
 }
--(id) initWithCharacter:(Character*)aCharacter rangeName:(NSString*) rangeName;
--(id) initWithCharacter:(Character*)aCharacter rangeType:(Range*) range;
--(void) showAttackRange:(BOOL)visible;
--(void) setRangeRotation:(float) offX:(float) offY;
--(void) execute;
+//-(id) initWithCharacter:(Character*)aCharacter rangeName:(NSString*) rangeName;
+//-(id) initWithCharacter:(Character*)aCharacter rangeType:(Range*) range;
+//-(void) showAttackRange:(BOOL)visible;
+//-(void) setRangeRotation:(float) offX:(float) offY;
+//-(void) execute;
 @end

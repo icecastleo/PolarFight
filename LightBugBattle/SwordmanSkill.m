@@ -11,24 +11,21 @@
 
 @implementation SwordmanSkill
 
--(id)init {
-    if (self = [super init]) {
+-(id)initWithCharacter:(Character *)aCharacter {
+    if (self = [super initWithCharacter:aCharacter]) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
         
-        range = [Range rangeWithParameters:dictionary];
+        range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
     }
     return self;
 }
 
 -(void)execute {
-    if (range.character == nil) {
-        range.character = self.owner;
-    }
     
-    int attack = [self.owner getAttribute:kCharacterAttributeAttack].value;
+    int attack = [character getAttribute:kCharacterAttributeAttack].value;
     
     for (Character *target in [range getEffectTargets]) {
-        DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack damageType:kDamageTypeAttack damager:self.owner];
+        DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack damageType:kDamageTypeAttack damager:character];
         [target receiveDamageEvent:event];
     }
 }
