@@ -64,6 +64,7 @@ typedef enum {
 static const int totalRoleNumber = 6;
 static const int mainRolePosition = 0;
 static const int nilRoleTag = 100;
+static const int characterMinNumber = 1;
 
 +(CCScene *) scene {
 	CCScene *scene = [CCScene node];
@@ -347,10 +348,10 @@ static const int nilRoleTag = 100;
 }
 
 -(NSArray *)loadAllCharacterFromFile {
-    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagName:@"character"];
+    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagAttributeName:@"ol" tagName:@"character"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         [characters addObject:character];
     }
     return characters;
@@ -454,6 +455,8 @@ static const int nilRoleTag = 100;
 }
 
 - (void)showCharacterInfo:(CCSprite *) newSprite {
+    if (newSprite.tag > characterParty.count)
+        return;
     Character *role = [characterParty objectAtIndex:newSprite.tag];
     rolelevel = role.level;
     
@@ -526,7 +529,7 @@ static const int nilRoleTag = 100;
         }
     }
     
-    if (saveCharacterArray.count < 5) {
+    if (saveCharacterArray.count < characterMinNumber) {
         for (Character *chr in saveCharacterArray) {
             NSLog(@"Character name :: %@", chr.name);
         }
