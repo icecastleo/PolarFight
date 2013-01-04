@@ -37,7 +37,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="003" name="Enchanter" img="avt1">
+    <character id="003" name="Wizard" img="avt1">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="200"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>

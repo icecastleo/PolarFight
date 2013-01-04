@@ -44,9 +44,9 @@
 		radius_				= 10.0f;
 		numberOfSegments	= 36U;
 		
-        //self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
+        // self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
         
-			// default blend function
+        // default blend function
 		blendFunc_ = (ccBlendFunc) { CC_BLEND_SRC, CC_BLEND_DST };
 		
 		color_.r =
@@ -61,7 +61,7 @@
 		}
 		memset(circleVertices_, 0, sizeof(CGPoint)*(numberOfSegments));
 		
-		self.radius			= radius_;
+		self.radius = radius_;
 	}
 	return self;
 }

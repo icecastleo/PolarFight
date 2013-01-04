@@ -19,6 +19,7 @@
 #import "ContinuousAttackSkill.h"
 #import "HealSkill.h"
 #import "SwordmanSkill.h"
+#import "WizardSkill.h"
 
 @implementation Character
 
@@ -82,8 +83,6 @@
 //        attackType = kAttackNoraml;
         armorType = kArmorNoraml;
         
-        [self setSkillForCharacter:_name];
-        
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
@@ -96,6 +95,8 @@
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         skill = [[SwordmanSkill alloc] initWithCharacter:self];
+    } else if ([name isEqualToString:@"Wizard"]) {
+        skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
         skill = [[HealSkill alloc] initWithCharacter:self];
     }
@@ -104,6 +105,7 @@
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 damagePercent:100]];
+    } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
     } else if ([name isEqualToString:@"Priest"]) {
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:10]];
@@ -139,18 +141,6 @@
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
 }
 
-//-(void) setRandomAbility {
-//    maxHp = 30;
-//    currentHp = 30;
-//
-//    attack = arc4random() % 4 + 3;
-//    defense = 3;
-//    speed = arc4random() % 7 + 3;
-//
-//    moveSpeed = arc4random() % 3 + 4;
-//    moveTime = arc4random() % 3 + 3;
-//}
-
 -(void)addAttribute:(Attribute *)attribute {
     [attributeDictionary setObject:attribute forKey:[NSNumber numberWithInt:attribute.type]];
 }
@@ -174,33 +164,7 @@
     }
 }
 
--(void)setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool {
-    // FIXME: What if more than one passisive skill wants to ban a state?
-    // Use number to replace boolean?
-    [statePremissionDictionary setObject:[NSNumber numberWithBool:aBool] forKey:[NSNumber numberWithInt:aState]];
-}
-
 // FIXME: Set default directionVelocity
-
-//-(void)setDefaultAttackRotation {
-//    switch (direction) {
-//        case kCharacterDirectionLeft:
-//            [self setAttackRotationWithVelocity:ccp(-1, 0)];
-//            break;
-//        case kCharacterDirectionRight:
-//            [self setAttackRotationWithVelocity:ccp(1, 0)];
-//            break;
-//        case kCharacterDirectionUp:
-//            [self setAttackRotationWithVelocity:ccp(0, 1)];
-//            break;
-//        case kCharacterDirectionDown:
-//            [self setAttackRotationWithVelocity:ccp(0, -1)];
-//            break;
-//        default:
-//            [NSException raise:@"Character direction error." format:@"%d is not a correct direction value",direction];
-//            ;
-//    }
-//}
 
 //-(void)setDefault {
 //    switch (direction) {
@@ -222,7 +186,6 @@
 //    }
 //}
 
-
 -(void)setDirectionVelocity:(CGPoint)velocity {
     if(velocity.x == 0 && velocity.y == 0) {
         state = stateIdle;
@@ -230,7 +193,7 @@
         return;
     }
     
-    // Set here to keep privious rotation.
+    // Set here to keep privious velocity.
     _directionVelocity = velocity;
     
     state = stateMove;
@@ -243,7 +206,6 @@
     }
 
     [skill setRangeRotation:velocity.x :velocity.y];
-//    [self setAttackRotationWithVelocity:velocity];
 }
 
 -(CharacterDirection)getDirectionByVelocity:(CGPoint)velocity {
@@ -362,7 +324,7 @@
     
     [hp increaseCurrentValue:heal];
     
-    //FIXME: It may exceed the maxHp...
+    // FIXME: It may exceed the maxHp...
     [self displayString:[NSString stringWithFormat:@"+%d",heal] withColor:ccGREEN];
     
     [sprite updateBloodSprite];
