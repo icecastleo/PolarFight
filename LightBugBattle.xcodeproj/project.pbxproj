@@ -4486,6 +4486,7 @@
 				9BE01A391695E81900B9C427 /* HealSkill.m in Sources */,
 				9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */,
 				9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */,
+				37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
