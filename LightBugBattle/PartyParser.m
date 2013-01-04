@@ -16,13 +16,18 @@
 //TODO: not finish saveParty yet
 + (void)saveParty:(NSArray *)party fileName:(NSString *)fileName {
     GDataXMLElement * partyElement = [GDataXMLNode elementWithName:@"party"];
+    int i=0;
     for (Character *character in party) {
         GDataXMLElement * characterElement =
         [GDataXMLNode elementWithName:@"character"];
+        NSString *count = [NSString stringWithFormat:@"%03d",i];
+        [characterElement addAttribute:[GDataXMLNode elementWithName:@"ol" stringValue:count]];
+        
         [characterElement addAttribute:[GDataXMLNode elementWithName:@"id" stringValue:character.characterId]];
         NSString *levelString = [NSString stringWithFormat:@"%d",character.level];
         [characterElement addAttribute:[GDataXMLNode elementWithName:@"level" stringValue:levelString]];
         [partyElement addChild:characterElement];
+        i=i+1;
     }
     GDataXMLDocument *document = [[GDataXMLDocument alloc]
                                    initWithRootElement:partyElement];
@@ -57,7 +62,7 @@
     }
 }
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagId:(NSString *)tagId
++ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagId:(NSString *)tagId
 {
     //ex: fileName = @"Save.xml"
     NSString *filePath = [self dataFilePath:fileName forSave:NO];
@@ -72,7 +77,7 @@
     
     for (GDataXMLElement *element in elements) {
         for (GDataXMLNode *attribute in element.attributes) {
-            if ([attribute.name isEqualToString:@"id"]) {
+            if ([attribute.name isEqualToString:tagAttributeName]) {
                 if ([attribute.stringValue isEqualToString:tagId]) {
                     return [element copy];
                 }
@@ -82,7 +87,7 @@
     return nil;
 }
 
-+ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName
++ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagAttributeName:(NSString *)tagAttributeName tagName:(NSString *)tagName
 {
     //ex: fileName = @"Save.xml"
     NSString *filePath = [self dataFilePath:fileName forSave:NO];
@@ -99,7 +104,7 @@
     
     for (GDataXMLElement *element in elements) {
         for (GDataXMLNode *attribute in element.attributes) {
-            if ([attribute.name isEqualToString:@"id"]) {
+            if ([attribute.name isEqualToString:tagAttributeName]) {
                 [characterIdArray addObject:attribute.stringValue];
             }
         }

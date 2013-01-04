@@ -18,6 +18,7 @@
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
+		37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37598BDD1696D2550007013B /* CharacterInfoView.m */; };
 		378B847A1684A72A0049D319 /* Save.xml in Resources */ = {isa = PBXBuildFile; fileRef = 378B84791684A7290049D319 /* Save.xml */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
 		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
@@ -968,6 +969,8 @@
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
 		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
 		374070831683144A007BEDDF /* XMLParsingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParsingDelegate.h; sourceTree = "<group>"; };
+		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
+		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
 		378B84791684A7290049D319 /* Save.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Save.xml; sourceTree = "<group>"; };
 		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
@@ -3517,6 +3520,8 @@
 				9B82F798164FB38A0001A357 /* SelectLayer.h */,
 				9B82F799164FB38A0001A357 /* SelectLayer.m */,
 				9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */,
+				37598BDC1696D2550007013B /* CharacterInfoView.h */,
+				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 			);
 			name = SelectLayer;
 			sourceTree = "<group>";

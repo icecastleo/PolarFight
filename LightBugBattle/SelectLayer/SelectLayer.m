@@ -348,10 +348,10 @@ static const int characterMinNumber = 1;
 }
 
 -(NSArray *)loadAllCharacterFromFile {
-    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagName:@"character"];
+    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagAttributeName:@"ol" tagName:@"character"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         [characters addObject:character];
     }
     return characters;
@@ -455,6 +455,8 @@ static const int characterMinNumber = 1;
 }
 
 - (void)showCharacterInfo:(CCSprite *) newSprite {
+    if (newSprite.tag > characterParty.count)
+        return;
     Character *role = [characterParty objectAtIndex:newSprite.tag];
     rolelevel = role.level;
     

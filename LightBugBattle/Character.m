@@ -45,7 +45,7 @@
         attributeDictionary = [[NSMutableDictionary alloc] init];
         passiveSkillArray = [[NSMutableArray alloc] init];
         
-        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagId:anId];;
+        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
         
         //get tag's attributes
         for (GDataXMLNode *attribute in characterElement.attributes) {
