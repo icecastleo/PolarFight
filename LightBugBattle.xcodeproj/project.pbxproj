@@ -930,6 +930,7 @@
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BE01A391695E81900B9C427 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */; };
+		9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A521696DA1100B9C427 /* WizardSkill.m */; };
 		9BF2DDE6168C8F0300545940 /* ContinuousAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */; };
 		9BFFAE67163E9DBB00073DC5 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
@@ -2070,6 +2071,8 @@
 		9BE01A381695E81900B9C427 /* HealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealSkill.m; sourceTree = "<group>"; };
 		9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwordmanSkill.h; sourceTree = "<group>"; };
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
+		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
+		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
 		9BF2DDBC168B3A0F00545940 /* BattleControllerEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattleControllerEventDelegate.h; sourceTree = "<group>"; };
 		9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuousAttackSkill.h; sourceTree = "<group>"; };
 		9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuousAttackSkill.m; sourceTree = "<group>"; };
@@ -3566,6 +3569,8 @@
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
 				9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */,
 				9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */,
+				9BE01A511696DA1000B9C427 /* WizardSkill.h */,
+				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
 			);
 			name = PositiveSkill;
 			sourceTree = "<group>";
@@ -4480,6 +4485,7 @@
 				2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */,
 				9BE01A391695E81900B9C427 /* HealSkill.m in Sources */,
 				9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */,
+				9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */,
 				37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

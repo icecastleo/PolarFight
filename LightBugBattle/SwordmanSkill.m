@@ -13,7 +13,7 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@500,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
         
         range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
     }

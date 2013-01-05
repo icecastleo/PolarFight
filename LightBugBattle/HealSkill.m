@@ -13,8 +13,8 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@50,@"radius",nil];
-
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];
+        
         range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
     }
     return self;

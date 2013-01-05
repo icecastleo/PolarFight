@@ -17,7 +17,7 @@
 //effectRadius=攻擊半徑:50
 
 -(void)setSpecialParameter:(NSMutableDictionary*)dict {
-        
+    
     int effectRadius;
     
     NSNumber *radius = [dict valueForKey:@"effectRadius"];

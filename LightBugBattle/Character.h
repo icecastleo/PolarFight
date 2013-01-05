@@ -64,7 +64,6 @@
 
 -(void)addPassiveSkill:(PassiveSkill *)aSkill;
 
--(void)setCharacterStatePermission:(CharacterState)aState isPermission:(BOOL)aBool;
 //-(void)setDirectionVelocity:(CGPoint)velocity;
 
 -(void)useSkill;

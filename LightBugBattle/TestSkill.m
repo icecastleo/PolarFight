@@ -39,7 +39,7 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy,kRangeSideAlly],@"rangeSides",kRangeTypeCircle,@"rangeType",@120,@"effectDistance",@40,@"effectRadius",nil]; // FarCircle
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy,kRangeSideAlly],@"rangeSides",kRangeTypeFarCircle,@"rangeType",@120,@"effectDistance",@40,@"effectRadius",nil]; // FarCircle
         
         range = [Range rangeWithParameters:dict onCharacter:aCharacter];
     }

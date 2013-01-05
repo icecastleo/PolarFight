@@ -17,26 +17,30 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
-    int rangeDistance=120;
+    int rangeDistance;
     
     NSNumber *distance = [dict valueForKey:@"effectDistance"];
-    if(distance!=nil)
-    {
-         rangeDistance= [distance intValue]<=0?120:[distance intValue];
-      
+    
+    if(distance != nil) {
+        NSAssert([distance intValue] >= 0,@"You can not set a radius value below 0.");
+        rangeDistance = [distance intValue];
+    } else {
+        rangeDistance = 0;
     }
 
-    int effectRadius=40;
+    int effectRadius;
+    
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
-    if(radius!=nil)
-    {
-        effectRadius = [radius intValue]<=0?20:[radius intValue];
-        
+    
+    if(radius != nil) {
+        NSAssert([radius intValue] > 0,@"You can not set a radius value below 0.");
+        effectRadius = [radius intValue];
+    } else {
+        effectRadius = 50;
     }
-        
-    rangeWidth= (effectRadius+rangeDistance)*2;
-
-    rangeHeight=(effectRadius+rangeDistance)*2;
+    
+    rangeWidth = (effectRadius+rangeDistance)*2;
+    rangeHeight = (effectRadius+rangeDistance)*2;
     
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2+rangeDistance,rangeHeight/2);
