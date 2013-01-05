@@ -135,14 +135,14 @@ static BattleController* currentInstance;
     NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 1;
         character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 2;
         character.controller = self;
         [character.sprite addBloodSprite];
