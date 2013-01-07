@@ -259,7 +259,6 @@
 }
 
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity {
-    velocity = ccpMult(velocity, 0.05);
     
     [KnockOutObject objectWithCharacter:character velocity:velocity];
 }

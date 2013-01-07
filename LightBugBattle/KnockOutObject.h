@@ -15,8 +15,9 @@
 }
 
 @property (weak, readonly) Character* character;
-@property (readonly) CGPoint velocity;
+@property (readwrite) CGPoint velocity;
 @property (readwrite) int count;
+@property (readwrite) float power;
 
 +(id)objectWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity;
 
