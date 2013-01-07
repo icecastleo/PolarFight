@@ -261,24 +261,7 @@
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity {
     velocity = ccpMult(velocity, 0.05);
     
-    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity];
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.025f target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
-}
-
--(void)knockOutUpdate:(NSTimer *)timer {
-
-    KnockOutObject *obj = timer.userInfo;
-    
-    if (obj.count >= 10) {
-        [timer invalidate];
-    } else {
-        float ratio = powf( 0.9, obj.count);
-        CGPoint vel = ccpMult(obj.velocity, ratio);
-        
-        obj.character.position = ccpAdd(obj.character.position, vel);
-        obj.count++;
-    }
+    [KnockOutObject objectWithCharacter:character velocity:velocity];
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

@@ -23,12 +23,16 @@
     return self;
 }
 
--(int)getDamage {
+-(int)attack {
     Attribute *attack = [_attacker getAttribute:kCharacterAttributeAttack];
     
-    NSAssert(attack != nil, @"How can you let a character without attack point to attack?");
-    
-    return (attack.value + _bonus) * _multiplier;
+    NSAssert(attack != nil, @"How can you let a character without attack attribute to attack?");
+
+    return attack.value;
+}
+
+-(int)getDamage {
+    return (self.attack + _bonus) * _multiplier;
 }
 
 -(DamageEvent*)convertToDamageEvent {

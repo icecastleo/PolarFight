@@ -19,7 +19,7 @@
 
 -(void)execute {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+                format:@"You must override %@ in a PositiveSkill subclass", NSStringFromSelector(_cmd)];
 }
 
 -(void)showAttackRange:(BOOL)visible {

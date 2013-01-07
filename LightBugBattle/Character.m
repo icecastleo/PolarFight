@@ -20,6 +20,8 @@
 #import "HealSkill.h"
 #import "SwordmanSkill.h"
 #import "WizardSkill.h"
+#import "AssassinSkill.h"
+#import "SlowMoveAura.h"
 
 @implementation Character
 
@@ -28,10 +30,9 @@
 @synthesize level;
 //@synthesize attackType;
 @synthesize armorType;
-//@synthesize maxHp, currentHp, attack, defense, speed, moveSpeed, moveTime;
 @synthesize state;
 @synthesize sprite,direction;
-@synthesize timeStatusDictionary,auraStatusDictionary;
+@synthesize timeStatusDictionary;
 @synthesize pointArray;
 
 @dynamic position;
@@ -41,9 +42,11 @@
     if ((self = [super init])) {
         
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        auraStatusDictionary = [[NSMutableDictionary alloc] init];
+//        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         attributeDictionary = [[NSMutableDictionary alloc] init];
         passiveSkillArray = [[NSMutableArray alloc] init];
+        auraArray = [[NSMutableArray alloc] init];
+        _auraPassiveSkillDictionary = [[NSMutableDictionary alloc] init];
         
         GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
         
@@ -99,6 +102,9 @@
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
         skill = [[HealSkill alloc] initWithCharacter:self];
+    } else if ([name isEqualToString:@"Tank"]) {
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
+        [auraArray addObject:aura];
     }
 }
 
@@ -106,9 +112,9 @@
     if ([name isEqualToString:@"Swordsman"]) {
         [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 damagePercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
-        [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithBonusPercent:20]];
+        [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:10]];
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:50]];
     }
 }
 
@@ -364,30 +370,6 @@
 
 -(CGPoint)position {
     return sprite.position;
-}
-
--(void)update {
-    NSMutableArray *removedKeys = [NSMutableArray array];
-    
-    for (TimeStatus *status in timeStatusDictionary) {
-        [status update];
-        
-        if(status.isDead)
-            [removedKeys addObject:[NSNumber numberWithInt:status.type]];
-    }
-    
-    [timeStatusDictionary removeObjectsForKeys:removedKeys];
-    
-    [removedKeys removeAllObjects];
-    
-    for (AuraStatus *status in auraStatusDictionary) {
-        [status updateCharacter:self];
-        
-        if(status.isDead)
-            [removedKeys addObject:[NSNumber numberWithInt:status.type]];
-    }
-    
-    [auraStatusDictionary removeObjectsForKeys:removedKeys];
 }
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time {

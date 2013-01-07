@@ -11,13 +11,32 @@
 
 @implementation KnockOutObject
 
++(id)objectWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity {
+    return [[KnockOutObject alloc] initWithCharacter:aCharacter velocity:aVelocity];
+}
+
 -(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity {
     if(self = [super init]) {
         _character = aCharacter;
         _velocity = aVelocity;
         _count = 0;
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.025f target:self selector:@selector(update:) userInfo:nil repeats:YES];
     }
     return self;
+}
+
+-(void)update:(NSTimer *)timer {
+    
+    if (_count >= 10) {
+        [timer invalidate];
+    } else {
+        float ratio = powf(0.9, _count);
+        CGPoint vel = ccpMult(_velocity, ratio);
+        
+        _character.position = ccpAdd(_character.position, vel);
+        _count++;
+    }
 }
 
 @end

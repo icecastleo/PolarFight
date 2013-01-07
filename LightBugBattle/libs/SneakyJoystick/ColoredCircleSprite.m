@@ -80,7 +80,7 @@
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 		float j = radius_ * cosf(theta) + position_.x;
 		float k = radius_ * sinf(theta) + position_.y;
-#endif				
+#endif
 		
 		circleVertices_[i] = ccp(j,k);
 		

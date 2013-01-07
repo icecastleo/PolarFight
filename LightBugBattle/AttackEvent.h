@@ -17,6 +17,7 @@
 @property (retain,readonly) Character *attacker;
 @property (retain,readonly) Character *defender;
 @property (readonly) AttackType type;
+@property (readonly) int attack;
 @property float bonus;
 @property float multiplier;
 

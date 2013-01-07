@@ -52,7 +52,11 @@
 }
 
 -(void)addMultiplier:(float)aMultiplier {
-    multiplier *= multiplier;
+    CCLOG(@"Before : %f",multiplier);
+    
+    multiplier *= aMultiplier;
+    
+    CCLOG(@"After : %f",multiplier);
     [self updateValue];
     
     if(_dependent != nil) {
@@ -61,7 +65,7 @@
 }
 
 -(void)subtractMultiplier:(float)aMultiplier {
-    multiplier /= multiplier;
+    multiplier /= aMultiplier;
     [self updateValue];
     
     if(_dependent != nil) {

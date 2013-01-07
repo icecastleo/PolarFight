@@ -11,12 +11,13 @@
 @class Character;
 
 @interface DamageEvent : NSObject {
-    int baseDamage;
+
 }
 
 @property (readonly) DamageType type;
 @property (readonly) Character *damager;
-@property (readonly) int damage;
+//@property (readonly) int damage;
+@property (readonly) int baseDamage;
 @property float bonus;
 @property float multiplier;
 

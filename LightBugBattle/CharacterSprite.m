@@ -27,8 +27,13 @@
 -(void)addBloodSprite {
     bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
     bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
+    
     [self updateBloodSprite];
     [self addChild:bloodSprite];
+    
+    CCSprite *bloodFrame = [CCSprite spriteWithFile:@"blood_frame.png"];
+    bloodFrame.position = bloodSprite.position;
+    [self addChild:bloodFrame];
 }
 
 -(void)removeBloodSprite {

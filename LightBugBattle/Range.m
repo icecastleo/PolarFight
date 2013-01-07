@@ -11,7 +11,7 @@
 #import "BattleController.h"
 
 @implementation Range
-@synthesize character,attackRange,rangeSprite;
+@synthesize character,rangeSprite;
 
 +(id)rangeWithParameters:(NSMutableDictionary*)dict onCharacter:(Character *)aCharacter {
     NSString* rangeName = [dict objectForKey:@"rangeType"];
@@ -46,7 +46,7 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+                format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
 }
 
 -(void)setRangeSprite {
@@ -99,7 +99,7 @@
         loc = [temp.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
+//            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
             return YES;
         }
     }

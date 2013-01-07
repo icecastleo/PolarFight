@@ -21,12 +21,8 @@
 }
 
 -(void)execute {
-    
-    int attack = [character getAttribute:kCharacterAttributeAttack].value;
-    
     for (Character *target in [range getEffectTargets]) {
-        DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack damageType:kDamageTypeAttack damager:character];
-        [target receiveDamageEvent:event];
+        [character attackCharacter:target withAttackType:kAttackNoraml];
     }
 }
 

@@ -11,13 +11,13 @@
 #import "Character.h"
 
 @interface KnockOutObject : NSObject {
-    
+
 }
 
 @property (weak, readonly) Character* character;
 @property (readonly) CGPoint velocity;
 @property (readwrite) int count;
 
--(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity;
++(id)objectWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity;
 
 @end
