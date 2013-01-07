@@ -18,7 +18,7 @@
     float constantTerm;
     
     int baseValue;
-    int bonus;
+    float bonus;
     float multiplier;
 }
 
@@ -31,8 +31,8 @@
 
 // Init with a quadratic equation.
 -(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
--(void)addBonus:(int)aBonus;
--(void)subtractBonus:(int)aBonus;
+-(void)addBonus:(float)aBonus;
+-(void)subtractBonus:(float)aBonus;
 -(void)addMultiplier:(float)aMultiplier;
 -(void)subtractMultiplier:(float)aMultiplier;
 -(void)updateValueWithLevel:(int)level;

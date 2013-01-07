@@ -25,10 +25,7 @@
     
     if (_remainTime <= 0) {
         [timer invalidate];
-        
-        if (character != nil) {
-            [character.auraPassiveSkillDictionary removeObjectForKey:NSStringFromClass(self.class)];
-        }
+        [character.auraPassiveSkillDictionary removeObjectForKey:NSStringFromClass(self.class)];
     }
 }
 

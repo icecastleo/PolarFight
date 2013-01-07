@@ -29,8 +29,7 @@
     int count = [range getEffectTargets].count;
     
     if (count < 3) {
-        event.bonus += (3 - count) * event.attack * 0.25;
-        CCLOG(@"%f",(3 - count) * event.attack * 0.25);
+        [event addAttack: (3 - count) * event.attack * 0.25];
     }
 }
 

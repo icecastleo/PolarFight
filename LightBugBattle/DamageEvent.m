@@ -17,18 +17,33 @@
         _baseDamage = aNumber;
         _type = aType;
         _damager = aCharacter;
-        _bonus = 0;
-        _multiplier = 1;
+        bonus = 0;
+        multiplier = 1;
     }
     return self;
 }
 
+-(void)addDamage:(float)aBonus {
+    bonus += aBonus;
+}
+
+-(void)subtractDamage:(float)aBonus {
+    bonus -= aBonus;
+}
+
+-(void)addMultiplier:(float)aMultiplier {
+    multiplier *= multiplier;
+}
+
+-(void)subtractMultiplier:(float)aMultiplier {
+    multiplier /= multiplier;
+}
+
 -(int)damage {
-    if (_multiplier == 0) {
+    if (multiplier == 0) {
         return 0;
     }
-    
-    return MAX(1, _baseDamage * _multiplier + _bonus);
+    return MAX(1, _baseDamage * multiplier + bonus);
 }
 
 -(Damage *)convertToDamage {

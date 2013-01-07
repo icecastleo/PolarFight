@@ -17,8 +17,8 @@
         _attacker = anAttacker;
         _defender = aDefender;
         _type = aType;
-        _bonus = 0;
-        _multiplier = 1;
+        bonus = 0;
+        multiplier = 1;
     }
     return self;
 }
@@ -31,8 +31,24 @@
     return attack.value;
 }
 
+-(void)addAttack:(float)aBonus {
+    bonus += aBonus;
+}
+
+-(void)subtractAttack:(float)aBonus {
+    bonus -= aBonus;
+}
+
+-(void)addMultiplier:(float)aMultiplier {
+    multiplier *= multiplier;
+}
+
+-(void)subtractMultiplier:(float)aMultiplier {
+    multiplier /= multiplier;
+}
+
 -(int)getDamage {
-    return (self.attack + _bonus) * _multiplier;
+    return (self.attack + bonus) * multiplier;
 }
 
 -(DamageEvent*)convertToDamageEvent {

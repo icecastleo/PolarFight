@@ -269,7 +269,7 @@
     Attribute *defense = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeDefense]];
     
     if (defense != nil) {
-        event.bonus -= defense.value;
+        [event subtractAttack:defense.value];
     }
     
     [self receiveDamageEvent:[event convertToDamageEvent]];
@@ -312,9 +312,9 @@
         }
     }
     
-    if (hp.currentValue > 0) {
-        [sprite updateBloodSprite];
-    } else { // currentHp <= 0
+    [sprite updateBloodSprite];
+    
+    if (hp.currentValue == 0) {
         state = stateDead;
         
         // dead animation + cleanup
