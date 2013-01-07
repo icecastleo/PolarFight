@@ -69,15 +69,54 @@
     
 }
 
-+(float) calculateVectorAngle:(float)x y:(float)y
++(CGPoint) vectorFromAngle:(float) angle
 {
-    float angleRadians = atanf(x/y);
-    float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-    float cocosAngle =-1* angleDegrees;
-    if (x<0) {
-        cocosAngle +=180;
-    }
-return cocosAngle;
+    angle = angle * M_PI / 180;
+    float sin = sinf(angle);
+    float cos = cosf(angle);
+    
+    CGPoint point = ccp( 0, 1 );
+    CGPoint axis = ccp( 0, 0 );
+    float x = ( point.x - axis.x )*cos + ( point.y - axis.y )*sin + axis.x;
+    float y = ( point.x - axis.x )*sin + ( point.y - axis.y )*cos + axis.y;
+    
+    return ccp( x, y );
 }
 
++(float) calculateVectorAngle:(CGPoint)vector
+{
+    float angle = atan2f(vector.x, vector.y) * 180 / M_PI ;
+	
+	if( angle < 0 ) angle = 360 + angle;
+	
+	return angle;
+}
+
++(CGPoint) vectorBounce_self:(CGPoint)selfPoint vector:(CGPoint)selfVector target:(CGPoint)targetPoint
+{
+    float N_angle = [self calculateVectorAngle:ccpSub( selfPoint, targetPoint)];
+	float selfAngle = [self calculateVectorAngle:selfVector];
+	
+    
+	float diffAngle1 = N_angle + 90 - selfAngle;
+	float diffAngle2 = N_angle - 90 - selfAngle;
+	
+	float newAngle = 0;
+	
+	if( diffAngle1 < 0 ) diffAngle1 += 360;
+	if( diffAngle2 < 0 ) diffAngle2 += 360;
+	
+	if( diffAngle1 < 180 )
+	{
+		newAngle = N_angle + 90 + diffAngle1;
+	}
+	else
+	{
+		newAngle = N_angle - 90 + diffAngle2;
+	}
+    
+    if( newAngle < 0 ) newAngle += 360;
+	
+	return [self vectorFromAngle:newAngle];
+}
 @end
