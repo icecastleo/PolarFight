@@ -40,16 +40,13 @@
     CGSize mapSize = mapBody.boundingBox.size;
     CGSize charaSize = aCharacter.sprite.boundingBox.size;
     
-    if(aCharacter.player == 1)
-    {
+    if (aCharacter.player == 1) {
         aCharacter.position =
         ccp(
             -1*CCRANDOM_0_1()*mapSize.width/2*0.8 + charaSize.width/2,
             CCRANDOM_0_1()*mapSize.height*0.8 - mapSize.height/2
             );
-    }
-    else
-    {
+    } else {
         aCharacter.position =
         ccp(
             CCRANDOM_0_1()*mapSize.width/2*0.8 - charaSize.width/2,
@@ -71,9 +68,9 @@
 
 -(void)setMapBlocks
 {
-    for( int x=0; x<128; x++ )
+    for(int x=0; x<128; x++ )
     {
-        for( int y=0; y<53; y++)
+        for(int y=0; y<53; y++)
         {
             float temp = CCRANDOM_0_1();
             
@@ -168,7 +165,7 @@
         }
     }
     
-    // decide which point to walk
+    // Decide which point to walk
     for( int i=0; i<7; i++ )
     {
         if( possibleLocationKey[i] )
@@ -267,7 +264,6 @@
     
     power *= 0.15; // edit someday
     
-    
     //CCLOG(@"ANGLE : %f, ANGLE 2: %f, POWER : %f", angle, [Helper calculateVectorAngle:direction], power);
     KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:direction power:power];
     
@@ -283,56 +279,45 @@
     if (obj.count >= 30) {
         [timer invalidate];
     } else {
-        
-        
         float ratio = powf( 0.9, obj.count++);
         CGPoint direction = obj.velocity;
         CGPoint nextPoint = ccpAdd( theCharacter.position, ccpMult( direction, ratio * obj.power) );
         
-        
-        // check character collide
-        for( int i=0; i<_characters.count; i++ )
-        {
-            if( [_characters objectAtIndex:i] == theCharacter )
-            {
+        // Check character collide
+        for(Character *other in _characters) {
+            if(other == theCharacter) {
                 continue;
             }
             
-            CGPoint targetLocation = [[_characters objectAtIndex:i] sprite].position;
-            float targetRadius = [[_characters objectAtIndex:i] sprite].boundingBox.size.width/2;
+            CGPoint targetLocation = other.position;
+            float targetRadius = other.sprite.boundingBox.size.width/2;
             float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
             
-            if( ccpDistance( nextPoint, targetLocation) < ( targetRadius + selfRadius ))
-            {
+            if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
                 direction = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
             }
-            
         }
         
-        // check barrier collide
-        for( int i=0; i<barriers.count; i++ )
-        {
-            CGPoint targetLocation = [[barriers objectAtIndex:i] center];
-                
-            float targetRadius = [[barriers objectAtIndex:i] radius];
+        // Check barrier collide
+        for(Barrier *barrier in barriers) {
+            CGPoint targetLocation = barrier.center;
+            float targetRadius = barrier.radius;
             float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
                 
-            if( ccpDistance( nextPoint, targetLocation) < ( targetRadius + selfRadius ))
-            {
+            if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
                 direction = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
             }
         }
         
         obj.velocity = direction;
         CGPoint vel = ccpMult(obj.velocity, ratio * obj.power);
-        obj.character.position = ccpAdd(obj.character.position, vel );
+        obj.character.position = ccpAdd(obj.character.position, vel);
         
-        [self reorderChild:theCharacter.sprite z: 1000 - theCharacter.position.y];
+        [self reorderChild:theCharacter.sprite z:1000 - theCharacter.position.y];
     }
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-//    [cameraControl followTarget:NULL];
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     

@@ -17,18 +17,38 @@
         _attacker = anAttacker;
         _defender = aDefender;
         _type = aType;
-        _bonus = 0;
-        _multiplier = 1;
+        bonus = 0;
+        multiplier = 1;
     }
     return self;
 }
 
--(int)getDamage {
+-(int)attack {
     Attribute *attack = [_attacker getAttribute:kCharacterAttributeAttack];
     
-    NSAssert(attack != nil, @"How can you let a character without attack point to attack?");
-    
-    return (attack.value + _bonus) * _multiplier;
+    NSAssert(attack != nil, @"How can you let a character without attack attribute to attack?");
+
+    return attack.value;
+}
+
+-(void)addAttack:(float)aBonus {
+    bonus += aBonus;
+}
+
+-(void)subtractAttack:(float)aBonus {
+    bonus -= aBonus;
+}
+
+-(void)addMultiplier:(float)aMultiplier {
+    multiplier *= multiplier;
+}
+
+-(void)subtractMultiplier:(float)aMultiplier {
+    multiplier /= multiplier;
+}
+
+-(int)getDamage {
+    return (self.attack + bonus) * multiplier;
 }
 
 -(DamageEvent*)convertToDamageEvent {

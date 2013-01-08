@@ -9,6 +9,9 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
+#define kAuraInterval 0.3
+#define kAuraPassiveInterval 0.1
+
 //typedef enum {
 //    kGameStateRoundStart,
 //    kGameStateCharacterMove,

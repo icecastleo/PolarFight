@@ -24,7 +24,7 @@
         time = 0;
     } else {
         time ++;
-        event.bonus += percent / 100.0 * time * [sender getAttribute:kCharacterAttributeAttack].value;
+        [event addAttack: percent / 100.0 * time * event.attack];
     }
 }
 

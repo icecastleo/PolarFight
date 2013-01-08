@@ -11,10 +11,10 @@
 #import "Character.h"
 
 @interface KnockOutObject : NSObject {
-    
+
 }
 
-@property (weak, readonly) Character* character;
+@property (readonly) Character* character;
 @property (readwrite) CGPoint velocity;
 @property (readwrite) int count;
 @property (readwrite) float power;

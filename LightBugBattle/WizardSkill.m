@@ -21,10 +21,8 @@
 }
 
 -(void)execute {
-    
     for (Character *target in [range getEffectTargets]) {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
-        [target receiveAttackEvent:event];
+        [character attackCharacter:target withAttackType:kAttackNoraml];
     }
 }
 

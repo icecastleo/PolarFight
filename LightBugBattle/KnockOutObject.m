@@ -12,7 +12,7 @@
 @implementation KnockOutObject
 
 -(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity power:(float)aPower{
-    if(self = [super init]) {
+    if (self = [super init]) {
         _character = aCharacter;
         _velocity = aVelocity;
         _count = 0;

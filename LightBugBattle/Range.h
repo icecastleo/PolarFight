@@ -16,20 +16,15 @@
     CGMutablePathRef attackRange;
     __weak Character* character;
     
-//    RangeSide rangeSide;
-//    EffectSelfOrNot effectSelfOrNot;
-    
     NSArray *sides;
     NSArray *filters;
-    
-    CCSprite *rangeSprite;
+
     int rangeHeight;
     int rangeWidth;
 }
 
-@property (nonatomic, weak) Character *character;
-@property (nonatomic, strong) CCSprite *rangeSprite;
-@property (nonatomic) CGMutablePathRef attackRange;
+@property (readonly, weak) Character *character;
+@property (readonly, strong) CCSprite *rangeSprite;
 
 +(id)rangeWithParameters:(NSMutableDictionary *)dict onCharacter:(Character *)aCharacter;
 -(NSMutableArray *) getEffectTargets;

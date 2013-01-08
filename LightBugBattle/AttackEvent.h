@@ -11,16 +11,21 @@
 @class Character;
 
 @interface AttackEvent : NSObject {
-    
+    float bonus;
+    float multiplier;
 }
 
 @property (retain,readonly) Character *attacker;
 @property (retain,readonly) Character *defender;
 @property (readonly) AttackType type;
-@property float bonus;
-@property float multiplier;
+@property (readonly) int attack;
 
 -(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender;
+
+-(void)addAttack:(float)aBonus;
+-(void)subtractAttack:(float)aBonus;
+-(void)addMultiplier:(float)aMultiplier;
+-(void)subtractMultiplier:(float)aMultiplier;
 
 -(DamageEvent*)convertToDamageEvent;
 

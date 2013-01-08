@@ -24,7 +24,6 @@
         countdownLabel.position = ccp(size.width / 2, size.height - 30);
         [self addChild:countdownLabel];
         
-        
         startLabel = [CCLabelTTF labelWithString:@"Press to start!"  fontName:@"Marker Felt"  fontSize:21];
         startLabel.position = ccp(size.width / 2,size.height / 2);
         startLabel.opacity = 150;
@@ -53,7 +52,6 @@
 }
 
 -(void) startSelectCharacter:(Character*)character {
-    
 //    Select sprite should be on the same layer as the character is.
     [character.sprite.parent addChild:selectSprite];
     selectSprite.position = character.position;
