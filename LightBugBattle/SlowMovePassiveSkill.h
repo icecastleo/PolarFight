@@ -6,8 +6,8 @@
 //
 //
 
-#import "AuraPassiveSkill.h"
+#import "PassiveSkill.h"
 
-@interface SlowMoveSkill : AuraPassiveSkill
+@interface SlowMovePassiveSkill : PassiveSkill
 
 @end

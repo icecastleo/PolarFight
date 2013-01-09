@@ -14,6 +14,6 @@
     int time;
 }
 
--(id)initWithBonusPercent:(int)percent;
+-(id)initWithPercent:(int)aPercent;
 
 @end

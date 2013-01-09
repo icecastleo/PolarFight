@@ -13,6 +13,6 @@
     int percent;
 }
 
--(id)initWithProbability:(int)aProbability damagePercent:(int)aPercent;
+-(id)initWithProbability:(int)aProbability reflectPercent:(int)aPercent;
 
 @end

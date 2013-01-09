@@ -6,9 +6,9 @@
 //
 //
 
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 
-@implementation PositiveSkill
+@implementation ActiveSkill
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {

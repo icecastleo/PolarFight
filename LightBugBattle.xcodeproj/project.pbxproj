@@ -788,12 +788,11 @@
 		9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248219164D40E3007B6E4D /* MapControlExample.m */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
-		9B2AB06816665C0500B78136 /* PositiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* PositiveSkill.m */; };
+		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
 		9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
 		9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2C785F1699E6B500CA1A1C /* blood_frame.png */; };
 		9B2C7863169A1C2D00CA1A1C /* Aura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* Aura.m */; };
-		9B2C7867169ABA9900CA1A1C /* SlowMoveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7866169ABA9900CA1A1C /* SlowMoveSkill.m */; };
-		9B2C786A169ABAC900CA1A1C /* AuraPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7869169ABAC900CA1A1C /* AuraPassiveSkill.m */; };
+		9B2C7867169ABA9900CA1A1C /* SlowMovePassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */; };
 		9B2C786E169ADA9300CA1A1C /* SlowMoveAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C786D169ADA9300CA1A1C /* SlowMoveAura.m */; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1786,17 +1785,15 @@
 		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
 		9B288209166FA76D0041604F /* Armor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Armor.m; sourceTree = "<group>"; };
-		9B2AB06616665C0400B78136 /* PositiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositiveSkill.h; sourceTree = "<group>"; };
-		9B2AB06716665C0500B78136 /* PositiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositiveSkill.m; sourceTree = "<group>"; };
+		9B2AB06616665C0400B78136 /* ActiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSkill.h; sourceTree = "<group>"; };
+		9B2AB06716665C0500B78136 /* ActiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveSkill.m; sourceTree = "<group>"; };
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
 		9B2AB06A16668F6A00B78136 /* PassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveSkill.m; sourceTree = "<group>"; };
 		9B2C785F1699E6B500CA1A1C /* blood_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_frame.png; sourceTree = "<group>"; };
 		9B2C7861169A1C2C00CA1A1C /* Aura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aura.h; sourceTree = "<group>"; };
 		9B2C7862169A1C2C00CA1A1C /* Aura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aura.m; sourceTree = "<group>"; };
-		9B2C7865169ABA9900CA1A1C /* SlowMoveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMoveSkill.h; sourceTree = "<group>"; };
-		9B2C7866169ABA9900CA1A1C /* SlowMoveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMoveSkill.m; sourceTree = "<group>"; };
-		9B2C7868169ABAC800CA1A1C /* AuraPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraPassiveSkill.h; sourceTree = "<group>"; };
-		9B2C7869169ABAC900CA1A1C /* AuraPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraPassiveSkill.m; sourceTree = "<group>"; };
+		9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMovePassiveSkill.h; sourceTree = "<group>"; };
+		9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMovePassiveSkill.m; sourceTree = "<group>"; };
 		9B2C786C169ADA9300CA1A1C /* SlowMoveAura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMoveAura.h; sourceTree = "<group>"; };
 		9B2C786D169ADA9300CA1A1C /* SlowMoveAura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMoveAura.m; sourceTree = "<group>"; };
 		9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterEventDelegate.h; sourceTree = "<group>"; };
@@ -3143,15 +3140,6 @@
 			name = Battle;
 			sourceTree = "<group>";
 		};
-		9B2C7864169ABA0E00CA1A1C /* AuraPassiveSkill */ = {
-			isa = PBXGroup;
-			children = (
-				9B2C7865169ABA9900CA1A1C /* SlowMoveSkill.h */,
-				9B2C7866169ABA9900CA1A1C /* SlowMoveSkill.m */,
-			);
-			name = AuraPassiveSkill;
-			sourceTree = "<group>";
-		};
 		9B2C786B169ADA7E00CA1A1C /* Aura */ = {
 			isa = PBXGroup;
 			children = (
@@ -3164,14 +3152,16 @@
 		9B3881401676716D00E1FBF4 /* PassiveSkill */ = {
 			isa = PBXGroup;
 			children = (
-				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
-				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
-				9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */,
-				9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */,
 				9B514DEE168866A400359C2A /* AssassinSkill.h */,
 				9B514DEF168866A400359C2A /* AssassinSkill.m */,
 				9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */,
 				9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */,
+				9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */,
+				9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */,
+				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
+				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
+				9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */,
+				9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -3595,7 +3585,7 @@
 			name = Armor;
 			sourceTree = "<group>";
 		};
-		9BE01A351695E21600B9C427 /* PositiveSkill */ = {
+		9BE01A351695E21600B9C427 /* ActiveSkill */ = {
 			isa = PBXGroup;
 			children = (
 				9BE01A371695E81900B9C427 /* HealSkill.h */,
@@ -3605,29 +3595,26 @@
 				9BE01A511696DA1000B9C427 /* WizardSkill.h */,
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
 			);
-			name = PositiveSkill;
+			name = ActiveSkill;
 			sourceTree = "<group>";
 		};
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
 				9B2C786B169ADA7E00CA1A1C /* Aura */,
-				9B2C7864169ABA0E00CA1A1C /* AuraPassiveSkill */,
-				9BE01A351695E21600B9C427 /* PositiveSkill */,
+				9BE01A351695E21600B9C427 /* ActiveSkill */,
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
 				2D26FC961640111500C34AA4 /* Effect */,
 				2D4AD598163FDDC400A949C3 /* Range */,
 				2D4AD58F163FCD8C00A949C3 /* TestSkill.h */,
 				2D4AD590163FCD8C00A949C3 /* TestSkill.m */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
-				9B2AB06616665C0400B78136 /* PositiveSkill.h */,
-				9B2AB06716665C0500B78136 /* PositiveSkill.m */,
+				9B2AB06616665C0400B78136 /* ActiveSkill.h */,
+				9B2AB06716665C0500B78136 /* ActiveSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
 				9B2C7861169A1C2C00CA1A1C /* Aura.h */,
 				9B2C7862169A1C2C00CA1A1C /* Aura.m */,
-				9B2C7868169ABAC800CA1A1C /* AuraPassiveSkill.h */,
-				9B2C7869169ABAC900CA1A1C /* AuraPassiveSkill.m */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -4501,7 +4488,7 @@
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
 				9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */,
-				9B2AB06816665C0500B78136 /* PositiveSkill.m in Sources */,
+				9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */,
 				9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */,
 				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
 				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
@@ -4528,8 +4515,7 @@
 				9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */,
 				37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */,
 				9B2C7863169A1C2D00CA1A1C /* Aura.m in Sources */,
-				9B2C7867169ABA9900CA1A1C /* SlowMoveSkill.m in Sources */,
-				9B2C786A169ABAC900CA1A1C /* AuraPassiveSkill.m in Sources */,
+				9B2C7867169ABA9900CA1A1C /* SlowMovePassiveSkill.m in Sources */,
 				9B2C786E169ADA9300CA1A1C /* SlowMoveAura.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

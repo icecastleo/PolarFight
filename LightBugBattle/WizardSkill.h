@@ -6,8 +6,8 @@
 //
 //
 
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 
-@interface WizardSkill : PositiveSkill
+@interface WizardSkill : ActiveSkill
 
 @end

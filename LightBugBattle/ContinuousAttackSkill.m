@@ -11,7 +11,7 @@
 
 @implementation ContinuousAttackSkill
 
--(id)initWithBonusPercent:(int)aPercent {
+-(id)initWithPercent:(int)aPercent {
     if(self = [super init]) {
         percent = aPercent;
     }

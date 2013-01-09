@@ -14,23 +14,21 @@
 #import "PassiveSkill.h"
 #import "DamageEvent.h"
 #import "CharacterEventDelegate.h"
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 #import "Aura.h"
-#import "AuraPassiveSkill.h"
 #import "SkillKit.h"
 @class BattleController;
 
 @interface Character : NSObject <XMLParsingDelegate> {
     NSMutableArray *pointArray;
 //    TestSkill *skill;
-    PositiveSkill *skill;
+    ActiveSkill *skill;
     
     NSMutableDictionary *attributeDictionary;
     NSMutableDictionary *statePremissionDictionary;
     
     NSMutableArray *auraArray;
-    NSMutableArray *passiveSkillArray;
-//    NSMutableDictionary *auraPassiveSkillDictionary;
+    NSMutableDictionary *passiveSkillDictionary;
 }
 
 @property (weak) BattleController *controller;
@@ -47,8 +45,6 @@
 @property (readonly) int level;
 
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
-//@property (readonly) NSMutableDictionary *auraStatusDictionary;
-@property (readonly) NSMutableDictionary *auraPassiveSkillDictionary;
 
 // TODO: Move bloodsprite to hp attribute?
 @property (readonly) CharacterSprite *sprite;
@@ -67,10 +63,6 @@
 -(void)addAttribute:(Attribute *)attribute;
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
--(void)addPassiveSkill:(PassiveSkill *)aSkill;
-
-//-(void)setDirectionVelocity:(CGPoint)velocity;
-
 -(void)useSkill;
 -(void)attackCharacter:(Character *)target withAttackType:(AttackType)type;
 
@@ -81,8 +73,8 @@
 -(void)handleRoundStartEvent;
 -(void)handleRoundEndEvent;
 
-//-(void)addAuraPassiveSkill:(AuraPassiveSkill *)aSkill;
-//-(void)removeAuraPassiveSkill:(AuraPassiveSkill *)aSkill;
+-(void)addPassiveSkill:(PassiveSkill *)passiveSkill;
+-(void)removePassiveSkill:(PassiveSkill *)passiveSkill;
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time;
 //-(void)addAuraStatus:(StatusType)type;

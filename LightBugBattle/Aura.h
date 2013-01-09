@@ -6,12 +6,12 @@
 //
 //
 
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 
-@interface Aura : PositiveSkill {
-    Class auraPassiveSkillClass;
+@interface Aura : ActiveSkill {
+
 }
 
--(id)initWithCharacter:(Character *)aCharacter rangeDictionary:(NSMutableDictionary *)dictionary auraPassiveSkillClass:(Class)aClass;
+-(id)initWithCharacter:(Character *)aCharacter rangeDictionary:(NSMutableDictionary *)dictionary;
 
 @end

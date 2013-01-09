@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 
 @class  Character;
-@interface TestSkill : PositiveSkill {
+@interface TestSkill : ActiveSkill {
 //    NSString *name;
 //    Range *effectRange;
 //    __weak Character *character;

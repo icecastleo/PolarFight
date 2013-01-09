@@ -11,7 +11,7 @@
 
 @implementation ReflectAttackDamageSkill
 
--(id)initWithProbability:(int)aProbability damagePercent:(int)aPercent {
+-(id)initWithProbability:(int)aProbability reflectPercent:(int)aPercent {
     if(self = [super init]) {
         probability = aProbability;
         percent = aPercent;

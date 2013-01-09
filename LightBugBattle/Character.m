@@ -44,9 +44,8 @@
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
 //        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         attributeDictionary = [[NSMutableDictionary alloc] init];
-        passiveSkillArray = [[NSMutableArray alloc] init];
+        passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
-        _auraPassiveSkillDictionary = [[NSMutableDictionary alloc] init];
         
         GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
         
@@ -103,14 +102,17 @@
     } else if ([name isEqualToString:@"Priest"]) {
         skill = [[HealSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Tank"]) {
-        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
+        
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self rangeDictionary:dictionary];
+        
         [auraArray addObject:aura];
     }
 }
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 damagePercent:100]];
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -153,11 +155,6 @@
 
 -(Attribute *)getAttribute:(CharacterAttributeType)type {
     return [attributeDictionary objectForKey:[NSNumber numberWithInt:type]];
-}
-
--(void)addPassiveSkill:(PassiveSkill *)aSkill {
-    // TODO: How to handle the same skill? (some might have problem)
-    [passiveSkillArray addObject:aSkill];
 }
 
 -(BOOL)getCharacterStatePermission:(CharacterState)aState {
@@ -256,7 +253,7 @@
 }
 
 -(void)sendAttackEvent:(AttackEvent *)event {
-    for (PassiveSkill *p in passiveSkillArray) {
+    for (PassiveSkill *p in passiveSkillDictionary) {
         if ([p respondsToSelector:@selector(character:willSendAttackEvent:)]) {
             [p character:self willSendAttackEvent:event];
         }
@@ -266,6 +263,12 @@
 }
 
 -(void)receiveAttackEvent:(AttackEvent *)event {
+    for (PassiveSkill *p in passiveSkillDictionary) {
+        if ([p respondsToSelector:@selector(character:willReceiveAttackEvent:)]) {
+            [p character:self willReceiveAttackEvent:event];
+        }
+    }
+    
     Attribute *defense = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeDefense]];
     
     if (defense != nil) {
@@ -276,7 +279,7 @@
 }
 
 -(void)receiveDamageEvent:(DamageEvent *)event {
-    for (PassiveSkill *p in passiveSkillArray) {
+    for (PassiveSkill *p in passiveSkillDictionary) {
         if ([p respondsToSelector:@selector(character:didReceiveDamageEvent:)]) {
             [p character:self didReceiveDamageEvent:event];
         }
@@ -296,7 +299,7 @@
     
     [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
     
-    for (PassiveSkill *p in passiveSkillArray) {
+    for (PassiveSkill *p in passiveSkillDictionary) {
         if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
             [p character:self didReceiveDamage:damage];
         }
@@ -344,7 +347,7 @@
 }
 
 -(void)handleRoundStartEvent {
-    for (PassiveSkill *p in passiveSkillArray) {
+    for (PassiveSkill *p in passiveSkillDictionary) {
         if ([p respondsToSelector:@selector(characterShouldStartRound:)]) {
             [p characterShouldStartRound:self];
         }
@@ -357,7 +360,7 @@
     [sprite stopAllActions];
     state = stateIdle;
     
-    for (PassiveSkill *p in passiveSkillArray) {
+    for (PassiveSkill *p in passiveSkillDictionary) {
         if ([p respondsToSelector:@selector(characterDidRoundEnd:)]) {
             [p characterDidRoundEnd:self];
         }
@@ -370,6 +373,46 @@
 
 -(CGPoint)position {
     return sprite.position;
+}
+
+-(void)addPassiveSkill:(PassiveSkill *)passiveSkill {
+    // FIXME: For passive skill with duration, maybe there are some better way without allocing a new one to replace.
+    // Fix it with static method is better (before alloc), but hard for extend class.
+    
+    NSString *key = NSStringFromClass([passiveSkill class]);
+    
+    // Check if there are already exist the same passive skill.
+    PassiveSkill *old = [passiveSkillDictionary objectForKey:key];
+
+    if (old != nil) {
+        // Add duration time to the old one
+        if (old.duration != 0 && passiveSkill.duration != 0) {
+            old.duration = passiveSkill.duration;
+            return;
+        }
+        
+        [self removePassiveSkill:old key:key];
+    }
+    
+    // Add passive skill
+    if ([passiveSkill respondsToSelector:@selector(characterWillAddDelegate:)]) {
+        [passiveSkill characterWillAddDelegate:self];
+    }
+    
+    [passiveSkillDictionary setObject:passiveSkill forKey:key];
+    
+    passiveSkill.character = self;
+}
+
+-(void)removePassiveSkill:(PassiveSkill *)passiveSkill {
+    [self removePassiveSkill:passiveSkill key:NSStringFromClass([passiveSkill class])];
+}
+
+-(void)removePassiveSkill:(PassiveSkill *)passiveSkill key:(NSString *)key {
+    if ([passiveSkill respondsToSelector:@selector(characterWillRemoveDelegate:)]) {
+        [passiveSkill characterWillRemoveDelegate:self];
+    }
+    [passiveSkillDictionary removeObjectForKey:key];
 }
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time {

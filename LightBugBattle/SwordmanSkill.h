@@ -6,10 +6,10 @@
 //
 //
 
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 #import "Range.h"
 
-@interface SwordmanSkill : PositiveSkill {
+@interface SwordmanSkill : ActiveSkill {
 
 }
 

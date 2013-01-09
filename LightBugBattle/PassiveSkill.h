@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PositiveSkill.h"
+#import "ActiveSkill.h"
 #import "CharacterEventDelegate.h"
 
 @interface PassiveSkill : NSObject<CharacterEventDelegate> {
-    
+
 }
+
+@property (weak, nonatomic) Character *character;
+@property float duration;
 
 @end

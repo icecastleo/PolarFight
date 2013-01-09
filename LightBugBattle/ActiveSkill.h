@@ -10,7 +10,7 @@
 #import "EffectKit.h"
 #import "Range.h"
 
-@interface PositiveSkill : NSObject {
+@interface ActiveSkill : NSObject {
     Range *range;
     __weak Character *character;
 }

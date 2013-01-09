@@ -7,17 +7,26 @@
 //
 
 #import "SlowMoveAura.h"
-#import "SlowMoveSkill.h"
+#import "SlowMovePassiveSkill.h"
+#import "Character.h"
 
 @implementation SlowMoveAura
 
--(id)initWithCharacter:(Character *)aCharacter {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
-    
-    if (self = [super initWithCharacter:aCharacter rangeDictionary:dictionary auraPassiveSkillClass:[SlowMoveSkill class]]) {
-        
+//-(id)initWithCharacter:(Character *)aCharacter {
+//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
+//    
+//    if (self = [super initWithCharacter:aCharacter rangeDictionary:dictionary]) {
+//        
+//    }
+//    return self;
+//}
+
+-(void)execute {
+    for (Character *target in [range getEffectTargets]) {
+        SlowMovePassiveSkill *skill = [[SlowMovePassiveSkill alloc] init];
+        skill.duration = kPassiveSkillDuration;
+        [target addPassiveSkill:skill];
     }
-    return self;
 }
 
 @end

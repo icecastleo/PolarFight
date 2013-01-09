@@ -13,6 +13,9 @@
 
 @optional
 
+-(void)characterWillAddDelegate:(Character *)sender;
+-(void)characterWillRemoveDelegate:(Character *)sender;
+
 -(BOOL)characterShouldStartRound:(Character *)sender;
 //-(void)characterWillStartRound:(Character *)sender;
 
@@ -20,6 +23,7 @@
 
 -(BOOL)characterShouldAttack:(Character *)sender;
 -(void)character:(Character *)sender willSendAttackEvent:(AttackEvent*)event;
+-(void)character:(Character *)sender willReceiveAttackEvent:(AttackEvent*)event;
 
 -(void)character:(Character *)sender didReceiveDamageEvent:(DamageEvent*)event;
 -(void)character:(Character *)sender didReceiveDamage:(Damage*)damage;
