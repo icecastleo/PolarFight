@@ -71,7 +71,7 @@ const int characterInfoViewZ = 9999;
             );
     }
     
-    [self addChild:character.sprite z:1000 - character.position.y];
+    [self addChild:character.sprite z:characterPositionZ - character.position.y];
 }
 
 -(void)addBarrier:(Barrier *)theBarrier {

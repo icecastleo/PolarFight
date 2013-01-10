@@ -4585,6 +4585,14 @@
 				9B2C7863169A1C2D00CA1A1C /* Aura.m in Sources */,
 				9B2C7867169ABA9900CA1A1C /* SlowMovePassiveSkill.m in Sources */,
 				9B2C786E169ADA9300CA1A1C /* SlowMoveAura.m in Sources */,
+				3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */,
+				3727AEE2169D6ACA00160620 /* SWMultiColumnTableView.m in Sources */,
+				3727AEE3169D6ACA00160620 /* SWScrollView.m in Sources */,
+				3727AEE4169D6ACA00160620 /* SWSorting.m in Sources */,
+				3727AEE5169D6ACA00160620 /* SWTableView.m in Sources */,
+				3727AEE6169D6ACA00160620 /* SWTableViewCell.m in Sources */,
+				3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */,
+				37BB1959169E9F2300AC56FC /* MyCell.m in Sources */,
 				9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */,
 				9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */,
 				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
@@ -4773,7 +4781,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4800,7 +4808,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -4825,11 +4833,11 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "./**";
 			};
@@ -4848,11 +4856,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d/cocos2d-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "./**";
 				VALIDATE_PRODUCT = YES;

@@ -22,7 +22,7 @@
 //}
 
 -(void)execute {
-//    CCLOG(@"%@",character.name);
+    CCLOG(@"%@",character.name);
     
     for (Character *target in [range getEffectTargets]) {
         SlowMovePassiveSkill *skill = [[SlowMovePassiveSkill alloc] init];
