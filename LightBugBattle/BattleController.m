@@ -97,7 +97,8 @@ static BattleController* currentInstance;
         isMove = NO;
         
         currentIndex = 0;
-        currentCharacter = self.characters[currentIndex];
+//        currentCharacter = self.characters[currentIndex];
+        currentCharacter = [self.characters objectAtIndex:currentIndex];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
@@ -218,7 +219,8 @@ static BattleController* currentInstance;
     // FIXME: It will caused wrong sequence after someone's dead.
     currentIndex = ++currentIndex % self.characters.count;
     
-    currentCharacter = self.characters[currentIndex];
+//    currentCharacter = self.characters[currentIndex];
+    currentCharacter = [self.characters objectAtIndex:currentIndex];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
     

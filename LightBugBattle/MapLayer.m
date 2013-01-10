@@ -7,9 +7,18 @@
 //
 
 #import "MapLayer.h"
+#import "CharacterInfoView.h"
+
+@interface MapLayer () {
+    CharacterInfoView *_characterInfoView;
+}
+@end
 
 @implementation MapLayer
 @synthesize cameraControl;
+
+const int characterPositionZ = 1000;
+const int characterInfoViewZ = 9999;
 
 -(id)initWithMapSprite:(CCSprite*)aSprite {
     if((self=[super init])) {
@@ -23,6 +32,10 @@
         mapBody = aSprite;
         
         [cameraControl setMap:mapBody mapLayer:self];
+        
+        CharacterInfoView *characterInfoView = [CharacterInfoView node];
+        _characterInfoView = characterInfoView;
+        [self addChild:_characterInfoView z:characterInfoViewZ];
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
@@ -63,7 +76,7 @@
 
 -(void)addBarrier:(Barrier *)theBarrier {
     [barriers addObject:theBarrier];
-    [self addChild:theBarrier z:1000 - theBarrier.center.y];
+    [self addChild:theBarrier z:characterPositionZ - theBarrier.center.y];
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -94,6 +107,7 @@
 }
 
 -(void)moveCharacterTo:(Character*)theCharacter position:(CGPoint)location {
+    [_characterInfoView clean];
     //int x = (location.x + mapBody.boundingBox.size.width/2)/10;
     //int y = (location.y + mapBody.boundingBox.size.height/2)/10;
     
@@ -242,7 +256,7 @@
 //    CCLOG(@"LIMITS X:%f Y:%f", mapXLimit, mapYLimit);
 //    CCLOG(@"CHARA POSITION X:%f Y:%f", theCharacter.position.x, theCharacter.position.y);
     
-    [self reorderChild:theCharacter.sprite z: 1000 - moveY];
+    [self reorderChild:theCharacter.sprite z: characterPositionZ - moveY];
     
     theCharacter.position = ccp(moveX,moveY);
     
@@ -313,13 +327,16 @@
         }
         theCharacter.position = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
         
-        [self reorderChild:theCharacter.sprite z:1000 - theCharacter.position.y];
+        [self reorderChild:theCharacter.sprite z:characterPositionZ - theCharacter.position.y];
     }
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    [_characterInfoView clean];
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
+    CGPoint actualLocation = [self getTouchPositionInMapFromOriginalTouchLocation:location];
+    [self selectCharacterForTouch:actualLocation];
     
     return YES;
 }
@@ -333,6 +350,42 @@
     
     CGPoint diff = ccp( location.x - lastPoint.x, location.y - lastPoint.y );
     [cameraControl moveCameraX: -0.5 * diff.x Y: -0.5 * diff.y];
+}
+
+- (void)selectCharacterForTouch:(CGPoint)touchLocation {
+    for (Character *character  in _characters) {
+        if (CGRectContainsPoint(character.sprite.boundingBox, touchLocation)) {
+            CGPoint position = [self getInfoViewPositionFromCharacterPosition:character.position];
+            [_characterInfoView showInfoFromCharacter:character loacation:position needBackGround:YES];
+            CCLOG(@"touch %@ ::(X:%g,Y:%g)",character.name,touchLocation.x,touchLocation.y);
+            break;
+        }
+    }
+}
+
+- (CGPoint)getTouchPositionInMapFromOriginalTouchLocation:(CGPoint)point {
+    CGPoint cameraPosition = [cameraControl getCameraPosition];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    double x = point.x + cameraPosition.x - winSize.width/2;
+    double y = point.y + cameraPosition.y - winSize.height/2;
+    CGPoint goal = CGPointMake(x, y);
+    
+    return goal;
+}
+
+- (CGPoint)getInfoViewPositionFromCharacterPosition:(CGPoint)chaPoint {
+    CGPoint cameraPosition = [cameraControl getCameraPosition];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    double x=0,y=0;
+    if (chaPoint.x < cameraPosition.x) 
+        x = cameraPosition.x + 10;
+    else
+        x = cameraPosition.x - winSize.width/2 + winSize.width/20;
+    
+    y = cameraPosition.y - winSize.height/2 + winSize.height/5;
+    CGPoint goal = CGPointMake(x, y);
+    
+    return goal;
 }
 
 @end
