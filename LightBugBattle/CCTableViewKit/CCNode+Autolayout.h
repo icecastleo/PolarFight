@@ -27,6 +27,7 @@
 //  Copyright 2010 Sangwoo Im. All rights reserved.
 //
 
+#import "cocos2d.h"
 #import "CCNode.h"
 #import "CCScene.h"
 

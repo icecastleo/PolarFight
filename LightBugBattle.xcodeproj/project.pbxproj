@@ -30,6 +30,7 @@
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
 		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
+		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1002,6 +1003,8 @@
 		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
 		3799B71B1650DFC100A9A394 /* CharacterData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CharacterData.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		37BB1957169E9F2300AC56FC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
@@ -3599,6 +3602,8 @@
 				9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */,
 				37598BDC1696D2550007013B /* CharacterInfoView.h */,
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
+				37BB1957169E9F2300AC56FC /* MyCell.h */,
+				37BB1958169E9F2300AC56FC /* MyCell.m */,
 			);
 			name = SelectLayer;
 			sourceTree = "<group>";
@@ -4582,6 +4587,7 @@
 				3727AEE5169D6ACA00160620 /* SWTableView.m in Sources */,
 				3727AEE6169D6ACA00160620 /* SWTableViewCell.m in Sources */,
 				3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */,
+				37BB1959169E9F2300AC56FC /* MyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

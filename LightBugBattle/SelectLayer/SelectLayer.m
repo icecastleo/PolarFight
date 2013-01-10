@@ -14,7 +14,7 @@
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 
-#import "SWTableViewCell.h"
+#import "MyCell.h"
 
 #pragma mark - SelectLayer
 typedef enum {
@@ -69,6 +69,7 @@ static const int characterMinNumber = 1;
         [self initAllSelectedRoles];
         [self putMainRole];
         [self loadAllRolesCanBeSelected];
+        [self setTable];
         
         [[CCDirector sharedDirector] setDisplayStats:NO];
         
@@ -137,7 +138,7 @@ static const int characterMinNumber = 1;
         
         roleBase.tag = nilRoleTag;
         
-        [self addChild:roleBase];
+        //[self addChild:roleBase];
         [allRoleBases addObject:roleBase];
     }
 }
@@ -230,7 +231,7 @@ static const int characterMinNumber = 1;
                 CCSprite *newRole = [characterSpritParty objectAtIndex:i];
                 newRole.tag = i;
                 
-                [self replaceOldRole:[allRoleBases objectAtIndex:i] newCharacter:newRole inArray:allRoleBases index:i];
+                //[self replaceOldRole:[allRoleBases objectAtIndex:i] newCharacter:newRole inArray:allRoleBases index:i];
             }
         }
     }
@@ -264,6 +265,20 @@ static const int characterMinNumber = 1;
 }
 
 #pragma mark touch
+- (void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
+    CCSprite * newSprite = nil;
+    if(sprite.tag != nilRoleTag) {
+        newSprite = sprite;
+    }
+    if (newSprite != selSprite) {
+        [self showCharacterInfo:newSprite];
+        [self shakyShaky:newSprite];
+        selSprite = newSprite;
+    }
+    if (newSprite)
+        [self addRole:newSprite];
+}
+
 - (void)selectSpriteForTouch:(CGPoint)touchLocation {
     CCSprite * newSprite = nil;
     for (CCSprite *sprite in allRoleBases) {
@@ -317,6 +332,8 @@ static const int characterMinNumber = 1;
 }
 
 - (void)showCharacterInfo:(CCSprite *) newSprite {
+    if (!newSprite)
+        return;
     if (newSprite.tag > characterParty.count)
         return;
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -382,11 +399,11 @@ static const int characterMinNumber = 1;
 }
 
 - (void)setTable {
-    CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(55, 55, 55, 255)];
-    tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(320,400)];
+    CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(77, 31, 0, 225)];
+    tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(200,180)];
     
     tableView.direction = SWScrollViewDirectionVertical;
-    tableView.position = ccp(100,80);
+    tableView.position = ccp(20,100);
     tableView.delegate = self;
     tableView.bounces = YES;
     
@@ -395,7 +412,7 @@ static const int characterMinNumber = 1;
     
     [tableView addChild:layer];
     
-    [self addChild:tableView];
+    [self addChild:tableView z:100];
     [tableView reloadData];
 }
 
@@ -407,26 +424,36 @@ static const int characterMinNumber = 1;
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
-        cell = [SWTableViewCell new];
+        cell = [MyCell new];
     } else {
         [cell removeAllChildrenWithCleanup:YES];
     }
-    NSString * string = [NSString stringWithFormat:@"%d:Name",idx];
-    CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:12.0];
-    label.position = ccp(65, 20);
-    label.color = ccc3(0,0,0);
-    [cell addChild:label];
+    
+    Character *character = [characterParty objectAtIndex:idx];
+    CCSprite *sprite = character.sprite;
+    
+    CCTexture2D *tx = [sprite texture];
+    CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
+    newSprite.position = ccp(65, 20);
+    newSprite.tag = idx;
+    NSLog(@"%d.%@:",idx,character.name);
+    [cell addChild:newSprite];
+
     return cell;
 }
 -(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
     
-    return 50;
+    return characterParty.count;
 }
 
 #pragma mark SWTableViewDelegate
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-    CCLabelTTF *label = [cell.children objectAtIndex:0];
-    NSLog(@"%d::%@",cell.idx,label.string);
+//    CCLabelTTF *label = [cell.children objectAtIndex:0];
+//    NSLog(@"%d::%@",cell.idx,label.string);
+    CCSprite *sprite = [cell.children objectAtIndex:0];
+    Character *character = [characterParty objectAtIndex:sprite.tag];
+    NSLog(@"%@ say hi",character.name);
+    [self selectSpriteForTouchFromCell:sprite];
 }
 
 @end

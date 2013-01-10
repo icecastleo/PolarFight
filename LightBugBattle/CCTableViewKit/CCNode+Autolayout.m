@@ -33,7 +33,10 @@
 #import "CCGrid.h"
 
 @implementation CCNode (Autolayout)
-/*
+//*
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 - (void) visit
 {
 	// quick return if not visible
@@ -42,7 +45,7 @@
 	
 	[self performSelector:@selector(layout)];
 	
-	glPushMatrix();
+	kmGLPushMatrix();
 	
 	if ( grid_ && grid_.active) {
 		[grid_ beforeDraw];
@@ -55,9 +58,12 @@
 	}
 	
 	if(children_) {
+        
+		[self sortAllChildren];
+        
 		ccArray *arrayData = children_->data;
 		NSUInteger i = 0;
-		
+        
 		// draw children zOrder < 0
 		for( ; i < arrayData->num; i++ ) {
 			CCNode *child = arrayData->arr[i];
@@ -66,27 +72,34 @@
 			else
 				break;
 		}
-		
+        
 		// self draw
 		[self draw];
-		
+        
 		// draw children zOrder >= 0
 		for( ; i < arrayData->num; i++ ) {
 			CCNode *child =  arrayData->arr[i];
 			[child visit];
 		}
-		
+        
 	} else
 		[self draw];
-		 
+    
 	if ([self respondsToSelector:@selector(afterDraw)]) {
 		[self performSelector:@selector(afterDraw)];
 	}
+    
+    // reset for next frame
+	orderOfArrival_ = 0;
+    
 	if ( grid_ && grid_.active)
 		[grid_ afterDraw:self];
 	
-	glPopMatrix();
+	kmGLPopMatrix();
 }
+
+#pragma clang diagnostic pop
+
 - (void)layoutChildren {}
 - (void)layout {
 	if (isTransformDirty_ && isTransformDirty_ && isInverseDirty_) {

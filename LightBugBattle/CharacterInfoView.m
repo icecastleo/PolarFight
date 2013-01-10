@@ -31,7 +31,7 @@
     
     NSString *roleName    = role.name;
     NSString *rolelevel   = [self getNSStringFromint:role.level];
-    NSString *hp          = [self getNSStringFromint:[role getAttribute:kCharacterAttributeHp].value];
+    NSString *hp          = [self getNSStringFromint:[role getAttribute:kCharacterAttributeHp].currentValue];
     NSString *attack      = [self getNSStringFromint:[role getAttribute:kCharacterAttributeAttack].value];
     NSString *defense     = [self getNSStringFromint:[role getAttribute:kCharacterAttributeDefense].value];
     NSString *agile       = [self getNSStringFromint:[role getAttribute:kCharacterAttributeAgile].value];
