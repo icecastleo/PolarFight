@@ -14,8 +14,9 @@
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 
-#pragma mark - SelectLayer
+#import "SWTableViewCell.h"
 
+#pragma mark - SelectLayer
 typedef enum {
     mainRoleTag = 1001
 } RolesTag;
@@ -50,8 +51,11 @@ static const int characterMinNumber = 1;
 }
 
 -(id) init {
-    if( (self=[super initWithColor:ccc4(255, 255, 255, 255)]) ) {
-                
+    if( (self=[super init]) ) {
+        
+        backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)];
+        [self addChild:backgroundLayer];
+        
         // 1 - Initialize
         self.isTouchEnabled = YES;
         
@@ -316,7 +320,7 @@ static const int characterMinNumber = 1;
     if (newSprite.tag > characterParty.count)
         return;
     Character *role = [characterParty objectAtIndex:newSprite.tag];
-    [_characterInfoView setValueForLabels:role];
+    [_characterInfoView showInfoFromCharacter:role loacation:CGPointMake(260, 200)];
 }
 
 - (void)addRole:(CCSprite *)sprite {
@@ -374,6 +378,54 @@ static const int characterMinNumber = 1;
         [PartyParser saveParty:saveCharacterArray fileName:@"SelectedCharacters.xml"];
         [[CCDirector sharedDirector] replaceScene:[BattleController node]];
     }
+}
+
+- (void)setTable {
+    CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(55, 55, 55, 255)];
+    tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(320,400)];
+    
+    tableView.direction = SWScrollViewDirectionVertical;
+    tableView.position = ccp(100,80);
+    tableView.delegate = self;
+    tableView.bounces = YES;
+    
+    
+    layer.contentSize		 = tableView.contentSize;
+    
+    [tableView addChild:layer];
+    
+    [self addChild:tableView];
+    [tableView reloadData];
+}
+
+
+#pragma mark SWTableViewDataSource
+-(CGSize)cellSizeForTable:(SWTableView *)table {
+    return CGSizeMake(200, 50);
+}
+-(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
+    SWTableViewCell *cell = [table dequeueCell];
+    if (!cell) {
+        cell = [SWTableViewCell new];
+    } else {
+        [cell removeAllChildrenWithCleanup:YES];
+    }
+    NSString * string = [NSString stringWithFormat:@"%d:Name",idx];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:12.0];
+    label.position = ccp(65, 20);
+    label.color = ccc3(0,0,0);
+    [cell addChild:label];
+    return cell;
+}
+-(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
+    
+    return 50;
+}
+
+#pragma mark SWTableViewDelegate
+-(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
+    CCLabelTTF *label = [cell.children objectAtIndex:0];
+    NSLog(@"%d::%@",cell.idx,label.string);
 }
 
 @end

@@ -63,5 +63,8 @@
 //    [self moveCameraToX:target.position.x Y:target.position.y];
 //}
 
+-(CGPoint)getCameraPosition {
+    return cameraPosition;
+}
 @end
 

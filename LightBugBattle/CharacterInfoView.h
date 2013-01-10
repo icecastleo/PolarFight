@@ -12,6 +12,6 @@
 
 @interface CharacterInfoView : CCLayer
 
-- (void)setValueForLabels:(Character *)role;
-
+- (void)showInfoFromCharacter:(Character *)role loacation:(CGPoint)point;
+- (void)clean;
 @end

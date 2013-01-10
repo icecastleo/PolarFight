@@ -7,9 +7,11 @@
 //
 
 #import "cocos2d.h"
+#import "SWTableView.h"
 
-@interface SelectLayer : CCLayerColor {
-    
+@interface SelectLayer : CCLayer <SWTableViewDataSource,SWTableViewDelegate>{
+	CCLayerColor   *backgroundLayer;
+    SWTableView   *tableView;
     NSMutableArray * allRoleBases;
 }
 

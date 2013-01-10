@@ -28,5 +28,5 @@
 -(void) moveCameraX:(float)moveX Y:(float)moveY;
 -(void) moveCameraToX:(float)moveX Y:(float)moveY;
 //-(void) followTarget:(CCSprite*)theTarget;
-
+-(CGPoint)getCameraPosition;
 @end

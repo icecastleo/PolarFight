@@ -62,5 +62,11 @@
 		<key>y</key>
 		<integer>200</integer>
 	</dict>
+	<dict>
+		<key>x</key>
+		<integer>20</integer>
+		<key>y</key>
+		<integer>150</integer>
+	</dict>
 </array>
 </plist>
