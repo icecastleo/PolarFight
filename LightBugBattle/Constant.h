@@ -13,6 +13,9 @@
 #define kPassiveSkillDuration 0.5
 #define kPassiveSkillInterval 0.1
 
+#define kKnoutOutCount 30
+#define kKnoutOutRatio 0.9
+
 //typedef enum {
 //    kGameStateRoundStart,
 //    kGameStateCharacterMove,

@@ -35,26 +35,30 @@
     return self;
 }
 
--(void)addCharacter:(Character*)aCharacter {
-    [_characters addObject:aCharacter];
+-(void)addCharacter:(Character*)character {
+    [_characters addObject:character];
     CGSize mapSize = mapBody.boundingBox.size;
-    CGSize charaSize = aCharacter.sprite.boundingBox.size;
+    CGSize charaSize = character.sprite.boundingBox.size;
     
-    if (aCharacter.player == 1) {
-        aCharacter.position =
+    float rangeX = mapSize.width / 2 * 0.5;
+    float blankX = mapSize.width / 2 * 0.25;
+    float rangeY = mapSize.height * 0.5;
+    
+    if (character.player == 1) {
+        character.position =
         ccp(
-            -1*CCRANDOM_0_1()*mapSize.width/2*0.8 + charaSize.width/2,
-            CCRANDOM_0_1()*mapSize.height*0.8 - mapSize.height/2
+            arc4random_uniform(rangeX) - rangeX - blankX + charaSize.width / 2,
+            arc4random_uniform(rangeY) - rangeY / 2
             );
     } else {
-        aCharacter.position =
+        character.position =
         ccp(
-            CCRANDOM_0_1()*mapSize.width/2*0.8 - charaSize.width/2,
-            CCRANDOM_0_1()*mapSize.height*0.8 - mapSize.height/2
+            arc4random_uniform(rangeX) + blankX + charaSize.width / 2,
+            arc4random_uniform(rangeY) - rangeY / 2
             );
     }
     
-    [self addChild:aCharacter.sprite z:1000 - aCharacter.position.y];
+    [self addChild:character.sprite z:1000 - character.position.y];
 }
 
 -(void)addBarrier:(Barrier *)theBarrier {
@@ -255,17 +259,16 @@
     [theCharacter setDirectionVelocity:velocity];
 }
 
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity {
-    
-    float angle = [Helper calculateVectorAngle:velocity];
-    CGPoint direction = [Helper vectorFromAngle:angle];
-    
-    float power = ccpDistance(velocity, direction);
-    
-    power *= 0.15; // edit someday
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power {
+//    float angle = [Helper calculateVectorAngle:velocity];
+//    CGPoint direction = [Helper vectorFromAngle:angle];
+//    
+//    float power = ccpDistance(velocity, direction);
+//    
+//    power *= 0.15; // edit someday
     
     //CCLOG(@"ANGLE : %f, ANGLE 2: %f, POWER : %f", angle, [Helper calculateVectorAngle:direction], power);
-    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:direction power:power];
+    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity power:power];
     
     [NSTimer scheduledTimerWithTimeInterval:0.025f target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
 }
@@ -274,14 +277,14 @@
 
     KnockOutObject *obj = timer.userInfo;
     
-    Character* theCharacter = obj.character;
+    Character *theCharacter = obj.character;
     
-    if (obj.count >= 30) {
+    if (obj.count >= kKnoutOutCount) {
         [timer invalidate];
     } else {
-        float ratio = powf( 0.9, obj.count++);
-        CGPoint direction = obj.velocity;
-        CGPoint nextPoint = ccpAdd( theCharacter.position, ccpMult( direction, ratio * obj.power) );
+        obj.count++;
+        obj.ratio *= kKnoutOutRatio;
+        CGPoint nextPoint = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
         
         // Check character collide
         for(Character *other in _characters) {
@@ -294,7 +297,7 @@
             float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
             
             if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
-                direction = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+                obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
             }
         }
         
@@ -305,13 +308,10 @@
             float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
                 
             if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
-                direction = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+                obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
             }
         }
-        
-        obj.velocity = direction;
-        CGPoint vel = ccpMult(obj.velocity, ratio * obj.power);
-        obj.character.position = ccpAdd(obj.character.position, vel);
+        theCharacter.position = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
         
         [self reorderChild:theCharacter.sprite z:1000 - theCharacter.position.y];
     }

@@ -11,12 +11,15 @@
 
 @implementation KnockOutObject
 
--(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity power:(float)aPower{
+-(id)initWithCharacter:(Character *)character velocity:(CGPoint)velocity power:(float)power {
     if (self = [super init]) {
-        _character = aCharacter;
-        _velocity = aVelocity;
+        _character = character;
+//        _point = ccpMult(path, 1 / kKnoutOutCount);
+        _velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
+//        _power = power / kKnoutOutCount;
+        _power = power;
         _count = 0;
-        _power = aPower;
+        _ratio = 1;
     }
     return self;
 }

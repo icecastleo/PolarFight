@@ -65,22 +65,22 @@ static BattleController* currentInstance;
         
         // Testing add barriers
         Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree setPosition:ccp(0,0)];
+        [tree setPosition:ccp(35,35)];
         [tree setShapeRoundRadius:10 center:ccp(10,-30)];
         [mapLayer addBarrier:tree];
         
         Barrier* tree2 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree2 setPosition:ccp(100,-40)];
+        [tree2 setPosition:ccp(35,-35)];
         [tree2 setShapeRoundRadius:10 center:ccp(10,-30)];
         [mapLayer addBarrier:tree2];
         
         Barrier* tree3 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree3 setPosition:ccp(-50,30)];
+        [tree3 setPosition:ccp(-35,35)];
         [tree3 setShapeRoundRadius:10 center:ccp(10,-30)];
         [mapLayer addBarrier:tree3];
         
         Barrier* tree4 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree4 setPosition:ccp(50,10)];
+        [tree4 setPosition:ccp(-35,-35)];
         [tree4 setShapeRoundRadius:10 center:ccp(10,-30)];
         [mapLayer addBarrier:tree4];
         
@@ -151,6 +151,7 @@ static BattleController* currentInstance;
 }
 
 -(void)addCharacter:(Character *)character {
+//    CCLOG(@"Add character : %@",character.name);
     [mapLayer addCharacter:character];
 }
 
@@ -162,8 +163,8 @@ static BattleController* currentInstance;
     }
 }
 
--(void)knockOut:(Character *)character velocity:(CGPoint)velocity {
-    [mapLayer knockOut:character velocity:velocity];
+-(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power {
+    [mapLayer knockOut:character velocity:velocity power:power];
 }
 
 -(void)update:(ccTime)delta {

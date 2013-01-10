@@ -25,7 +25,8 @@
 
 
 -(void)addBloodSprite {
-    bloodSprite = [CCSprite spriteWithFile:@"blood.png"];
+    bloodSprite = [CCSprite spriteWithFile:
+                   [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
     bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
     
     [self updateBloodSprite];

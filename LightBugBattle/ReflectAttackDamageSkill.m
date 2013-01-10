@@ -24,7 +24,7 @@
         return;
     }
     
-    int random = arc4random() % 100 + 1;
+    int random = arc4random_uniform(100) + 1;
     
     if (probability >= random) {
         DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage.value * percent / 100 damageType:kDamageTypePassiveSkill damager:sender];

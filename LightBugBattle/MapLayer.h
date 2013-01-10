@@ -22,7 +22,6 @@
     CCSprite* mapBody;
     
     NSMutableArray* knockOutObjs;
-    
 }
 
 @property (strong, readonly) NSMutableArray* characters;
@@ -30,15 +29,15 @@
 
 -(id)initWithMapSprite:(CCSprite*)aSprite;
 
--(void) addCharacter:(Character*)theCharacter;
--(void) removeCharacter:(Character*)theCharacter;
+-(void)addCharacter:(Character*)theCharacter;
+-(void)removeCharacter:(Character*)theCharacter;
 
--(void) addBarrier:(Barrier *)theBarrier;
+-(void)addBarrier:(Barrier *)theBarrier;
 //-(void) removeBarrier:(Barrier*)
 
 //-(void) setMap:(CCSprite*)theMap;
--(void) setMapBlocks;
--(void) moveCharacter:(Character*)theCharacter velocity:(CGPoint)velocity;
--(void) moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
--(void) knockOut:(Character*)character velocity:(CGPoint)velocity;
+-(void)setMapBlocks;
+-(void)moveCharacter:(Character*)theCharacter velocity:(CGPoint)velocity;
+-(void)moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power;
 @end

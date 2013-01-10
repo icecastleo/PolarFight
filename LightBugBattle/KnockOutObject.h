@@ -14,11 +14,12 @@
 
 }
 
-@property (readonly) Character* character;
+@property (readonly) Character *character;
 @property (readwrite) CGPoint velocity;
-@property (readwrite) int count;
 @property (readwrite) float power;
+@property (readwrite) int count;
+@property (readwrite) float ratio;
 
--(id)initWithCharacter:(Character *)aCharacter velocity:(CGPoint)aVelocity power:(float)aPower;
+-(id)initWithCharacter:(Character *)character velocity:(CGPoint)velocity power:(float)power;
 
 @end

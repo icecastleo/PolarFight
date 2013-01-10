@@ -23,7 +23,7 @@
 }
 
 -(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
-    if(probability >= arc4random() % 100 + 1) {
+    if(probability >= arc4random_uniform(100) + 1) {
         [base doEffectFromCharacter:aCharacter toCharacter:bCharacter];
     }
 }

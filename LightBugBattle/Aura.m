@@ -15,7 +15,7 @@
 -(id)initWithCharacter:(Character *)aCharacter rangeDictionary:(NSMutableDictionary *)dictionary {
     if (self = [super initWithCharacter:aCharacter]) {
         range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
-        range.rangeSprite.visible = true;
+//        range.rangeSprite.visible = true;
         
         [NSTimer scheduledTimerWithTimeInterval:kAuraInterval target:self selector:@selector(execute) userInfo:nil repeats:YES];
     }

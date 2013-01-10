@@ -783,7 +783,11 @@
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
-		9B114123163E4CAD0074969E /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B114122163E4CAD0074969E /* blood.png */; };
+		9B2040C4169F0C30000EF31F /* blood_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C2169F0C30000EF31F /* blood_green.png */; };
+		9B2040C5169F0C30000EF31F /* blood_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C3169F0C30000EF31F /* blood_red.png */; };
+		9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040C7169F0C84000EF31F /* TankSkill.m */; };
+		9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040CE169F2E7C000EF31F /* SuicideSkill.m */; };
+		9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
 		9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248217164D40E3007B6E4D /* MapCameraControl.m */; };
 		9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248219164D40E3007B6E4D /* MapControlExample.m */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
@@ -1776,7 +1780,14 @@
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
 		9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegenerationSkill.m; sourceTree = "<group>"; };
-		9B114122163E4CAD0074969E /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood.png; sourceTree = "<group>"; };
+		9B2040C2169F0C30000EF31F /* blood_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_green.png; sourceTree = "<group>"; };
+		9B2040C3169F0C30000EF31F /* blood_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_red.png; sourceTree = "<group>"; };
+		9B2040C6169F0C84000EF31F /* TankSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TankSkill.h; sourceTree = "<group>"; };
+		9B2040C7169F0C84000EF31F /* TankSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TankSkill.m; sourceTree = "<group>"; };
+		9B2040CD169F2E7C000EF31F /* SuicideSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuicideSkill.h; sourceTree = "<group>"; };
+		9B2040CE169F2E7C000EF31F /* SuicideSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuicideSkill.m; sourceTree = "<group>"; };
+		9B2040D0169F2F6D000EF31F /* BombPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombPassiveSkill.h; sourceTree = "<group>"; };
+		9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombPassiveSkill.m; sourceTree = "<group>"; };
 		9B248216164D40E3007B6E4D /* MapCameraControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCameraControl.h; sourceTree = "<group>"; };
 		9B248217164D40E3007B6E4D /* MapCameraControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCameraControl.m; sourceTree = "<group>"; };
 		9B248218164D40E3007B6E4D /* MapControlExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlExample.h; sourceTree = "<group>"; };
@@ -2312,12 +2323,13 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B2040C2169F0C30000EF31F /* blood_green.png */,
+				9B2040C3169F0C30000EF31F /* blood_red.png */,
 				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
 				2B85A7B916635BF100D5962F /* tree01.gif */,
 				2B51EB021643EB0000441FB1 /* debugColor.png */,
 				2BBF991A163E6532005AD8B9 /* controlBall.png */,
 				2BBF990D163E6134005AD8B9 /* map.png */,
-				9B114122163E4CAD0074969E /* blood.png */,
 				9B520E1E163972F500057A3D /* TestFont.fnt */,
 				9B520E1F163972F500057A3D /* TestFont.png */,
 				37DD1C5B168D96560058E450 /* WhiteFont.fnt */,
@@ -3162,6 +3174,8 @@
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
 				9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */,
 				9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */,
+				9B2040D0169F2F6D000EF31F /* BombPassiveSkill.h */,
+				9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -3588,12 +3602,16 @@
 		9BE01A351695E21600B9C427 /* ActiveSkill */ = {
 			isa = PBXGroup;
 			children = (
+				9B2040CD169F2E7C000EF31F /* SuicideSkill.h */,
+				9B2040CE169F2E7C000EF31F /* SuicideSkill.m */,
 				9BE01A371695E81900B9C427 /* HealSkill.h */,
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
 				9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */,
 				9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */,
 				9BE01A511696DA1000B9C427 /* WizardSkill.h */,
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
+				9B2040C6169F0C84000EF31F /* TankSkill.h */,
+				9B2040C7169F0C84000EF31F /* TankSkill.m */,
 			);
 			name = ActiveSkill;
 			sourceTree = "<group>";
@@ -4426,7 +4444,6 @@
 				9B520C1E1639128100057A3D /* select-3.png in Resources */,
 				9B520E20163972F500057A3D /* TestFont.fnt in Resources */,
 				9B520E21163972F500057A3D /* TestFont.png in Resources */,
-				9B114123163E4CAD0074969E /* blood.png in Resources */,
 				2BBF9910163E6134005AD8B9 /* map.png in Resources */,
 				2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */,
 				2B51EB031643EB0000441FB1 /* debugColor.png in Resources */,
@@ -4440,6 +4457,8 @@
 				37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */,
 				37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */,
 				9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */,
+				9B2040C4169F0C30000EF31F /* blood_green.png in Resources */,
+				9B2040C5169F0C30000EF31F /* blood_red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4517,6 +4536,9 @@
 				9B2C7863169A1C2D00CA1A1C /* Aura.m in Sources */,
 				9B2C7867169ABA9900CA1A1C /* SlowMovePassiveSkill.m in Sources */,
 				9B2C786E169ADA9300CA1A1C /* SlowMoveAura.m in Sources */,
+				9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */,
+				9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */,
+				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4648,7 +4670,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4672,7 +4694,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4750,7 +4772,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4772,7 +4794,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d/cocos2d-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
