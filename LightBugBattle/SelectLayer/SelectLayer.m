@@ -319,8 +319,9 @@ static const int characterMinNumber = 1;
 - (void)showCharacterInfo:(CCSprite *) newSprite {
     if (newSprite.tag > characterParty.count)
         return;
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     Character *role = [characterParty objectAtIndex:newSprite.tag];
-    [_characterInfoView showInfoFromCharacter:role loacation:CGPointMake(260, 200)];
+    [_characterInfoView showInfoFromCharacter:role loacation:CGPointMake(winSize.width/2 + winSize.width/48, winSize.height/4) needBackGround:NO];
 }
 
 - (void)addRole:(CCSprite *)sprite {

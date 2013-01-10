@@ -356,7 +356,7 @@ const int characterInfoViewZ = 9999;
     for (Character *character  in _characters) {
         if (CGRectContainsPoint(character.sprite.boundingBox, touchLocation)) {
             CGPoint position = [self getInfoViewPositionFromCharacterPosition:character.position];
-            [_characterInfoView showInfoFromCharacter:character loacation:position];
+            [_characterInfoView showInfoFromCharacter:character loacation:position needBackGround:YES];
             CCLOG(@"touch %@ ::(X:%g,Y:%g)",character.name,touchLocation.x,touchLocation.y);
             break;
         }

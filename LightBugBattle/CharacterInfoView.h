@@ -12,6 +12,6 @@
 
 @interface CharacterInfoView : CCLayer
 
-- (void)showInfoFromCharacter:(Character *)role loacation:(CGPoint)point;
+- (void)showInfoFromCharacter:(Character *)role loacation:(CGPoint)point needBackGround:(BOOL)needBg;
 - (void)clean;
 @end
