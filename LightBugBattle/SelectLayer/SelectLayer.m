@@ -17,9 +17,6 @@
 #import "MyCell.h"
 
 #pragma mark - SelectLayer
-typedef enum {
-    mainRoleTag = 1001
-} RolesTag;
 
 @interface SelectLayer() {
     BOOL isSelecting;
@@ -36,10 +33,15 @@ typedef enum {
 
 @implementation SelectLayer
 
-static const int totalRoleNumber = 6;
-static const int mainRolePosition = 0;
+static const int totalRoleNumber = 5;
 static const int nilRoleTag = 100;
 static const int characterMinNumber = 1;
+static const int tableviewWidth = 200;
+static const int tableviewHeight = 180;
+static const int tableviewCellHeight = 50;
+static const int tableviewPositionX = 20;
+static const int tableviewPositionY = 100;
+static const int tableviewPositionZ = 100;
 
 +(CCScene *) scene {
 	CCScene *scene = [CCScene node];
@@ -50,10 +52,11 @@ static const int characterMinNumber = 1;
 	return scene;
 }
 
+#pragma mark Init Methods
 -(id) init {
     if( (self=[super init]) ) {
         
-        backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)];
+        backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)]; //white color
         [self addChild:backgroundLayer];
         
         // 1 - Initialize
@@ -65,9 +68,7 @@ static const int characterMinNumber = 1;
         
         [self SetLabels];
         [self SetMenu];
-        [self initAllSelectableRoles];
         [self initAllSelectedRoles];
-        [self putMainRole];
         [self loadAllRolesCanBeSelected];
         [self setTable];
         
@@ -76,7 +77,6 @@ static const int characterMinNumber = 1;
 	}
 	return self;
 }
-
 - (void)SetLabels {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
@@ -102,7 +102,6 @@ static const int characterMinNumber = 1;
     moneyLabel.color = ccBLACK;
     [self addChild: moneyLabel];
 }
-
 - (void)SetMenu {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
@@ -124,28 +123,9 @@ static const int characterMinNumber = 1;
     // Add the menu to the layer
     [self addChild:menu];
 }
-
-- (void)initAllSelectableRoles {
-    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"UnSelectedRolesPosition" ofType:@"plist"];
-    NSArray * rolePositions = [NSArray arrayWithContentsOfFile:plistPath];
-    allRoleBases = [[NSMutableArray alloc] initWithCapacity:10];
-    
-    for(NSDictionary * rolePos in rolePositions)
-    {
-        CCSprite * roleBase = [CCSprite spriteWithFile:@"open_spot.jpg"];
-        
-        [roleBase setPosition:ccp([[rolePos objectForKey:@"x"] intValue],[[rolePos objectForKey:@"y"] intValue])];
-        
-        roleBase.tag = nilRoleTag;
-        
-        //[self addChild:roleBase];
-        [allRoleBases addObject:roleBase];
-    }
-}
-
 - (void)initAllSelectedRoles {
     isSelecting = NO;
-    currentRoleIndex = mainRolePosition;
+    currentRoleIndex = 0;
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"SelectedRolesPostion" ofType:@"plist"];
     NSArray * rolePositions = [NSArray arrayWithContentsOfFile:plistPath];
     self.selectedRoles = [[NSMutableArray alloc] initWithCapacity:totalRoleNumber];
@@ -159,57 +139,39 @@ static const int characterMinNumber = 1;
         [self addChild:roleBase];
     }
 }
+- (void)setTable {
+    CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(77, 31, 0, 225)];  //coffee color
+    tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(tableviewWidth,tableviewHeight)];
+    
+    tableView.verticalFillOrder = SWTableViewFillTopDown;
+    tableView.direction = SWScrollViewDirectionVertical;
+    tableView.position = ccp(tableviewPositionX,tableviewPositionY);
+    tableView.delegate = self;
+    tableView.bounces = YES;
+    
+    
+    layer.contentSize		 = tableView.contentSize;
+    
+    [tableView addChild:layer];
+    
+    [self addChild:tableView z:tableviewPositionZ];
+    [tableView reloadData];
+    [tableView moveToTop];
+}
 
 #pragma LoadData
-
 - (NSString *)loadCurrentLevel {
     //load data from file...
     return @"Level: 1";
 }
-
 - (NSString *)loadCurrentGoal {
     //load data from file...
     return @"Goal: Who let the dogs out?";
 }
-
 - (NSString *)loadCurrentMoney {
     //load data from file...
     return @"Money: 100元";
 }
-
--(void)putMainRole {
-    CCSprite *oldMainRole = [self.selectedRoles objectAtIndex:mainRolePosition];
-    
-    CCSprite *mainRole = [CCSprite spriteWithFile:@"mainRole.jpg"];
-    mainRole.tag = mainRoleTag; //should put main roles Tag
-    
-    if (oldMainRole.tag == nilRoleTag) {
-    
-        [self replaceOldRole:oldMainRole newCharacter:mainRole inArray:self.selectedRoles index:mainRolePosition];
-        nextRoleIndex = mainRolePosition + 1;
-    }
-}
-
-//FIXME: load All Roles From File
--(NSArray *)loadAllRolesFromFile // load data from file
-{
-    NSMutableArray *characterSprites = [[NSMutableArray alloc] init];
-    NSArray *characters = [self loadAllCharacterFromFile];
-    
-    int count = characters.count;
-    for (int i=0; i < count; i++) {
-        Character *chr = [characters objectAtIndex:i];
-        CCTexture2D *tx = [chr.sprite texture];
-        CCSprite * sprite = [CCSprite spriteWithTexture:tx];
-        sprite.tag = i;
-        [characterSprites addObject:sprite];
-        if (i==0) {
-            [self showCharacterInfo:sprite];
-        }
-    }
-    return characterSprites;
-}
-
 -(NSArray *)loadAllCharacterFromFile {
     NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagAttributeName:@"ol" tagName:@"character"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
@@ -219,27 +181,13 @@ static const int characterMinNumber = 1;
     }
     return characters;
 }
-
 - (void)loadAllRolesCanBeSelected {
     characterParty = [self loadAllCharacterFromFile];
-    NSArray *characterSpritParty = [self loadAllRolesFromFile];
-    
-    for(int i = 0; i < characterSpritParty.count; i++)
-    {
-        if ([[allRoleBases objectAtIndex:i] tag]) {
-            if ([[allRoleBases objectAtIndex:i] tag] == nilRoleTag){
-                CCSprite *newRole = [characterSpritParty objectAtIndex:i];
-                newRole.tag = i;
-                
-                //[self replaceOldRole:[allRoleBases objectAtIndex:i] newCharacter:newRole inArray:allRoleBases index:i];
-            }
-        }
+    if ([[characterParty objectAtIndex:0] isKindOfClass:[Character class]]) {
+        Character *character = [characterParty objectAtIndex:0];
+        character.sprite.tag = 0;
+        [self showCharacterInfo:character.sprite];
     }
-}
-
-//select roles methods
--(BOOL)canPutRoles {
-    return YES;
 }
 
 #pragma mark draw character methods
@@ -253,15 +201,45 @@ static const int characterMinNumber = 1;
         currentRoleIndex = index;
     }
 }
-
 -(void) addCharacter:(CCSprite*)character toPosition:(CGPoint)position{
     
     character.position = position;
     [self addChild:character];
 }
-
 -(void)removeCharacter:(CCSprite *)character {
     [character removeFromParentAndCleanup:YES];
+}
+
+#pragma mark add character To selectedArray
+- (void)addRole:(CCSprite *)sprite {
+    if (isSelecting) {
+        nextRoleIndex = currentRoleIndex;
+        isSelecting = NO;
+    }else if ([self IsPositionFull]) {
+        return;
+    }
+    
+    CCTexture2D *tx = [sprite texture];
+    CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
+    newSprite.tag = sprite.tag;
+    
+    [self replaceOldRole:[self.selectedRoles objectAtIndex:nextRoleIndex] newCharacter:newSprite inArray:self.selectedRoles index:nextRoleIndex];
+    
+    for (CCSprite *sprite in self.selectedRoles) {
+        if (sprite.tag == nilRoleTag) {
+            nextRoleIndex = [self.selectedRoles indexOfObject:sprite];
+            break;
+        }
+    }
+    
+}
+- (BOOL)IsPositionFull {
+    for (CCSprite *sprite in self.selectedRoles) {
+        if (sprite.tag == nilRoleTag) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 #pragma mark touch
@@ -278,39 +256,13 @@ static const int characterMinNumber = 1;
     if (newSprite)
         [self addRole:newSprite];
 }
-
-- (void)selectSpriteForTouch:(CGPoint)touchLocation {
-    CCSprite * newSprite = nil;
-    for (CCSprite *sprite in allRoleBases) {
-        if(sprite.tag != nilRoleTag)
-        {
-            if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {
-                newSprite = sprite;
-                break;
-            }
-        }
-    }
-    if (newSprite != selSprite) {
-        [self showCharacterInfo:newSprite];
-        [self shakyShaky:newSprite];
-        selSprite = newSprite;
-    }
-    if (!newSprite) {
-        [self selectRolesInReadyArrayForTouch:touchLocation];
-    }else{
-        [self addRole:newSprite];
-    }
-}
-
 - (void)selectRolesInReadyArrayForTouch:(CGPoint)touchLocation {
     CCSprite * newSprite = nil;
     for (CCSprite *sprite in self.selectedRoles) {
         if (CGRectContainsPoint(sprite.boundingBox, touchLocation)) {
-            if ([self.selectedRoles indexOfObject:sprite] !=0 ) {
-                newSprite = sprite;
-                currentRoleIndex = [self.selectedRoles indexOfObject:sprite];
-                isSelecting = YES;
-            }
+            newSprite = sprite;
+            currentRoleIndex = [self.selectedRoles indexOfObject:sprite];
+            isSelecting = YES;
             break;
         }
     }
@@ -320,7 +272,13 @@ static const int characterMinNumber = 1;
         selSprite = newSprite;
     }
 }
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+    [self selectRolesInReadyArrayForTouch:touchLocation];
+}
 
+#pragma mark Animation
 - (void)shakyShaky:(CCSprite *) newSprite {
     [selSprite stopAllActions];
     [selSprite runAction:[CCRotateTo actionWithDuration:0.1 angle:0]];
@@ -331,6 +289,7 @@ static const int characterMinNumber = 1;
     [newSprite runAction:[CCRepeatForever actionWithAction:rotSeq]];
 }
 
+#pragma mark showCharacterInfo
 - (void)showCharacterInfo:(CCSprite *) newSprite {
     if (!newSprite)
         return;
@@ -341,87 +300,9 @@ static const int characterMinNumber = 1;
     [_characterInfoView showInfoFromCharacter:role loacation:CGPointMake(winSize.width/2 + winSize.width/48, winSize.height/4) needBackGround:NO];
 }
 
-- (void)addRole:(CCSprite *)sprite {
-    if (isSelecting) {
-        nextRoleIndex = currentRoleIndex;
-        isSelecting = NO;
-    }else if ([self IsPositionFull]) {
-        return;
-    }
-
-    CCTexture2D *tx = [sprite texture];
-    CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
-    newSprite.tag = sprite.tag;
-    
-    [self replaceOldRole:[self.selectedRoles objectAtIndex:nextRoleIndex] newCharacter:newSprite inArray:self.selectedRoles index:nextRoleIndex];
-    
-    for (CCSprite *sprite in self.selectedRoles) {
-        if (sprite.tag == nilRoleTag) {
-            nextRoleIndex = [self.selectedRoles indexOfObject:sprite];
-            break;
-        }
-    }
-    
-}
-
-- (BOOL)IsPositionFull {
-    for (CCSprite *sprite in self.selectedRoles) {
-        if (sprite.tag == nilRoleTag) {
-            return NO;
-        }
-    }
-    return YES;
-}
-
-- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    [self selectSpriteForTouch:touchLocation];
-}
-
-- (void)startMenuDidPress {
-    NSMutableArray *saveCharacterArray = [[NSMutableArray alloc] init];
-    for (CCSprite *sprite in self.selectedRoles) {
-        if (sprite.tag != nilRoleTag && sprite.tag != mainRoleTag) {
-            Character *chr = [characterParty objectAtIndex:sprite.tag];
-            [saveCharacterArray addObject:chr];
-        }
-    }
-    
-    if (saveCharacterArray.count < characterMinNumber) {
-        for (Character *chr in saveCharacterArray) {
-            NSLog(@"Character name :: %@", chr.name);
-        }
-    }else {
-        [PartyParser saveParty:saveCharacterArray fileName:@"SelectedCharacters.xml"];
-        [[CCDirector sharedDirector] replaceScene:[BattleController node]];
-    }
-}
-
-- (void)setTable {
-    CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(77, 31, 0, 225)];
-    tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(200,180)];
-    
-    tableView.verticalFillOrder = SWTableViewFillTopDown;
-    tableView.direction = SWScrollViewDirectionVertical;
-    tableView.position = ccp(20,100);
-    tableView.delegate = self;
-    tableView.bounces = YES;
-    
-    
-    layer.contentSize		 = tableView.contentSize;
-    
-    [tableView addChild:layer];
-    
-    [self addChild:tableView z:100];
-    [tableView reloadData];
-    [tableView moveToTop];
-}
-
-
 #pragma mark SWTableViewDataSource
 -(CGSize)cellSizeForTable:(SWTableView *)table {
-    return CGSizeMake(200, 50);
+    return CGSizeMake(tableviewWidth, tableviewCellHeight);
 }
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
     SWTableViewCell *cell = [table dequeueCell];
@@ -450,12 +331,28 @@ static const int characterMinNumber = 1;
 
 #pragma mark SWTableViewDelegate
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-//    CCLabelTTF *label = [cell.children objectAtIndex:0];
-//    NSLog(@"%d::%@",cell.idx,label.string);
     CCSprite *sprite = [cell.children objectAtIndex:0];
     Character *character = [characterParty objectAtIndex:sprite.tag];
     NSLog(@"%@ say hi",character.name);
     [self selectSpriteForTouchFromCell:sprite];
+}
+
+#pragma mark Transit To Next Scene
+- (void)startMenuDidPress {
+    NSMutableArray *saveCharacterArray = [[NSMutableArray alloc] init];
+    for (CCSprite *sprite in self.selectedRoles) {
+        if (sprite.tag != nilRoleTag) {
+            Character *chr = [characterParty objectAtIndex:sprite.tag];
+            [saveCharacterArray addObject:chr];
+        }
+    }
+    
+    if (saveCharacterArray.count < characterMinNumber) {
+        CCLOG(@"you don't choose any character.");
+    }else {
+        [PartyParser saveParty:saveCharacterArray fileName:@"SelectedCharacters.xml"];
+        [[CCDirector sharedDirector] replaceScene:[BattleController node]];
+    }
 }
 
 @end

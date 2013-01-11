@@ -932,7 +932,6 @@
 		9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F796164FB38A0001A357 /* open_spot.jpg */; };
 		9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */; };
 		9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F799164FB38A0001A357 /* SelectLayer.m */; };
-		9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */; };
 		9B92B1A71680F2F300D965AF /* ReflectAttackDamageSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */; };
 		9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1AA1681D63D00D965AF /* DamageEvent.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
@@ -2089,7 +2088,6 @@
 		9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SelectedRolesPostion.plist; path = SelectLayer/SelectedRolesPostion.plist; sourceTree = "<group>"; };
 		9B82F798164FB38A0001A357 /* SelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectLayer.h; path = SelectLayer/SelectLayer.h; sourceTree = "<group>"; };
 		9B82F799164FB38A0001A357 /* SelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectLayer.m; path = SelectLayer/SelectLayer.m; sourceTree = "<group>"; };
-		9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UnSelectedRolesPosition.plist; path = SelectLayer/UnSelectedRolesPosition.plist; sourceTree = "<group>"; };
 		9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackDamageSkill.h; sourceTree = "<group>"; };
 		9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackDamageSkill.m; sourceTree = "<group>"; };
 		9B92B1A91681D63D00D965AF /* DamageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEvent.h; sourceTree = "<group>"; };
@@ -3603,7 +3601,6 @@
 				9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */,
 				9B82F798164FB38A0001A357 /* SelectLayer.h */,
 				9B82F799164FB38A0001A357 /* SelectLayer.m */,
-				9B82F79A164FB38A0001A357 /* UnSelectedRolesPosition.plist */,
 				37598BDC1696D2550007013B /* CharacterInfoView.h */,
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 				37BB1957169E9F2300AC56FC /* MyCell.h */,
@@ -4499,7 +4496,6 @@
 				9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */,
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
-				9B82F79F164FB38A0001A357 /* UnSelectedRolesPosition.plist in Resources */,
 				3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */,
 				2B85A7BA16635BF100D5962F /* tree01.gif in Resources */,
 				378B847A1684A72A0049D319 /* Save.xml in Resources */,
