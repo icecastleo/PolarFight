@@ -325,6 +325,14 @@ const int characterInfoViewZ = 9999;
                 obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
             }
         }
+        CGPoint targetLocation = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+        // MAP LIMIT
+        float mapXLimit = mapBody.boundingBox.size.width/2;
+        float mapYLimit = mapBody.boundingBox.size.height/2;
+        float characterWidth = theCharacter.sprite.boundingBox.size.width/2;
+        
+        targetLocation.x = MIN( MAX( targetLocation.x, -1*mapXLimit + characterWidth ), mapXLimit - characterWidth);
+        targetLocation.y = MIN( MAX( targetLocation.y, -1*mapYLimit + characterWidth ), mapYLimit - characterWidth);
         theCharacter.position = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
         
         [self reorderChild:theCharacter.sprite z:characterPositionZ - theCharacter.position.y];
