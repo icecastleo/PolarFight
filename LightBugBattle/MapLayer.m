@@ -333,7 +333,7 @@ const int characterInfoViewZ = 9999;
         
         targetLocation.x = MIN( MAX( targetLocation.x, -1*mapXLimit + characterWidth ), mapXLimit - characterWidth);
         targetLocation.y = MIN( MAX( targetLocation.y, -1*mapYLimit + characterWidth ), mapYLimit - characterWidth);
-        theCharacter.position = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+        theCharacter.position = targetLocation;
         
         [self reorderChild:theCharacter.sprite z:characterPositionZ - theCharacter.position.y];
     }
