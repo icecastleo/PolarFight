@@ -21,9 +21,7 @@
 //    return self;
 //}
 
--(void)execute {
-    CCLOG(@"%@",character.name);
-    
+-(void)execute {    
     for (Character *target in [range getEffectTargets]) {
         SlowMovePassiveSkill *skill = [[SlowMovePassiveSkill alloc] init];
         skill.duration = kPassiveSkillDuration;

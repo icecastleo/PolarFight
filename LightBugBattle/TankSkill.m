@@ -24,6 +24,7 @@
 -(void)execute {
     for (Character *target in [range getEffectTargets]) {
         [[BattleController currentInstance] knockOut:target velocity:ccpSub(character.position, target.position) power:2];
+//        [character attackCharacter:target withAttackType:kAttackNoraml];
     }
 }
 

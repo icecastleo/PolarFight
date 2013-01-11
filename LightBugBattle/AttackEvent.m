@@ -40,11 +40,11 @@
 }
 
 -(void)addMultiplier:(float)aMultiplier {
-    multiplier *= multiplier;
+    multiplier *= aMultiplier;
 }
 
 -(void)subtractMultiplier:(float)aMultiplier {
-    multiplier /= multiplier;
+    multiplier /= aMultiplier;
 }
 
 -(int)getDamage {
