@@ -17,9 +17,19 @@
         range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
 //        range.rangeSprite.visible = true;
         
-        [NSTimer scheduledTimerWithTimeInterval:kAuraInterval target:self selector:@selector(execute) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:kAuraInterval target:self selector:@selector(update:) userInfo:nil repeats:YES];
     }
     return self;
+}
+
+-(void)update:(NSTimer *)timer {
+    // Remove aura when character dealloc.
+    if (character == nil) {
+        [timer invalidate];
+        return;
+    }
+    
+    [self execute];
 }
 
 // Override what you want to do every interval;

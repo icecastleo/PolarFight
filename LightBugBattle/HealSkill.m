@@ -23,7 +23,7 @@
 -(void)execute {    
     int attack = [character getAttribute:kCharacterAttributeAttack].value;
     
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 2 damageType:kDamageTypeSkill damager:character];
+    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 3 damageType:kDamageTypeSkill damager:character];
     [character receiveDamageEvent:event];
     
     for (Character *target in [range getEffectTargets]) {

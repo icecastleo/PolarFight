@@ -3,7 +3,7 @@
 <characters>
     <character id="001" name="Swordsman" img="amg1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="300"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="150"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
@@ -21,7 +21,7 @@
     </character>
     <character id="002" name="Assassin" img="ftr1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
@@ -39,7 +39,7 @@
     </character>
     <character id="003" name="Wizard" img="avt1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="20"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
@@ -57,7 +57,7 @@
     </character>
     <character id="004" name="Priest" img="bmg1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="20"></attribute>
             <attribute name="defense" a="0" b="0" c="5"></attribute>
@@ -75,7 +75,7 @@
     </character>
     <character id="005" name="God" img="chr1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="50"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="50"></attribute>
             <attribute name="defense" a="0" b="0" c="5"></attribute>
@@ -93,7 +93,7 @@
     </character>
     <character id="006" name="Bomber" img="dvl1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="40"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
@@ -111,7 +111,7 @@
     </character>
     <character id="007" name="Tank" img="gsd1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="500"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="250"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="40"></attribute>
             <attribute name="defense" a="0" b="0" c="25"></attribute>
@@ -129,7 +129,7 @@
     </character>
     <character id="008" name="Archer" img="isd1">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>

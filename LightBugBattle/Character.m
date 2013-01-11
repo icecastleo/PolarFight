@@ -128,7 +128,6 @@
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:50]];
     } else if ([name isEqualToString:@"Bomber"]) {
         [self addPassiveSkill:[[BombPassiveSkill alloc] init]];
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:50]];
     }
 }
 
