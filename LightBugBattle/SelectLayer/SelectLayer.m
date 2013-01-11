@@ -402,6 +402,7 @@ static const int characterMinNumber = 1;
     CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(77, 31, 0, 225)];
     tableView = [SWTableView viewWithDataSource:self size:CGSizeMake(200,180)];
     
+    tableView.verticalFillOrder = SWTableViewFillTopDown;
     tableView.direction = SWScrollViewDirectionVertical;
     tableView.position = ccp(20,100);
     tableView.delegate = self;
@@ -414,6 +415,7 @@ static const int characterMinNumber = 1;
     
     [self addChild:tableView z:100];
     [tableView reloadData];
+    [tableView moveToTop];
 }
 
 
