@@ -13,15 +13,16 @@
 #import "Helper.h"
 #import "Barrier.h"
 #import "KnockOutObject.h"
+#import "CharacterInfoView.h"
 
 @class Character;
-@interface MapLayer : CCLayer {
+@interface MapLayer : CCLayer {        
     int mapBlock[128][53];
-//    NSMutableArray* characters;
-    NSMutableArray* barriers;
-    CCSprite* mapBody;
+//    NSMutableArray *characters;
+    NSMutableArray *barriers;
+    CCSprite *mapBody;
     
-    NSMutableArray* knockOutObjs;
+    CharacterInfoView *characterInfoView;
 }
 
 @property (strong, readonly) NSMutableArray* characters;
@@ -39,5 +40,5 @@
 -(void)setMapBlocks;
 -(void)moveCharacter:(Character*)theCharacter velocity:(CGPoint)velocity;
 -(void)moveCharacterTo:(Character*)theCharacter position:(CGPoint)location;
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power;
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 @end

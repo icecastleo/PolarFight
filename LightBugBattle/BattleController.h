@@ -48,7 +48,7 @@
 -(void)addCharacter:(Character *)character;
 -(void)removeCharacter:(Character *)character;
 
--(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power;
+-(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 
 @end
 

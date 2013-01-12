@@ -12,15 +12,6 @@
 
 @implementation SlowMoveAura
 
-//-(id)initWithCharacter:(Character *)aCharacter {
-//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
-//    
-//    if (self = [super initWithCharacter:aCharacter rangeDictionary:dictionary]) {
-//        
-//    }
-//    return self;
-//}
-
 -(void)execute {    
     for (Character *target in [range getEffectTargets]) {
         SlowMovePassiveSkill *skill = [[SlowMovePassiveSkill alloc] init];

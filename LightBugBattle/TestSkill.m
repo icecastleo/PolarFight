@@ -54,7 +54,7 @@
 //        }
 //    }
     for (Character *target in [range getEffectTargets]) {
-        [character attackCharacter:target withAttackType:kAttackNoraml];
+//        [character attackCharacter:target withAttackType:kAttackNoraml];
     }
 }
 

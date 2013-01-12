@@ -9,7 +9,6 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-#import "MapControlExample.h"
 #import "BattleController.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"

@@ -20,7 +20,7 @@
 }
 
 -(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
-    [aCharacter attackCharacter:bCharacter withAttackType:type];
+//    [aCharacter attackCharacter:bCharacter withAttackType:type];
 }
 
 @end

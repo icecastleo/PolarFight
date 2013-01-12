@@ -797,7 +797,6 @@
 		9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040CE169F2E7C000EF31F /* SuicideSkill.m */; };
 		9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
 		9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248217164D40E3007B6E4D /* MapCameraControl.m */; };
-		9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248219164D40E3007B6E4D /* MapControlExample.m */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
 		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
@@ -1813,8 +1812,6 @@
 		9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombPassiveSkill.m; sourceTree = "<group>"; };
 		9B248216164D40E3007B6E4D /* MapCameraControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCameraControl.h; sourceTree = "<group>"; };
 		9B248217164D40E3007B6E4D /* MapCameraControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCameraControl.m; sourceTree = "<group>"; };
-		9B248218164D40E3007B6E4D /* MapControlExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlExample.h; sourceTree = "<group>"; };
-		9B248219164D40E3007B6E4D /* MapControlExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlExample.m; sourceTree = "<group>"; };
 		9B288204166FA61C0041604F /* AttackEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEffect.h; sourceTree = "<group>"; };
 		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
@@ -2165,8 +2162,6 @@
 				9B82F78F164FB2780001A357 /* MapLayer.m */,
 				9B248216164D40E3007B6E4D /* MapCameraControl.h */,
 				9B248217164D40E3007B6E4D /* MapCameraControl.m */,
-				9B248218164D40E3007B6E4D /* MapControlExample.h */,
-				9B248219164D40E3007B6E4D /* MapControlExample.m */,
 				2B85A7B5166357DB00D5962F /* Barrier.h */,
 				2B85A7B6166357DB00D5962F /* Barrier.m */,
 				2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */,
@@ -2416,8 +2411,6 @@
 				9B92D2B516416D66000AF467 /* Character.m */,
 				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
 				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
-				9B062E8216353A8200E06018 /* Army */,
-				9B062E8116353A4F00E06018 /* Player */,
 				3799B7141650DDDD00A9A394 /* PartyParser.h */,
 				3799B7151650DDDD00A9A394 /* PartyParser.m */,
 				374070831683144A007BEDDF /* XMLParsingDelegate.h */,
@@ -2426,20 +2419,6 @@
 				378B84791684A7290049D319 /* Save.xml */,
 			);
 			name = Character;
-			sourceTree = "<group>";
-		};
-		9B062E8116353A4F00E06018 /* Player */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Player;
-			sourceTree = "<group>";
-		};
-		9B062E8216353A8200E06018 /* Army */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Army;
 			sourceTree = "<group>";
 		};
 		9B06348D1635414B00E06018 /* last-guardian-sprites */ = {
@@ -4540,7 +4519,6 @@
 				9B019B1D16495B6100A6976F /* PoisonStatus.m in Sources */,
 				9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */,
 				9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */,
-				9B24821B164D40E3007B6E4D /* MapControlExample.m in Sources */,
 				9B82F790164FB2780001A357 /* BattleController.m in Sources */,
 				9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */,
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
