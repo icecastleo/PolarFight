@@ -15,6 +15,8 @@
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E83A16A44EB500A3F5D5 /* Arrow.png */; };
+		2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
@@ -24,6 +26,9 @@
 		3727AEE5169D6ACA00160620 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDB169D6ACA00160620 /* SWTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE6169D6ACA00160620 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDD169D6ACA00160620 /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		374EEAC316A4222500374659 /* ButtonStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 374EEAC116A4222500374659 /* ButtonStar.png */; };
+		374EEAC416A4222500374659 /* ButtonStarSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 374EEAC216A4222500374659 /* ButtonStarSel.png */; };
+		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37598BDD1696D2550007013B /* CharacterInfoView.m */; };
 		378B847A1684A72A0049D319 /* Save.xml in Resources */ = {isa = PBXBuildFile; fileRef = 378B84791684A7290049D319 /* Save.xml */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
@@ -980,6 +985,9 @@
 		2D26FC991640114D00C34AA4 /* Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effect.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
+		2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeCarrier.h; sourceTree = "<group>"; };
+		2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeCarrier.m; sourceTree = "<group>"; };
+		2D66E83A16A44EB500A3F5D5 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
 		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
@@ -999,6 +1007,10 @@
 		3727AEDE169D6ACA00160620 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		374070831683144A007BEDDF /* XMLParsingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParsingDelegate.h; sourceTree = "<group>"; };
+		374EEAC116A4222500374659 /* ButtonStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStar.png; sourceTree = "<group>"; };
+		374EEAC216A4222500374659 /* ButtonStarSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStarSel.png; sourceTree = "<group>"; };
+		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
+		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
 		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
 		378B84791684A7290049D319 /* Save.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Save.xml; sourceTree = "<group>"; };
@@ -2199,6 +2211,8 @@
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
+				2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */,
+				2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */,
 				9BFFAE61163E9DBB00073DC5 /* Range.h */,
 				9BFFAE62163E9DBB00073DC5 /* Range.m */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
@@ -2211,6 +2225,15 @@
 				2D97F28A1679DFF200030713 /* RangeFarCircle.m */,
 			);
 			name = Range;
+			sourceTree = "<group>";
+		};
+		374EEAAF16A3F5DE00374659 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				374EEAC116A4222500374659 /* ButtonStar.png */,
+				374EEAC216A4222500374659 /* ButtonStarSel.png */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		3799B7171650DE2000A9A394 /* XMLSupport */ = {
@@ -3596,6 +3619,8 @@
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 				37BB1957169E9F2300AC56FC /* MyCell.h */,
 				37BB1958169E9F2300AC56FC /* MyCell.m */,
+				374EEAC516A4228000374659 /* PauseLayer.h */,
+				374EEAC616A4228000374659 /* PauseLayer.m */,
 			);
 			name = SelectLayer;
 			sourceTree = "<group>";
@@ -4509,6 +4534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */,
 				9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */,
 				9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */,
 				9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */,
@@ -4586,6 +4612,7 @@
 				9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */,
 				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
 				9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */,
+				374EEAC716A4228000374659 /* PauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

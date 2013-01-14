@@ -7,6 +7,8 @@
 //
 
 #import "MapLayer.h"
+#import "CharacterInfoView.h"
+#import "PauseLayer.h"
 
 @implementation MapLayer
 @synthesize cameraControl;
@@ -14,8 +16,8 @@
 const int characterPositionZ = 1000;
 const int characterInfoViewZ = 9999;
 
--(id)initWithMapSprite:(CCSprite*)aSprite {
-    if((self=[super init])) {        
+-(id)initWithMapSprite:(CCSprite*)aSprite withPauseLayer:(PauseLayer *)aPauseLayer {
+    if((self=[super init])) {
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
         
@@ -25,9 +27,8 @@ const int characterInfoViewZ = 9999;
         
         [cameraControl setMap:mapBody mapLayer:self];
         
-        characterInfoView = [CharacterInfoView node];
-
-        [self addChild:characterInfoView z:characterInfoViewZ];
+        [self setCharacterInfoViewLayer];
+        aPauseLayer = aPauseLayer;
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
@@ -343,6 +344,11 @@ const int characterInfoViewZ = 9999;
     double y = location.y + cameraPosition.y - winSize.height/2;
     
     return ccp(x, y);
+}
+
+- (void)setCharacterInfoViewLayer {
+    characterInfoView = [CharacterInfoView node];
+    [self addChild:characterInfoView z:characterInfoViewZ];
 }
 
 -(Character *)getCharacterAtLocation:(CGPoint)location {
