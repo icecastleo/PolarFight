@@ -26,8 +26,8 @@
     range.rangeSprite.visible = visible;
 }
 
--(void)setRangeRotation:(float)offX :(float)offY {
-    [range setRotation:offX :offY];
+-(void)setRangeDirection:(CGPoint)velocity {
+    [range setDirection:velocity];
 }
 
 @end

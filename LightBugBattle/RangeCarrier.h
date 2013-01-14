@@ -24,7 +24,6 @@
     float distance;
 }
 
-
 -(id)init:(Range *)range iconFileName:(NSString *)icon;
 -(void) shoot:(CGPoint)vector speed:(float) speed delegate:(id)delegate;
 @end

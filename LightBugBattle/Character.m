@@ -34,11 +34,12 @@
 //@synthesize attackType;
 @synthesize armorType;
 @synthesize state;
-@synthesize sprite,direction;
+@synthesize sprite,characterDirection;
 @synthesize timeStatusDictionary;
 @synthesize pointArray;
 
-@dynamic position;
+@synthesize direction = _direction;
+@dynamic position,boundingBox;
 
 // FIXME: fix name reference.
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
@@ -94,7 +95,8 @@
         [self setSkillForCharacter:_name];
         [self setPassiveSkillForCharacter:_name];
         
-//        CCLOG(@"%@ is create",_name);s
+        _direction = ccp(0, -1);
+        [skill setRangeDirection:_direction];
     }
     return self;
 }
@@ -202,26 +204,34 @@
 //    }
 //}
 
--(void)setDirectionVelocity:(CGPoint)velocity {
-    if(velocity.x == 0 && velocity.y == 0) {
-        state = stateIdle;
-        [sprite stopAllActions];
-        return;
+-(void)setDirection:(CGPoint)velocity {
+    @synchronized(self) {
+        if(velocity.x == 0 && velocity.y == 0) {
+            state = stateIdle;
+            [sprite stopAllActions];
+            return;
+        }
+        
+        // Set here to keep privious velocity.
+        _direction = ccpNormalize(velocity);
+        
+        state = stateMove;
+        
+        CharacterDirection newDirection = [self getDirectionByVelocity:velocity];
+        
+        if([sprite numberOfRunningActions] == 0 || characterDirection != newDirection) {
+            characterDirection = newDirection;
+            [sprite runDirectionAnimate];
+        }
+        
+        [skill setRangeDirection:velocity];
     }
-    
-    // Set here to keep privious velocity.
-    _directionVelocity = velocity;
-    
-    state = stateMove;
-    
-    CharacterDirection newDirection = [self getDirectionByVelocity:velocity];
-    
-    if([sprite numberOfRunningActions] == 0 || direction != newDirection) {
-        direction = newDirection;
-        [sprite runDirectionAnimate];
-    }
+}
 
-    [skill setRangeRotation:velocity.x :velocity.y];
+-(CGPoint)direction {
+    @synchronized(self) {
+        return _direction;
+    }
 }
 
 -(CharacterDirection)getDirectionByVelocity:(CGPoint)velocity {
@@ -400,6 +410,10 @@
     return sprite.position;
 }
 
+-(CGRect)boundingBox {
+    return sprite.boundingBox;
+}
+
 -(void)addPassiveSkill:(PassiveSkill *)passiveSkill {
     // FIXME: For passive skill with duration, maybe there are some better way without allocing a new one to replace.
     // Fix it with static method is better (before alloc), but hard for extend class.
@@ -453,10 +467,6 @@
 
 -(void)removeTimeStatus:(TimeStatusType)type {
     [timeStatusDictionary removeObjectForKey:[NSNumber numberWithInt:type]];
-}
-
--(CGRect)boundingBox {
-    return sprite.boundingBox;
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {

@@ -19,6 +19,6 @@
 -(void)execute;
 
 -(void)showAttackRange:(BOOL)visible;
--(void)setRangeRotation:(float)offX :(float)offY;
+-(void)setRangeDirection:(CGPoint)velocity;
 
 @end

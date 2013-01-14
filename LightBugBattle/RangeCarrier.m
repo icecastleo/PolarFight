@@ -14,103 +14,71 @@
 -(id)init:(Range *)range iconFileName:(NSString *)icon
 {
     if (self = [super initWithFile:icon]) {
-        carryRange=range;
+        carryRange = range;
       
-        character=range.character;
+        character = range.character;
         [character.sprite.parent addChild:self];
         
-        self.position =character.position;// ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
-        
+        self.position = character.position;
     }
-
-    
     return self;
 }
 
--(void) shoot:(CGPoint)vector speed:(float) speed delegate:(id)dele
+-(void)shoot:(CGPoint)vector speed:(float)speed delegate:(id)dele
 {
-    NSLog(@"shoot");
+//    NSLog(@"shoot");
     float angle = atan2f(vector.y, vector.x);
-    delegate=dele;
+    delegate = dele;
     
     float angleDegrees = CC_RADIANS_TO_DEGREES(angle);
     float cocosAngle = -1 * angleDegrees;
     
     self.rotation = cocosAngle;
-    shootVector=CGPointMake(speed*cos(angle), speed*sin(angle));
-    startPoint=self.position;
-    [self schedule:@selector(spidersUpdate:) interval:0.1];
+    shootVector = ccpMult(vector, speed);
+    startPoint = self.position;
+    [self schedule:@selector(update:)];
 }
 
--(void) checkCollision
+-(void)update:(ccTime)delta
 {
-    NSMutableArray *effectTargets = [NSMutableArray array];
-    CGRect playerRect = CGRectMake(self.position.x - (self.contentSize.width/2),
-                                   self.position.y - (self.contentSize.height/2),
-                                   self.contentSize.width,
-                                   self.contentSize.height);
-    for(Character* temp in [BattleController currentInstance].characters)
+    if(ccpDistance(self.position, startPoint) > 200)
     {
-        if (![self checkSide:temp]) {
-            continue;
-        }
-        
-        if ([self checkFilter:temp]) {
-            continue;
-        }
-        CGRect targetRect = CGRectMake(temp.position.x - (temp.sprite.contentSize.width/2),
-                                       temp.position.y - (temp.sprite.contentSize.height/2),
-                                       temp.sprite.contentSize.width,
-                                       temp.sprite.contentSize.height);
-        
-       
-        if (  CGRectIntersectsRect(playerRect,targetRect)) {
-            [effectTargets addObject:temp];
-        }
+        [self unschedule:@selector(update:)];
+        [self removeFromParentAndCleanup:YES];
+    }
     
-    }
-    if(effectTargets.count>0){
-       
-            SEL x = NSSelectorFromString(@"delayExecute:carrier:");
-       
-        [delegate performSelector:x withObject:effectTargets withObject:self];
-        
-        
-        [self unschedule:@selector(spidersUpdate:)];
-        [character.sprite.parent removeChild:self cleanup:YES];
-    }
-}
--(void) spidersUpdate:(ccTime)delta
-{
-    
-    if(ccpDistance(self.position, startPoint)>200)
-    {
-        [self unschedule:@selector(spidersUpdate:)];
-        [character.sprite.parent removeChild:self cleanup:YES];
-        
-    }
+    self.position = ccpAdd(self.position, shootVector);
     
     [self checkCollision];
-    
-    CGPoint belowScreenPosition =
-    CGPointMake(self.position.x+shootVector.x, self.position.y+shootVector.y);
-    
-    CCMoveTo* move = [CCMoveTo actionWithDuration:0.3 position:belowScreenPosition];
-    
-    //CCCallFuncN* call = [CCCallFuncN actionWithTarget:self selector:@selector(spiderBelowScreen:)];
-    
-    CCSequence* sequnece = [CCSequence actions:move, nil];
-    [self runAction:sequnece];
-    
 }
 
--(void) spiderBelowScreen:(id)sender
+-(void)checkCollision
 {
-    NSAssert([sender isKindOfClass:[CCSprite class]], @"sender is not a CCSprite!");
-    CCSprite* spider = (CCSprite*)sender;
+    NSMutableArray *effectTargets = [NSMutableArray array];
     
-    CGPoint pos =    CGPointMake(self.position.x+shootVector.x, self.position.y+shootVector.x);
-    spider.position=pos;
+    for(Character* target in [BattleController currentInstance].characters)
+    {
+        if (![self checkSide:target]) {
+            continue;
+        }
+        
+        if ([self checkFilter:target]) {
+            continue;
+        }
+        
+        if (CGRectIntersectsRect(self.boundingBox, target.boundingBox)) {
+            [effectTargets addObject:target];
+        }
+    }
+    
+    if(effectTargets.count > 0) {
+        if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
+            [delegate delayExecute:effectTargets carrier:self];
+        }
+        
+        [self unschedule:@selector(update:)];
+        [self removeFromParentAndCleanup:YES];
+    }
 }
 
 -(BOOL)checkSide:(Character *)temp {
@@ -139,11 +107,6 @@
         }
     }
     return NO;
-}
-
--(void) dealloc
-{
-    NSLog(@"dealloc");
 }
 
 @end

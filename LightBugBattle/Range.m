@@ -28,8 +28,8 @@
     [character.sprite addChild:rangeSprite];
 }
 
--(void)setRotation:(float)offX :(float)offY {
-    float angleRadians = atan2f(offY, offX);
+-(void)setDirection:(CGPoint)velocity {
+    float angleRadians = atan2f(velocity.y, velocity.x);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
     float cocosAngle = -1 * angleDegrees;
     
@@ -68,7 +68,7 @@
 }
 
 -(NSMutableArray *)getEffectTargets {
-    [self setRotation:character.directionVelocity.x :character.directionVelocity.y];
+    [self setDirection:character.direction];
     
     NSMutableArray *effectTargets = [NSMutableArray array];
     

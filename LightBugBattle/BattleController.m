@@ -129,7 +129,7 @@ static BattleController* currentInstance;
     NSArray *characterIdArray;
     if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"]) {
         characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"];
-    }else {
+    } else {
         characterIdArray = @[@"001",@"002",@"003",@"004"];
     }
     // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
@@ -205,7 +205,7 @@ static BattleController* currentInstance;
         
         // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
-        [currentCharacter setDirectionVelocity:dPadLayer.velocity];
+        [currentCharacter setDirection:dPadLayer.velocity];
         [mapLayer moveCharacter:currentCharacter velocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }
 }

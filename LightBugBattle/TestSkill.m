@@ -30,18 +30,16 @@
     //    }
     RangeCarrier* rc = [[RangeCarrier alloc] init:range iconFileName:@"Arrow.png"];
     
-    [rc shoot:character.directionVelocity speed:50 delegate:self];
-    
+    [rc shoot:character.direction speed:10 delegate:self];
 }
 
-
--(void)delayExecute:(NSMutableArray *) target carrier:(RangeCarrier*) carrier {
+-(void)delayExecute:(NSMutableArray *)targets carrier:(RangeCarrier *)carrier {
     
-    for(Character *item in target)
+    for(Character *target in targets)
     {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:item];
-        [item receiveAttackEvent:event];
-        NSLog(@"%@ is under attack",item.name);
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        [target receiveAttackEvent:event];
+        NSLog(@"%@ is under attack",target.name);
     }
 }
 @end

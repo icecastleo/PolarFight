@@ -8,7 +8,10 @@
 
 
 #import "ActiveSkill.h"
+
 @class RangeCarrier;
+
 @interface TestSkill : ActiveSkill
 -(void)delayExecute:(NSMutableArray *) target carrier:(RangeCarrier*) carrier;
+
 @end

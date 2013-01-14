@@ -19,7 +19,7 @@
         CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [frameCache addSpriteFramesWithFile:@"vald_sword.plist"];
         
-        if ((self = [super initWithSpriteFrameName:@"walking e0000.bmp"])) {
+        if ((self = [super initWithSpriteFrameName:@"walking s0000.bmp"])) {
             character = aCharacter;
             
             upAction = [self animationWithName:@"n"];
@@ -32,7 +32,7 @@
     
     // FIXME: replace player with direction.
     if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",aCharacter.picFilename, aCharacter.player == 1 ? @"rt" : @"fr"]])
+               [NSString stringWithFormat:@"%@_%@2.gif",aCharacter.picFilename, aCharacter.player == 1 ? @"fr" : @"fr"]])
     {
         character = aCharacter;
         [self setAnimationWithName:character.picFilename];
@@ -124,7 +124,7 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
 
 -(void)runDirectionAnimate {
-    CharacterDirection direction = character.direction;
+    CharacterDirection direction = character.characterDirection;
     
     [self stopAllActions];
     
