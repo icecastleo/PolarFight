@@ -24,9 +24,9 @@
 		3727AEE5169D6ACA00160620 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDB169D6ACA00160620 /* SWTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE6169D6ACA00160620 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDD169D6ACA00160620 /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		374EEAA916A3ED8200374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAA816A3ED8200374659 /* PauseLayer.m */; };
 		374EEAC316A4222500374659 /* ButtonStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 374EEAC116A4222500374659 /* ButtonStar.png */; };
 		374EEAC416A4222500374659 /* ButtonStarSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 374EEAC216A4222500374659 /* ButtonStarSel.png */; };
+		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37598BDD1696D2550007013B /* CharacterInfoView.m */; };
 		378B847A1684A72A0049D319 /* Save.xml in Resources */ = {isa = PBXBuildFile; fileRef = 378B84791684A7290049D319 /* Save.xml */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
@@ -998,10 +998,10 @@
 		3727AEDE169D6ACA00160620 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		374070831683144A007BEDDF /* XMLParsingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParsingDelegate.h; sourceTree = "<group>"; };
-		374EEAA716A3ED8200374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
-		374EEAA816A3ED8200374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		374EEAC116A4222500374659 /* ButtonStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStar.png; sourceTree = "<group>"; };
 		374EEAC216A4222500374659 /* ButtonStarSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStarSel.png; sourceTree = "<group>"; };
+		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
+		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
 		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
 		378B84791684A7290049D319 /* Save.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Save.xml; sourceTree = "<group>"; };
@@ -3601,8 +3601,8 @@
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 				37BB1957169E9F2300AC56FC /* MyCell.h */,
 				37BB1958169E9F2300AC56FC /* MyCell.m */,
-				374EEAA716A3ED8200374659 /* PauseLayer.h */,
-				374EEAA816A3ED8200374659 /* PauseLayer.m */,
+				374EEAC516A4228000374659 /* PauseLayer.h */,
+				374EEAC616A4228000374659 /* PauseLayer.m */,
 			);
 			name = SelectLayer;
 			sourceTree = "<group>";
@@ -4590,8 +4590,8 @@
 				9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */,
 				9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */,
 				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
-				374EEAA916A3ED8200374659 /* PauseLayer.m in Sources */,
 				9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */,
+				374EEAC716A4228000374659 /* PauseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
