@@ -13,6 +13,7 @@
 #import "Helper.h"
 #import "Barrier.h"
 #import "KnockOutObject.h"
+#import "CharacterInfoView.h"
 
 @class Character, CharacterInfoView, PauseLayer;
 @interface MapLayer : CCLayer {
