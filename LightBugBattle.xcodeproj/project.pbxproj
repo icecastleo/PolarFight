@@ -14,7 +14,6 @@
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
-		2D4AD591163FCD8C00A949C3 /* TestSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD590163FCD8C00A949C3 /* TestSkill.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
@@ -789,6 +788,7 @@
 		9B063A2E1635414C00E06018 /* zph1_rt1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375D1635414C00E06018 /* zph1_rt1.gif */; };
 		9B063A2F1635414C00E06018 /* zph1_rt2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375E1635414C00E06018 /* zph1_rt2.gif */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
+		9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B08F95816A3FBB0006BF34F /* TestSkill.m */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
 		9B2040C4169F0C30000EF31F /* blood_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C2169F0C30000EF31F /* blood_green.png */; };
@@ -974,8 +974,6 @@
 		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		2D26FC991640114D00C34AA4 /* Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effect.m; sourceTree = "<group>"; };
-		2D4AD58F163FCD8C00A949C3 /* TestSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSkill.h; sourceTree = "<group>"; };
-		2D4AD590163FCD8C00A949C3 /* TestSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSkill.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
@@ -1798,6 +1796,8 @@
 		9B06375E1635414C00E06018 /* zph1_rt2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zph1_rt2.gif; sourceTree = "<group>"; };
 		9B06F83E16787F3800E1B09D /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
+		9B08F95716A3FBB0006BF34F /* TestSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSkill.h; sourceTree = "<group>"; };
+		9B08F95816A3FBB0006BF34F /* TestSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSkill.m; sourceTree = "<group>"; };
 		9B10C678167745160026E796 /* DamageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEffect.h; sourceTree = "<group>"; };
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
@@ -3637,6 +3637,8 @@
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
 				9B2040C6169F0C84000EF31F /* TankSkill.h */,
 				9B2040C7169F0C84000EF31F /* TankSkill.m */,
+				9B08F95716A3FBB0006BF34F /* TestSkill.h */,
+				9B08F95816A3FBB0006BF34F /* TestSkill.m */,
 			);
 			name = ActiveSkill;
 			sourceTree = "<group>";
@@ -3649,8 +3651,6 @@
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
 				2D26FC961640111500C34AA4 /* Effect */,
 				2D4AD598163FDDC400A949C3 /* Range */,
-				2D4AD58F163FCD8C00A949C3 /* TestSkill.h */,
-				2D4AD590163FCD8C00A949C3 /* TestSkill.m */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
 				9B2AB06616665C0400B78136 /* ActiveSkill.h */,
 				9B2AB06716665C0500B78136 /* ActiveSkill.m */,
@@ -4508,7 +4508,6 @@
 				9B062E751635275300E06018 /* IntroLayer.m in Sources */,
 				9BFFAE67163E9DBB00073DC5 /* Range.m in Sources */,
 				9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */,
-				2D4AD591163FCD8C00A949C3 /* TestSkill.m in Sources */,
 				2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */,
 				2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */,
 				9B92D2B616416D66000AF467 /* Character.m in Sources */,
@@ -4570,6 +4569,7 @@
 				9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */,
 				9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */,
 				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
+				9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

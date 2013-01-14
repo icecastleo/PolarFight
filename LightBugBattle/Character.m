@@ -25,6 +25,7 @@
 #import "TankSkill.h"
 #import "SuicideSkill.h"
 #import "BombPassiveSkill.h"
+#import "TestSkill.h"
 
 @implementation Character
 
@@ -101,6 +102,8 @@
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         skill = [[SwordmanSkill alloc] initWithCharacter:self];
+    } else if ([name isEqualToString:@"Assassin"]) {
+        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
