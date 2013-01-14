@@ -25,10 +25,10 @@
 #import "TankSkill.h"
 #import "SuicideSkill.h"
 #import "BombPassiveSkill.h"
+#import "TestSkill.h"
 
 @implementation Character
 
-@synthesize controller;
 @synthesize player;
 @synthesize level;
 //@synthesize attackType;
@@ -47,7 +47,7 @@
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
 //        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         attributeDictionary = [[NSMutableDictionary alloc] init];
-        passiveSkillDictionary = [[NSMutableDictionary alloc] init];
+        _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
         GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
@@ -102,6 +102,8 @@
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         skill = [[SwordmanSkill alloc] initWithCharacter:self];
+    } else if ([name isEqualToString:@"Assassin"]) {
+        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -256,28 +258,19 @@
     [self finishAttack];
 }
 
--(void)attackCharacter:(Character *)target withAttackType:(AttackType)type {
-    // TODO: Define attack type.
-    AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self attackType:type defender:target];
+-(void)receiveAttackEvent:(AttackEvent *)event {
+    NSAssert(event.defender == self, @"Wrong character receive the attack event!");
     
-    [self sendAttackEvent:event];
-}
-
--(void)sendAttackEvent:(AttackEvent *)event {
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+    for (NSString *key in event.attacker.passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(character:willSendAttackEvent:)]) {
-            [p character:self willSendAttackEvent:event];
+            [p character:event.attacker willSendAttackEvent:event];
         }
     }
     
-    [event.defender receiveAttackEvent:event];
-}
-
--(void)receiveAttackEvent:(AttackEvent *)event {
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+    for (NSString *key in _passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(character:willReceiveAttackEvent:)]) {
             [p character:self willReceiveAttackEvent:event];
@@ -293,9 +286,9 @@
     [self receiveDamageEvent:[event convertToDamageEvent]];
 }
 
--(void)receiveDamageEvent:(DamageEvent *)event {
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+-(void)receiveDamageEvent:(DamageEvent *)event {    
+    for (NSString *key in _passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(character:didReceiveDamageEvent:)]) {
             [p character:self didReceiveDamageEvent:event];
@@ -316,28 +309,26 @@
     
     [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
     
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
-        
-        if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
-            [p character:self didReceiveDamage:damage];
-        }
-    }
-    
-    state = kCharacterStateGetDamage;
+    [sprite updateBloodSprite];
     
     // Knock out effect
-    if (controller != nil) {
-        if (damage.type == kDamageTypeAttack) {
-            CGPoint velocity = ccpSub(self.position, damage.damager.position);
-            [controller knockOut:self velocity:velocity power:4];
-        }
+    if (damage.knockOutPower != 0) {
+        CGPoint velocity = ccpSub(self.position, damage.location);
+        [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
     }
-    
-    [sprite updateBloodSprite];
+
+    //    state = kCharacterStateGetDamage;
     
     if (hp.currentValue == 0) {
         [self dead];
+    } else {
+        for (NSString *key in _passiveSkillDictionary) {
+            PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
+            
+            if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
+                [p character:self didReceiveDamage:damage];
+            }
+        }
     }
 }
 
@@ -364,8 +355,8 @@
 -(void)dead {
     state = stateDead;
     
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+    for (NSString *key in _passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(characterWillRemoveDelegate:)]) {
             [p characterWillRemoveDelegate:self];
@@ -373,13 +364,12 @@
     }
     
     // dead animation + cleanup
-    if(controller)
-        [controller removeCharacter:self];
+    [[BattleController currentInstance] removeCharacter:self];
 }
 
 -(void)handleRoundStartEvent {
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+    for (NSString *key in _passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(characterShouldStartRound:)]) {
             [p characterShouldStartRound:self];
@@ -393,8 +383,8 @@
     [sprite stopAllActions];
     state = stateIdle;
     
-    for (NSString *key in passiveSkillDictionary) {
-        PassiveSkill *p = [passiveSkillDictionary objectForKey:key];
+    for (NSString *key in _passiveSkillDictionary) {
+        PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
         if ([p respondsToSelector:@selector(characterDidRoundEnd:)]) {
             [p characterDidRoundEnd:self];
@@ -417,7 +407,7 @@
     NSString *key = NSStringFromClass([passiveSkill class]);
     
     // Check if there are already exist the same passive skill.
-    PassiveSkill *old = [passiveSkillDictionary objectForKey:key];
+    PassiveSkill *old = [_passiveSkillDictionary objectForKey:key];
 
     if (old != nil) {
         // Add duration time to the old one
@@ -434,7 +424,7 @@
         [passiveSkill characterWillAddDelegate:self];
     }
     
-    [passiveSkillDictionary setObject:passiveSkill forKey:key];
+    [_passiveSkillDictionary setObject:passiveSkill forKey:key];
     
     passiveSkill.character = self;
 }
@@ -447,7 +437,7 @@
     if ([passiveSkill respondsToSelector:@selector(characterWillRemoveDelegate:)]) {
         [passiveSkill characterWillRemoveDelegate:self];
     }
-    [passiveSkillDictionary removeObjectForKey:key];
+    [_passiveSkillDictionary removeObjectForKey:key];
 }
 
 -(void)addTimeStatus:(TimeStatusType)type withTime:(int)time {

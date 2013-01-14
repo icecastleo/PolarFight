@@ -17,9 +17,13 @@
 @property (readonly) Character *character;
 @property (readwrite) CGPoint velocity;
 @property (readwrite) float power;
+@property (readonly) BOOL collision;
 @property (readwrite) int count;
 @property (readwrite) float ratio;
 
--(id)initWithCharacter:(Character *)character velocity:(CGPoint)velocity power:(float)power;
+@property (readonly) int maxCount;
+@property (readonly) float acceleration;
+
+-(id)initWithCharacter:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 
 @end

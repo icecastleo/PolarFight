@@ -2,7 +2,7 @@
 //  MyCell.m
 //  LightBugBattle
 //
-//  Created by  DAN on 13/1/10.
+//  Created by  浩翔 on 13/1/10.
 //
 //
 

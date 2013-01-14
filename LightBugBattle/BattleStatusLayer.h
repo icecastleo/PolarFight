@@ -13,14 +13,11 @@
 @interface BattleStatusLayer : CCLayer {
 //    BattleController *controller;
     
-    CCLabelTTF *__unsafe_unretained startLabel;
-    CCLabelBMFont *countdownLabel;
-    
     CCSprite *selectSprite;
     CCAction *selectAction;
 }
 
-@property (unsafe_unretained, readonly) CCLabelTTF *startLabel;
+@property (readonly) CCLabelTTF *startLabel;
 @property (readonly) CCLabelBMFont *countdownLabel;
 
 -(id) initWithBattleController:(BattleController*) controller;

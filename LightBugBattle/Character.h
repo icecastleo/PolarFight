@@ -28,22 +28,21 @@
     NSMutableDictionary *statePremissionDictionary;
     
     NSMutableArray *auraArray;
-    NSMutableDictionary *passiveSkillDictionary;
 }
 
-@property (weak) BattleController *controller;
-@property int player;
+@property (readwrite) int player;
 
 @property (readonly) CharacterType roleType;
 //@property (readonly) AttackType attackType;
 @property (readonly) ArmorType armorType;
 
 @property (readonly) NSString *characterId;
-@property (retain, readonly) NSString *name;
-@property (retain, readonly) NSString *picFilename;
+@property (readonly) NSString *name;
+@property (readonly) NSString *picFilename;
 
 @property (readonly) int level;
 
+@property (readonly) NSMutableDictionary *passiveSkillDictionary;
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
 
 // TODO: Move bloodsprite to hp attribute?
@@ -55,7 +54,7 @@
 @property (readwrite) CGPoint position;
 @property (nonatomic, readwrite) CGPoint directionVelocity;
 
-@property (nonatomic, strong) NSMutableArray *pointArray;
+@property (nonatomic) NSMutableArray *pointArray;
 
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel;
 -(id)initWithXMLElement:(GDataXMLElement *)anElement;
@@ -64,9 +63,8 @@
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
 -(void)useSkill;
--(void)attackCharacter:(Character *)target withAttackType:(AttackType)type;
 
-//-(void)receiveAttackEvent:(AttackEvent *)event;
+-(void)receiveAttackEvent:(AttackEvent *)event;
 -(void)receiveDamageEvent:(DamageEvent *)event;
 -(void)getHeal:(int)heal;
 

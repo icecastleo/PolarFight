@@ -15,10 +15,13 @@
     float multiplier;
 }
 
-@property (retain,readonly) Character *attacker;
-@property (retain,readonly) Character *defender;
+@property (readonly) Character *attacker;
+@property (readonly) Character *defender;
 @property (readonly) AttackType type;
 @property (readonly) int attack;
+@property CGPoint location;
+@property float knockOutPower;
+@property BOOL knouckOutCollision;
 
 -(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender;
 

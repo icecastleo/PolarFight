@@ -9,7 +9,6 @@
 #import "CCLayer.h"
 
 @class Character;
-
 @interface CharacterInfoView : CCLayer
 
 - (void)showInfoFromCharacter:(Character *)role loacation:(CGPoint)point needBackGround:(BOOL)needBg;

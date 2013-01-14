@@ -10,6 +10,7 @@
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Character.h"
+#import "PauseLayer.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -55,7 +56,9 @@ static BattleController* currentInstance;
         // You need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
-        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
+        PauseLayer *pauseLayer = [PauseLayer node];
+        [self addChild:pauseLayer z:1];
+        mapLayer = [[MapLayer alloc] initWithMapSprite:map withPauseLayer:pauseLayer];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
@@ -138,14 +141,12 @@ static BattleController* currentInstance;
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 1;
-        character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 2;
-        character.controller = self;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
@@ -164,8 +165,8 @@ static BattleController* currentInstance;
     }
 }
 
--(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power {
-    [mapLayer knockOut:character velocity:velocity power:power];
+-(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
+    [mapLayer knockOut:character velocity:velocity power:power collision:collision];
 }
 
 -(void)update:(ccTime)delta {

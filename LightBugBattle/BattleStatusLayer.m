@@ -10,30 +10,22 @@
 
 @implementation BattleStatusLayer
 
-@synthesize startLabel,countdownLabel;
-
 -(id) initWithBattleController:(BattleController *) battleController {
-
-    if(self = [super init]) {
-    
-//        controller = battleController;
-        
+    if(self = [super init]) {        
         CGSize size = [CCDirector sharedDirector].winSize;
         
-        countdownLabel = [[CCLabelBMFont alloc] initWithString:@"Loading..." fntFile:@"TestFont.fnt"];
-        countdownLabel.position = ccp(size.width / 2, size.height - 30);
-        [self addChild:countdownLabel];
+        _countdownLabel = [[CCLabelBMFont alloc] initWithString:@"Loading..." fntFile:@"TestFont.fnt"];
+        _countdownLabel.position = ccp(size.width / 2, size.height - 30);
+        [self addChild:_countdownLabel];
         
-        startLabel = [CCLabelTTF labelWithString:@"Press to start!"  fontName:@"Marker Felt"  fontSize:21];
-        startLabel.position = ccp(size.width / 2,size.height / 2);
-        startLabel.opacity = 150;
+        _startLabel = [CCLabelTTF labelWithString:@"Press to start!"  fontName:@"Marker Felt"  fontSize:21];
+        _startLabel.position = ccp(size.width / 2,size.height / 2);
+        _startLabel.opacity = 150;
 //        startLabel.visible = NO;
-        [self addChild:startLabel];
-        
+        [self addChild:_startLabel];
         
         selectSprite = [[CCSprite alloc] init];
         selectSprite.visible = NO;
-//        [self addChild:selectSprite];
         
         CCAnimation *animation = [CCAnimation animation];
         
@@ -64,10 +56,5 @@
     selectSprite.visible = NO;
     [selectSprite stopAllActions];
 }
-
-//-(void) update:(ccTime) delta {
-//
-//    // TODO: update label;
-//}
 
 @end

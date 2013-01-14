@@ -16,6 +16,9 @@
 @property (readonly) DamageType type;
 @property (readonly) Character *damager;
 @property (readonly) int value;
+@property CGPoint location;
+@property float knockOutPower;
+@property BOOL knouckOutCollision;
 
 -(id)initWithValue:(int)aNumber damageType:(DamageType)aType damager:(Character*)aCharacter;
 

@@ -22,7 +22,10 @@
 
 -(void)execute {
     for (Character *target in [range getEffectTargets]) {
-        [character attackCharacter:target withAttackType:kAttackNoraml];
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        event.knockOutPower = 4;
+        event.knouckOutCollision = YES;
+        [target receiveAttackEvent:event];
     }
 }
 

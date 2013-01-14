@@ -10,11 +10,6 @@
 #import "CharacterInfoView.h"
 #import "Character.h"
 
-@interface CharacterInfoView() {
-}
-
-@end
-
 @implementation CharacterInfoView
 
 -(id)init {

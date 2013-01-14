@@ -8,11 +8,7 @@
 
 #import "MapLayer.h"
 #import "CharacterInfoView.h"
-
-@interface MapLayer () {
-    CharacterInfoView *_characterInfoView;
-}
-@end
+#import "PauseLayer.h"
 
 @implementation MapLayer
 @synthesize cameraControl;
@@ -20,12 +16,10 @@
 const int characterPositionZ = 1000;
 const int characterInfoViewZ = 9999;
 
--(id)initWithMapSprite:(CCSprite*)aSprite {
+-(id)initWithMapSprite:(CCSprite*)aSprite withPauseLayer:(PauseLayer *)aPauseLayer {
     if((self=[super init])) {
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
-        
-        knockOutObjs = [[NSMutableArray alloc] init];
         
         cameraControl = [MapCameraControl node];
         
@@ -33,17 +27,15 @@ const int characterInfoViewZ = 9999;
         
         [cameraControl setMap:mapBody mapLayer:self];
         
-        CharacterInfoView *characterInfoView = [CharacterInfoView node];
-        _characterInfoView = characterInfoView;
-        [self addChild:_characterInfoView z:characterInfoViewZ];
+        [self setCharacterInfoViewLayer];
+        aPauseLayer = aPauseLayer;
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
         
         CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
-
-        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
         
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
     }
     return self;
 }
@@ -107,7 +99,7 @@ const int characterInfoViewZ = 9999;
 }
 
 -(void)moveCharacterTo:(Character*)theCharacter position:(CGPoint)location {
-    [_characterInfoView clean];
+    [characterInfoView clean];
     //int x = (location.x + mapBody.boundingBox.size.width/2)/10;
     //int y = (location.y + mapBody.boundingBox.size.height/2)/10;
     
@@ -194,57 +186,6 @@ const int characterInfoViewZ = 9999;
         }
     }
     
-////    CCLOG(@"PLAYER BLOCK x:%i y:%i", x, y);
-//    
-//    // Character Collide with Character
-//    for( int i=0; i<characters.count; i++ )
-//    {
-//        if( [characters objectAtIndex:i] == theCharacter )
-//        {
-//            continue;
-//        }
-//        
-//        CGPoint targetLocation = [[characters objectAtIndex:i] position];
-//        CGPoint selfLocation = theCharacter.position;
-//        
-//        float targetRadius = [[characters objectAtIndex:i] sprite].boundingBox.size.width/2;
-//        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-//        
-//        // redirect the location
-//        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
-//        {
-//            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
-//            
-//            moveX = redirect.x;
-//            moveY = redirect.y;
-//        }
-//        // redirect the location
-//    }
-//    // Character Collide with Character
-//    
-//    // Character Collide with Barriers
-//    for( int i=0; i<barriers.count; i++ )
-//    {
-//        CGPoint targetLocation = [[barriers objectAtIndex:i] center];
-//        CGPoint selfLocation = theCharacter.position;
-//        
-//        float targetRadius = [[barriers objectAtIndex:i] radius];
-//        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-//        
-//        // redirect the location
-//        if( ccpDistance(targetLocation, location ) < (targetRadius + selfRadius ) )
-//        {
-//            CGPoint redirect = [Helper moveRedirectWhileCollisionP1:selfLocation R1:selfRadius P2:targetLocation R2:targetRadius Location:location];
-//            
-//            moveX = redirect.x;
-//            moveY = redirect.y;
-//        }
-//        // redirect the location
-//    }
-//    // Character Collide with Barriers
-
-    
-    
     // MAP LIMIT
     float mapXLimit = mapBody.boundingBox.size.width/2;
     float mapYLimit = mapBody.boundingBox.size.height/2;
@@ -273,18 +214,11 @@ const int characterInfoViewZ = 9999;
     [theCharacter setDirectionVelocity:velocity];
 }
 
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power {
-//    float angle = [Helper calculateVectorAngle:velocity];
-//    CGPoint direction = [Helper vectorFromAngle:angle];
-//    
-//    float power = ccpDistance(velocity, direction);
-//    
-//    power *= 0.15; // edit someday
+-(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
+
+    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity power:power collision:collision];
     
-    //CCLOG(@"ANGLE : %f, ANGLE 2: %f, POWER : %f", angle, [Helper calculateVectorAngle:direction], power);
-    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity power:power];
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.025f target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1.0/kGameSettingFps target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
 }
 
 -(void)knockOutUpdate:(NSTimer *)timer {
@@ -293,58 +227,65 @@ const int characterInfoViewZ = 9999;
     
     Character *theCharacter = obj.character;
     
-    if (obj.count >= kKnoutOutCount) {
+    if (obj.count >= obj.maxCount) {
         [timer invalidate];
-    } else {
-        obj.count++;
-        obj.ratio *= kKnoutOutRatio;
-        CGPoint nextPoint = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-        
-        // Check character collide
-        for(Character *other in _characters) {
-            if(other == theCharacter) {
-                continue;
-            }
-            
-            CGPoint targetLocation = other.position;
-            float targetRadius = other.sprite.boundingBox.size.width/2;
-            float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-            
-            if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
-                obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
-            }
-        }
-        
-        // Check barrier collide
-        for(Barrier *barrier in barriers) {
-            CGPoint targetLocation = barrier.center;
-            float targetRadius = barrier.radius;
-            float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
-                
-            if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
-                obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
-            }
-        }
-        CGPoint targetLocation = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-        // MAP LIMIT
-        float mapXLimit = mapBody.boundingBox.size.width/2;
-        float mapYLimit = mapBody.boundingBox.size.height/2;
-        float characterWidth = theCharacter.sprite.boundingBox.size.width/2;
-        
-        targetLocation.x = MIN( MAX( targetLocation.x, -1*mapXLimit + characterWidth ), mapXLimit - characterWidth);
-        targetLocation.y = MIN( MAX( targetLocation.y, -1*mapYLimit + characterWidth ), mapYLimit - characterWidth);
-        theCharacter.position = targetLocation;
-        
-        [self reorderChild:theCharacter.sprite z:characterPositionZ - theCharacter.position.y];
+        return;
     }
+    
+    obj.count++;
+    obj.ratio -= obj.acceleration;
+    
+    CGPoint nextPoint = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+    
+    // Check character collide
+    for(Character *other in _characters) {
+        if(other == theCharacter) {
+            continue;
+        }
+        
+        CGPoint targetLocation = other.position;
+        float targetRadius = other.sprite.boundingBox.size.width/2;
+        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+        
+        if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
+            if (obj.collision == false) {
+                [timer invalidate];
+                return;
+            }
+            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+        }
+    }
+    
+    // Check barrier collide
+    for(Barrier *barrier in barriers) {
+        CGPoint targetLocation = barrier.center;
+        float targetRadius = barrier.radius;
+        float selfRadius = theCharacter.sprite.boundingBox.size.width/2;
+        
+        if(ccpDistance(nextPoint, targetLocation) < (targetRadius + selfRadius)) {
+            if (obj.collision == false) {
+                [timer invalidate];
+                return;
+            }
+            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+        }
+    }
+    CGPoint targetLocation = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+    
+    // MAP LIMIT
+    float mapXLimit = mapBody.boundingBox.size.width/2;
+    float mapYLimit = mapBody.boundingBox.size.height/2;
+    float characterWidth = theCharacter.sprite.boundingBox.size.width/2;
+    
+    targetLocation.x = MIN( MAX( targetLocation.x, -1*mapXLimit + characterWidth ), mapXLimit - characterWidth);
+    targetLocation.y = MIN( MAX( targetLocation.y, -1*mapYLimit + characterWidth ), mapYLimit - characterWidth);
+    theCharacter.position = targetLocation;
+    
+    [self reorderChild:theCharacter.sprite z:characterPositionZ - theCharacter.position.y];
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    [_characterInfoView clean];
-    CGPoint location = [touch locationInView:touch.view];
-    location = [[CCDirector sharedDirector] convertToGL:location];
-    CGPoint actualLocation = [self getTouchPositionInMapFromOriginalTouchLocation:location];
-    [self selectCharacterForTouch:actualLocation];
+    [characterInfoView clean];
     
     return YES;
 }
@@ -360,40 +301,68 @@ const int characterInfoViewZ = 9999;
     [cameraControl moveCameraX: -0.5 * diff.x Y: -0.5 * diff.y];
 }
 
-- (void)selectCharacterForTouch:(CGPoint)touchLocation {
-    for (Character *character  in _characters) {
-        if (CGRectContainsPoint(character.sprite.boundingBox, touchLocation)) {
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint location = [touch locationInView:touch.view];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    
+    CGPoint lastPoint = [touch previousLocationInView:touch.view];
+    lastPoint = [[CCDirector sharedDirector] convertToGL:lastPoint];
+
+    // It is tap
+    if (location.x == lastPoint.x && location.y == lastPoint.y) {
+        location = [self convertLocationToMapLocation:location];
+        
+        Character *character = [self getCharacterAtLocation:location];
+        
+        if (character != nil) {
             CGPoint position = [self getInfoViewPositionFromCharacterPosition:character.position];
-            [_characterInfoView showInfoFromCharacter:character loacation:position needBackGround:YES];
-            CCLOG(@"touch %@ ::(X:%g,Y:%g)",character.name,touchLocation.x,touchLocation.y);
-            break;
+            [characterInfoView showInfoFromCharacter:character loacation:position needBackGround:YES];
         }
     }
 }
 
-- (CGPoint)getTouchPositionInMapFromOriginalTouchLocation:(CGPoint)point {
-    CGPoint cameraPosition = [cameraControl getCameraPosition];
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    double x = point.x + cameraPosition.x - winSize.width/2;
-    double y = point.y + cameraPosition.y - winSize.height/2;
-    CGPoint goal = CGPointMake(x, y);
-    
-    return goal;
-}
-
 - (CGPoint)getInfoViewPositionFromCharacterPosition:(CGPoint)chaPoint {
     CGPoint cameraPosition = [cameraControl getCameraPosition];
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    double x=0,y=0;
-    if (chaPoint.x < cameraPosition.x) 
+    
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    float x,y;
+    
+    if (chaPoint.x < cameraPosition.x)
         x = cameraPosition.x + 10;
     else
-        x = cameraPosition.x - winSize.width/2 + winSize.width/20;
+        x = cameraPosition.x - winSize.width/2 + 10;
     
     y = cameraPosition.y - winSize.height/2 + winSize.height/5;
-    CGPoint goal = CGPointMake(x, y);
     
-    return goal;
+    return ccp(x, y);
+}
+
+-(CGPoint)convertLocationToMapLocation:(CGPoint)location {
+    
+    CGPoint cameraPosition = [cameraControl getCameraPosition];
+    
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    double x = location.x + cameraPosition.x - winSize.width/2;
+    double y = location.y + cameraPosition.y - winSize.height/2;
+    
+    return ccp(x, y);
+}
+
+- (void)setCharacterInfoViewLayer {
+    characterInfoView = [CharacterInfoView node];
+    [self addChild:characterInfoView z:characterInfoViewZ];
+}
+
+-(Character *)getCharacterAtLocation:(CGPoint)location {
+    for (Character *character  in _characters) {
+        if (CGRectContainsPoint(character.sprite.boundingBox, location)) {
+            CCLOG(@"Find character %@ at (%f, %f)",character.name,location.x,location.y);
+            return character;
+        }
+    }
+    return nil;
 }
 
 @end

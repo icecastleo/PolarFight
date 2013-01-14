@@ -113,7 +113,7 @@
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="250"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="40"></attribute>
+            <attribute name="attack" a="0" b="0" c="20"></attribute>
             <attribute name="defense" a="0" b="0" c="25"></attribute>
             <attribute name="agile" a="0" b="0" c="0"></attribute>
             <attribute name="speed" a="0" b="0" c="2"></attribute>

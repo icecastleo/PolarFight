@@ -40,7 +40,7 @@
 	[director_ setDisplayStats:YES];
 
 	// set FPS at 30
-	[director_ setAnimationInterval:1.0/30];
+	[director_ setAnimationInterval:1.0/kGameSettingFps];
 
 	// attach the openglView to the director
 	[director_ setView:glView];
