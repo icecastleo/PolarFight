@@ -9,25 +9,42 @@
 #import "PauseLayer.h"
 #import "HelloWorldLayer.h"
 
+typedef enum {
+    buttomPad1 = 0,
+    buttomPad2,
+    restartLabelY,
+    resumeLabelY,
+    topPad,
+    labelButtom
+} MenuLabelsPosition;
+
 @implementation PauseLayer
 
 -(id)init {
-    
     if ((self = [super init])) {
         [self setPauseButton];
     }
     return self;
 }
 
-- (void)restartTapped:(id)sender {
-    
+-(void)gamePause {
+    [[CCDirector sharedDirector] pause];
+}
+
+-(void)resumeTapped:(id)sender {
+    [[CCDirector sharedDirector] resume];
+    [self removeChild:menu cleanup:YES];
+    menu = nil;
+}
+
+-(void)restartTapped:(id)sender {
+    [[CCDirector sharedDirector] resume];
     // Reload the current scene
     CCScene *scene = [HelloWorldLayer scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:scene]];
-    
 }
 
-- (void)showPauseMenu {
+-(void)showPauseMenu {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCLabelTTF *restartLabel;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -38,21 +55,35 @@
     }
     
     CCMenuItemLabel *restartItem = [CCMenuItemLabel itemWithLabel:restartLabel target:self selector:@selector(restartTapped:)];
-    restartItem.scale = 0.1;
-    restartItem.position = ccp(winSize.width/2, winSize.height/2);
+    restartItem.scale = 1.0;
+    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelButtom);
     
-    CCMenu *menu = [CCMenu menuWithItems:restartItem, nil];
+    CCLabelTTF *resumeLabel;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        resumeLabel = [CCLabelBMFont labelWithString:@"Resume" fntFile:@"WhiteFont.fnt"];
+    } else {
+        resumeLabel = [CCLabelTTF labelWithString:@"Resume" fontName:@"Marker Felt" fontSize:60];
+        resumeLabel.color = ccBLACK;
+    }
+    
+    CCMenuItemLabel *resumetItem = [CCMenuItemLabel itemWithLabel:resumeLabel target:self selector:@selector(resumeTapped:)];
+    resumetItem.scale = 1.0;
+    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelButtom);
+    
+    menu = [CCMenu menuWithItems:restartItem, resumetItem, nil];
     menu.position = CGPointZero;
     [self addChild:menu z:10];
     
-    [restartItem runAction:[CCScaleTo actionWithDuration:0.5 scale:1.0]];
+    [self gamePause];
 }
 
-- (void)pauseButtonTapped:(id)sender {
-    [self showPauseMenu];
+-(void)pauseButtonTapped:(id)sender {
+    if (!menu) {
+        [self showPauseMenu];
+    }
 }
 
-- (void)setPauseButton {
+-(void)setPauseButton {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCMenuItem *pauseMenuItem = [CCMenuItemImage
                                 itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"

@@ -13,23 +13,7 @@
 #import "PartyParser.h"
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
-
 #import "MyCell.h"
-
-#pragma mark - SelectLayer
-
-@interface SelectLayer() {
-    BOOL isSelecting;
-    int currentRoleIndex;
-    int nextRoleIndex;
-    
-    NSArray *characterParty;
-    CCSprite * selSprite;
-    
-    CharacterInfoView *_characterInfoView;
-}
-
-@end
 
 @implementation SelectLayer
 
@@ -62,9 +46,8 @@ static const int tableviewPositionZ = 100;
         // 1 - Initialize
         self.isTouchEnabled = YES;
         
-        CharacterInfoView *characterInfoView = [CharacterInfoView node];
-        _characterInfoView = characterInfoView;
-        [self addChild:_characterInfoView z:1];
+        characterInfoView = [CharacterInfoView node];
+        [self addChild:characterInfoView z:1];
         
         [self SetLabels];
         [self SetMenu];
@@ -311,7 +294,7 @@ static const int tableviewPositionZ = 100;
         return;
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     Character *role = [characterParty objectAtIndex:newSprite.tag];
-    [_characterInfoView showInfoFromCharacter:role loacation:CGPointMake(winSize.width/2 + winSize.width/48, winSize.height/4) needBackGround:NO];
+    [characterInfoView showInfoFromCharacter:role loacation:CGPointMake(winSize.width/2 + winSize.width/48, winSize.height/4) needBackGround:NO];
 }
 
 #pragma mark SWTableViewDataSource
@@ -346,8 +329,6 @@ static const int tableviewPositionZ = 100;
 #pragma mark SWTableViewDelegate
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
     CCSprite *sprite = [cell.children objectAtIndex:0];
-    Character *character = [characterParty objectAtIndex:sprite.tag];
-    NSLog(@"%@ say hi",character.name);
     [self selectSpriteForTouchFromCell:sprite];
 }
 
