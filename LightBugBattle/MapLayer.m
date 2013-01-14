@@ -207,10 +207,6 @@ const int characterInfoViewZ = 9999;
     if (velocity.x != 0 && velocity.y != 0) {
         [self moveCharacterTo:theCharacter position:ccpAdd(theCharacter.position, velocity)];
     }
-    
-    // TODO: Give the final velocity to character.
-    // The best way is return a final velocity, and let the |setCharacterWithVelocity| out of here.
-    [theCharacter setDirectionVelocity:velocity];
 }
 
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {

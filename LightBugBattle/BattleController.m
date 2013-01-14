@@ -202,6 +202,7 @@ static BattleController* currentInstance;
         
         // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
+        [currentCharacter setDirectionVelocity:dPadLayer.velocity];
         [mapLayer moveCharacter:currentCharacter velocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }
 }

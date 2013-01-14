@@ -789,6 +789,10 @@
 		9B063A2F1635414C00E06018 /* zph1_rt2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9B06375E1635414C00E06018 /* zph1_rt2.gif */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
 		9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B08F95816A3FBB0006BF34F /* TestSkill.m */; };
+		9B08F95E16A40805006BF34F /* vald_sword-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B08F95A16A40805006BF34F /* vald_sword-hd.plist */; };
+		9B08F95F16A40805006BF34F /* vald_sword-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B08F95B16A40805006BF34F /* vald_sword-hd.png */; };
+		9B08F96016A40805006BF34F /* vald_sword.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B08F95C16A40805006BF34F /* vald_sword.plist */; };
+		9B08F96116A40805006BF34F /* vald_sword.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B08F95D16A40805006BF34F /* vald_sword.png */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
 		9B2040C4169F0C30000EF31F /* blood_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C2169F0C30000EF31F /* blood_green.png */; };
@@ -1798,6 +1802,10 @@
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
 		9B08F95716A3FBB0006BF34F /* TestSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSkill.h; sourceTree = "<group>"; };
 		9B08F95816A3FBB0006BF34F /* TestSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSkill.m; sourceTree = "<group>"; };
+		9B08F95A16A40805006BF34F /* vald_sword-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "vald_sword-hd.plist"; sourceTree = "<group>"; };
+		9B08F95B16A40805006BF34F /* vald_sword-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vald_sword-hd.png"; sourceTree = "<group>"; };
+		9B08F95C16A40805006BF34F /* vald_sword.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = vald_sword.plist; sourceTree = "<group>"; };
+		9B08F95D16A40805006BF34F /* vald_sword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vald_sword.png; sourceTree = "<group>"; };
 		9B10C678167745160026E796 /* DamageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEffect.h; sourceTree = "<group>"; };
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
@@ -2362,6 +2370,10 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
+				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
+				9B08F95C16A40805006BF34F /* vald_sword.plist */,
+				9B08F95D16A40805006BF34F /* vald_sword.png */,
 				9B2040C2169F0C30000EF31F /* blood_green.png */,
 				9B2040C3169F0C30000EF31F /* blood_red.png */,
 				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
@@ -4483,6 +4495,10 @@
 				9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */,
 				9B2040C4169F0C30000EF31F /* blood_green.png in Resources */,
 				9B2040C5169F0C30000EF31F /* blood_red.png in Resources */,
+				9B08F95E16A40805006BF34F /* vald_sword-hd.plist in Resources */,
+				9B08F95F16A40805006BF34F /* vald_sword-hd.png in Resources */,
+				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
+				9B08F96116A40805006BF34F /* vald_sword.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

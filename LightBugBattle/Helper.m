@@ -71,7 +71,7 @@
 
 +(CGPoint) vectorFromAngle:(float) angle
 {
-    angle = angle * M_PI / 180;
+    angle = angle / 180 * M_PI;
     float sin = sinf(angle);
     float cos = cosf(angle);
     
@@ -85,7 +85,7 @@
 
 +(float) calculateVectorAngle:(CGPoint)vector
 {
-    float angle = atan2f(vector.x, vector.y) * 180 / M_PI ;
+    float angle = atan2f(vector.x, vector.y) / M_PI * 180;
 	
 	if( angle < 0 ) angle = 360 + angle;
 	
@@ -94,10 +94,9 @@
 
 +(CGPoint) vectorBounce_self:(CGPoint)selfPoint vector:(CGPoint)selfVector target:(CGPoint)targetPoint
 {
-    float N_angle = [self calculateVectorAngle:ccpSub( selfPoint, targetPoint)];
+    float N_angle = [self calculateVectorAngle:ccpSub(selfPoint, targetPoint)];
 	float selfAngle = [self calculateVectorAngle:selfVector];
 	
-    
 	float diffAngle1 = N_angle + 90 - selfAngle;
 	float diffAngle2 = N_angle - 90 - selfAngle;
 	
@@ -115,7 +114,9 @@
 		newAngle = N_angle - 90 + diffAngle2;
 	}
     
-    if( newAngle < 0 ) newAngle += 360;
+    if( newAngle < 0 ) {
+        newAngle += 360;
+    }
 	
 	return [self vectorFromAngle:newAngle];
 }

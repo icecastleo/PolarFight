@@ -12,12 +12,29 @@
 
 @implementation CharacterSprite
 
--(id)initWithCharacter:(Character *)cha {
+-(id)initWithCharacter:(Character *)aCharacter {
+    if ([aCharacter.name isEqualToString:@"Swordsman"]) {
+        
+        // Load the texture atlas sprite frames; this also loads the Texture with the same name
+        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+        [frameCache addSpriteFramesWithFile:@"vald_sword.plist"];
+        
+        if ((self = [super initWithSpriteFrameName:@"walking e0000.bmp"])) {
+            character = aCharacter;
+            
+            upAction = [self animationWithName:@"n"];
+            downAction = [self animationWithName:@"s"];
+            rightAction = [self animationWithName:@"e"];
+            leftAction = [self animationWithName:@"w"];
+        }
+        return self;
+    }
+    
     // FIXME: replace player with direction.
     if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",cha.picFilename, cha.player == 1 ? @"rt" : @"fr"]])
+               [NSString stringWithFormat:@"%@_%@2.gif",aCharacter.picFilename, aCharacter.player == 1 ? @"rt" : @"fr"]])
     {
-        character = cha;
+        character = aCharacter;
         [self setAnimationWithName:character.picFilename];
     }
     return self;
@@ -40,6 +57,28 @@
 -(void)removeBloodSprite {
     [bloodSprite removeFromParentAndCleanup:YES];
     bloodSprite = nil;
+}
+
+-(CCAction *)animationWithName:(NSString*)name {
+    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+    
+    // Load the animation frames
+    NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
+    
+    for (int i = 0; i < 8; i++)
+    {
+        NSString* file = [NSString stringWithFormat:@"walking %@000%d.bmp",name, i];
+        CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
+        [frames addObject:frame];
+    }
+    // Create an animation object from all the sprite animation frames
+    CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
+    
+    // Run the animation by using the CCAnimate action
+    CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
+    CCRepeatForever* repeat = [CCRepeatForever actionWithAction:animate];
+    
+    return repeat;
 }
 
 -(void)setAnimationWithName:(NSString*)name {

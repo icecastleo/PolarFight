@@ -22,7 +22,7 @@
     CCAction *leftAction;
 }
 
--(id) initWithCharacter:(Character *)character;
+-(id) initWithCharacter:(Character *)aCharacter;
 
 -(void) addBloodSprite;
 -(void) removeBloodSprite;
