@@ -16,12 +16,12 @@
     CGMutablePathRef attackRange;
     __weak Character* character;
     
-    NSArray *sides;
-    NSArray *filters;
-
+    
     int rangeHeight;
     int rangeWidth;
 }
+@property NSArray *sides;
+@property NSArray *filters;
 
 @property (readonly, weak) Character *character;
 @property (readonly, strong) CCSprite *rangeSprite;

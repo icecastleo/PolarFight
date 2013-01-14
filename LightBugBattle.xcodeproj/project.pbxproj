@@ -15,6 +15,8 @@
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E83A16A44EB500A3F5D5 /* Arrow.png */; };
+		2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
@@ -979,6 +981,9 @@
 		2D26FC991640114D00C34AA4 /* Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effect.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
+		2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeCarrier.h; sourceTree = "<group>"; };
+		2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeCarrier.m; sourceTree = "<group>"; };
+		2D66E83A16A44EB500A3F5D5 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
 		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
@@ -2198,6 +2203,8 @@
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
+				2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */,
+				2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */,
 				9BFFAE61163E9DBB00073DC5 /* Range.h */,
 				9BFFAE62163E9DBB00073DC5 /* Range.m */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
@@ -2378,6 +2385,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D66E83A16A44EB500A3F5D5 /* Arrow.png */,
 				374EEAAF16A3F5DE00374659 /* Buttons */,
 				9B2040C2169F0C30000EF31F /* blood_green.png */,
 				9B2040C3169F0C30000EF31F /* blood_red.png */,
@@ -4504,6 +4512,7 @@
 				9B2040C5169F0C30000EF31F /* blood_red.png in Resources */,
 				374EEAC316A4222500374659 /* ButtonStar.png in Resources */,
 				374EEAC416A4222500374659 /* ButtonStarSel.png in Resources */,
+				2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4514,6 +4523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */,
 				9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */,
 				9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */,
 				9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */,
