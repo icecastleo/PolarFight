@@ -7,6 +7,7 @@
 //
 
 #import "BattleStatusLayer.h"
+#import "PauseLayer.h"
 
 @implementation BattleStatusLayer
 
@@ -38,6 +39,7 @@
         CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
         selectAction = [CCRepeatForever actionWithAction:selectAnimate];
         
+        [self setPauseButton];
         // TODO: init other view like playing queue.
     }
     return self;
@@ -55,6 +57,26 @@
     [selectSprite removeFromParentAndCleanup:NO];
     selectSprite.visible = NO;
     [selectSprite stopAllActions];
+}
+
+-(void)pauseButtonTapped:(id)sender {
+    PauseLayer *layer = [PauseLayer node];
+    [self addChild:layer];
+}
+
+-(void)setPauseButton {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CCMenuItem *pauseMenuItem = [CCMenuItemImage
+                                 itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"
+                                 target:self selector:@selector(pauseButtonTapped:)];
+    
+    double width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
+    double height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
+    pauseMenuItem.position = ccp(width, height);
+    
+    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
+    pauseMenu.position = CGPointZero;
+    [self addChild:pauseMenu];
 }
 
 @end

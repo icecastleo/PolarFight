@@ -3604,6 +3604,8 @@
 				9B82F78B164FB2780001A357 /* BattleStatusLayer.m */,
 				9B82F78C164FB2780001A357 /* DPadLayer.h */,
 				9B82F78D164FB2780001A357 /* DPadLayer.m */,
+				374EEAC516A4228000374659 /* PauseLayer.h */,
+				374EEAC616A4228000374659 /* PauseLayer.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
@@ -3621,8 +3623,6 @@
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 				37BB1957169E9F2300AC56FC /* MyCell.h */,
 				37BB1958169E9F2300AC56FC /* MyCell.m */,
-				374EEAC516A4228000374659 /* PauseLayer.h */,
-				374EEAC616A4228000374659 /* PauseLayer.m */,
 			);
 			name = SelectLayer;
 			sourceTree = "<group>";

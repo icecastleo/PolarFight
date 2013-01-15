@@ -10,7 +10,6 @@
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Character.h"
-#import "PauseLayer.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -55,9 +54,6 @@ static BattleController* currentInstance;
     if(self = [super init]) {
         // You need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
-        
-        PauseLayer *pauseLayer = [PauseLayer node];
-        [self addChild:pauseLayer z:1];
         
         mapLayer = [[MapLayer alloc] initWithMapSprite:map];
         

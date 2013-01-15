@@ -22,7 +22,7 @@ typedef enum {
 
 -(id)init {
     if ((self = [super init])) {
-        [self setPauseButton];
+        [self showPauseMenu];
     }
     return self;
 }
@@ -33,8 +33,7 @@ typedef enum {
 
 -(void)resumeTapped:(id)sender {
     [[CCDirector sharedDirector] resume];
-    [self removeChild:menu cleanup:YES];
-    menu = nil;
+    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)restartTapped:(id)sender {
@@ -75,27 +74,6 @@ typedef enum {
     [self addChild:menu z:10];
     
     [self gamePause];
-}
-
--(void)pauseButtonTapped:(id)sender {
-    if (!menu) {
-        [self showPauseMenu];
-    }
-}
-
--(void)setPauseButton {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"
-                                target:self selector:@selector(pauseButtonTapped:)];
-    
-    double width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
-    double height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
-    pauseMenuItem.position = ccp(width, height);
-    
-    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
-    pauseMenu.position = CGPointZero;
-    [self addChild:pauseMenu];
 }
 
 @end
