@@ -53,12 +53,10 @@ static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
-        // You need a map photo to show on the map layer.
+        // We need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
-        
-        PauseLayer *pauseLayer = [PauseLayer node];
-        [self addChild:pauseLayer];
-        mapLayer = [[MapLayer alloc] initWithMapSprite:map withPauseLayer:pauseLayer];
+
+        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 

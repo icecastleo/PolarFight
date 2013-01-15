@@ -27,7 +27,6 @@ const int characterInfoViewZ = 9999;
         [cameraControl setMap:mapBody mapLayer:self];
         
         [self setCharacterInfoViewLayer];
-        pauseLayer = aPauseLayer;
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
