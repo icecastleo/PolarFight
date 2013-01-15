@@ -49,10 +49,12 @@
 @property (readonly) CharacterSprite *sprite;
 
 @property (readonly) CharacterState state;
-@property (readonly) CharacterDirection direction;
+@property (readonly) CharacterDirection characterDirection;
 
-@property (readwrite) CGPoint position;
-@property (nonatomic, readwrite) CGPoint directionVelocity;
+@property CGPoint direction;
+@property CGPoint position;
+@property (readonly) CGRect boundingBox;
+
 
 @property (nonatomic) NSMutableArray *pointArray;
 

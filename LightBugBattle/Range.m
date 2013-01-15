@@ -28,20 +28,20 @@
     [character.sprite addChild:rangeSprite];
 }
 
--(void)setRotation:(float)offX :(float)offY {
-    float angleRadians = atan2f(offY, offX);
+-(void)setDirection:(CGPoint)velocity {
+    float angleRadians = atan2f(velocity.y, velocity.x);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
     float cocosAngle = -1 * angleDegrees;
-
+    
     rangeSprite.rotation = cocosAngle;
 }
 
 -(void)setParameter:(NSMutableDictionary *)dict {
-    sides = [dict valueForKey:@"rangeSides"];
+    _sides = [dict valueForKey:@"rangeSides"];
     
-    NSAssert(sides != nil, @"You must define rangeSides for a range");
+    NSAssert(_sides != nil, @"You must define rangeSides for a range");
     
-    filters = [dict valueForKey:@"rangeFilters"];
+    _filters = [dict valueForKey:@"rangeFilters"];
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -61,19 +61,19 @@
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
-
+    
     rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
 }
 
--(NSMutableArray *)getEffectTargets {    
-    [self setRotation:character.directionVelocity.x :character.directionVelocity.y];
+-(NSMutableArray *)getEffectTargets {
+    [self setDirection:character.direction];
     
     NSMutableArray *effectTargets = [NSMutableArray array];
     
     for(Character* temp in [BattleController currentInstance].characters)
-    {    
+    {
         if ([self containTarget:temp]) {
             [effectTargets addObject:temp];
         }
@@ -99,7 +99,7 @@
         loc = [temp.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-//            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
+            //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
             return YES;
         }
     }
@@ -107,13 +107,13 @@
 }
 
 -(BOOL)checkSide:(Character *)temp {
-    if ([sides containsObject:kRangeSideAlly]) {
+    if ([_sides containsObject:kRangeSideAlly]) {
         if (temp.player == character.player) {
             return YES;
         }
     }
     
-    if ([sides containsObject:kRangeSideEnemy]) {
+    if ([_sides containsObject:kRangeSideEnemy]) {
         if (temp.player != character.player) {
             return YES;
         }
@@ -122,11 +122,11 @@
 }
 
 -(BOOL)checkFilter:(Character *)temp {
-    if (filters == nil) {
+    if (_filters == nil) {
         return NO;
     }
     
-    if ([filters containsObject:kRangeFilterSelf]) {
+    if ([_filters containsObject:kRangeFilterSelf]) {
         if (temp == character) {
             return YES;
         }

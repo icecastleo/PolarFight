@@ -216,8 +216,8 @@ static const int tableviewPositionZ = 100;
         return;
     }
     
-    CCTexture2D *tx = [sprite texture];
-    CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
+    CCSprite *newSprite = [CCSprite spriteWithTexture:[sprite texture] rect:[sprite textureRect]];
+    
     newSprite.tag = sprite.tag;
     
     [self replaceOldRole:[self.selectedRoles objectAtIndex:nextRoleIndex] newCharacter:newSprite inArray:self.selectedRoles index:nextRoleIndex];
@@ -312,8 +312,7 @@ static const int tableviewPositionZ = 100;
     Character *character = [characterParty objectAtIndex:idx];
     CCSprite *sprite = character.sprite;
     
-    CCTexture2D *tx = [sprite texture];
-    CCSprite *newSprite = [CCSprite spriteWithTexture:tx];
+    CCSprite *newSprite = [CCSprite spriteWithTexture:[sprite texture] rect:[sprite textureRect]];
     newSprite.position = ccp(65, 20);
     newSprite.tag = idx;
     NSLog(@"%d.%@:",idx,character.name);
