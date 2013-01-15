@@ -28,7 +28,7 @@ const int characterInfoViewZ = 9999;
         [cameraControl setMap:mapBody mapLayer:self];
         
         [self setCharacterInfoViewLayer];
-        aPauseLayer = aPauseLayer;
+        pauseLayer = aPauseLayer;
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
@@ -248,7 +248,7 @@ const int characterInfoViewZ = 9999;
                 [timer invalidate];
                 return;
             }
-            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+            obj.velocity = [Helper reflection:nextPoint vector:obj.velocity target:targetLocation];
         }
     }
     
@@ -263,7 +263,7 @@ const int characterInfoViewZ = 9999;
                 [timer invalidate];
                 return;
             }
-            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+            obj.velocity = [Helper reflection:nextPoint vector:obj.velocity target:targetLocation];
         }
     }
     CGPoint targetLocation = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));

@@ -125,7 +125,7 @@
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
+//        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {

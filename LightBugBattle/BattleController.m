@@ -57,7 +57,7 @@ static BattleController* currentInstance;
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
         PauseLayer *pauseLayer = [PauseLayer node];
-        [self addChild:pauseLayer z:1];
+        [self addChild:pauseLayer];
         mapLayer = [[MapLayer alloc] initWithMapSprite:map withPauseLayer:pauseLayer];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -111,7 +111,7 @@ static BattleController* currentInstance;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         [currentCharacter handleRoundStartEvent];
         
-        [self scheduleUpdate];
+        [self scheduleUpdate];        
     }
     currentInstance = self;
     
