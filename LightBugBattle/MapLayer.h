@@ -22,13 +22,12 @@
     CCSprite *mapBody;
     
     CharacterInfoView *characterInfoView;
-    PauseLayer *pauseLayer;
 }
 
 @property (strong, readonly) NSMutableArray* characters;
 @property (weak, readonly) MapCameraControl* cameraControl;
 
--(id)initWithMapSprite:(CCSprite*)aSprite withPauseLayer:(PauseLayer *)aPauseLayer;
+-(id)initWithMapSprite:(CCSprite*)aSprite;
 
 -(void)addCharacter:(Character*)theCharacter;
 -(void)removeCharacter:(Character*)theCharacter;

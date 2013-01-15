@@ -58,7 +58,8 @@ static BattleController* currentInstance;
         
         PauseLayer *pauseLayer = [PauseLayer node];
         [self addChild:pauseLayer z:1];
-        mapLayer = [[MapLayer alloc] initWithMapSprite:map withPauseLayer:pauseLayer];
+        
+        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
@@ -218,10 +219,11 @@ static BattleController* currentInstance;
 
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
-    currentIndex = ++currentIndex % self.characters.count;
+//    currentIndex = ++currentIndex % self.characters.count;
     
 //    currentCharacter = self.characters[currentIndex];
     currentCharacter = [self.characters objectAtIndex:currentIndex];
+    currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
     
@@ -237,6 +239,16 @@ static BattleController* currentInstance;
     
     statusLayer.startLabel.visible = YES;
     canMove = YES;
+}
+
+-(Character *)getCurrentCharacterFromQueue {
+    currentIndex = ++currentIndex % self.characters.count;
+    Character *character = [self.characters objectAtIndex:currentIndex];
+    return character;
+}
+
+-(void)reSortCharacterQueue {
+    
 }
 
 @end
