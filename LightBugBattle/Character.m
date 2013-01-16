@@ -309,6 +309,11 @@
 }
 
 -(void)receiveDamage:(Damage *)damage {
+    // FIXME: Maybe there are better solutions.
+    if (state == stateDead) {
+        return;
+    }
+    
     CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, damage.value);
     
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
@@ -343,6 +348,11 @@
 }
 
 -(void)getHeal:(int)heal {
+    // FIXME: Maybe there are better solutions.
+    if (state == stateDead) {
+        return;
+    }
+    
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
   
     NSAssert(hp != nil, @"A character without hp gets heal...");

@@ -98,8 +98,7 @@ static BattleController* currentInstance;
         isMove = NO;
         
         currentIndex = 0;
-//        currentCharacter = self.characters[currentIndex];
-        currentCharacter = [self.characters objectAtIndex:currentIndex];
+        currentCharacter = self.characters[currentIndex];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
@@ -141,12 +140,14 @@ static BattleController* currentInstance;
         character.player = 1;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
+//        character.position = ccp(0, -200);
     }
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
+//        character.position = ccp(0, -240);
     }
 }
 
@@ -157,6 +158,12 @@ static BattleController* currentInstance;
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
+    
+    // FIXME: Need a manage to control scene
+    if (self.characters.count == 0) {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[BattleController node]]];
+        return;
+    }
     
     if(currentCharacter == character) {
         [self endMove];
@@ -213,14 +220,11 @@ static BattleController* currentInstance;
     
     // 回合結束的檢查 && 設定參數
     isMove = NO;
-    [currentCharacter handleRoundEndEvent];
-
-    // TODO: Where is play queue??
-    // FIXME: It will caused wrong sequence after someone's dead.
-//    currentIndex = ++currentIndex % self.characters.count;
     
-//    currentCharacter = self.characters[currentIndex];
-    currentCharacter = [self.characters objectAtIndex:currentIndex];
+    if (currentCharacter.state != stateDead) {
+        [currentCharacter handleRoundEndEvent];
+    }
+
     currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
@@ -240,6 +244,7 @@ static BattleController* currentInstance;
 }
 
 -(Character *)getCurrentCharacterFromQueue {
+     // FIXME: It will caused wrong sequence after someone's dead.
     currentIndex = ++currentIndex % self.characters.count;
     Character *character = [self.characters objectAtIndex:currentIndex];
     return character;
