@@ -165,6 +165,7 @@ static BattleController* currentInstance;
         character.player = 2;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
+//        character.position = ccp(0, -240);
     }
     characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
     //characterQueue = [[CharacterQueue alloc] init];
@@ -251,7 +252,10 @@ static BattleController* currentInstance;
     
     // 回合結束的檢查 && 設定參數
     isMove = NO;
-    [currentCharacter handleRoundEndEvent];
+    
+    if (currentCharacter.state != stateDead) {
+        [currentCharacter handleRoundEndEvent];
+    }
 
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
