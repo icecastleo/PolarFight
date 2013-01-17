@@ -107,7 +107,7 @@ static BattleController* currentInstance;
         
         currentIndex = 0;
 //        currentCharacter = self.characters[currentIndex];
-        currentCharacter = [characterQueue pop];
+        currentCharacter = [self getCurrentCharacterFromQueue];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
