@@ -8,10 +8,19 @@
 
 #import "BattleStatusLayer.h"
 #import "PauseLayer.h"
+#import "CharacterQueueLayer.h"
+#import "CharacterQueue.h"
+
+@interface BattleStatusLayer() {
+    CharacterQueueLayer *queueLayer;
+}
+
+@end
 
 @implementation BattleStatusLayer
+@synthesize queue = _queue;
 
--(id) initWithBattleController:(BattleController *) battleController {
+-(id) initWithBattleController:(BattleController *) battleController andQueue:(CharacterQueue *)aQueue{
     if(self = [super init]) {        
         CGSize size = [CCDirector sharedDirector].winSize;
         
@@ -39,7 +48,9 @@
         CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
         selectAction = [CCRepeatForever actionWithAction:selectAnimate];
         
+        _queue = aQueue;
         [self setPauseButton];
+        [self setCharacatQueueLayer];
         // TODO: init other view like playing queue.
     }
     return self;
@@ -47,6 +58,7 @@
 
 -(void) startSelectCharacter:(Character*)character {
 //    Select sprite should be on the same layer as the character is.
+    [self setCurrentCharacterInQueueLayer:character];
     [character.sprite.parent addChild:selectSprite];
     selectSprite.position = character.position;
     [selectSprite runAction:selectAction];
@@ -79,4 +91,12 @@
     [self addChild:pauseMenu];
 }
 
+-(void)setCharacatQueueLayer {
+    queueLayer = [[CharacterQueueLayer alloc] initWithQueue:self.queue];
+    [self addChild:queueLayer];
+}
+
+-(void)setCurrentCharacterInQueueLayer:(Character *)character {
+    [queueLayer setCurrentCharacter:character];
+}
 @end

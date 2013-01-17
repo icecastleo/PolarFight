@@ -97,10 +97,10 @@ static BattleController* currentInstance;
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
+        [self setCharacterArrayFromSelectLayer]; //should be above statusLayer.
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self andQueue:characterQueue];
+        //statusLayer.queue = characterQueue; // For showing Queue Bar.
         [self addChild:statusLayer];
-        
-        [self setCharacterArrayFromSelectLayer];
         
         canMove = YES;
         isMove = NO;

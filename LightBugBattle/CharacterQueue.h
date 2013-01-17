@@ -18,10 +18,17 @@
 -(BOOL)hasTheSameCharacter:(Character *)newCharacter;
 @end
 
+@protocol CharacteQueueBar <NSObject>
+-(void)redrawQueueBar;
+-(void)insertCharacter;
+-(void)removeCharacter;
+@end
+
 @interface CharacterQueue : NSObject
 
--(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2;
+@property (nonatomic) id <CharacteQueueBar> delegate;
 
+-(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2;
 -(void)addCharacter:(Character *)newCharacter;
 -(void)removeCharacter:(Character *)object;
 - (Character *)pop;
@@ -30,7 +37,7 @@
 - (void)clear;
 
 -(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter;
--(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter;
-
+//-(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter;
+-(NSArray *)currentCharacterQueueArray;
 
 @end

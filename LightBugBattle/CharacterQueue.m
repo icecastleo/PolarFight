@@ -115,6 +115,7 @@ int lcm(int a,int b) {
 //        NSLog(@"%d player's %@ time :: %d",obj.character.player,obj.character.name,obj.time);
 //    }
 //    NSLog(@"============================");
+    [self.delegate redrawQueueBar];
 }
 
 -(Character *)pop {
@@ -144,6 +145,7 @@ int lcm(int a,int b) {
     if (!hasRemoved) {
         CCLOG(@"The character isn't in the queue.");
     }
+    [self.delegate removeCharacter];
 }
 
 -(Character *)first {
@@ -223,13 +225,27 @@ int lcm(int a,int b) {
             }
         }
     }
+    [self.delegate insertCharacter];
+    
     return insertIndex;
 }
 
--(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter {
-    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter];
-    [self addCharacter:newCharacter];
-    return insertIndex;
+//-(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter {
+//    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter];
+//    [self addCharacter:newCharacter];
+//    return insertIndex;
+//}
+
+-(NSArray *)currentCharacterQueueArray {
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    int count = [self count];
+    for (int i=0; i<count; i++) {
+        CharacterQueueObject *obj = [self.queue objectAtIndex:i];
+        Character *character = obj.character;
+        [tempArray addObject:character];
+    }
+    
+    return [tempArray copy];
 }
 
 @end

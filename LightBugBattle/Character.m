@@ -59,6 +59,8 @@
                 _name = attribute.stringValue;
             } else if ([attribute.name isEqualToString:@"img"]) {
                 _picFilename = attribute.stringValue;
+            }else if ([attribute.name isEqualToString:@"headImage"]) {
+                _headImageFileName = attribute.stringValue;
             }
         }
         

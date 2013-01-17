@@ -15,7 +15,7 @@ typedef enum {
     restartLabelY,
     resumeLabelY,
     topPad,
-    labelButtom
+    labelsCount
 } MenuLabelsPosition;
 
 @implementation PauseLayer
@@ -55,7 +55,7 @@ typedef enum {
     
     CCMenuItemLabel *restartItem = [CCMenuItemLabel itemWithLabel:restartLabel target:self selector:@selector(restartTapped:)];
     restartItem.scale = 1.0;
-    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelButtom);
+    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelsCount);
     
     CCLabelTTF *resumeLabel;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -67,7 +67,7 @@ typedef enum {
     
     CCMenuItemLabel *resumetItem = [CCMenuItemLabel itemWithLabel:resumeLabel target:self selector:@selector(resumeTapped:)];
     resumetItem.scale = 1.0;
-    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelButtom);
+    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelsCount);
     
     menu = [CCMenu menuWithItems:restartItem, resumetItem, nil];
     menu.position = CGPointZero;
