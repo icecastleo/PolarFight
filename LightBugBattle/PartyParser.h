@@ -15,8 +15,8 @@
 + (void)saveParty:(NSArray *)party fileName:(NSString *)fileName;
 
 //+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagId:(NSString *)tagId;
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagId:(NSString *)tagId;
++ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue;
 
-+ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagAttributeName:(NSString *)tagAttributeName tagName:(NSString *)tagName;
++ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName;
 
 @end

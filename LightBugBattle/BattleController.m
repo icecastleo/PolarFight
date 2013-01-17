@@ -135,14 +135,14 @@ static BattleController* currentInstance;
     
     //here is only for test before selectLayer has done.
     NSArray *characterIdArray;
-    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"]) {
-        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"];
+    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"]) {
+        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     } else {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:@"000"]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
         character.player = 1;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
-        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:@"000"]];
+        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
         character2.player = 2;
         [character2.sprite addBloodSprite];
         [self addCharacter:character2];
@@ -151,17 +151,24 @@ static BattleController* currentInstance;
     // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
     
     //This code is really need after test.
-    //NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character"];
+    //characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 1;
         [character.sprite addBloodSprite];
         [player1 addObject:character];
     }
-    for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+    
+    // random momster Only for test
+    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol"];
+    for (NSString *characterId in player2IdArray) {
+        int picknumber = arc4random() % 2; //random create player2's character.
+        if (picknumber == 0) {
+            continue;
+        }
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
@@ -281,6 +288,9 @@ static BattleController* currentInstance;
     Character *character = [characterQueue pop];
     if ([self.characters containsObject:currentCharacter]) {
         [characterQueue addCharacter:currentCharacter];
+    }
+    if (!character) {
+        character = [characterQueue pop];
     }
     return character;
 }

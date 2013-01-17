@@ -16,7 +16,11 @@
 @implementation CharacterHeadView
 
 -(id)initWithCharacter:(Character *)character {
-    if ([super initWithFile:character.headImageFileName]) {
+    if (!character) {
+        NSAssert(character !=nil , @"character's headImage should not nil.");
+        return nil;
+    }
+    if (self = [super initWithFile:character.headImageFileName]) {
         _imageFileName = character.headImageFileName;
     }
     return self;

@@ -36,6 +36,7 @@ typedef enum {
 @interface CharacterQueueLayer() {
     NSArray *headViewPointArray;
     NSMutableArray *queueBarSprit;
+    
     CCSprite *selectSprite;
     CCAction *selectAction;
 }
@@ -43,6 +44,8 @@ typedef enum {
 @end
 
 @implementation CharacterQueueLayer
+
+static const int currentCharacterHeadViewTag = 999;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue {
     if ((self = [super init])) {
@@ -77,10 +80,16 @@ typedef enum {
 }
 
 -(void)setCurrentCharacter:(Character *)currentCharacter {
+    [self removeChildByTag:currentCharacterHeadViewTag cleanup:YES];
     CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:currentCharacter];
+    if (!characterHeadView) {
+        NSAssert(characterHeadView !=nil , @"character's headImage should not nil.");
+        return;
+    }
     CGPoint currentHeadViewPoint = [[headViewPointArray objectAtIndex:currentCharacterIndex] CGPointValue];
     characterHeadView.position = currentHeadViewPoint;
     characterHeadView.anchorPoint = ccp(0,0.5);
+    characterHeadView.tag = currentCharacterHeadViewTag;
     selectSprite.position = currentHeadViewPoint;
     selectSprite.visible = YES;
 
