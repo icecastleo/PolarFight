@@ -138,11 +138,11 @@ static BattleController* currentInstance;
     if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"]) {
         characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     } else {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
         character.player = 1;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
-        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
+        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
         character2.player = 2;
         [character2.sprite addBloodSprite];
         [self addCharacter:character2];
@@ -162,13 +162,14 @@ static BattleController* currentInstance;
     }
     
     // random momster Only for test
-    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol"];
+    //NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol"];
     for (NSString *characterId in player2IdArray) {
-        int picknumber = arc4random() % 2; //random create player2's character.
-        if (picknumber == 0) {
-            continue;
-        }
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+//        int picknumber = arc4random() % 2; //random create player2's character.
+//        if (picknumber == 0) {
+//            continue;
+//        }
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
