@@ -61,7 +61,7 @@ static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
-        // You need a map photo to show on the map layer.
+        // We need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
         mapLayer = [[MapLayer alloc] initWithMapSprite:map];
@@ -117,7 +117,7 @@ static BattleController* currentInstance;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         [currentCharacter handleRoundStartEvent];
         
-        [self scheduleUpdate];
+        [self scheduleUpdate];        
     }
     currentInstance = self;
     
@@ -189,6 +189,12 @@ static BattleController* currentInstance;
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
     [characterQueue removeCharacter:character];
+    
+    // FIXME: Need a manage to control scene
+    if (self.characters.count == 0) {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[BattleController node]]];
+        return;
+    }
     
     if(currentCharacter == character) {
         [self endMove];
