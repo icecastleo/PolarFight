@@ -42,6 +42,7 @@
 		37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39671664AD48000677B2 /* TypeMapping.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39691664AD48000677B2 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DF39701664AD48000677B2 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF396B1664AD48000677B2 /* Util.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		9B019B1216494E8000A6976F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1116494E8000A6976F /* Status.m */; };
 		9B019B1516494F2500A6976F /* TimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B1416494F2500A6976F /* TimeStatus.m */; };
 		9B019B181649542E00A6976F /* AuraStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B019B171649542E00A6976F /* AuraStatus.m */; };
@@ -1050,6 +1051,8 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
+		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
+		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		9B019B1016494E8000A6976F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		9B019B1116494E8000A6976F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		9B019B1316494F2500A6976F /* TimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatus.h; sourceTree = "<group>"; };
@@ -3606,6 +3609,8 @@
 				9B82F78D164FB2780001A357 /* DPadLayer.m */,
 				374EEAC516A4228000374659 /* PauseLayer.h */,
 				374EEAC616A4228000374659 /* PauseLayer.m */,
+				37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */,
+				37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
@@ -4618,6 +4623,7 @@
 				9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */,
 				9B08F95916A3FBB1006BF34F /* TestSkill.m in Sources */,
 				374EEAC716A4228000374659 /* PauseLayer.m in Sources */,
+				37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

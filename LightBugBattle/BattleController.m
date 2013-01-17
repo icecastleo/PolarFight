@@ -10,6 +10,7 @@
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Character.h"
+#import "CharacterQueue.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -38,6 +39,14 @@
 //}
 //
 //@end
+
+@interface BattleController () {
+    NSMutableArray *player1;
+    NSMutableArray *player2;
+    CharacterQueue *characterQueue;
+}
+
+@end
 
 @implementation BattleController
 @dynamic characters;
@@ -98,7 +107,7 @@ static BattleController* currentInstance;
         
         currentIndex = 0;
 //        currentCharacter = self.characters[currentIndex];
-        currentCharacter = [self.characters objectAtIndex:currentIndex];
+        currentCharacter = [characterQueue pop];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
@@ -121,13 +130,23 @@ static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     //TODO: will get character from selectLayer fuction.
+    player1 = [[NSMutableArray alloc] init];
+    player2 = [[NSMutableArray alloc] init];
     
     //here is only for test before selectLayer has done.
     NSArray *characterIdArray;
     if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"]) {
         characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"];
     } else {
-        characterIdArray = @[@"001",@"002",@"003",@"004"];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:@"000"]];
+        character.player = 1;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:@"000"]];
+        character2.player = 2;
+        [character2.sprite addBloodSprite];
+        [self addCharacter:character2];
+        return;
     }
     // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
     
@@ -139,14 +158,27 @@ static BattleController* currentInstance;
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 1;
         [character.sprite addBloodSprite];
-        [self addCharacter:character];
+        [player1 addObject:character];
     }
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
-        [self addCharacter:character];
+        [player2 addObject:character];
     }
+    characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
+    //characterQueue = [[CharacterQueue alloc] init];
+    
+    for (Character *character in player1) {
+        [self addCharacter:character];
+        //[characterQueue addObject:character];
+    }
+    for (Character *character in player2) {
+        [self addCharacter:character];
+        //[characterQueue addObject:character];
+    }
+    player1 = nil;
+    player2 = nil;
 }
 
 -(void)addCharacter:(Character *)character {
@@ -156,6 +188,7 @@ static BattleController* currentInstance;
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
+    [characterQueue removeCharacter:character];
     
     if(currentCharacter == character) {
         [self endMove];
@@ -216,10 +249,6 @@ static BattleController* currentInstance;
 
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
-//    currentIndex = ++currentIndex % self.characters.count;
-    
-//    currentCharacter = self.characters[currentIndex];
-    currentCharacter = [self.characters objectAtIndex:currentIndex];
     currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
@@ -239,13 +268,11 @@ static BattleController* currentInstance;
 }
 
 -(Character *)getCurrentCharacterFromQueue {
-    currentIndex = ++currentIndex % self.characters.count;
-    Character *character = [self.characters objectAtIndex:currentIndex];
+    Character *character = [characterQueue pop];
+    if ([self.characters containsObject:currentCharacter]) {
+        [characterQueue addCharacter:currentCharacter];
+    }
     return character;
-}
-
--(void)reSortCharacterQueue {
-    
 }
 
 @end

@@ -50,7 +50,7 @@
     [character.sprite.parent addChild:selectSprite];
     selectSprite.position = character.position;
     [selectSprite runAction:selectAction];
-    selectSprite.visible = YES;    
+    selectSprite.visible = YES;
 }
 
 -(void) stopSelect {
