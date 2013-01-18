@@ -38,6 +38,7 @@
 		3725D4FC16A807C000BF49E2 /* CharacterQueueLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */; };
 		3725D51816A83E3A00BF49E2 /* AllCharacter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51716A83E3A00BF49E2 /* AllCharacter.xml */; };
 		3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */; };
+		3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D52216A982B000BF49E2 /* CharacterQueueObject.m */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
 		3727AEE2169D6ACA00160620 /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED5169D6ACA00160620 /* SWMultiColumnTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE3169D6ACA00160620 /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED7169D6ACA00160620 /* SWScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1032,6 +1033,8 @@
 		3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueLayer.m; sourceTree = "<group>"; };
 		3725D51716A83E3A00BF49E2 /* AllCharacter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AllCharacter.xml; sourceTree = "<group>"; };
 		3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestPlayer2.xml; sourceTree = "<group>"; };
+		3725D52116A982B000BF49E2 /* CharacterQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueueObject.h; sourceTree = "<group>"; };
+		3725D52216A982B000BF49E2 /* CharacterQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueObject.m; sourceTree = "<group>"; };
 		3727AED0169D6ACA00160620 /* CCNode+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+Autolayout.h"; sourceTree = "<group>"; };
 		3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+Autolayout.m"; sourceTree = "<group>"; };
 		3727AED4169D6ACA00160620 /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWMultiColumnTableView.h; sourceTree = "<group>"; };
@@ -3682,6 +3685,8 @@
 				37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */,
 				3725D4FA16A807C000BF49E2 /* CharacterQueueLayer.h */,
 				3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */,
+				3725D52116A982B000BF49E2 /* CharacterQueueObject.h */,
+				3725D52216A982B000BF49E2 /* CharacterQueueObject.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
@@ -4712,6 +4717,7 @@
 				37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */,
 				37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */,
 				3725D4FC16A807C000BF49E2 /* CharacterQueueLayer.m in Sources */,
+				3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

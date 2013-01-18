@@ -7,43 +7,21 @@
 //
 
 #import "CharacterQueue.h"
+#import "CharacterQueueObject.h"
 #import "Character.h"
 
-@implementation CharacterQueueObject
-@synthesize time = _time;
-
--(void)setCharacterQueueObjectTime:(NSUInteger)distance {
-    int agile = [self.character getAttribute:kCharacterAttributeAgile].value;
-    _time = distance/agile;
-}
--(void)timeDecrease {
-    if (self.time > 1) {
-        _time--;
-    }else {
-        _time = 0;
-    }
-}
--(BOOL)hasTheSameCharacter:(Character *)newCharacter {
-    if (self.character == newCharacter) {
-        return YES;
-    }
-    return NO;
-}
-@end
 
 @interface CharacterQueue() {
     int distance;
 }
-
 @property (atomic, strong) NSMutableArray *queue;
 @end
 
 @implementation CharacterQueue
 @synthesize queue = _queue;
-
 static const int defaultDistance = 9999;
 
-int lcm(int a,int b) {
+static int LowestCommonMultiple(int a,int b) {
     if (a==0 || b==0) {
         return 0;
     }
@@ -76,23 +54,13 @@ int lcm(int a,int b) {
         distance = 1;
         for (CharacterQueueObject *obj in self.queue) {
             int agile = [obj.character getAttribute:kCharacterAttributeAgile].value;
-            distance = lcm(distance,agile);
+            distance = LowestCommonMultiple(distance,agile);
         }
         if (distance == 0) {
             distance = defaultDistance;
         }
         [self setCharacterQueueObjectTime];
-        
-//        for (CharacterQueueObject *obj in self.queue) {
-//            NSLog(@"%d player's %@ Agile :: %d",obj.character.player,obj.character.name,[obj.character getAttribute:kCharacterAttributeAgile].value );
-//        }
-//        NSLog(@"============================");
-        
         [self sortQueue];
-        
-//        for (CharacterQueueObject *obj in self.queue) {
-//            NSLog(@"%d player's %@ Agile :: %d",obj.character.player,obj.character.name,[obj.character getAttribute:kCharacterAttributeAgile].value );
-//        }
     }
     
     return self;
@@ -102,7 +70,7 @@ int lcm(int a,int b) {
     self.queue = [[NSMutableArray alloc] init];
 }
 
-#pragma mark - JCPriorityQueue
+#pragma mark - PriorityQueue
 
 -(void)addCharacter:(Character *)newCharacter {
     CharacterQueueObject *newObject = [[CharacterQueueObject alloc] init];
@@ -111,26 +79,28 @@ int lcm(int a,int b) {
     NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter];
 
     [self.queue insertObject:newObject atIndex:insertIndex];
-//    for (CharacterQueueObject *obj in self.queue) {
-//        NSLog(@"%d player's %@ time :: %d",obj.character.player,obj.character.name,obj.time);
-//    }
-//    NSLog(@"============================");
     [self.delegate redrawQueueBar];
 }
 
 -(Character *)pop {
-    Character * firstObject = [self first];
+    CharacterQueueObject * firstObject = [self first];
+    Character *firstCharacter = firstObject.character;
     
-    if (!firstObject) {
+    if (!firstCharacter) {
+        NSAssert(firstCharacter != nil, @"firstCharacter should not nil??");
         return nil;
     }
-    [self removeCharacter:firstObject];
-    [self nextTurn];
-//    for (CharacterQueueObject *obj in self.queue) {
-//        NSLog(@"%d player's %@ time :: %d",obj.character.player,obj.character.name,obj.time);
-//    }
-//    NSLog(@"============pop================");
-    return firstObject;
+    [self removeCharacter:firstCharacter];
+    
+    if (firstObject.time > 1) {
+        int count = firstObject.time;
+        for (int i=0; i<count; i++) {
+            [self nextTurn];
+        }
+    }else {
+        [self nextTurn];
+    }
+    return firstCharacter;
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -148,12 +118,11 @@ int lcm(int a,int b) {
     [self.delegate removeCharacter];
 }
 
--(Character *)first {
+-(CharacterQueueObject *)first {
     if (self.queue.count < 1) return nil;
     CharacterQueueObject *firstObject = [self.queue objectAtIndex:0];
-    Character *firstCharacter = firstObject.character;
     
-    return firstCharacter;
+    return firstObject;
 }
 
 -(NSUInteger)count {
@@ -229,12 +198,6 @@ int lcm(int a,int b) {
     
     return insertIndex;
 }
-
-//-(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter {
-//    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter];
-//    [self addCharacter:newCharacter];
-//    return insertIndex;
-//}
 
 -(NSArray *)currentCharacterQueueArray {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
