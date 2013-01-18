@@ -57,10 +57,9 @@
 }
 
 -(void) startSelectCharacter:(Character*)character {
-//    Select sprite should be on the same layer as the character is.
     [self setCurrentCharacterInQueueLayer:character];
-    [character.sprite.parent addChild:selectSprite];
-    selectSprite.position = character.position;
+    [character.sprite addChild:selectSprite];
+    selectSprite.position = ccp(character.boundingBox.size.width / 2, character.boundingBox.size.height / 2);
     [selectSprite runAction:selectAction];
     selectSprite.visible = YES;
 }
