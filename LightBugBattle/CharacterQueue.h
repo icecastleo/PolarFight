@@ -6,17 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 @class Character;
-
-@interface CharacterQueueObject : NSObject
-@property (weak,nonatomic) Character *character;
-@property (nonatomic,readonly) NSUInteger time;
--(void)setCharacterQueueObjectTime:(NSUInteger)distance;
--(void)timeDecrease;
--(BOOL)hasTheSameCharacter:(Character *)newCharacter;
-@end
 
 @protocol CharacteQueueBar <NSObject>
 -(void)redrawQueueBar;
@@ -32,12 +22,10 @@
 -(void)addCharacter:(Character *)newCharacter;
 -(void)removeCharacter:(Character *)object;
 - (Character *)pop;
-- (Character *)first;
 - (NSUInteger)count;
 - (void)clear;
 
 -(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter;
-//-(NSUInteger)getInsertIndexAndAddCharacter:(Character *)newCharacter;
 -(NSArray *)currentCharacterQueueArray;
 
 @end

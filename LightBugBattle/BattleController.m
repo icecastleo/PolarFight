@@ -250,6 +250,7 @@ static BattleController* currentInstance;
 }
 
 -(void) endMove {
+    
     canMove = NO;
     
     // 回合結束的檢查 && 設定參數
@@ -280,13 +281,10 @@ static BattleController* currentInstance;
 }
 
 -(Character *)getCurrentCharacterFromQueue {
-    Character *character = [characterQueue pop];
     if ([self.characters containsObject:currentCharacter]) {
         [characterQueue addCharacter:currentCharacter];
     }
-    if (!character) {
-        character = [characterQueue pop];
-    }
+    Character *character = [characterQueue pop];
     return character;
 }
 
