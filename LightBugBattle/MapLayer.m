@@ -8,7 +8,6 @@
 
 #import "MapLayer.h"
 #import "CharacterInfoView.h"
-#import "PauseLayer.h"
 
 @implementation MapLayer
 @synthesize cameraControl;
@@ -16,7 +15,7 @@
 const int characterPositionZ = 1000;
 const int characterInfoViewZ = 9999;
 
--(id)initWithMapSprite:(CCSprite*)aSprite withPauseLayer:(PauseLayer *)aPauseLayer {
+-(id)initWithMapSprite:(CCSprite*)aSprite {
     if((self=[super init])) {
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
@@ -28,7 +27,6 @@ const int characterInfoViewZ = 9999;
         [cameraControl setMap:mapBody mapLayer:self];
         
         [self setCharacterInfoViewLayer];
-        aPauseLayer = aPauseLayer;
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:0];
@@ -248,7 +246,7 @@ const int characterInfoViewZ = 9999;
                 [timer invalidate];
                 return;
             }
-            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+            obj.velocity = [Helper reflection:nextPoint vector:obj.velocity target:targetLocation];
         }
     }
     
@@ -263,7 +261,7 @@ const int characterInfoViewZ = 9999;
                 [timer invalidate];
                 return;
             }
-            obj.velocity = [Helper vectorBounce_self:nextPoint vector:obj.velocity target:targetLocation];
+            obj.velocity = [Helper reflection:nextPoint vector:obj.velocity target:targetLocation];
         }
     }
     CGPoint targetLocation = ccpAdd(theCharacter.position, ccpMult(obj.velocity, obj.ratio * obj.power));

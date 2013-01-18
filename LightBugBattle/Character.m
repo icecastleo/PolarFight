@@ -51,7 +51,7 @@
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
-        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
+        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagAttributeValue:anId];;
         
         //get tag's attributes
         for (GDataXMLNode *attribute in characterElement.attributes) {
@@ -59,6 +59,8 @@
                 _name = attribute.stringValue;
             } else if ([attribute.name isEqualToString:@"img"]) {
                 _picFilename = attribute.stringValue;
+            }else if ([attribute.name isEqualToString:@"headImage"]) {
+                _headImageFileName = attribute.stringValue;
             }
         }
         
@@ -125,7 +127,7 @@
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
+//        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -342,7 +344,7 @@
     }
 }
 
--(void)getHeal:(int)heal {
+-(void)getHeal:(int)heal {    
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
   
     NSAssert(hp != nil, @"A character without hp gets heal...");
@@ -365,6 +367,11 @@
 -(void)dead {
     state = stateDead;
     
+//    CCLOG(@"Player %i's %@ is dead", player, self.name);
+    
+    // dead animation + cleanup
+    [[BattleController currentInstance] removeCharacter:self];
+    
     for (NSString *key in _passiveSkillDictionary) {
         PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
         
@@ -372,9 +379,6 @@
             [p characterWillRemoveDelegate:self];
         }
     }
-    
-    // dead animation + cleanup
-    [[BattleController currentInstance] removeCharacter:self];
 }
 
 -(void)handleRoundStartEvent {

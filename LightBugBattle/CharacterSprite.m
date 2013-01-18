@@ -10,6 +10,11 @@
 #import "CharacterSprite.h"
 #import "Character.h"
 
+@interface CharacterSprite() {
+    float bloodScaleMultiplier;
+}
+@end
+
 @implementation CharacterSprite
 
 -(id)initWithCharacter:(Character *)aCharacter {
@@ -45,12 +50,15 @@
     bloodSprite = [CCSprite spriteWithFile:
                    [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
     bloodSprite.position = ccp([self boundingBox].size.width / 2, -[bloodSprite boundingBox].size.height - 2);
+
+    bloodScaleMultiplier = self.boundingBox.size.width / bloodSprite.boundingBox.size.width;
     
     [self updateBloodSprite];
     [self addChild:bloodSprite];
     
     CCSprite *bloodFrame = [CCSprite spriteWithFile:@"blood_frame.png"];
     bloodFrame.position = bloodSprite.position;
+    bloodFrame.scaleX = bloodScaleMultiplier;
     [self addChild:bloodFrame];
 }
 
@@ -144,9 +152,10 @@
     
     NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
     
-    bloodSprite.scaleX = (float) hp.currentValue / hp.value;
-//    bloodSprite.scaleX = (float)character.currentHp/ character.maxHp;
-    bloodSprite.position = ccp([self boundingBox].size.width / 2 * bloodSprite.scaleX, bloodSprite.position.y);
+    float scale = (float) hp.currentValue / hp.value;
+    
+    bloodSprite.scaleX = scale * bloodScaleMultiplier;
+    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
 }
 
 @end

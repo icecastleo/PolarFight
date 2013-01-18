@@ -170,10 +170,10 @@ static const int tableviewPositionZ = 100;
     return @"Money: 100元";
 }
 -(NSArray *)loadAllCharacterFromFile {
-    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"Save.xml" tagAttributeName:@"ol" tagName:@"character"];
+    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"Save.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         [characters addObject:character];
     }
     return characters;

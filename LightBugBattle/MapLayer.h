@@ -14,7 +14,7 @@
 #import "Barrier.h"
 #import "KnockOutObject.h"
 
-@class Character, CharacterInfoView, PauseLayer;
+@class Character, CharacterInfoView;
 @interface MapLayer : CCLayer {
     int mapBlock[128][53];
 //    NSMutableArray *characters;
@@ -22,13 +22,12 @@
     CCSprite *mapBody;
     
     CharacterInfoView *characterInfoView;
-    PauseLayer *pauseLayer;
 }
 
 @property (strong, readonly) NSMutableArray* characters;
 @property (weak, readonly) MapCameraControl* cameraControl;
 
--(id)initWithMapSprite:(CCSprite*)aSprite withPauseLayer:(PauseLayer *)aPauseLayer;
+-(id)initWithMapSprite:(CCSprite*)aSprite;
 
 -(void)addCharacter:(Character*)theCharacter;
 -(void)removeCharacter:(Character*)theCharacter;

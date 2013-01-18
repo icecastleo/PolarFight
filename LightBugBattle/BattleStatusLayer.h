@@ -10,6 +10,8 @@
 #import "cocos2d.h"
 #import "BattleController.h"
 
+@class CharacterQueue;
+
 @interface BattleStatusLayer : CCLayer {
 //    BattleController *controller;
     
@@ -19,8 +21,9 @@
 
 @property (readonly) CCLabelTTF *startLabel;
 @property (readonly) CCLabelBMFont *countdownLabel;
+@property (weak,nonatomic) CharacterQueue *queue;
 
--(id) initWithBattleController:(BattleController*) controller;
+-(id) initWithBattleController:(BattleController*) controller andQueue:(CharacterQueue *)aQueue;
 //-(void) update:(ccTime) delta;
 
 -(void) startSelectCharacter:(Character*)character;

@@ -15,14 +15,14 @@ typedef enum {
     restartLabelY,
     resumeLabelY,
     topPad,
-    labelButtom
+    labelsCount
 } MenuLabelsPosition;
 
 @implementation PauseLayer
 
 -(id)init {
     if ((self = [super init])) {
-        [self setPauseButton];
+        [self showPauseMenu];
     }
     return self;
 }
@@ -33,8 +33,7 @@ typedef enum {
 
 -(void)resumeTapped:(id)sender {
     [[CCDirector sharedDirector] resume];
-    [self removeChild:menu cleanup:YES];
-    menu = nil;
+    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)restartTapped:(id)sender {
@@ -56,7 +55,7 @@ typedef enum {
     
     CCMenuItemLabel *restartItem = [CCMenuItemLabel itemWithLabel:restartLabel target:self selector:@selector(restartTapped:)];
     restartItem.scale = 1.0;
-    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelButtom);
+    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelsCount);
     
     CCLabelTTF *resumeLabel;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -68,34 +67,13 @@ typedef enum {
     
     CCMenuItemLabel *resumetItem = [CCMenuItemLabel itemWithLabel:resumeLabel target:self selector:@selector(resumeTapped:)];
     resumetItem.scale = 1.0;
-    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelButtom);
+    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelsCount);
     
     menu = [CCMenu menuWithItems:restartItem, resumetItem, nil];
     menu.position = CGPointZero;
     [self addChild:menu z:10];
     
     [self gamePause];
-}
-
--(void)pauseButtonTapped:(id)sender {
-    if (!menu) {
-        [self showPauseMenu];
-    }
-}
-
--(void)setPauseButton {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"
-                                target:self selector:@selector(pauseButtonTapped:)];
-    
-    double width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
-    double height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
-    pauseMenuItem.position = ccp(width, height);
-    
-    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
-    pauseMenu.position = CGPointZero;
-    [self addChild:pauseMenu];
 }
 
 @end

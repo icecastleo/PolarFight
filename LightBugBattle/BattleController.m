@@ -10,7 +10,8 @@
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Character.h"
-#import "PauseLayer.h"
+#import "CharacterQueue.h"
+#import "HelloWorldLayer.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -40,6 +41,14 @@
 //
 //@end
 
+@interface BattleController () {
+    NSMutableArray *player1;
+    NSMutableArray *player2;
+    CharacterQueue *characterQueue;
+}
+
+@end
+
 @implementation BattleController
 @dynamic characters;
 
@@ -53,12 +62,10 @@ static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
-        // You need a map photo to show on the map layer.
+        // We need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
-        PauseLayer *pauseLayer = [PauseLayer node];
-        [self addChild:pauseLayer z:1];
-        mapLayer = [[MapLayer alloc] initWithMapSprite:map withPauseLayer:pauseLayer];
+        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
@@ -91,17 +98,17 @@ static BattleController* currentInstance;
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
+        [self setCharacterArrayFromSelectLayer]; //should be above statusLayer.
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self andQueue:characterQueue];
+        //statusLayer.queue = characterQueue; // For showing Queue Bar.
         [self addChild:statusLayer];
-        
-        [self setCharacterArrayFromSelectLayer];
         
         canMove = YES;
         isMove = NO;
         
         currentIndex = 0;
 //        currentCharacter = self.characters[currentIndex];
-        currentCharacter = [self.characters objectAtIndex:currentIndex];
+        currentCharacter = [self getCurrentCharacterFromQueue];
         
         // start game
         [statusLayer startSelectCharacter:currentCharacter];
@@ -111,7 +118,7 @@ static BattleController* currentInstance;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         [currentCharacter handleRoundStartEvent];
         
-        [self scheduleUpdate];
+        [self scheduleUpdate];        
     }
     currentInstance = self;
     
@@ -124,32 +131,57 @@ static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     //TODO: will get character from selectLayer fuction.
+    player1 = [[NSMutableArray alloc] init];
+    player2 = [[NSMutableArray alloc] init];
     
     //here is only for test before selectLayer has done.
     NSArray *characterIdArray;
-    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"]) {
-        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagAttributeName:@"ol" tagName:@"character"];
+    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"]) {
+        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     } else {
-        characterIdArray = @[@"001",@"002",@"003",@"004"];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
+        character.player = 1;
+        [character.sprite addBloodSprite];
+        [self addCharacter:character];
+        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
+        character2.player = 2;
+        [character2.sprite addBloodSprite];
+        [self addCharacter:character2];
+        return;
     }
     // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
     
     //This code is really need after test.
-    //NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character"];
+    //characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 1;
         [character.sprite addBloodSprite];
-        [self addCharacter:character];
+        [player1 addObject:character];
     }
-    for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagId:characterId]];
+    
+    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol"];
+    
+    for (NSString *characterId in player2IdArray) {
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
-        [self addCharacter:character];
+        [player2 addObject:character];
     }
+    characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
+    
+    for (Character *character in player1) {
+        [self addCharacter:character];
+//        character.position = ccp(0, -190);
+    }
+    for (Character *character in player2) {
+        [self addCharacter:character];
+//        character.position = ccp(0, -240);
+    }
+    player1 = nil;
+    player2 = nil;
 }
 
 -(void)addCharacter:(Character *)character {
@@ -159,6 +191,13 @@ static BattleController* currentInstance;
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
+    [characterQueue removeCharacter:character];
+    
+    // FIXME: Need a manage to control scene
+    if (self.characters.count == 0) {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+        return;
+    }
     
     if(currentCharacter == character) {
         [self endMove];
@@ -211,18 +250,19 @@ static BattleController* currentInstance;
 }
 
 -(void) endMove {
+    
     canMove = NO;
     
     // 回合結束的檢查 && 設定參數
     isMove = NO;
-    [currentCharacter handleRoundEndEvent];
+    
+    if (currentCharacter.state != stateDead) {
+        [currentCharacter handleRoundEndEvent];
+    }
 
     // TODO: Where is play queue??
     // FIXME: It will caused wrong sequence after someone's dead.
-    currentIndex = ++currentIndex % self.characters.count;
-    
-//    currentCharacter = self.characters[currentIndex];
-    currentCharacter = [self.characters objectAtIndex:currentIndex];
+    currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
     
@@ -238,6 +278,14 @@ static BattleController* currentInstance;
     
     statusLayer.startLabel.visible = YES;
     canMove = YES;
+}
+
+-(Character *)getCurrentCharacterFromQueue {
+    if ([self.characters containsObject:currentCharacter]) {
+        [characterQueue addCharacter:currentCharacter];
+    }
+    Character *character = [characterQueue pop];
+    return character;
 }
 
 @end

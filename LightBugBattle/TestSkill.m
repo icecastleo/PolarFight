@@ -34,12 +34,10 @@
 }
 
 -(void)delayExecute:(NSMutableArray *)targets carrier:(RangeCarrier *)carrier {
-    
-    for(Character *target in targets)
-    {
+    for(Character *target in targets) {
+//        NSLog(@"%@ is under attack",target.name);
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
         [target receiveAttackEvent:event];
-        NSLog(@"%@ is under attack",target.name);
     }
 }
 @end
