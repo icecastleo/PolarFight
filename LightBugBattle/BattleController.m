@@ -174,11 +174,11 @@ static BattleController* currentInstance;
     
     for (Character *character in player1) {
         [self addCharacter:character];
-        character.position = ccp(0, -190);
+//        character.position = ccp(0, -190);
     }
     for (Character *character in player2) {
         [self addCharacter:character];
-        character.position = ccp(0, -240);
+//        character.position = ccp(0, -240);
     }
     player1 = nil;
     player2 = nil;
