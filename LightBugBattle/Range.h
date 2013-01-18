@@ -18,6 +18,8 @@
     
     int rangeHeight;
     int rangeWidth;
+    
+    float scaleRange;
 }
 @property NSArray *sides;
 @property NSArray *filters;

@@ -65,6 +65,9 @@
     rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
+    
+    scaleRange = rangeSprite.contentSize.width/rangeWidth;
+    
 }
 
 -(NSMutableArray *)getEffectTargets {
@@ -98,6 +101,9 @@
         // Switch coordinate systems
         loc = [temp.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
+        loc.x=loc.x/scaleRange;
+        loc.y=loc.y/scaleRange;
+        
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
             //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
             return YES;

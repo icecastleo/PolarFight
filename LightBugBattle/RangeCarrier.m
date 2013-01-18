@@ -45,6 +45,7 @@
     {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
+        return;
     }
     
     self.position = ccpAdd(self.position, shootVector);

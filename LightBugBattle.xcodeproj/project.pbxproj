@@ -17,6 +17,7 @@
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E83A16A44EB500A3F5D5 /* Arrow.png */; };
 		2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */; };
+		2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E84116A54CB900A3F5D5 /* Red_point.png */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
@@ -988,6 +989,7 @@
 		2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeCarrier.h; sourceTree = "<group>"; };
 		2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeCarrier.m; sourceTree = "<group>"; };
 		2D66E83A16A44EB500A3F5D5 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
+		2D66E84116A54CB900A3F5D5 /* Red_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_point.png; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
 		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
@@ -2393,6 +2395,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
 				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
 				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
 				9B08F95C16A40805006BF34F /* vald_sword.plist */,
@@ -4529,6 +4532,7 @@
 				9B08F95F16A40805006BF34F /* vald_sword-hd.png in Resources */,
 				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
 				9B08F96116A40805006BF34F /* vald_sword.png in Resources */,
+				2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
