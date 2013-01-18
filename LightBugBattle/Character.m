@@ -158,9 +158,9 @@
 
 -(void)makePoint {
     pointArray=[NSMutableArray arrayWithObjects:
-                [NSValue valueWithCGPoint:ccp(0, 32)],
-                [NSValue valueWithCGPoint:ccp(32, 32)],
-                [NSValue valueWithCGPoint:ccp(32, 0)],
+                [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, 0)],
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
 }
 
