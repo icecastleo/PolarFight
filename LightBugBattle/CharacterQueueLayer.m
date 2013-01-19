@@ -61,7 +61,6 @@ static const int currentCharacterHeadViewTag = 999;
 
 -(void)setQueueBar {
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    //winSize.width/2, winSize.height*restartLabelY/labelsCount
     CGPoint currentCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*currentCharacterHeadViewPosition/labelsCount);
     CGPoint firstCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*firstCharacterHeadViewPosition/labelsCount);
     CGPoint secondCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*secondCharacterHeadViewPosition/labelsCount);
@@ -80,7 +79,9 @@ static const int currentCharacterHeadViewTag = 999;
 }
 
 -(void)setCurrentCharacter:(Character *)currentCharacter {
-    [self removeChildByTag:currentCharacterHeadViewTag cleanup:YES];
+    if ([self getChildByTag:currentCharacterHeadViewTag]) {
+        [self removeChildByTag:currentCharacterHeadViewTag cleanup:YES];
+    }
     CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:currentCharacter];
     if (!characterHeadView) {
         NSAssert(characterHeadView !=nil , @"character's headImage should not nil.");

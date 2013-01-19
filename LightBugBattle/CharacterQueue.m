@@ -11,32 +11,16 @@
 #import "Character.h"
 
 
-@interface CharacterQueue() {
-    int distance;
-}
+@interface CharacterQueue()
 @property (atomic, strong) NSMutableArray *queue;
 @end
 
 @implementation CharacterQueue
-@synthesize queue = _queue;
-static const int defaultDistance = 9999;
-
-static int LowestCommonMultiple(int a,int b) {
-    if (a==0 || b==0) {
-        return 0;
-    }
-    int n;
-    for(n=a; n<=a*b;n++) {
-        if(n%a == 0 && n%b == 0)
-            return n;
-    }
-    return 0;
-}
+static const int distance = NSIntegerMax;
 
 -(id)init {
     if ((self = [super init])) {
         [self clear];
-        distance = defaultDistance;
     }
     
     return self;
@@ -50,14 +34,6 @@ static int LowestCommonMultiple(int a,int b) {
         }
         for (Character *cha in player2) {
             [self addCharacter:cha];
-        }
-        distance = 1;
-        for (CharacterQueueObject *obj in self.queue) {
-            int agile = [obj.character getAttribute:kCharacterAttributeAgile].value;
-            distance = LowestCommonMultiple(distance,agile);
-        }
-        if (distance == 0) {
-            distance = defaultDistance;
         }
         [self setCharacterQueueObjectTime];
         [self sortQueue];
@@ -91,15 +67,8 @@ static int LowestCommonMultiple(int a,int b) {
         return nil;
     }
     [self removeCharacter:firstCharacter];
+    [self nextTurn:firstObject.time];
     
-    if (firstObject.time > 1) {
-        int count = firstObject.time;
-        for (int i=0; i<count; i++) {
-            [self nextTurn];
-        }
-    }else {
-        [self nextTurn];
-    }
     return firstCharacter;
 }
 
@@ -113,7 +82,7 @@ static int LowestCommonMultiple(int a,int b) {
         }
     }
     if (!hasRemoved) {
-        CCLOG(@"The character isn't in the queue.");
+        //CCLOG(@"The character isn't in the queue.");
     }
     [self.delegate removeCharacter];
 }
@@ -146,9 +115,9 @@ static int LowestCommonMultiple(int a,int b) {
     }
 }
 
--(void)nextTurn {
+-(void)nextTurn:(NSInteger)number {
     for (CharacterQueueObject *obj in self.queue) {
-        [obj timeDecrease];
+        [obj timeDecrease:number];
     }
 }
 

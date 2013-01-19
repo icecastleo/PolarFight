@@ -14,7 +14,7 @@
 @property (nonatomic,readonly) NSUInteger time;
 
 -(void)setCharacterQueueObjectTime:(NSUInteger)distance;
--(void)timeDecrease;
+-(void)timeDecrease:(NSUInteger)number;
 -(BOOL)hasTheSameCharacter:(Character *)newCharacter;
 
 @end
