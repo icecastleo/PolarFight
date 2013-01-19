@@ -14,7 +14,7 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@500,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@5,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
         
         range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
     }
@@ -30,7 +30,14 @@
     //    }
     RangeCarrier* rc = [[RangeCarrier alloc] init:range iconFileName:@"Arrow.png"];
     
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];
+    
+    [rc setCarryRange:[Range rangeWithParameters:dictionary onCharacter:character]];
+    
     [rc shoot:character.direction speed:10 delegate:self];
+    
+    
 }
 
 -(void)delayExecute:(NSMutableArray *)targets carrier:(RangeCarrier *)carrier {

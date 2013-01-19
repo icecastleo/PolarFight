@@ -24,6 +24,13 @@
     return self;
 }
 
+-(void) setCarryRange:(Range *)range {
+    
+    effectRange=  range;
+    [effectRange setCarrier:self];
+    
+}
+
 -(void)shoot:(CGPoint)vector speed:(float)speed delegate:(id)dele
 {
 //    NSLog(@"shoot");
@@ -36,6 +43,12 @@
     self.rotation = cocosAngle;
     shootVector = ccpMult(vector, speed);
     startPoint = self.position;
+    
+    if(effectRange!=nil)
+    {
+        effectRange.rangeSprite.visible=YES;
+    }
+    
     [self schedule:@selector(update:)];
 }
 
@@ -45,6 +58,9 @@
     {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
+        
+           effectRange =nil;
+        
         return;
     }
     
@@ -73,12 +89,25 @@
     }
     
     if(effectTargets.count > 0) {
+        if(effectRange==nil){
         if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
             [delegate delayExecute:effectTargets carrier:self];
         }
         
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
+        }
+        else
+        {
+            NSMutableArray *effectTargets = [effectRange getEffectTargets];
+            if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
+                [delegate delayExecute:effectTargets carrier:self];
+            }
+            
+            effectRange =nil;
+            [self unschedule:@selector(update:)];
+            [self removeFromParentAndCleanup:YES];
+        }
     }
 }
 

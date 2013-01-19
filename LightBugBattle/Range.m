@@ -18,14 +18,24 @@
     Range *range=  [NSClassFromString(rangeName) alloc];
     [range setParameter:dict];
     [range setSpecialParameter:dict];
-    range.character = aCharacter;
+    if(aCharacter !=nil)
+        range.character = aCharacter;
     return range;
 }
 
 -(void)setCharacter:(Character *)aCharacter {
+  
     character = aCharacter;
-    [self setRangeSprite];
+    [self setRangeSprite:aCharacter.sprite];
     [character.sprite addChild:rangeSprite];
+}
+
+-(void)setCarrier:(CCSprite *)sprite{
+    
+    [self setRangeSprite:sprite];
+    [sprite addChild:rangeSprite];
+    carrierSprite = sprite;
+    
 }
 
 -(void)setDirection:(CGPoint)velocity {
@@ -49,7 +59,7 @@
                 format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
 }
 
--(void)setRangeSprite {
+-(void)setRangeSprite:(CCSprite *)carrier {
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
@@ -62,7 +72,7 @@
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
     
-    rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
+    rangeSprite.position = ccp(carrier.boundingBox.size.width/2,carrier.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
     
@@ -100,7 +110,9 @@
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
         loc = [temp.sprite convertToWorldSpace:loc];
+   
         loc = [rangeSprite convertToNodeSpace:loc];
+        
         loc.x=loc.x/scaleRange;
         loc.y=loc.y/scaleRange;
         

@@ -16,6 +16,8 @@
     CGMutablePathRef attackRange;
     __weak Character* character;
     
+    CCSprite *carrierSprite;
+    
     int rangeHeight;
     int rangeWidth;
     
@@ -31,5 +33,7 @@
 -(NSMutableArray *)getEffectTargets;
 -(BOOL)containTarget:(Character *)temp;
 -(void)setDirection:(CGPoint)velocity;
--(void)setRangeSprite;
+-(void)setRangeSprite:(CCSprite *)carrier;
+-(void)setCarrier:(CCSprite *)sprite;
+
 @end

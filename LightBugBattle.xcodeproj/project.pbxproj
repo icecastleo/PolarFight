@@ -2466,6 +2466,7 @@
 			isa = PBXGroup;
 			children = (
 				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
+				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
 				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
 				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
 				9B08F95C16A40805006BF34F /* vald_sword.plist */,
@@ -4608,6 +4609,26 @@
 				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
 				9B08F96116A40805006BF34F /* vald_sword.png in Resources */,
 				2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */,
+				3725D4EA16A7FDE000BF49E2 /* archerHead.png in Resources */,
+				3725D4EB16A7FDE000BF49E2 /* archerHead32.png in Resources */,
+				3725D4EC16A7FDE000BF49E2 /* assassinHead.png in Resources */,
+				3725D4ED16A7FDE000BF49E2 /* assassinHead32.png in Resources */,
+				3725D4EE16A7FDE000BF49E2 /* bomberHead.png in Resources */,
+				3725D4EF16A7FDE000BF49E2 /* bomberHead32.png in Resources */,
+				3725D4F016A7FDE000BF49E2 /* godHead.png in Resources */,
+				3725D4F116A7FDE000BF49E2 /* godHead32.png in Resources */,
+				3725D4F216A7FDE000BF49E2 /* priestHead.png in Resources */,
+				3725D4F316A7FDE000BF49E2 /* priestHead32.png in Resources */,
+				3725D4F416A7FDE000BF49E2 /* swordsmanHead.png in Resources */,
+				3725D4F516A7FDE000BF49E2 /* swordsmanHead32.png in Resources */,
+				3725D4F616A7FDE000BF49E2 /* TankHead.png in Resources */,
+				3725D4F716A7FDE000BF49E2 /* TankHead32.png in Resources */,
+				3725D4F816A7FDE000BF49E2 /* wizardHead.png in Resources */,
+				3725D4F916A7FDE000BF49E2 /* wizardHead32.png in Resources */,
+				3725D51816A83E3A00BF49E2 /* AllCharacter.xml in Resources */,
+				3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */,
+				3725D52716A999F100BF49E2 /* ButtonPause.png in Resources */,
+				3725D52816A999F100BF49E2 /* ButtonPauseSel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
