@@ -11,6 +11,7 @@
 #import "PartyParser.h"
 #import "Character.h"
 #import "CharacterQueue.h"
+#import "HelloWorldLayer.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -161,30 +162,23 @@ static BattleController* currentInstance;
         [player1 addObject:character];
     }
     
-    // random momster Only for test
-    //NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol"];
     NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol"];
+    
     for (NSString *characterId in player2IdArray) {
-//        int picknumber = arc4random() % 2; //random create player2's character.
-//        if (picknumber == 0) {
-//            continue;
-//        }
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
-//        character.position = ccp(0, -240);
     }
     characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
-    //characterQueue = [[CharacterQueue alloc] init];
     
     for (Character *character in player1) {
         [self addCharacter:character];
-        //[characterQueue addObject:character];
+//        character.position = ccp(0, -190);
     }
     for (Character *character in player2) {
         [self addCharacter:character];
-        //[characterQueue addObject:character];
+//        character.position = ccp(0, -240);
     }
     player1 = nil;
     player2 = nil;
@@ -201,7 +195,7 @@ static BattleController* currentInstance;
     
     // FIXME: Need a manage to control scene
     if (self.characters.count == 0) {
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[BattleController node]]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
         return;
     }
     

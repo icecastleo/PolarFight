@@ -17,6 +17,7 @@
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E83A16A44EB500A3F5D5 /* Arrow.png */; };
 		2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */; };
+		2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E84116A54CB900A3F5D5 /* Red_point.png */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3725D4EA16A7FDE000BF49E2 /* archerHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725D4DA16A7FDE000BF49E2 /* archerHead.png */; };
@@ -1009,6 +1010,7 @@
 		2D66E83716A44E4800A3F5D5 /* RangeCarrier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RangeCarrier.h; sourceTree = "<group>"; };
 		2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeCarrier.m; sourceTree = "<group>"; };
 		2D66E83A16A44EB500A3F5D5 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
+		2D66E84116A54CB900A3F5D5 /* Red_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_point.png; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
 		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
@@ -2442,7 +2444,6 @@
 				9B82F787164FB2510001A357 /* BattleScene */,
 				9B062E7F16353A2B00E06018 /* Character */,
 				9B3E48C01675ECD1000CFFFB /* libs */,
-				2B1C55D71643B08A007D6CEA /* Map */,
 				9B062CF61635275000E06018 /* Resources */,
 				9B019B0F16494D7700A6976F /* Status */,
 				9BFFAE60163E9D8A00073DC5 /* Skill */,
@@ -2464,6 +2465,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
 				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
 				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
@@ -3673,6 +3675,7 @@
 		9B82F787164FB2510001A357 /* BattleScene */ = {
 			isa = PBXGroup;
 			children = (
+				2B1C55D71643B08A007D6CEA /* Map */,
 				9B82F788164FB2780001A357 /* BattleController.h */,
 				9B82F789164FB2780001A357 /* BattleController.m */,
 				9B82F78A164FB2780001A357 /* BattleStatusLayer.h */,
@@ -4605,6 +4608,7 @@
 				9B08F95F16A40805006BF34F /* vald_sword-hd.png in Resources */,
 				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
 				9B08F96116A40805006BF34F /* vald_sword.png in Resources */,
+				2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */,
 				3725D4EA16A7FDE000BF49E2 /* archerHead.png in Resources */,
 				3725D4EB16A7FDE000BF49E2 /* archerHead32.png in Resources */,
 				3725D4EC16A7FDE000BF49E2 /* assassinHead.png in Resources */,
