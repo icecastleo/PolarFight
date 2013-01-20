@@ -11,7 +11,7 @@
 	<key>blendFuncSource</key>
 	<string>770</string>
 	<key>duration</key>
-	<string>0.200</string>
+	<string>0.0</string>
 	<key>emitterType</key>
 	<integer>0</integer>
 	<key>finishColorAlpha</key>
@@ -39,7 +39,7 @@
 	<key>gravityy</key>
 	<string>0.0</string>
 	<key>maxParticles</key>
-	<string>500.00</string>
+	<string>2000.00</string>
 	<key>maxRadius</key>
 	<string>10</string>
 	<key>maxRadiusVariance</key>
@@ -47,9 +47,9 @@
 	<key>minRadius</key>
 	<string>10</string>
 	<key>particleLifespan</key>
-	<real>0</real>
+	<real>0.5</real>
 	<key>particleLifespanVariance</key>
-	<string>0.5</string>
+	<string>1.0</string>
 	<key>radialAccelVariance</key>
 	<integer>0</integer>
 	<key>radialAcceleration</key>
@@ -71,7 +71,7 @@
 	<key>speed</key>
 	<integer>50</integer>
 	<key>speedVariance</key>
-	<integer>50</integer>
+	<integer>100</integer>
 	<key>startColorAlpha</key>
 	<string>1</string>
 	<key>startColorBlue</key>
@@ -89,9 +89,9 @@
 	<key>startColorVarianceRed</key>
 	<real>0</real>
 	<key>startParticleSize</key>
-	<string>20.00</string>
+	<string>5.00</string>
 	<key>startParticleSizeVariance</key>
-	<integer>0</integer>
+	<real>5</real>
 	<key>tangentialAccelVariance</key>
 	<integer>0</integer>
 	<key>tangentialAcceleration</key>
