@@ -71,13 +71,15 @@
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
+
+    // TODO: Delete when bug fixed
+//    rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
     
     rangeSprite.position = ccp(carrier.boundingBox.size.width/2,carrier.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
     
     scaleRange = rangeSprite.contentSize.width/rangeWidth;
-    
 }
 
 -(NSMutableArray *)getEffectTargets {

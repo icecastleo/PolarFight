@@ -156,6 +156,8 @@
 -(void)dealloc {
     // FIXME: Cleaned it when it is dead.
     [sprite removeFromParentAndCleanup:YES];
+    
+//    CCLOG(@"Player %d's %@ is dealloc",player, self.name);
 }
 
 -(void)makePoint {
@@ -262,12 +264,14 @@
     CCLOG(@"Player %d's %@ is using skill",player, self.name);
     
     state = kCharacterStateUseSkill;
-    // TODO: Run skill animation
+    
+    // Run attack animation
+    [sprite runAttackAnimate];
 
     [skill execute];
     
     // TODO: Need to be called after skill animation
-    [self finishAttack];
+//    [self finishAttack];
 }
 
 -(void)receiveAttackEvent:(AttackEvent *)event {
@@ -328,17 +332,17 @@
         CGPoint velocity = ccpSub(self.position, damage.location);
         [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
     }
-
-    //    state = kCharacterStateGetDamage;
     
     if (hp.currentValue == 0) {
         [self dead];
     } else {
+//        state = kCharacterStateGetDamage;
+        
         for (NSString *key in _passiveSkillDictionary) {
             PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
             
             if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
-                [p character:self didReceiveDamage:damage];
+                [p  character:self didReceiveDamage:damage];
             }
         }
     }
@@ -360,16 +364,18 @@
 }
 
 // TODO: Need to be called when attack animation finished
--(void)finishAttack {
+-(void)attackAnimateCallback {
     state = stateIdle;
 }
 
 -(void)dead {
     state = stateDead;
     
-//    CCLOG(@"Player %i's %@ is dead", player, self.name);
+    //    CCLOG(@"Player %i's %@ is dead", player, self.name);
+
+    // Run dead animation, then clean up
+    [sprite runDeadAnimate];
     
-    // dead animation + cleanup
     [[BattleController currentInstance] removeCharacter:self];
     
     for (NSString *key in _passiveSkillDictionary) {

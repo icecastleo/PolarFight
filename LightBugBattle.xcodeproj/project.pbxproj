@@ -977,6 +977,8 @@
 		9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */; };
 		9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A521696DA1100B9C427 /* WizardSkill.m */; };
 		9BF2DDE6168C8F0300545940 /* ContinuousAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */; };
+		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
+		9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260816AC891A00D5782B /* bloodParticle.plist */; };
 		9BFFAE67163E9DBB00073DC5 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
@@ -2185,6 +2187,8 @@
 		9BF2DDBC168B3A0F00545940 /* BattleControllerEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattleControllerEventDelegate.h; sourceTree = "<group>"; };
 		9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuousAttackSkill.h; sourceTree = "<group>"; };
 		9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuousAttackSkill.m; sourceTree = "<group>"; };
+		9BF3260516AC559700D5782B /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		9BF3260816AC891A00D5782B /* bloodParticle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bloodParticle.plist; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
 		9BFFAE62163E9DBB00073DC5 /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCircle.h; sourceTree = "<group>"; };
@@ -2465,6 +2469,8 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BF3260816AC891A00D5782B /* bloodParticle.plist */,
+				9BF3260516AC559700D5782B /* fire.png */,
 				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
 				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
@@ -4629,6 +4635,8 @@
 				3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */,
 				3725D52716A999F100BF49E2 /* ButtonPause.png in Resources */,
 				3725D52816A999F100BF49E2 /* ButtonPauseSel.png in Resources */,
+				9BF3260616AC559700D5782B /* fire.png in Resources */,
+				9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

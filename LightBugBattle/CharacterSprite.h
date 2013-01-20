@@ -20,14 +20,22 @@
     CCAction *downAction;
     CCAction *rightAction;
     CCAction *leftAction;
+    
+    CCAction *upAttackAction;
+    CCAction *downAttackAction;
+    CCAction *rightAttackAction;
+    CCAction *leftAttackAction;
 }
 
--(id) initWithCharacter:(Character *)aCharacter;
+-(id)initWithCharacter:(Character *)aCharacter;
 
--(void) addBloodSprite;
--(void) removeBloodSprite;
+-(void)addBloodSprite;
+-(void)removeBloodSprite;
 
--(void) runDirectionAnimate;
--(void) updateBloodSprite;
+-(void)runDirectionAnimate;
+-(void)runAttackAnimate;
+-(void)runDeadAnimate;
+
+-(void)updateBloodSprite;
 
 @end

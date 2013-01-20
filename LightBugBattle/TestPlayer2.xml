@@ -2,5 +2,6 @@
 
 <party>
     <character ol="000" id="002" level="1"></character>
-    <character ol="001" id="004" level="2"></character>
+    <character ol="001" id="002" level="1"></character>
+    <character ol="002" id="002" level="1"></character>
 </party>
