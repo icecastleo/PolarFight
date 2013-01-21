@@ -39,7 +39,7 @@
 	<key>gravityy</key>
 	<string>0.0</string>
 	<key>maxParticles</key>
-	<string>2000.00</string>
+	<string>500.00</string>
 	<key>maxRadius</key>
 	<string>10</string>
 	<key>maxRadiusVariance</key>
@@ -97,7 +97,7 @@
 	<key>tangentialAcceleration</key>
 	<integer>0</integer>
 	<key>textureFileName</key>
-	<string></string>
+	<string>fire.png</string>
 	<key>textureImageData</key>
 	<string></string>
 </dict>

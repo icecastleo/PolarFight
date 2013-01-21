@@ -197,11 +197,11 @@
 -(void)runDeadAnimate {
     [self stopAllActions];
     
-//    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
-//    emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
-//    emitter.positionType = kCCPositionTypeRelative;
-//    emitter.autoRemoveOnFinish = YES;
-//    [self addChild:emitter];
+    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
+    emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
+    emitter.positionType = kCCPositionTypeRelative;
+    emitter.autoRemoveOnFinish = YES;
+    [self addChild:emitter];
 
     [self runAction:[CCSequence actions:
                      [CCFadeOut actionWithDuration:1.0f],
