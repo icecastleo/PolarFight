@@ -158,7 +158,7 @@
     if(direction == kCharacterDirectionUp) {
         // TODO: Just delete me when there are attack animation.
         if (upAttackAction == nil) {
-            [self runAction:[CCSpawn actions:
+            [self runAction:[CCSequence actions:
                              [CCDelayTime actionWithDuration:0.5],
                              [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
@@ -167,7 +167,7 @@
     } else if (direction == kCharacterDirectionDown) {
         // TODO: Just delete me when there are attack animation.
         if (downAttackAction == nil) {
-            [self runAction:[CCSpawn actions:
+            [self runAction:[CCSequence actions:
                              [CCDelayTime actionWithDuration:0.5],
                              [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
@@ -176,7 +176,7 @@
     } else if (direction == kCharacterDirectionLeft) {
         // TODO: Just delete me when there are attack animation.
         if (leftAttackAction == nil) {
-            [self runAction:[CCSpawn actions:
+            [self runAction:[CCSequence actions:
                              [CCDelayTime actionWithDuration:0.5],
                              [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
@@ -185,7 +185,7 @@
     } else if (direction == kCharacterDirectionRight) {
         // TODO: Just delete me when there are attack animation.
         if (rightAttackAction == nil) {
-            [self runAction:[CCSpawn actions:
+            [self runAction:[CCSequence actions:
                              [CCDelayTime actionWithDuration:0.5],
                              [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;

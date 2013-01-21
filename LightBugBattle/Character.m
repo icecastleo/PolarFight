@@ -365,6 +365,7 @@
 
 // TODO: Need to be called when attack animation finished
 -(void)attackAnimateCallback {
+    CCLOG(@"Attack finish");
     state = stateIdle;
 }
 
