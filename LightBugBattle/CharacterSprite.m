@@ -27,10 +27,15 @@
         if ((self = [super initWithSpriteFrameName:@"walking s0000.bmp"])) {
             character = aCharacter;
             
-            upAction = [self animationWithName:@"n"];
-            downAction = [self animationWithName:@"s"];
-            rightAction = [self animationWithName:@"e"];
-            leftAction = [self animationWithName:@"w"];
+            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking n" frameNumber:8]];
+            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking s" frameNumber:8]];
+            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking e" frameNumber:8]];
+            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking w" frameNumber:8]];
+            
+            upAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking n" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            downAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking s" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            rightAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking e" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            leftAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking w" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
         }
         return self;
     }
@@ -67,26 +72,24 @@
     bloodSprite = nil;
 }
 
--(CCAction *)animationWithName:(NSString*)name {
+-(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger{
     CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
     
     // Load the animation frames
     NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
     
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < anInteger; i++)
     {
-        NSString* file = [NSString stringWithFormat:@"walking %@000%d.bmp",name, i];
+        NSString* file = [NSString stringWithFormat:@"%@%04d.bmp",name, i];
         CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
         [frames addObject:frame];
     }
     // Create an animation object from all the sprite animation frames
     CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
-    
-    // Run the animation by using the CCAnimate action
+    animation.restoreOriginalFrame = YES;
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
-    CCRepeatForever* repeat = [CCRepeatForever actionWithAction:animate];
     
-    return repeat;
+    return animate;
 }
 
 -(void)setAnimationWithName:(NSString*)name {
@@ -132,9 +135,9 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
 
 -(void)runDirectionAnimate {
-    CharacterDirection direction = character.characterDirection;
-    
     [self stopAllActions];
+    
+    CharacterDirection direction = character.characterDirection;
     
     if(direction == kCharacterDirectionUp) {
         [self runAction:upAction];
@@ -145,6 +148,70 @@
     } else if (direction == kCharacterDirectionRight) {
         [self runAction:rightAction];
     }
+}
+
+-(void)runAttackAnimate {
+    [self stopAllActions];
+    
+    CharacterDirection direction = character.characterDirection;
+    
+    if(direction == kCharacterDirectionUp) {
+        // TODO: Just delete me when there are attack animation.
+        if (upAttackAction == nil) {
+            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            return;
+        }
+        [self runAction:upAttackAction];
+    } else if (direction == kCharacterDirectionDown) {
+        // TODO: Just delete me when there are attack animation.
+        if (downAttackAction == nil) {
+            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            return;
+        }
+        [self runAction:downAttackAction];
+    } else if (direction == kCharacterDirectionLeft) {
+        // TODO: Just delete me when there are attack animation.
+        if (leftAttackAction == nil) {
+            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            return;
+        }
+        [self runAction:leftAttackAction];
+    } else if (direction == kCharacterDirectionRight) {
+        // TODO: Just delete me when there are attack animation.
+        if (rightAttackAction == nil) {
+            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            return;
+        }
+        [self runAction:rightAttackAction];
+    }
+}
+
+-(void)runDeadAnimate {
+    [self stopAllActions];
+    
+    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
+    emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
+    emitter.positionType = kCCPositionTypeRelative;
+    emitter.autoRemoveOnFinish = YES;
+    [self addChild:emitter];
+
+    [self runAction:[CCSequence actions:
+                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(deadAnimateCallback)]
+                     ,nil]];
+}
+
+-(void)releaseCharacterRetain {
+    upAttackAction = nil;
+    downAttackAction = nil;
+    leftAttackAction = nil;
+    rightAttackAction = nil;
+}
+
+-(void)deadAnimateCallback {
+    // TODO : Comment out after test.
+    [self releaseCharacterRetain];
+//    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)updateBloodSprite {

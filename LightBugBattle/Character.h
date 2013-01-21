@@ -46,7 +46,6 @@
 @property (readonly) NSMutableDictionary *passiveSkillDictionary;
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
 
-// TODO: Move bloodsprite to hp attribute?
 @property (readonly) CharacterSprite *sprite;
 
 @property (readonly) CharacterState state;
@@ -66,6 +65,7 @@
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
 -(void)useSkill;
+-(void)attackAnimateCallback;
 
 -(void)receiveAttackEvent:(AttackEvent *)event;
 -(void)receiveDamageEvent:(DamageEvent *)event;
