@@ -14,11 +14,12 @@
 @interface BattleStatusLayer() {
     CharacterQueueLayer *queueLayer;
 }
-
 @end
 
 @implementation BattleStatusLayer
 @synthesize queue = _queue;
+
+static const int pauseLayerTag = 9999;
 
 -(id) initWithBattleController:(BattleController *) battleController andQueue:(CharacterQueue *)aQueue{
     if(self = [super init]) {        
@@ -71,8 +72,11 @@
 }
 
 -(void)pauseButtonTapped:(id)sender {
-    PauseLayer *layer = [PauseLayer node];
-    [self addChild:layer];
+    if(![self getChildByTag:pauseLayerTag]){
+        PauseLayer *layer = [PauseLayer node];
+        layer.tag = pauseLayerTag;
+        [self addChild:layer];
+    }
 }
 
 -(void)setPauseButton {
