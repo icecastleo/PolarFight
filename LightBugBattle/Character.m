@@ -112,11 +112,7 @@
         skill = [[HealSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Tank"]) {
         skill = [[TankSkill alloc] initWithCharacter:self];
-        
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
-        
-        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self rangeDictionary:dictionary];
-        
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
         [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         skill = [[SuicideSkill alloc] initWithCharacter:self];

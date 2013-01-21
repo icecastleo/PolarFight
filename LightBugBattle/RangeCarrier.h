@@ -17,6 +17,9 @@
     NSString *IconFileName;
     CGPoint shootVector;
     Character *character;
+    
+    Range *effectRange;
+    
     id delegate;
     
     CGPoint startPoint;
@@ -24,6 +27,7 @@
     float distance;
 }
 
--(id)init:(Range *)range iconFileName:(NSString *)icon;
--(void) shoot:(CGPoint)vector speed:(float) speed delegate:(id)delegate;
+//-(id)init:(Range *)range iconFileName:(NSString *)icon;
+//-(void) shoot:(CGPoint)vector speed:(float) speed delegate:(id)delegate;
+//-(void) setCarryRange:(Range *)range;
 @end

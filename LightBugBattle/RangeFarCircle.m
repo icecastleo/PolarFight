@@ -46,7 +46,7 @@
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2+rangeDistance,rangeHeight/2);
     CGPathAddArc(attackRange, NULL, rangeWidth/2+rangeDistance, rangeHeight/2, effectRadius, 0, M_PI*2,NO);
     CGPathCloseSubpath(attackRange);
-    CGPathRetain(attackRange);
+//    CGPathRetain(attackRange);
 }
 
 @end

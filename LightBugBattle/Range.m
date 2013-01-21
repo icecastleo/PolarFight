@@ -13,20 +13,44 @@
 @implementation Range
 @synthesize character,rangeSprite;
 
-+(id)rangeWithParameters:(NSMutableDictionary*)dict onCharacter:(Character *)aCharacter {
+
+static float scale;
+//float scaleRange = if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
+//                       && [[UIScreen mainScreen] scale] == 2.0;
+
++(void)initialize {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    } else {
+        scale = 1.0;
+    }
+}
+
++(id)rangeWithParameters:(NSMutableDictionary*)dict {
+
     NSString* rangeName = [dict objectForKey:@"rangeType"];
+    
+    NSAssert(rangeName != nil, @"You must define rangeType for a range");
+    
     Range *range=  [NSClassFromString(rangeName) alloc];
     [range setParameter:dict];
-    [range setSpecialParameter:dict];
-    range.character = aCharacter;
+    
     return range;
 }
 
--(void)setCharacter:(Character *)aCharacter {
-    character = aCharacter;
-    [self setRangeSprite];
-    [character.sprite addChild:rangeSprite];
-}
+//-(void)setCharacter:(Character *)aCharacter {
+//  
+//    character = aCharacter;
+//    [self setRangeSprite:aCharacter.sprite];
+//    [character.sprite addChild:rangeSprite];
+//}
+//
+//-(void)setCarrier:(CCSprite *)sprite{
+//    
+//    carrierSprite = sprite;
+//    [self setRangeSprite:sprite];
+//    [sprite addChild:rangeSprite];
+//}
 
 -(void)setDirection:(CGPoint)velocity {
     float angleRadians = atan2f(velocity.y, velocity.x);
@@ -36,17 +60,38 @@
     rangeSprite.rotation = cocosAngle;
 }
 
--(void)setParameter:(NSMutableDictionary *)dict {
-    _sides = [dict valueForKey:@"rangeSides"];
+-(void)setParameter:(NSMutableDictionary *)dict {    
+    _sides = [dict objectForKey:@"rangeSides"];
     
     NSAssert(_sides != nil, @"You must define rangeSides for a range");
     
-    _filters = [dict valueForKey:@"rangeFilters"];
+    _filters = [dict objectForKey:@"rangeFilters"];
+    
+    character = [dict objectForKey:@"rangeCharacter"];
+    
+    NSAssert(character != nil, @"You must define rangeCharacter for a range");
+    
+    NSString *file = [dict objectForKey:@"rangeSpriteFile"];
+    
+    if (file == nil) {
+        NSAssert(![[dict objectForKey:@"rangeType"]isEqualToString:kRangeTypeSprite], @"You must define rangeSpriteFile for a range of kRangeTypeSprite");
+        [self setSpecialParameter:dict];
+        [self setRangeSprite];
+    } else {
+        // TODO: Maybe each range can set its special parameter based on the sprite.
+        rangeSprite = [CCSprite spriteWithFile:file];
+        [self setSpecialParameter:dict];
+    }
+    
+    rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
+    
+    rangeSprite.zOrder = -1;
+    rangeSprite.visible = NO;
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
+//    [NSException raise:NSInternalInconsistencyException
+//                format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
 }
 
 -(void)setRangeSprite {
@@ -60,15 +105,10 @@
     
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
-    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
-    
-    rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
-    rangeSprite.zOrder = -1;
-    rangeSprite.visible = NO;
+    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];    
 }
 
 -(NSMutableArray *)getEffectTargets {
-    [self setDirection:character.direction];
     
     NSMutableArray *effectTargets = [NSMutableArray array];
     
@@ -81,25 +121,40 @@
     return effectTargets;
 }
 
--(BOOL)containTarget:(Character *)temp {
+-(BOOL)containTarget:(Character *)target {
     
-    if (![self checkSide:temp]) {
+    if (![self checkSide:target]) {
         return NO;
     }
     
-    if ([self checkFilter:temp]) {
+    if ([self checkFilter:target]) {
         return NO;
     }
     
-    NSMutableArray *points = temp.pointArray;
+    if (attackRange == nil) {
+//        CGRect rect = rangeSprite.boundingBox;
+//        rect.origin = ccpAdd(rect.origin, rangeSprite.parent.position);
+        if (CGRectIntersectsRect(rangeSprite.boundingBox, target.boundingBox)) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    NSMutableArray *points = target.pointArray;
     
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
-        loc = [temp.sprite convertToWorldSpace:loc];
-        loc = [rangeSprite convertToNodeSpace:loc];
+        loc = [target.sprite convertToWorldSpace:loc];
+        loc = [rangeSprite convertToNodeSpace:loc];        
+        loc.x = loc.x / scale;
+        loc.y = loc.y / scale;
+        
+        CCLOG(@"%f %f",loc.x,loc.y);
+        
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
-            //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
+//            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
             return YES;
         }
     }

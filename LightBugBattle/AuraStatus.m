@@ -38,10 +38,10 @@
 
 -(void)updateCharacter:(Character *)character {
     // character is out of range
-    if (![range containTarget:character]) {
-        [self removeEffectOnCharacter:character];
-        isDead = YES;
-    }
+//    if (![range containTarget:character]) {
+//        [self removeEffectOnCharacter:character];
+//        isDead = YES;
+//    }
 }
 
 @end
