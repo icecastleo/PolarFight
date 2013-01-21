@@ -72,25 +72,25 @@ static float scale;
 
 -(void)setRangeSprite:(CCSprite *)carrier {
     
-//    CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-//    CGContextRef context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
-//    CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.8 );
-//    
-//    CGContextAddPath(context, attackRange);
-//    CGContextFillPath(context);
-//    
-//    // Get CGImageRef
-//    CGImageRef imgRef = CGBitmapContextCreateImage(context);
-//    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
+    CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
+    CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.8 );
+    
+    CGContextAddPath(context, attackRange);
+    CGContextFillPath(context);
+    
+    // Get CGImageRef
+    CGImageRef imgRef = CGBitmapContextCreateImage(context);
+    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
     // TODO: Delete when bug fixed
   
-    rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
-    
+    //rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
+  
     rangeSprite.position = ccp(carrier.boundingBox.size.width/2,carrier.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
-    
+   // rangeSprite.scale=scale;
     
     
 }
@@ -127,9 +127,9 @@ static float scale;
         loc = [temp.sprite convertToWorldSpace:loc];
    
         loc = [rangeSprite convertToNodeSpace:loc];
-        
-        loc.x=loc.x*scale;
-        loc.y=loc.y*scale;
+        NSLog(@"%f,%f",loc.x,loc.y);
+        loc.x=loc.x*scale-rangeSprite.boundingBox.size.width/2+rangeWidth/2;
+        loc.y=loc.y*scale-rangeSprite.boundingBox.size.height/2+rangeHeight/2;
         
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
             //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
