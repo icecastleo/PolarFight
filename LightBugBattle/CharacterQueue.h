@@ -19,6 +19,7 @@
 @property (nonatomic) id <CharacteQueueBar> delegate;
 
 -(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2;
+-(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters;
 -(void)addCharacter:(Character *)newCharacter;
 -(void)removeCharacter:(Character *)object;
 - (Character *)pop;
