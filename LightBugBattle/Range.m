@@ -13,6 +13,17 @@
 @implementation Range
 @synthesize character,rangeSprite;
 
+static float scale;
+
++(void)initialize {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    } else {
+        scale = 1.0;
+    }
+}
+
+
 +(id)rangeWithParameters:(NSMutableDictionary*)dict onCharacter:(Character *)aCharacter {
     NSString* rangeName = [dict objectForKey:@"rangeType"];
     Range *range=  [NSClassFromString(rangeName) alloc];
@@ -73,13 +84,14 @@
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 
     // TODO: Delete when bug fixed
-//    rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
+  //  rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
     
     rangeSprite.position = ccp(carrier.boundingBox.size.width/2,carrier.boundingBox.size.height/2);
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
     
-    scaleRange = rangeSprite.contentSize.width/rangeWidth;
+    
+    
 }
 
 -(NSMutableArray *)getEffectTargets {
@@ -115,8 +127,8 @@
    
         loc = [rangeSprite convertToNodeSpace:loc];
         
-        loc.x=loc.x/scaleRange;
-        loc.y=loc.y/scaleRange;
+        loc.x=loc.x*scale;
+        loc.y=loc.y*scale;
         
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
             //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
