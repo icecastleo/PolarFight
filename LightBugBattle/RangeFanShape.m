@@ -19,6 +19,7 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
+    
     int rangeRadius=50;
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
     if(radius!=nil)
