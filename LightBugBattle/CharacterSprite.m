@@ -158,28 +158,36 @@
     if(direction == kCharacterDirectionUp) {
         // TODO: Just delete me when there are attack animation.
         if (upAttackAction == nil) {
-            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            [self runAction:[CCSpawn actions:
+                             [CCDelayTime actionWithDuration:0.5],
+                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
         }
         [self runAction:upAttackAction];
     } else if (direction == kCharacterDirectionDown) {
         // TODO: Just delete me when there are attack animation.
         if (downAttackAction == nil) {
-            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            [self runAction:[CCSpawn actions:
+                             [CCDelayTime actionWithDuration:0.5],
+                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
         }
         [self runAction:downAttackAction];
     } else if (direction == kCharacterDirectionLeft) {
         // TODO: Just delete me when there are attack animation.
         if (leftAttackAction == nil) {
-            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            [self runAction:[CCSpawn actions:
+                             [CCDelayTime actionWithDuration:0.5],
+                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
         }
         [self runAction:leftAttackAction];
     } else if (direction == kCharacterDirectionRight) {
         // TODO: Just delete me when there are attack animation.
         if (rightAttackAction == nil) {
-            [self runAction:[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)]];
+            [self runAction:[CCSpawn actions:
+                             [CCDelayTime actionWithDuration:0.5],
+                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
             return;
         }
         [self runAction:rightAttackAction];
@@ -189,11 +197,11 @@
 -(void)runDeadAnimate {
     [self stopAllActions];
     
-    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
-    emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
-    emitter.positionType = kCCPositionTypeRelative;
-    emitter.autoRemoveOnFinish = YES;
-    [self addChild:emitter];
+//    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
+//    emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
+//    emitter.positionType = kCCPositionTypeRelative;
+//    emitter.autoRemoveOnFinish = YES;
+//    [self addChild:emitter];
 
     [self runAction:[CCSequence actions:
                      [CCFadeOut actionWithDuration:1.0f],
