@@ -127,17 +127,9 @@ static const int tableviewPositionZ = 100;
     
     CGSize tableSize;
     CGPoint tablePosition;
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
-        && [[UIScreen mainScreen] scale] == 2.0) {
-        // Retina
-        tableSize = CGSizeMake(tableviewWidth,tableviewHeight);
-        tablePosition = ccp(tableviewPositionX*2,tableviewPositionY*2);
-    } else {
-        // Not Retina
-        tableSize = CGSizeMake(tableviewWidth,tableviewHeight);
-        tablePosition = ccp(tableviewPositionX,tableviewPositionY);
-    }
     
+    tableSize = CGSizeMake(tableviewWidth,tableviewHeight);
+    tablePosition = ccp(tableviewPositionX,tableviewPositionY);
     tableView = [SWTableView viewWithDataSource:self size:tableSize];
     
     tableView.verticalFillOrder = SWTableViewFillTopDown;
