@@ -42,6 +42,19 @@ static const int distance = NSIntegerMax;
     return self;
 }
 
+-(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters {
+    if ((self = [super init])) {
+        [self clear];
+        for (Character *cha in characters) {
+            [self addCharacter:cha];
+        }
+        [self setRandomCharacterQueueObjectTime];
+        [self sortQueue];
+    }
+    
+    return self;
+}
+
 -(void)clear {
     self.queue = [[NSMutableArray alloc] init];
 }
@@ -178,6 +191,15 @@ static const int distance = NSIntegerMax;
     }
     
     return [tempArray copy];
+}
+
+-(void)setRandomCharacterQueueObjectTime {
+     //random create player2's character.
+    for (CharacterQueueObject *obj in self.queue) {
+        int randomDistance = distance - arc4random();
+        NSLog(@"%d",randomDistance);
+        [obj setCharacterQueueObjectTime:randomDistance];
+    }
 }
 
 @end

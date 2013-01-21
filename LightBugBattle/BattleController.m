@@ -170,7 +170,7 @@ static BattleController* currentInstance;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
     }
-    characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
+    //characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
     
     for (Character *character in player1) {
         [self addCharacter:character];
@@ -180,6 +180,8 @@ static BattleController* currentInstance;
         [self addCharacter:character];
 //        character.position = ccp(0, -240);
     }
+    NSArray *tempArray = [[NSArray alloc] initWithArray:self.characters];
+    characterQueue = [[CharacterQueue alloc] initWithCharacterArrayWithRandomTime:tempArray];
     player1 = nil;
     player2 = nil;
 }
