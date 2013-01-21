@@ -26,7 +26,7 @@
 
 //-(void) setCarryRange:(Range *)range {
 //    
-//    effectRange = range;
+//    effectRange=  range;
 //    [effectRange setCarrier:self];
 //    
 //}
@@ -88,26 +88,28 @@
         }
     }
     
-    if(effectTargets.count > 0) {
-        if(effectRange == nil){
-            if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
-                //            [delegate delayExecute:effectTargets carrier:self];
-            }
-            [self unschedule:@selector(update:)];
-            [self removeFromParentAndCleanup:YES];
-        }
-        else
-        {
-            NSMutableArray *effectTargets = [effectRange getEffectTargets];
-            if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
-                //                [delegate delayExecute:effectTargets carrier:self];
-            }
-            
-            effectRange =nil;
-            [self unschedule:@selector(update:)];
-            [self removeFromParentAndCleanup:YES];
-        }
-    }
+//    if(effectTargets.count > 0) {
+//
+//        if(effectRange==nil){
+//        if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
+//            [delegate delayExecute:effectTargets carrier:self];
+//        }
+//        
+//        [self unschedule:@selector(update:)];
+//        [self removeFromParentAndCleanup:YES];
+//        }
+//        else
+//        {
+//            NSMutableArray *effectTargets = [effectRange getEffectTargets];
+//            if ([delegate respondsToSelector:@selector(delayExecute:carrier:)]) {
+//                [delegate delayExecute:effectTargets carrier:self];
+//            }
+//            
+//            effectRange =nil;
+//            [self unschedule:@selector(update:)];
+//            [self removeFromParentAndCleanup:YES];
+//        }
+//    }
 }
 
 -(BOOL)checkSide:(Character *)temp {

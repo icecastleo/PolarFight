@@ -18,7 +18,7 @@
     return [super initWithCharacter:aCharacter rangeDictionary:dictionary];
 }
 
--(void)execute {    
+-(void)execute {
     for (Character *target in [range getEffectTargets]) {
         SlowMovePassiveSkill *skill = [[SlowMovePassiveSkill alloc] init];
         skill.duration = kPassiveSkillDuration;

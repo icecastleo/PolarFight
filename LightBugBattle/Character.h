@@ -39,13 +39,13 @@
 @property (readonly) NSString *characterId;
 @property (readonly) NSString *name;
 @property (readonly) NSString *picFilename;
+@property (readonly) NSString *headImageFileName;
 
 @property (readonly) int level;
 
 @property (readonly) NSMutableDictionary *passiveSkillDictionary;
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
 
-// TODO: Move bloodsprite to hp attribute?
 @property (readonly) CharacterSprite *sprite;
 
 @property (readonly) CharacterState state;
@@ -65,6 +65,7 @@
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
 -(void)useSkill;
+-(void)attackAnimateCallback;
 
 -(void)receiveAttackEvent:(AttackEvent *)event;
 -(void)receiveDamageEvent:(DamageEvent *)event;

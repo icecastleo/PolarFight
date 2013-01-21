@@ -15,7 +15,7 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:sender,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@150,@"effectRadius",nil];
     
     Range *range = [Range rangeWithParameters:dictionary];
-    
+
     int damage = [sender getAttribute:kCharacterAttributeAttack].value * 5;
     
     for (Character *target in [range getEffectTargets]) {

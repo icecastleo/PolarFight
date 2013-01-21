@@ -33,7 +33,7 @@
     rangeHeight = effectRadius*2;
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, effectRadius, effectRadius, 0, M_PI*2,NO);
+    CGPathAddArc(attackRange, NULL, rangeWidth/2, effectRadius, effectRadius, 0, M_PI*2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }

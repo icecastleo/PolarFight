@@ -62,9 +62,9 @@
     }
 }
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagId:(NSString *)tagId
++ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue
 {
-    //ex: fileName = @"Save.xml"
+    //ex: fileName = @"AllCharacter.xml"
     NSString *filePath = [self dataFilePath:fileName forSave:NO];
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
     NSError *error;
@@ -78,7 +78,7 @@
     for (GDataXMLElement *element in elements) {
         for (GDataXMLNode *attribute in element.attributes) {
             if ([attribute.name isEqualToString:tagAttributeName]) {
-                if ([attribute.stringValue isEqualToString:tagId]) {
+                if ([attribute.stringValue isEqualToString:tagAttributeValue]) {
                     return [element copy];
                 }
             }
@@ -87,9 +87,8 @@
     return nil;
 }
 
-+ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagAttributeName:(NSString *)tagAttributeName tagName:(NSString *)tagName
-{
-    //ex: fileName = @"Save.xml"
++ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName {
+    //ex: fileName = @"AllCharacter.xml"
     NSString *filePath = [self dataFilePath:fileName forSave:NO];
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
     NSError *error;

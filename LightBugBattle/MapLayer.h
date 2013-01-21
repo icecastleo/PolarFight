@@ -14,7 +14,7 @@
 #import "Barrier.h"
 #import "KnockOutObject.h"
 
-@class Character, CharacterInfoView, PauseLayer;
+@class Character, CharacterInfoView;
 @interface MapLayer : CCLayer {
     int mapBlock[128][53];
 //    NSMutableArray *characters;

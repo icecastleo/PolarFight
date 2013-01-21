@@ -19,6 +19,14 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
+    float scale = 0;
+    
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    } else {
+        scale = 1.0;
+    }
+    
     int rangeRadius=50;
     NSNumber *radius = [dict valueForKey:@"effectRadius"];
     if(radius!=nil)
@@ -26,6 +34,7 @@
         rangeRadius = [radius intValue]<=0?50:[radius intValue];
        
     }
+    rangeRadius*=scale;
     rangeWidth= rangeRadius*2;
     rangeHeight=rangeRadius*2;
     double rangeAngle= M_PI/2;

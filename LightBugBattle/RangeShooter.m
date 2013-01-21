@@ -19,7 +19,7 @@
 }
 
 -(void)shoot:(CGPoint)aVector speed:(float)aSpeed delegate:(id)aDelegate {
-    //    NSLog(@"shoot");
+    CCLOG(@"shoot");
     delegate = aDelegate;
     speed = aSpeed;
     
@@ -38,17 +38,17 @@
 }
 
 -(void)update:(ccTime)delta
-{
-    self.position = ccpAdd(self.position, ccpMult(vector, speed));
+{    
+    range.rangeSprite.position = ccpAdd(range.rangeSprite.position, ccpMult(vector, speed));
     
-    if(ccpDistance(self.position, startPoint) > 200)
+    if(ccpDistance(range.rangeSprite.position, startPoint) > 200)
     {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
         return;
     }
     
-    NSMutableArray *effectTargets = [range getEffectTargets];
+    NSArray *effectTargets = [range getEffectTargets];
     
     if(effectTargets.count > 0) {
         if ([delegate respondsToSelector:@selector(delayExecute:)]) {

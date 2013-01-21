@@ -7,10 +7,21 @@
 //
 
 #import "BattleStatusLayer.h"
+#import "PauseLayer.h"
+#import "CharacterQueueLayer.h"
+#import "CharacterQueue.h"
+
+@interface BattleStatusLayer() {
+    CharacterQueueLayer *queueLayer;
+}
+@end
 
 @implementation BattleStatusLayer
+@synthesize queue = _queue;
 
--(id) initWithBattleController:(BattleController *) battleController {
+static const int pauseLayerTag = 9999;
+
+-(id) initWithBattleController:(BattleController *) battleController andQueue:(CharacterQueue *)aQueue{
     if(self = [super init]) {        
         CGSize size = [CCDirector sharedDirector].winSize;
         
@@ -38,17 +49,20 @@
         CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
         selectAction = [CCRepeatForever actionWithAction:selectAnimate];
         
+        _queue = aQueue;
+        [self setPauseButton];
+        [self setCharacatQueueLayer];
         // TODO: init other view like playing queue.
     }
     return self;
 }
 
 -(void) startSelectCharacter:(Character*)character {
-//    Select sprite should be on the same layer as the character is.
-    [character.sprite.parent addChild:selectSprite];
-    selectSprite.position = character.position;
+    [self setCurrentCharacterInQueueLayer:character];
+    [character.sprite addChild:selectSprite];
+    selectSprite.position = ccp(character.boundingBox.size.width / 2, character.boundingBox.size.height / 2);
     [selectSprite runAction:selectAction];
-    selectSprite.visible = YES;    
+    selectSprite.visible = YES;
 }
 
 -(void) stopSelect {
@@ -57,4 +71,35 @@
     [selectSprite stopAllActions];
 }
 
+-(void)pauseButtonTapped:(id)sender {
+    if(![self getChildByTag:pauseLayerTag]){
+        PauseLayer *layer = [PauseLayer node];
+        layer.tag = pauseLayerTag;
+        [self addChild:layer];
+    }
+}
+
+-(void)setPauseButton {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CCMenuItem *pauseMenuItem = [CCMenuItemImage
+                                 itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"
+                                 target:self selector:@selector(pauseButtonTapped:)];
+    
+    double width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
+    double height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
+    pauseMenuItem.position = ccp(width, height);
+    
+    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
+    pauseMenu.position = CGPointZero;
+    [self addChild:pauseMenu];
+}
+
+-(void)setCharacatQueueLayer {
+    queueLayer = [[CharacterQueueLayer alloc] initWithQueue:self.queue];
+    [self addChild:queueLayer];
+}
+
+-(void)setCurrentCharacterInQueueLayer:(Character *)character {
+    [queueLayer setCurrentCharacter:character];
+}
 @end

@@ -13,10 +13,7 @@
 @implementation Range
 @synthesize character,rangeSprite;
 
-
 static float scale;
-//float scaleRange = if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
-//                       && [[UIScreen mainScreen] scale] == 2.0;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -27,7 +24,6 @@ static float scale;
 }
 
 +(id)rangeWithParameters:(NSMutableDictionary*)dict {
-
     NSString* rangeName = [dict objectForKey:@"rangeType"];
     
     NSAssert(rangeName != nil, @"You must define rangeType for a range");
@@ -37,20 +33,6 @@ static float scale;
     
     return range;
 }
-
-//-(void)setCharacter:(Character *)aCharacter {
-//  
-//    character = aCharacter;
-//    [self setRangeSprite:aCharacter.sprite];
-//    [character.sprite addChild:rangeSprite];
-//}
-//
-//-(void)setCarrier:(CCSprite *)sprite{
-//    
-//    carrierSprite = sprite;
-//    [self setRangeSprite:sprite];
-//    [sprite addChild:rangeSprite];
-//}
 
 -(void)setDirection:(CGPoint)velocity {
     float angleRadians = atan2f(velocity.y, velocity.x);
@@ -82,11 +64,11 @@ static float scale;
         rangeSprite = [CCSprite spriteWithFile:file];
         [self setSpecialParameter:dict];
     }
-    
-    rangeSprite = [CCSprite spriteWithFile:@"Arrow.png"];
-    
+
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
+    
+    effectRange = [dict objectForKey:@"rangeEffectRange"];
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -105,20 +87,25 @@ static float scale;
     
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
+
     rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];    
 }
 
--(NSMutableArray *)getEffectTargets {
+-(NSArray *)getEffectTargets {
     
-    NSMutableArray *effectTargets = [NSMutableArray array];
+    NSMutableSet *effectTargets = [NSMutableSet set];
     
     for(Character* temp in [BattleController currentInstance].characters)
     {
         if ([self containTarget:temp]) {
-            [effectTargets addObject:temp];
+            if (effectRange == nil) {
+                [effectTargets addObject:temp];
+            } else {
+                [effectTargets addObjectsFromArray:[effectRange getEffectTargets]];
+            }
         }
     }
-    return effectTargets;
+    return [effectTargets allObjects];
 }
 
 -(BOOL)containTarget:(Character *)target {
@@ -132,9 +119,13 @@ static float scale;
     }
     
     if (attackRange == nil) {
-//        CGRect rect = rangeSprite.boundingBox;
-//        rect.origin = ccpAdd(rect.origin, rangeSprite.parent.position);
-        if (CGRectIntersectsRect(rangeSprite.boundingBox, target.boundingBox)) {
+        // Parent's scale must be 1, or it will fail !!
+        CGPoint point = [rangeSprite.parent convertToWorldSpace:rangeSprite.boundingBox.origin];
+        point = [target.sprite.parent convertToNodeSpace:point];
+
+        CGRect temp = CGRectMake(point.x, point.y, rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height);
+        
+        if (CGRectIntersectsRect(temp, target.boundingBox)) {
             return YES;
         } else {
             return NO;
@@ -146,12 +137,12 @@ static float scale;
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
+
         loc = [target.sprite convertToWorldSpace:loc];
-        loc = [rangeSprite convertToNodeSpace:loc];        
-        loc.x = loc.x / scale;
-        loc.y = loc.y / scale;
-        
-        CCLOG(@"%f %f",loc.x,loc.y);
+        loc = [rangeSprite convertToNodeSpace:loc];
+//        NSLog(@"%f,%f",loc.x,loc.y);
+        loc.x = loc.x * scale - rangeSprite.boundingBox.size.width/2 + rangeWidth/2;
+        loc.y = loc.y * scale - rangeSprite.boundingBox.size.height/2 + rangeHeight/2;
         
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
 //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
@@ -188,7 +179,6 @@ static float scale;
     }
     return NO;
 }
-
 
 //-(void)dealloc {
 //    CGPathRelease(attackRange);

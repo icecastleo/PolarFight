@@ -11,6 +11,6 @@
 
 @interface TestSkill : ActiveSkill
 
--(void)delayExecute:(NSMutableArray *)target;
+-(void)delayExecute:(NSArray *)target;
 
 @end

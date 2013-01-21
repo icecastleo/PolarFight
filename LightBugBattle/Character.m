@@ -51,7 +51,7 @@
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
-        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagId:anId];;
+        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:@"CharacterData.xml" tagName:@"character" tagAttributeName:@"id" tagAttributeValue:anId];;
         
         //get tag's attributes
         for (GDataXMLNode *attribute in characterElement.attributes) {
@@ -59,6 +59,8 @@
                 _name = attribute.stringValue;
             } else if ([attribute.name isEqualToString:@"img"]) {
                 _picFilename = attribute.stringValue;
+            }else if ([attribute.name isEqualToString:@"headImage"]) {
+                _headImageFileName = attribute.stringValue;
             }
         }
         
@@ -96,6 +98,7 @@
         [self setPassiveSkillForCharacter:_name];
         
         _direction = ccp(0, -1);
+        characterDirection = kCharacterDirectionDown;
         [skill setRangeDirection:_direction];
     }
     return self;
@@ -121,7 +124,7 @@
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-//        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -150,13 +153,15 @@
 -(void)dealloc {
     // FIXME: Cleaned it when it is dead.
     [sprite removeFromParentAndCleanup:YES];
+    
+//    CCLOG(@"Player %d's %@ is dealloc",player, self.name);
 }
 
 -(void)makePoint {
     pointArray=[NSMutableArray arrayWithObjects:
-                [NSValue valueWithCGPoint:ccp(0, 32)],
-                [NSValue valueWithCGPoint:ccp(32, 32)],
-                [NSValue valueWithCGPoint:ccp(32, 0)],
+                [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, 0)],
                 [NSValue valueWithCGPoint:ccp(0, 0)],nil];
 }
 
@@ -256,12 +261,14 @@
     CCLOG(@"Player %d's %@ is using skill",player, self.name);
     
     state = kCharacterStateUseSkill;
-    // TODO: Run skill animation
+    
+    // Run attack animation
+    [sprite runAttackAnimate];
 
     [skill execute];
     
     // TODO: Need to be called after skill animation
-    [self finishAttack];
+//    [self finishAttack];
 }
 
 -(void)receiveAttackEvent:(AttackEvent *)event {
@@ -322,23 +329,23 @@
         CGPoint velocity = ccpSub(self.position, damage.location);
         [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
     }
-
-    //    state = kCharacterStateGetDamage;
     
     if (hp.currentValue == 0) {
         [self dead];
     } else {
+//        state = kCharacterStateGetDamage;
+        
         for (NSString *key in _passiveSkillDictionary) {
             PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
             
             if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
-                [p character:self didReceiveDamage:damage];
+                [p  character:self didReceiveDamage:damage];
             }
         }
     }
 }
 
--(void)getHeal:(int)heal {
+-(void)getHeal:(int)heal {    
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
   
     NSAssert(hp != nil, @"A character without hp gets heal...");
@@ -354,12 +361,20 @@
 }
 
 // TODO: Need to be called when attack animation finished
--(void)finishAttack {
+-(void)attackAnimateCallback {
+    CCLOG(@"Attack finish");
     state = stateIdle;
 }
 
 -(void)dead {
     state = stateDead;
+    
+    //    CCLOG(@"Player %i's %@ is dead", player, self.name);
+
+    // Run dead animation, then clean up
+    [sprite runDeadAnimate];
+    
+    [[BattleController currentInstance] removeCharacter:self];
     
     for (NSString *key in _passiveSkillDictionary) {
         PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
@@ -368,9 +383,6 @@
             [p characterWillRemoveDelegate:self];
         }
     }
-    
-    // dead animation + cleanup
-    [[BattleController currentInstance] removeCharacter:self];
 }
 
 -(void)handleRoundStartEvent {

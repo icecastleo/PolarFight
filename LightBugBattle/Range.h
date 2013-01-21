@@ -20,6 +20,8 @@
     
     int rangeHeight;
     int rangeWidth;
+    
+    Range *effectRange;
 }
 @property NSArray *sides;
 @property NSArray *filters;
@@ -28,10 +30,7 @@
 @property (readonly, strong) CCSprite *rangeSprite;
 
 +(id)rangeWithParameters:(NSMutableDictionary*)dict;
--(NSMutableArray *)getEffectTargets;
-//-(BOOL)containTarget:(Character *)target;
+-(NSArray *)getEffectTargets;
 -(void)setDirection:(CGPoint)velocity;
-//-(void)setRangeSprite:(CCSprite *)carrier;
-//-(void)setCarrier:(CCSprite *)sprite;
 
 @end
