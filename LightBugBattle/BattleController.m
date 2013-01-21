@@ -279,6 +279,11 @@ static BattleController* currentInstance;
     [currentCharacter handleRoundStartEvent];
     
     statusLayer.startLabel.visible = YES;
+    [self scheduleOnce:@selector(setMoveToYes) delay:2];
+    //canMove = YES;
+}
+
+-(void)setMoveToYes {
     canMove = YES;
 }
 
