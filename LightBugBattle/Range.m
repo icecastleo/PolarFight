@@ -147,8 +147,8 @@ static float scale;
         loc = [target.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
         CGPoint p = loc;
-        loc.x = loc.x * scale - rangeSprite.boundingBox.size.width/2 + rangeWidth/2;
-        loc.y = loc.y * scale - rangeSprite.boundingBox.size.height/2 + rangeHeight/2;
+        loc.x = (loc.x - rangeSprite.boundingBox.size.width/2)* scale  + rangeWidth/2;
+        loc.y = (loc.y  - rangeSprite.boundingBox.size.height/2)* scale  + rangeHeight/2;
         
 //        CCLOG(@"%f,%f",loc.x,loc.y);
         

@@ -162,7 +162,14 @@
                 [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height)],
                 [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height)],
                 [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, 0)],
-                [NSValue valueWithCGPoint:ccp(0, 0)],nil];
+                [NSValue valueWithCGPoint:ccp(0, 0)],
+                
+                [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height/2)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width/2, self.boundingBox.size.height)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height/2)],
+                [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width/2, 0)]
+                
+                ,nil];
 }
 
 -(void)addAttribute:(Attribute *)attribute {
