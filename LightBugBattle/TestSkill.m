@@ -10,13 +10,17 @@
 #import "AttackEvent.h"
 #import "Character.h"
 #import "RangeCarrier.h"
+#import "RangeShooter.h"
 @implementation TestSkill
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@5,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+
+//        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@500,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+
+//        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",nil];
         
-        range = [Range rangeWithParameters:dictionary onCharacter:aCharacter];
+//        range = [Range rangeWithParameters:dictionary];
     }
     return self;
 }
@@ -28,21 +32,23 @@
     ////        event.knouckOutCollision = YES;
     //        [target receiveAttackEvent:event];
     //    }
-    RangeCarrier* rc = [[RangeCarrier alloc] init:range iconFileName:@"Arrow.png"];
+//    RangeCarrier* rc = [[RangeCarrier alloc] init:range iconFileName:@"Arrow.png"];
     
+//    [rc shoot:character.direction speed:10 delegate:self];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];
+    NSMutableDictionary *effectDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];
     
-    [rc setCarryRange:[Range rangeWithParameters:dictionary onCharacter:character]];
+    Range *effectRange = [Range rangeWithParameters:effectDictionary];
     
-    [rc shoot:character.direction speed:10 delegate:self];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
     
+    RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithParameters:dictionary]];
     
+    [shooter shoot:character.direction speed:10 delegate:self];
 }
 
--(void)delayExecute:(NSMutableArray *)targets carrier:(RangeCarrier *)carrier {
+-(void)delayExecute:(NSArray *)targets {
     for(Character *target in targets) {
-//        NSLog(@"%@ is under attack",target.name);
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
         [target receiveAttackEvent:event];
     }

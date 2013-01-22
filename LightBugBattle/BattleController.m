@@ -69,7 +69,7 @@ static BattleController* currentInstance;
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
-        [mapLayer setPosition:ccp(winSize.width/2, winSize.height/2)];
+        mapLayer.position = ccp(winSize.width/2, winSize.height/2);
         
         [self addChild:mapLayer];
         
@@ -251,7 +251,7 @@ static BattleController* currentInstance;
     }
 }
 
--(void) endMove {
+-(void)endMove {
     
     canMove = NO;
     
@@ -279,7 +279,7 @@ static BattleController* currentInstance;
     [currentCharacter handleRoundStartEvent];
     
     statusLayer.startLabel.visible = YES;
-    [self scheduleOnce:@selector(setMoveToYes) delay:2];
+    [self scheduleOnce:@selector(setMoveToYes) delay:0.5];
     //canMove = YES;
 }
 

@@ -109,6 +109,7 @@ typedef enum {
 //} RangeSide;
 
 // RangeType
+#define kRangeTypeSprite @"Range"
 #define kRangeTypeCircle @"RangeCircle"
 #define kRangeTypeFanShape @"RangeFanShape"
 #define kRangeTypeLine @"RangeLine"

@@ -30,9 +30,9 @@ static const int thumbSpriteRadius = 25;
         
         SneakyButtonSkinnedBase *rightBut = [[SneakyButtonSkinnedBase alloc] init];
         rightBut.position = ccp(400,64);
-        rightBut.defaultSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 255, 64) radius:backgroundRadius];
-        rightBut.activatedSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 255, 255) radius:backgroundRadius];
-        rightBut.pressSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 127) radius:backgroundRadius];
+        rightBut.defaultSprite = [ColoredCircleSprite circleWithColor:ccc4(50, 50, 50, 100) radius:backgroundRadius];
+        rightBut.activatedSprite = [ColoredCircleSprite circleWithColor:ccc4(50, 50, 50, 100) radius:backgroundRadius];
+        rightBut.pressSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 100) radius:backgroundRadius];
         rightBut.button = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, 64, 64)];
         attackButton = rightBut.button;
         attackButton.isToggleable = NO;

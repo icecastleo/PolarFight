@@ -43,7 +43,7 @@
     CGPathAddLineToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2+effectWidth/2);
     
     CGPathCloseSubpath(attackRange);
-    CGPathRetain(attackRange);
+//    CGPathRetain(attackRange);
 }
 
 

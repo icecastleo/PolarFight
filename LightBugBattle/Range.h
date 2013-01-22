@@ -21,7 +21,7 @@
     int rangeHeight;
     int rangeWidth;
     
-    float scaleRange;
+    Range *effectRange;
 }
 @property NSArray *sides;
 @property NSArray *filters;
@@ -29,11 +29,8 @@
 @property (readonly, weak) Character *character;
 @property (readonly, strong) CCSprite *rangeSprite;
 
-+(id)rangeWithParameters:(NSMutableDictionary *)dict onCharacter:(Character *)aCharacter;
--(NSMutableArray *)getEffectTargets;
--(BOOL)containTarget:(Character *)temp;
++(id)rangeWithParameters:(NSMutableDictionary*)dict;
+-(NSArray *)getEffectTargets;
 -(void)setDirection:(CGPoint)velocity;
--(void)setRangeSprite:(CCSprite *)carrier;
--(void)setCarrier:(CCSprite *)sprite;
 
 @end

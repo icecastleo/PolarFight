@@ -7,6 +7,7 @@
 //
 
 #import "ActiveSkill.h"
+#import "Character.h"
 
 @implementation ActiveSkill
 
@@ -23,6 +24,15 @@
 }
 
 -(void)showAttackRange:(BOOL)visible {
+    if (range == nil) {
+        return;
+    }
+    
+    if(range.rangeSprite.parent == nil) {
+        range.rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
+        [character.sprite addChild:range.rangeSprite];
+    }
+    
     range.rangeSprite.visible = visible;
 }
 

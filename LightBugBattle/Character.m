@@ -98,6 +98,7 @@
         [self setPassiveSkillForCharacter:_name];
         
         _direction = ccp(0, -1);
+        characterDirection = kCharacterDirectionDown;
         [skill setRangeDirection:_direction];
     }
     return self;
@@ -114,11 +115,7 @@
         skill = [[HealSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Tank"]) {
         skill = [[TankSkill alloc] initWithCharacter:self];
-        
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
-        
-        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self rangeDictionary:dictionary];
-        
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
         [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         skill = [[SuicideSkill alloc] initWithCharacter:self];
@@ -127,7 +124,7 @@
 
 -(void)setPassiveSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-//        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
+        [self addPassiveSkill:[[ReflectAttackDamageSkill alloc] initWithProbability:20 reflectPercent:100]];
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
