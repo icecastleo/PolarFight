@@ -33,11 +33,15 @@
 #import "CCGrid.h"
 
 @implementation CCNode (Autolayout)
-//*
+/*
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+ 
+//you should modify visit method in CCNode.m. You can not override the same name method in Category.
+//Category methods should not override existing methods (class or instance)
+//Two different categories implementing the same method for the same class will result in undefined behavior
 
-- (void) visit
+ - (void) visit
 {
 	// quick return if not visible
 	if (!visible_)
@@ -99,7 +103,7 @@
 }
 
 #pragma clang diagnostic pop
-
+//*/
 - (void)layoutChildren {}
 - (void)layout {
 	if (isTransformDirty_ && isTransformDirty_ && isInverseDirty_) {

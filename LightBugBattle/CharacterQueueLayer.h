@@ -8,8 +8,9 @@
 
 #import "cocos2d.h"
 #import "CharacterQueue.h"
+#import "SWTableView.h"
 
-@interface CharacterQueueLayer : CCLayer <CharacteQueueBar>
+@interface CharacterQueueLayer : CCLayer <CharacteQueueBar,SWTableViewDataSource,SWTableViewDelegate>
 
 @property (weak,nonatomic) Character *currentCharacter;
 
