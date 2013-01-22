@@ -33,4 +33,15 @@
     }
     return NO;
 }
+-(void)setCharacterQueueObjectTimeWithaVariable:(NSUInteger)distance {
+    //random add/minus a half of agile to this character in this time.
+    int agile = [self.character getAttribute:kCharacterAttributeAgile].value;
+    int pickaNumber = arc4random() % 2;
+    int variable = agile/2;
+    
+    if (pickaNumber != 0)
+        variable *= -1;
+        
+    _time = distance/(agile+variable);
+}
 @end

@@ -17,4 +17,6 @@
 -(void)timeDecrease:(NSUInteger)number;
 -(BOOL)hasTheSameCharacter:(Character *)newCharacter;
 
+-(void)setCharacterQueueObjectTimeWithaVariable:(NSUInteger)distance;
+
 @end
