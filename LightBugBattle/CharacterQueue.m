@@ -197,7 +197,7 @@ static const int distance = NSIntegerMax;
      //random create player2's character.
     for (CharacterQueueObject *obj in self.queue) {
         int randomDistance = distance - arc4random();
-        NSLog(@"%d",randomDistance);
+        //NSLog(@"%d",randomDistance);
         [obj setCharacterQueueObjectTime:randomDistance];
     }
 }

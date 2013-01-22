@@ -9,6 +9,7 @@
 #import "CharacterQueueLayer.h"
 #import "CharacterHeadView.h"
 #import "Character.h"
+#import "MyCell.h"
 
 typedef enum {
     buttomPad1 = 0,
@@ -34,11 +35,13 @@ typedef enum {
 } HeadViewIndex;
 
 @interface CharacterQueueLayer() {
-    NSArray *headViewPointArray;
+//    NSArray *headViewPointArray;
     NSMutableArray *queueBarSprit;
     
     CCSprite *selectSprite;
     CCAction *selectAction;
+    
+    SWTableView   *tableView;
 }
 @property (nonatomic) CharacterQueue *queue;
 @end
@@ -46,6 +49,12 @@ typedef enum {
 @implementation CharacterQueueLayer
 
 static const int currentCharacterHeadViewTag = 999;
+static const int tableviewWidth = 32;
+static const int tableviewHeight = 200;
+static const int tableviewCellHeight = 40;
+static const int tableviewPositionX = 5;
+static const int tableviewPositionY = 40;
+static const int tableviewPositionZ = 100;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue {
     if ((self = [super init])) {
@@ -53,29 +62,10 @@ static const int currentCharacterHeadViewTag = 999;
         _queue.delegate = self;
         queueBarSprit = [[NSMutableArray alloc] init];
         [self setCCSelectSprite];
-        [self setQueueBar];
         [self drawQueueBar];
+        [self setTable];
     }
     return self;
-}
-
--(void)setQueueBar {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    CGPoint currentCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*currentCharacterHeadViewPosition/labelsCount);
-    CGPoint firstCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*firstCharacterHeadViewPosition/labelsCount);
-    CGPoint secondCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*secondCharacterHeadViewPosition/labelsCount);
-    CGPoint thirdCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*thirdCharacterHeadViewPosition/labelsCount);
-    CGPoint fourthCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*fourthCharacterHeadViewPosition/labelsCount);
-    CGPoint fifthCharacterHeadView = CGPointMake(winSize.width/48, winSize.height*fifthCharacterHeadViewPosition/labelsCount);
-    
-    NSValue *point0Value = [NSValue valueWithCGPoint:currentCharacterHeadView];
-    NSValue *point1Value = [NSValue valueWithCGPoint:firstCharacterHeadView];
-    NSValue *point2Value = [NSValue valueWithCGPoint:secondCharacterHeadView];
-    NSValue *point3Value = [NSValue valueWithCGPoint:thirdCharacterHeadView];
-    NSValue *point4Value = [NSValue valueWithCGPoint:fourthCharacterHeadView];
-    NSValue *point5Value = [NSValue valueWithCGPoint:fifthCharacterHeadView];
-    
-    headViewPointArray = [[NSArray alloc] initWithObjects:point0Value,point1Value,point2Value,point3Value,point4Value,point5Value, nil];
 }
 
 -(void)setCurrentCharacter:(Character *)currentCharacter {
@@ -87,9 +77,10 @@ static const int currentCharacterHeadViewTag = 999;
         NSAssert(characterHeadView !=nil , @"character's headImage should not nil.");
         return;
     }
-    CGPoint currentHeadViewPoint = [[headViewPointArray objectAtIndex:currentCharacterIndex] CGPointValue];
+    
+    CGPoint currentHeadViewPoint = ccp(tableviewWidth/2+tableviewPositionX*2,tableviewPositionY+tableviewHeight+tableviewCellHeight/2);
     characterHeadView.position = currentHeadViewPoint;
-    characterHeadView.anchorPoint = ccp(0,0.5);
+    characterHeadView.anchorPoint = ccp(0.5,0.5);
     characterHeadView.tag = currentCharacterHeadViewTag;
     selectSprite.position = currentHeadViewPoint;
     selectSprite.visible = YES;
@@ -102,27 +93,22 @@ static const int currentCharacterHeadViewTag = 999;
     for (CharacterHeadView *sprite in queueBarSprit) {
         [self removeChild:sprite cleanup:YES];
     }
+    [queueBarSprit removeAllObjects];
     
     NSArray *characterArray = [self.queue currentCharacterQueueArray];
     int count = characterArray.count;
     for (int i=0; i<count; i++) {
         Character *character = [characterArray objectAtIndex:i];
         CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:character];
-        if ((i+1) < headViewPointArray.count) {
-            CGPoint headViewPoint = [[headViewPointArray objectAtIndex:i+1] CGPointValue];
-            characterHeadView.position = headViewPoint;
-            characterHeadView.anchorPoint = ccp(0,0.5);
-            [self addChild:characterHeadView];
-            [queueBarSprit addObject:characterHeadView];
-        }else {
-            break;
-        }
+        [queueBarSprit addObject:characterHeadView];
     }
+    [tableView reloadData];
+    [tableView moveToTop];
 }
 
 -(void)setCCSelectSprite {
-    selectSprite = [[CCSprite alloc] initWithFile:@"select-3.png"];
-    selectSprite.anchorPoint = ccp(0.25,0.5);
+    selectSprite = [[CCSprite alloc] initWithFile:@"currentCharacter.png"];
+    selectSprite.anchorPoint = ccp(0.5,0.5);
     selectSprite.visible = NO;
     [self addChild:selectSprite];
 }
@@ -139,6 +125,66 @@ static const int currentCharacterHeadViewTag = 999;
 -(void)removeCharacter {
     //TODO: Show Remove Animation.
     [self drawQueueBar];
+}
+
+- (void)setTable {
+    //CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];  //no color
+    
+    CGSize tableSize;
+    CGPoint tablePosition;
+    
+    tableSize = CGSizeMake(tableviewWidth,tableviewHeight);
+    tablePosition = ccp(tableviewPositionX,tableviewPositionY);
+    tableView = [SWTableView viewWithDataSource:self size:tableSize];
+    
+    tableView.verticalFillOrder = SWTableViewFillTopDown;
+    tableView.direction = SWScrollViewDirectionVertical;
+    tableView.position = tablePosition;
+    tableView.delegate = self;
+    tableView.bounces = YES;
+    
+    //layer.contentSize		 = tableView.contentSize;
+    
+    //[tableView addChild:layer];
+    
+    [self addChild:tableView z:tableviewPositionZ];
+    [tableView reloadData];
+    [tableView moveToTop];
+}
+
+#pragma mark SWTableViewDataSource
+-(CGSize)cellSizeForTable:(SWTableView *)table {
+    return CGSizeMake(tableviewWidth, tableviewCellHeight);;
+}
+-(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
+    SWTableViewCell *cell = [table dequeueCell];
+    if (!cell) {
+        cell = [MyCell new];
+    } else {
+        [cell removeAllChildrenWithCleanup:YES];
+    }
+    
+    CCSprite *sprite = [queueBarSprit objectAtIndex:idx];
+    CCSprite *newSprite = [CCSprite spriteWithTexture:[sprite texture] rect:[sprite textureRect]];
+    newSprite.anchorPoint = ccp(0,0.5);
+    newSprite.position = ccp(0, tableviewCellHeight/2);
+    newSprite.tag = idx;
+    [cell addChild:newSprite];
+    
+    return cell;
+}
+-(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
+    return queueBarSprit.count;
+}
+
+#pragma mark SWTableViewDelegate
+-(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
+    CCSprite *sprite = [cell.children objectAtIndex:0];
+    [self selectSpriteForTouchFromCell:sprite];
+}
+
+-(void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
+    
 }
 
 @end
