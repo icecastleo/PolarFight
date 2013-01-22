@@ -69,6 +69,12 @@ static float scale;
     rangeSprite.visible = NO;
     
     effectRange = [dict objectForKey:@"rangeEffectRange"];
+    
+    if (effectRange != nil) {
+        [rangeSprite addChild:effectRange.rangeSprite];
+        effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height / 2);
+        effectRange.rangeSprite.visible = YES;
+    }
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -101,7 +107,7 @@ static float scale;
             if (effectRange == nil) {
                 [effectTargets addObject:temp];
             } else {
-                [effectTargets addObjectsFromArray:[effectRange getEffectTargets]];
+                return [effectRange getEffectTargets];
             }
         }
     }
@@ -180,8 +186,9 @@ static float scale;
     return NO;
 }
 
-//-(void)dealloc {
+-(void)dealloc {
+    [rangeSprite removeFromParentAndCleanup:YES];
 //    CGPathRelease(attackRange);
-//}
+}
 
 @end

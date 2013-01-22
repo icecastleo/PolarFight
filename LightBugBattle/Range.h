@@ -16,8 +16,6 @@
     CGMutablePathRef attackRange;
     __weak Character* character;
     
-    CCSprite *carrierSprite;
-    
     int rangeHeight;
     int rangeWidth;
     

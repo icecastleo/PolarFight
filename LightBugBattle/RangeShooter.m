@@ -8,6 +8,7 @@
 
 #import "RangeShooter.h"
 #import "Character.h"
+#import "BattleController.h"
 
 @implementation RangeShooter
 
@@ -19,12 +20,14 @@
 }
 
 -(void)shoot:(CGPoint)aVector speed:(float)aSpeed delegate:(id)aDelegate {
-    CCLOG(@"shoot");
+//    CCLOG(@"shoot");
     delegate = aDelegate;
+    vector = aVector;
     speed = aSpeed;
     
     range.rangeSprite.position = range.character.position;
     [range.character.sprite.parent addChild:range.rangeSprite];
+    
     range.rangeSprite.visible = YES;
     
     float angle = atan2f(vector.y, vector.x);
@@ -35,12 +38,14 @@
     
     startPoint = range.rangeSprite.position;
     [self schedule:@selector(update:)];
+    
+    [[BattleController currentInstance] addChild:self];
 }
 
 -(void)update:(ccTime)delta
-{    
+{
     range.rangeSprite.position = ccpAdd(range.rangeSprite.position, ccpMult(vector, speed));
-    
+
     if(ccpDistance(range.rangeSprite.position, startPoint) > 200)
     {
         [self unschedule:@selector(update:)];
@@ -54,7 +59,6 @@
         if ([delegate respondsToSelector:@selector(delayExecute:)]) {
             [delegate delayExecute:effectTargets];
         }
-        
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
     };
