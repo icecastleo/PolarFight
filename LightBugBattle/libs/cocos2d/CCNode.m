@@ -503,7 +503,8 @@ static NSUInteger globalOrderOfArrival = 1;
 
 -(void) visit
 {
-	// quick return if not visible. children won't be drawn.
+	/*
+    // quick return if not visible. children won't be drawn.
 	if (!visible_)
 		return;
 
@@ -548,6 +549,63 @@ static NSUInteger globalOrderOfArrival = 1;
 	if ( grid_ && grid_.active)
 		[grid_ afterDraw:self];
 
+	kmGLPopMatrix();
+    //*/
+    if (!visible_)
+		return;
+	
+	[self performSelector:@selector(layout)];
+	
+	kmGLPushMatrix();
+	
+	if ( grid_ && grid_.active) {
+		[grid_ beforeDraw];
+		[self transformAncestors];
+	}
+	
+	[self transform];
+	if ([self respondsToSelector:@selector(beforeDraw)]) {
+		[self performSelector:@selector(beforeDraw)];
+	}
+	
+	if(children_) {
+        
+		[self sortAllChildren];
+        
+		ccArray *arrayData = children_->data;
+		NSUInteger i = 0;
+        
+		// draw children zOrder < 0
+		for( ; i < arrayData->num; i++ ) {
+			CCNode *child = arrayData->arr[i];
+			if ( [child zOrder] < 0 )
+				[child visit];
+			else
+				break;
+		}
+        
+		// self draw
+		[self draw];
+        
+		// draw children zOrder >= 0
+		for( ; i < arrayData->num; i++ ) {
+			CCNode *child =  arrayData->arr[i];
+			[child visit];
+		}
+        
+	} else
+		[self draw];
+    
+	if ([self respondsToSelector:@selector(afterDraw)]) {
+		[self performSelector:@selector(afterDraw)];
+	}
+    
+    // reset for next frame
+	orderOfArrival_ = 0;
+    
+	if ( grid_ && grid_.active)
+		[grid_ afterDraw:self];
+	
 	kmGLPopMatrix();
 }
 
