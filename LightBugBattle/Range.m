@@ -67,14 +67,20 @@ static float scale;
 
     rangeSprite.zOrder = -1;
     rangeSprite.visible = NO;
+    rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
+    [character.sprite addChild:rangeSprite];
     
     effectRange = [dict objectForKey:@"rangeEffectRange"];
     
     if (effectRange != nil) {
+        if (effectRange.rangeSprite.parent != nil) {
+            [effectRange.rangeSprite removeFromParentAndCleanup:NO];
+        }
+        
         [rangeSprite addChild:effectRange.rangeSprite];
         effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height / 2);
         effectRange.rangeSprite.visible = YES;
-    }
+    }    
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -146,28 +152,16 @@ static float scale;
 
         loc = [target.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
-        CGPoint p = loc;
+
         loc.x = (loc.x - rangeSprite.boundingBox.size.width/2)* scale  + rangeWidth/2;
         loc.y = (loc.y  - rangeSprite.boundingBox.size.height/2)* scale  + rangeHeight/2;
         
 //        CCLOG(@"%f,%f",loc.x,loc.y);
         
-        p = [rangeSprite convertToWorldSpace:p];
-        p = [rangeSprite.parent.parent convertToNodeSpace:p];
-        
-        CCLOG(@"%f,%f",p.x,p.y);
-        
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
 //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
-            CCSprite *test = [CCSprite spriteWithFile:@"Red_point.png"];
-            test.position = p;
-            [rangeSprite.parent.parent addChild:test];
             return YES;
-        } else {
-            CCSprite *test = [CCSprite spriteWithFile:@"Arrow.png"];
-            test.position = p;
-            [rangeSprite.parent.parent addChild:test];
-        }
+        } 
     }
     return NO;
 }

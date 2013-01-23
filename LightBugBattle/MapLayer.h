@@ -25,7 +25,7 @@
 }
 
 @property (strong, readonly) NSMutableArray* characters;
-@property (weak, readonly) MapCameraControl* cameraControl;
+@property (readonly) MapCameraControl* cameraControl;
 
 -(id)initWithMapSprite:(CCSprite*)aSprite;
 

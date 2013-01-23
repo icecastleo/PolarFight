@@ -9,24 +9,32 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class MapLayer;
 @interface MapCameraControl : CCNode
 {
-    CCSprite* map;
-    CCCamera* mainCamera;
-    CGPoint cameraPosition;
-    CGSize mapSize;
-    CGSize winSize;
+    CCCamera* camera;
+
+    float cameraZ;
+    
     float heightLimit;
     float widthLimit;
     
-    CCSprite* target;
-    BOOL isMove;
-    CGPoint moveAmount;
+    float moveX;
+    float moveY;
+    bool move;
+    
+    float moveLength;
+    int moveCountDown;
+    CGPoint delta;
 }
+@property (readonly) CGPoint cameraPosition;
 
--(void) setMap:(CCSprite*)theMap mapLayer:(CCNode*)mapLayer;
--(void) moveCameraX:(float)moveX Y:(float)moveY;
--(void) moveCameraToX:(float)moveX Y:(float)moveY;
-//-(void) followTarget:(CCSprite*)theTarget;
--(CGPoint)getCameraPosition;
+-(id)initWithMapLayer:(MapLayer *)layer mapSprite:(CCSprite *)sprite;
+-(void)moveCameraX:(float)x Y:(float)y;
+-(void)moveCameraToX:(float)x Y:(float)y;
+-(void)smoothMoveCameraToX:(float)x Y:(float)y;
+
+-(void)setDefaultZ;
+-(void)moveCameraZ:(float)zValue;
+
 @end

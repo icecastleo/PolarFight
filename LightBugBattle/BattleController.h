@@ -30,6 +30,7 @@
     Character *currentCharacter;
 //    NSMutableArray *characters;
     
+    bool startMove;
     bool canMove;
     bool isMove;
     float countdown;

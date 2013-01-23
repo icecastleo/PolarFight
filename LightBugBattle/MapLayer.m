@@ -15,16 +15,14 @@
 const int characterPositionZ = 1000;
 const int characterInfoViewZ = 9999;
 
--(id)initWithMapSprite:(CCSprite*)aSprite {
+-(id)initWithMapSprite:(CCSprite *)aSprite {
     if((self=[super init])) {
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
         
-        cameraControl = [MapCameraControl node];
-        
         mapBody = aSprite;
         
-        [cameraControl setMap:mapBody mapLayer:self];
+        cameraControl = [[MapCameraControl alloc] initWithMapLayer:self mapSprite:mapBody];
         
         [self setCharacterInfoViewLayer];
         
@@ -316,7 +314,7 @@ const int characterInfoViewZ = 9999;
 }
 
 - (CGPoint)getInfoViewPositionFromCharacterPosition:(CGPoint)chaPoint {
-    CGPoint cameraPosition = [cameraControl getCameraPosition];
+    CGPoint cameraPosition = cameraControl.cameraPosition;
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
@@ -334,7 +332,7 @@ const int characterInfoViewZ = 9999;
 
 -(CGPoint)convertLocationToMapLocation:(CGPoint)location {
     
-    CGPoint cameraPosition = [cameraControl getCameraPosition];
+    CGPoint cameraPosition = cameraControl.cameraPosition;
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     

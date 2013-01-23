@@ -25,6 +25,10 @@
     vector = aVector;
     speed = aSpeed;
     
+    if (range.rangeSprite.parent != nil) {
+        [range.rangeSprite removeFromParentAndCleanup:NO];
+    }
+    
     range.rangeSprite.position = range.character.position;
     [range.character.sprite.parent addChild:range.rangeSprite];
     

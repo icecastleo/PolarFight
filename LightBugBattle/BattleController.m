@@ -103,22 +103,8 @@ static BattleController* currentInstance;
         //statusLayer.queue = characterQueue; // For showing Queue Bar.
         [self addChild:statusLayer];
         
-        canMove = YES;
-        isMove = NO;
-        
-        currentIndex = 0;
-//        currentCharacter = self.characters[currentIndex];
-        currentCharacter = [self getCurrentCharacterFromQueue];
-        
-        // start game
-        [statusLayer startSelectCharacter:currentCharacter];
-        [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
-        
-        countdown = [currentCharacter getAttribute:kCharacterAttributeTime].value;
-        [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
-        [currentCharacter handleRoundStartEvent];
-        
-        [self scheduleUpdate];        
+        canMove = NO;
+        [self scheduleUpdate];
     }
     currentInstance = self;
     
@@ -174,11 +160,11 @@ static BattleController* currentInstance;
     
     for (Character *character in player1) {
         [self addCharacter:character];
-//        character.position = ccp(0, -190);
+        character.position = ccp(0, -190);
     }
     for (Character *character in player2) {
         [self addCharacter:character];
-//        character.position = ccp(0, -240);
+        character.position = ccp(0, -240);
     }
     NSArray *tempArray = [[NSArray alloc] initWithArray:self.characters];
     characterQueue = [[CharacterQueue alloc] initWithCharacterArrayWithRandomTime:tempArray];
@@ -187,16 +173,19 @@ static BattleController* currentInstance;
 }
 
 -(void)addCharacter:(Character *)character {
-//    CCLOG(@"Add character : %@",character.name);
+//    CCLOG(@"Add player %i's %@", character.player, character.name);
     [mapLayer addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
+//    CCLOG(@"Remove player %i's %@", character.player, character.name);
+    
     [mapLayer removeCharacter:character];
     [characterQueue removeCharacter:character withAnimated:YES];
     
     // FIXME: Need a manage to control scene
     if (self.characters.count == 0) {
+        [self unscheduleUpdate];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
         return;
     }
@@ -212,8 +201,12 @@ static BattleController* currentInstance;
 
 -(void)update:(ccTime)delta {
     
-    if(!canMove)
+    if(!canMove) {
+        if (startMove == NO) {
+            [self startMove];
+        }
         return;
+    }
     
     if(!isMove && dPadLayer.isButtonPressed) {
         isMove = YES;
@@ -243,7 +236,7 @@ static BattleController* currentInstance;
             [currentCharacter useSkill];
             return;
         }
-        
+
         // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
         [currentCharacter setDirection:dPadLayer.velocity];
@@ -251,36 +244,39 @@ static BattleController* currentInstance;
     }
 }
 
--(void)endMove {
-    
-    canMove = NO;
-    
-    // 回合結束的檢查 && 設定參數
+-(void)startMove {
+    startMove = YES;
     isMove = NO;
     
-    if (currentCharacter.state != stateDead) {
-        [currentCharacter handleRoundEndEvent];
-    }
-
-    // TODO: Where is play queue??
-    // FIXME: It will caused wrong sequence after someone's dead.
     currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
     // Use state pattern for update??
     
-    // select character
+    // Select character
     [statusLayer startSelectCharacter:currentCharacter];
     
-    countdown  = [currentCharacter getAttribute:kCharacterAttributeTime].value;
-//    countdown = currentCharacter.moveTime;
-    [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
+    // Set count down for character
+    countdown = [currentCharacter getAttribute:kCharacterAttributeTime].value;
     
-    [[mapLayer cameraControl] moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+    // Show count down
+    [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
+    statusLayer.startLabel.visible = YES;
+    
     [currentCharacter handleRoundStartEvent];
     
-    statusLayer.startLabel.visible = YES;
-    [self scheduleOnce:@selector(setMoveToYes) delay:0.5];
+    [mapLayer.cameraControl smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+
     //canMove = YES;
+    [self scheduleOnce:@selector(setMoveToYes) delay:0.5];
+}
+
+-(void)endMove {
+    canMove = NO;
+    startMove = NO;
+    
+    if (currentCharacter.state != stateDead) {
+        [currentCharacter handleRoundEndEvent];
+    }
 }
 
 -(void)setMoveToYes {
