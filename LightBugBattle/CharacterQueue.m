@@ -16,7 +16,7 @@
 @end
 
 @implementation CharacterQueue
-static const int distance = NSIntegerMax;
+//static const int distance = NSIntegerMax;
 
 -(id)init {
     if ((self = [super init])) {
@@ -64,8 +64,8 @@ static const int distance = NSIntegerMax;
 -(void)addCharacter:(Character *)newCharacter {
     CharacterQueueObject *newObject = [[CharacterQueueObject alloc] init];
     newObject.character = newCharacter;
-    [newObject setCharacterQueueObjectTime:distance];
-    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter];
+    [newObject setCharacterQueueObjectTime];
+    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter withAnimated:NO];
 
     [self.queue insertObject:newObject atIndex:insertIndex];
     [self.delegate redrawQueueBar];
@@ -79,13 +79,13 @@ static const int distance = NSIntegerMax;
         NSAssert(firstCharacter != nil, @"firstCharacter should not nil??");
         return nil;
     }
-    [self removeCharacter:firstCharacter];
+    [self removeCharacter:firstCharacter withAnimated:NO];
     [self nextTurn:firstObject.time];
     
     return firstCharacter;
 }
 
--(void)removeCharacter:(Character *)character {
+-(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated{
     BOOL hasRemoved = NO;
     for (CharacterQueueObject *object in self.queue) {
         if ([object hasTheSameCharacter:character]) {
@@ -97,7 +97,7 @@ static const int distance = NSIntegerMax;
     if (!hasRemoved) {
         //CCLOG(@"The character isn't in the queue.");
     }
-    [self.delegate removeCharacter];
+    [self.delegate removeCharacterWithAnimated:animated];
 }
 
 -(CharacterQueueObject *)first {
@@ -124,7 +124,7 @@ static const int distance = NSIntegerMax;
 
 -(void)setCharacterQueueObjectTime {
     for (CharacterQueueObject *obj in self.queue) {
-        [obj setCharacterQueueObjectTime:distance];
+        [obj setCharacterQueueObjectTime];
     }
 }
 
@@ -156,10 +156,10 @@ static const int distance = NSIntegerMax;
 }
 
 #pragma mark Custom Functions
--(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter {
+-(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter withAnimated:(BOOL)animated{
     CharacterQueueObject *newObject = [[CharacterQueueObject alloc] init];
     newObject.character = newCharacter;
-    [newObject setCharacterQueueObjectTime:distance];
+    [newObject setCharacterQueueObjectTime];
     NSUInteger last_index = [self lastIndex];
     NSUInteger insertIndex = [self count];
     
@@ -176,7 +176,7 @@ static const int distance = NSIntegerMax;
             }
         }
     }
-    [self.delegate insertCharacter];
+    [self.delegate insertCharacterAtIndex:insertIndex withAnimated:animated];
     
     return insertIndex;
 }
@@ -195,7 +195,7 @@ static const int distance = NSIntegerMax;
 
 -(void)setRandomCharacterQueueObjectTime {
     for (CharacterQueueObject *obj in self.queue) {
-        [obj setCharacterQueueObjectTimeWithaVariable:distance];
+        [obj setCharacterQueueObjectTimeWithaVariable];
     }
 }
 

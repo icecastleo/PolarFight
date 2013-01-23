@@ -193,7 +193,7 @@ static BattleController* currentInstance;
 
 -(void)removeCharacter:(Character *)character {
     [mapLayer removeCharacter:character];
-    [characterQueue removeCharacter:character];
+    [characterQueue removeCharacter:character withAnimated:YES];
     
     // FIXME: Need a manage to control scene
     if (self.characters.count == 0) {

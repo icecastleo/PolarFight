@@ -10,8 +10,8 @@
 
 @protocol CharacteQueueBar <NSObject>
 -(void)redrawQueueBar;
--(void)insertCharacter;
--(void)removeCharacter;
+-(void)insertCharacterAtIndex:(NSUInteger)index withAnimated:(BOOL)animated;
+-(void)removeCharacterWithAnimated:(BOOL)animated;
 @end
 
 @interface CharacterQueue : NSObject
@@ -21,12 +21,12 @@
 //-(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2;
 -(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters;
 -(void)addCharacter:(Character *)newCharacter;
--(void)removeCharacter:(Character *)object;
+-(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated;
 - (Character *)pop;
 - (NSUInteger)count;
 - (void)clear;
 
--(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter;
+-(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter withAnimated:(BOOL)animated;
 -(NSArray *)currentCharacterQueueArray;
 
 @end

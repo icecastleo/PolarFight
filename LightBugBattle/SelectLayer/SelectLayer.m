@@ -145,7 +145,7 @@ static const int tableviewPositionZ = 100;
     
     [self addChild:tableView z:tableviewPositionZ];
     [tableView reloadData];
-    [tableView moveToTop];
+    [tableView moveToTopWithAnimated:NO];
 }
 
 #pragma LoadData
