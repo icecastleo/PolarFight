@@ -2,7 +2,7 @@
 //  CharacterQueueLayer.m
 //  LightBugBattle
 //
-//  Created by  DAN on 13/1/17.
+//  Created by  浩翔 on 13/1/17.
 //
 //
 
@@ -35,32 +35,33 @@ typedef enum {
 } HeadViewIndex;
 
 @interface CharacterQueueLayer() {
-//    NSArray *headViewPointArray;
-    NSMutableArray *queueBarSprit;
+    NSMutableArray *queueBarSprite;
     
     CCSprite *selectSprite;
     CCAction *selectAction;
     
     SWTableView   *tableView;
 }
-@property (nonatomic) CharacterQueue *queue;
+@property (nonatomic,weak) CharacterQueue *queue;
 @end
 
 @implementation CharacterQueueLayer
 
 static const int currentCharacterHeadViewTag = 999;
-static const int tableviewWidth = 32;
+static const int tableviewWidth = 36;
 static const int tableviewHeight = 200;
 static const int tableviewCellHeight = 40;
 static const int tableviewPositionX = 5;
 static const int tableviewPositionY = 40;
 static const int tableviewPositionZ = 100;
+static const int player1Tag = 1;
+static const int playerColerFrameTag = 987;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue {
     if ((self = [super init])) {
         _queue = aQueue;
         _queue.delegate = self;
-        queueBarSprit = [[NSMutableArray alloc] init];
+        queueBarSprite = [[NSMutableArray alloc] init];
         [self setCCSelectSprite];
         [self drawQueueBar];
         [self setTable];
@@ -88,24 +89,6 @@ static const int tableviewPositionZ = 100;
     [self addChild:characterHeadView];
 }
 
--(void)drawQueueBar {
-    
-    for (CharacterHeadView *sprite in queueBarSprit) {
-        [self removeChild:sprite cleanup:YES];
-    }
-    [queueBarSprit removeAllObjects];
-    
-    NSArray *characterArray = [self.queue currentCharacterQueueArray];
-    int count = characterArray.count;
-    for (int i=0; i<count; i++) {
-        Character *character = [characterArray objectAtIndex:i];
-        CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:character];
-        [queueBarSprit addObject:characterHeadView];
-    }
-    [tableView reloadData];
-    [tableView moveToTop];
-}
-
 -(void)setCCSelectSprite {
     selectSprite = [[CCSprite alloc] initWithFile:@"currentCharacter.png"];
     selectSprite.anchorPoint = ccp(0.5,0.5);
@@ -113,18 +96,67 @@ static const int tableviewPositionZ = 100;
     [self addChild:selectSprite];
 }
 
+-(void)drawQueueBar {
+    
+    for (CharacterHeadView *sprite in queueBarSprite) {
+        [self removeChild:sprite cleanup:YES];
+    }
+    [queueBarSprite removeAllObjects];
+    
+    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    int count = characterArray.count;
+    for (int i=0; i<count; i++) {
+        Character *character = [characterArray objectAtIndex:i];
+        CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:character];
+        [queueBarSprite addObject:characterHeadView];
+    }
+    [self resortTableViewWithAnimated:YES];
+}
+
 -(void)redrawQueueBar {
     [self drawQueueBar];
 }
 
--(void)insertCharacter {
+-(void)insertCharacterAtIndex:(NSUInteger)index withAnimated:(BOOL)animated {
     //TODO: Show Insert Animation.
-    [self drawQueueBar];
+    if (!animated) {
+        [self drawQueueBar];
+        return;
+    }
+//    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+//    int count = characterArray.count;
+//    CharacterHeadView *character = [[CharacterHeadView alloc] initWithCharacter:[characterArray objectAtIndex:index]];
+    
+
 }
 
--(void)removeCharacter {
+-(void)removeCharacterWithAnimated:(BOOL)animated {
     //TODO: Show Remove Animation.
-    [self drawQueueBar];
+    if (!animated) {
+        [self drawQueueBar];
+        return;
+    }
+    
+    NSMutableArray *willRemovequeueBarSprites = [NSMutableArray array];
+    
+    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    int count = queueBarSprite.count;
+    for (int i=0; i<count; i++) {
+        CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:i];
+        Character *character = characterHeadView.character;
+        if (![characterArray containsObject:character]) {
+            [self removeCharacterHeadViewInCell:i];
+            [willRemovequeueBarSprites addObject:characterHeadView];
+        }
+    }
+    for (CharacterHeadView *characterHeadView in willRemovequeueBarSprites) {
+        if ([queueBarSprite containsObject:characterHeadView]) {
+            [queueBarSprite removeObject:characterHeadView];
+        }
+    }
+    
+    [self scheduleOnce:@selector(resortTableViewDoesHaveAnimation) delay:2];
+    willRemovequeueBarSprites = nil;
 }
 
 - (void)setTable {
@@ -148,8 +180,7 @@ static const int tableviewPositionZ = 100;
     //[tableView addChild:layer];
     
     [self addChild:tableView z:tableviewPositionZ];
-    [tableView reloadData];
-    [tableView moveToTop];
+    [self resortTableViewWithAnimated:NO];
 }
 
 #pragma mark SWTableViewDataSource
@@ -164,17 +195,33 @@ static const int tableviewPositionZ = 100;
         [cell removeAllChildrenWithCleanup:YES];
     }
     
-    CCSprite *sprite = [queueBarSprit objectAtIndex:idx];
+    CCSprite *sprite = [queueBarSprite objectAtIndex:idx];
     CCSprite *newSprite = [CCSprite spriteWithTexture:[sprite texture] rect:[sprite textureRect]];
-    newSprite.anchorPoint = ccp(0,0.5);
-    newSprite.position = ccp(0, tableviewCellHeight/2);
+    newSprite.anchorPoint = ccp(0.5,0.5);
+    newSprite.position = ccp(tableviewWidth/2, tableviewCellHeight/2);
     newSprite.tag = idx;
     [cell addChild:newSprite];
+    
+    if ([[queueBarSprite objectAtIndex:idx] isKindOfClass:[CharacterHeadView class]]) {
+        CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:idx];
+        Character *character = characterHeadView.character;
+        CCSprite *playerColorFrame;
+        
+        if (character.player == player1Tag) {
+            playerColorFrame = [[CCSprite alloc] initWithFile:@"player1Character.png"];
+            playerColorFrame.tag = playerColerFrameTag;
+        }else {
+            playerColorFrame = [[CCSprite alloc] initWithFile:@"player2Character.png"];
+            playerColorFrame.tag = playerColerFrameTag;
+        }
+        playerColorFrame.position = newSprite.position;
+        [cell addChild:playerColorFrame];
+    }
     
     return cell;
 }
 -(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
-    return queueBarSprit.count;
+    return queueBarSprite.count;
 }
 
 #pragma mark SWTableViewDelegate
@@ -184,7 +231,37 @@ static const int tableviewPositionZ = 100;
 }
 
 -(void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
+    //TODO: after touch let map camera move to that character. 
+}
+
+#pragma mark Custom Table animation method
+-(void)removeCharacterHeadViewInCell:(NSUInteger)index {
+    SWTableViewCell *cell = [tableView cellAtIndex:index];
     
+    CCNode *node = [cell getChildByTag:index];
+    CCNode *playerColorFrame = [cell getChildByTag:playerColerFrameTag];
+    
+    [self runDeadAnimate:node];
+    [playerColorFrame runAction:[CCFadeOut actionWithDuration:1.0f]];
+}
+
+-(void)runDeadAnimate:(CCNode *)node {
+    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
+    emitter.position = ccp(node.position.x, node.position.y);
+    emitter.positionType = kCCPositionTypeRelative;
+    emitter.autoRemoveOnFinish = YES;
+    [node addChild:emitter];
+    
+    [node runAction:[CCFadeOut actionWithDuration:1.0f]];
+}
+
+-(void)resortTableViewWithAnimated:(BOOL)animated {
+    [tableView reloadData];
+    [tableView moveToTopWithAnimated:animated];
+}
+
+-(void)resortTableViewDoesHaveAnimation {
+    [self resortTableViewWithAnimated:YES];
 }
 
 @end

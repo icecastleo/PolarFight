@@ -2,7 +2,7 @@
 //  CharacterHeadView.h
 //  LightBugBattle
 //
-//  Created by  DAN on 13/1/17.
+//  Created by  浩翔 on 13/1/17.
 //
 //
 
@@ -12,6 +12,7 @@
 
 @interface CharacterHeadView : CCSprite
 
+@property (nonatomic,readonly) Character *character;
 -(id)initWithCharacter:(Character *)character;
 
 @end

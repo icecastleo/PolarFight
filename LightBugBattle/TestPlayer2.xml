@@ -2,4 +2,9 @@
 
 <party>
     <character ol="000" id="001" level="1"></character>
+    <character ol="001" id="002" level="2"></character>
+    <character ol="002" id="003" level="2"></character>
+    <character ol="003" id="004" level="2"></character>
+    <character ol="004" id="005" level="2"></character>
+    <character ol="005" id="006" level="2"></character>
 </party>

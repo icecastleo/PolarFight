@@ -2,7 +2,7 @@
 //  CharacterQueueObject.h
 //  LightBugBattle
 //
-//  Created by  DAN on 13/1/18.
+//  Created by  浩翔 on 13/1/18.
 //
 //
 
@@ -13,10 +13,10 @@
 @property (weak,nonatomic) Character *character;
 @property (nonatomic,readonly) NSUInteger time;
 
--(void)setCharacterQueueObjectTime:(NSUInteger)distance;
+-(void)setCharacterQueueObjectTime;
 -(void)timeDecrease:(NSUInteger)number;
 -(BOOL)hasTheSameCharacter:(Character *)newCharacter;
 
--(void)setCharacterQueueObjectTimeWithaVariable:(NSUInteger)distance;
+-(void)setCharacterQueueObjectTimeWithaVariable;
 
 @end

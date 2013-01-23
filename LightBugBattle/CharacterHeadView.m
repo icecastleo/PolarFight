@@ -2,7 +2,7 @@
 //  CharacterHeadView.m
 //  LightBugBattle
 //
-//  Created by  DAN on 13/1/17.
+//  Created by  浩翔 on 13/1/17.
 //
 //
 
@@ -22,6 +22,7 @@
     }
     if (self = [super initWithFile:character.headImageFileName]) {
         _imageFileName = character.headImageFileName;
+        _character = character;
     }
     return self;
 }
