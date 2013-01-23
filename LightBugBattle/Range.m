@@ -69,6 +69,12 @@ static float scale;
     rangeSprite.visible = NO;
     
     effectRange = [dict objectForKey:@"rangeEffectRange"];
+    
+    if (effectRange != nil) {
+        [rangeSprite addChild:effectRange.rangeSprite];
+        effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height / 2);
+        effectRange.rangeSprite.visible = YES;
+    }
 }
 
 -(void)setSpecialParameter:(NSMutableDictionary *)dict {
@@ -101,7 +107,7 @@ static float scale;
             if (effectRange == nil) {
                 [effectTargets addObject:temp];
             } else {
-                [effectTargets addObjectsFromArray:[effectRange getEffectTargets]];
+                return [effectRange getEffectTargets];
             }
         }
     }
@@ -140,13 +146,27 @@ static float scale;
 
         loc = [target.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
-//        NSLog(@"%f,%f",loc.x,loc.y);
+        CGPoint p = loc;
         loc.x = loc.x * scale - rangeSprite.boundingBox.size.width/2 + rangeWidth/2;
         loc.y = loc.y * scale - rangeSprite.boundingBox.size.height/2 + rangeHeight/2;
         
+//        CCLOG(@"%f,%f",loc.x,loc.y);
+        
+        p = [rangeSprite convertToWorldSpace:p];
+        p = [rangeSprite.parent.parent convertToNodeSpace:p];
+        
+        CCLOG(@"%f,%f",p.x,p.y);
+        
         if (CGPathContainsPoint(attackRange, NULL, loc, NO)) {
 //            CCLOG(@"Player %d's %@ is under the range", temp.player, temp.name);
+            CCSprite *test = [CCSprite spriteWithFile:@"Red_point.png"];
+            test.position = p;
+            [rangeSprite.parent.parent addChild:test];
             return YES;
+        } else {
+            CCSprite *test = [CCSprite spriteWithFile:@"Arrow.png"];
+            test.position = p;
+            [rangeSprite.parent.parent addChild:test];
         }
     }
     return NO;
@@ -180,8 +200,9 @@ static float scale;
     return NO;
 }
 
-//-(void)dealloc {
+-(void)dealloc {
+    [rangeSprite removeFromParentAndCleanup:YES];
 //    CGPathRelease(attackRange);
-//}
+}
 
 @end

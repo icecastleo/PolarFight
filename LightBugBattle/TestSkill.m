@@ -11,6 +11,7 @@
 #import "Character.h"
 #import "RangeCarrier.h"
 #import "RangeShooter.h"
+
 @implementation TestSkill
 
 -(id)initWithCharacter:(Character *)aCharacter {
@@ -41,6 +42,8 @@
     Range *effectRange = [Range rangeWithParameters:effectDictionary];
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
+    
+//     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",nil];
     
     RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithParameters:dictionary]];
     

@@ -360,9 +360,8 @@
     // TODO: When there is AI, there maybe need to change from dangerous to good state.
 }
 
-// TODO: Need to be called when attack animation finished
+// Need to be called when attack animation finished
 -(void)attackAnimateCallback {
-    CCLOG(@"Attack finish");
     state = stateIdle;
 }
 

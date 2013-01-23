@@ -29,7 +29,7 @@ const int characterInfoViewZ = 9999;
         [self setCharacterInfoViewLayer];
         
         [self addChild:cameraControl];
-        [self addChild:mapBody z:0];
+        [self addChild:mapBody z:-1];
         
         CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
         
