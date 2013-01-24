@@ -10,6 +10,8 @@
 #import "CharacterHeadView.h"
 #import "Character.h"
 #import "MyCell.h"
+#import "MapLayer.h"
+#import "MapCameraControl.h"
 
 typedef enum {
     buttomPad1 = 0,
@@ -221,12 +223,18 @@ static const int playerColerFrameTag = 987;
 
 #pragma mark SWTableViewDelegate
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-    CCSprite *sprite = [cell.children objectAtIndex:0];
-    [self selectSpriteForTouchFromCell:sprite];
+    CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:cell.idx];
+    Character *character = characterHeadView.character;
+    MapLayer *mapLayer = (MapLayer *)character.sprite.parent;
+    MapCameraControl *camera = mapLayer.cameraControl;
+    if (camera) {
+        [camera smoothMoveCameraToX:character.position.x Y:character.position.y];
+    }
 }
 
 -(void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
-    //TODO: after touch let map camera move to that character. 
+    //TODO: after touch let map camera move to that character.
+    
 }
 
 #pragma mark Custom Table animation method
@@ -261,7 +269,7 @@ static const int playerColerFrameTag = 987;
 -(void)deadAnimationCallback {
     NSArray *characterArray = [self.queue currentCharacterQueueArray];
     if (queueBarSprite.count == characterArray.count) {
-//        [self resortTableViewWithAnimated:YES];
+        [self resortTableViewWithAnimated:YES];
     }
 }
 
