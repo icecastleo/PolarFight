@@ -10,8 +10,12 @@
 #import "Character.h"
 
 @implementation CharacterQueueObject
-@synthesize time = _time;
+
 static const int distance = NSUIntegerMax;
+static const double a = 0.03;
+static const double b = -3.75;
+static const double c = 135;
+
 
 -(void)setCharacterQueueObjectTime {
     int agile = [self.character getAttribute:kCharacterAttributeAgile].value;
@@ -53,7 +57,7 @@ static const int distance = NSUIntegerMax;
 }
 
 -(NSUInteger)agileToTimeFunction:(NSUInteger)agile {
-    double doubleTime = 0.03*agile*agile-3.75*agile+135;
+    double doubleTime = a * agile*agile + b * agile + c;
     NSUInteger time = floor(doubleTime);
     return time;
 }

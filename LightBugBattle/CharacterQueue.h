@@ -11,7 +11,7 @@
 @protocol CharacteQueueBar <NSObject>
 -(void)redrawQueueBar;
 -(void)insertCharacterAtIndex:(NSUInteger)index withAnimated:(BOOL)animated;
--(void)removeCharacterWithAnimated:(BOOL)animated;
+-(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated;
 @end
 
 @interface CharacterQueue : NSObject

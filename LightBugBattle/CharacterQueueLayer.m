@@ -110,7 +110,7 @@ static const int playerColerFrameTag = 987;
         CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:character];
         [queueBarSprite addObject:characterHeadView];
     }
-    [self resortTableViewWithAnimated:YES];
+    [self resortTableViewWithAnimated:NO];
 }
 
 -(void)redrawQueueBar {
@@ -130,36 +130,31 @@ static const int playerColerFrameTag = 987;
 
 }
 
--(void)removeCharacterWithAnimated:(BOOL)animated {
+-(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated{
     //TODO: Show Remove Animation.
     if (!animated) {
         [self drawQueueBar];
         return;
     }
-    
-    NSMutableArray *willRemovequeueBarSprites = [NSMutableArray array];
-    
-    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    BOOL removed = NO;
+    int index;
     int count = queueBarSprite.count;
     for (int i=0; i<count; i++) {
         CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:i];
-        Character *character = characterHeadView.character;
-        if (![characterArray containsObject:character]) {
+        Character *removeCharacter = characterHeadView.character;
+        if (removeCharacter == character) {
             [self removeCharacterHeadViewInCell:i];
-            [willRemovequeueBarSprites addObject:characterHeadView];
+            removed = YES;
+            index = i;
+            break;
         }
     }
-    for (CharacterHeadView *characterHeadView in willRemovequeueBarSprites) {
-        if ([queueBarSprite containsObject:characterHeadView]) {
-            [queueBarSprite removeObject:characterHeadView];
-        }
+    if (removed) {
+        [queueBarSprite removeObjectAtIndex:index];
     }
-    
-    [self scheduleOnce:@selector(resortTableViewDoesHaveAnimation) delay:2];
-    willRemovequeueBarSprites = nil;
 }
 
-- (void)setTable {
+-(void)setTable {
     //CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];  //no color
     
     CGSize tableSize;
@@ -241,18 +236,21 @@ static const int playerColerFrameTag = 987;
     CCNode *node = [cell getChildByTag:index];
     CCNode *playerColorFrame = [cell getChildByTag:playerColerFrameTag];
     
-    [self runDeadAnimate:node];
+    [self runDeadAnimation:node];
     [playerColorFrame runAction:[CCFadeOut actionWithDuration:1.0f]];
 }
 
--(void)runDeadAnimate:(CCNode *)node {
+-(void)runDeadAnimation:(CCNode *)node {
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
     emitter.position = ccp(node.position.x, node.position.y);
     emitter.positionType = kCCPositionTypeRelative;
     emitter.autoRemoveOnFinish = YES;
     [node addChild:emitter];
     
-    [node runAction:[CCFadeOut actionWithDuration:1.0f]];
+    [node runAction:[CCSequence actions:
+                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(deadAnimationCallback)]
+                     ,nil]];
 }
 
 -(void)resortTableViewWithAnimated:(BOOL)animated {
@@ -260,8 +258,11 @@ static const int playerColerFrameTag = 987;
     [tableView moveToTopWithAnimated:animated];
 }
 
--(void)resortTableViewDoesHaveAnimation {
-    [self resortTableViewWithAnimated:YES];
+-(void)deadAnimationCallback {
+    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    if (queueBarSprite.count == characterArray.count) {
+//        [self resortTableViewWithAnimated:YES];
+    }
 }
 
 @end

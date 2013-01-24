@@ -97,7 +97,7 @@
     if (!hasRemoved) {
         //CCLOG(@"The character isn't in the queue.");
     }
-    [self.delegate removeCharacterWithAnimated:animated];
+    [self.delegate removeCharacter:character withAnimated:animated];
 }
 
 -(CharacterQueueObject *)first {
