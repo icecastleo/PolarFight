@@ -58,6 +58,7 @@ static const int tableviewPositionY = 40;
 static const int tableviewPositionZ = 100;
 static const int player1Tag = 1;
 static const int playerColerFrameTag = 987;
+static const int arrowTag = 990;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue {
     if ((self = [super init])) {
@@ -120,20 +121,44 @@ static const int playerColerFrameTag = 987;
 }
 
 -(void)insertCharacterAtIndex:(NSUInteger)index withAnimated:(BOOL)animated {
-    //TODO: Show Insert Animation.
-    if (!animated) {
-        [self drawQueueBar];
-        return;
+    //FIXME: Here should be tested more.
+//    if (!animated) {
+//        [self drawQueueBar];
+//        return;
+//    }
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+//    NSLog(@"%d",index);
+    SWTableViewCell *cell = [tableView cellAtIndex:index];
+    CCSprite *insertArrow = [[CCSprite alloc] initWithFile:@"Arrow.png"];
+    int height;
+    BOOL show = NO;
+    insertArrow.tag = arrowTag;
+    if (cell) {
+//        int count = cell.children.count;
+//        NSLog(@"%d.cell is here ::(%g,%g) count :: %d",cell.idx,cell.position.x,cell.position.y,count);
+        height = cell.position.y;
+        show = YES;
+    }else {
+//        NSLog(@"no cell");
+        height = winSize.height - (tableviewPositionY + index*tableviewCellHeight);
+        if (height > tableviewPositionY) {
+            show = YES;
+        }
     }
-//    NSArray *characterArray = [self.queue currentCharacterQueueArray];
-//    int count = characterArray.count;
-//    CharacterHeadView *character = [[CharacterHeadView alloc] initWithCharacter:[characterArray objectAtIndex:index]];
-    
+    if (show) {
+        insertArrow.position = ccp(tableviewPositionX+tableviewWidth,height);
+        [self addChild:insertArrow];
+        [insertArrow runAction:[CCFadeOut actionWithDuration:1.0f]];
+        [self performSelector:@selector(arrowClean) withObject:nil afterDelay:1.0];
+    }
+    [self drawQueueBar];
+}
 
+-(void)arrowClean {
+    [[self getChildByTag:arrowTag] removeFromParentAndCleanup:YES];
 }
 
 -(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated{
-    //TODO: Show Remove Animation.
     if (!animated) {
         [self drawQueueBar];
         return;
@@ -230,11 +255,6 @@ static const int playerColerFrameTag = 987;
     if (camera) {
         [camera smoothMoveCameraToX:character.position.x Y:character.position.y];
     }
-}
-
--(void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
-    //TODO: after touch let map camera move to that character.
-    
 }
 
 #pragma mark Custom Table animation method
