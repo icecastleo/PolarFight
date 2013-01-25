@@ -10,6 +10,8 @@
 #import "CharacterHeadView.h"
 #import "Character.h"
 #import "MyCell.h"
+#import "MapLayer.h"
+#import "MapCameraControl.h"
 
 typedef enum {
     buttomPad1 = 0,
@@ -56,6 +58,7 @@ static const int tableviewPositionY = 40;
 static const int tableviewPositionZ = 100;
 static const int player1Tag = 1;
 static const int playerColerFrameTag = 987;
+static const int arrowTag = 990;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue {
     if ((self = [super init])) {
@@ -110,7 +113,7 @@ static const int playerColerFrameTag = 987;
         CharacterHeadView *characterHeadView = [[CharacterHeadView alloc] initWithCharacter:character];
         [queueBarSprite addObject:characterHeadView];
     }
-    [self resortTableViewWithAnimated:YES];
+    [self resortTableViewWithAnimated:NO];
 }
 
 -(void)redrawQueueBar {
@@ -118,48 +121,67 @@ static const int playerColerFrameTag = 987;
 }
 
 -(void)insertCharacterAtIndex:(NSUInteger)index withAnimated:(BOOL)animated {
-    //TODO: Show Insert Animation.
-    if (!animated) {
-        [self drawQueueBar];
-        return;
+    //FIXME: Here should be tested more.
+//    if (!animated) {
+//        [self drawQueueBar];
+//        return;
+//    }
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+//    NSLog(@"%d",index);
+    SWTableViewCell *cell = [tableView cellAtIndex:index];
+    CCSprite *insertArrow = [[CCSprite alloc] initWithFile:@"Arrow.png"];
+    int height;
+    BOOL show = NO;
+    insertArrow.tag = arrowTag;
+    if (cell) {
+//        int count = cell.children.count;
+//        NSLog(@"%d.cell is here ::(%g,%g) count :: %d",cell.idx,cell.position.x,cell.position.y,count);
+        height = cell.position.y;
+        show = YES;
+    }else {
+//        NSLog(@"no cell");
+        height = winSize.height - (tableviewPositionY + index*tableviewCellHeight);
+        if (height > tableviewPositionY) {
+            show = YES;
+        }
     }
-//    NSArray *characterArray = [self.queue currentCharacterQueueArray];
-//    int count = characterArray.count;
-//    CharacterHeadView *character = [[CharacterHeadView alloc] initWithCharacter:[characterArray objectAtIndex:index]];
-    
-
+    if (show) {
+        insertArrow.position = ccp(tableviewPositionX+tableviewWidth,height);
+        [self addChild:insertArrow];
+        [insertArrow runAction:[CCFadeOut actionWithDuration:1.0f]];
+        [self performSelector:@selector(arrowClean) withObject:nil afterDelay:1.0];
+    }
+    [self drawQueueBar];
 }
 
--(void)removeCharacterWithAnimated:(BOOL)animated {
-    //TODO: Show Remove Animation.
+-(void)arrowClean {
+    [[self getChildByTag:arrowTag] removeFromParentAndCleanup:YES];
+}
+
+-(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated{
     if (!animated) {
         [self drawQueueBar];
         return;
     }
-    
-    NSMutableArray *willRemovequeueBarSprites = [NSMutableArray array];
-    
-    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    BOOL removed = NO;
+    int index;
     int count = queueBarSprite.count;
     for (int i=0; i<count; i++) {
         CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:i];
-        Character *character = characterHeadView.character;
-        if (![characterArray containsObject:character]) {
+        Character *removeCharacter = characterHeadView.character;
+        if (removeCharacter == character) {
             [self removeCharacterHeadViewInCell:i];
-            [willRemovequeueBarSprites addObject:characterHeadView];
+            removed = YES;
+            index = i;
+            break;
         }
     }
-    for (CharacterHeadView *characterHeadView in willRemovequeueBarSprites) {
-        if ([queueBarSprite containsObject:characterHeadView]) {
-            [queueBarSprite removeObject:characterHeadView];
-        }
+    if (removed) {
+        [queueBarSprite removeObjectAtIndex:index];
     }
-    
-    [self scheduleOnce:@selector(resortTableViewDoesHaveAnimation) delay:2];
-    willRemovequeueBarSprites = nil;
 }
 
-- (void)setTable {
+-(void)setTable {
     //CCLayerColor *layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];  //no color
     
     CGSize tableSize;
@@ -226,12 +248,13 @@ static const int playerColerFrameTag = 987;
 
 #pragma mark SWTableViewDelegate
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-    CCSprite *sprite = [cell.children objectAtIndex:0];
-    [self selectSpriteForTouchFromCell:sprite];
-}
-
--(void)selectSpriteForTouchFromCell:(CCSprite *)sprite {
-    //TODO: after touch let map camera move to that character. 
+    CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:cell.idx];
+    Character *character = characterHeadView.character;
+    MapLayer *mapLayer = (MapLayer *)character.sprite.parent;
+    MapCameraControl *camera = mapLayer.cameraControl;
+    if (camera) {
+        [camera smoothMoveCameraToX:character.position.x Y:character.position.y];
+    }
 }
 
 #pragma mark Custom Table animation method
@@ -241,18 +264,21 @@ static const int playerColerFrameTag = 987;
     CCNode *node = [cell getChildByTag:index];
     CCNode *playerColorFrame = [cell getChildByTag:playerColerFrameTag];
     
-    [self runDeadAnimate:node];
+    [self runDeadAnimation:node];
     [playerColorFrame runAction:[CCFadeOut actionWithDuration:1.0f]];
 }
 
--(void)runDeadAnimate:(CCNode *)node {
+-(void)runDeadAnimation:(CCNode *)node {
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
     emitter.position = ccp(node.position.x, node.position.y);
     emitter.positionType = kCCPositionTypeRelative;
     emitter.autoRemoveOnFinish = YES;
     [node addChild:emitter];
     
-    [node runAction:[CCFadeOut actionWithDuration:1.0f]];
+    [node runAction:[CCSequence actions:
+                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(deadAnimationCallback)]
+                     ,nil]];
 }
 
 -(void)resortTableViewWithAnimated:(BOOL)animated {
@@ -260,8 +286,11 @@ static const int playerColerFrameTag = 987;
     [tableView moveToTopWithAnimated:animated];
 }
 
--(void)resortTableViewDoesHaveAnimation {
-    [self resortTableViewWithAnimated:YES];
+-(void)deadAnimationCallback {
+    NSArray *characterArray = [self.queue currentCharacterQueueArray];
+    if (queueBarSprite.count == characterArray.count) {
+        [self resortTableViewWithAnimated:YES];
+    }
 }
 
 @end
