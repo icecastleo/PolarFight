@@ -36,7 +36,7 @@
     
     float angle = atan2f(vector.y, vector.x);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angle);
-    float cocosAngle = -1 * angleDegrees;
+    float cocosAngle = 270 - angleDegrees;
     
     range.rangeSprite.rotation = cocosAngle;
     

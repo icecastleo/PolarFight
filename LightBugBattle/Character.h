@@ -53,8 +53,9 @@
 
 @property CGPoint direction;
 @property CGPoint position;
-@property (readonly) CGRect boundingBox;
 
+@property (readonly) float radius;
+@property (readonly) CGRect boundingBox;
 
 @property (nonatomic) NSMutableArray *pointArray;
 

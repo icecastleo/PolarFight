@@ -26,6 +26,7 @@
 #import "SuicideSkill.h"
 #import "BombPassiveSkill.h"
 #import "TestSkill.h"
+#import "BombSkill.h"
 
 @implementation Character
 
@@ -39,7 +40,7 @@
 @synthesize pointArray;
 
 @synthesize direction = _direction;
-@dynamic position,boundingBox;
+@dynamic position,boundingBox,radius;
 
 // FIXME: fix name reference.
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
@@ -118,7 +119,7 @@
         SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
         [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
-        skill = [[SuicideSkill alloc] initWithCharacter:self];
+        skill = [[BombSkill alloc] initWithCharacter:self];
     }
 }
 
@@ -426,6 +427,10 @@
 
 -(CGRect)boundingBox {
     return sprite.boundingBox;
+}
+
+-(float)radius {
+    return sprite.boundingBox.size.width / 2;
 }
 
 -(void)addPassiveSkill:(PassiveSkill *)passiveSkill {

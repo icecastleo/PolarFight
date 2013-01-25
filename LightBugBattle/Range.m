@@ -78,7 +78,7 @@ static float scale;
         }
         
         [rangeSprite addChild:effectRange.rangeSprite];
-        effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height / 2);
+        effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width / 2, 0);
         effectRange.rangeSprite.visible = YES;
     }    
 }

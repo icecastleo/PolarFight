@@ -12,9 +12,7 @@
 #import "cocos2d.h"
 
 @interface Barrier : CCSprite {
-    
     int shapeType;
-    
 }
 
 @property (readwrite, assign) float radius;

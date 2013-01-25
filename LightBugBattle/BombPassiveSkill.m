@@ -12,7 +12,7 @@
 @implementation BombPassiveSkill
 
 -(void)characterWillRemoveDelegate:(Character *)sender {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:sender,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@150,@"effectRadius",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:sender,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@75,@"effectRadius",nil];
     
     Range *range = [Range rangeWithParameters:dictionary];
 
