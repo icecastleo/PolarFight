@@ -209,17 +209,17 @@
                      ,nil]];
 }
 
+-(void)deadAnimateCallback {
+    // TODO : Comment out after test.
+    [self releaseCharacterRetain];
+//    [self removeFromParentAndCleanup:YES];
+}
+
 -(void)releaseCharacterRetain {
     upAttackAction = nil;
     downAttackAction = nil;
     leftAttackAction = nil;
     rightAttackAction = nil;
-}
-
--(void)deadAnimateCallback {
-    // TODO : Comment out after test.
-    [self releaseCharacterRetain];
-//    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)updateBloodSprite {

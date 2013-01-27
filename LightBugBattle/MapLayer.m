@@ -30,12 +30,16 @@
         
         [self addChild:cameraControl];
         [self addChild:mapBody z:-1];
+
+        self.isTouchEnabled = YES;
         
         CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
-        
-        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
     }
     return self;
+}
+
+-(void)registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
 }
 
 - (void)setCharacterInfoViewLayer {
@@ -71,7 +75,7 @@
 
 -(void)addBarrier:(Barrier *)barrier {
     [barriers addObject:barrier];
-    [self addChild:barrier z:zOrder - barrier.center.y];
+    [self addChild:barrier z:zOrder - barrier.collisionPosition.y];
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -123,8 +127,8 @@
         collisionObjectPosition = c.position;
         collisionObjectRadius = c.radius;
     } else {
-        collisionObjectPosition = b.position;
-        collisionObjectRadius = b.radius;
+        collisionObjectPosition = b.collisionPosition;
+        collisionObjectRadius = b.collisionRadius;
     }
     
     CGPoint deltaPoint = ccpSub(position, character.position);
@@ -191,7 +195,7 @@
         [self setPosition:position forCharacter:character];
         [cameraControl moveCameraToX:position.x Y:position.y];
     } else {
-        // Something have block this move.
+        // Something is occupied the position.
     }
 }
 
@@ -278,7 +282,7 @@
         float targetRadius = other.sprite.boundingBox.size.width/2;
         float selfRadius = character.sprite.boundingBox.size.width/2;
         
-        if(ccpDistance(position, targetPosition) < (targetRadius + selfRadius)) {
+        if(ccpDistance(position, targetPosition) < (selfRadius + targetRadius)) {
             return other;
         }
     }
@@ -287,11 +291,11 @@
 
 -(Barrier *)getCollisionBarrierForCharacter:(Character *)character atPosition:(CGPoint)position {
     for(Barrier *barrier in barriers) {
-        CGPoint targetPosition = barrier.center;
-        float targetRadius = barrier.radius;
+        CGPoint targetPosition = barrier.collisionPosition;
+        float targetRadius = barrier.collisionRadius;
         float selfRadius = character.sprite.boundingBox.size.width/2;
         
-        if(ccpDistance(position, targetPosition) < (targetRadius + selfRadius)) {
+        if(ccpDistance(position, targetPosition) < (selfRadius + targetRadius)) {
             return barrier;
         }
     }
@@ -373,6 +377,10 @@
     y = cameraPosition.y - winSize.height/2 + winSize.height/5;
     
     return ccp(x, y);
+}
+
+-(void)dealloc {
+    CCLOG(@"MAPLayer");
 }
 
 @end

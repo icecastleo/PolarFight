@@ -12,7 +12,7 @@
 
 @interface CharacterQueueLayer : CCLayer <CharacteQueueBar,SWTableViewDataSource,SWTableViewDelegate>
 
-@property (weak,nonatomic) Character *currentCharacter;
+@property (weak, nonatomic) Character *currentCharacter;
 
 -(id)initWithQueue:(CharacterQueue *)aQueue;
 

@@ -85,8 +85,8 @@ static const int pauseLayerTag = 9999;
                                  itemWithNormalImage:@"ButtonPause.png" selectedImage:@"ButtonPauseSel.png"
                                  target:self selector:@selector(pauseButtonTapped:)];
     
-    double width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
-    double height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
+    float width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
+    float height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
     pauseMenuItem.position = ccp(width, height);
     
     CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];

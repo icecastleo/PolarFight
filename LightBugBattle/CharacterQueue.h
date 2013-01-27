@@ -22,9 +22,8 @@
 -(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters;
 -(void)addCharacter:(Character *)newCharacter;
 -(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated;
-- (Character *)pop;
-- (NSUInteger)count;
-- (void)clear;
+-(Character *)pop;
+-(NSUInteger)count;
 
 -(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter withAnimated:(BOOL)animated;
 -(NSArray *)currentCharacterQueueArray;

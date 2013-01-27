@@ -12,19 +12,12 @@
 
 
 @interface CharacterQueue()
-@property (atomic, strong) NSMutableArray *queue;
+@property NSMutableArray *queue;
 @end
 
 @implementation CharacterQueue
 //static const int distance = NSIntegerMax;
 
--(id)init {
-    if ((self = [super init])) {
-        [self clear];
-    }
-    
-    return self;
-}
 /*
 -(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2 {
     if ((self = [super init])) {
@@ -44,7 +37,8 @@
 //*/
 -(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters {
     if ((self = [super init])) {
-        [self clear];
+        _queue = [[NSMutableArray alloc] init];
+
         for (Character *cha in characters) {
             [self addCharacter:cha];
         }
@@ -53,10 +47,6 @@
     }
     
     return self;
-}
-
--(void)clear {
-    self.queue = [[NSMutableArray alloc] init];
 }
 
 #pragma mark - PriorityQueue

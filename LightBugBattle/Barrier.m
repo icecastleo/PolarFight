@@ -10,12 +10,18 @@
 
 
 @implementation Barrier
-@synthesize center, radius;
 
--(void) setShapeRoundRadius:(float)r center:(CGPoint)point
-{
-    radius = r;
-    center = ccpAdd( [self position], point );
+-(id)initWithFile:(NSString *)file radius:(float)radius {
+    if (self = [super initWithFile:file]) {
+        _collisionRadius = radius;
+    }
+    return self;
+}
+
+-(void)setPosition:(CGPoint)position {
+    [super setPosition:position];
+    
+    _collisionPosition = ccp(position.x, position.y - self.boundingBox.size.height / 2 + _collisionRadius);
 }
 
 @end

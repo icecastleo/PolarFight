@@ -54,7 +54,7 @@
 
 static int kMoveMultiplier = 40;
 
-static BattleController* currentInstance;
+__weak static BattleController* currentInstance;
 
 +(BattleController *)currentInstance {
     return currentInstance;
@@ -74,24 +74,20 @@ static BattleController* currentInstance;
         [self addChild:mapLayer];
         
         // Testing add barriers
-        Barrier* tree = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree setPosition:ccp(35,35)];
-        [tree setShapeRoundRadius:10 center:ccp(10,-30)];
+        Barrier* tree = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
+        tree.position = ccp(35, 35);
         [mapLayer addBarrier:tree];
         
-        Barrier* tree2 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree2 setPosition:ccp(35,-35)];
-        [tree2 setShapeRoundRadius:10 center:ccp(10,-30)];
+        Barrier* tree2 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
+        tree2.position = ccp(35, -35);
         [mapLayer addBarrier:tree2];
         
-        Barrier* tree3 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree3 setPosition:ccp(-35,35)];
-        [tree3 setShapeRoundRadius:10 center:ccp(10,-30)];
+        Barrier* tree3 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
+        tree3.position = ccp(-35, 35);
         [mapLayer addBarrier:tree3];
         
-        Barrier* tree4 = [Barrier spriteWithFile:@"tree01.gif"];
-        [tree4 setPosition:ccp(-35,-35)];
-        [tree4 setShapeRoundRadius:10 center:ccp(10,-30)];
+        Barrier* tree4 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
+        tree4.position = ccp(-35, -35);
         [mapLayer addBarrier:tree4];
         
         // init Dpad
@@ -289,6 +285,10 @@ static BattleController* currentInstance;
     }
     Character *character = [characterQueue pop];
     return character;
+}
+
+-(void)dealloc {
+    CCLOG(@"BattleScene dealloc");
 }
 
 @end

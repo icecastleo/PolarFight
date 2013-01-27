@@ -28,7 +28,7 @@
     CharacterInfoView *characterInfoView;
 }
 
-@property (strong, readonly) NSMutableArray* characters;
+@property (readonly) NSMutableArray* characters;
 @property (readonly) MapCameraControl* cameraControl;
 
 -(id)initWithMapSprite:(CCSprite*)aSprite;

@@ -841,6 +841,8 @@
 		9B2C7863169A1C2D00CA1A1C /* Aura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* Aura.m */; };
 		9B2C7867169ABA9900CA1A1C /* SlowMovePassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */; };
 		9B2C786E169ADA9300CA1A1C /* SlowMoveAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C786D169ADA9300CA1A1C /* SlowMoveAura.m */; };
+		9B33591D16B5656D00259B28 /* ButtonPause.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */; };
+		9B33591F16B5656F00259B28 /* ButtonPauseSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1A16676B8B00BAF11B /* HelloWorldScene.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -4723,6 +4725,8 @@
 				9B9379A216B1677500F1A05A /* BombExploding_04.png in Resources */,
 				9B9379A316B1677500F1A05A /* BombExploding_05.png in Resources */,
 				9B9379A416B1677500F1A05A /* BombExploding_06.png in Resources */,
+				9B33591D16B5656D00259B28 /* ButtonPause.png in Resources */,
+				9B33591F16B5656F00259B28 /* ButtonPauseSel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4948,7 +4952,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
@@ -4972,7 +4976,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
@@ -4996,7 +5000,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -5004,6 +5008,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5023,7 +5028,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = LightBugBattle/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -5031,6 +5036,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

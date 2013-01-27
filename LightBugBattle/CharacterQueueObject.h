@@ -10,8 +10,8 @@
 
 @interface CharacterQueueObject : NSObject
 
-@property (weak,nonatomic) Character *character;
-@property (nonatomic,readonly) NSUInteger time;
+@property (weak) Character *character;
+@property (readonly) NSUInteger time;
 
 -(void)setCharacterQueueObjectTime;
 -(void)timeDecrease:(NSUInteger)number;

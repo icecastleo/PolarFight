@@ -28,7 +28,6 @@
 //    id<GameState> state;
     
     Character *currentCharacter;
-//    NSMutableArray *characters;
     
     bool startMove;
     bool canMove;
@@ -36,7 +35,6 @@
     float countdown;
     
     int currentIndex;
-    //NSMutableArray *characterQueue;
 }
 
 //@property (readonly) DPadLayer *dPadLayer;
