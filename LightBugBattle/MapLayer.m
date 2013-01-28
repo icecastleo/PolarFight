@@ -134,12 +134,19 @@
     CGPoint deltaPoint = ccpSub(position, character.position);
     CGPoint deltaCenter = ccpSub(collisionObjectPosition, character.position);
     
+    // TODO: Delete me after test.
+    if (deltaCenter.x == 0 && deltaCenter.y == 0) {
+        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
+        return;
+    }
+    
     // Their cos = 1 -> 0 degree
     if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.99) {
 //        CGPoint result = ccpMult(ccpNormalize(deltaPoint),collisionObjectRadius + character.radius);
 //        position = ccpAdd(collisionObjectPosition, ccpNeg(result));
 //        [self setPosition:position forCharacter:character];
 //        [cameraControl moveCameraToX:position.x Y:position.y];
+        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
         return;
     }
     
@@ -198,6 +205,7 @@
         [cameraControl moveCameraToX:position.x Y:position.y];
     } else {
         // Something is occupied the position.
+        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
     }
 }
 
