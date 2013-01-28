@@ -120,6 +120,7 @@
         [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         skill = [[BombSkill alloc] initWithCharacter:self];
+//        skill = [[SuicideSkill alloc] initWithCharacter:self];
     }
 }
 
