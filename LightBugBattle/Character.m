@@ -128,11 +128,7 @@
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
-        int hp = [self getAttribute:kCharacterAttributeHp].value;
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:hp / 5]];
-    }  else if ([name isEqualToString:@"Tank"]) {
-        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
-        [auraArray addObject:aura];
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithPercentValue:25]];
     } else if ([name isEqualToString:@"Bomber"]) {
         [self addPassiveSkill:[[BombPassiveSkill alloc] init]];
     } else if ([name isEqualToString:@"Archer"]) {
