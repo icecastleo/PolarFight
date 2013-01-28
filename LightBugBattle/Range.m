@@ -91,8 +91,8 @@ static float scale;
 -(void)setRangeSprite {
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate( NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast );
-    CGContextSetRGBFillColor( context, 1.0, 0.8, 0.8, 0.8 );
+    CGContextRef context = CGBitmapContextCreate(NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextSetRGBFillColor(context, 1.0, 0.8, 0.8, 0.8);
     
     CGContextAddPath(context, attackRange);
     CGContextFillPath(context);
@@ -100,7 +100,7 @@ static float scale;
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
 
-    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];    
+    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 }
 
 -(NSArray *)getEffectTargets {

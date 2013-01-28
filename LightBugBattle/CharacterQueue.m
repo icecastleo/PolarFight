@@ -16,6 +16,8 @@
 @end
 
 @implementation CharacterQueue
+@dynamic count;
+
 //static const int distance = NSIntegerMax;
 
 /*
@@ -35,6 +37,7 @@
     return self;
 }
 //*/
+
 -(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters {
     if ((self = [super init])) {
         _queue = [[NSMutableArray alloc] init];
@@ -45,17 +48,21 @@
         [self setRandomCharacterQueueObjectTime];
         [self sortQueue];
     }
-    
     return self;
 }
 
 #pragma mark - PriorityQueue
 
+-(int)count {
+    return _queue.count;
+}
+
 -(void)addCharacter:(Character *)newCharacter {
     CharacterQueueObject *newObject = [[CharacterQueueObject alloc] init];
     newObject.character = newCharacter;
     [newObject setCharacterQueueObjectTime];
-    NSUInteger insertIndex = [self getInsertIndexForCharacter:newCharacter withAnimated:NO];
+    
+    NSUInteger insertIndex = [self getIndexForCharacterQueueObject:newObject];
 
     [self.queue insertObject:newObject atIndex:insertIndex];
     [self.delegate redrawQueueBar];
@@ -97,19 +104,8 @@
     return firstObject;
 }
 
--(NSUInteger)count {
-    return self.queue.count;
-}
-
 -(NSString *)description {
     return [[self queue] description];
-}
-
--(NSUInteger)lastIndex {
-    if (self.queue.count > 0) 
-        return self.queue.count - 1;
-    
-    return 0;
 }
 
 -(void)setCharacterQueueObjectTime {
@@ -124,51 +120,37 @@
     }
 }
 
--(BOOL)compareAgileWithCharacter1:(CharacterQueueObject *)object1 andCharacter2:(CharacterQueueObject *)object2 {
-    int time1 = object1.time;
-    int time2 = object2.time;
-    
-    return (time1 > time2);
+-(int)compareCharacterQueueObject:(CharacterQueueObject *)object1 andObject:(CharacterQueueObject *)object2 {    
+    if (object1.time > object2.time) {
+        return NSOrderedDescending;
+    } else if (object1.time == object2.time) {
+        return NSOrderedSame;
+    } else {
+        return NSOrderedAscending;
+    }
 }
 
 // Ascending Array
 -(void)sortQueue {
     [self.queue sortUsingComparator:^NSComparisonResult(CharacterQueueObject * obj1, CharacterQueueObject * obj2) {
-        
-        if( ![self compareAgileWithCharacter1:obj1 andCharacter2:obj2]) {
-            return NSOrderedAscending;
-        }
-        else if ( [self compareAgileWithCharacter1:obj1 andCharacter2:obj2] ) {
-            return NSOrderedDescending;
-        }
-        return NSOrderedSame;
+        return [self compareCharacterQueueObject:obj1 andObject:obj2];
     }];
 }
 
-#pragma mark Custom Functions
--(NSUInteger)getInsertIndexForCharacter:(Character *)newCharacter withAnimated:(BOOL)animated{
-    CharacterQueueObject *newObject = [[CharacterQueueObject alloc] init];
-    newObject.character = newCharacter;
-    [newObject setCharacterQueueObjectTime];
-    NSUInteger last_index = [self lastIndex];
-    NSUInteger insertIndex = [self count];
+-(NSUInteger)getIndexForCharacterQueueObject:(CharacterQueueObject *)object {
+    if (self.count == 0) {
+        return 0;
+    }
     
-    if (last_index < [self count]) {
-        CharacterQueueObject *lastObj = [self.queue objectAtIndex:last_index];
+    for (NSUInteger index = self.count; index > 0; index--) {
+        CharacterQueueObject *temp = [self.queue objectAtIndex:index - 1];
         
-        while ([self compareAgileWithCharacter1:lastObj andCharacter2:newObject]) {
-            insertIndex = last_index;
-            if ( 0 < last_index) {
-                last_index--;
-                lastObj = [self.queue objectAtIndex:last_index];
-            }else {
-                break;
-            }
+        if ([self compareCharacterQueueObject:temp andObject:object] <= 0) {
+            return index;
         }
     }
-    [self.delegate insertCharacterAtIndex:insertIndex withAnimated:animated];
-    
-    return insertIndex;
+    // Object is the fatest
+    return 0;
 }
 
 -(NSArray *)currentCharacterQueueArray {

@@ -18,6 +18,7 @@
 @property (readwrite) CGPoint velocity;
 @property (readwrite) float power;
 @property (readonly) BOOL collision;
+
 @property (readwrite) int count;
 @property (readwrite) float ratio;
 
