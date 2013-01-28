@@ -45,15 +45,13 @@ static const double c = 135;
 -(void)setCharacterQueueObjectTimeWithaVariable {
     //random add/minus a half of agile to this character in this time.
     int agile = [self.character getAttribute:kCharacterAttributeAgile].value;
-    int pickaNumber = arc4random() % 2;
-    int variable = 1;
-    
-    if (pickaNumber != 0)
-        variable *= -1;
+    int value = agile*0.2 + 1;
+    int randomValue = arc4random() % value;
+    agile = agile*0.9 + randomValue;
     
       //old function
 //    _time = distance/(agile+variable);
-    _time = [self agileToTimeFunction:(agile+variable)];
+    _time = [self agileToTimeFunction:agile];
 }
 
 -(NSUInteger)agileToTimeFunction:(NSUInteger)agile {
