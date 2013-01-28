@@ -3,12 +3,12 @@
 <characters>
     <character id="001" name="Swordsman" img="amg1" headImage="swordsmanHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="300"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="150"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="30"></attribute>
+            <attribute name="attack" a="0" b="0" c="45"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
-            <attribute name="agile" a="0" b="0" c="3"></attribute>
-            <attribute name="speed" a="0" b="0" c="5"></attribute>
+            <attribute name="agile" a="0" b="0" c="15"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -21,11 +21,11 @@
     </character>
     <character id="002" name="Archer" img="ftr1" headImage="assassinHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="30"></attribute>
+            <attribute name="attack" a="0" b="0" c="45"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
-            <attribute name="agile" a="0" b="0" c="4"></attribute>
+            <attribute name="agile" a="0" b="0" c="20"></attribute>
             <attribute name="speed" a="0" b="0" c="5"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
@@ -39,12 +39,12 @@
     </character>
     <character id="003" name="Wizard" img="avt1" headImage="wizardHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="20"></attribute>
+            <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
-            <attribute name="agile" a="0" b="0" c="2"></attribute>
-            <attribute name="speed" a="0" b="0" c="6"></attribute>
+            <attribute name="agile" a="0" b="0" c="10"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
@@ -57,11 +57,11 @@
     </character>
     <character id="004" name="Priest" img="bmg1" headImage="priestHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="20"></attribute>
+            <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="5"></attribute>
-            <attribute name="agile" a="0" b="0" c="2"></attribute>
+            <attribute name="agile" a="0" b="0" c="10"></attribute>
             <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
@@ -75,11 +75,11 @@
     </character>
     <character id="005" name="God" img="chr1" headImage="godHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="50"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="50"></attribute>
+            <attribute name="attack" a="0" b="0" c="75"></attribute>
             <attribute name="defense" a="0" b="0" c="5"></attribute>
-            <attribute name="agile" a="0" b="0" c="1"></attribute>
+            <attribute name="agile" a="0" b="0" c="5"></attribute>
             <attribute name="speed" a="0" b="0" c="5"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
@@ -93,11 +93,11 @@
     </character>
     <character id="006" name="Bomber" img="dvl1" headImage="bomberHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="40"></attribute>
+            <attribute name="attack" a="0" b="0" c="60"></attribute>
             <attribute name="defense" a="0" b="0" c="15"></attribute>
-            <attribute name="agile" a="0" b="0" c="3"></attribute>
+            <attribute name="agile" a="0" b="0" c="15"></attribute>
             <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
@@ -111,11 +111,11 @@
     </character>
     <character id="007" name="Tank" img="gsd1" headImage="TankHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="500"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="250"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="20"></attribute>
+            <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="25"></attribute>
-            <attribute name="agile" a="0" b="0" c="2"></attribute>
+            <attribute name="agile" a="0" b="0" c="10"></attribute>
             <attribute name="speed" a="0" b="0" c="2"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
@@ -129,12 +129,12 @@
     </character>
     <character id="008" name="Assassin" img="isd1" headImage="archerHead32.png">
         <attributes>
-            <attribute name="maxHp" a="0" b="0" c="200"></attribute>
+            <attribute name="maxHp" a="0" b="0" c="100"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
-            <attribute name="attack" a="0" b="0" c="30"></attribute>
+            <attribute name="attack" a="0" b="0" c="45"></attribute>
             <attribute name="defense" a="0" b="0" c="10"></attribute>
             <attribute name="agile" a="0" b="0" c="4"></attribute>
-            <attribute name="speed" a="0" b="0" c="4"></attribute>
+            <attribute name="speed" a="0" b="0" c="2"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
