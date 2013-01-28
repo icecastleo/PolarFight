@@ -291,8 +291,4 @@ __weak static BattleController* currentInstance;
     return character;
 }
 
--(void)dealloc {
-    CCLOG(@"BattleScene dealloc");
-}
-
 @end

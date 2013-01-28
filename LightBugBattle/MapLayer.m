@@ -113,7 +113,7 @@
     Character *c = [self getCollisionCharacterForCharacter:character atPosition:position];
     Barrier *b = [self getCollisionBarrierForCharacter:character atPosition:position];
     
-    // No one occupied the target position
+    // No one occupied the position
     if (b == nil && c == nil) {
         [self setPosition:position forCharacter:character];
         [cameraControl moveCameraToX:position.x Y:position.y];
@@ -134,12 +134,12 @@
     CGPoint deltaPoint = ccpSub(position, character.position);
     CGPoint deltaCenter = ccpSub(collisionObjectPosition, character.position);
     
-    // Their ccpNormalize are the same.
-    if (ccpDot(deltaPoint, deltaCenter) == 1) {
-        CGPoint result = ccpMult(ccpNormalize(deltaCenter),collisionObjectRadius + character.radius);
-        position = ccpAdd(position, result);
-        [self setPosition:position forCharacter:character];
-        [cameraControl moveCameraToX:position.x Y:position.y];
+    // Their cos = 1 -> 0 degree
+    if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.99) {
+//        CGPoint result = ccpMult(ccpNormalize(deltaPoint),collisionObjectRadius + character.radius);
+//        position = ccpAdd(collisionObjectPosition, ccpNeg(result));
+//        [self setPosition:position forCharacter:character];
+//        [cameraControl moveCameraToX:position.x Y:position.y];
         return;
     }
     
@@ -177,6 +177,7 @@
         }
     }
     
+    // The length of force
     float remain = ccpLength(deltaPoint);
 
     float startAngle = ccpToAngle(ccpNeg(deltaCenter));
@@ -185,9 +186,10 @@
 
     float finalAngle = startAngle + (counterclockwise ? leftAngle : -1 * leftAngle);
 
+    // Move around the collision object
     position = ccpAdd(collisionObjectPosition, ccpMult(ccpForAngle(finalAngle), ccpLength(deltaCenter)));
     
-    // Check if someone occupied the second point.
+    // Check if someone occupied the second position.
     c = [self getCollisionCharacterForCharacter:character atPosition:position];
     b = [self getCollisionBarrierForCharacter:character atPosition:position];
 
@@ -224,8 +226,7 @@
     [NSTimer scheduledTimerWithTimeInterval:1.0/kGameSettingFps target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
 }
 
--(void)knockOutUpdate:(NSTimer *)timer {
-
+-(void)knockOutUpdate:(NSTimer *)timer {    
     KnockOutObject *obj = timer.userInfo;
     
     Character *character = obj.character;
@@ -239,6 +240,8 @@
     obj.ratio -= obj.acceleration;
     
     CGPoint nextPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+    
+    nextPosition = [self getPositionInBoundary:nextPosition forCharacter:character];
     
     Character *c = [self getCollisionCharacterForCharacter:character atPosition:nextPosition];
     
@@ -270,6 +273,8 @@
         }
         return;
     }
+    
+    [self setPosition:nextPosition forCharacter:character];
 }
 
 -(Character *)getCollisionCharacterForCharacter:(Character *)character atPosition:(CGPoint)position {
@@ -377,10 +382,6 @@
     y = cameraPosition.y - winSize.height/2 + winSize.height/5;
     
     return ccp(x, y);
-}
-
--(void)dealloc {
-    CCLOG(@"MAPLayer");
 }
 
 @end
