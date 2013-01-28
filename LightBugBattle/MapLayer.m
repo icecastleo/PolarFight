@@ -134,8 +134,6 @@
     CGPoint deltaPoint = ccpSub(position, character.position);
     CGPoint deltaCenter = ccpSub(collisionObjectPosition, character.position);
     
-    CCLOG(@"%f",ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)));
-    
     // Their cos = 1 -> 0 degree
     if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.99) {
 //        CGPoint result = ccpMult(ccpNormalize(deltaPoint),collisionObjectRadius + character.radius);
@@ -242,6 +240,8 @@
     obj.ratio -= obj.acceleration;
     
     CGPoint nextPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+    
+    nextPosition = [self getPositionInBoundary:nextPosition forCharacter:character];
     
     Character *c = [self getCollisionCharacterForCharacter:character atPosition:nextPosition];
     
