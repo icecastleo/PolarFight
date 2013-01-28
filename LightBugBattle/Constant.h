@@ -18,6 +18,8 @@
 
 #define kGameSettingFps 30
 
+#define kMoveMultiplier 10
+
 //typedef enum {
 //    kGameStateRoundStart,
 //    kGameStateCharacterMove,

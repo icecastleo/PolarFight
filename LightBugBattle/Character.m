@@ -108,19 +108,17 @@
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         skill = [[SwordmanSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Assassin"]) {
-        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
         skill = [[HealSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Tank"]) {
         skill = [[TankSkill alloc] initWithCharacter:self];
-        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
-        [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         skill = [[BombSkill alloc] initWithCharacter:self];
 //        skill = [[SuicideSkill alloc] initWithCharacter:self];
+    } else if ([name isEqualToString:@"Archer"]) {
+        skill = [[TestSkill alloc] initWithCharacter:self];
     }
 }
 
@@ -130,9 +128,15 @@
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:50]];
+        int hp = [self getAttribute:kCharacterAttributeHp].value;
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:hp / 5]];
+    }  else if ([name isEqualToString:@"Tank"]) {
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
+        [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         [self addPassiveSkill:[[BombPassiveSkill alloc] init]];
+    } else if ([name isEqualToString:@"Archer"]) {
+        [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithPercent:20]];
     }
 }
 

@@ -52,8 +52,6 @@
 @implementation BattleController
 @dynamic characters;
 
-static int kMoveMultiplier = 40;
-
 __weak static BattleController* currentInstance;
 
 +(BattleController *)currentInstance {
