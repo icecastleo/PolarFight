@@ -23,15 +23,20 @@ static float scale;
     }
 }
 
-+(id)rangeWithParameters:(NSMutableDictionary*)dict {
++(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
     NSString* rangeName = [dict objectForKey:@"rangeType"];
     
     NSAssert(rangeName != nil, @"You must define rangeType for a range");
     
-    Range *range=  [NSClassFromString(rangeName) alloc];
-    [range setParameter:dict];
-    
-    return range;
+    return [[NSClassFromString(rangeName) alloc] initWithCharacter:aCharacter parameters:dict];
+}
+
+-(id)initWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
+    if (self = [super init]) {
+        character = aCharacter;
+        [self setParameter:dict];
+    }
+    return self;
 }
 
 -(void)setDirection:(CGPoint)velocity {
@@ -48,10 +53,6 @@ static float scale;
     NSAssert(_sides != nil, @"You must define rangeSides for a range");
     
     _filters = [dict objectForKey:@"rangeFilters"];
-    
-    character = [dict objectForKey:@"rangeCharacter"];
-    
-    NSAssert(character != nil, @"You must define rangeCharacter for a range");
     
     NSString *file = [dict objectForKey:@"rangeSpriteFile"];
     

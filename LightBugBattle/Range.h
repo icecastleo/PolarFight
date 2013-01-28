@@ -27,7 +27,7 @@
 @property (readonly, weak) Character *character;
 @property (readonly, strong) CCSprite *rangeSprite;
 
-+(id)rangeWithParameters:(NSMutableDictionary*)dict;
++(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict;
 -(NSArray *)getEffectTargets;
 -(void)setDirection:(CGPoint)velocity;
 

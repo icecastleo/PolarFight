@@ -60,6 +60,8 @@ __weak static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
+        currentInstance = self;
+        
         // We need a map photo to show on the map layer.
         CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
         
@@ -100,8 +102,6 @@ __weak static BattleController* currentInstance;
         canMove = NO;
         [self scheduleUpdate];
     }
-    currentInstance = self;
-    
     return self;
 }
 

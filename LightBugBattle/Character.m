@@ -129,6 +129,9 @@
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
         [self addPassiveSkill:[[RegenerationSkill alloc] initWithPercentValue:25]];
+    }  else if ([name isEqualToString:@"Tank"]) {
+        SlowMoveAura *aura = [[SlowMoveAura alloc] initWithCharacter:self];
+        [auraArray addObject:aura];
     } else if ([name isEqualToString:@"Bomber"]) {
         [self addPassiveSkill:[[BombPassiveSkill alloc] init]];
     } else if ([name isEqualToString:@"Archer"]) {

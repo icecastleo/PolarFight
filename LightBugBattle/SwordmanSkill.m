@@ -14,11 +14,11 @@
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
 
-//        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"tree01.gif",@"rangeSpriteFile",character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@50,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+//        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"tree01.gif",@"rangeSpriteFile",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@50,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
 
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@50,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
         
-        range = [Range rangeWithParameters:dictionary];
+        range = [Range rangeWithCharacter:aCharacter parameters:dictionary];
     }
     return self;
 }

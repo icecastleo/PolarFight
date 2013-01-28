@@ -13,18 +13,6 @@
 
 static const float interval = kPassiveSkillInterval;
 
-//-(id)initWithCharacter:(Character *)aCharacter duration:(float)aDuration {
-//    if (self = [super init]) {
-//        character = aCharacter;
-//        _duration = aDuration;
-//        
-//        if (_duration > 0) {
-//            [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(update:) userInfo:nil repeats:YES];
-//        }
-//    }
-//    return self;
-//}
-
 -(void)setCharacter:(Character *)character {
     _character = character;
     

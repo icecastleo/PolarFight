@@ -41,7 +41,7 @@
     range.rangeSprite.rotation = cocosAngle;
     
     startPoint = range.rangeSprite.position;
-    [self schedule:@selector(update:)];
+    [self scheduleUpdate];
     
     [[BattleController currentInstance] addChild:self];
 }

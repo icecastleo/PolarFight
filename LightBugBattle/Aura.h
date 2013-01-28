@@ -8,10 +8,13 @@
 
 #import "ActiveSkill.h"
 
-@interface Aura : ActiveSkill {
-
+@interface Aura : CCNode {
+    Range *range;
+    __weak Character *character;
 }
 
--(id)initWithCharacter:(Character *)aCharacter rangeDictionary:(NSMutableDictionary *)dictionary;
+-(id)initWithCharacter:(Character *)aCharacter;
+-(NSMutableDictionary *)getRangeDictionary;
+-(void)execute:(Character *)target;
 
 @end

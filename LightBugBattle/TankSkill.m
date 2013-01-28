@@ -14,9 +14,9 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@100,@"effectRadius",nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@100,@"effectRadius",nil];
         
-        range = [Range rangeWithParameters:dictionary];
+        range = [Range rangeWithCharacter:aCharacter parameters:dictionary];
     }
     return self;
 }

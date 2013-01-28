@@ -11,9 +11,9 @@
 @implementation AssassinSkill
 
 -(void)characterWillAddDelegate:(Character *)sender {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:sender,@"rangeCharacter",@[kRangeSideAlly, kRangeSideEnemy],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@150,@"effectRadius",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly, kRangeSideEnemy],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@150,@"effectRadius",nil];
     
-    range = [Range rangeWithParameters:dictionary];
+    range = [Range rangeWithCharacter:sender parameters:dictionary];
 }
 
 -(void)character:(Character *)sender willSendAttackEvent:(AttackEvent *)event {
