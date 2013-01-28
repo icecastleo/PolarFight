@@ -98,7 +98,7 @@
             <attribute name="attack" a="0" b="0" c="30"></attribute>
             <attribute name="defense" a="0" b="0" c="0"></attribute>
             <attribute name="agile" a="0" b="0" c="15"></attribute>
-            <attribute name="speed" a="0" b="0" c="2"></attribute>
+            <attribute name="speed" a="0" b="0" c="3"></attribute>
             <attribute name="moveTime" a="0" b="0" c="6"></attribute>
         </attributes>
         <skill range="">
