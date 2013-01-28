@@ -195,6 +195,10 @@ __weak static BattleController* currentInstance;
     [mapLayer knockOut:character velocity:velocity power:power collision:collision];
 }
 
+-(void)smoothMoveCameraToX:(float)x Y:(float)y {
+    [mapLayer.cameraControl smoothMoveCameraToX:x Y:y];
+}
+
 -(void)update:(ccTime)delta {
     
     if(!canMove) {
@@ -260,8 +264,8 @@ __weak static BattleController* currentInstance;
     
     [currentCharacter handleRoundStartEvent];
     
-    [mapLayer.cameraControl smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
-
+    [self smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+    
     //canMove = YES;
     [self scheduleOnce:@selector(setMoveToYes) delay:0.5];
 }

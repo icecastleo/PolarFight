@@ -10,8 +10,7 @@
 #import "CharacterHeadView.h"
 #import "Character.h"
 #import "MyCell.h"
-#import "MapLayer.h"
-#import "MapCameraControl.h"
+#import "BattleController.h"
 
 typedef enum {
     buttomPad1 = 0,
@@ -82,7 +81,7 @@ static const int arrowTag = 990;
         return;
     }
     
-    CGPoint currentHeadViewPoint = ccp(tableviewWidth/2+tableviewPositionX*2,tableviewPositionY+tableviewHeight+tableviewCellHeight/2);
+    CGPoint currentHeadViewPoint = ccp(tableviewWidth/2+tableviewPositionX,tableviewPositionY+tableviewHeight+tableviewCellHeight/2);
     characterHeadView.position = currentHeadViewPoint;
     characterHeadView.anchorPoint = ccp(0.5,0.5);
     characterHeadView.tag = currentCharacterHeadViewTag;
@@ -250,11 +249,8 @@ static const int arrowTag = 990;
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
     CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:cell.idx];
     Character *character = characterHeadView.character;
-    MapLayer *mapLayer = (MapLayer *)character.sprite.parent;
-    MapCameraControl *camera = mapLayer.cameraControl;
-    if (camera) {
-        [camera smoothMoveCameraToX:character.position.x Y:character.position.y];
-    }
+    BattleController *controller = [BattleController currentInstance];
+    [controller smoothMoveCameraToX:character.position.x Y:character.position.y];
 }
 
 #pragma mark Custom Table animation method
