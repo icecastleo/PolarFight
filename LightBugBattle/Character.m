@@ -129,7 +129,7 @@
     } else if ([name isEqualToString:@"Wizard"]) {
         [self addPassiveSkill:[[AssassinSkill alloc] init]];
     } else if ([name isEqualToString:@"Priest"]) {
-        [self addPassiveSkill:[[RegenerationSkill alloc] initWithValue:50]];
+        [self addPassiveSkill:[[RegenerationSkill alloc] initWithPercentValue:30]];
     } else if ([name isEqualToString:@"Bomber"]) {
         [self addPassiveSkill:[[BombPassiveSkill alloc] init]];
     }

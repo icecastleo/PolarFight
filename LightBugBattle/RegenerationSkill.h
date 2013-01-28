@@ -9,9 +9,9 @@
 #import "PassiveSkill.h"
 
 @interface RegenerationSkill : PassiveSkill {
-    int value;
+    double percentValue;
 }
 
--(id)initWithValue:(int)aValue;
+-(id)initWithPercentValue:(int)aValue;
 
 @end

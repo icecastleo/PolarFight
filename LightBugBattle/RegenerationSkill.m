@@ -11,15 +11,16 @@
 
 @implementation RegenerationSkill
 
--(id)initWithValue:(int)aValue {
+-(id)initWithPercentValue:(int)aValue {
     if(self = [super init]) {
-        value = aValue;
+        percentValue = aValue / 100.0;
     }
     return self;
 }
 
 -(void)characterDidRoundEnd:(Character *)sender {
-    [sender getHeal:value];
+    int healValue = (percentValue * [sender getAttribute:kCharacterAttributeHp].value);
+    [sender getHeal:healValue];
 }
 
 
