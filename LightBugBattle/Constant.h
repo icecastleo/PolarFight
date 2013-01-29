@@ -9,22 +9,30 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
+#define kGameSettingFps 30
+
+// For Aura and PassiveSkill
 #define kAuraInterval 0.4
 #define kPassiveSkillDuration 0.5
 #define kPassiveSkillInterval 0.1
 
+// For KnockOutObject
 #define kKnoutOutCount 10
 #define kKnoutOutRatio 0.9
 
-#define kGameSettingFps 30
-
+// For BattleController to move character
 #define kMoveMultiplier 10
 
-//typedef enum {
-//    kGameStateRoundStart,
-//    kGameStateCharacterMove,
-//    kGameStateRoundEnd,
-//} GameState;
+//// For register cocos2d touch dispatcher
+//#define kTouchPriorityDpad 15
+//#define kTouchPriorityMapLayer 5
+
+
+typedef enum {
+    kGameStateRoundStart,
+    kGameStateCharacterMove,
+    kGameStateRoundEnd,
+} GameState;
 
 typedef enum {
     Hero = 0,

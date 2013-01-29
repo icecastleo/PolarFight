@@ -29,7 +29,7 @@
     
     Character *currentCharacter;
     
-    bool startMove;
+    bool roundStart;
     bool canMove;
     bool isMove;
     float countdown;
@@ -41,6 +41,7 @@
 //@property (readonly) BattleStatusLayer *statusLayer;
 //@property MapLayer *mapLayer;
 
+@property (readonly) GameState state;
 @property (readonly) NSMutableArray *characters;
 
 +(BattleController *)currentInstance;

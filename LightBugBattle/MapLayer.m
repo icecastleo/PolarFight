@@ -7,6 +7,7 @@
 //
 
 #import "MapLayer.h"
+#import "BattleController.h"
 #import "CharacterInfoView.h"
 
 @implementation MapLayer
@@ -316,6 +317,10 @@
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if ([BattleController currentInstance].state == kGameStateCharacterMove) {
+        return NO;
+    }
+    
     [characterInfoView clean];
     
     return YES;

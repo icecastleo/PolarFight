@@ -19,13 +19,16 @@
     float heightLimit;
     float widthLimit;
     
+    id target;
+    SEL selector;
+    
     float moveX;
     float moveY;
     bool move;
     
-    float moveLength;
     int moveCountDown;
     CGPoint delta;
+    CGPoint acceleration;
 }
 @property (readonly) CGPoint cameraPosition;
 
@@ -33,6 +36,7 @@
 -(void)moveCameraX:(float)x Y:(float)y;
 -(void)moveCameraToX:(float)x Y:(float)y;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y;
+-(void)smoothMoveCameraToX:(float)x Y:(float)y delegate:(id)aTarget selector:(SEL)aSelector;
 
 -(void)setDefaultZ;
 -(void)moveCameraZ:(float)zValue;

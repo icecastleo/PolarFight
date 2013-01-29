@@ -185,7 +185,7 @@ __weak static BattleController* currentInstance;
     }
     
     if(currentCharacter == character) {
-        [self endMove];
+        [self roundEnd];
     }
 }
 
@@ -194,20 +194,26 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
-    [mapLayer.cameraControl smoothMoveCameraToX:x Y:y];
+    if (_state == kGameStateCharacterMove) {
+        return;
+    }
+    
+    [mapLayer.cameraControl smoothMoveCameraToX:x Y:y delegate:self selector:@selector(canMove)];
+    canMove = NO;
 }
 
 -(void)update:(ccTime)delta {
     
     if(!canMove) {
-        if (startMove == NO) {
-            [self startMove];
+        if (roundStart == NO) {
+            [self roundStart];
         }
         return;
     }
     
     if(!isMove && dPadLayer.isButtonPressed) {
         isMove = YES;
+        _state = kGameStateCharacterMove;
         statusLayer.startLabel.visible = NO;
         [statusLayer stopSelect];
     }
@@ -222,7 +228,7 @@ __weak static BattleController* currentInstance;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
         if(countdown == 0) {
-            [self endMove];
+            [self roundEnd];
             return;
         }
         
@@ -242,9 +248,10 @@ __weak static BattleController* currentInstance;
     }
 }
 
--(void)startMove {
-    startMove = YES;
+-(void)roundStart {
+    roundStart = YES;
     isMove = NO;
+    _state = kGameStateRoundStart;
     
     currentCharacter = [self getCurrentCharacterFromQueue];
     // TODO:If the player is com, maybe need to change state here!
@@ -262,22 +269,20 @@ __weak static BattleController* currentInstance;
     
     [currentCharacter handleRoundStartEvent];
     
-    [self smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
-    
-    //canMove = YES;
-    [self scheduleOnce:@selector(setMoveToYes) delay:0.5];
+    [mapLayer.cameraControl smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y delegate:self selector:@selector(canMove)];
 }
 
--(void)endMove {
+-(void)roundEnd {
     canMove = NO;
-    startMove = NO;
+    roundStart = NO;
+    _state = kGameStateRoundStart;
     
     if (currentCharacter.state != stateDead) {
         [currentCharacter handleRoundEndEvent];
     }
 }
 
--(void)setMoveToYes {
+-(void)canMove {
     canMove = YES;
 }
 

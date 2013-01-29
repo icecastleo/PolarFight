@@ -10,7 +10,7 @@
 #import "MapLayer.h"
 
 const static int kMoveTotalFps = kGameSettingFps;
-const static int kMoveSlowFPS = kGameSettingFps / 4;
+const static int kMoveSlowFPS = kGameSettingFps / 3;
 const static int kMoveSlowRatio = 30;
 
 @implementation MapCameraControl
@@ -55,8 +55,11 @@ const static int kMoveSlowRatio = 30;
     [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:cameraZ];
 }
 
-// TODO: Add callback
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
+    return [self smoothMoveCameraToX:x Y:y delegate:nil selector:nil];
+}
+
+-(void)smoothMoveCameraToX:(float)x Y:(float)y delegate:(id)aTarget selector:(SEL)aSelector {
     if (move) {
         [self unscheduleMove];
     }
@@ -68,25 +71,26 @@ const static int kMoveSlowRatio = 30;
     moveX = targetX - _cameraPosition.x;
     moveY = targetY - _cameraPosition.y;
     
-    moveLength = ccpLength(ccp(moveX, moveY));
+    float moveLength = ccpLength(ccp(moveX, moveY));
     
-    delta = ccpMult(ccpForAngle(atan2f(moveY, moveX)), moveLength * (kMoveSlowRatio - 1) / kMoveSlowRatio / (kMoveTotalFps - kMoveSlowFPS));
+    delta = ccpMult(ccpForAngle(atan2f(moveY, moveX)), moveLength / (kMoveTotalFps - (float)kMoveSlowFPS / 2));
+    
+    // Used for slowdown
+    acceleration = ccpMult(delta, 1 / (float)kMoveSlowFPS);
     
     moveCountDown = kMoveTotalFps;
+    
+    target = aTarget;
+    selector = aSelector;
     
     [self scheduleUpdate];
 }
 
 -(void)update:(ccTime)deltaTime {
-    if (moveX == 0 && moveY == 0) {
-        [self unscheduleMove];
-        return;
-    }
-    
     moveCountDown --;
     
-    if (moveCountDown == kMoveSlowFPS) {
-        delta = ccpMult(ccpForAngle(atan2f(moveY, moveX)), moveLength * 1 / kMoveSlowRatio / kMoveSlowFPS);
+    if (moveCountDown < kMoveSlowFPS) {
+        delta = ccpSub(delta, acceleration);
     }
     
     float updateX;
@@ -111,10 +115,23 @@ const static int kMoveSlowRatio = 30;
     
     [camera setCenterX:_cameraPosition.x centerY:_cameraPosition.y centerZ:0];
     [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:cameraZ];
+    
+    if (moveCountDown == 0) {
+        [self unscheduleMove];
+        return;
+    }
 }
 
 -(void)unscheduleMove {
     [self unscheduleUpdate];
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    if (target != nil && selector != nil) {
+        [target performSelector:selector];
+    }
+#pragma clang diagnostic pop    
+    
     move = NO;
 }
 
