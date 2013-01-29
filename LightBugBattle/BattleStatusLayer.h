@@ -28,5 +28,6 @@
 
 -(void) startSelectCharacter:(Character*)character;
 -(void) stopSelect;
+-(void)winTheGame:(BOOL)win;
 
 @end
