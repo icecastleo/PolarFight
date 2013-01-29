@@ -57,6 +57,19 @@ static const int pauseLayerTag = 9999;
     return self;
 }
 
+-(void)winTheGame:(BOOL)win {
+    CCLabelTTF *gameOverLabel;
+    if (win) {
+         gameOverLabel = [CCLabelTTF labelWithString:@"You Win!"  fontName:@"Marker Felt"  fontSize:31];
+    }else {
+        gameOverLabel = [CCLabelTTF labelWithString:@"You Lose!"  fontName:@"Marker Felt"  fontSize:31];
+    }
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    gameOverLabel.position = ccp(winSize.width/2,winSize.height/2+gameOverLabel.boundingBox.size.height);
+    gameOverLabel.color = ccRED;
+    [self addChild:gameOverLabel];
+}
+
 -(void) startSelectCharacter:(Character*)character {
     [self setCurrentCharacterInQueueLayer:character];
     [character.sprite addChild:selectSprite];

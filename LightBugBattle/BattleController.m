@@ -110,29 +110,11 @@ __weak static BattleController* currentInstance;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
-    //TODO: will get character from selectLayer fuction.
     player1 = [[NSMutableArray alloc] init];
     player2 = [[NSMutableArray alloc] init];
     
-    //here is only for test before selectLayer has done.
     NSArray *characterIdArray;
-    if ([PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"]) {
-        characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
-    } else {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
-        character.player = 1;
-        [character.sprite addBloodSprite];
-        [self addCharacter:character];
-        Character *character2 = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"000"]];
-        character2.player = 2;
-        [character2.sprite addBloodSprite];
-        [self addCharacter:character2];
-        return;
-    }
-    // Above codes are only for test b/c we are lazy choose characters from selecterLayer always.
-    
-    //This code is really need after test.
-    //characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
+    characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
     NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
@@ -150,8 +132,6 @@ __weak static BattleController* currentInstance;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
     }
-    //characterQueue = [[CharacterQueue alloc] initWithPlayer1Array:player1 andPlayer2Array:player2];
-    
     for (Character *character in player1) {
         [self addCharacter:character];
 //        character.position = ccp(0, -190);
@@ -187,6 +167,33 @@ __weak static BattleController* currentInstance;
     if(currentCharacter == character) {
         [self roundEnd];
     }
+}
+
+-(BOOL)isGameOver {
+    int player1Number = 0;
+    int player2Number = 0;
+    for (Character *character in self.characters) {
+        if (character.player == 1) {
+            player1Number ++;
+        }else if (character.player == 2) {
+            player2Number ++;
+        }
+    }
+    BOOL isOver = NO;
+    
+    if (player1Number == 0 && player2Number != 0) {
+        isOver = YES;
+        [statusLayer winTheGame:NO];
+    }else if (player2Number == 0 && player1Number != 0) {
+        isOver = YES;
+        [statusLayer winTheGame:YES];
+    }
+    
+    return isOver;
+}
+
+-(void)replaceSceneToHelloWorldLayer {
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
 }
 
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
@@ -279,6 +286,11 @@ __weak static BattleController* currentInstance;
     
     if (currentCharacter.state != stateDead) {
         [currentCharacter handleRoundEndEvent];
+    }
+    
+    if ([self isGameOver]) {
+        [self unscheduleUpdate];
+        [self performSelector:@selector(replaceSceneToHelloWorldLayer) withObject:nil afterDelay:3.0];
     }
 }
 
