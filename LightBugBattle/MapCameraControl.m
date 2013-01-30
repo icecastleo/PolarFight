@@ -40,8 +40,7 @@ const static int kMoveSlowRatio = 30;
     [self moveCameraToX:_cameraPosition.x + x Y:_cameraPosition.y + y];
 }
 
--(void)moveCameraToX:(float)x Y:(float)y
-{
+-(void)moveCameraToX:(float)x Y:(float)y {
 //    NSAssert(!move, @"You can't move camera during a smooth move!");
     if (move) {
 //        CCLOG(@"You can't move camera during a smooth move!");
@@ -90,7 +89,11 @@ const static int kMoveSlowRatio = 30;
     moveCountDown --;
     
     if (moveCountDown < kMoveSlowFPS) {
-        delta = ccpSub(delta, acceleration);
+        if (moveCountDown == kMoveSlowFPS - 1) {
+            delta = ccpSub(delta, ccpMult(acceleration, 0.5));
+        } else {
+            delta = ccpSub(delta, acceleration);
+        }
     }
     
     float updateX;

@@ -169,13 +169,15 @@ __weak static BattleController* currentInstance;
     }
 }
 
+// FIXME: You should not called isGameOver because you also show the status
 -(BOOL)isGameOver {
+    // FIXME: Add number to local variable
     int player1Number = 0;
     int player2Number = 0;
     for (Character *character in self.characters) {
         if (character.player == 1) {
             player1Number ++;
-        }else if (character.player == 2) {
+        } else if (character.player == 2) {
             player2Number ++;
         }
     }
@@ -188,6 +190,7 @@ __weak static BattleController* currentInstance;
         isOver = YES;
         [statusLayer winTheGame:YES];
     }
+    // FIXME: Tile?
     
     return isOver;
 }
@@ -219,10 +222,7 @@ __weak static BattleController* currentInstance;
     }
     
     if(!isMove && dPadLayer.isButtonPressed) {
-        isMove = YES;
-        _state = kGameStateCharacterMove;
-        statusLayer.startLabel.visible = NO;
-        [statusLayer stopSelect];
+        [self characterMove];
     }
     
     if(isMove) {
@@ -252,6 +252,7 @@ __weak static BattleController* currentInstance;
         // Character's position control is in mapLayer, so character move should call mapLayer
         [currentCharacter setDirection:dPadLayer.velocity];
         [mapLayer moveCharacter:currentCharacter velocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
+        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
     }
 }
 
@@ -277,6 +278,13 @@ __weak static BattleController* currentInstance;
     [currentCharacter handleRoundStartEvent];
     
     [mapLayer.cameraControl smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y delegate:self selector:@selector(canMove)];
+}
+
+-(void)characterMove {
+    isMove = YES;
+    _state = kGameStateCharacterMove;
+    statusLayer.startLabel.visible = NO;
+    [statusLayer stopSelect];
 }
 
 -(void)roundEnd {

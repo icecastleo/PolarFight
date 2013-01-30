@@ -17,14 +17,14 @@
 @class Character, CharacterInfoView;
 @interface MapLayer : CCLayer {
     int mapBlock[128][53];
-        
+    
     NSMutableArray *barriers;
-    CCSprite *mapBody;
+    CCSprite *mapSprite;
     
     float boundaryX;
     float boundaryY;
     int zOrder;
-    
+
     CharacterInfoView *characterInfoView;
 }
 
@@ -37,10 +37,10 @@
 -(void)removeCharacter:(Character*)character;
 
 -(void)addBarrier:(Barrier *)barrier;
-//-(void) removeBarrier:(Barrier*)
+//-(void)removeBarrier:(Barrier*)
 
-//-(void) setMap:(CCSprite*)theMap;
--(void)setMapBlocks;
+//-(void)setMapBlocks;
+
 -(void)moveCharacter:(Character*)character velocity:(CGPoint)velocity;
 -(void)moveCharacterTo:(Character*)character position:(CGPoint)position;
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;

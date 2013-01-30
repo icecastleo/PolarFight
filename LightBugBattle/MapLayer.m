@@ -18,23 +18,23 @@
         _characters = [[NSMutableArray alloc] init];
         barriers = [[NSMutableArray alloc] init];
         
-        mapBody = aSprite;
+        mapSprite = aSprite;
         
-        boundaryX = mapBody.boundingBox.size.width / 2;
-        boundaryY = mapBody.boundingBox.size.height / 2;
+        boundaryX = mapSprite.boundingBox.size.width / 2;
+        boundaryY = mapSprite.boundingBox.size.height / 2;
         
-        zOrder = mapBody.boundingBox.size.height;
+        zOrder = mapSprite.boundingBox.size.height;
         
-        cameraControl = [[MapCameraControl alloc] initWithMapLayer:self mapSprite:mapBody];
+        cameraControl = [[MapCameraControl alloc] initWithMapLayer:self mapSprite:mapSprite];
         
         [self setCharacterInfoViewLayer];
         
         [self addChild:cameraControl];
-        [self addChild:mapBody z:-1];
+        [self addChild:mapSprite z:-1];
 
         self.isTouchEnabled = YES;
         
-        CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
+//        CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
     }
     return self;
 }
@@ -50,7 +50,7 @@
 
 -(void)addCharacter:(Character*)character {
     [_characters addObject:character];
-    CGSize mapSize = mapBody.boundingBox.size;
+    CGSize mapSize = mapSprite.boundingBox.size;
     CGSize charaSize = character.sprite.boundingBox.size;
     
     float rangeX = mapSize.width / 2 * 0.5;
@@ -83,28 +83,28 @@
     [_characters removeObject:character];
 }
 
--(void)setMapBlocks
-{
-    for(int x=0; x<128; x++ )
-    {
-        for(int y=0; y<53; y++)
-        {
-            float temp = CCRANDOM_0_1();
-            
-            if( temp > 0.8 )
-            {
-                mapBlock[x][y] = 1;
-                CCSprite* debug = [CCSprite spriteWithFile:@"debugColor.png"];
-                [mapBody addChild:debug];
-                [debug setPosition:ccp( x*10, y*10 )];
-            }
-            else
-            {
-                mapBlock[x][y] = 0;
-            }
-        }
-    }
-}
+//-(void)setMapBlocks
+//{
+//    for(int x=0; x<128; x++ )
+//    {
+//        for(int y=0; y<53; y++)
+//        {
+//            float temp = CCRANDOM_0_1();
+//            
+//            if( temp > 0.8 )
+//            {
+//                mapBlock[x][y] = 1;
+//                CCSprite* debug = [CCSprite spriteWithFile:@"debugColor.png"];
+//                [mapBody addChild:debug];
+//                [debug setPosition:ccp( x*10, y*10 )];
+//            }
+//            else
+//            {
+//                mapBlock[x][y] = 0;
+//            }
+//        }
+//    }
+//}
 
 -(void)moveCharacterTo:(Character*)character position:(CGPoint)position {
     [characterInfoView clean];
@@ -117,7 +117,7 @@
     // No one occupied the position
     if (b == nil && c == nil) {
         [self setPosition:position forCharacter:character];
-        [cameraControl moveCameraToX:position.x Y:position.y];
+//        [cameraControl moveCameraToX:position.x Y:position.y];
         return;
     }
     
@@ -137,17 +137,15 @@
     
     // TODO: Delete me after test.
     if (deltaCenter.x == 0 && deltaCenter.y == 0) {
-        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
         return;
     }
     
     // Their cos = 1 -> 0 degree
-    if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.99) {
-//        CGPoint result = ccpMult(ccpNormalize(deltaPoint),collisionObjectRadius + character.radius);
+    if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.98) {
+//        CGPoint result = ccpMult(ccpNormalize(deltaCenter),collisionObjectRadius + character.radius);
 //        position = ccpAdd(collisionObjectPosition, ccpNeg(result));
 //        [self setPosition:position forCharacter:character];
 //        [cameraControl moveCameraToX:position.x Y:position.y];
-        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
         return;
     }
     
@@ -203,10 +201,9 @@
 
     if (c == nil && b == nil) {
         [self setPosition:position forCharacter:character];
-        [cameraControl moveCameraToX:position.x Y:position.y];
+//        [cameraControl moveCameraToX:position.x Y:position.y];
     } else {
         // Something is occupied the position.
-        [cameraControl moveCameraToX:character.position.x Y:character.position.y];
     }
 }
 
@@ -250,40 +247,34 @@
     
     CGPoint nextPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
     
+    if (obj.collision == NO) {
+        [self moveCharacterTo:character position:nextPosition];
+        return;
+    }
+    
     nextPosition = [self getPositionInBoundary:nextPosition forCharacter:character];
     
     Character *c = [self getCollisionCharacterForCharacter:character atPosition:nextPosition];
-    
-    if (c != nil) {
-        if (obj.collision == false) {
-            // stop update;
-            [timer invalidate];
-        } else {
-            // reflect
-            obj.velocity = [Helper reflection:nextPosition vector:obj.velocity target:c.position];
-            CGPoint targetPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-            targetPosition = [self getPositionInBoundary:targetPosition forCharacter:character];
-            [self setPosition:targetPosition forCharacter:character];
-        }
-        return;
-    }
-    
     Barrier *b = [self getCollisionBarrierForCharacter:character atPosition:nextPosition];
     
-    if (b != nil) {
-        if (obj.collision == false) {
-            [timer invalidate];
-        } else {
-            obj.velocity = [Helper reflection:nextPosition vector:obj.velocity target:b.position];
-            CGPoint targetPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-            targetPosition = [self getPositionInBoundary:targetPosition forCharacter:character];
-            [self setPosition:targetPosition forCharacter:character];
-
-        }
+    if (b == nil && c == nil) {
+        [self setPosition:nextPosition forCharacter:character];
         return;
     }
     
-    [self setPosition:nextPosition forCharacter:character];
+    CGPoint collisionObjectPosition;
+    
+    if (c != nil) {
+        collisionObjectPosition = c.position;
+    } else {
+        collisionObjectPosition = b.collisionPosition;
+    }
+    
+    // reflect
+    obj.velocity = [Helper reflection:nextPosition vector:obj.velocity target:collisionObjectPosition];
+    CGPoint targetPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
+    targetPosition = [self getPositionInBoundary:targetPosition forCharacter:character];
+    [self setPosition:targetPosition forCharacter:character];
 }
 
 -(Character *)getCollisionCharacterForCharacter:(Character *)character atPosition:(CGPoint)position {
