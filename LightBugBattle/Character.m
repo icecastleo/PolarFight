@@ -223,10 +223,10 @@
             return;
         }
         
-        // Set here to keep privious velocity.
-        _direction = ccpNormalize(velocity);
-        
         state = stateMove;
+        
+        _direction = ccpNormalize(velocity);
+        [skill setRangeDirection:velocity];
         
         CharacterDirection newDirection = [self getDirectionByVelocity:velocity];
         
@@ -234,8 +234,6 @@
             characterDirection = newDirection;
             [sprite runDirectionAnimate];
         }
-        
-        [skill setRangeDirection:velocity];
     }
 }
 

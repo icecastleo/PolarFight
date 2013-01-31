@@ -969,6 +969,11 @@
 		9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F796164FB38A0001A357 /* open_spot.jpg */; };
 		9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */; };
 		9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F799164FB38A0001A357 /* SelectLayer.m */; };
+		9B8652A016BAF3C20062AAD7 /* Minotaur-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B86529E16BAF3C20062AAD7 /* Minotaur-hd.plist */; };
+		9B8652A116BAF3C20062AAD7 /* Minotaur-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B86529F16BAF3C20062AAD7 /* Minotaur-hd.png */; };
+		9B8652A416BAF44F0062AAD7 /* Minotaur.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B8652A216BAF44F0062AAD7 /* Minotaur.plist */; };
+		9B8652A516BAF44F0062AAD7 /* Minotaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8652A316BAF44F0062AAD7 /* Minotaur.png */; };
+		9B8652A816BAFB810062AAD7 /* CCMoveCharacterByLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */; };
 		9B92B1A71680F2F300D965AF /* ReflectAttackDamageSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */; };
 		9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1AA1681D63D00D965AF /* DamageEvent.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
@@ -1001,6 +1006,8 @@
 		9BF3255016A6EA0300D5782B /* RangeShooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3254F16A6EA0300D5782B /* RangeShooter.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
 		9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260816AC891A00D5782B /* bloodParticle.plist */; };
+		9BF467C616BA73CA005B1BBE /* CCMoveCharacterTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */; };
+		9BF467C916BA8191005B1BBE /* CCMoveCharacterBy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */; };
 		9BFFAE67163E9DBB00073DC5 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.m */; };
 		9BFFB64E163592A7006ECAC0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */; };
@@ -2182,6 +2189,12 @@
 		9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SelectedRolesPostion.plist; path = SelectLayer/SelectedRolesPostion.plist; sourceTree = "<group>"; };
 		9B82F798164FB38A0001A357 /* SelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectLayer.h; path = SelectLayer/SelectLayer.h; sourceTree = "<group>"; };
 		9B82F799164FB38A0001A357 /* SelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectLayer.m; path = SelectLayer/SelectLayer.m; sourceTree = "<group>"; };
+		9B86529E16BAF3C20062AAD7 /* Minotaur-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Minotaur-hd.plist"; sourceTree = "<group>"; };
+		9B86529F16BAF3C20062AAD7 /* Minotaur-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Minotaur-hd.png"; sourceTree = "<group>"; };
+		9B8652A216BAF44F0062AAD7 /* Minotaur.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Minotaur.plist; sourceTree = "<group>"; };
+		9B8652A316BAF44F0062AAD7 /* Minotaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Minotaur.png; sourceTree = "<group>"; };
+		9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMoveCharacterByLength.h; sourceTree = "<group>"; };
+		9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterByLength.m; sourceTree = "<group>"; };
 		9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackDamageSkill.h; sourceTree = "<group>"; };
 		9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackDamageSkill.m; sourceTree = "<group>"; };
 		9B92B1A91681D63D00D965AF /* DamageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageEvent.h; sourceTree = "<group>"; };
@@ -2235,6 +2248,10 @@
 		9BF3254F16A6EA0300D5782B /* RangeShooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeShooter.m; sourceTree = "<group>"; };
 		9BF3260516AC559700D5782B /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		9BF3260816AC891A00D5782B /* bloodParticle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bloodParticle.plist; sourceTree = "<group>"; };
+		9BF467C416BA73C9005B1BBE /* CCMoveCharacterTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMoveCharacterTo.h; sourceTree = "<group>"; };
+		9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterTo.m; sourceTree = "<group>"; };
+		9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMoveCharacterBy.h; sourceTree = "<group>"; };
+		9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterBy.m; sourceTree = "<group>"; };
 		9BFFAE61163E9DBB00073DC5 /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
 		9BFFAE62163E9DBB00073DC5 /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCircle.h; sourceTree = "<group>"; };
@@ -2273,7 +2290,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B1C55D71643B08A007D6CEA /* Map */ = {
+		2B1C55D71643B08A007D6CEA /* MapLayer */ = {
 			isa = PBXGroup;
 			children = (
 				9B82F78E164FB2780001A357 /* MapLayer.h */,
@@ -2287,7 +2304,7 @@
 				2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */,
 				2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */,
 			);
-			name = Map;
+			name = MapLayer;
 			sourceTree = "<group>";
 		};
 		2D26FC961640111500C34AA4 /* Effect */ = {
@@ -2515,38 +2532,22 @@
 			isa = PBXGroup;
 			children = (
 				9B93798A16B1676400F1A05A /* Bomb */,
-				9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */,
-				9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */,
-				9BF3260816AC891A00D5782B /* bloodParticle.plist */,
-				9BF3260516AC559700D5782B /* fire.png */,
-				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
-				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
-				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
-				9B08F95C16A40805006BF34F /* vald_sword.plist */,
-				9B08F95D16A40805006BF34F /* vald_sword.png */,
 				2D66E83A16A44EB500A3F5D5 /* Arrow.png */,
+				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
 				9B2040C2169F0C30000EF31F /* blood_green.png */,
 				9B2040C3169F0C30000EF31F /* blood_red.png */,
-				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
-				2B85A7B916635BF100D5962F /* tree01.gif */,
-				2B51EB021643EB0000441FB1 /* debugColor.png */,
+				9BF3260816AC891A00D5782B /* bloodParticle.plist */,
+				9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */,
+				9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */,
 				2BBF991A163E6532005AD8B9 /* controlBall.png */,
-				2BBF990D163E6134005AD8B9 /* map.png */,
-				37E4F98016AE2E6D00D492E6 /* map@2x.png */,
-				9B520E1E163972F500057A3D /* TestFont.fnt */,
-				9B520E1F163972F500057A3D /* TestFont.png */,
-				37DD1C5B168D96560058E450 /* WhiteFont.fnt */,
-				37DD1C5C168D96560058E450 /* WhiteFont.png */,
-				9B520C191639128100057A3D /* select-1.png */,
-				9B520C1A1639128100057A3D /* select-2.png */,
-				9B520C1B1639128100057A3D /* select-3.png */,
-				9B06348D1635414B00E06018 /* last-guardian-sprites */,
-				9B062CF71635275000E06018 /* Default.png */,
+				2B51EB021643EB0000441FB1 /* debugColor.png */,
 				9B062CF91635275100E06018 /* Default-Landscape~ipad.png */,
-				9B062CFB1635275100E06018 /* fps_images.png */,
+				9B062CF71635275000E06018 /* Default.png */,
+				9BF3260516AC559700D5782B /* fire.png */,
 				9B062CFD1635275100E06018 /* fps_images-hd.png */,
 				9B062CFF1635275100E06018 /* fps_images-ipadhd.png */,
+				9B062CFB1635275100E06018 /* fps_images.png */,
 				9B062D011635275100E06018 /* Icon-72.png */,
 				9B062D031635275100E06018 /* Icon-Small-50.png */,
 				9B062D051635275100E06018 /* Icon-Small.png */,
@@ -2555,6 +2556,26 @@
 				9B062D0B1635275100E06018 /* Icon@2x.png */,
 				9B062D0D1635275100E06018 /* Info.plist */,
 				9B062D0E1635275100E06018 /* iTunesArtwork */,
+				9B06348D1635414B00E06018 /* last-guardian-sprites */,
+				2BBF990D163E6134005AD8B9 /* map.png */,
+				37E4F98016AE2E6D00D492E6 /* map@2x.png */,
+				9B8652A216BAF44F0062AAD7 /* Minotaur.plist */,
+				9B8652A316BAF44F0062AAD7 /* Minotaur.png */,
+				9B86529E16BAF3C20062AAD7 /* Minotaur-hd.plist */,
+				9B86529F16BAF3C20062AAD7 /* Minotaur-hd.png */,
+				2D66E84116A54CB900A3F5D5 /* Red_point.png */,
+				9B520C191639128100057A3D /* select-1.png */,
+				9B520C1A1639128100057A3D /* select-2.png */,
+				9B520C1B1639128100057A3D /* select-3.png */,
+				9B520E1E163972F500057A3D /* TestFont.fnt */,
+				9B520E1F163972F500057A3D /* TestFont.png */,
+				2B85A7B916635BF100D5962F /* tree01.gif */,
+				9B08F95A16A40805006BF34F /* vald_sword-hd.plist */,
+				9B08F95B16A40805006BF34F /* vald_sword-hd.png */,
+				9B08F95C16A40805006BF34F /* vald_sword.plist */,
+				9B08F95D16A40805006BF34F /* vald_sword.png */,
+				37DD1C5B168D96560058E450 /* WhiteFont.fnt */,
+				37DD1C5C168D96560058E450 /* WhiteFont.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -3729,21 +3750,14 @@
 		9B82F787164FB2510001A357 /* BattleScene */ = {
 			isa = PBXGroup;
 			children = (
-				2B1C55D71643B08A007D6CEA /* Map */,
-				9B82F788164FB2780001A357 /* BattleController.h */,
-				9B82F789164FB2780001A357 /* BattleController.m */,
+				9BF467C316BA7361005B1BBE /* BattleController */,
+				2B1C55D71643B08A007D6CEA /* MapLayer */,
 				9B82F78A164FB2780001A357 /* BattleStatusLayer.h */,
 				9B82F78B164FB2780001A357 /* BattleStatusLayer.m */,
 				9B82F78C164FB2780001A357 /* DPadLayer.h */,
 				9B82F78D164FB2780001A357 /* DPadLayer.m */,
 				374EEAC516A4228000374659 /* PauseLayer.h */,
 				374EEAC616A4228000374659 /* PauseLayer.m */,
-				37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */,
-				37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */,
-				3725D4FA16A807C000BF49E2 /* CharacterQueueLayer.h */,
-				3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */,
-				3725D52116A982B000BF49E2 /* CharacterQueueObject.h */,
-				3725D52216A982B000BF49E2 /* CharacterQueueObject.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
@@ -3838,6 +3852,35 @@
 				9B93798716B1655800F1A05A /* BombSkill.m */,
 			);
 			name = ActiveSkill;
+			sourceTree = "<group>";
+		};
+		9BF467C316BA7361005B1BBE /* BattleController */ = {
+			isa = PBXGroup;
+			children = (
+				9BF467CA16BA8286005B1BBE /* CharacterQueue */,
+				9B82F788164FB2780001A357 /* BattleController.h */,
+				9B82F789164FB2780001A357 /* BattleController.m */,
+				9BF467C416BA73C9005B1BBE /* CCMoveCharacterTo.h */,
+				9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */,
+				9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */,
+				9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */,
+				9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */,
+				9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */,
+			);
+			name = BattleController;
+			sourceTree = "<group>";
+		};
+		9BF467CA16BA8286005B1BBE /* CharacterQueue */ = {
+			isa = PBXGroup;
+			children = (
+				37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */,
+				37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */,
+				3725D4FA16A807C000BF49E2 /* CharacterQueueLayer.h */,
+				3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */,
+				3725D52116A982B000BF49E2 /* CharacterQueueObject.h */,
+				3725D52216A982B000BF49E2 /* CharacterQueueObject.m */,
+			);
+			name = CharacterQueue;
 			sourceTree = "<group>";
 		};
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
@@ -4727,6 +4770,10 @@
 				9B9379A416B1677500F1A05A /* BombExploding_06.png in Resources */,
 				9B33591D16B5656D00259B28 /* ButtonPause.png in Resources */,
 				9B33591F16B5656F00259B28 /* ButtonPauseSel.png in Resources */,
+				9B8652A016BAF3C20062AAD7 /* Minotaur-hd.plist in Resources */,
+				9B8652A116BAF3C20062AAD7 /* Minotaur-hd.png in Resources */,
+				9B8652A416BAF44F0062AAD7 /* Minotaur.plist in Resources */,
+				9B8652A516BAF44F0062AAD7 /* Minotaur.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4822,6 +4869,9 @@
 				3725D4FC16A807C000BF49E2 /* CharacterQueueLayer.m in Sources */,
 				3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */,
 				9B93798816B1655800F1A05A /* BombSkill.m in Sources */,
+				9BF467C616BA73CA005B1BBE /* CCMoveCharacterTo.m in Sources */,
+				9BF467C916BA8191005B1BBE /* CCMoveCharacterBy.m in Sources */,
+				9B8652A816BAFB810062AAD7 /* CCMoveCharacterByLength.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

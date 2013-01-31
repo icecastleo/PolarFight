@@ -21,7 +21,7 @@
 #define kKnoutOutRatio 0.9
 
 // For BattleController to move character
-#define kMoveMultiplier 10
+#define kMoveMultiplier 15
 
 //// For register cocos2d touch dispatcher
 //#define kTouchPriorityDpad 15

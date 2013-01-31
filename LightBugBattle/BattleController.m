@@ -7,6 +7,8 @@
 //
 
 #import "BattleController.h"
+#import "CCMoveCharacterTo.h"
+#import "CCMoveCharacterBy.h"
 #import "BattleStatusLayer.h"
 #import "PartyParser.h"
 #import "Character.h"
@@ -75,19 +77,19 @@ __weak static BattleController* currentInstance;
         
         // Testing add barriers
         Barrier* tree = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree.position = ccp(35, 35);
+        tree.position = ccp(55, 55);
         [mapLayer addBarrier:tree];
         
         Barrier* tree2 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree2.position = ccp(35, -35);
+        tree2.position = ccp(55, -55);
         [mapLayer addBarrier:tree2];
         
         Barrier* tree3 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree3.position = ccp(-35, 35);
+        tree3.position = ccp(-55, 55);
         [mapLayer addBarrier:tree3];
         
         Barrier* tree4 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree4.position = ccp(-35, -35);
+        tree4.position = ccp(-55, -55);
         [mapLayer addBarrier:tree4];
         
         // init Dpad
@@ -169,6 +171,14 @@ __weak static BattleController* currentInstance;
     }
 }
 
+-(void)moveCharacter:(Character *)character byPosition:(CGPoint)position {
+    [mapLayer moveCharacter:character byPosition:position];
+}
+
+-(void)moveCharacter:(Character *)character toPosition:(CGPoint)position {
+    [mapLayer moveCharacter:character toPosition:position];
+}
+
 // FIXME: You should not called isGameOver because you also show the status
 -(BOOL)isGameOver {
     // FIXME: Add number to local variable
@@ -200,7 +210,10 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
-    [mapLayer knockOut:character velocity:velocity power:power collision:collision];
+//    [mapLayer knockOut:character velocity:velocity power:power collision:collision];
+    
+    velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
+    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:3]];
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
@@ -226,6 +239,8 @@ __weak static BattleController* currentInstance;
     }
     
     if(isMove) {
+        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+        
         countdown -= delta;
         
         if (countdown < 0) {
@@ -251,8 +266,7 @@ __weak static BattleController* currentInstance;
         // Move character.
         // Character's position control is in mapLayer, so character move should call mapLayer
         [currentCharacter setDirection:dPadLayer.velocity];
-        [mapLayer moveCharacter:currentCharacter velocity:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
-        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+        [mapLayer moveCharacter:currentCharacter byPosition:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }
 }
 

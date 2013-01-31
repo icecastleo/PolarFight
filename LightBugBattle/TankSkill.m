@@ -24,7 +24,7 @@
 -(void)execute {
     for (Character *target in [range getEffectTargets]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
-        event.knockOutPower = -3;
+        event.knockOutPower = -20;
         [target receiveAttackEvent:event];
     }
 }

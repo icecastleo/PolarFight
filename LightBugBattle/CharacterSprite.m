@@ -9,6 +9,7 @@
 
 #import "CharacterSprite.h"
 #import "Character.h"
+#import "CCMoveCharacterByLength.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -19,23 +20,43 @@
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
+//        
+//        // Load the texture atlas sprite frames; this also loads the Texture with the same name
+//        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [frameCache addSpriteFramesWithFile:@"vald_sword.plist"];
+//        
+//        if ((self = [super initWithSpriteFrameName:@"walking s0000.bmp"])) {
+//            character = aCharacter;
+//            
+//            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking n" frameNumber:8]];
+//            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking s" frameNumber:8]];
+//            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking e" frameNumber:8]];
+//            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking w" frameNumber:8]];
+//            
+//            upAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking n" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+//            downAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking s" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+//            rightAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking e" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+//            leftAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking w" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+//        }
+//        return self;
+        
         
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
         CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [frameCache addSpriteFramesWithFile:@"vald_sword.plist"];
+        [frameCache addSpriteFramesWithFile:@"Minotaur.plist"];
         
-        if ((self = [super initWithSpriteFrameName:@"walking s0000.bmp"])) {
+        if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
             
-            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking n" frameNumber:8]];
-            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking s" frameNumber:8]];
-            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking e" frameNumber:8]];
-            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking w" frameNumber:8]];
+            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_n" frameNumber:8]];
+            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_s" frameNumber:8]];
+            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_e" frameNumber:8]];
+            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_w" frameNumber:8]];
             
-            upAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking n" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            downAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking s" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            rightAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking e" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            leftAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking w" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            rightAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_e" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            leftAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_w" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
         }
         return self;
     }
@@ -72,15 +93,15 @@
     bloodSprite = nil;
 }
 
--(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger{
+-(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
     CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
     
     // Load the animation frames
     NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
     
-    for (int i = 0; i < anInteger; i++)
+    for (int i = 1; i <= anInteger; i++)
     {
-        NSString* file = [NSString stringWithFormat:@"%@%04d.bmp",name, i];
+        NSString* file = [NSString stringWithFormat:@"%@%03d.png",name, i];
         CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
         [frames addObject:frame];
     }
@@ -90,6 +111,25 @@
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
     
     return animate;
+
+//    
+//    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//    
+//    // Load the animation frames
+//    NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
+//    
+//    for (int i = 0; i < anInteger; i++)
+//    {
+//        NSString* file = [NSString stringWithFormat:@"%@%04d.bmp",name, i];
+//        CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
+//        [frames addObject:frame];
+//    }
+//    // Create an animation object from all the sprite animation frames
+//    CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
+//    animation.restoreOriginalFrame = YES;
+//    CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
+//    
+//    return animate;
 }
 
 -(void)setAnimationWithName:(NSString*)name {

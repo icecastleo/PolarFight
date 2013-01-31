@@ -43,7 +43,8 @@ static const int ButtonDistance = 100;
 }
 
 -(CGPoint) velocity {
-    return leftJoystick.velocity;
+//    return leftJoystick.velocity;
+    return ccpNormalize(leftJoystick.velocity);
 }
 
 -(Boolean) isButtonPressed {

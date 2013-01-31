@@ -106,7 +106,7 @@
 //    }
 //}
 
--(void)moveCharacterTo:(Character*)character position:(CGPoint)position {
+-(void)moveCharacter:(Character*)character toPosition:(CGPoint)position {
     [characterInfoView clean];
     
     position = [self getPositionInBoundary:position forCharacter:character];
@@ -117,7 +117,6 @@
     // No one occupied the position
     if (b == nil && c == nil) {
         [self setPosition:position forCharacter:character];
-//        [cameraControl moveCameraToX:position.x Y:position.y];
         return;
     }
     
@@ -141,11 +140,10 @@
     }
     
     // Their cos = 1 -> 0 degree
-    if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) > 0.98) {
+    if (ccpDot(deltaPoint, deltaCenter) / (ccpLength(deltaPoint) * ccpLength(deltaCenter)) == 1) {
 //        CGPoint result = ccpMult(ccpNormalize(deltaCenter),collisionObjectRadius + character.radius);
 //        position = ccpAdd(collisionObjectPosition, ccpNeg(result));
 //        [self setPosition:position forCharacter:character];
-//        [cameraControl moveCameraToX:position.x Y:position.y];
         return;
     }
     
@@ -188,7 +186,7 @@
 
     float startAngle = ccpToAngle(ccpNeg(deltaCenter));
 
-    float leftAngle = remain / ccpLength(deltaCenter) / 2;
+    float leftAngle = remain / ccpLength(deltaCenter);
 
     float finalAngle = startAngle + (counterclockwise ? leftAngle : -1 * leftAngle);
 
@@ -201,7 +199,6 @@
 
     if (c == nil && b == nil) {
         [self setPosition:position forCharacter:character];
-//        [cameraControl moveCameraToX:position.x Y:position.y];
     } else {
         // Something is occupied the position.
     }
@@ -219,14 +216,15 @@
     [self reorderChild:character.sprite z:zOrder - character.position.y];
 }
 
--(void)moveCharacter:(Character*)character velocity:(CGPoint)velocity {
-    if (velocity.x != 0 && velocity.y != 0) {
-        [self moveCharacterTo:character position:ccpAdd(character.position, velocity)];
+-(void)moveCharacter:(Character*)character byPosition:(CGPoint)position {
+    if (position.x == 0 && position.y == 0) {
+        return;
     }
+    
+    [self moveCharacter:character toPosition:ccpAdd(character.position, position)];
 }
 
 -(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
-
     KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity power:power collision:collision];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0/kGameSettingFps target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
@@ -248,7 +246,7 @@
     CGPoint nextPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
     
     if (obj.collision == NO) {
-        [self moveCharacterTo:character position:nextPosition];
+        [self moveCharacter:character toPosition:nextPosition];
         return;
     }
     
