@@ -11,7 +11,7 @@
 
 @implementation DPadLayer
 
-@synthesize velocity;
+@dynamic velocity;
 
 static const int backgroundRadius = 50;
 static const int thumbSpriteRadius = 25;
@@ -43,8 +43,11 @@ static const int ButtonDistance = 100;
 }
 
 -(CGPoint) velocity {
-//    return leftJoystick.velocity;
-    return ccpNormalize(leftJoystick.velocity);
+    if (leftJoystick.velocity.x == 0 && leftJoystick.velocity.y == 0) {
+        return leftJoystick.velocity;
+    } else {
+        return ccpNormalize(leftJoystick.velocity);
+    }
 }
 
 -(Boolean) isButtonPressed {
