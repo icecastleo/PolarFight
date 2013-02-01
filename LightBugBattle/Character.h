@@ -65,6 +65,8 @@
 -(void)addAttribute:(Attribute *)attribute;
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
+-(void)moveBy:(CGPoint)position;
+
 -(void)useSkill;
 -(void)attackAnimateCallback;
 
@@ -83,6 +85,5 @@
 -(void)removeTimeStatus:(TimeStatusType)type;
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
--(void)displayString:(NSString *)string R:(int)red G:(int)green B:(int)blue;
 
 @end

@@ -106,7 +106,7 @@
 //    }
 //}
 
--(void)moveCharacter:(Character*)character toPosition:(CGPoint)position {
+-(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
     [characterInfoView clean];
     
     position = [self getPositionInBoundary:position forCharacter:character];
@@ -119,6 +119,12 @@
         [self setPosition:position forCharacter:character];
         return;
     }
+    
+    if (!move) {
+        return;
+    }
+    
+    // If it is move, it will move around the collision object
     
     CGPoint collisionObjectPosition;
     float collisionObjectRadius;
@@ -134,7 +140,7 @@
     CGPoint deltaPoint = ccpSub(position, character.position);
     CGPoint deltaCenter = ccpSub(collisionObjectPosition, character.position);
     
-    // TODO: Delete me after test.
+    // TODO: Delete me after test, for object occupied the same position.
     if (deltaCenter.x == 0 && deltaCenter.y == 0) {
         return;
     }
@@ -192,6 +198,7 @@
 
     // Move around the collision object
     position = ccpAdd(collisionObjectPosition, ccpMult(ccpForAngle(finalAngle), ccpLength(deltaCenter)));
+    position = [self getPositionInBoundary:position forCharacter:character];
     
     // Check if someone occupied the second position.
     c = [self getCollisionCharacterForCharacter:character atPosition:position];
@@ -216,63 +223,12 @@
     [self reorderChild:character.sprite z:zOrder - character.position.y];
 }
 
--(void)moveCharacter:(Character*)character byPosition:(CGPoint)position {
+-(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move {
     if (position.x == 0 && position.y == 0) {
         return;
     }
-    
-    [self moveCharacter:character toPosition:ccpAdd(character.position, position)];
-}
 
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
-    KnockOutObject* obj = [[KnockOutObject alloc] initWithCharacter:character velocity:velocity power:power collision:collision];
-    
-    [NSTimer scheduledTimerWithTimeInterval:1.0/kGameSettingFps target:self selector:@selector(knockOutUpdate:) userInfo:obj repeats:YES];
-}
-
--(void)knockOutUpdate:(NSTimer *)timer {    
-    KnockOutObject *obj = timer.userInfo;
-    
-    Character *character = obj.character;
-    
-    if (obj.count >= obj.maxCount) {
-        [timer invalidate];
-        return;
-    }
-    
-    obj.count++;
-    obj.ratio -= obj.acceleration;
-    
-    CGPoint nextPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-    
-    if (obj.collision == NO) {
-        [self moveCharacter:character toPosition:nextPosition];
-        return;
-    }
-    
-    nextPosition = [self getPositionInBoundary:nextPosition forCharacter:character];
-    
-    Character *c = [self getCollisionCharacterForCharacter:character atPosition:nextPosition];
-    Barrier *b = [self getCollisionBarrierForCharacter:character atPosition:nextPosition];
-    
-    if (b == nil && c == nil) {
-        [self setPosition:nextPosition forCharacter:character];
-        return;
-    }
-    
-    CGPoint collisionObjectPosition;
-    
-    if (c != nil) {
-        collisionObjectPosition = c.position;
-    } else {
-        collisionObjectPosition = b.collisionPosition;
-    }
-    
-    // reflect
-    obj.velocity = [Helper reflection:nextPosition vector:obj.velocity target:collisionObjectPosition];
-    CGPoint targetPosition = ccpAdd(character.position, ccpMult(obj.velocity, obj.ratio * obj.power));
-    targetPosition = [self getPositionInBoundary:targetPosition forCharacter:character];
-    [self setPosition:targetPosition forCharacter:character];
+    [self moveCharacter:character toPosition:ccpAdd(character.position, position) isMove:move];
 }
 
 -(Character *)getCollisionCharacterForCharacter:(Character *)character atPosition:(CGPoint)position {

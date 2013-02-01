@@ -19,7 +19,7 @@
     return self;
 }
 
--(void)shoot:(CGPoint)aVector speed:(float)aSpeed delegate:(id)aDelegate {
+-(void)shoot:(CGPoint)aVector speed:(float)aSpeed delegate:(id<RangeShooterDelegate>)aDelegate {
 //    CCLOG(@"shoot");
     delegate = aDelegate;
     vector = aVector;
@@ -61,7 +61,7 @@
     
     if(effectTargets.count > 0) {
         if ([delegate respondsToSelector:@selector(delayExecute:)]) {
-            [delegate delayExecute:effectTargets];
+            [delegate delayExecute:effectTargets effectPosition:range.effectPosition];
         }
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];

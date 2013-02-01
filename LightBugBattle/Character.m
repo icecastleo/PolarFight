@@ -47,6 +47,8 @@
     if ((self = [super init])) {
         
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
+        
+        // FIXME: Delete aura array and use dictionary
 //        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         attributeDictionary = [[NSMutableDictionary alloc] init];
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
@@ -85,7 +87,7 @@
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
-        state = stateIdle;
+        state = kCharacterStateIdle;
         
         [self makePoint];
         
@@ -98,9 +100,8 @@
         [self setSkillForCharacter:_name];
         [self setPassiveSkillForCharacter:_name];
         
-        _direction = ccp(0, -1);
-        characterDirection = kCharacterDirectionDown;
-        [skill setRangeDirection:_direction];
+        // FIXME: set direction with init parameter?
+        self.direction = ccp(0, -1);
     }
     return self;
 }
@@ -215,25 +216,41 @@
 //    }
 //}
 
+
+// TODO: We need another method for AI to move to a certain position for a giving time.
+
+// This method should be called by update method in one frame.
+-(void)moveBy:(CGPoint)position {
+    if (position.x == 0 && position.y == 0) {
+        if (state != kCharacterStateIdle) {
+            state = kCharacterStateIdle;
+            [sprite stopAllActions];
+        }
+        return;
+    }
+    
+    state = kCharacterStateMove;
+    
+    [[BattleController currentInstance] moveCharacter:self byPosition:position isMove:YES];
+    
+    CharacterDirection old = characterDirection;
+    
+    // It will set the direction!!
+    [self setDirection:ccpNormalize(position)];
+    
+    if(characterDirection != old || [sprite numberOfRunningActions] == 0) {
+        [sprite runDirectionAnimate];
+    }
+}
+
 -(void)setDirection:(CGPoint)velocity {
     @synchronized(self) {
-        if(velocity.x == 0 && velocity.y == 0) {
-            state = stateIdle;
-            [sprite stopAllActions];
-            return;
-        }
+//        CCLOG(@"%f %f = %f",velocity.x , velocity.y, roundf(ccpLength(velocity)));
+        NSAssert(roundf(ccpLength(velocity)) == 1, @"Direction should be a normalize velocity!");
         
-        state = stateMove;
-        
-        _direction = ccpNormalize(velocity);
-        [skill setRangeDirection:velocity];
-        
-        CharacterDirection newDirection = [self getDirectionByVelocity:velocity];
-        
-        if([sprite numberOfRunningActions] == 0 || characterDirection != newDirection) {
-            characterDirection = newDirection;
-            [sprite runDirectionAnimate];
-        }
+        _direction = velocity;
+        [skill setRangeDirection:velocity];        
+        characterDirection = [self getDirectionByVelocity:velocity];
     }
 }
 
@@ -259,10 +276,6 @@
     }
 }
 
-//-(void)setAttackRotationWithVelocity:(CGPoint)velocity {
-//    [skill setRangeRotation:velocity.x :velocity.y];
-//}
-
 -(void)useSkill {
     [sprite stopAllActions];
     
@@ -274,9 +287,11 @@
     [sprite runAttackAnimate];
 
     [skill execute];
-    
-    // TODO: Need to be called after skill animation
-//    [self finishAttack];
+}
+
+// Need to be called when attack animation finished
+-(void)attackAnimateCallback {
+    state = kCharacterStateIdle;
 }
 
 -(void)receiveAttackEvent:(AttackEvent *)event {
@@ -334,14 +349,19 @@
     
     // Knock out effect
     if (damage.knockOutPower != 0) {
-        CGPoint velocity = ccpSub(self.position, damage.location);
+        CGPoint velocity = ccpSub(self.position, damage.position);
         [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
+    }
+    
+    if (damage.type == kDamageTypeAttack) {
+        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
     }
     
     if (hp.currentValue == 0) {
         [self dead];
     } else {
 //        state = kCharacterStateGetDamage;
+        // TODO: Run hurt animation and callback
         
         for (NSString *key in _passiveSkillDictionary) {
             PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
@@ -368,13 +388,8 @@
     // TODO: When there is AI, there maybe need to change from dangerous to good state.
 }
 
-// Need to be called when attack animation finished
--(void)attackAnimateCallback {
-    state = stateIdle;
-}
-
 -(void)dead {
-    state = stateDead;
+    state = kCharacterStateDead;
     
     //    CCLOG(@"Player %i's %@ is dead", player, self.name);
 
@@ -406,7 +421,7 @@
 -(void)handleRoundEndEvent {
     [skill showAttackRange:NO];
     [sprite stopAllActions];
-    state = stateIdle;
+    state = kCharacterStateIdle;
     
     for (NSString *key in _passiveSkillDictionary) {
         PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
@@ -502,10 +517,6 @@
                        [CCFadeOut actionWithDuration:0.3f],nil],
                       [CCCallFuncN actionWithTarget:self  selector:@selector(removeLabel:)],
                       nil]];
-}
-
--(void)displayString:(NSString*)string R:(int)red G:(int)green B:(int)blue {
-	[self displayString:string withColor:ccc3(red, green, blue)];
 }
 
 -(void)removeLabel:(id)sender {

@@ -36,7 +36,6 @@
 }
 
 -(void)execute {
-
     for (Character *target in [range getEffectTargets]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
         event.knockOutPower = 25;
@@ -45,32 +44,11 @@
     }
     
     count++;
-    count %= 3;
+    count %= ranges.count;
     
     range.rangeSprite.visible = NO;
     range = ranges[count];
     range.rangeSprite.visible = YES;
 }
-
--(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
-    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-    
-    // Load the animation frames
-    NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
-    
-    for (int i = 1; i <= anInteger; i++)
-    {
-        NSString* file = [NSString stringWithFormat:@"%@%03d.png",name, i];
-        CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
-        [frames addObject:frame];
-    }
-    // Create an animation object from all the sprite animation frames
-    CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
-    animation.restoreOriginalFrame = YES;
-    CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
-    
-    return animate;
-}
-
 
 @end

@@ -59,9 +59,9 @@ typedef enum {
 typedef enum {
     kCharacterStateUseSkill,
     kCharacterStateGetDamage,
-    stateMove,
-    stateIdle,
-    stateDead
+    kCharacterStateMove,
+    kCharacterStateIdle,
+    kCharacterStateDead
 } CharacterState;
 
 typedef enum {

@@ -7,7 +7,8 @@
 //
 
 #import "ActiveSkill.h"
+#import "RangeShooter.h"
 
-@interface BombSkill : ActiveSkill
+@interface BombSkill : ActiveSkill<RangeShooterDelegate>
 
 @end

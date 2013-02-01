@@ -8,9 +8,8 @@
 
 
 #import "ActiveSkill.h"
+#import "RangeShooter.h"
 
-@interface TestSkill : ActiveSkill
-
--(void)delayExecute:(NSArray *)target;
+@interface TestSkill : ActiveSkill<RangeShooterDelegate>
 
 @end

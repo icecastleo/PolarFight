@@ -26,6 +26,7 @@
 
 @property (readonly, weak) Character *character;
 @property (readonly, strong) CCSprite *rangeSprite;
+@property (readonly) CGPoint effectPosition;
 
 +(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict;
 -(NSArray *)getEffectTargets;

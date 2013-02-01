@@ -12,6 +12,7 @@
 
 @implementation Range
 @synthesize character,rangeSprite;
+@dynamic effectPosition;
 
 static float scale;
 
@@ -119,6 +120,19 @@ static float scale;
         }
     }
     return [effectTargets allObjects];
+}
+
+// Only used for RangeShooter for now
+-(CGPoint)effectPosition {
+    if (effectRange == nil) {
+        CGPoint position = rangeSprite.position;
+        position = [rangeSprite.parent convertToWorldSpace:position];
+        return [character.sprite.parent convertToNodeSpace:position];
+    } else {
+        CGPoint position = effectRange.rangeSprite.position;
+        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
+        return [character.sprite.parent convertToNodeSpace:position];
+    }
 }
 
 -(BOOL)containTarget:(Character *)target {

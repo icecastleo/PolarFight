@@ -48,7 +48,7 @@
 
 -(Damage *)convertToDamage {
     Damage *damage = [[Damage alloc] initWithValue:[self damage] damageType:_type damager:_damager];
-    damage.location = _location;
+    damage.position = _position;
     damage.knockOutPower = _knockOutPower;
     damage.knouckOutCollision = _knouckOutCollision;
     return damage;
