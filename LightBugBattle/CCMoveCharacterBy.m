@@ -48,7 +48,7 @@
 {
     ccTime deltaTime = t - elapse;
     
-    [[BattleController currentInstance] moveCharacter:character byPosition:ccpMult(delta_, deltaTime)];
+    [[BattleController currentInstance] moveCharacter:character byPosition:ccpMult(delta_, deltaTime) isMove:NO];
     
     elapse = t;
 }

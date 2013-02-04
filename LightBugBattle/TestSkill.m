@@ -29,10 +29,12 @@
     [shooter shoot:character.direction speed:10 delegate:self];
 }
 
--(void)delayExecute:(NSArray *)targets {
+-(void)delayExecute:(NSArray *)targets effectPosition:(CGPoint)position {
     for(Character *target in targets) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        event.position = position;
         [target receiveAttackEvent:event];
     }
 }
+
 @end

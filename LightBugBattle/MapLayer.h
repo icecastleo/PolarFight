@@ -40,8 +40,7 @@
 //-(void)removeBarrier:(Barrier*)
 
 //-(void)setMapBlocks;
--(void)moveCharacter:(Character*)character toPosition:(CGPoint)position;
--(void)moveCharacter:(Character*)character byPosition:(CGPoint)position;
+-(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move;
+-(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move;
 
--(void)knockOut:(Character*)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 @end

@@ -19,7 +19,7 @@
 @property (readonly) Character *defender;
 @property (readonly) AttackType type;
 @property (readonly) int attack;
-@property CGPoint location;
+@property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 

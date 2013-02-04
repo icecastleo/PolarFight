@@ -65,17 +65,52 @@
             [[CCDirector sharedDirector] replaceScene:[SelectLayer node]];
         }];
         
-		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, nil];
+        
+        // Jump Test Code
+        
+//        CCSprite *sprite = [CCSprite spriteWithFile:@"Bomb_01.png"];
+//        sprite.position = ccp(50, 50);
+//        [self addChild:sprite];
+//        
+//        CCMenuItem *zTest = [CCMenuItemFont itemWithString:@"zTest" block:^(id sender) {
+//
+//            CCActionInterval *jump = [CCSpawn actions: [CCEaseOut actionWithAction:[CCMoveBy actionWithDuration:0.6 position:ccp(40, 10)] rate:1.5], nil];
+//
+//            CCSprite *s = [CCSprite spriteWithFile:@"blood_red.png"];
+//            
+//            CCAnimation *animation = [CCAnimation animationWithSpriteFrames:@[[CCSpriteFrame frameWithTexture:s.texture rect:s.textureRect]] delay:0.6];
+//            animation.restoreOriginalFrame = YES;
+//            CCAnimate *animate = [CCAnimate actionWithAnimation:animation];
+//            
+//            CCSprite *test = [CCSprite spriteWithFile:@"Bomb_01.png"];
+//            test.position = ccp(sprite.boundingBox.size.width / 2, sprite.boundingBox.size.height / 2);
+//            [sprite addChild:test];
+//
+//            [test runAction:[CCSequence actions:[CCEaseOut actionWithAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0, 125)] rate:3], [CCEaseIn actionWithAction: [CCMoveBy actionWithDuration:0.3 position:ccp(0, -125)] rate:3],[CCFadeOut actionWithDuration:0.01], nil]];
+//            
+//            [sprite runAction:[CCSpawn actions:jump, animate, nil] ];
+//        }];
+//        
+//        [self runAction:[CCFollow actionWithTarget:sprite]];
+//        
+//        [self addChild:[CCSprite spriteWithFile:@"map.png"] z:-1];
+//        
+//		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, zTest, nil];
 		
+        CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, nil];
+        
         [menu alignItemsVerticallyWithPadding:30];
 		[menu setPosition:ccp( size.width/2, size.height/2-20 )];
 		
 		// Add the menu to the layer
 		[self addChild:menu];
         
+        
 	}
 	return self;
 }
+
+
 
 // on "dealloc" you need to release all your retained objects
 

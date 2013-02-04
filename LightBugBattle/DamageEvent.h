@@ -18,7 +18,7 @@
 @property (readonly) DamageType type;
 @property (readonly) Character *damager;
 @property (readonly) int baseDamage;
-@property CGPoint location;
+@property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 

@@ -57,10 +57,10 @@
             
             [self setAnimationWithName:character.name];
             
-            upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            rightAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_e" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            leftAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:5], [self createAnimateWithName:@"minotaur_attack_w" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            rightAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_e" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            leftAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_w" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
         }
         return self;
     }

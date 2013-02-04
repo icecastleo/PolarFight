@@ -20,7 +20,7 @@
         bonus = 0;
         multiplier = 1;
         
-        _location = _attacker.position;
+        _position = _attacker.position;
     }
     return self;
 }
@@ -55,7 +55,7 @@
 
 -(DamageEvent*)convertToDamageEvent {
     DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:[self getDamage] damageType:kDamageTypeAttack damager:_attacker];
-    event.location = _location;
+    event.position = _position;
     event.knockOutPower = _knockOutPower;
     event.knouckOutCollision = _knouckOutCollision;
     return event;
