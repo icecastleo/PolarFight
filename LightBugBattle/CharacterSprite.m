@@ -11,6 +11,7 @@
 #import "Character.h"
 #import "CCMoveCharacterByLength.h"
 #import "AKHelpers.h"
+#import "SimpleAudioEngine.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -54,7 +55,6 @@
         
         if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
-            
             [self setAnimationWithName:character.name];
             
             upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
@@ -139,6 +139,7 @@
 -(void)setAnimationWithName:(NSString*)name {
     
     if ([name isEqualToString:@"Swordsman"]) {
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"pop.caf"];
         upDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Up_Animation.plist"];
         downDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
         leftDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];

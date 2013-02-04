@@ -26,7 +26,6 @@
 		3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D52216A982B000BF49E2 /* CharacterQueueObject.m */; };
 		3727472216BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */; };
 		3727472816BBFA0400D90D18 /* swordsman_Atlas_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */; };
-		3727472E16BC0BEF00D90D18 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3727472D16BC0BEE00D90D18 /* pop.wav */; };
 		3727473216BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */; };
 		3727473316BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */; };
 		3727473416BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */; };
@@ -43,6 +42,7 @@
 		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
+		37BE4F3516BFA4EF0049C634 /* pop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37BE4F3416BFA4EF0049C634 /* pop.caf */; };
 		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3216BBD08300C0368D /* AKCCRandomSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1065,7 +1065,6 @@
 		3725D52216A982B000BF49E2 /* CharacterQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueObject.m; sourceTree = "<group>"; };
 		3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Up_Animation.plist; sourceTree = "<group>"; };
 		3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Atlas_Animation.plist; sourceTree = "<group>"; };
-		3727472D16BC0BEE00D90D18 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Down_Animation.plist; sourceTree = "<group>"; };
 		3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Left_Animation.plist; sourceTree = "<group>"; };
 		3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Right_Animation.plist; sourceTree = "<group>"; };
@@ -1094,6 +1093,7 @@
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BB1957169E9F2300AC56FC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		37BE4F3416BFA4EF0049C634 /* pop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pop.caf; sourceTree = "<group>"; };
 		37DB1F2816BBD08300C0368D /* AKCCRandomDelayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomDelayTime.h; sourceTree = "<group>"; };
 		37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCRandomDelayTime.m; sourceTree = "<group>"; };
 		37DB1F2A16BBD08300C0368D /* AKCCRandomSpawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomSpawn.h; sourceTree = "<group>"; };
@@ -2406,7 +2406,7 @@
 		3727471D16BBF0D400D90D18 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				3727472D16BC0BEE00D90D18 /* pop.wav */,
+				37BE4F3416BFA4EF0049C634 /* pop.caf */,
 				3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */,
 				3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */,
 				3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */,
@@ -4845,10 +4845,10 @@
 				9B8652A516BAF44F0062AAD7 /* Minotaur.png in Resources */,
 				3727472216BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist in Resources */,
 				3727472816BBFA0400D90D18 /* swordsman_Atlas_Animation.plist in Resources */,
-				3727472E16BC0BEF00D90D18 /* pop.wav in Resources */,
 				3727473216BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist in Resources */,
 				3727473316BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist in Resources */,
 				3727473416BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist in Resources */,
+				37BE4F3516BFA4EF0049C634 /* pop.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
