@@ -19,13 +19,13 @@
 						<key>Type</key>
 						<string>Tag</string>
 						<key>Name</key>
-						<string>upAttackAction</string>
+						<string>leftAttackAction</string>
 					</dict>
 					<dict>
 						<key>Type</key>
 						<string>Animation</string>
 						<key>Name</key>
-						<string>upAttackAction</string>
+						<string>leftAttackAction</string>
 					</dict>
 					<dict>
 						<key>Type</key>

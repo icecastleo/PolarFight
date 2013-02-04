@@ -1,24 +1,21 @@
 //
-//  AKHelpers.m
-//  AnimationKit
+//  AKHelperObject.m
+//  LightBugBattle
 //
-//  Created by nikan on 12/1/10.
-//  Copyright 2010 Anton Nikolaienko. All rights reserved.
+//  Created by  DAN on 13/2/4.
+//
 //
 
-#import "AKHelpers.h"
+#import "AKHelperObject.h"
 #import "AKCCRandomSpawn.h"
 #import "AKCCRandomDelayTime.h"
 #import "AKCCSoundEffect.h"
 
-
-@implementation AKHelpers
-
-static id tagDelegate_ = nil;
+@implementation AKHelperObject
 
 #pragma mark Animation Set Routines
 
-+ (CCSpriteFrame*)frameFromFile:(NSString*)file
+- (CCSpriteFrame*)frameFromFile:(NSString*)file
 {
     CCSpriteFrame *spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:file];
     if (!spriteFrame) {
@@ -26,14 +23,14 @@ static id tagDelegate_ = nil;
         //[[CCTexture2D alloc] initWithCGImage:[image CGImage]];
         CCTexture2D *tex = [[CCTexture2D alloc] initWithCGImage:[img CGImage] resolutionType:kCCResolutionUnknown];
         spriteFrame = [CCSpriteFrame frameWithTexture:tex
-                            rect:CGRectMake(0, 0, tex.contentSize.width, tex.contentSize.height)];
+                                                 rect:CGRectMake(0, 0, tex.contentSize.width, tex.contentSize.height)];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrame:spriteFrame name:file];
     }
     
     return spriteFrame;
 }
 
-+ (NSArray*)imageFramesFromArray:(NSArray*)array
+- (NSArray*)imageFramesFromArray:(NSArray*)array
 {
     NSMutableArray *resArray = [NSMutableArray arrayWithCapacity:[array count]];
     for (NSString *imgName in array) {
@@ -44,7 +41,7 @@ static id tagDelegate_ = nil;
     return resArray;
 }
 
-+ (NSArray*)imageFramesFromPattern:(NSDictionary*)patternDict
+- (NSArray*)imageFramesFromPattern:(NSDictionary*)patternDict
 {
     NSString *patternString = [patternDict valueForKey:@"Format"];
     NSNumber *startIdx = [patternDict valueForKey:@"StartIndex"];
@@ -62,7 +59,7 @@ static id tagDelegate_ = nil;
     return resArray;
 }
 
-+ (NSArray*)imageFramesFromPlist:(NSString*)plistFile
+- (NSArray*)imageFramesFromPlist:(NSString*)plistFile
 {
     NSString *localizedPath = [[NSBundle mainBundle] pathForResource:plistFile ofType:nil];
     NSData *plistData = [NSData dataWithContentsOfFile:localizedPath];
@@ -77,7 +74,7 @@ static id tagDelegate_ = nil;
     return [self imageFramesFromArray:plist];
 }
 
-+ (NSDictionary*)animationSetFromDictionary:(NSDictionary*)animSetDict
+- (NSDictionary*)animationSetFromDictionary:(NSDictionary*)animSetDict
 {
     NSMutableDictionary *resDict = [NSMutableDictionary dictionaryWithCapacity:animSetDict.count];
     for (NSString *animName in animSetDict) {
@@ -96,7 +93,7 @@ static id tagDelegate_ = nil;
         
         // Loading frames
         NSArray *imageList = nil;
-
+        
         NSString *singleFrame = [animSet valueForKey:@"Frame"];
         if (singleFrame) {
             imageList = [NSArray arrayWithObject:[self frameFromFile:singleFrame]];
@@ -121,11 +118,17 @@ static id tagDelegate_ = nil;
             repeatNum = [NSNumber numberWithInt:1];
         }
         
+        NSNumber *restoreOriginalFrameNum = [NSNumber numberWithBool:[[animSet valueForKey:@"RestoreOriginalFrame"] boolValue]];
+        if (!restoreOriginalFrameNum) {
+            restoreOriginalFrameNum = [NSNumber numberWithBool:NO];
+        }
+        
         // Cocos2d anim objects:
         CCAnimation *anim = [CCAnimation animationWithSpriteFrames:imageList delay:[durationNum doubleValue]];
         [resDict setObject:[NSDictionary dictionaryWithObjectsAndKeys:
                             anim, @"Animation",
                             repeatNum, @"RepeatCount",
+                            restoreOriginalFrameNum, @"RestoreOriginalFrame",
                             nil]
                     forKey:animName];
     }
@@ -133,7 +136,7 @@ static id tagDelegate_ = nil;
     return resDict;
 }
 
-+ (NSDictionary*)animationSetFromPlist:(NSString*)plistFile
+- (NSDictionary*)animationSetFromPlist:(NSString*)plistFile
 {
     NSString *filePath = plistFile;
     if (![filePath isAbsolutePath]) {
@@ -146,11 +149,14 @@ static id tagDelegate_ = nil;
     return [self animationSetFromDictionary:animSetDict];
 }
 
-+ (CCAction*)actionForAnimation:(NSDictionary*)anim
+- (CCAction*)actionForAnimation:(NSDictionary*)anim
 {
     CCAction *res = nil;
     int repeatCount = [[anim valueForKey:@"RepeatCount"] intValue];
+    BOOL restoreOriginalFrame = [[anim valueForKey:@"RestoreOriginalFrame"] boolValue];
     CCAnimation *animation = [anim objectForKey:@"Animation"];
+    
+    animation.restoreOriginalFrame = restoreOriginalFrame;
     if (repeatCount != 0) {
         //res = [CCRepeat actionWithAction:[CCAnimate actionWithAnimation:animation restoreOriginalFrame:NO] times:repeatCount];
         res = [CCRepeat actionWithAction:[CCAnimate actionWithAnimation:animation] times:repeatCount];
@@ -162,7 +168,7 @@ static id tagDelegate_ = nil;
     return res;
 }
 
-+ (CCAction*)actionForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
+- (CCAction*)actionForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
 {
     NSDictionary *anim = [animSet objectForKey:animName];
     if (!anim) return nil;
@@ -170,7 +176,7 @@ static id tagDelegate_ = nil;
     return [self actionForAnimation:anim];
 }
 
-+ (void)applyAnimation:(NSDictionary*)anim toNode:(CCNode*)node
+- (void)applyAnimation:(NSDictionary*)anim toNode:(CCNode*)node
 {
     CCAction *action = [self actionForAnimation:anim];
     if (action) {
@@ -178,7 +184,7 @@ static id tagDelegate_ = nil;
     }
 }
 
-+ (void)applyAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet toNode:(CCNode*)node
+- (void)applyAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet toNode:(CCNode*)node
 {
     NSDictionary *anim = [animSet objectForKey:animName];
     if (!anim) return;
@@ -186,7 +192,7 @@ static id tagDelegate_ = nil;
     [self applyAnimation:anim toNode:node];
 }
 
-+ (CCSpriteFrame*)initialFrameForAnimation:(NSDictionary*)anim
+- (CCSpriteFrame*)initialFrameForAnimation:(NSDictionary*)anim
 {
     CCAnimation *ccanim = [anim objectForKey:@"Animation"];
     if (!ccanim || ccanim.frames.count == 0) return nil;
@@ -194,15 +200,15 @@ static id tagDelegate_ = nil;
     return [ccanim.frames objectAtIndex:0];
 }
 
-+ (CCSpriteFrame*)initialFrameForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
+- (CCSpriteFrame*)initialFrameForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
 {
     NSDictionary *anim = [animSet objectForKey:animName];
     if (!anim) return nil;
- 
+    
     return [self initialFrameForAnimation:anim];
 }
 
-+ (CCSpriteFrame*)finalFrameForAnimation:(NSDictionary*)anim
+- (CCSpriteFrame*)finalFrameForAnimation:(NSDictionary*)anim
 {
     CCAnimation *ccanim = [anim objectForKey:@"Animation"];
     if (!ccanim || ccanim.frames.count == 0) return nil;
@@ -210,7 +216,7 @@ static id tagDelegate_ = nil;
     return [ccanim.frames lastObject];
 }
 
-+ (CCSpriteFrame*)finalFrameForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
+- (CCSpriteFrame*)finalFrameForAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
 {
     NSDictionary *anim = [animSet objectForKey:animName];
     if (!anim) return nil;
@@ -218,7 +224,7 @@ static id tagDelegate_ = nil;
     return [self finalFrameForAnimation:anim];
 }
 
-+ (NSTimeInterval)durationOfAnimation:(NSDictionary*)anim
+- (NSTimeInterval)durationOfAnimation:(NSDictionary*)anim
 {
     int repeatCount = [[anim valueForKey:@"RepeatCount"] intValue];
     CCAnimation *animation = [anim objectForKey:@"Animation"];
@@ -230,7 +236,7 @@ static id tagDelegate_ = nil;
     }
 }
 
-+ (NSTimeInterval)durationOfAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
+- (NSTimeInterval)durationOfAnimationWithName:(NSString*)animName fromSet:(NSDictionary*)animSet
 {
     NSDictionary *anim = [animSet objectForKey:animName];
     if (!anim) return 0.0;
@@ -241,7 +247,7 @@ static id tagDelegate_ = nil;
 
 #pragma mark Animation Clip: Loading
 
-+ (NSDictionary*)spawnClipItemWithDictionary:(NSDictionary*)dict
+- (NSDictionary*)spawnClipItemWithDictionary:(NSDictionary*)dict
 {
     NSArray *items = [dict objectForKey:@"Items"];
     if (!items || items.count == 0) return nil;
@@ -266,11 +272,11 @@ static id tagDelegate_ = nil;
     return resDict;
 }
 
-+ (NSDictionary*)randomSpawnClipItemWithDictionary:(NSDictionary*)dict
+- (NSDictionary*)randomSpawnClipItemWithDictionary:(NSDictionary*)dict
 {
     NSArray *items = [dict objectForKey:@"Items"];
     if (!items || items.count == 0) return nil;
-
+    
     NSMutableArray *resItems = [NSMutableArray arrayWithCapacity:items.count];
     for (NSDictionary *chanceDict in items) {
         NSDictionary *itemDict = [chanceDict objectForKey:@"Item"];
@@ -289,7 +295,7 @@ static id tagDelegate_ = nil;
     return resDict;
 }
 
-+ (NSDictionary*)sequenceClipItemWithDictionary:(NSDictionary*)sequenceDict
+- (NSDictionary*)sequenceClipItemWithDictionary:(NSDictionary*)sequenceDict
 {
     NSArray *items = [sequenceDict objectForKey:@"Items"];
     if (!items || items.count == 0) return nil;
@@ -306,7 +312,7 @@ static id tagDelegate_ = nil;
             [resItems addObject:sequenceItem];
         }
     }
-
+    
     NSDictionary *resDict = [NSDictionary dictionaryWithObjectsAndKeys:
                              @"Sequence", @"Type",
                              resItems, @"Items",
@@ -314,7 +320,7 @@ static id tagDelegate_ = nil;
     return resDict;
 }
 
-+ (NSDictionary*)loopClipItemWithDictionary:(NSDictionary*)loopDict
+- (NSDictionary*)loopClipItemWithDictionary:(NSDictionary*)loopDict
 {
     NSDictionary *loopItemDict = [loopDict objectForKey:@"Item"];
     if (!loopItemDict) return nil;
@@ -334,7 +340,7 @@ static id tagDelegate_ = nil;
             nil];
 }
 
-+ (NSDictionary*)clipItemWithDictionary:(NSDictionary*)clipItemDict
+- (NSDictionary*)clipItemWithDictionary:(NSDictionary*)clipItemDict
 {
     NSString *itemType = [clipItemDict valueForKey:@"Type"];
     if (!itemType) return nil;
@@ -355,7 +361,7 @@ static id tagDelegate_ = nil;
     return newItem;
 }
 
-+ (NSDictionary*)animationClipFromPlist:(NSString*)plistFile
+- (NSDictionary*)animationClipFromPlist:(NSString*)plistFile
 {
     NSString *filePath = plistFile;
     if (![filePath isAbsolutePath]) {
@@ -364,7 +370,7 @@ static id tagDelegate_ = nil;
     
     NSDictionary *animClipDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
     if (!animClipDict) return nil;
-
+    
     NSDictionary *animSet = nil;
     id animationSet = [animClipDict objectForKey:@"AnimationSet"];
     if ([animationSet isKindOfClass:[NSDictionary class]]) {
@@ -381,7 +387,7 @@ static id tagDelegate_ = nil;
     
     NSDictionary *rootClipItem = [self clipItemWithDictionary:rootClipItemDict];
     if (!rootClipItem) return nil;
-
+    
     NSMutableDictionary *resDict = [NSMutableDictionary dictionary];
     [resDict setObject:animSet forKey:@"AnimationSet"];
     [resDict setObject:rootClipItem forKey:@"Clip"];
@@ -391,19 +397,19 @@ static id tagDelegate_ = nil;
 
 #pragma mark Animation Clip: Applying
 
-+ (CCAction*)soundEffectActionWithDictionary:(NSDictionary*)clipItemDict
+- (CCAction*)soundEffectActionWithDictionary:(NSDictionary*)clipItemDict
 {
     NSString *soundFile = [clipItemDict valueForKey:@"File"];
     return [AKCCSoundEffect actionWithEffectName:soundFile];
 }
 
-+ (CCAction*)animationActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
+- (CCAction*)animationActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
 {
     NSString *animName = [clipItemDict valueForKey:@"Name"];
     return [self actionForAnimationWithName:animName fromSet:animSet];
 }
 
-+ (CCAction*)spawnActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
+- (CCAction*)spawnActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
 {
     NSArray *items = [clipItemDict objectForKey:@"Items"];
     
@@ -424,7 +430,7 @@ static id tagDelegate_ = nil;
     return rootAction;
 }
 
-+ (CCAction*)sequenceActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
+- (CCAction*)sequenceActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
 {
     NSArray *items = [clipItemDict objectForKey:@"Items"];
     
@@ -441,11 +447,11 @@ static id tagDelegate_ = nil;
             rootAction = prevAction;
         }
     }
-        
+    
     return rootAction;
 }
 
-+ (CCAction*)loopActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
+- (CCAction*)loopActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
 {
     NSNumber *repeatCount = [clipItemDict valueForKey:@"Count"];
     NSDictionary *itemDict = [clipItemDict objectForKey:@"Item"];
@@ -461,7 +467,7 @@ static id tagDelegate_ = nil;
     }
 }
 
-+ (CCAction*)randomDelayActionWithDictionary:(NSDictionary*)clipItemDict
+- (CCAction*)randomDelayActionWithDictionary:(NSDictionary*)clipItemDict
 {
     NSNumber *minValue = [clipItemDict valueForKey:@"MinValue"];
     NSNumber *maxValue = [clipItemDict valueForKey:@"MaxValue"];
@@ -469,13 +475,13 @@ static id tagDelegate_ = nil;
     return [AKCCRandomDelayTime actionWithMinDuration:[minValue doubleValue] maxDuration:[maxValue doubleValue]];
 }
 
-+ (CCAction*)delayActionWithDictionary:(NSDictionary*)clipItemDict
+- (CCAction*)delayActionWithDictionary:(NSDictionary*)clipItemDict
 {
     NSNumber *duration = [clipItemDict valueForKey:@"Duration"];
     return [CCDelayTime actionWithDuration:[duration doubleValue]];
 }
 
-+ (CCAction*)randomSpawnActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
+- (CCAction*)randomSpawnActionWithDictionary:(NSDictionary*)clipItemDict andAnimationSet:(NSDictionary*)animSet
 {
     NSArray *items = [clipItemDict objectForKey:@"Items"];
     NSMutableArray *procItems = [NSMutableArray arrayWithCapacity:items.count];
@@ -492,15 +498,15 @@ static id tagDelegate_ = nil;
     return [AKCCRandomSpawn actionWithItems:procItems];
 }
 
-+ (CCAction*)tagActionWithDictionary:(NSDictionary*)dict
+- (CCAction*)tagActionWithDictionary:(NSDictionary*)dict
 {
-    if (!tagDelegate_) return nil;
+    if (!self.objectDelegate) return nil;
     
     NSString *tagName = [dict valueForKey:@"Name"];
-    return [CCCallFuncND actionWithTarget:tagDelegate_ selector:@selector(animationClipOnNode:reachedTagWithName:) data:tagName];
+    return [CCCallFuncND actionWithTarget:self.objectDelegate selector:@selector(animationClipOnNode:reachedTagWithName:) data:(__bridge void *)(tagName)];
 }
 
-+ (CCAction*)actionForAnimationClipItem:(NSDictionary*)clipItemDict withAnimationSet:(NSDictionary*)animSet
+- (CCAction*)actionForAnimationClipItem:(NSDictionary*)clipItemDict withAnimationSet:(NSDictionary*)animSet
 {
     NSString *itemType = [clipItemDict valueForKey:@"Type"];
     CCAction *newAction = nil;
@@ -527,7 +533,7 @@ static id tagDelegate_ = nil;
     return newAction;
 }
 
-+ (CCAction*)actionForAnimationClip:(NSDictionary*)clip
+- (CCAction*)actionForAnimationClip:(NSDictionary*)clip
 {
     NSDictionary *rootClipItem = [clip objectForKey:@"Clip"];
     NSDictionary *animSet = [clip objectForKey:@"AnimationSet"];
@@ -535,7 +541,7 @@ static id tagDelegate_ = nil;
     return [self actionForAnimationClipItem:rootClipItem withAnimationSet:animSet];
 }
 
-+ (void)applyAnimationClip:(NSDictionary*)clip toNode:(CCNode*)node
+- (void)applyAnimationClip:(NSDictionary*)clip toNode:(CCNode*)node
 {
     CCAction *resultAction = [self actionForAnimationClip:clip];
     if (resultAction) {
@@ -543,18 +549,9 @@ static id tagDelegate_ = nil;
     }
 }
 
-+ (NSDictionary*)animationSetOfClip:(NSDictionary*)animClip
+- (NSDictionary*)animationSetOfClip:(NSDictionary*)animClip
 {
     return [animClip objectForKey:@"AnimationSet"];
-}
-
-
-#pragma mark -
-
-+ (void)setTagDelegate:(id)tagDelegate
-{
-    [tagDelegate_ release];
-    tagDelegate_ = [tagDelegate retain];
 }
 
 @end

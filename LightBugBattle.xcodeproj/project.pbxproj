@@ -36,6 +36,10 @@
 		3727AEE5169D6ACA00160620 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDB169D6ACA00160620 /* SWTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE6169D6ACA00160620 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDD169D6ACA00160620 /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3728FF7F16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3728FF7C16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist */; };
+		3728FF8016BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3728FF7D16BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist */; };
+		3728FF8116BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3728FF7E16BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist */; };
+		3728FF8816BFEB5500538CE6 /* swordsmanAttacking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3728FF8716BFEB5500538CE6 /* swordsmanAttacking.wav */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37598BDD1696D2550007013B /* CharacterInfoView.m */; };
 		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
@@ -44,6 +48,7 @@
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
 		37BE4F3F16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37BE4F3E16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist */; };
 		37BE4F4116BFACA10049C634 /* swordsmanWalking.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37BE4F4016BFACA10049C634 /* swordsmanWalking.caf */; };
+		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
 		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3216BBD08300C0368D /* AKCCRandomSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1083,6 +1088,10 @@
 		3727AEDD169D6ACA00160620 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
 		3727AEDE169D6ACA00160620 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
+		3728FF7C16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Attack_Down_Animation.plist; sourceTree = "<group>"; };
+		3728FF7D16BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Attack_Left_Animation.plist; sourceTree = "<group>"; };
+		3728FF7E16BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Attack_Right_Animation.plist; sourceTree = "<group>"; };
+		3728FF8716BFEB5500538CE6 /* swordsmanAttacking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = swordsmanAttacking.wav; sourceTree = "<group>"; };
 		374070831683144A007BEDDF /* XMLParsingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParsingDelegate.h; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
@@ -1096,6 +1105,8 @@
 		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		37BE4F3E16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Attack_Up_Animation.plist; sourceTree = "<group>"; };
 		37BE4F4016BFACA10049C634 /* swordsmanWalking.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swordsmanWalking.caf; sourceTree = "<group>"; };
+		37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelperObject.h; sourceTree = "<group>"; };
+		37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelperObject.m; sourceTree = "<group>"; };
 		37DB1F2816BBD08300C0368D /* AKCCRandomDelayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomDelayTime.h; sourceTree = "<group>"; };
 		37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCRandomDelayTime.m; sourceTree = "<group>"; };
 		37DB1F2A16BBD08300C0368D /* AKCCRandomSpawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomSpawn.h; sourceTree = "<group>"; };
@@ -2408,15 +2419,35 @@
 		3727471D16BBF0D400D90D18 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				3728FF8616BFEB0D00538CE6 /* Plist */,
+				3728FF8516BFEAFD00538CE6 /* Sounds */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		3728FF8516BFEAFD00538CE6 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3728FF8716BFEB5500538CE6 /* swordsmanAttacking.wav */,
 				37BE4F4016BFACA10049C634 /* swordsmanWalking.caf */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		3728FF8616BFEB0D00538CE6 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */,
 				3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */,
 				3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */,
 				3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */,
 				3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */,
-				3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */,
 				37BE4F3E16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist */,
+				3728FF7C16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist */,
+				3728FF7D16BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist */,
+				3728FF7E16BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist */,
 			);
-			name = Animation;
+			name = Plist;
 			sourceTree = "<group>";
 		};
 		3799B7171650DE2000A9A394 /* XMLSupport */ = {
@@ -2449,6 +2480,8 @@
 				37DB1F2E16BBD08300C0368D /* AKHelpers.h */,
 				37DB1F2F16BBD08300C0368D /* AKHelpers.m */,
 				37DB1F3016BBD08300C0368D /* AnimationKit.h */,
+				37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */,
+				37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */,
 			);
 			name = AnimationKit;
 			sourceTree = "<group>";
@@ -4853,6 +4886,10 @@
 				3727473416BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist in Resources */,
 				37BE4F3F16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist in Resources */,
 				37BE4F4116BFACA10049C634 /* swordsmanWalking.caf in Resources */,
+				3728FF7F16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist in Resources */,
+				3728FF8016BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist in Resources */,
+				3728FF8116BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist in Resources */,
+				3728FF8816BFEB5500538CE6 /* swordsmanAttacking.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4956,6 +4993,7 @@
 				37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */,
 				37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */,
 				37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */,
+				37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

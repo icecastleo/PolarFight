@@ -10,11 +10,13 @@
 #import "CharacterSprite.h"
 #import "Character.h"
 #import "CCMoveCharacterByLength.h"
-#import "AKHelpers.h"
+#import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
+    
+    AKHelperObject *akHelper;
     
     NSDictionary *upDirectionClip;
     NSDictionary *downDirectionClip;
@@ -22,6 +24,9 @@
     NSDictionary *rightDirectionClip;
     
     NSDictionary *upAttackClip;
+    NSDictionary *downAttackClip;
+    NSDictionary *leftAttackClip;
+    NSDictionary *rightAttackClip;
     
 }
 @end
@@ -29,57 +34,17 @@
 @implementation CharacterSprite
 
 -(id)initWithCharacter:(Character *)aCharacter {
+    akHelper = [[AKHelperObject alloc] init];
+    akHelper.objectDelegate = self;
+    
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
-//        
-//        // Load the texture atlas sprite frames; this also loads the Texture with the same name
-//        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-//        [frameCache addSpriteFramesWithFile:@"vald_sword.plist"];
-//        
-//        if ((self = [super initWithSpriteFrameName:@"walking s0000.bmp"])) {
-//            character = aCharacter;
-//            
-//            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking n" frameNumber:8]];
-//            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking s" frameNumber:8]];
-//            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking e" frameNumber:8]];
-//            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"walking w" frameNumber:8]];
-//            
-//            upAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking n" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-//            downAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking s" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-//            rightAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking e" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-//            leftAttackAction = [CCSequence actions:[self createAnimateWithName:@"looking w" frameNumber:12],[CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-//        }
-//        return self;
-        
-        
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
         CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [frameCache addSpriteFramesWithFile:@"Minotaur.plist"];
         
         if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
-            
             [self setAnimationWithName:character.name];
-            [AKHelpers setTagDelegate:self];
-            
-            upAttackClip = [AKHelpers animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
-            /*
-            upAttackAction =
-            [CCSequence actions:
-               [CCSpawn actions:
-                  [
-             CCEaseOut actionWithAction:
-                     [CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2],
-                  [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4],
-                  nil],
-               [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],
-               nil];
-            //*/
-            
-            
-            
-            downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            rightAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_e" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
-            leftAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_w" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
         }
         return self;
     }
@@ -158,11 +123,17 @@
 -(void)setAnimationWithName:(NSString*)name {
     
     if ([name isEqualToString:@"Swordsman"]) {
+        NSAssert(akHelper != nil, @"akHelper != nil");
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"pop.caf"];
-        upDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Up_Animation.plist"];
-        downDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
-        leftDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];
-        rightDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Right_Animation.plist"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanAttacking.wav"];
+        upDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Up_Animation.plist"];
+        downDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
+        leftDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];
+        rightDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Right_Animation.plist"];
+        upAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
+        downAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Down_Animation.plist"];
+        leftAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Left_Animation.plist"];
+        rightAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Right_Animation.plist"];
         return;
     }
     
@@ -215,13 +186,13 @@
     if ([character.name isEqualToString:@"Swordsman"]) {
         CharacterDirection direction = character.characterDirection;
         if(direction == kCharacterDirectionUp) {
-            [AKHelpers applyAnimationClip:upDirectionClip toNode:self];
+            [akHelper applyAnimationClip:upDirectionClip toNode:self];
         } else if (direction == kCharacterDirectionDown) {
-            [AKHelpers applyAnimationClip:downDirectionClip toNode:self];
+            [akHelper applyAnimationClip:downDirectionClip toNode:self];
         } else if (direction == kCharacterDirectionLeft) {
-            [AKHelpers applyAnimationClip:leftDirectionClip toNode:self];
+            [akHelper applyAnimationClip:leftDirectionClip toNode:self];
         } else if (direction == kCharacterDirectionRight) {
-            [AKHelpers applyAnimationClip:rightDirectionClip toNode:self];
+            [akHelper applyAnimationClip:rightDirectionClip toNode:self];
         }
         return;
     }
@@ -246,7 +217,8 @@
     
     if(direction == kCharacterDirectionUp) {
         if ([character.name isEqualToString:@"Swordsman"]) {
-            [AKHelpers applyAnimationClip:upAttackClip toNode:self];
+            [akHelper applyAnimationClip:upAttackClip toNode:self];
+            return;
         }
         // TODO: Just delete me when there are attack animation.
         if (upAttackAction == nil) {
@@ -257,6 +229,10 @@
         }
         [self runAction:upAttackAction];
     } else if (direction == kCharacterDirectionDown) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:downAttackClip toNode:self];
+            return;
+        }
         // TODO: Just delete me when there are attack animation.
         if (downAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -266,6 +242,10 @@
         }
         [self runAction:downAttackAction];
     } else if (direction == kCharacterDirectionLeft) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:leftAttackClip toNode:self];
+            return;
+        }
         // TODO: Just delete me when there are attack animation.
         if (leftAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -275,6 +255,10 @@
         }
         [self runAction:leftAttackAction];
     } else if (direction == kCharacterDirectionRight) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:rightAttackClip toNode:self];
+            return;
+        }
         // TODO: Just delete me when there are attack animation.
         if (rightAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -312,8 +296,6 @@
     downAttackAction = nil;
     leftAttackAction = nil;
     rightAttackAction = nil;
-    
-    [AKHelpers setTagDelegate:nil];
 }
 
 -(void)updateBloodSprite {
@@ -331,10 +313,14 @@
 - (void)animationClipOnNode:(CCNode*)node reachedTagWithName:(NSString*)tagName
 {
     if ([tagName isEqualToString:@"upAttackAction"]) {
-        CCLOG(@"upAttackAction");
+        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+    }else if ([tagName isEqualToString:@"downAttackAction"]) {
+        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+    }else if ([tagName isEqualToString:@"leftAttackAction"]) {
+        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+    }else if ([tagName isEqualToString:@"rightAttackAction"]) {
         [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"setIdle"]) {
-        CCLOG(@"setIdle");
         [character attackAnimateCallback];
     }
 }
