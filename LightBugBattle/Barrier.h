@@ -9,13 +9,14 @@
 #import "cocos2d.h"
 
 // TODO : Refactroing class & character to MapObject or ?
-@interface Barrier : CCSprite {
+@interface Barrier : NSObject {
     
 }
+@property (readonly) CCSprite *sprite;
 
 -(id)initWithFile:(NSString *)file radius:(float)radius;
 
-@property (readonly) float collisionRadius;
-@property (readonly) CGPoint collisionPosition;
+@property (readonly) float radius;
+@property CGPoint position;
 
 @end

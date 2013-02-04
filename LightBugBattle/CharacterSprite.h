@@ -31,11 +31,10 @@
 
 -(void)addBloodSprite;
 -(void)removeBloodSprite;
+-(void)updateBloodSprite;
 
 -(void)runDirectionAnimate;
 -(void)runAttackAnimate;
 -(void)runDeadAnimate;
-
--(void)updateBloodSprite;
 
 @end

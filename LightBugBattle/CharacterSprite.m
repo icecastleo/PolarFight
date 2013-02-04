@@ -65,7 +65,8 @@
                    [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
     bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
 
-    bloodScaleMultiplier = self.boundingBox.size.width / bloodSprite.boundingBox.size.width;
+    // blood sprite width -> character.radius * 2
+    bloodScaleMultiplier = character.radius * 2 / bloodSprite.boundingBox.size.width;
     
     [self updateBloodSprite];
     [self addChild:bloodSprite];
@@ -79,6 +80,17 @@
 -(void)removeBloodSprite {
     [bloodSprite removeFromParentAndCleanup:YES];
     bloodSprite = nil;
+}
+
+-(void)updateBloodSprite {
+    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
+    
+    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
+    
+    float scale = (float) hp.currentValue / hp.value;
+    
+    bloodSprite.scaleX = scale * bloodScaleMultiplier;
+    bloodSprite.position = ccp(self.boundingBox.size.width / 2 - character.radius * (1 - scale), bloodSprite.position.y);
 }
 
 -(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
