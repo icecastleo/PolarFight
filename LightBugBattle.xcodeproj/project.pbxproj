@@ -24,6 +24,11 @@
 		3725D51816A83E3A00BF49E2 /* AllCharacter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51716A83E3A00BF49E2 /* AllCharacter.xml */; };
 		3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */; };
 		3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D52216A982B000BF49E2 /* CharacterQueueObject.m */; };
+		3727472216BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */; };
+		3727472816BBFA0400D90D18 /* swordsman_Atlas_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */; };
+		3727473216BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */; };
+		3727473316BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */; };
+		3727473416BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
 		3727AEE2169D6ACA00160620 /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED5169D6ACA00160620 /* SWMultiColumnTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3727AEE3169D6ACA00160620 /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED7169D6ACA00160620 /* SWScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -37,6 +42,12 @@
 		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
+		37BE4F3516BFA4EF0049C634 /* pop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 37BE4F3416BFA4EF0049C634 /* pop.caf */; };
+		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DB1F3216BBD08300C0368D /* AKCCRandomSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2F16BBD08300C0368D /* AKHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F3C16BBD2F600C0368D /* TouchTracker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1052,6 +1063,11 @@
 		3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestPlayer2.xml; sourceTree = "<group>"; };
 		3725D52116A982B000BF49E2 /* CharacterQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueueObject.h; sourceTree = "<group>"; };
 		3725D52216A982B000BF49E2 /* CharacterQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueObject.m; sourceTree = "<group>"; };
+		3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Up_Animation.plist; sourceTree = "<group>"; };
+		3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Atlas_Animation.plist; sourceTree = "<group>"; };
+		3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Down_Animation.plist; sourceTree = "<group>"; };
+		3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Left_Animation.plist; sourceTree = "<group>"; };
+		3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = swordsman_Walking_Right_Animation.plist; sourceTree = "<group>"; };
 		3727AED0169D6ACA00160620 /* CCNode+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+Autolayout.h"; sourceTree = "<group>"; };
 		3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+Autolayout.m"; sourceTree = "<group>"; };
 		3727AED4169D6ACA00160620 /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWMultiColumnTableView.h; sourceTree = "<group>"; };
@@ -1077,6 +1093,18 @@
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BB1957169E9F2300AC56FC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		37BE4F3416BFA4EF0049C634 /* pop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pop.caf; sourceTree = "<group>"; };
+		37DB1F2816BBD08300C0368D /* AKCCRandomDelayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomDelayTime.h; sourceTree = "<group>"; };
+		37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCRandomDelayTime.m; sourceTree = "<group>"; };
+		37DB1F2A16BBD08300C0368D /* AKCCRandomSpawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomSpawn.h; sourceTree = "<group>"; };
+		37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCRandomSpawn.m; sourceTree = "<group>"; };
+		37DB1F2C16BBD08300C0368D /* AKCCSoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCSoundEffect.h; sourceTree = "<group>"; };
+		37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCSoundEffect.m; sourceTree = "<group>"; };
+		37DB1F2E16BBD08300C0368D /* AKHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelpers.h; sourceTree = "<group>"; };
+		37DB1F2F16BBD08300C0368D /* AKHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelpers.m; sourceTree = "<group>"; };
+		37DB1F3016BBD08300C0368D /* AnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationKit.h; sourceTree = "<group>"; };
+		37DB1F3B16BBD2F600C0368D /* TouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTracker.h; sourceTree = "<group>"; };
+		37DB1F3C16BBD2F600C0368D /* TouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTracker.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
@@ -2375,6 +2403,19 @@
 			name = CharacterHeadImages;
 			sourceTree = "<group>";
 		};
+		3727471D16BBF0D400D90D18 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				37BE4F3416BFA4EF0049C634 /* pop.caf */,
+				3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */,
+				3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */,
+				3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */,
+				3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */,
+				3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
 		3799B7171650DE2000A9A394 /* XMLSupport */ = {
 			isa = PBXGroup;
 			children = (
@@ -2390,6 +2431,32 @@
 				37DF396B1664AD48000677B2 /* Util.m */,
 			);
 			name = XMLSupport;
+			sourceTree = "<group>";
+		};
+		37DB1F2616BBD06B00C0368D /* AnimationKit */ = {
+			isa = PBXGroup;
+			children = (
+				37DB1F3916BBD2CC00C0368D /* TouchTracker */,
+				37DB1F2816BBD08300C0368D /* AKCCRandomDelayTime.h */,
+				37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */,
+				37DB1F2A16BBD08300C0368D /* AKCCRandomSpawn.h */,
+				37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */,
+				37DB1F2C16BBD08300C0368D /* AKCCSoundEffect.h */,
+				37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */,
+				37DB1F2E16BBD08300C0368D /* AKHelpers.h */,
+				37DB1F2F16BBD08300C0368D /* AKHelpers.m */,
+				37DB1F3016BBD08300C0368D /* AnimationKit.h */,
+			);
+			name = AnimationKit;
+			sourceTree = "<group>";
+		};
+		37DB1F3916BBD2CC00C0368D /* TouchTracker */ = {
+			isa = PBXGroup;
+			children = (
+				37DB1F3B16BBD2F600C0368D /* TouchTracker.h */,
+				37DB1F3C16BBD2F600C0368D /* TouchTracker.m */,
+			);
+			name = TouchTracker;
 			sourceTree = "<group>";
 		};
 		37DC007A169C12D600069708 /* Cocos2D_Extensions */ = {
@@ -2506,6 +2573,7 @@
 		9B062CF51635275000E06018 /* LightBugBattle */ = {
 			isa = PBXGroup;
 			children = (
+				37DB1F2616BBD06B00C0368D /* AnimationKit */,
 				9B28820B166FC7EE0041604F /* Battle */,
 				9B82F787164FB2510001A357 /* BattleScene */,
 				9B062E7F16353A2B00E06018 /* Character */,
@@ -2531,6 +2599,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3727471D16BBF0D400D90D18 /* Animation */,
 				9B93798A16B1676400F1A05A /* Bomb */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
 				2D66E83A16A44EB500A3F5D5 /* Arrow.png */,
@@ -4774,6 +4843,12 @@
 				9B8652A116BAF3C20062AAD7 /* Minotaur-hd.png in Resources */,
 				9B8652A416BAF44F0062AAD7 /* Minotaur.plist in Resources */,
 				9B8652A516BAF44F0062AAD7 /* Minotaur.png in Resources */,
+				3727472216BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist in Resources */,
+				3727472816BBFA0400D90D18 /* swordsman_Atlas_Animation.plist in Resources */,
+				3727473216BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist in Resources */,
+				3727473316BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist in Resources */,
+				3727473416BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist in Resources */,
+				37BE4F3516BFA4EF0049C634 /* pop.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4872,6 +4947,11 @@
 				9BF467C616BA73CA005B1BBE /* CCMoveCharacterTo.m in Sources */,
 				9BF467C916BA8191005B1BBE /* CCMoveCharacterBy.m in Sources */,
 				9B8652A816BAFB810062AAD7 /* CCMoveCharacterByLength.m in Sources */,
+				37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */,
+				37DB1F3216BBD08300C0368D /* AKCCRandomSpawn.m in Sources */,
+				37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */,
+				37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */,
+				37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

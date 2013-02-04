@@ -10,9 +10,17 @@
 #import "CharacterSprite.h"
 #import "Character.h"
 #import "CCMoveCharacterByLength.h"
+#import "AKHelpers.h"
+#import "SimpleAudioEngine.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
+    
+    NSDictionary *upDirectionClip;
+    NSDictionary *downDirectionClip;
+    NSDictionary *leftDirectionClip;
+    NSDictionary *rightDirectionClip;
+    
 }
 @end
 
@@ -47,11 +55,7 @@
         
         if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
-            
-            upAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_n" frameNumber:8]];
-            downAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_s" frameNumber:8]];
-            rightAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_e" frameNumber:8]];
-            leftAction = [CCRepeatForever actionWithAction:[self createAnimateWithName:@"minotaur_walking_w" frameNumber:8]];
+            [self setAnimationWithName:character.name];
             
             upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
             downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
@@ -134,6 +138,15 @@
 
 -(void)setAnimationWithName:(NSString*)name {
     
+    if ([name isEqualToString:@"Swordsman"]) {
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"pop.caf"];
+        upDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Up_Animation.plist"];
+        downDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
+        leftDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];
+        rightDirectionClip = [AKHelpers animationClipFromPlist:@"swordsman_Walking_Right_Animation.plist"];
+        return;
+    }
+    
     CCAnimation *animation = [CCAnimation animation];
     
     [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_bk1.gif",name]];
@@ -179,6 +192,22 @@
     
     CharacterDirection direction = character.characterDirection;
     
+    // All character might use the applyAnimation method.
+    if ([character.name isEqualToString:@"Swordsman"]) {
+        CharacterDirection direction = character.characterDirection;
+        if(direction == kCharacterDirectionUp) {
+            [AKHelpers applyAnimationClip:upDirectionClip toNode:self];
+        } else if (direction == kCharacterDirectionDown) {
+            [AKHelpers applyAnimationClip:downDirectionClip toNode:self];
+        } else if (direction == kCharacterDirectionLeft) {
+            [AKHelpers applyAnimationClip:leftDirectionClip toNode:self];
+        } else if (direction == kCharacterDirectionRight) {
+            [AKHelpers applyAnimationClip:rightDirectionClip toNode:self];
+        }
+        return;
+    }
+    
+    // after test, these things will be deleted
     if(direction == kCharacterDirectionUp) {
         [self runAction:upAction];
     } else if (direction == kCharacterDirectionDown) {
@@ -188,6 +217,7 @@
     } else if (direction == kCharacterDirectionRight) {
         [self runAction:rightAction];
     }
+    
 }
 
 -(void)runAttackAnimate {
