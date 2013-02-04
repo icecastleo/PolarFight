@@ -122,7 +122,7 @@ static id tagDelegate_ = nil;
         }
         
         // Cocos2d anim objects:
-        CCAnimation *anim = [CCAnimation animationWithSpriteFrames:imageList delay:[durationNum doubleValue] / imageList.count];
+        CCAnimation *anim = [CCAnimation animationWithSpriteFrames:imageList delay:[durationNum doubleValue]];
         [resDict setObject:[NSDictionary dictionaryWithObjectsAndKeys:
                             anim, @"Animation",
                             repeatNum, @"RepeatCount",
@@ -151,6 +151,7 @@ static id tagDelegate_ = nil;
     CCAction *res = nil;
     int repeatCount = [[anim valueForKey:@"RepeatCount"] intValue];
     CCAnimation *animation = [anim objectForKey:@"Animation"];
+    animation.restoreOriginalFrame = YES;
     if (repeatCount != 0) {
         //res = [CCRepeat actionWithAction:[CCAnimate actionWithAnimation:animation restoreOriginalFrame:NO] times:repeatCount];
         res = [CCRepeat actionWithAction:[CCAnimate actionWithAnimation:animation] times:repeatCount];

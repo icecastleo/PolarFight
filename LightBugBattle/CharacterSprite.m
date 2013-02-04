@@ -21,6 +21,8 @@
     NSDictionary *leftDirectionClip;
     NSDictionary *rightDirectionClip;
     
+    NSDictionary *upAttackClip;
+    
 }
 @end
 
@@ -55,9 +57,26 @@
         
         if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
-            [self setAnimationWithName:character.name];
             
-            upAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
+            [self setAnimationWithName:character.name];
+            [AKHelpers setTagDelegate:self];
+            
+            upAttackClip = [AKHelpers animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
+            /*
+            upAttackAction =
+            [CCSequence actions:
+               [CCSpawn actions:
+                  [
+             CCEaseOut actionWithAction:
+                     [CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2],
+                  [self createAnimateWithName:@"minotaur_attack_n" frameNumber:4],
+                  nil],
+               [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],
+               nil];
+            //*/
+            
+            
+            
             downAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_s" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
             rightAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_e" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
             leftAttackAction = [CCSequence actions:[CCSpawn actions:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2], [self createAnimateWithName:@"minotaur_attack_w" frameNumber:4], nil], [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)], nil];
@@ -226,6 +245,9 @@
     CharacterDirection direction = character.characterDirection;
     
     if(direction == kCharacterDirectionUp) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [AKHelpers applyAnimationClip:upAttackClip toNode:self];
+        }
         // TODO: Just delete me when there are attack animation.
         if (upAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -290,6 +312,8 @@
     downAttackAction = nil;
     leftAttackAction = nil;
     rightAttackAction = nil;
+    
+    [AKHelpers setTagDelegate:nil];
 }
 
 -(void)updateBloodSprite {
@@ -301,6 +325,18 @@
     
     bloodSprite.scaleX = scale * bloodScaleMultiplier;
     bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
+}
+
+#pragma mark AKHelper Tag Delegate Method
+- (void)animationClipOnNode:(CCNode*)node reachedTagWithName:(NSString*)tagName
+{
+    if ([tagName isEqualToString:@"upAttackAction"]) {
+        CCLOG(@"upAttackAction");
+        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+    }else if ([tagName isEqualToString:@"setIdle"]) {
+        CCLOG(@"setIdle");
+        [character attackAnimateCallback];
+    }
 }
 
 @end
