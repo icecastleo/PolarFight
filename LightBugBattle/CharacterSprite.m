@@ -310,17 +310,6 @@
     rightAttackAction = nil;
 }
 
--(void)updateBloodSprite {
-    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
-    
-    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
-    
-    float scale = (float) hp.currentValue / hp.value;
-    
-    bloodSprite.scaleX = scale * bloodScaleMultiplier;
-    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
-}
-
 #pragma mark AKHelper Tag Delegate Method
 - (void)animationClipOnNode:(CCNode*)node reachedTagWithName:(NSString*)tagName
 {
