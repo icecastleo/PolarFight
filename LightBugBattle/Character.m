@@ -40,7 +40,8 @@
 @synthesize pointArray;
 
 @synthesize direction = _direction;
-@dynamic position,boundingBox,radius;
+@synthesize position = _position;
+@dynamic boundingBox;
 
 // FIXME: fix name reference.
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
@@ -102,6 +103,10 @@
         
         // FIXME: set direction with init parameter?
         self.direction = ccp(0, -1);
+        
+        // FIXME: merge with barrier?
+        // FIXME: init with a ratio of boundingbox by XML?
+        _radius = self.boundingBox.size.width / 3;
     }
     return self;
 }
@@ -432,20 +437,21 @@
     }
 }
 
--(void)setPosition:(CGPoint)newPosition {
-    sprite.position = newPosition;
+-(void)setPosition:(CGPoint)position {
+    @synchronized(self) {
+        _position = position;
+        sprite.position = ccp(position.x, position.y - self.radius + self.boundingBox.size.height / 2);
+    }
 }
 
 -(CGPoint)position {
-    return sprite.position;
+    @synchronized(self) {
+        return _position;
+    }
 }
 
 -(CGRect)boundingBox {
     return sprite.boundingBox;
-}
-
--(float)radius {
-    return sprite.boundingBox.size.width / 2;
 }
 
 -(void)addPassiveSkill:(PassiveSkill *)passiveSkill {

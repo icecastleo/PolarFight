@@ -77,7 +77,7 @@
                    [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
     bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
 
-    bloodScaleMultiplier = self.boundingBox.size.width / bloodSprite.boundingBox.size.width;
+    bloodScaleMultiplier = character.radius * 2 / bloodSprite.boundingBox.size.width;
     
     [self updateBloodSprite];
     [self addChild:bloodSprite];

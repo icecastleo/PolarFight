@@ -76,7 +76,7 @@
 
 -(void)addBarrier:(Barrier *)barrier {
     [barriers addObject:barrier];
-    [self addChild:barrier z:zOrder - barrier.collisionPosition.y];
+    [self addChild:barrier.sprite z:zOrder - barrier.position.y];
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -107,6 +107,8 @@
 //}
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
+    CCLOG(@"%f %f",position.x, position.y);
+    
     [characterInfoView clean];
     
     position = [self getPositionInBoundary:position forCharacter:character];
@@ -133,8 +135,8 @@
         collisionObjectPosition = c.position;
         collisionObjectRadius = c.radius;
     } else {
-        collisionObjectPosition = b.collisionPosition;
-        collisionObjectRadius = b.collisionRadius;
+        collisionObjectPosition = b.position;
+        collisionObjectRadius = b.radius;
     }
     
     CGPoint deltaPoint = ccpSub(position, character.position);
@@ -213,8 +215,9 @@
 
 -(CGPoint)getPositionInBoundary:(CGPoint)position forCharacter:(Character *)character {
     float characterWidth = character.sprite.boundingBox.size.width/2;
+    float characterHeight = character.sprite.boundingBox.size.height/2;
     
-    return ccp(MIN( MAX(position.x, -1 * boundaryX + characterWidth), boundaryX - characterWidth), MIN( MAX(position.y, -1 * boundaryY + characterWidth), boundaryY - characterWidth));
+    return ccp(MIN( MAX(position.x, -1 * boundaryX + characterWidth), boundaryX - characterWidth), MIN( MAX(position.y, -1 * boundaryY + characterHeight), boundaryY - characterHeight));
 }
 
 -(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
@@ -227,7 +230,7 @@
     if (position.x == 0 && position.y == 0) {
         return;
     }
-
+    
     [self moveCharacter:character toPosition:ccpAdd(character.position, position) isMove:move];
 }
 
@@ -238,8 +241,8 @@
         }
         
         CGPoint targetPosition = other.position;
-        float targetRadius = other.sprite.boundingBox.size.width/2;
-        float selfRadius = character.sprite.boundingBox.size.width/2;
+        float targetRadius = other.radius;
+        float selfRadius = character.radius;
         
         if(ccpDistance(position, targetPosition) < (selfRadius + targetRadius)) {
             return other;
@@ -250,9 +253,9 @@
 
 -(Barrier *)getCollisionBarrierForCharacter:(Character *)character atPosition:(CGPoint)position {
     for(Barrier *barrier in barriers) {
-        CGPoint targetPosition = barrier.collisionPosition;
-        float targetRadius = barrier.collisionRadius;
-        float selfRadius = character.sprite.boundingBox.size.width/2;
+        CGPoint targetPosition = barrier.position;
+        float targetRadius = barrier.radius;
+        float selfRadius = character.radius;
         
         if(ccpDistance(position, targetPosition) < (selfRadius + targetRadius)) {
             return barrier;
@@ -302,6 +305,8 @@
     }
 }
 
+// By bounding box
+// FIXME: character will overlay
 -(Character *)getCharacterAtLocation:(CGPoint)location {
     for (Character *character  in _characters) {
         if (CGRectContainsPoint(character.sprite.boundingBox, location)) {

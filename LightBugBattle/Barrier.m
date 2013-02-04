@@ -8,20 +8,28 @@
 
 #import "Barrier.h"
 
-
 @implementation Barrier
+@synthesize position = _position;
 
 -(id)initWithFile:(NSString *)file radius:(float)radius {
-    if (self = [super initWithFile:file]) {
-        _collisionRadius = radius;
+    if (self = [super init]) {
+        _sprite = [CCSprite spriteWithFile:file];
+        _radius = radius;
     }
     return self;
 }
 
 -(void)setPosition:(CGPoint)position {
-    [super setPosition:position];
-    
-    _collisionPosition = ccp(position.x, position.y - self.boundingBox.size.height / 2 + _collisionRadius);
+    @synchronized(self) {
+        _position = position;
+        _sprite.position = ccp(position.x, position.y - self.radius + self.sprite.boundingBox.size.height / 2);
+    }
+}
+
+-(CGPoint)position {
+    @synchronized(self) {
+        return _position;
+    }
 }
 
 @end
