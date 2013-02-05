@@ -12,9 +12,28 @@
 		<array>
 			<dict>
 				<key>Type</key>
-				<string>SoundEffect</string>
-				<key>File</key>
-				<string>swordsmanWalking.caf</string>
+				<string>Sequence</string>
+				<key>Items</key>
+				<array>
+					<dict>
+						<key>Type</key>
+						<string>SoundEffect</string>
+						<key>File</key>
+						<string>swordsmanWalking.caf</string>
+					</dict>
+					<dict>
+						<key>Type</key>
+						<string>Delay</string>
+						<key>Duration</key>
+						<real>0.1</real>
+					</dict>
+					<dict>
+						<key>Type</key>
+						<string>SoundEffect</string>
+						<key>File</key>
+						<string>swordsmanWalking.caf</string>
+					</dict>
+				</array>
 			</dict>
 			<dict>
 				<key>Type</key>
