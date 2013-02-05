@@ -2437,15 +2437,7 @@
 		3728FF8616BFEB0D00538CE6 /* Plist */ = {
 			isa = PBXGroup;
 			children = (
-				3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */,
-				3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */,
-				3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */,
-				3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */,
-				3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */,
-				37BE4F3E16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist */,
-				3728FF7C16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist */,
-				3728FF7D16BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist */,
-				3728FF7E16BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist */,
+				37E059A816C0E64400A32956 /* swordsman */,
 			);
 			name = Plist;
 			sourceTree = "<group>";
@@ -2541,6 +2533,38 @@
 			);
 			name = SneakyJoystick;
 			path = libs/SneakyJoystick;
+			sourceTree = "<group>";
+		};
+		37E059A816C0E64400A32956 /* swordsman */ = {
+			isa = PBXGroup;
+			children = (
+				3727472716BBFA0400D90D18 /* swordsman_Atlas_Animation.plist */,
+				37E059AB16C0E65800A32956 /* attack */,
+				37E059AA16C0E64F00A32956 /* walking */,
+			);
+			name = swordsman;
+			sourceTree = "<group>";
+		};
+		37E059AA16C0E64F00A32956 /* walking */ = {
+			isa = PBXGroup;
+			children = (
+				3727472116BBF22E00D90D18 /* swordsman_Walking_Up_Animation.plist */,
+				3727472F16BC0CED00D90D18 /* swordsman_Walking_Down_Animation.plist */,
+				3727473016BC0CED00D90D18 /* swordsman_Walking_Left_Animation.plist */,
+				3727473116BC0CED00D90D18 /* swordsman_Walking_Right_Animation.plist */,
+			);
+			name = walking;
+			sourceTree = "<group>";
+		};
+		37E059AB16C0E65800A32956 /* attack */ = {
+			isa = PBXGroup;
+			children = (
+				37BE4F3E16BFAC380049C634 /* swordsman_Attack_Up_Animation.plist */,
+				3728FF7C16BFE83D00538CE6 /* swordsman_Attack_Down_Animation.plist */,
+				3728FF7D16BFE83D00538CE6 /* swordsman_Attack_Left_Animation.plist */,
+				3728FF7E16BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist */,
+			);
+			name = attack;
 			sourceTree = "<group>";
 		};
 		9B019B0F16494D7700A6976F /* Status */ = {

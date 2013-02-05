@@ -247,12 +247,12 @@ __weak static BattleController* currentInstance;
         
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
-        if(countdown == 0) {
-            [self roundEnd];
+        if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
             return;
         }
         
-        if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
+        if(countdown == 0) {
+            [self roundEnd];
             return;
         }
         
