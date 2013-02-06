@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>rotateAttack</key>
+	<dict>
+		<key>RestoreOriginalFrame</key>
+		<true/>
+		<key>Duration</key>
+		<real>0.1</real>
+		<key>Atlas</key>
+		<string>Minotaur.plist</string>
+		<key>Frames</key>
+		<array>
+			<string>minotaur_attack_w002.png</string>
+			<string>minotaur_attack_n002.png</string>
+			<string>minotaur_attack_e002.png</string>
+			<string>minotaur_attack_s002.png</string>
+		</array>
+	</dict>
 	<key>upAction</key>
 	<dict>
 		<key>Duration</key>

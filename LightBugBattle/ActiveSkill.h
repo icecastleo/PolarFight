@@ -20,5 +20,6 @@
 
 -(void)showAttackRange:(BOOL)visible;
 -(void)setRangeDirection:(CGPoint)velocity;
+-(BOOL)hasNext;
 
 @end

@@ -13,6 +13,8 @@
     NSMutableArray *ranges;
     
     int count;
+    BOOL doing;
+    BOOL hasNext;
     
     CCAction *upAttackAction;
     CCAction *downAttackAction;

@@ -107,7 +107,7 @@
 //}
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
-    CCLOG(@"%f %f",position.x, position.y);
+//    CCLOG(@"%f %f",position.x, position.y);
     
     [characterInfoView clean];
     

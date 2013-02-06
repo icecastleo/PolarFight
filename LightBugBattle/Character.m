@@ -282,21 +282,20 @@
 }
 
 -(void)useSkill {
-    [sprite stopAllActions];
-    
     CCLOG(@"Player %d's %@ is using skill",player, self.name);
     
     state = kCharacterStateUseSkill;
     
-    // Run attack animation
-    [sprite runAttackAnimate];
-
     [skill execute];
 }
 
 // Need to be called when attack animation finished
 -(void)attackAnimateCallback {
-    state = kCharacterStateIdle;
+    if ([skill hasNext]) {
+        [skill execute];
+    }else {
+       state = kCharacterStateIdle; 
+    }
 }
 
 -(void)receiveAttackEvent:(AttackEvent *)event {

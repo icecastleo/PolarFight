@@ -247,6 +247,15 @@ __weak static BattleController* currentInstance;
         
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
+        if(dPadLayer.isButtonPressed) {
+            if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
+                [currentCharacter setDirection:dPadLayer.velocity];
+            }
+            //let the skill know double press.
+            [currentCharacter useSkill];
+            return;
+        }
+        
         if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
             return;
         }
@@ -256,15 +265,6 @@ __weak static BattleController* currentInstance;
             return;
         }
         
-        if(dPadLayer.isButtonPressed) {
-            if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
-                [currentCharacter setDirection:dPadLayer.velocity];
-            }
-            
-            [currentCharacter useSkill];
-            return;
-        }
-
         // Move character
         [currentCharacter moveBy:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }

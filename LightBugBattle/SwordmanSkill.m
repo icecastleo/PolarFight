@@ -31,24 +31,57 @@
         Range *range2 = [Range rangeWithCharacter:aCharacter parameters:dictionary2];
         
         [ranges addObject:range2];
+        doing = NO;
+        hasNext = NO;
     }
     return self;
 }
 
 -(void)execute {
+    if (!doing) {
+        if (hasNext) {
+            [self runSkill];
+        }else {
+            count = 0;
+            [self runSkill];
+        }
+    }else {
+        if (count == [character.sprite getCurrentAnimation]) {
+            count++;
+            hasNext = YES;
+        }
+        
+        if (count >= ranges.count) {
+            count = 0;
+            hasNext = NO;
+        }
+    }
+    
+}
+
+-(BOOL)hasNext {
+    doing = NO;
+    if (!hasNext) {
+        range.rangeSprite.visible = NO;
+        range = ranges[0];
+        range.rangeSprite.visible = YES;
+    }
+    return hasNext;
+}
+
+-(void)runSkill {
     for (Character *target in [range getEffectTargets]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
         event.knockOutPower = 25;
         event.knouckOutCollision = YES;
         [target receiveAttackEvent:event];
     }
-    
-    count++;
-    count %= ranges.count;
-    
+    [character.sprite runAttackAnimateFromSkill:count];
     range.rangeSprite.visible = NO;
     range = ranges[count];
     range.rangeSprite.visible = YES;
+    hasNext = NO;
+    doing = YES;
 }
 
 @end

@@ -13,10 +13,17 @@
 #import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
 
+typedef enum {
+    kAttack1 = 0,
+    kAttack2 = 1,
+    kAttack3
+} AttackAnimation;
+
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
     
     AKHelperObject *akHelper;
+    int currentAnimation;
     
     NSDictionary *upDirectionClip;
     NSDictionary *downDirectionClip;
@@ -27,6 +34,8 @@
     NSDictionary *downAttackClip;
     NSDictionary *leftAttackClip;
     NSDictionary *rightAttackClip;
+    
+    NSDictionary *rotateAttackClip;
     
 }
 @end
@@ -146,6 +155,7 @@
         downAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Down_Animation.plist"];
         leftAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Left_Animation.plist"];
         rightAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Right_Animation.plist"];
+        rotateAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Rotate_Animation.plist"];
         return;
     }
     
@@ -282,6 +292,43 @@
     }
 }
 
+-(void)runAttackAnimateFromSkill:(int)index {
+    [self stopAllActions];
+//    CCLOG(@"Attack Animation::%d",index);
+    currentAnimation = index;
+    
+    if (index==kAttack3) {
+        [akHelper applyAnimationClip:rotateAttackClip toNode:self];
+        return;
+    }
+    CharacterDirection direction = character.characterDirection;
+    
+    if(direction == kCharacterDirectionUp) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:upAttackClip toNode:self];
+            return;
+        }
+        
+    } else if (direction == kCharacterDirectionDown) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:downAttackClip toNode:self];
+            return;
+        }
+        
+    } else if (direction == kCharacterDirectionLeft) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:leftAttackClip toNode:self];
+            return;
+        }
+        
+    } else if (direction == kCharacterDirectionRight) {
+        if ([character.name isEqualToString:@"Swordsman"]) {
+            [akHelper applyAnimationClip:rightAttackClip toNode:self];
+            return;
+        }
+    }
+}
+
 -(void)runDeadAnimate {
     [self stopAllActions];
     
@@ -308,6 +355,7 @@
     downAttackAction = nil;
     leftAttackAction = nil;
     rightAttackAction = nil;
+    akHelper.objectDelegate = nil;
 }
 
 #pragma mark AKHelper Tag Delegate Method
@@ -324,6 +372,10 @@
     }else if ([tagName isEqualToString:@"setIdle"]) {
         [character attackAnimateCallback];
     }
+}
+
+-(int)getCurrentAnimation {
+    return currentAnimation;
 }
 
 @end

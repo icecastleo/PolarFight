@@ -37,4 +37,6 @@
 -(void)runAttackAnimate;
 -(void)runDeadAnimate;
 
+-(void)runAttackAnimateFromSkill:(int)index;
+-(int)getCurrentAnimation;
 @end

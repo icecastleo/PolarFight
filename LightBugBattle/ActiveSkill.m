@@ -35,4 +35,7 @@
     [range setDirection:velocity];
 }
 
+-(BOOL)hasNext {
+    return NO;
+}
 @end
