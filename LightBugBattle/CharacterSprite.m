@@ -13,42 +13,28 @@
 #import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
 
-typedef enum {
-    kAttack1 = 0,
-    kAttack2 = 1,
-    kAttack3
-} AttackAnimation;
-
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
     
     AKHelperObject *akHelper;
     int currentAnimation;
     
-    NSDictionary *upDirectionClip;
-    NSDictionary *downDirectionClip;
-    NSDictionary *leftDirectionClip;
-    NSDictionary *rightDirectionClip;
-    
-    NSDictionary *upAttack1Clip;
-    NSDictionary *downAttack1Clip;
-    NSDictionary *leftAttack1Clip;
-    NSDictionary *rightAttack1Clip;
-    
-    NSDictionary *attack2Clip;
-    
-    NSDictionary *upAttack3Clip;
-    NSDictionary *downAttack3Clip;
-    NSDictionary *leftAttack3Clip;
-    NSDictionary *rightAttack3Clip;
+    NSArray *directionStrings;
+    NSMutableDictionary *animationDictionary;
 }
 @end
+
+
+#define kAttackAnimation @"Attack"
+#define kWalkingAnimation @"Walking"
 
 @implementation CharacterSprite
 
 -(id)initWithCharacter:(Character *)aCharacter {
     akHelper = [[AKHelperObject alloc] init];
     akHelper.objectDelegate = self;
+    directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
+    animationDictionary = [NSMutableDictionary dictionary];
     
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
@@ -124,25 +110,6 @@ typedef enum {
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
     
     return animate;
-
-//    
-//    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-//    
-//    // Load the animation frames
-//    NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
-//    
-//    for (int i = 0; i < anInteger; i++)
-//    {
-//        NSString* file = [NSString stringWithFormat:@"%@%04d.bmp",name, i];
-//        CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
-//        [frames addObject:frame];
-//    }
-//    // Create an animation object from all the sprite animation frames
-//    CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
-//    animation.restoreOriginalFrame = YES;
-//    CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
-//    
-//    return animate;
 }
 
 -(void)setAnimationWithName:(NSString*)name {
@@ -151,20 +118,19 @@ typedef enum {
         NSAssert(akHelper != nil, @"akHelper != nil");
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"pop.caf"];
         [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanAttacking.wav"];
-        upDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Up_Animation.plist"];
-        downDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
-        leftDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];
-        rightDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Right_Animation.plist"];
-        upAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
-        downAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Down_Animation.plist"];
-        leftAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Left_Animation.plist"];
-        rightAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Right_Animation.plist"];
-        attack2Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Rotate_Animation.plist"];
         
-        upAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Up_Animation.plist"]; 
-        downAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Down_Animation.plist"];
-        leftAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Left_Animation.plist"];
-        rightAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Right_Animation.plist"];
+        int directionCount = directionStrings.count;
+        NSMutableArray *walkAnimationArray = [NSMutableArray arrayWithCapacity:directionCount];
+        NSMutableDictionary *walkingDictionary = [NSMutableDictionary dictionary];
+        
+        for (int i = 0; i < directionCount; i++) {
+            NSString *direction = [directionStrings objectAtIndex:i];
+            NSString *attackPlistName = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",name,direction];
+            NSDictionary *attackClip = [akHelper animationClipFromPlist:attackPlistName];
+            [walkingDictionary setValue:attackClip forKey:direction];
+        }
+        [walkAnimationArray addObject:walkingDictionary];
+        [animationDictionary setValue:walkAnimationArray forKey:kWalkingAnimation];
         return;
     }
     
@@ -206,7 +172,27 @@ typedef enum {
     animation.restoreOriginalFrame = YES;
     animation.delayPerUnit = 0.3;
     
-    rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];}
+    rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
+}
+
+-(void)setSkillAnimationWithName:(NSString *)name andCombosCount:(int)count {
+    if ([name isEqualToString:@"Swordsman"]) {
+        NSMutableArray *attackAnimationArray = [NSMutableArray arrayWithCapacity:count];
+        for (int i = 1; i <= count; i++) {
+            NSMutableDictionary *attackDictionary = [NSMutableDictionary dictionary];
+            
+            int directionStringsCount = directionStrings.count;
+            for (int j=0; j<directionStringsCount; j++) {
+                NSString *direction = [directionStrings objectAtIndex:j];
+                NSString *attackPlistName = [NSString stringWithFormat:@"%@_Attack%02d_%@_Animation.plist",name,i,direction];
+                NSDictionary *attackClip = [akHelper animationClipFromPlist:attackPlistName];
+                [attackDictionary setValue:attackClip forKey:direction];
+            }
+            [attackAnimationArray addObject:attackDictionary];
+        }
+        [animationDictionary setValue:attackAnimationArray forKey:kAttackAnimation];
+    }
+}
 
 -(void)runDirectionAnimate {
     [self stopAllActions];
@@ -216,15 +202,10 @@ typedef enum {
     // All character might use the applyAnimation method.
     if ([character.name isEqualToString:@"Swordsman"]) {
         CharacterDirection direction = character.characterDirection;
-        if(direction == kCharacterDirectionUp) {
-            [akHelper applyAnimationClip:upDirectionClip toNode:self];
-        } else if (direction == kCharacterDirectionDown) {
-            [akHelper applyAnimationClip:downDirectionClip toNode:self];
-        } else if (direction == kCharacterDirectionLeft) {
-            [akHelper applyAnimationClip:leftDirectionClip toNode:self];
-        } else if (direction == kCharacterDirectionRight) {
-            [akHelper applyAnimationClip:rightDirectionClip toNode:self];
-        }
+        NSArray *walkingAnimationArray = [animationDictionary objectForKey:kWalkingAnimation];
+        NSDictionary *walkingDic = [walkingAnimationArray lastObject]; //walking array only has one object.
+        NSDictionary *walkingClip = [walkingDic valueForKey:[directionStrings objectAtIndex:direction-1]];
+        [akHelper applyAnimationClip:walkingClip toNode:self];
         return;
     }
     
@@ -247,10 +228,6 @@ typedef enum {
     CharacterDirection direction = character.characterDirection;
     
     if(direction == kCharacterDirectionUp) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:upAttack1Clip toNode:self];
-            return;
-        }
         // TODO: Just delete me when there are attack animation.
         if (upAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -260,10 +237,6 @@ typedef enum {
         }
         [self runAction:upAttackAction];
     } else if (direction == kCharacterDirectionDown) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:downAttack1Clip toNode:self];
-            return;
-        }
         // TODO: Just delete me when there are attack animation.
         if (downAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -273,10 +246,6 @@ typedef enum {
         }
         [self runAction:downAttackAction];
     } else if (direction == kCharacterDirectionLeft) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:leftAttack1Clip toNode:self];
-            return;
-        }
         // TODO: Just delete me when there are attack animation.
         if (leftAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -286,10 +255,6 @@ typedef enum {
         }
         [self runAction:leftAttackAction];
     } else if (direction == kCharacterDirectionRight) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:rightAttack1Clip toNode:self];
-            return;
-        }
         // TODO: Just delete me when there are attack animation.
         if (rightAttackAction == nil) {
             [self runAction:[CCSequence actions:
@@ -303,49 +268,15 @@ typedef enum {
 
 -(void)runAttackAnimateFromSkill:(int)index {
     [self stopAllActions];
-//    CCLOG(@"Attack Animation::%d",index);
     currentAnimation = index;
-    
     CharacterDirection direction = character.characterDirection;
     
-    if(direction == kCharacterDirectionUp) {
-        if (index == kAttack3) {
-           [akHelper applyAnimationClip:upAttack3Clip toNode:self];
-        }else if (index == kAttack2) {
-            [akHelper applyAnimationClip:attack2Clip toNode:self];
-        }else if (index == kAttack1){
-            [akHelper applyAnimationClip:upAttack1Clip toNode:self];
-        }
-        return;
-    } else if (direction == kCharacterDirectionDown) {
-        if (index == kAttack3) {
-            [akHelper applyAnimationClip:downAttack3Clip toNode:self];
-        }else if (index == kAttack2) {
-            [akHelper applyAnimationClip:attack2Clip toNode:self];
-        }else if (index == kAttack1){
-            [akHelper applyAnimationClip:downAttack1Clip toNode:self];
-        }
-        return;
-    } else if (direction == kCharacterDirectionLeft) {
-        if (index == kAttack3) {
-            [akHelper applyAnimationClip:leftAttack3Clip toNode:self];
-        }else if (index == kAttack2) {
-            [akHelper applyAnimationClip:attack2Clip toNode:self];
-        }else if (index == kAttack1){
-            [akHelper applyAnimationClip:leftAttack1Clip toNode:self];
-        }
-        return;
-        
-    } else if (direction == kCharacterDirectionRight) {
-        if (index == kAttack3) {
-            [akHelper applyAnimationClip:rightAttack3Clip toNode:self];
-        }else if (index == kAttack2) {
-            [akHelper applyAnimationClip:attack2Clip toNode:self];
-        }else if (index == kAttack1){
-            [akHelper applyAnimationClip:rightAttack1Clip toNode:self];
-        }
-        return;
-    }
+    NSArray *attackAnimationArray = [animationDictionary objectForKey:kAttackAnimation];
+    NSDictionary *attackDic = [attackAnimationArray objectAtIndex:index];
+    NSDictionary *attackClip = [attackDic valueForKey:[directionStrings objectAtIndex:direction-1]];
+    NSAssert(attackClip, @"check if the attack animation exist.");
+    [akHelper applyAnimationClip:attackClip toNode:self];
+    return;
 }
 
 -(void)runDeadAnimate {
@@ -415,4 +346,5 @@ typedef enum {
     [self runAction:sequence];
 
 }
+
 @end
