@@ -36,6 +36,7 @@
         doing = NO;
         hasNext = NO;
         count = 0;
+        [character.sprite setSkillAnimationWithName:character.name andCombosCount:ranges.count];
     }
     return self;
 }
@@ -82,5 +83,4 @@
         [target receiveAttackEvent:event];
     }
 }
-
 @end
