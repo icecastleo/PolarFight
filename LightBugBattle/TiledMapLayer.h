@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MapCameraControl.h"
 #import "TiledMapCamera.h"
 #import "Helper.h"
 #import "Barrier.h"
