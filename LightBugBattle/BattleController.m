@@ -64,37 +64,33 @@ __weak static BattleController* currentInstance;
     if(self = [super init]) {
         currentInstance = self;
         
-        // We need a map photo to show on the map layer.
-        CCSprite* map = [CCSprite spriteWithFile:@"map.png"];
-        
-        mapLayer = [[MapLayer alloc] initWithMapSprite:map];
-        
-        CGSize winSize = [CCDirector sharedDirector].winSize;
-
-        mapLayer.position = ccp(winSize.width/2, winSize.height/2);
+        // We need a tiled map file to show        
+        mapLayer = [[TiledMapLayer alloc] initWithFile:@"TestMap.tmx"];
         
         [self addChild:mapLayer];
         
         // Testing add barriers
         Barrier* tree = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree.position = ccp(55, 55);
+        tree.position = ccp(100, 100);
         [mapLayer addBarrier:tree];
         
         Barrier* tree2 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree2.position = ccp(55, -55);
+        tree2.position = ccp(100, 200);
         [mapLayer addBarrier:tree2];
         
         Barrier* tree3 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree3.position = ccp(-55, 55);
+        tree3.position = ccp(200, 200);
         [mapLayer addBarrier:tree3];
         
         Barrier* tree4 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree4.position = ccp(-55, -55);
+        tree4.position = ccp(200, 100);
         [mapLayer addBarrier:tree4];
         
         // init Dpad
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
+        
+        characterQueue = [[CharacterQueue alloc] init];
         
         [self setCharacterArrayFromSelectLayer]; //should be above statusLayer.
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self andQueue:characterQueue];
@@ -102,6 +98,8 @@ __weak static BattleController* currentInstance;
         [self addChild:statusLayer];
         
         canMove = NO;
+        
+        [characterQueue roundStart];
         [self scheduleUpdate];
     }
     return self;
@@ -134,6 +132,7 @@ __weak static BattleController* currentInstance;
         [character.sprite addBloodSprite];
         [player2 addObject:character];
     }
+    
     for (Character *character in player1) {
         [self addCharacter:character];
 //        character.position = ccp(0, -190);
@@ -142,8 +141,7 @@ __weak static BattleController* currentInstance;
         [self addCharacter:character];
 //        character.position = ccp(0, -240);
     }
-    NSArray *tempArray = [[NSArray alloc] initWithArray:self.characters];
-    characterQueue = [[CharacterQueue alloc] initWithCharacterArrayWithRandomTime:tempArray];
+    
     player1 = nil;
     player2 = nil;
 }
@@ -151,15 +149,16 @@ __weak static BattleController* currentInstance;
 -(void)addCharacter:(Character *)character {
 //    CCLOG(@"Add player %i's %@", character.player, character.name);
     [mapLayer addCharacter:character];
+    [characterQueue addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
 //    CCLOG(@"Remove player %i's %@", character.player, character.name);
-    
+
     [mapLayer removeCharacter:character];
     [characterQueue removeCharacter:character withAnimated:YES];
     
-    // FIXME: Need a manage to control scene
+    // FIXME: Need a manager to control scene
     if (self.characters.count == 0) {
         [self unscheduleUpdate];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
@@ -247,21 +246,21 @@ __weak static BattleController* currentInstance;
         
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
+        if(countdown == 0) {
+            [self roundEnd];
+            return;
+        }
+        
         if(dPadLayer.isButtonPressed) {
             if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
                 [currentCharacter setDirection:dPadLayer.velocity];
             }
-            //let the skill know double press.
+            
+            // Skill will handle for multiple button pressed
             [currentCharacter useSkill];
-            return;
         }
         
         if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
-            return;
-        }
-        
-        if(countdown == 0) {
-            [self roundEnd];
             return;
         }
         

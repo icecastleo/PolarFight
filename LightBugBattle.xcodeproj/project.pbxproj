@@ -857,7 +857,6 @@
 		9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040C7169F0C84000EF31F /* TankSkill.m */; };
 		9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040CE169F2E7C000EF31F /* SuicideSkill.m */; };
 		9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
-		9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B248217164D40E3007B6E4D /* MapCameraControl.m */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
 		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
@@ -986,10 +985,13 @@
 		9B520C1E1639128100057A3D /* select-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520C1B1639128100057A3D /* select-3.png */; };
 		9B520E20163972F500057A3D /* TestFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1E163972F500057A3D /* TestFont.fnt */; };
 		9B520E21163972F500057A3D /* TestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1F163972F500057A3D /* TestFont.png */; };
+		9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */; };
+		9B6E290F16C301900041BA61 /* mountain_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6E290D16C301900041BA61 /* mountain_landscape.png */; };
+		9B6E291016C301900041BA61 /* TestMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9B6E290E16C301900041BA61 /* TestMap.tmx */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
-		9B82F793164FB2780001A357 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78F164FB2780001A357 /* MapLayer.m */; };
+		9B82F793164FB2780001A357 /* TiledMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78F164FB2780001A357 /* TiledMapLayer.m */; };
 		9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F795164FB38A0001A357 /* mainRole.jpg */; };
 		9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F796164FB38A0001A357 /* open_spot.jpg */; };
 		9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */; };
@@ -1971,8 +1973,6 @@
 		9B2040CE169F2E7C000EF31F /* SuicideSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuicideSkill.m; sourceTree = "<group>"; };
 		9B2040D0169F2F6D000EF31F /* BombPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombPassiveSkill.h; sourceTree = "<group>"; };
 		9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombPassiveSkill.m; sourceTree = "<group>"; };
-		9B248216164D40E3007B6E4D /* MapCameraControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCameraControl.h; sourceTree = "<group>"; };
-		9B248217164D40E3007B6E4D /* MapCameraControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCameraControl.m; sourceTree = "<group>"; };
 		9B288204166FA61C0041604F /* AttackEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEffect.h; sourceTree = "<group>"; };
 		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
@@ -2232,6 +2232,10 @@
 		9B520C1B1639128100057A3D /* select-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-3.png"; sourceTree = "<group>"; };
 		9B520E1E163972F500057A3D /* TestFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFont.fnt; sourceTree = "<group>"; };
 		9B520E1F163972F500057A3D /* TestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestFont.png; sourceTree = "<group>"; };
+		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
+		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
+		9B6E290D16C301900041BA61 /* mountain_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain_landscape.png; sourceTree = "<group>"; };
+		9B6E290E16C301900041BA61 /* TestMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestMap.tmx; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B82F788164FB2780001A357 /* BattleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleController.h; sourceTree = "<group>"; };
 		9B82F789164FB2780001A357 /* BattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleController.m; sourceTree = "<group>"; };
@@ -2239,8 +2243,8 @@
 		9B82F78B164FB2780001A357 /* BattleStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleStatusLayer.m; sourceTree = "<group>"; };
 		9B82F78C164FB2780001A357 /* DPadLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPadLayer.h; sourceTree = "<group>"; };
 		9B82F78D164FB2780001A357 /* DPadLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPadLayer.m; sourceTree = "<group>"; };
-		9B82F78E164FB2780001A357 /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLayer.h; sourceTree = "<group>"; };
-		9B82F78F164FB2780001A357 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
+		9B82F78E164FB2780001A357 /* TiledMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapLayer.h; sourceTree = "<group>"; };
+		9B82F78F164FB2780001A357 /* TiledMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapLayer.m; sourceTree = "<group>"; };
 		9B82F795164FB38A0001A357 /* mainRole.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mainRole.jpg; path = SelectLayer/mainRole.jpg; sourceTree = "<group>"; };
 		9B82F796164FB38A0001A357 /* open_spot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = open_spot.jpg; path = SelectLayer/open_spot.jpg; sourceTree = "<group>"; };
 		9B82F797164FB38A0001A357 /* SelectedRolesPostion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SelectedRolesPostion.plist; path = SelectLayer/SelectedRolesPostion.plist; sourceTree = "<group>"; };
@@ -2350,10 +2354,10 @@
 		2B1C55D71643B08A007D6CEA /* MapLayer */ = {
 			isa = PBXGroup;
 			children = (
-				9B82F78E164FB2780001A357 /* MapLayer.h */,
-				9B82F78F164FB2780001A357 /* MapLayer.m */,
-				9B248216164D40E3007B6E4D /* MapCameraControl.h */,
-				9B248217164D40E3007B6E4D /* MapCameraControl.m */,
+				9B82F78E164FB2780001A357 /* TiledMapLayer.h */,
+				9B82F78F164FB2780001A357 /* TiledMapLayer.m */,
+				9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */,
+				9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */,
 				37598BDC1696D2550007013B /* CharacterInfoView.h */,
 				37598BDD1696D2550007013B /* CharacterInfoView.m */,
 				2B85A7B5166357DB00D5962F /* Barrier.h */,
@@ -2683,6 +2687,8 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B6E290D16C301900041BA61 /* mountain_landscape.png */,
+				9B6E290E16C301900041BA61 /* TestMap.tmx */,
 				3727471D16BBF0D400D90D18 /* Animation */,
 				9B93798A16B1676400F1A05A /* Bomb */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
@@ -4981,11 +4987,10 @@
 				9B019B181649542E00A6976F /* AuraStatus.m in Sources */,
 				9B019B1D16495B6100A6976F /* PoisonStatus.m in Sources */,
 				9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */,
-				9B24821A164D40E3007B6E4D /* MapCameraControl.m in Sources */,
 				9B82F790164FB2780001A357 /* BattleController.m in Sources */,
 				9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */,
 				9B82F792164FB2780001A357 /* DPadLayer.m in Sources */,
-				9B82F793164FB2780001A357 /* MapLayer.m in Sources */,
+				9B82F793164FB2780001A357 /* TiledMapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
 				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
@@ -5050,6 +5055,7 @@
 				37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */,
 				37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */,
 				37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */,
+				9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "Character.h"
 #import "DPadLayer.h"
-#import "MapLayer.h"
+#import "TiledMapLayer.h"
 #import "Barrier.h"
 
 @class BattleStatusLayer;
@@ -23,7 +23,7 @@
     
     BattleStatusLayer *statusLayer;
     DPadLayer *dPadLayer;
-    MapLayer *mapLayer;
+    TiledMapLayer *mapLayer;
     
 //    id<GameState> state;
     
@@ -54,7 +54,6 @@
 
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y;
-
 
 @end
 

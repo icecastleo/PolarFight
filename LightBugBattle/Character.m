@@ -284,6 +284,7 @@
 -(void)useSkill {
     CCLOG(@"Player %d's %@ is using skill",player, self.name);
     
+    // FIXME: If skill is cooldown or ?, it can't be true
     state = kCharacterStateUseSkill;
     
     [skill execute];

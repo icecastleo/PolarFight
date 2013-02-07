@@ -18,35 +18,9 @@
 @implementation CharacterQueue
 @dynamic count;
 
-//static const int distance = NSIntegerMax;
-
-/*
--(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2 {
-    if ((self = [super init])) {
-        [self clear];
-        for (Character *cha in player1) {
-            [self addCharacter:cha];
-        }
-        for (Character *cha in player2) {
-            [self addCharacter:cha];
-        }
-        [self setCharacterQueueObjectTime];
-        [self sortQueue];
-    }
-    
-    return self;
-}
-//*/
-
--(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters {
-    if ((self = [super init])) {
+-(id)init {
+    if (self = [super init]) {
         _queue = [[NSMutableArray alloc] init];
-
-        for (Character *cha in characters) {
-            [self addCharacter:cha];
-        }
-        [self setRandomCharacterQueueObjectTime];
-        [self sortQueue];
     }
     return self;
 }
@@ -68,18 +42,20 @@
     [self.delegate redrawQueueBar];
 }
 
--(Character *)pop {
-    CharacterQueueObject * firstObject = [self first];
-    Character *firstCharacter = firstObject.character;
-    
-    if (!firstCharacter) {
-        NSAssert(firstCharacter != nil, @"firstCharacter should not nil??");
-        return nil;
+-(NSUInteger)getIndexForCharacterQueueObject:(CharacterQueueObject *)object {
+    if (self.count == 0) {
+        return 0;
     }
-    [self removeCharacter:firstCharacter withAnimated:NO];
-    [self nextTurn:firstObject.time];
     
-    return firstCharacter;
+    for (NSUInteger index = self.count; index > 0; index--) {
+        CharacterQueueObject *temp = [self.queue objectAtIndex:index - 1];
+        
+        if ([self compareCharacterQueueObject:temp andObject:object] <= 0) {
+            return index;
+        }
+    }
+    // Object is the fatest
+    return 0;
 }
 
 -(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated{
@@ -97,6 +73,20 @@
     [self.delegate removeCharacter:character withAnimated:animated];
 }
 
+-(Character *)pop {
+    CharacterQueueObject * firstObject = [self first];
+    Character *firstCharacter = firstObject.character;
+    
+    if (!firstCharacter) {
+        NSAssert(firstCharacter != nil, @"firstCharacter should not nil??");
+        return nil;
+    }
+    [self removeCharacter:firstCharacter withAnimated:NO];
+    [self nextTurn:firstObject.time];
+    
+    return firstCharacter;
+}
+
 -(CharacterQueueObject *)first {
     if (self.queue.count < 1) return nil;
     CharacterQueueObject *firstObject = [self.queue objectAtIndex:0];
@@ -104,20 +94,32 @@
     return firstObject;
 }
 
--(NSString *)description {
-    return [[self queue] description];
-}
-
--(void)setCharacterQueueObjectTime {
-    for (CharacterQueueObject *obj in self.queue) {
-        [obj setCharacterQueueObjectTime];
-    }
-}
-
 -(void)nextTurn:(NSInteger)number {
     for (CharacterQueueObject *obj in self.queue) {
         [obj timeDecrease:number];
     }
+}
+
+-(NSString *)description {
+    return [[self queue] description];
+}
+
+-(void)roundStart {
+    [self setRandomCharacterQueueObjectTime];
+    [self sortQueue];
+}
+
+-(void)setRandomCharacterQueueObjectTime {
+    for (CharacterQueueObject *obj in self.queue) {
+        [obj setCharacterQueueObjectTimeWithaVariable];
+    }
+}
+
+// Ascending Array
+-(void)sortQueue {
+    [self.queue sortUsingComparator:^NSComparisonResult(CharacterQueueObject * obj1, CharacterQueueObject * obj2) {
+        return [self compareCharacterQueueObject:obj1 andObject:obj2];
+    }];
 }
 
 -(int)compareCharacterQueueObject:(CharacterQueueObject *)object1 andObject:(CharacterQueueObject *)object2 {    
@@ -130,29 +132,6 @@
     }
 }
 
-// Ascending Array
--(void)sortQueue {
-    [self.queue sortUsingComparator:^NSComparisonResult(CharacterQueueObject * obj1, CharacterQueueObject * obj2) {
-        return [self compareCharacterQueueObject:obj1 andObject:obj2];
-    }];
-}
-
--(NSUInteger)getIndexForCharacterQueueObject:(CharacterQueueObject *)object {
-    if (self.count == 0) {
-        return 0;
-    }
-    
-    for (NSUInteger index = self.count; index > 0; index--) {
-        CharacterQueueObject *temp = [self.queue objectAtIndex:index - 1];
-        
-        if ([self compareCharacterQueueObject:temp andObject:object] <= 0) {
-            return index;
-        }
-    }
-    // Object is the fatest
-    return 0;
-}
-
 -(NSArray *)currentCharacterQueueArray {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     int count = [self count];
@@ -163,12 +142,6 @@
     }
     
     return [tempArray copy];
-}
-
--(void)setRandomCharacterQueueObjectTime {
-    for (CharacterQueueObject *obj in self.queue) {
-        [obj setCharacterQueueObjectTimeWithaVariable];
-    }
 }
 
 @end

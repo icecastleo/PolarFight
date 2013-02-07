@@ -1,57 +1,51 @@
 //
-//  MapCameraControl.m
-//  MapTest
+//  TiledMapCamera.m
+//  LightBugBattle
 //
-//  Created by Huang Hsing on 12/10/24.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 朱 世光 on 13/2/5.
+//
 //
 
-#import "MapCameraControl.h"
-#import "MapLayer.h"
+#import "TiledMapCamera.h"
 
 const static int kMoveTotalFps = kGameSettingFps;
 const static int kMoveSlowFPS = kGameSettingFps / 3;
 const static int kMoveSlowRatio = 30;
 
-@implementation MapCameraControl
+@implementation TiledMapCamera
 
--(id)initWithMapLayer:(MapLayer *)layer mapSprite:(CCSprite *)sprite {
-    if((self=[super init])) {
-        CGSize mapSize = sprite.boundingBox.size;
+-(id)initWithTiledMap:(CCTMXTiledMap *)aMap {
+    if (self = [super init]) {
+        map = aMap;
+        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
-        heightLimit = (mapSize.height - winSize.height) / 2;
-        widthLimit = (mapSize.width - winSize.width) / 2;
+        center = ccp(winSize.width / 2, winSize.height / 2);
         
-        camera = layer.camera;
+        widthMax = map.mapSize.width * map.tileSize.width - winSize.width;
+        heightMax = map.mapSize.height * map.tileSize.height - winSize.height;
         
-        _cameraPosition = ccp(0, 0);
-        
-        cameraZ = [CCCamera getZEye];
-        
-        [self moveCameraToX:0 Y:0];
-        
-        move = false;
+        move = NO;
     }
     return self;
 }
 
 -(void)moveCameraX:(float)x Y:(float)y {
-    [self moveCameraToX:_cameraPosition.x + x Y:_cameraPosition.y + y];
+    [self setMapPosition:ccp(map.position.x - x, map.position.y - y)];
 }
 
 -(void)moveCameraToX:(float)x Y:(float)y {
+    [self setMapPosition:ccpAdd(ccp(-x, -y), center)];
+}
+
+-(void)setMapPosition:(CGPoint)position {
 //    NSAssert(!move, @"You can't move camera during a smooth move!");
     if (move) {
 //        CCLOG(@"You can't move camera during a smooth move!");
         return;
     }
     
-    _cameraPosition.x = MIN(widthLimit, MAX(-1 * widthLimit, x));
-    _cameraPosition.y = MIN(heightLimit, MAX(-1 * heightLimit, y));
-    
-    [camera setCenterX:_cameraPosition.x centerY:_cameraPosition.y centerZ:0];
-    [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:cameraZ];
+    map.position = ccp(MAX(MIN(0, position.x), -widthMax),MAX(MIN(0, position.y), -heightMax));
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
@@ -64,11 +58,14 @@ const static int kMoveSlowRatio = 30;
     }
     move = YES;
     
-    float targetX = MIN(widthLimit, MAX(-1 * widthLimit, x));
-    float targetY = MIN(heightLimit, MAX(-1 * heightLimit, y));
+    x = -x + center.x;
+    y = -y + center.y;
     
-    moveX = targetX - _cameraPosition.x;
-    moveY = targetY - _cameraPosition.y;
+    float targetX = MAX(MIN(0, x), -widthMax);
+    float targetY = MAX(MIN(0, y), -heightMax);
+    
+    moveX = targetX - map.position.x;
+    moveY = targetY - map.position.y;
     
     float moveLength = ccpLength(ccp(moveX, moveY));
     
@@ -112,12 +109,8 @@ const static int kMoveSlowRatio = 30;
         updateY = MAX(moveY, delta.y);
     }
     moveY -= updateY;
-    
-    _cameraPosition.x += updateX;
-    _cameraPosition.y += updateY;
-    
-    [camera setCenterX:_cameraPosition.x centerY:_cameraPosition.y centerZ:0];
-    [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:cameraZ];
+
+    map.position = ccpAdd(map.position, ccp(updateX, updateY));
     
     if (moveCountDown == 0) {
         [self unscheduleMove];
@@ -133,20 +126,10 @@ const static int kMoveSlowRatio = 30;
     if (target != nil && selector != nil) {
         [target performSelector:selector];
     }
-#pragma clang diagnostic pop    
+#pragma clang diagnostic pop
     
     move = NO;
 }
 
--(void)setDefaultZ {
-    [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:[CCCamera getZEye]];
-}
-
--(void)moveCameraZ:(float)zValue {
-    cameraZ += zValue;
-    
-    [camera setEyeX:_cameraPosition.x eyeY:_cameraPosition.y eyeZ:cameraZ];
-}
 
 @end
-

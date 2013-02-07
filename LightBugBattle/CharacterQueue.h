@@ -19,12 +19,11 @@
 @property id<CharacteQueueBar> delegate;
 @property (readonly) int count;
 
-//-(id)initWithPlayer1Array:(NSArray *)player1 andPlayer2Array:(NSArray *)player2;
--(id)initWithCharacterArrayWithRandomTime:(NSArray *)characters;
 -(void)addCharacter:(Character *)newCharacter;
 -(void)removeCharacter:(Character *)character withAnimated:(BOOL)animated;
 -(Character *)pop;
 
+-(void)roundStart;
 -(NSArray *)currentCharacterQueueArray;
 
 @end

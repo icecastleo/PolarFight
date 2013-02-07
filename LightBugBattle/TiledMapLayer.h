@@ -8,39 +8,40 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MapCameraControl.h"
-#import "Character.h"
+#import "TiledMapCamera.h"
 #import "Helper.h"
 #import "Barrier.h"
 #import "KnockOutObject.h"
 
 @class Character, CharacterInfoView;
-@interface MapLayer : CCLayer {
+@interface TiledMapLayer : CCLayer {
     int mapBlock[128][53];
     
+    CCTMXTiledMap *map;
+    
     NSMutableArray *barriers;
-    CCSprite *mapSprite;
     
     float boundaryX;
     float boundaryY;
     int zOrder;
-
+    
     CharacterInfoView *characterInfoView;
 }
 
 @property (readonly) NSMutableArray* characters;
-@property (readonly) MapCameraControl* cameraControl;
+//@property (readonly) MapCameraControl* cameraControl;
+@property (readonly) TiledMapCamera* cameraControl;
 
--(id)initWithMapSprite:(CCSprite*)aSprite;
 
--(void)addCharacter:(Character*)character;
--(void)removeCharacter:(Character*)character;
+-(id)initWithFile:(NSString *)file;
+
+-(void)addCharacter:(Character *)character;
+-(void)removeCharacter:(Character *)character;
 
 -(void)addBarrier:(Barrier *)barrier;
-//-(void)removeBarrier:(Barrier*)
+//-(void)removeBarrier:(Barrier *)
 
-//-(void)setMapBlocks;
--(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move;
--(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move;
+-(void)moveCharacter:(Character *)character toPosition:(CGPoint)position isMove:(BOOL)move;
+-(void)moveCharacter:(Character *)character byPosition:(CGPoint)position isMove:(BOOL)move;
 
 @end
