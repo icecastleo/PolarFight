@@ -88,6 +88,7 @@
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
+        // FIXME: Group to a function, and run idle animation.
         state = kCharacterStateIdle;
         
         [self makePoint];
@@ -223,7 +224,6 @@
 
 
 // TODO: We need another method for AI to move to a certain position for a giving time.
-
 // This method should be called by update method in one frame.
 -(void)moveBy:(CGPoint)position {
     if (position.x == 0 && position.y == 0) {
@@ -290,12 +290,18 @@
     [skill execute];
 }
 
+-(void)stopSkill {
+    [skill stop];
+}
+
 // Need to be called when attack animation finished
 -(void)attackAnimateCallback {
-    if ([skill hasNext]) {
+    if (skill.hasNext) {
+        [skill next];
         [skill execute];
-    }else {
-       state = kCharacterStateIdle; 
+    } else {
+        [skill reset];
+        state = kCharacterStateIdle;
     }
 }
 
@@ -396,7 +402,7 @@
 -(void)dead {
     state = kCharacterStateDead;
     
-    //    CCLOG(@"Player %i's %@ is dead", player, self.name);
+//    CCLOG(@"Player %i's %@ is dead", player, self.name);
 
     // Run dead animation, then clean up
     [sprite runDeadAnimate];

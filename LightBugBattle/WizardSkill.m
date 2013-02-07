@@ -11,13 +11,10 @@
 
 @implementation WizardSkill
 
--(id)initWithCharacter:(Character *)aCharacter {
-    if (self = [super initWithCharacter:aCharacter]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFarCircle,@"rangeType",@50,@"effectRadius",@100,@"effectDistance",nil];
-        
-        range = [Range rangeWithCharacter:aCharacter parameters:dictionary];
-    }
-    return self;
+-(void)setRanges {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFarCircle,@"rangeType",@50,@"effectRadius",@100,@"effectDistance",nil];
+
+    [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
 
 -(void)execute {

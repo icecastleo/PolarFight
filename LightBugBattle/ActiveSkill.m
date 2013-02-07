@@ -14,13 +14,78 @@
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {
         character = aCharacter;
+        
+        ranges = [[NSMutableArray alloc] init];
+        [self setRanges];
+        
+        count = 0;
+        
+        if (ranges.count > 0) {
+            range = ranges[0];
+        }
+        
+        [character.sprite setSkillAnimationWithName:character.name andCombosCount:ranges.count];
+        
+        execute = NO;
+        _hasNext = NO;
     }
     return self;
 }
 
--(void)execute {
+-(void)setRanges {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a PositiveSkill subclass", NSStringFromSelector(_cmd)];
+                format:@"You must override %@ in a ActiveSkill subclass", NSStringFromSelector(_cmd)];
+}
+
+-(void)execute {
+    if (!execute) {
+        execute = YES;
+        [character.sprite runAttackAnimateFromSkill:count];
+        [self activeSkill:count];
+    } else {
+        if (ranges.count < 1) {
+            return;
+        }
+        
+        if (count != ranges.count - 1) {
+            _hasNext = YES;
+        }
+    }
+}
+
+-(void)stop {
+    _hasNext = NO;
+}
+
+-(void)next {
+    execute = NO;
+    _hasNext = NO;
+    
+    count++;
+    
+    range.rangeSprite.visible = NO;
+    range = ranges[count];
+    range.rangeSprite.visible = YES;
+}
+
+-(void)reset {
+    execute = NO;
+    _hasNext = NO;
+    
+    if (count == 0) {
+        return;
+    }
+    
+    count = 0;
+    
+    range.rangeSprite.visible = NO;
+    range = ranges[count];
+    range.rangeSprite.visible = YES;
+}
+
+-(void)activeSkill:(int)count {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a ActiveSkill subclass", NSStringFromSelector(_cmd)];
 }
 
 -(void)showAttackRange:(BOOL)visible {
@@ -35,7 +100,4 @@
     [range setDirection:velocity];
 }
 
--(BOOL)hasNext {
-    return NO;
-}
 @end

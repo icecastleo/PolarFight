@@ -69,6 +69,7 @@
 -(void)moveBy:(CGPoint)position;
 
 -(void)useSkill;
+-(void)stopSkill;
 -(void)attackAnimateCallback;
 
 -(void)receiveAttackEvent:(AttackEvent *)event;

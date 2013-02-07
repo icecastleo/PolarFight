@@ -125,11 +125,12 @@
         
         for (int i = 0; i < directionCount; i++) {
             NSString *direction = [directionStrings objectAtIndex:i];
-            NSString *attackPlistName = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",name,direction];
-            NSDictionary *attackClip = [akHelper animationClipFromPlist:attackPlistName];
-            [walkingDictionary setValue:attackClip forKey:direction];
+            NSString *plistName = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",name,direction];
+            NSDictionary *clip = [akHelper animationClipFromPlist:plistName];
+            NSAssert(clip != nil, @"%@ not exist!!",plistName);
+            [walkingDictionary setValue:clip forKey:direction];
+            [walkAnimationArray addObject:walkingDictionary];
         }
-        [walkAnimationArray addObject:walkingDictionary];
         [animationDictionary setValue:walkAnimationArray forKey:kWalkingAnimation];
         return;
     }
@@ -178,16 +179,19 @@
 -(void)setSkillAnimationWithName:(NSString *)name andCombosCount:(int)count {
     if ([name isEqualToString:@"Swordsman"]) {
         NSMutableArray *attackAnimationArray = [NSMutableArray arrayWithCapacity:count];
+        
         for (int i = 1; i <= count; i++) {
             NSMutableDictionary *attackDictionary = [NSMutableDictionary dictionary];
             
             int directionStringsCount = directionStrings.count;
+            
             for (int j=0; j<directionStringsCount; j++) {
                 NSString *direction = [directionStrings objectAtIndex:j];
                 NSString *attackPlistName = [NSString stringWithFormat:@"%@_Attack%02d_%@_Animation.plist",name,i,direction];
                 NSDictionary *attackClip = [akHelper animationClipFromPlist:attackPlistName];
                 [attackDictionary setValue:attackClip forKey:direction];
             }
+            
             [attackAnimationArray addObject:attackDictionary];
         }
         [animationDictionary setValue:attackAnimationArray forKey:kAttackAnimation];
@@ -201,10 +205,10 @@
     
     // All character might use the applyAnimation method.
     if ([character.name isEqualToString:@"Swordsman"]) {
-        CharacterDirection direction = character.characterDirection;
         NSArray *walkingAnimationArray = [animationDictionary objectForKey:kWalkingAnimation];
-        NSDictionary *walkingDic = [walkingAnimationArray lastObject]; //walking array only has one object.
-        NSDictionary *walkingClip = [walkingDic valueForKey:[directionStrings objectAtIndex:direction-1]];
+        // walking array only has one object.
+        NSDictionary *walkingDic = [walkingAnimationArray lastObject];
+        NSDictionary *walkingClip = [walkingDic valueForKey:[directionStrings objectAtIndex:direction - 1]];
         [akHelper applyAnimationClip:walkingClip toNode:self];
         return;
     }
@@ -219,7 +223,6 @@
     } else if (direction == kCharacterDirectionRight) {
         [self runAction:rightAction];
     }
-    
 }
 
 -(void)runAttackAnimate {

@@ -11,15 +11,11 @@
 
 @implementation BombSkill
 
--(id)initWithCharacter:(Character *)aCharacter {
-    if (self = [super initWithCharacter:aCharacter]) {
-        
-    }
-    return self;
+-(void)setRanges {
+    
 }
 
 -(void)execute {
-    
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",nil];
     
     RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary]];

@@ -12,7 +12,11 @@
 
 @implementation SuicideSkill
 
--(void)execute {
+-(void)setRanges {
+    
+}
+
+-(void)activeSkill:(int)count {
     int damage = [character getAttribute:kCharacterAttributeHp].value;
     
     DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeSkill damager:character];

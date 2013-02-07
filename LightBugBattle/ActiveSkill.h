@@ -11,15 +11,28 @@
 #import "Range.h"
 
 @interface ActiveSkill : NSObject {
-    Range *range;
     __weak Character *character;
+    
+    NSMutableArray *ranges;
+    Range *range;
+    
+    int count;
+    BOOL execute;
 }
 
--(id)initWithCharacter:(Character*)aCharacter;
+@property (readonly) BOOL hasNext;
+
+-(id)initWithCharacter:(Character *)aCharacter;
+-(void)setRanges;
+
 -(void)execute;
+-(void)stop;
+-(void)next;
+-(void)reset;
+
+-(void)activeSkill:(int)count;
 
 -(void)showAttackRange:(BOOL)visible;
 -(void)setRangeDirection:(CGPoint)velocity;
--(BOOL)hasNext;
 
 @end

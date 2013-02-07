@@ -247,6 +247,12 @@ __weak static BattleController* currentInstance;
         [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
         
         if(countdown == 0) {
+            if(currentCharacter.state == kCharacterStateUseSkill) {
+                //FIXME: Might stop more than one time
+                [currentCharacter stopSkill];
+                return;
+            }
+            
             [self roundEnd];
             return;
         }
@@ -258,9 +264,10 @@ __weak static BattleController* currentInstance;
             
             // Skill will handle for multiple button pressed
             [currentCharacter useSkill];
+            return;
         }
         
-        if(currentCharacter.state == kCharacterStateUseSkill && currentCharacter.sprite.numberOfRunningActions != 0) {
+        if(currentCharacter.state == kCharacterStateUseSkill) {
             return;
         }
         

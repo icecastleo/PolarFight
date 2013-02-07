@@ -14,6 +14,10 @@
 
 @implementation TestSkill
 
+-(void)setRanges {
+    
+}
+
 -(void)execute {
     
 //    NSMutableDictionary *effectDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];

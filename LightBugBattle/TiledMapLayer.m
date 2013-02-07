@@ -14,6 +14,16 @@
 @implementation TiledMapLayer
 @synthesize cameraControl;
 
+static float scale;
+
++(void)initialize {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    } else {
+        scale = 1.0;
+    }
+}
+
 -(id)initWithFile:(NSString *)file {
     if(self = [super init]) {
         _characters = [[NSMutableArray alloc] init];
@@ -21,8 +31,13 @@
         
         map =  [CCTMXTiledMap tiledMapWithTMXFile:file] ;
         
-        boundaryX = map.mapSize.width * map.tileSize.width;
-        boundaryY = map.mapSize.height * map.tileSize.height;
+        // Iterate over all the "layers" (atlas sprite managers) and set them as 'antialias'
+        for(CCTMXLayer *child in [map children] ) {
+            [[child texture] setAntiAliasTexParameters];
+        }
+        
+        boundaryX = map.mapSize.width * map.tileSize.width / scale;
+        boundaryY = map.mapSize.height * map.tileSize.height / scale;
         
         zOrder = boundaryY;
         
@@ -67,11 +82,11 @@
     
     NSAssert(spawn != nil, @"Spawn object not found");
     
-    int x = [[spawn valueForKey:@"x"] intValue];
-    int y = [[spawn valueForKey:@"y"] intValue];
+    int x = [[spawn valueForKey:@"x"] intValue] / scale;
+    int y = [[spawn valueForKey:@"y"] intValue] / scale;
     
-    int width = [[spawn valueForKey:@"width"] intValue];
-    int height = [[spawn valueForKey:@"height"] intValue];
+    int width = [[spawn valueForKey:@"width"] intValue] / scale;
+    int height = [[spawn valueForKey:@"height"] intValue] / scale;
     
     CGPoint position;
     

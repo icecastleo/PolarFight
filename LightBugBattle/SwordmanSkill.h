@@ -10,16 +10,7 @@
 #import "Range.h"
 
 @interface SwordmanSkill : ActiveSkill {
-    NSMutableArray *ranges;
-    
-    int count;
-    BOOL doing;
-    BOOL hasNext;
-    
-    CCAction *upAttackAction;
-    CCAction *downAttackAction;
-    CCAction *rightAttackAction;
-    CCAction *leftAttackAction;
+
 }
 
 @end
