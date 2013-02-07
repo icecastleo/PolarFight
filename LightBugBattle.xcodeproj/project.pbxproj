@@ -4936,6 +4936,10 @@
 				3728FF8116BFE83D00538CE6 /* swordsman_Attack_Right_Animation.plist in Resources */,
 				3728FF8816BFEB5500538CE6 /* swordsmanAttacking.wav in Resources */,
 				37E0C81216C1F70000626E0A /* swordsman_Attack_Rotate_Animation.plist in Resources */,
+				373E23A216C393A4007A0981 /* swordsman_Attack_Jump_Down_Animation.plist in Resources */,
+				373E23A316C393A4007A0981 /* swordsman_Attack_Jump_Left_Animation.plist in Resources */,
+				373E23A416C393A4007A0981 /* swordsman_Attack_Jump_Right_Animation.plist in Resources */,
+				373E23A516C393A4007A0981 /* swordsman_Attack_Jump_Up_Animation.plist in Resources */,
 				9B6E290F16C301900041BA61 /* mountain_landscape.png in Resources */,
 				9B6E291016C301900041BA61 /* TestMap.tmx in Resources */,
 			);
