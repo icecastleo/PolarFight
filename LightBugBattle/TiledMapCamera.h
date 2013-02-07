@@ -1,23 +1,21 @@
 //
-//  MapCameraControl.h
-//  MapTest
+//  TiledMapCamera.h
+//  LightBugBattle
 //
-//  Created by Huang Hsing on 12/10/24.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 朱 世光 on 13/2/5.
+//
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@class MapLayer;
-@interface MapCameraControl : CCNode
-{
-    CCCamera* camera;
-
-    float cameraZ;
+@interface TiledMapCamera : CCNode {
+    CCTMXTiledMap *map;
     
-    float heightLimit;
-    float widthLimit;
+    CGPoint center;
+    
+    float widthMax;
+    float heightMax;
     
     id target;
     SEL selector;
@@ -30,15 +28,12 @@
     CGPoint delta;
     CGPoint acceleration;
 }
-@property (readonly) CGPoint cameraPosition;
 
--(id)initWithMapLayer:(MapLayer *)layer mapSprite:(CCSprite *)sprite;
+-(id)initWithTiledMap:(CCTMXTiledMap *)aMap;
+
 -(void)moveCameraX:(float)x Y:(float)y;
 -(void)moveCameraToX:(float)x Y:(float)y;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y delegate:(id)aTarget selector:(SEL)aSelector;
-
--(void)setDefaultZ;
--(void)moveCameraZ:(float)zValue;
 
 @end
