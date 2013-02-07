@@ -30,13 +30,17 @@ typedef enum {
     NSDictionary *leftDirectionClip;
     NSDictionary *rightDirectionClip;
     
-    NSDictionary *upAttackClip;
-    NSDictionary *downAttackClip;
-    NSDictionary *leftAttackClip;
-    NSDictionary *rightAttackClip;
+    NSDictionary *upAttack1Clip;
+    NSDictionary *downAttack1Clip;
+    NSDictionary *leftAttack1Clip;
+    NSDictionary *rightAttack1Clip;
     
-    NSDictionary *rotateAttackClip;
+    NSDictionary *attack2Clip;
     
+    NSDictionary *upAttack3Clip;
+    NSDictionary *downAttack3Clip;
+    NSDictionary *leftAttack3Clip;
+    NSDictionary *rightAttack3Clip;
 }
 @end
 
@@ -151,11 +155,16 @@ typedef enum {
         downDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Down_Animation.plist"];
         leftDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Left_Animation.plist"];
         rightDirectionClip = [akHelper animationClipFromPlist:@"swordsman_Walking_Right_Animation.plist"];
-        upAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
-        downAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Down_Animation.plist"];
-        leftAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Left_Animation.plist"];
-        rightAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Right_Animation.plist"];
-        rotateAttackClip = [akHelper animationClipFromPlist:@"swordsman_Attack_Rotate_Animation.plist"];
+        upAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Up_Animation.plist"];
+        downAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Down_Animation.plist"];
+        leftAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Left_Animation.plist"];
+        rightAttack1Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Right_Animation.plist"];
+        attack2Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Rotate_Animation.plist"];
+        
+        upAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Up_Animation.plist"]; 
+        downAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Down_Animation.plist"];
+        leftAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Left_Animation.plist"];
+        rightAttack3Clip = [akHelper animationClipFromPlist:@"swordsman_Attack_Jump_Right_Animation.plist"];
         return;
     }
     
@@ -239,7 +248,7 @@ typedef enum {
     
     if(direction == kCharacterDirectionUp) {
         if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:upAttackClip toNode:self];
+            [akHelper applyAnimationClip:upAttack1Clip toNode:self];
             return;
         }
         // TODO: Just delete me when there are attack animation.
@@ -252,7 +261,7 @@ typedef enum {
         [self runAction:upAttackAction];
     } else if (direction == kCharacterDirectionDown) {
         if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:downAttackClip toNode:self];
+            [akHelper applyAnimationClip:downAttack1Clip toNode:self];
             return;
         }
         // TODO: Just delete me when there are attack animation.
@@ -265,7 +274,7 @@ typedef enum {
         [self runAction:downAttackAction];
     } else if (direction == kCharacterDirectionLeft) {
         if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:leftAttackClip toNode:self];
+            [akHelper applyAnimationClip:leftAttack1Clip toNode:self];
             return;
         }
         // TODO: Just delete me when there are attack animation.
@@ -278,7 +287,7 @@ typedef enum {
         [self runAction:leftAttackAction];
     } else if (direction == kCharacterDirectionRight) {
         if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:rightAttackClip toNode:self];
+            [akHelper applyAnimationClip:rightAttack1Clip toNode:self];
             return;
         }
         // TODO: Just delete me when there are attack animation.
@@ -297,35 +306,45 @@ typedef enum {
 //    CCLOG(@"Attack Animation::%d",index);
     currentAnimation = index;
     
-    if (index==kAttack3) {
-        [akHelper applyAnimationClip:rotateAttackClip toNode:self];
-        return;
-    }
     CharacterDirection direction = character.characterDirection;
     
     if(direction == kCharacterDirectionUp) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:upAttackClip toNode:self];
-            return;
+        if (index == kAttack3) {
+           [akHelper applyAnimationClip:upAttack3Clip toNode:self];
+        }else if (index == kAttack2) {
+            [akHelper applyAnimationClip:attack2Clip toNode:self];
+        }else if (index == kAttack1){
+            [akHelper applyAnimationClip:upAttack1Clip toNode:self];
         }
-        
+        return;
     } else if (direction == kCharacterDirectionDown) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:downAttackClip toNode:self];
-            return;
+        if (index == kAttack3) {
+            [akHelper applyAnimationClip:downAttack3Clip toNode:self];
+        }else if (index == kAttack2) {
+            [akHelper applyAnimationClip:attack2Clip toNode:self];
+        }else if (index == kAttack1){
+            [akHelper applyAnimationClip:downAttack1Clip toNode:self];
         }
-        
+        return;
     } else if (direction == kCharacterDirectionLeft) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:leftAttackClip toNode:self];
-            return;
+        if (index == kAttack3) {
+            [akHelper applyAnimationClip:leftAttack3Clip toNode:self];
+        }else if (index == kAttack2) {
+            [akHelper applyAnimationClip:attack2Clip toNode:self];
+        }else if (index == kAttack1){
+            [akHelper applyAnimationClip:leftAttack1Clip toNode:self];
         }
+        return;
         
     } else if (direction == kCharacterDirectionRight) {
-        if ([character.name isEqualToString:@"Swordsman"]) {
-            [akHelper applyAnimationClip:rightAttackClip toNode:self];
-            return;
+        if (index == kAttack3) {
+            [akHelper applyAnimationClip:rightAttack3Clip toNode:self];
+        }else if (index == kAttack2) {
+            [akHelper applyAnimationClip:attack2Clip toNode:self];
+        }else if (index == kAttack1){
+            [akHelper applyAnimationClip:rightAttack1Clip toNode:self];
         }
+        return;
     }
 }
 
@@ -369,6 +388,14 @@ typedef enum {
         [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"rightAttackAction"]) {
         [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+    }else if ([tagName isEqualToString:@"upJumpAttackAction"]) {
+        [self jumpAction];
+    }else if ([tagName isEqualToString:@"downJumpAttackAction"]) {
+        [self jumpAction];
+    }else if ([tagName isEqualToString:@"leftJumpAttackAction"]) {
+        [self jumpAction];
+    }else if ([tagName isEqualToString:@"rightJumpAttackAction"]) {
+        [self jumpAction];
     }else if ([tagName isEqualToString:@"setIdle"]) {
         [character attackAnimateCallback];
     }
@@ -378,4 +405,14 @@ typedef enum {
     return currentAnimation;
 }
 
+-(void)jumpAction {
+    CCJumpTo *jump1 = [CCJumpTo actionWithDuration:1 position:self.position height:self.boundingBox.size.height*.5 jumps:1];
+    CCEaseIn *squeze1 = [CCEaseIn actionWithAction:[CCScaleTo actionWithDuration:.1 scaleX:1 scaleY:.8] rate:2];
+    CCEaseOut *expand1 = [CCEaseOut actionWithAction:[CCScaleTo actionWithDuration:.1 scaleX:1 scaleY:1] rate:2];
+    
+    CCSequence *sequence = [CCSequence actions: jump1, squeze1, expand1, nil];
+    
+    [self runAction:sequence];
+
+}
 @end
