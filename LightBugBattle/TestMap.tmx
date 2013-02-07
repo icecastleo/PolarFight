@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="60" height="60" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Mountain landscape" tilewidth="32" tileheight="32">
   <image source="mountain_landscape.png" width="512" height="512"/>
  </tileset>
- <layer name="Background" width="100" height="100">
+ <layer name="Background" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt1LERAVEUheFXABpgVIAadPBK2RiBGBWgWWeznR2xfWO/4Mv/uWfm1lJKBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+BOLWA6sGmiai/Hte12c4hyX2DbQORebWH9xi3s87PFTu9iPXOMZr3jbY3L5YcfhPocGmoDpfACtEwt0
+   eJzt0rENglAARdE/ALoAxgmUGdyAUayVwlqdQFzWZ0cMpSY/eIrTv5u8vpTSAwAAAAAAAAAAAAAAUKUmVhPrCjb9qu3tGKc4xxDbCnZ+yybaGde4xX1hvbvYf7jEI8Z4Lqx3Tj5+mPZ3FWziv7wApDxT/A==
   </data>
  </layer>
- <layer name="Foreground" width="100" height="100">
+ <layer name="Foreground" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt1TlOw2AUhdGfsWfsGXvkgGgZe8aecSPsAHYLDddKIGBFiCpW4nOkr7DcPPkqSikAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwfzNtH8C35hb182yaS/NpIS2O+6iOGrXFUlpOK2k1raX1Md/F7y0201baTjtpt8W7ptF7+vjj/agtqtQrk7PHtPwHjtrisAw3mZQ9psXPLV5Kf4evXos9xm2j9Leov/1bGf4+qsHzfjpo7bru2Sv9PapGvUFn6by167rnKB2nk3TaqN7iJt22dl33XKTLdJWuG9VbPKXn1q7rnrt0nx7SYyNbwOT6BA2cFns=
+   eJzt0b1OAkEYheFPVHoF7BGxNwvGFvzpwZ8eQW7EO9C71cYz2SW7mWy2IMNM3LxP8haTbb6TNQMAAAAAAAAAAAAAAAAAAAAQ2lHqAyLyt7p3Rx2rE3WqurGPOpC6rWfqXPVUXw3UReS7YqhuvVQjdaXG6jrhXfv4Ub8N3+u2Zmpi/3Nvk7qtd1Zubtve6tZPy3fu+rL27R1avtVt+7by/2bFe6puk10X3o3lezOvSdGjekp2XXgzNVf36sHLbX1Vb8muC2+hlupZvXi5rR9qm+y68FbqXa3VxqttW3FYf6+NFno=
   </data>
  </layer>
- <layer name="Shadow - Foreground" width="100" height="100">
+ <layer name="Shadow - Foreground" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztzrERACAIADHm1w1wWakcQSiSu+8/AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmGJVu3uCJ6vTPQEAwHcXQD8CSw==
+   eJztzrENADAIwDDuLx+0z8IVMNSWsicCAAAAAAAAAAAAAADgT6fL7YlBt3vbEwCMKeHaAks=
   </data>
  </layer>
- <layer name="Decoration" width="100" height="100">
+ <layer name="Decoration" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztzkENADAIBDD8a2MOJob3FNwSWgWtAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgs04HeNx0AFjhpAMA8LkBzoICdg==
+   eJztzkENACAMBLD51zYcIGYP0MAlpFXQKgAAAAAAAAAAAAAAgKPTgcd2OgDXSgeALw3mTQJ2
   </data>
  </layer>
- <layer name="Top" width="100" height="100">
+ <layer name="Top" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztzkENACAMADH8SwMH4ABMsNcsjJA2uf+1BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALyqR6N6gjSjVT1B2tGpngAAAAC+dAGKWAUg
+   eJztzjENACAMAEH8SwMH4ABMUAVMpF3ukt+/NQAAAAAAAAAAAACAtx6N6olEM1rVE4l2dKonAAD47gJ9XQUg
   </data>
  </layer>
- <objectgroup name="Collision" width="100" height="100">
-  <object x="1280" y="3030" width="25">
+ <objectgroup name="Collision" width="60" height="60">
+  <object x="640" y="1750" width="25">
    <ellipse/>
   </object>
-  <object x="1465" y="2871" width="75" height="38">
+  <object x="825" y="1591" width="75" height="38">
    <ellipse/>
   </object>
-  <object x="1703" y="2974">
+  <object x="1063" y="1694">
    <polyline points="0,0 -2,133 24,160 247,164 304,93 305,-135 253,-179 181,-179 0,0"/>
   </object>
  </objectgroup>
- <objectgroup name="Spawn Layer" width="100" height="100">
-  <object name="Player1" x="630" y="2579" width="431" height="394"/>
-  <object name="Player2" x="2126" y="2605" width="431" height="394"/>
+ <objectgroup name="Spawn Layer" width="60" height="60">
+  <object name="Player1" x="31" y="1480" width="431" height="394"/>
+  <object name="Player2" x="1442" y="1491" width="431" height="394"/>
  </objectgroup>
 </map>
