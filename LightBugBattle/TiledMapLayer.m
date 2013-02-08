@@ -82,12 +82,12 @@ static float scale;
     
     NSAssert(spawn != nil, @"Spawn object not found");
     
-    int x = [[spawn valueForKey:@"x"] intValue] / scale;
-    int y = [[spawn valueForKey:@"y"] intValue] / scale;
+    int x = [[spawn valueForKey:@"x"] intValue] / CC_CONTENT_SCALE_FACTOR();
+    int y = [[spawn valueForKey:@"y"] intValue] / CC_CONTENT_SCALE_FACTOR();
     
-    int width = [[spawn valueForKey:@"width"] intValue] / scale;
-    int height = [[spawn valueForKey:@"height"] intValue] / scale;
-    
+    int width = [[spawn valueForKey:@"width"] intValue] / CC_CONTENT_SCALE_FACTOR();
+    int height = [[spawn valueForKey:@"height"] intValue] / CC_CONTENT_SCALE_FACTOR();
+        
     CGPoint position;
     
     while (true) {

@@ -1023,10 +1023,10 @@
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
 		9BC8FDBD1657EC7E00A9EAC7 /* TimeStatusEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */; };
-		9BD2951D16C44D45001733E4 /* TestMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9B6E290E16C301900041BA61 /* TestMap.tmx */; };
-		9BD2951E16C44D47001733E4 /* mountain_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6E290D16C301900041BA61 /* mountain_landscape.png */; };
-		9BD2952216C45136001733E4 /* TestMap-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952116C45136001733E4 /* TestMap-hd.tmx */; };
-		9BD2952416C452CA001733E4 /* mountain_landscape-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952316C452CA001733E4 /* mountain_landscape-hd.png */; };
+		9BD2952816C586A4001733E4 /* mountain_landscape-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952616C586A3001733E4 /* mountain_landscape-hd.png */; };
+		9BD2952916C586A4001733E4 /* mountain_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952716C586A3001733E4 /* mountain_landscape.png */; };
+		9BD2952C16C586B6001733E4 /* TestMap-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952A16C586B5001733E4 /* TestMap-hd.tmx */; };
+		9BD2952D16C586B6001733E4 /* TestMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9BD2952B16C586B5001733E4 /* TestMap.tmx */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BE01A391695E81900B9C427 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */; };
@@ -2236,8 +2236,6 @@
 		9B520E1F163972F500057A3D /* TestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestFont.png; sourceTree = "<group>"; };
 		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
 		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
-		9B6E290D16C301900041BA61 /* mountain_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain_landscape.png; sourceTree = "<group>"; };
-		9B6E290E16C301900041BA61 /* TestMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestMap.tmx; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B82F788164FB2780001A357 /* BattleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleController.h; sourceTree = "<group>"; };
 		9B82F789164FB2780001A357 /* BattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleController.m; sourceTree = "<group>"; };
@@ -2296,8 +2294,10 @@
 		9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackBuffStatus.m; sourceTree = "<group>"; };
 		9BC8FDBB1657EC7E00A9EAC7 /* TimeStatusEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeStatusEffect.h; sourceTree = "<group>"; };
 		9BC8FDBC1657EC7E00A9EAC7 /* TimeStatusEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeStatusEffect.m; sourceTree = "<group>"; };
-		9BD2952116C45136001733E4 /* TestMap-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestMap-hd.tmx"; sourceTree = "<group>"; };
-		9BD2952316C452CA001733E4 /* mountain_landscape-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mountain_landscape-hd.png"; sourceTree = "<group>"; };
+		9BD2952616C586A3001733E4 /* mountain_landscape-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mountain_landscape-hd.png"; sourceTree = "<group>"; };
+		9BD2952716C586A3001733E4 /* mountain_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain_landscape.png; sourceTree = "<group>"; };
+		9BD2952A16C586B5001733E4 /* TestMap-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestMap-hd.tmx"; sourceTree = "<group>"; };
+		9BD2952B16C586B5001733E4 /* TestMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestMap.tmx; sourceTree = "<group>"; };
 		9BDC077F166E3913009559C3 /* AttackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEvent.h; sourceTree = "<group>"; };
 		9BDC0780166E3913009559C3 /* AttackEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEvent.m; sourceTree = "<group>"; };
 		9BE01A371695E81900B9C427 /* HealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealSkill.h; sourceTree = "<group>"; };
@@ -2691,10 +2691,10 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9BD2952316C452CA001733E4 /* mountain_landscape-hd.png */,
-				9BD2952116C45136001733E4 /* TestMap-hd.tmx */,
-				9B6E290D16C301900041BA61 /* mountain_landscape.png */,
-				9B6E290E16C301900041BA61 /* TestMap.tmx */,
+				9BD2952A16C586B5001733E4 /* TestMap-hd.tmx */,
+				9BD2952B16C586B5001733E4 /* TestMap.tmx */,
+				9BD2952616C586A3001733E4 /* mountain_landscape-hd.png */,
+				9BD2952716C586A3001733E4 /* mountain_landscape.png */,
 				3727471D16BBF0D400D90D18 /* Animation */,
 				9B93798A16B1676400F1A05A /* Bomb */,
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
@@ -4958,10 +4958,10 @@
 				373E23E116C3BD01007A0981 /* Swordsman_Walking_Left_Animation.plist in Resources */,
 				373E23E216C3BD01007A0981 /* Swordsman_Walking_Right_Animation.plist in Resources */,
 				373E23E316C3BD01007A0981 /* Swordsman_Walking_Up_Animation.plist in Resources */,
-				9BD2951D16C44D45001733E4 /* TestMap.tmx in Resources */,
-				9BD2951E16C44D47001733E4 /* mountain_landscape.png in Resources */,
-				9BD2952216C45136001733E4 /* TestMap-hd.tmx in Resources */,
-				9BD2952416C452CA001733E4 /* mountain_landscape-hd.png in Resources */,
+				9BD2952816C586A4001733E4 /* mountain_landscape-hd.png in Resources */,
+				9BD2952916C586A4001733E4 /* mountain_landscape.png in Resources */,
+				9BD2952C16C586B6001733E4 /* TestMap-hd.tmx in Resources */,
+				9BD2952D16C586B6001733E4 /* TestMap.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

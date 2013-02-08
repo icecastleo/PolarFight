@@ -39,7 +39,7 @@
 	// Display FSP and SPF
 	[director_ setDisplayStats:YES];
 
-	// set FPS at 30
+	// set FPS
 	[director_ setAnimationInterval:1.0/kGameSettingFps];
 
 	// attach the openglView to the director
