@@ -986,6 +986,8 @@
 		9B520E20163972F500057A3D /* TestFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1E163972F500057A3D /* TestFont.fnt */; };
 		9B520E21163972F500057A3D /* TestFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B520E1F163972F500057A3D /* TestFont.png */; };
 		9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */; };
+		9B6F997516D37DD100A5C492 /* CPlusPlusClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */; };
+		9B6F997816D37EB600A5C492 /* ObjectiveCAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
@@ -2236,6 +2238,10 @@
 		9B520E1F163972F500057A3D /* TestFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestFont.png; sourceTree = "<group>"; };
 		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
 		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
+		9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPlusPlusClass.cpp; sourceTree = "<group>"; };
+		9B6F997416D37DD100A5C492 /* CPlusPlusClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPlusPlusClass.h; sourceTree = "<group>"; };
+		9B6F997616D37EB600A5C492 /* ObjectiveCAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCAdaptor.h; sourceTree = "<group>"; };
+		9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectiveCAdaptor.mm; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B82F788164FB2780001A357 /* BattleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleController.h; sourceTree = "<group>"; };
 		9B82F789164FB2780001A357 /* BattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleController.m; sourceTree = "<group>"; };
@@ -4031,6 +4037,10 @@
 				9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */,
 				9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */,
 				9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */,
+				9B6F997416D37DD100A5C492 /* CPlusPlusClass.h */,
+				9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */,
+				9B6F997616D37EB600A5C492 /* ObjectiveCAdaptor.h */,
+				9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */,
 			);
 			name = BattleController;
 			sourceTree = "<group>";
@@ -5066,6 +5076,8 @@
 				37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */,
 				37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */,
 				9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */,
+				9B6F997516D37DD100A5C492 /* CPlusPlusClass.cpp in Sources */,
+				9B6F997816D37EB600A5C492 /* ObjectiveCAdaptor.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
