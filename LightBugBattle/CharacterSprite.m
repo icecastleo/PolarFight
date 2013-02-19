@@ -12,6 +12,7 @@
 #import "CCMoveCharacterByLength.h"
 #import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
+#import "PartyParser.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -21,6 +22,8 @@
     
     NSArray *directionStrings;
     NSMutableDictionary *animationDictionary;
+    
+    NSMutableDictionary *animationDictionaryTest;
 }
 @end
 
@@ -35,6 +38,7 @@
     akHelper.objectDelegate = self;
     directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
     animationDictionary = [NSMutableDictionary dictionary];
+    animationDictionaryTest = [NSMutableDictionary dictionary];
     
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
@@ -116,8 +120,30 @@
     
     if ([name isEqualToString:@"Swordsman"]) {
         NSAssert(akHelper != nil, @"akHelper != nil");
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"pop.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanAttacking.wav"];
+        NSArray *Sounds = [PartyParser getAllSoundsPlistFromCharacterName:name];
+        NSArray *Animations = [PartyParser getAllAimationPlistFromCharacterName:name];
+        
+        for (NSString *soundsString in Sounds) {
+            [[SimpleAudioEngine sharedEngine] preloadEffect:soundsString];
+        }
+        
+//        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanWalking.caf"];
+//        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanAttacking.wav"];
+        
+        for (NSString *fileName in Animations) {
+            
+            NSArray *fileNameArray = [fileName componentsSeparatedByString:@"."];
+            NSString *fname = [fileNameArray objectAtIndex:0];
+            NSString *ftype = [fileNameArray lastObject];
+            
+            NSLog(@"fileName:%@",fileName);
+            
+            NSDictionary *clip = [akHelper animationClipFromPlist:fileName];
+            [animationDictionaryTest setValue:clip forKey:fname];
+            
+            NSLog(@"fname:%@, ftype:%@",fname,ftype);
+            NSLog(@"animationDictionaryTest: %@",animationDictionaryTest);
+        }
         
         int directionCount = directionStrings.count;
         NSMutableArray *walkAnimationArray = [NSMutableArray arrayWithCapacity:directionCount];

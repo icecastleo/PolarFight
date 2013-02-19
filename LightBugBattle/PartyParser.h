@@ -19,4 +19,7 @@
 
 + (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName;
 
++ (NSArray *)getAllAimationPlistFromCharacterName:(NSString *)name;
++ (NSArray *)getAllSoundsPlistFromCharacterName:(NSString *)name;
+
 @end

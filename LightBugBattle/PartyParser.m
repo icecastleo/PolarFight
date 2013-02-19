@@ -112,4 +112,38 @@
     return characterIdArray; //(NSString *)CharacterIds are in the array. 
 }
 
++ (NSArray *)getAllAimationPlistFromCharacterName:(NSString *)name {
+    
+    NSString *directory = [NSString stringWithFormat:@"%@/Animations",name];
+    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:@"plist" inDirectory:directory];
+    
+    NSMutableArray *fileNames = [NSMutableArray array];
+    for (NSString *path in directoryAndFileNames) {
+        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+        NSString *fileName = [fileArray lastObject];
+        [fileNames addObject:fileName];
+    }
+    
+//    NSLog(@"Animations: %@",fileNames);
+    return fileNames;
+}
+
++ (NSArray *)getAllSoundsPlistFromCharacterName:(NSString *)name {
+    
+    NSString *directory = [NSString stringWithFormat:@"%@/Sounds",name];
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:directory];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = [[NSError alloc] init];
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:path error:&error];
+    
+//    NSMutableArray *directoryAndFileNames = [NSMutableArray array];
+//    for (NSString * fileName in fileNames) {
+//        NSString *direcotryAndFileName = [path stringByAppendingPathComponent:fileName];
+//        [directoryAndFileNames addObject:direcotryAndFileName];
+//    }
+    
+//    NSLog(@"Sounds: %@",fileNames);
+    return fileNames;
+}
+
 @end
