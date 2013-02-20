@@ -37,8 +37,6 @@
 -(void)runAttackAnimate;
 -(void)runDeadAnimate;
 
--(void)runAttackAnimateFromSkill:(int)index;
--(int)getCurrentAnimation;
--(void)setSkillAnimationWithName:(NSString *)name andCombosCount:(int)count;
+-(void)runAnimationForName:(NSString *)animationName;
 
 @end

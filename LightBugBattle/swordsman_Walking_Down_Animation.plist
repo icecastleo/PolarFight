@@ -19,7 +19,7 @@
 						<key>Type</key>
 						<string>SoundEffect</string>
 						<key>File</key>
-						<string>swordsmanWalking.caf</string>
+						<string>SwordsmanWalking.wav</string>
 					</dict>
 					<dict>
 						<key>Type</key>
@@ -31,7 +31,7 @@
 						<key>Type</key>
 						<string>SoundEffect</string>
 						<key>File</key>
-						<string>swordsmanWalking.caf</string>
+						<string>SwordsmanWalking.wav</string>
 					</dict>
 				</array>
 			</dict>

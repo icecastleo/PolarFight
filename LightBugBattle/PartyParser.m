@@ -112,10 +112,8 @@
     return characterIdArray; //(NSString *)CharacterIds are in the array. 
 }
 
-+ (NSArray *)getAllAimationPlistFromCharacterName:(NSString *)name {
-    
-    NSString *directory = [NSString stringWithFormat:@"%@/Animations",name];
-    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:@"plist" inDirectory:directory];
++ (NSArray *)getAllFilePathsWithPrefix:(NSString *)prefix fileType:(NSString *)type {
+    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:nil];
     
     NSMutableArray *fileNames = [NSMutableArray array];
     for (NSString *path in directoryAndFileNames) {
@@ -124,26 +122,15 @@
         [fileNames addObject:fileName];
     }
     
-//    NSLog(@"Animations: %@",fileNames);
-    return fileNames;
-}
-
-+ (NSArray *)getAllSoundsPlistFromCharacterName:(NSString *)name {
+    NSMutableArray *targetFileNames = [NSMutableArray array];
     
-    NSString *directory = [NSString stringWithFormat:@"%@/Sounds",name];
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:directory];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error = [[NSError alloc] init];
-    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:path error:&error];
+    for (NSString *fileName in fileNames) {
+        if ([fileName hasPrefix:prefix]) {
+            [targetFileNames addObject:fileName];
+        }
+    }
     
-//    NSMutableArray *directoryAndFileNames = [NSMutableArray array];
-//    for (NSString * fileName in fileNames) {
-//        NSString *direcotryAndFileName = [path stringByAppendingPathComponent:fileName];
-//        [directoryAndFileNames addObject:direcotryAndFileName];
-//    }
-    
-//    NSLog(@"Sounds: %@",fileNames);
-    return fileNames;
+    return targetFileNames;
 }
 
 @end

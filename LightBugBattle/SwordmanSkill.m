@@ -24,7 +24,6 @@
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary2]];
     [ranges addObject:ranges[0]];
     
-    [character.sprite setSkillAnimationWithName:character.name andCombosCount:ranges.count];
 }
 
 -(void)activeSkill:(int)count {

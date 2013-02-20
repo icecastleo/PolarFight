@@ -18,12 +18,10 @@
     float bloodScaleMultiplier;
     
     AKHelperObject *akHelper;
-    int currentAnimation;
     
     NSArray *directionStrings;
-    NSMutableDictionary *animationDictionary;
     
-    NSMutableDictionary *animationDictionaryTest;
+    NSMutableDictionary *animationDictionary;
 }
 @end
 
@@ -38,7 +36,6 @@
     akHelper.objectDelegate = self;
     directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
     animationDictionary = [NSMutableDictionary dictionary];
-    animationDictionaryTest = [NSMutableDictionary dictionary];
     
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
@@ -119,45 +116,20 @@
 -(void)setAnimationWithName:(NSString*)name {
     
     if ([name isEqualToString:@"Swordsman"]) {
-        NSAssert(akHelper != nil, @"akHelper != nil");
-        NSArray *Sounds = [PartyParser getAllSoundsPlistFromCharacterName:name];
-        NSArray *Animations = [PartyParser getAllAimationPlistFromCharacterName:name];
+        NSAssert(akHelper != nil, @"akHelper should not be nil");
+        NSArray *Sounds = [PartyParser getAllFilePathsWithPrefix:name fileType:@"wav"];
+        NSArray *Animations = [PartyParser getAllFilePathsWithPrefix:name fileType:@"plist"];
         
-        for (NSString *soundsString in Sounds) {
-            [[SimpleAudioEngine sharedEngine] preloadEffect:soundsString];
+        for (NSString *fileName in Sounds) {
+            [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
         }
-        
-//        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanWalking.caf"];
-//        [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordsmanAttacking.wav"];
         
         for (NSString *fileName in Animations) {
-            
             NSArray *fileNameArray = [fileName componentsSeparatedByString:@"."];
             NSString *fname = [fileNameArray objectAtIndex:0];
-            NSString *ftype = [fileNameArray lastObject];
-            
-            NSLog(@"fileName:%@",fileName);
-            
             NSDictionary *clip = [akHelper animationClipFromPlist:fileName];
-            [animationDictionaryTest setValue:clip forKey:fname];
-            
-            NSLog(@"fname:%@, ftype:%@",fname,ftype);
-            NSLog(@"animationDictionaryTest: %@",animationDictionaryTest);
+            [animationDictionary setValue:clip forKey:fname];
         }
-        
-        int directionCount = directionStrings.count;
-        NSMutableArray *walkAnimationArray = [NSMutableArray arrayWithCapacity:directionCount];
-        NSMutableDictionary *walkingDictionary = [NSMutableDictionary dictionary];
-        
-        for (int i = 0; i < directionCount; i++) {
-            NSString *direction = [directionStrings objectAtIndex:i];
-            NSString *plistName = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",name,direction];
-            NSDictionary *clip = [akHelper animationClipFromPlist:plistName];
-            NSAssert(clip != nil, @"%@ not exist!!",plistName);
-            [walkingDictionary setValue:clip forKey:direction];
-            [walkAnimationArray addObject:walkingDictionary];
-        }
-        [animationDictionary setValue:walkAnimationArray forKey:kWalkingAnimation];
         return;
     }
     
@@ -202,28 +174,6 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
 }
 
--(void)setSkillAnimationWithName:(NSString *)name andCombosCount:(int)count {
-    if ([name isEqualToString:@"Swordsman"]) {
-        NSMutableArray *attackAnimationArray = [NSMutableArray arrayWithCapacity:count];
-        
-        for (int i = 1; i <= count; i++) {
-            NSMutableDictionary *attackDictionary = [NSMutableDictionary dictionary];
-            
-            int directionStringsCount = directionStrings.count;
-            
-            for (int j=0; j<directionStringsCount; j++) {
-                NSString *direction = [directionStrings objectAtIndex:j];
-                NSString *attackPlistName = [NSString stringWithFormat:@"%@_Attack%02d_%@_Animation.plist",name,i,direction];
-                NSDictionary *attackClip = [akHelper animationClipFromPlist:attackPlistName];
-                [attackDictionary setValue:attackClip forKey:direction];
-            }
-            
-            [attackAnimationArray addObject:attackDictionary];
-        }
-        [animationDictionary setValue:attackAnimationArray forKey:kAttackAnimation];
-    }
-}
-
 -(void)runDirectionAnimate {
     [self stopAllActions];
     
@@ -231,10 +181,12 @@
     
     // All character might use the applyAnimation method.
     if ([character.name isEqualToString:@"Swordsman"]) {
-        NSArray *walkingAnimationArray = [animationDictionary objectForKey:kWalkingAnimation];
-        // walking array only has one object.
-        NSDictionary *walkingDic = [walkingAnimationArray lastObject];
-        NSDictionary *walkingClip = [walkingDic valueForKey:[directionStrings objectAtIndex:direction - 1]];
+        
+        NSString *directionString = [directionStrings objectAtIndex:direction - 1];
+        NSString *animationKey = [NSString stringWithFormat:@"%@_Walking_%@_Animation",character.name,directionString];
+        NSDictionary *walkingClip = [animationDictionary objectForKey:animationKey];
+        NSAssert(walkingClip != nil, @"walking animation should exist.");
+        
         [akHelper applyAnimationClip:walkingClip toNode:self];
         return;
     }
@@ -294,18 +246,19 @@
         [self runAction:rightAttackAction];
     }
 }
-
--(void)runAttackAnimateFromSkill:(int)index {
+ 
+-(void)runAnimationForName:(NSString *)animationName {
     [self stopAllActions];
-    currentAnimation = index;
     CharacterDirection direction = character.characterDirection;
     
-    NSArray *attackAnimationArray = [animationDictionary objectForKey:kAttackAnimation];
-    NSDictionary *attackDic = [attackAnimationArray objectAtIndex:index];
-    NSDictionary *attackClip = [attackDic valueForKey:[directionStrings objectAtIndex:direction-1]];
-    NSAssert(attackClip, @"check if the attack animation exist.");
-    [akHelper applyAnimationClip:attackClip toNode:self];
-    return;
+    NSString *directionString = [directionStrings objectAtIndex:direction-1];
+    NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation",character.name,animationName,directionString];
+    
+    NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
+    NSAssert(animationClip != nil, @"Animation plist should exist.");
+    
+    [akHelper applyAnimationClip:animationClip toNode:self];
+    
 }
 
 -(void)runDeadAnimate {
@@ -359,10 +312,6 @@
     }else if ([tagName isEqualToString:@"setIdle"]) {
         [character attackAnimateCallback];
     }
-}
-
--(int)getCurrentAnimation {
-    return currentAnimation;
 }
 
 -(void)jumpAction {

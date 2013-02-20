@@ -31,7 +31,7 @@
 						<key>Type</key>
 						<string>SoundEffect</string>
 						<key>File</key>
-						<string>swordsmanAttacking.wav</string>
+						<string>SwordsmanAttacking.wav</string>
 					</dict>
 				</array>
 			</dict>

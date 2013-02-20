@@ -24,8 +24,6 @@
             range = ranges[0];
         }
         
-        [character.sprite setSkillAnimationWithName:character.name andCombosCount:ranges.count];
-        
         execute = NO;
         _hasNext = NO;
     }
@@ -40,7 +38,11 @@
 -(void)execute {
     if (!execute) {
         execute = YES;
-        [character.sprite runAttackAnimateFromSkill:count];
+        
+        //FIXME: skillName should be from each skill.
+        NSString *skillName = [NSString stringWithFormat:@"Attack%02d",count+1];
+        
+        [character.sprite runAnimationForName:skillName];
         [self activeSkill:count];
     } else {
         if (ranges.count < 1) {
