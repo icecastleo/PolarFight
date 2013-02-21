@@ -19,6 +19,6 @@
 
 + (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName;
 
-+ (NSArray *)getAllFilePathsWithPrefix:(NSString *)prefix fileType:(NSString *)type;
++ (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type;
 
 @end

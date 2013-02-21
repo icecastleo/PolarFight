@@ -13,7 +13,7 @@
 
 @implementation PartyParser
 
-//TODO: not finish saveParty yet
+//TODO: does not finish saveParty yet
 + (void)saveParty:(NSArray *)party fileName:(NSString *)fileName {
     GDataXMLElement * partyElement = [GDataXMLNode elementWithName:@"party"];
     int i=0;
@@ -112,25 +112,11 @@
     return characterIdArray; //(NSString *)CharacterIds are in the array. 
 }
 
-+ (NSArray *)getAllFilePathsWithPrefix:(NSString *)prefix fileType:(NSString *)type {
-    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:nil];
++ (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
     
-    NSMutableArray *fileNames = [NSMutableArray array];
-    for (NSString *path in directoryAndFileNames) {
-        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-        NSString *fileName = [fileArray lastObject];
-        [fileNames addObject:fileName];
-    }
+    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:directoryName];
     
-    NSMutableArray *targetFileNames = [NSMutableArray array];
-    
-    for (NSString *fileName in fileNames) {
-        if ([fileName hasPrefix:prefix]) {
-            [targetFileNames addObject:fileName];
-        }
-    }
-    
-    return targetFileNames;
+    return directoryAndFileNames;
 }
 
 @end

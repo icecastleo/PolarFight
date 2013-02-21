@@ -3,35 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>AnimationSet</key>
-	<string>swordsman_Atlas_Animation.plist</string>
+	<string>Swordsman/swordsman_Atlas_Animation.plist</string>
 	<key>Clip</key>
 	<dict>
 		<key>Type</key>
-		<string>Spawn</string>
+		<string>Sequence</string>
 		<key>Items</key>
 		<array>
 			<dict>
 				<key>Type</key>
-				<string>Sequence</string>
+				<string>Spawn</string>
 				<key>Items</key>
 				<array>
 					<dict>
 						<key>Type</key>
-						<string>SoundEffect</string>
-						<key>File</key>
-						<string>SwordsmanWalking.caf</string>
-					</dict>
-					<dict>
-						<key>Type</key>
-						<string>Delay</string>
-						<key>Duration</key>
-						<real>0.1</real>
+						<string>Tag</string>
+						<key>Name</key>
+						<string>leftJumpAttackAction</string>
 					</dict>
 					<dict>
 						<key>Type</key>
 						<string>SoundEffect</string>
 						<key>File</key>
-						<string>SwordsmanWalking.caf</string>
+						<string>Swordsman/SwordsmanAttacking.caf</string>
 					</dict>
 				</array>
 			</dict>
@@ -39,7 +33,13 @@
 				<key>Type</key>
 				<string>Animation</string>
 				<key>Name</key>
-				<string>rightAction</string>
+				<string>leftAttackAction</string>
+			</dict>
+			<dict>
+				<key>Type</key>
+				<string>Tag</string>
+				<key>Name</key>
+				<string>setIdle</string>
 			</dict>
 		</array>
 	</dict>

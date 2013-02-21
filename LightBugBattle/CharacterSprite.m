@@ -117,18 +117,19 @@
     
     if ([name isEqualToString:@"Swordsman"]) {
         NSAssert(akHelper != nil, @"akHelper should not be nil");
-        NSArray *Sounds = [PartyParser getAllFilePathsWithPrefix:name fileType:@"caf"];
-        NSArray *Animations = [PartyParser getAllFilePathsWithPrefix:name fileType:@"plist"];
+        NSArray *Sounds = [PartyParser getAllFilePathsInDirectory:name fileType:@"caf"];
+        NSArray *Animations = [PartyParser getAllFilePathsInDirectory:name fileType:@"plist"];
         
         for (NSString *fileName in Sounds) {
             [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
         }
         
-        for (NSString *fileName in Animations) {
-            NSArray *fileNameArray = [fileName componentsSeparatedByString:@"."];
-            NSString *fname = [fileNameArray objectAtIndex:0];
-            NSDictionary *clip = [akHelper animationClipFromPlist:fileName];
-            [animationDictionary setValue:clip forKey:fname];
+        for (NSString *path in Animations) {
+            NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+            NSString *fileName = [fileArray lastObject];
+            
+            NSDictionary *clip = [akHelper animationClipFromPlist:path];
+            [animationDictionary setValue:clip forKey:fileName];
         }
         return;
     }
@@ -183,7 +184,7 @@
     if ([character.name isEqualToString:@"Swordsman"]) {
         
         NSString *directionString = [directionStrings objectAtIndex:direction - 1];
-        NSString *animationKey = [NSString stringWithFormat:@"%@_Walking_%@_Animation",character.name,directionString];
+        NSString *animationKey = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",character.name,directionString];
         NSDictionary *walkingClip = [animationDictionary objectForKey:animationKey];
         NSAssert(walkingClip != nil, @"walking animation should exist.");
         
@@ -252,7 +253,7 @@
     CharacterDirection direction = character.characterDirection;
     
     NSString *directionString = [directionStrings objectAtIndex:direction-1];
-    NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation",character.name,animationName,directionString];
+    NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation.plist",character.name,animationName,directionString];
     
     NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
     NSAssert(animationClip != nil, @"Animation plist should exist.");
