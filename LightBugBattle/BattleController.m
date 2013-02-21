@@ -14,6 +14,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
+#import "ObjectiveCAdaptor.h"
 
 //@interface SwitchCharacterState : NSObject<GameState> {
 //    BOOL run;
@@ -101,6 +102,10 @@ __weak static BattleController* currentInstance;
         
         [characterQueue roundStart];
         [self scheduleUpdate];
+        
+        ObjectiveCAdaptor *test = [[ObjectiveCAdaptor alloc] init];
+        
+        [test objectiveFunc];
     }
     return self;
 }
