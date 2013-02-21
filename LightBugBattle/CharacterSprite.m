@@ -117,7 +117,7 @@
     
     if ([name isEqualToString:@"Swordsman"]) {
         NSAssert(akHelper != nil, @"akHelper should not be nil");
-        NSArray *Sounds = [PartyParser getAllFilePathsWithPrefix:name fileType:@"wav"];
+        NSArray *Sounds = [PartyParser getAllFilePathsWithPrefix:name fileType:@"caf"];
         NSArray *Animations = [PartyParser getAllFilePathsWithPrefix:name fileType:@"plist"];
         
         for (NSString *fileName in Sounds) {

@@ -39,8 +39,7 @@
     if (!execute) {
         execute = YES;
         
-        //FIXME: skillName should be from each skill.
-        NSString *skillName = [NSString stringWithFormat:@"Attack%02d",count+1];
+        NSString *skillName = [NSString stringWithFormat:@"%@%02d",NSStringFromClass([self class]),count+1];
         
         [character.sprite runAnimationForName:skillName];
         [self activeSkill:count];
