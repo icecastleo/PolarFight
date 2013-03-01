@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<map version="1.0" orientation="orthogonal" width="60" height="60" tilewidth="16" tileheight="16">
+    <tileset firstgid="1" name="Mountain landscape" tilewidth="16" tileheight="16">
+        <image source="mountain_landscape.png" width="256" height="256"/>
+    </tileset>
+    <layer name="Background" width="60" height="60">
+        <data encoding="base64" compression="zlib">eJzt0rENglAARdE/ALoAxgmUGdyAUayVwlqdQFzWZ0cMpSY/eIrTv5u8vpTSAwAAAAAAAAAAAAAAUKUmVhPrCjb9qu3tGKc4xxDbCnZ+yybaGde4xX1hvbvYf7jEI8Z4Lqx3Tj5+mPZ3FWziv7wApDxT/A==</data>
+    </layer>
+    <layer name="Foreground" width="60" height="60">
+        <data encoding="base64" compression="zlib">eJzt0b1OAkEYheFPVHoF7BGxNwvGFvzpwZ8eQW7EO9C71cYz2SW7mWy2IMNM3LxP8haTbb6TNQMAAAAAAAAAAAAAAAAAAAAQ2lHqAyLyt7p3Rx2rE3WqurGPOpC6rWfqXPVUXw3UReS7YqhuvVQjdaXG6jrhXfv4Ub8N3+u2Zmpi/3Nvk7qtd1Zubtve6tZPy3fu+rL27R1avtVt+7by/2bFe6puk10X3o3lezOvSdGjekp2XXgzNVf36sHLbX1Vb8muC2+hlupZvXi5rR9qm+y68FbqXa3VxqttW3FYf6+NFno=</data>
+    </layer>
+    <layer name="Shadow - Foreground" width="60" height="60">
+        <data encoding="base64" compression="zlib">eJztzrENADAIwDDuLx+0z8IVMNSWsicCAAAAAAAAAAAAAADgT6fL7YlBt3vbEwCMKeHaAks=</data>
+    </layer>
+    <layer name="Decoration" width="60" height="60">
+        <data encoding="base64" compression="zlib">eJztzkENACAMBLD51zYcIGYP0MAlpFXQKgAAAAAAAAAAAAAAgKPTgcd2OgDXSgeALw3mTQJ2</data>
+    </layer>
+    <layer name="Top" width="60" height="60">
+        <data encoding="base64" compression="zlib">eJztzjENACAMAEH8SwMH4ABMUAVMpF3ukt+/NQAAAAAAAAAAAACAtx6N6olEM1rVE4l2dKonAAD47gJ9XQUg</data>
+    </layer>
+    <objectgroup name="Collision" width="60" height="60">
+        <object x="320" y="875" width="13">
+            <ellipse/>
+        </object>
+        <object x="413" y="796" width="38" height="19">
+            <ellipse/>
+        </object>
+        <object x="526" y="660">
+            <polyline points="0,0 -1,67 12,80 124,82 152,47 153,-68 127,-90 91,-90 0,0"/>
+        </object>
+        <object x="532" y="914">
+            <polygon points="0,0 13,15 122,17 152,-26 151,-138 125,-157 91,-158 3,-69"/>
+        </object>
+    </objectgroup>
+    <objectgroup name="Spawn Layer" width="60" height="60">
+        <object name="Player1" x="16" y="720" width="192" height="192"/>
+        <object name="Player2" x="720" y="720" width="192" height="192"/>
+    </objectgroup>
+</map>

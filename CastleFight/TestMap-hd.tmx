@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="60" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Mountain landscape" tilewidth="32" tileheight="32">
+  <image source="mountain_landscape-hd.png" width="512" height="512"/>
+  <terraintypes>
+   <terrain name="Grass" tile="78"/>
+   <terrain name="Road" tile="28"/>
+   <terrain name="Black Road" tile="137"/>
+   <terrain name="Stone Road" tile="76"/>
+   <terrain name="Rock Road" tile="124"/>
+  </terraintypes>
+  <tile id="10" terrain="1,1,1,1"/>
+  <tile id="11" terrain="0,0,0,1"/>
+  <tile id="12" terrain="0,0,1,1"/>
+  <tile id="13" terrain="0,0,1,0"/>
+  <tile id="14" terrain="3,3,3,3"/>
+  <tile id="15" terrain="3,3,3,3"/>
+  <tile id="26" terrain="1,1,1,1"/>
+  <tile id="27" terrain="0,1,0,1"/>
+  <tile id="28" terrain="1,1,1,1"/>
+  <tile id="29" terrain="1,0,1,0"/>
+  <tile id="30" terrain="3,3,3,3"/>
+  <tile id="31" terrain="3,3,3,3"/>
+  <tile id="42" terrain="1,1,1,1"/>
+  <tile id="43" terrain="0,1,0,0"/>
+  <tile id="44" terrain="1,1,0,0"/>
+  <tile id="45" terrain="1,0,0,0"/>
+  <tile id="46" terrain="1,3,3,3"/>
+  <tile id="47" terrain="3,1,3,3"/>
+  <tile id="58" terrain="0,1,1,0"/>
+  <tile id="59" terrain="1,1,1,3"/>
+  <tile id="60" terrain="1,1,3,3"/>
+  <tile id="61" terrain="1,1,3,1"/>
+  <tile id="62" terrain="3,3,1,3"/>
+  <tile id="63" terrain="3,3,3,1"/>
+  <tile id="74" terrain="1,0,0,1"/>
+  <tile id="75" terrain="1,3,1,3"/>
+  <tile id="76" terrain="3,3,3,3"/>
+  <tile id="77" terrain="3,1,3,1"/>
+  <tile id="78" terrain="0,0,0,0"/>
+  <tile id="79" terrain="0,0,0,0"/>
+  <tile id="91" terrain="1,3,1,1"/>
+  <tile id="92" terrain="3,3,1,1"/>
+  <tile id="93" terrain="3,1,1,1"/>
+  <tile id="94" terrain="0,0,0,0"/>
+  <tile id="95" terrain="0,0,0,0"/>
+  <tile id="107" terrain="1,1,1,4"/>
+  <tile id="108" terrain="1,1,4,4"/>
+  <tile id="109" terrain="1,1,4,1"/>
+  <tile id="110" terrain="0,1,1,1"/>
+  <tile id="111" terrain="1,0,1,1"/>
+  <tile id="120" terrain="1,1,1,2"/>
+  <tile id="121" terrain="1,1,2,2"/>
+  <tile id="122" terrain="1,1,2,1"/>
+  <tile id="123" terrain="1,4,1,4"/>
+  <tile id="124" terrain="4,4,4,4"/>
+  <tile id="125" terrain="4,1,4,1"/>
+  <tile id="126" terrain="1,1,0,1"/>
+  <tile id="127" terrain="1,1,1,0"/>
+  <tile id="136" terrain="1,2,1,2"/>
+  <tile id="137" terrain="2,2,2,2"/>
+  <tile id="138" terrain="2,1,2,1"/>
+  <tile id="139" terrain="1,4,1,1"/>
+  <tile id="140" terrain="4,4,1,1"/>
+  <tile id="141" terrain="4,1,1,1"/>
+  <tile id="142" terrain="0,2,2,2"/>
+  <tile id="143" terrain="2,0,2,2"/>
+  <tile id="152" terrain="1,2,1,1"/>
+  <tile id="153" terrain="2,2,1,1"/>
+  <tile id="154" terrain="2,1,1,1"/>
+  <tile id="155" terrain="0,0,0,2"/>
+  <tile id="156" terrain="0,0,2,2"/>
+  <tile id="157" terrain="0,0,2,0"/>
+  <tile id="158" terrain="2,2,0,2"/>
+  <tile id="159" terrain="2,2,2,0"/>
+  <tile id="169" terrain="1,2,2,2"/>
+  <tile id="170" terrain="2,1,2,2"/>
+  <tile id="171" terrain="0,2,0,2"/>
+  <tile id="172" terrain="2,2,2,2"/>
+  <tile id="173" terrain="2,0,2,0"/>
+  <tile id="183" terrain="4,4,4,4"/>
+  <tile id="184" terrain="4,4,4,4"/>
+  <tile id="185" terrain="2,2,1,2"/>
+  <tile id="186" terrain="2,2,2,1"/>
+  <tile id="187" terrain="0,2,0,0"/>
+  <tile id="188" terrain="2,2,0,0"/>
+  <tile id="189" terrain="2,0,0,0"/>
+  <tile id="199" terrain="4,4,4,4"/>
+  <tile id="200" terrain="4,4,4,4"/>
+ </tileset>
+ <layer name="Background" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztl0tywkAMRGdPkguE5AL5XAXfwLpBcoPk6HEVVtWjkY0LDGTRi1eDPf6o1Rp52LXWdsYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjzI3oBvqRGM+FzHPsx98dru1xPq+5tY6HgceBpwXzGX+M5DE1UAtz0+PawMj7cv6aercDLwOveLfOv43zGUvGybjpc7RDP3ucV/95L/P2H/RmTBl3pYXnd/JMeqd1Qt+vrXcDPXN66Rk97NrhWk09ulbV45DjKi/X0Jt6pvxN/zM+janHGK1e3ySfoWud87ou1qrz9Pe77fuS8gW9qk39q/KhnrJ2tUexH6b/XBtr+rsZdb1hfMZv+s+Yqr7LXpZxs961b0c79p05Yh7X8vd34KPgZ9SderVGecwYu3acH+11+jzNi/aDNTRvoWcuH+xXnGcNVrnQ2lad0Y5zx9xwXa/p75zeXL/Vu7Xm0gOuZ/Urinmtj2jHOcpzl+plP1rib1VzWsdV71Ut2ten6ibkmZfw3vbr9HPB/JRXIXOpQfttVaO8V/cp1fd8jZqumIqR8YVcz7h1vxEysoZ1jfO5t4LfEh21LzFm/c5W+6wA+h79fUu99CvjYE3lsfaw6j9E9W3SPXa0+2hd4vupugtcV/0P0vWt4711qk+nSA/p29w+JdphTd1b6zl1QJ1Teub24OfwB3/lWT0=
+  </data>
+ </layer>
+ <layer name="Foreground" width="60" height="60" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0b1OAkEYheFPVHoF7BGxNwvGFvzpwZ8eQW7EO9C71cYz2SW7mWy2IMNM3LxP8haTbb6TNQMAAAAAAAAAAAAAAAAAAAAQ2lHqAyLyt7p3Rx2rE3WqurGPOpC6rWfqXPVUXw3UReS7YqhuvVQjdaXG6jrhXfv4Ub8N3+u2Zmpi/3Nvk7qtd1Zubtve6tZPy3fu+rL27R1avtVt+7by/2bFe6puk10X3o3lezOvSdGjekp2XXgzNVf36sHLbX1Vb8muC2+hlupZvXi5rR9qm+y68FbqXa3VxqttW3FYf6+NFno=
+  </data>
+ </layer>
+ <layer name="Shadow - Foreground" width="60" height="60" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrENADAIwDDuLx+0z8IVMNSWsicCAAAAAAAAAAAAAADgT6fL7YlBt3vbEwCMKeHaAks=
+  </data>
+ </layer>
+ <layer name="Decoration" width="60" height="60" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzkENACAMBLD51zYcIGYP0MAlpFXQKgAAAAAAAAAAAAAAgKPTgcd2OgDXSgeALw3mTQJ2
+  </data>
+ </layer>
+ <layer name="Top" width="60" height="60" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzjENACAMAEH8SwMH4ABMUAVMpF3ukt+/NQAAAAAAAAAAAACAtx6N6olEM1rVE4l2dKonAAD47gJ9XQUg
+  </data>
+ </layer>
+ <objectgroup name="Collision" width="60" height="60" visible="0">
+  <object x="640" y="1750" width="25">
+   <ellipse/>
+  </object>
+  <object x="825" y="1591" width="75" height="38">
+   <ellipse/>
+  </object>
+  <object x="1051" y="1320">
+   <polyline points="0,0 -2,133 24,160 247,164 304,93 305,-135 253,-179 181,-179 0,0"/>
+  </object>
+  <object x="1064" y="1828">
+   <polygon points="0,0 26,30 243,34 304,-52 301,-276 250,-314 182,-315 5,-138"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Spawn Layer" width="60" height="60" visible="0">
+  <object name="Player1" x="32" y="1440" width="384" height="384"/>
+  <object name="Player2" x="1440" y="1440" width="384" height="384"/>
+ </objectgroup>
+</map>
