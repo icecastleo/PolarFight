@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Character.h"
+#import "MapLayer.h"
 #import "DPadLayer.h"
 #import "TiledMapLayer.h"
 #import "Barrier.h"
@@ -23,7 +24,8 @@
     
     BattleStatusLayer *statusLayer;
     DPadLayer *dPadLayer;
-    TiledMapLayer *mapLayer;
+    MapLayer *mapLayer;
+//    TiledMapLayer *mapLayer;
     
 //    id<GameState> state;
     

@@ -66,26 +66,10 @@ __weak static BattleController* currentInstance;
         currentInstance = self;
         
         // We need a tiled map file to show        
-        mapLayer = [[TiledMapLayer alloc] initWithFile:@"TestMap.tmx"];
+//        mapLayer = [[TiledMapLayer alloc] initWithFile:@"TestMap.tmx"];
         
+        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
         [self addChild:mapLayer];
-        
-        // Testing add barriers
-        Barrier* tree = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree.position = ccp(100, 100);
-        [mapLayer addBarrier:tree];
-        
-        Barrier* tree2 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree2.position = ccp(100, 200);
-        [mapLayer addBarrier:tree2];
-        
-        Barrier* tree3 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree3.position = ccp(200, 200);
-        [mapLayer addBarrier:tree3];
-        
-        Barrier* tree4 = [[Barrier alloc] initWithFile:@"tree01.gif" radius:10];
-        tree4.position = ccp(200, 100);
-        [mapLayer addBarrier:tree4];
         
         // init Dpad
         dPadLayer = [DPadLayer node];

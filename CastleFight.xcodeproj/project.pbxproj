@@ -118,6 +118,8 @@
 		9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040C7169F0C84000EF31F /* TankSkill.m */; };
 		9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040CE169F2E7C000EF31F /* SuicideSkill.m */; };
 		9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
+		9B23A08016E1203A006E052F /* map_01-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B23A07E16E1203A006E052F /* map_01-hd.png */; };
+		9B23A08116E1203A006E052F /* map_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B23A07F16E1203A006E052F /* map_01.png */; };
 		9B288206166FA61C0041604F /* AttackEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288205166FA61C0041604F /* AttackEffect.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
 		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
@@ -282,6 +284,8 @@
 		9B9379A416B1677500F1A05A /* BombExploding_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93799716B1677500F1A05A /* BombExploding_06.png */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
+		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
+		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
 		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
@@ -499,6 +503,8 @@
 		9B2040CE169F2E7C000EF31F /* SuicideSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuicideSkill.m; sourceTree = "<group>"; };
 		9B2040D0169F2F6D000EF31F /* BombPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombPassiveSkill.h; sourceTree = "<group>"; };
 		9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombPassiveSkill.m; sourceTree = "<group>"; };
+		9B23A07E16E1203A006E052F /* map_01-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_01-hd.png"; sourceTree = "<group>"; };
+		9B23A07F16E1203A006E052F /* map_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_01.png; sourceTree = "<group>"; };
 		9B288204166FA61C0041604F /* AttackEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEffect.h; sourceTree = "<group>"; };
 		9B288205166FA61C0041604F /* AttackEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEffect.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
@@ -814,6 +820,10 @@
 		9BA147FC167BAE920012F2C0 /* DependentAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DependentAttribute.h; sourceTree = "<group>"; };
 		9BA147FD167BAE920012F2C0 /* DependentAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DependentAttribute.m; sourceTree = "<group>"; };
 		9BA4E40E16E08C5B00D5FA07 /* cocos2d-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2d-Prefix.pch"; sourceTree = "<group>"; };
+		9BA4E40F16E09D5D00D5FA07 /* MapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLayer.h; sourceTree = "<group>"; };
+		9BA4E41016E09D5D00D5FA07 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
+		9BA4E41216E09F0700D5FA07 /* MapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCamera.h; sourceTree = "<group>"; };
+		9BA4E41316E09F0700D5FA07 /* MapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCamera.m; sourceTree = "<group>"; };
 		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BC8FDA11654F11900A9EAC7 /* ProbabilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProbabilityEffect.h; sourceTree = "<group>"; };
@@ -886,6 +896,10 @@
 		2B1C55D71643B08A007D6CEA /* MapLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9BA4E40F16E09D5D00D5FA07 /* MapLayer.h */,
+				9BA4E41016E09D5D00D5FA07 /* MapLayer.m */,
+				9BA4E41216E09F0700D5FA07 /* MapCamera.h */,
+				9BA4E41316E09F0700D5FA07 /* MapCamera.m */,
 				9B82F78E164FB2780001A357 /* TiledMapLayer.h */,
 				9B82F78F164FB2780001A357 /* TiledMapLayer.m */,
 				9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */,
@@ -1161,6 +1175,8 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B23A07E16E1203A006E052F /* map_01-hd.png */,
+				9B23A07F16E1203A006E052F /* map_01.png */,
 				9BD2952A16C586B5001733E4 /* TestMap-hd.tmx */,
 				9BD2952B16C586B5001733E4 /* TestMap.tmx */,
 				9BD2952616C586A3001733E4 /* mountain_landscape-hd.png */,
@@ -1968,6 +1984,8 @@
 				9BD2952C16C586B6001733E4 /* TestMap-hd.tmx in Resources */,
 				9BD2952D16C586B6001733E4 /* TestMap.tmx in Resources */,
 				37799E2416D645D000349750 /* Swordsman in Resources */,
+				9B23A08016E1203A006E052F /* map_01-hd.png in Resources */,
+				9B23A08116E1203A006E052F /* map_01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2074,6 +2092,8 @@
 				9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */,
 				9B6F997516D37DD100A5C492 /* CPlusPlusClass.cpp in Sources */,
 				9B6F997816D37EB600A5C492 /* ObjectiveCAdaptor.mm in Sources */,
+				9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */,
+				9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
