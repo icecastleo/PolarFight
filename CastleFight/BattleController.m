@@ -131,6 +131,17 @@ __weak static BattleController* currentInstance;
 //        character.position = ccp(0, -240);
     }
     
+    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    myCastle.player = 1;
+    [myCastle.sprite addBloodSprite];
+    
+    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    enemyCastle.player = 2;
+    [enemyCastle.sprite addBloodSprite];
+    
+    [mapLayer addCastle:myCastle];
+    [mapLayer addCastle:enemyCastle];
+    
     player1 = nil;
     player2 = nil;
 }

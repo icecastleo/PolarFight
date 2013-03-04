@@ -51,7 +51,7 @@
     
     if ([aCharacter.name isEqualToString:@"Tower"]) {
         if ((self = [super initWithFile:
-                     [NSString stringWithFormat:@"Tower.png"]]))
+                     [NSString stringWithFormat:@"Tower.jpg"]]))
         {
             character = aCharacter;
             [self setAnimationWithName:character.name];
