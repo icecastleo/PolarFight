@@ -11,14 +11,17 @@
 #import "Character.h"
 
 @interface MapLayer : CCLayer {
-    float castleDistance;
+
 }
 
-@property (readonly) NSMutableArray* characters;
-@property (readonly) MapCamera* cameraControl;
+@property (readonly) Character *playerCastle, *enemyCastle;
+@property (readonly) NSMutableArray *characters;
+@property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
 
 -(id)initWithFile:(NSString *)file;
+
+-(void)addCastle:(Character *)castle;
 -(void)addCharacter:(Character *)character;
 -(void)removeCharacter:(Character *)character;
 
