@@ -49,6 +49,16 @@
         return self;
     }
     
+    if ([aCharacter.name isEqualToString:@"Tower"]) {
+        if ((self = [super initWithFile:
+                     [NSString stringWithFormat:@"Tower.png"]]))
+        {
+            character = aCharacter;
+            [self setAnimationWithName:character.name];
+        }
+        return self;
+    }
+    
     // FIXME: replace player with direction.
     if(self = [super initWithFile:
                [NSString stringWithFormat:@"%@_%@2.gif",aCharacter.picFilename, aCharacter.player == 1 ? @"fr" : @"fr"]])
