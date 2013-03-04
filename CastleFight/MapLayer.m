@@ -11,6 +11,9 @@
 @implementation MapLayer
 
 static float scale;
+const static int castleDistance = 100;
+const static int pathSizeHeight = 50;
+const static int pathHeight = 60;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -26,21 +29,19 @@ static float scale;
         
         CCSprite *map = [CCSprite spriteWithFile:file];
         map.anchorPoint = ccp(0, 0);
+        [self addChild:map z:-1];
+        
+        CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
+        background.contentSize = map.contentSize;
+        [self addChild:background z:-5];
         
         _boundaryX = map.boundingBox.size.width;
         _boundaryY = map.boundingBox.size.height;
         
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
-        
-        // Test it
         [self addChild:_cameraControl];
         
-        [self addChild:map z:-1];
-        
         self.isTouchEnabled = YES;
-        
-        // FIXME: Replace it.
-        castleDistance = 100;
         
 //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
     }
@@ -51,20 +52,39 @@ static float scale;
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
 }
 
--(void)addCharacter:(Character*)character {
+-(void)addCharacter:(Character *)character {
     
     CGPoint position;
     
     if (character.player == 1) {
-        position = ccp(castleDistance, arc4random_uniform(40) + 70);
+        position = ccp(castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
     } else {
-        position = ccp(self.boundaryX - castleDistance, arc4random_uniform(40) + 70);
+        position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
     }
 
     [self setPosition:position forCharacter:character];
 
     [self addChild:character.sprite];
     [_characters addObject:character];
+}
+
+-(void)addCastle:(Character *)castle {
+    if (castle.player == 1) {
+        NSAssert(_playerCastle == nil, @"Add second castle!!");
+        
+        _playerCastle = castle;
+        _playerCastle.position = ccp(castleDistance / 2, pathHeight);
+    } else {
+        NSAssert(_enemyCastle == nil, @"Add second castle!!");
+        
+        _enemyCastle = castle;
+        _enemyCastle.position = ccp(self.boundaryX - castleDistance / 2, pathHeight);
+    }
+    
+    [self addChild:castle.sprite];
+    
+    // FIXME: Seperate from characters.
+    [_characters addObject:castle];
 }
 
 -(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
@@ -90,9 +110,6 @@ static float scale;
     if (position.x == 0 && position.y == 0) {
         return;
     }
-    
-    // for castle fight game
-    position.y = 0;
     
     [self moveCharacter:character toPosition:ccpAdd(character.position, position) isMove:move];
 }

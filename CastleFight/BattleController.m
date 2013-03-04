@@ -197,7 +197,9 @@ __weak static BattleController* currentInstance;
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
 }
 
--(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {    
+-(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
+    // for castle fight
+    velocity.y = 0;
     velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
     [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
 }
@@ -260,8 +262,12 @@ __weak static BattleController* currentInstance;
             return;
         }
         
+        // FIXME: change dpad layer
+        CGPoint velocity = dPadLayer.velocity;
+        velocity.y = 0;
+        
         // Move character
-        [currentCharacter moveBy:ccpMult(dPadLayer.velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
+        [currentCharacter moveBy:ccpMult(velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
     }
 }
 
