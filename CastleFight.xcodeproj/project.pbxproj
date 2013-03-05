@@ -42,6 +42,10 @@
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
 		37CF5A7C16E4852A009A9199 /* Tower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CF5A7B16E4852A009A9199 /* Tower.jpg */; };
+		37CF5A9216E4DA2B009A9199 /* building-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37CF5A8E16E4DA2B009A9199 /* building-hd.plist */; };
+		37CF5A9316E4DA2B009A9199 /* building-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 37CF5A8F16E4DA2B009A9199 /* building-hd.pvr.ccz */; };
+		37CF5A9416E4DA2B009A9199 /* building.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37CF5A9016E4DA2B009A9199 /* building.plist */; };
+		37CF5A9516E4DA2B009A9199 /* building.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 37CF5A9116E4DA2B009A9199 /* building.pvr.ccz */; };
 		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3216BBD08300C0368D /* AKCCRandomSpawn.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2B16BBD08300C0368D /* AKCCRandomSpawn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -384,6 +388,10 @@
 		37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelperObject.h; sourceTree = "<group>"; };
 		37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelperObject.m; sourceTree = "<group>"; };
 		37CF5A7B16E4852A009A9199 /* Tower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tower.jpg; sourceTree = "<group>"; };
+		37CF5A8E16E4DA2B009A9199 /* building-hd.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "building-hd.plist"; sourceTree = "<group>"; };
+		37CF5A8F16E4DA2B009A9199 /* building-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "building-hd.pvr.ccz"; sourceTree = "<group>"; };
+		37CF5A9016E4DA2B009A9199 /* building.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = building.plist; sourceTree = "<group>"; };
+		37CF5A9116E4DA2B009A9199 /* building.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = building.pvr.ccz; sourceTree = "<group>"; };
 		37DB1F2816BBD08300C0368D /* AKCCRandomDelayTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomDelayTime.h; sourceTree = "<group>"; };
 		37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKCCRandomDelayTime.m; sourceTree = "<group>"; };
 		37DB1F2A16BBD08300C0368D /* AKCCRandomSpawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKCCRandomSpawn.h; sourceTree = "<group>"; };
@@ -1026,6 +1034,17 @@
 			name = XMLSupport;
 			sourceTree = "<group>";
 		};
+		37CF5A8C16E4DA1B009A9199 /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				37CF5A8E16E4DA2B009A9199 /* building-hd.plist */,
+				37CF5A8F16E4DA2B009A9199 /* building-hd.pvr.ccz */,
+				37CF5A9016E4DA2B009A9199 /* building.plist */,
+				37CF5A9116E4DA2B009A9199 /* building.pvr.ccz */,
+			);
+			name = Building;
+			sourceTree = "<group>";
+		};
 		37DB1F2616BBD06B00C0368D /* AnimationKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,6 +1214,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				37CF5A8C16E4DA1B009A9199 /* Building */,
 				37CF5A7B16E4852A009A9199 /* Tower.jpg */,
 				9B23A07E16E1203A006E052F /* map_01-hd.png */,
 				9B23A07F16E1203A006E052F /* map_01.png */,
@@ -2008,6 +2028,10 @@
 				9B23A08016E1203A006E052F /* map_01-hd.png in Resources */,
 				9B23A08116E1203A006E052F /* map_01.png in Resources */,
 				37CF5A7C16E4852A009A9199 /* Tower.jpg in Resources */,
+				37CF5A9216E4DA2B009A9199 /* building-hd.plist in Resources */,
+				37CF5A9316E4DA2B009A9199 /* building-hd.pvr.ccz in Resources */,
+				37CF5A9416E4DA2B009A9199 /* building.plist in Resources */,
+				37CF5A9516E4DA2B009A9199 /* building.pvr.ccz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,12 +50,16 @@
     }
     
     if ([aCharacter.name isEqualToString:@"Tower"]) {
-        if ((self = [super initWithFile:
-                     [NSString stringWithFormat:@"Tower.jpg"]]))
-        {
+        
+        CCSpriteBatchNode *spritesBgNode;
+        spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+        
+        if ((self = [super initWithSpriteFrameName:@"building_user_home_01.png"])) {
             character = aCharacter;
             [self setAnimationWithName:character.name];
         }
+
         return self;
     }
     
