@@ -33,7 +33,7 @@
 -(void)removeBloodSprite;
 -(void)updateBloodSprite;
 
--(void)runDirectionAnimate;
+-(void)runWalkAnimate;
 -(void)runAttackAnimate;
 -(void)runDeadAnimate;
 

@@ -11,12 +11,14 @@
 @implementation SimpleAI
 
 -(void) AIUpdate{
-
-    if(aiState==Walking)
+    if(aiState == Walking)
     {
-        [character moveBy:ccp(100, 100)];
+        if (character.player == 1) {
+            [character setMoveDirection:ccp(1, 0)];
+        } else {
+            [character setMoveDirection:ccp(-1, 0)];
+        }
     }
-
 }
 
 @end

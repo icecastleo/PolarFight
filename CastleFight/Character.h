@@ -17,12 +17,15 @@
 #import "ActiveSkill.h"
 #import "Aura.h"
 #import "SkillKit.h"
+#import "BaseAI.h"
 @class BattleController;
 
 @interface Character : NSObject <XMLParsingDelegate> {
     NSMutableArray *pointArray;
 //    TestSkill *skill;
     ActiveSkill *skill;
+    
+    BaseAI *ai;
     
     NSMutableDictionary *attributeDictionary;
     NSMutableDictionary *statePremissionDictionary;
@@ -55,7 +58,6 @@
 @property CGPoint position;
 
 @property (readonly) float radius;
-
 @property (readonly) CGRect boundingBox;
 
 @property (nonatomic) NSMutableArray *pointArray;
@@ -66,7 +68,8 @@
 -(void)addAttribute:(Attribute *)attribute;
 -(Attribute*)getAttribute:(CharacterAttributeType)type;
 
--(void)moveBy:(CGPoint)position;
+-(void)update:(ccTime)delta;
+-(void)setMoveDirection:(CGPoint)direction;
 
 -(void)useSkill;
 -(void)stopSkill;
