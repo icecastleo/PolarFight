@@ -13,7 +13,8 @@ typedef enum  {
 } aiStateEnum;
 @interface BaseAI : NSObject {
     __weak Character* character;
-     aiStateEnum aiState;
+    aiStateEnum aiState;
+    CGPoint targetPoint;
 }
 
 @property (readonly, weak) Character *character;
