@@ -185,7 +185,7 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
 }
 
--(void)runDirectionAnimate {
+-(void)runWalkAnimate {
     [self stopAllActions];
     
     CharacterDirection direction = character.characterDirection;
@@ -283,14 +283,10 @@
 
     [self runAction:[CCSequence actions:
                      [CCFadeOut actionWithDuration:1.0f],
-                     [CCCallFunc actionWithTarget:self selector:@selector(deadAnimateCallback)]
+                     [CCCallFunc actionWithTarget:character selector:@selector(deadAnimateCallback)]
                      ,nil]];
-}
-
--(void)deadAnimateCallback {
-    // TODO : Comment out after test.
+    
     [self releaseCharacterRetain];
-//    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)releaseCharacterRetain {

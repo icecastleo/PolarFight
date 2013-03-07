@@ -11,11 +11,10 @@
 @implementation BaseAI
 @synthesize character;
 
-
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {
         character = aCharacter;
-        aiState=Walking;
+        aiState = Walking;
     }
     return self;
 }

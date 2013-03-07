@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "SimpleAudioEngine.h"
 
 @implementation AppController
 
@@ -89,6 +90,11 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
+    // TODO: Control by game setting plist
+    SimpleAudioEngine *audioengine = [SimpleAudioEngine sharedEngine];
+    audioengine.effectsVolume = 0.1;
+    audioengine.backgroundMusicVolume = 0.1;
+    
 	return YES;
 }
 

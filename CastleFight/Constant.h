@@ -16,17 +16,12 @@
 #define kPassiveSkillDuration 0.5
 #define kPassiveSkillInterval 0.1
 
-// For KnockOutObject
+// For Knock out effect
 #define kKnoutOutCount 10
 #define kKnoutOutRatio 0.9
 
-// For BattleController to move character
-#define kMoveMultiplier 15
-
-//// For register cocos2d touch dispatcher
-//#define kTouchPriorityDpad 15
-//#define kTouchPriorityMapLayer 5
-
+// For character move
+#define kMoveMultiplier 5
 
 typedef enum {
     kGameStateRoundStart,

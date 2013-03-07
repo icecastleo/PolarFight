@@ -13,6 +13,7 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "SelectLayer.h"
+#import "ObjectiveCAdaptor.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -105,7 +106,9 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        
+        // Test for c++ code
+//        ObjectiveCAdaptor *test = [[ObjectiveCAdaptor alloc] init];
+//        [test objectiveFunc];
 	}
 	return self;
 }
