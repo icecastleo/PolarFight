@@ -10,25 +10,12 @@
 #import "Character.h"
 #import "ActiveSkill.h"
 #import "Character.h"
+#import "AIState.h"
 @implementation SimpleAI
 
 -(void) AIUpdate{
-    if(aiState == Walking)
-    {
-        if (character.player == 1) {
-            NSArray* target= [character.skill checkTarget];
-            if(target.count>0)
-            {
-                [character useSkill];
-                
-                //aiState=Battleing;
-            }else{
-            [character setMoveDirection:ccp(10, 0)];
-            }
-        } else {
-            [character setMoveDirection:ccp(-10, 0)];
-        }
-    }
+    [_currentState execute:self];
+    
 }
 
 @end

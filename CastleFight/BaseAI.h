@@ -8,16 +8,19 @@
 
 #import <Foundation/Foundation.h>
 @class Character;
+@class AIState;
 typedef enum  {
     Walking,Battleing
 } aiStateEnum;
 @interface BaseAI : NSObject {
     __weak Character* character;
     aiStateEnum aiState;
-    CGPoint targetPoint;
+    AIState * _currentState;
+    CGPoint _targetPoint;
 }
-
+@property CGPoint targetPoint;
 @property (readonly, weak) Character *character;
 -(id)initWithCharacter:(Character *)aCharacter;
 -(void)AIUpdate;
+- (void)changeState:(AIState *)state;
 @end
