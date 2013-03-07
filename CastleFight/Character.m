@@ -33,6 +33,7 @@
 @implementation Character
 
 @synthesize player;
+@synthesize skill;
 @synthesize level;
 //@synthesize attackType;
 @synthesize armorType;

@@ -34,5 +34,5 @@
 
 -(void)showAttackRange:(BOOL)visible;
 -(void)setRangeDirection:(CGPoint)velocity;
-
+-(NSArray *)checkTarget;
 @end
