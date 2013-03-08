@@ -119,8 +119,8 @@
 
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-        skill = [[SwordmanSkill alloc] initWithCharacter:self];
-//        skill = [[TestSkill alloc] initWithCharacter:self];
+//        skill = [[SwordmanSkill alloc] initWithCharacter:self];
+        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {

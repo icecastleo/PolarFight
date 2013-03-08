@@ -259,8 +259,6 @@
 }
  
 -(void)runAnimationForName:(NSString *)animationName {
-    CCLOG(@"%@",animationName);
-    
     [self stopAllActions];
     CharacterDirection direction = character.characterDirection;
     

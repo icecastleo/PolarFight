@@ -60,7 +60,7 @@
     NSArray *effectTargets = [range getEffectTargets];
     
     if(effectTargets.count > 0) {
-        if ([delegate respondsToSelector:@selector(delayExecute:)]) {
+        if ([delegate respondsToSelector:@selector(delayExecute:effectPosition:)]) {
             [delegate delayExecute:effectTargets effectPosition:range.effectPosition];
         }
         [self unschedule:@selector(update:)];

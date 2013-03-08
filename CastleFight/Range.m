@@ -125,13 +125,9 @@ static float scale;
 // Only used for RangeShooter for now
 -(CGPoint)effectPosition {
     if (effectRange == nil) {
-        CGPoint position = rangeSprite.position;
-        position = [rangeSprite.parent convertToWorldSpace:position];
-        return [character.sprite.parent convertToNodeSpace:position];
+        return rangeSprite.position;
     } else {
-        CGPoint position = effectRange.rangeSprite.position;
-        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
-        return [character.sprite.parent convertToNodeSpace:position];
+        return effectRange.rangeSprite.position;
     }
 }
 
@@ -146,13 +142,7 @@ static float scale;
     }
     
     if (attackRange == nil) {
-        // Parent's scale must be 1, or it will fail !!
-        CGPoint point = [rangeSprite.parent convertToWorldSpace:rangeSprite.boundingBox.origin];
-        point = [target.sprite.parent convertToNodeSpace:point];
-
-        CGRect temp = CGRectMake(point.x, point.y, rangeSprite.boundingBox.size.width, rangeSprite.boundingBox.size.height);
-        
-        if (CGRectIntersectsRect(temp, target.boundingBox)) {
+        if (CGRectIntersectsRect(rangeSprite.boundingBox, target.boundingBox)) {
             return YES;
         } else {
             return NO;
@@ -164,7 +154,6 @@ static float scale;
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
-
         loc = [target.sprite convertToWorldSpace:loc];
         loc = [rangeSprite convertToNodeSpace:loc];
 
