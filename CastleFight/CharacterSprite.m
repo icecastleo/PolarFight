@@ -292,9 +292,9 @@
     [self addChild:emitter];
 
     [self runAction:[CCSequence actions:
-                     [CCFadeOut actionWithDuration:1.0f],
-                     [CCCallFunc actionWithTarget:character selector:@selector(deadAnimateCallback)]
-                     ,nil]];
+//                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCCallFunc actionWithTarget:character selector:@selector(deadAnimateCallback)],
+                     nil]];
     
     [self releaseCharacterRetain];
 }
@@ -311,13 +311,13 @@
 - (void)animationClipOnNode:(CCNode*)node reachedTagWithName:(NSString*)tagName
 {
     if ([tagName isEqualToString:@"upAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"downAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"leftAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"rightAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"upJumpAttackAction"]) {
         [self jumpAction];
     }else if ([tagName isEqualToString:@"downJumpAttackAction"]) {
@@ -339,7 +339,10 @@
     CCSequence *sequence = [CCSequence actions: jump1, squeze1, expand1, nil];
     
     [self runAction:sequence];
+}
 
+-(void)dealloc {
+    CCLOG(@"dealloc");
 }
 
 @end

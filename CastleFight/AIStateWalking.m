@@ -24,6 +24,7 @@
 - (void)execute:(BaseAI *)ai {
     // Check if should change state
     NSArray* enemies= [ai.character.skill checkTarget];
+ 
     if (enemies.count > 0) {
         [ai changeState:[[AIStateAttack alloc] init]];
         return;

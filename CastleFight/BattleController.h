@@ -37,6 +37,8 @@
     float countdown;
     
     int currentIndex;
+    
+    NSMutableArray *removeCharacters;
 }
 
 //@property (readonly) DPadLayer *dPadLayer;
