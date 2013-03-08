@@ -22,9 +22,8 @@
 }
 
 - (void)execute:(BaseAI *)ai {
-
     // Check if should change state
- NSArray* enemies= [ai.character.skill checkTarget];
+    NSArray* enemies= [ai.character.skill checkTarget];
     if (enemies.count > 0) {
         [ai changeState:[[AIStateAttack alloc] init]];
         return;
@@ -37,11 +36,8 @@
             ai.targetPoint=ccp(-1,0);
         }
         [ai.character setMoveDirection:ai.targetPoint];
-   
         return;
     }
-    
-    
 }
 
 - (void)exit:(BaseAI *)ai {

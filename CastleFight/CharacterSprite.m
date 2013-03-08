@@ -259,6 +259,8 @@
 }
  
 -(void)runAnimationForName:(NSString *)animationName {
+    CCLOG(@"%@",animationName);
+    
     [self stopAllActions];
     CharacterDirection direction = character.characterDirection;
     
@@ -266,10 +268,18 @@
     NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation.plist",character.name,animationName,directionString];
     
     NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
-    NSAssert(animationClip != nil, @"Animation plist should exist.");
+    
+//    NSAssert(animationClip != nil, @"Animation plist should exist.");
+    
+    // FIXME: For test only.
+    if (animationClip == nil) {
+        [self runAction:[CCSequence actions:
+                         [CCDelayTime actionWithDuration:0.5],
+                         [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+        return;
+    }
     
     [akHelper applyAnimationClip:animationClip toNode:self];
-    
 }
 
 -(void)runDeadAnimate {
