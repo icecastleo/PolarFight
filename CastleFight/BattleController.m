@@ -55,6 +55,11 @@ __weak static BattleController* currentInstance;
         
         [characterQueue roundStart];
         [self scheduleUpdate];
+        
+        // TODO: Add character also need an array.
+        
+        // FIXME: Maybe move to maylayer
+        removeCharacters = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -100,25 +105,26 @@ __weak static BattleController* currentInstance;
 -(void)addCharacter:(Character *)character {
 //    CCLOG(@"Add player %i's %@", character.player, character.name);
     [mapLayer addCharacter:character];
-    [characterQueue addCharacter:character];
+//    [characterQueue addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
 //    CCLOG(@"Remove player %i's %@", character.player, character.name);
 
-    [mapLayer removeCharacter:character];
-    [characterQueue removeCharacter:character withAnimated:YES];
+//    [mapLayer removeCharacter:character];
+    [removeCharacters addObject:character];
+//    [characterQueue removeCharacter:character withAnimated:YES];
     
-    // FIXME: Need a manager to control scene
-    if (self.characters.count == 0) {
-        [self unscheduleUpdate];
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
-        return;
-    }
+//    // FIXME: Need a manager to control scene
+//    if (self.characters.count == 0) {
+//        [self unscheduleUpdate];
+//        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+//        return;
+//    }
     
-    if(currentCharacter == character) {
-        [self roundEnd];
-    }
+//    if(currentCharacter == character) {
+//        [self roundEnd];
+//    }
 }
 
 -(void)moveCharacter:(Character *)character byPosition:(CGPoint)position isMove:(BOOL)move{
@@ -163,7 +169,7 @@ __weak static BattleController* currentInstance;
     // for castle fight
     velocity.y = 0;
     velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
-    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
+//    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
@@ -180,6 +186,11 @@ __weak static BattleController* currentInstance;
         [character update:delta];
     }
     
+    if (removeCharacters.count > 0) {
+        [self.characters removeObjectsInArray:removeCharacters];
+        [removeCharacters removeAllObjects];
+    }
+        
 //    if(!canMove) {
 //        if (roundStart == NO) {
 //            [self roundStart];

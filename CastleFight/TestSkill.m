@@ -17,6 +17,9 @@
 
 -(void)setRanges {
     // TODO: Maybe show the arrow range.
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@150,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+    
+    [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
 
 -(void)activeSkill:(int)count {

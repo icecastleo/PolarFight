@@ -119,8 +119,8 @@
 
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
-//        skill = [[SwordmanSkill alloc] initWithCharacter:self];
-        skill = [[TestSkill alloc] initWithCharacter:self];
+        skill = [[SwordmanSkill alloc] initWithCharacter:self];
+//        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -387,10 +387,11 @@
         CGPoint velocity = ccpSub(self.position, damage.position);
         [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
     }
-    
-    if (damage.type == kDamageTypeAttack) {
-        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
-    }
+
+    // TODO: Face to attack source
+//    if (damage.type == kDamageTypeAttack) {
+//        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
+//    }
     
     if (hp.currentValue == 0) {
         [self dead];
@@ -443,7 +444,7 @@
 }
 
 -(void)deadAnimateCallback {
-//    CCLOG(@"Player %i's %@ fade out", player, self.name);
+    CCLOG(@"Player %i's %@ fade out", player, self.name);
 }
 
 -(void)handleRoundStartEvent {
