@@ -13,6 +13,8 @@
 #import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
 #import "PartyParser.h"
+#import "BattleController.h"
+#import "BattleSetObject.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -21,7 +23,7 @@
     
     NSArray *directionStrings;
     
-    NSMutableDictionary *animationDictionary;
+    NSDictionary *animationDictionary;
 }
 @end
 
@@ -50,11 +52,7 @@
     }
     
     if ([aCharacter.name isEqualToString:@"Tower"]) {
-        
-        CCSpriteBatchNode *spritesBgNode;
-        spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
-        
+
         if ((self = [super initWithSpriteFrameName:@"building_user_home_01.png"])) {
             character = aCharacter;
             [self setAnimationWithName:character.name];
@@ -131,19 +129,23 @@
     
     if ([name isEqualToString:@"Swordsman"]) {
         NSAssert(akHelper != nil, @"akHelper should not be nil");
-        NSArray *Sounds = [PartyParser getAllFilePathsInDirectory:name fileType:@"caf"];
-        NSArray *Animations = [PartyParser getAllFilePathsInDirectory:name fileType:@"plist"];
+//        NSArray *Sounds = [PartyParser getAllFilePathsInDirectory:name fileType:@"caf"];
+//        NSArray *Animations = [PartyParser getAllFilePathsInDirectory:name fileType:@"plist"];
         
-        for (NSString *fileName in Sounds) {
-            [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
-        }
+//        for (NSString *fileName in Sounds) {
+//            [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
+//        }
         
-        for (NSString *path in Animations) {
-            NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-            NSString *fileName = [fileArray lastObject];
-            
-            NSDictionary *clip = [akHelper animationClipFromPlist:path];
-            [animationDictionary setValue:clip forKey:fileName];
+//        for (NSString *path in Animations) {
+//            NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+//            NSString *fileName = [fileArray lastObject];
+//            
+//            NSDictionary *clip = [akHelper animationClipFromPlist:path];
+//            [animationDictionary setValue:clip forKey:fileName];
+//        }
+        BattleController *battleController = [BattleController currentInstance];
+        if (battleController) {
+            animationDictionary = [battleController.battleSetObject getAnimationDictionaryByName:name];
         }
         return;
     }
@@ -198,7 +200,8 @@
     if ([character.name isEqualToString:@"Swordsman"]) {
         
         NSString *directionString = [directionStrings objectAtIndex:direction - 1];
-        NSString *animationKey = [NSString stringWithFormat:@"%@_Walking_%@_Animation.plist",character.name,directionString];
+        NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_Walking_%@.plist",character.name,directionString];
+        
         NSDictionary *walkingClip = [animationDictionary objectForKey:animationKey];
         NSAssert(walkingClip != nil, @"walking animation should exist.");
         
@@ -269,7 +272,7 @@
     CharacterDirection direction = character.characterDirection;
     
     NSString *directionString = [directionStrings objectAtIndex:direction-1];
-    NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation.plist",character.name,animationName,directionString];
+    NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_%@_%@.plist",character.name,animationName,directionString];
     
     NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
     

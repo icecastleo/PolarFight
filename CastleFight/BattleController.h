@@ -14,7 +14,7 @@
 #import "TiledMapLayer.h"
 #import "Barrier.h"
 
-@class BattleStatusLayer;
+@class BattleStatusLayer,BattleSetObject;
 
 @protocol GameState <NSObject>
 -(void)update:(ccTime)delta;
@@ -47,6 +47,7 @@
 
 @property (readonly) GameState state;
 @property (readonly) NSMutableArray *characters;
+@property (readonly) BattleSetObject *battleSetObject;
 
 +(BattleController *)currentInstance;
 

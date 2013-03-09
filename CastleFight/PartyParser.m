@@ -72,14 +72,19 @@
     }
 }
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue
-{
-    //ex: fileName = @"AllCharacter.xml"
+//in Disk. load slowly.
++ (GDataXMLDocument *)loadGDataXMLDocumentFromFileName:(NSString *)fileName {
     NSString *filePath = [self dataFilePath:fileName forSave:NO];
     NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
     NSError *error;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
                                                            options:0 error:&error];
+    return doc;
+}
+
++ (GDataXMLElement *)getNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue
+{
+    
     if (doc == nil) { return nil; }
     
     NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
@@ -97,13 +102,8 @@
     return nil;
 }
 
-+ (NSArray *)getAllNodeFromXmlFile:(NSString *)fileName tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName {
-    //ex: fileName = @"AllCharacter.xml"
-    NSString *filePath = [self dataFilePath:fileName forSave:NO];
-    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
-    NSError *error;
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
-                                                           options:0 error:&error];
++ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName {
+    
     if (doc == nil) { return nil; }
     
     NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
@@ -119,7 +119,7 @@
         }
     }
     
-    return characterIdArray; //(NSString *)CharacterIds are in the array. 
+    return characterIdArray; //(NSString *)CharacterIds are in the array.
 }
 
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
