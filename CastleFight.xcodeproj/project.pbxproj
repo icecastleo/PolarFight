@@ -51,6 +51,7 @@
 		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2F16BBD08300C0368D /* AKHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F3C16BBD2F600C0368D /* TouchTracker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DB3D6716E61F1100A8C89C /* BattleSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB3D6616E61F1100A8C89C /* BattleSetObject.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -403,6 +404,8 @@
 		37DB1F3016BBD08300C0368D /* AnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationKit.h; sourceTree = "<group>"; };
 		37DB1F3B16BBD2F600C0368D /* TouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTracker.h; sourceTree = "<group>"; };
 		37DB1F3C16BBD2F600C0368D /* TouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTracker.m; sourceTree = "<group>"; };
+		37DB3D6516E61F1100A8C89C /* BattleSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSetObject.h; sourceTree = "<group>"; };
+		37DB3D6616E61F1100A8C89C /* BattleSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSetObject.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
@@ -1833,6 +1836,8 @@
 				9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */,
 				9B6F997616D37EB600A5C492 /* ObjectiveCAdaptor.h */,
 				9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */,
+				37DB3D6516E61F1100A8C89C /* BattleSetObject.h */,
+				37DB3D6616E61F1100A8C89C /* BattleSetObject.m */,
 			);
 			name = BattleController;
 			sourceTree = "<group>";
@@ -2142,6 +2147,7 @@
 				9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */,
 				2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */,
 				2DA446C216E4A6E400BDC060 /* SimpleAI.m in Sources */,
+				37DB3D6716E61F1100A8C89C /* BattleSetObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

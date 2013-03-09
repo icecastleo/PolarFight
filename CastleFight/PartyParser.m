@@ -11,6 +11,12 @@
 #import "Character.h"
 #import "XmlParser.h"
 
+@interface PartyParser () {
+    GDataXMLDocument *allCharacterDoc;
+}
+
+@end
+
 @implementation PartyParser
 
 //TODO: does not finish saveParty yet
@@ -36,6 +42,10 @@
     NSString *filePath = [self dataFilePath:fileName forSave:TRUE];
     NSLog(@"Saving xml data to %@...", filePath);
     [xmlData writeToFile:filePath atomically:YES];
+}
+
++ (NSString *)dataFilePath:(NSString *)fileName {
+    return [self dataFilePath:fileName forSave:NO];
 }
 
 + (NSString *)dataFilePath:(NSString *)fileName forSave:(BOOL)save
@@ -117,6 +127,24 @@
     NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:directoryName];
     
     return directoryAndFileNames;
+}
+
++ (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName withPrefix:(NSString *)prefix fileType:(NSString *)type {
+    
+    NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:directoryName];
+    
+    NSMutableArray *targetFileNameArray = [NSMutableArray array];
+    
+    for (NSString *path in directoryAndFileNames) {
+        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+        NSString *fileName = [fileArray lastObject];
+        if ([fileName hasPrefix:prefix]) {
+//            NSLog(@"targetFile:%@",fileName);
+            [targetFileNameArray addObject:path];
+        }
+    }
+    
+    return targetFileNameArray;
 }
 
 @end
