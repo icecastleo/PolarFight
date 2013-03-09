@@ -13,11 +13,15 @@
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
+		2D14424716E88EAC00969C12 /* AIStateWalking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424216E88EAB00969C12 /* AIStateWalking.m */; };
+		2D14424816E88EAC00969C12 /* AIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424416E88EAB00969C12 /* AIStateAttack.m */; };
+		2D14424C16E88EFD00969C12 /* AIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424B16E88EFD00969C12 /* AIState.m */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D66E83B16A44EB500A3F5D5 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E83A16A44EB500A3F5D5 /* Arrow.png */; };
 		2D66E83C16A44FD400A3F5D5 /* RangeCarrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */; };
 		2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E84116A54CB900A3F5D5 /* Red_point.png */; };
+		2D6BFCD416E9D86200B77B7F /* RangeShooterNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */; };
 		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446BE16E4A59F00BDC060 /* BaseAI.m */; };
 		2DA446C216E4A6E400BDC060 /* SimpleAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446C116E4A6E400BDC060 /* SimpleAI.m */; };
@@ -338,6 +342,12 @@
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutObject.h; sourceTree = "<group>"; };
 		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
+		2D14424116E88EAB00969C12 /* AIStateWalking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateWalking.h; sourceTree = "<group>"; };
+		2D14424216E88EAB00969C12 /* AIStateWalking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateWalking.m; sourceTree = "<group>"; };
+		2D14424316E88EAB00969C12 /* AIStateAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateAttack.h; sourceTree = "<group>"; };
+		2D14424416E88EAB00969C12 /* AIStateAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateAttack.m; sourceTree = "<group>"; };
+		2D14424A16E88EFD00969C12 /* AIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIState.h; sourceTree = "<group>"; };
+		2D14424B16E88EFD00969C12 /* AIState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIState.m; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		2D26FC991640114D00C34AA4 /* Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effect.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
@@ -346,6 +356,8 @@
 		2D66E83816A44E4800A3F5D5 /* RangeCarrier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RangeCarrier.m; sourceTree = "<group>"; };
 		2D66E83A16A44EB500A3F5D5 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
 		2D66E84116A54CB900A3F5D5 /* Red_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_point.png; sourceTree = "<group>"; };
+		2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooterNew.h; sourceTree = "<group>"; };
+		2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeShooterNew.m; sourceTree = "<group>"; };
 		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
 		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DA446BD16E4A59F00BDC060 /* BaseAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAI.h; sourceTree = "<group>"; };
@@ -933,6 +945,19 @@
 			name = MapLayer;
 			sourceTree = "<group>";
 		};
+		2D14424916E88EBC00969C12 /* AIState */ = {
+			isa = PBXGroup;
+			children = (
+				2D14424116E88EAB00969C12 /* AIStateWalking.h */,
+				2D14424216E88EAB00969C12 /* AIStateWalking.m */,
+				2D14424316E88EAB00969C12 /* AIStateAttack.h */,
+				2D14424416E88EAB00969C12 /* AIStateAttack.m */,
+				2D14424A16E88EFD00969C12 /* AIState.h */,
+				2D14424B16E88EFD00969C12 /* AIState.m */,
+			);
+			name = AIState;
+			sourceTree = "<group>";
+		};
 		2D26FC961640111500C34AA4 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
@@ -968,6 +993,8 @@
 				2D97F28A1679DFF200030713 /* RangeFarCircle.m */,
 				9BF3254E16A6EA0200D5782B /* RangeShooter.h */,
 				9BF3254F16A6EA0300D5782B /* RangeShooter.m */,
+				2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */,
+				2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -975,6 +1002,7 @@
 		2DA446BC16E4A53C00BDC060 /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				2D14424916E88EBC00969C12 /* AIState */,
 				2DA446BD16E4A59F00BDC060 /* BaseAI.h */,
 				2DA446BE16E4A59F00BDC060 /* BaseAI.m */,
 				2DA446C016E4A6E400BDC060 /* SimpleAI.h */,

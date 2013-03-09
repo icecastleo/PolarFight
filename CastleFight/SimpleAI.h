@@ -8,8 +8,6 @@
 
 #import "BaseAI.h"
 
-
-
 @interface SimpleAI : BaseAI;
 
 

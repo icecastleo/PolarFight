@@ -13,6 +13,8 @@
 #import "StatusFactory.h"
 #import "PartyParser.h"
 
+#import "SimpleAI.h"
+
 // TODO: Delete after test.
 #import "RegenerationSkill.h"
 #import "ReflectAttackDamageSkill.h"
@@ -31,6 +33,7 @@
 @implementation Character
 
 @synthesize player;
+@synthesize skill;
 @synthesize level;
 //@synthesize attackType;
 @synthesize armorType;
@@ -108,6 +111,8 @@
         // FIXME: merge with barrier?
         // FIXME: init with a ratio of boundingbox by XML?
         _radius = self.boundingBox.size.width / 3;
+        
+        ai = [[SimpleAI alloc] initWithCharacter:self];
     }
     return self;
 }
@@ -115,6 +120,7 @@
 -(void)setSkillForCharacter:(NSString *)name {
     if ([name isEqualToString:@"Swordsman"]) {
         skill = [[SwordmanSkill alloc] initWithCharacter:self];
+//        skill = [[TestSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Wizard"]) {
         skill = [[WizardSkill alloc] initWithCharacter:self];
     } else if ([name isEqualToString:@"Priest"]) {
@@ -222,30 +228,48 @@
 //    }
 //}
 
+-(void)update:(ccTime)delta {
+    if (state == kCharacterStateIdle || state == kCharacterStateMove) {
+        [ai AIUpdate];
+    }
+    
+    if (state == kCharacterStateMove) {
+        [[BattleController currentInstance] moveCharacter:self byPosition:ccpMult(self.direction, [self getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta) isMove:YES];
+    }
+}
 
-// TODO: We need another method for AI to move to a certain position for a giving time.
-// This method should be called by update method in one frame.
--(void)moveBy:(CGPoint)position {
-    if (position.x == 0 && position.y == 0) {
-        if (state != kCharacterStateIdle) {
-            state = kCharacterStateIdle;
-            [sprite stopAllActions];
-        }
+-(void)setMoveDirection:(CGPoint)direction {
+    if (state != kCharacterStateIdle && state != kCharacterStateMove) {
         return;
     }
     
-    state = kCharacterStateMove;
-    
-    [[BattleController currentInstance] moveCharacter:self byPosition:position isMove:YES];
+    if (direction.x == 0 && direction.y == 0) {
+        if (state == kCharacterStateIdle) {
+            return;
+        }
+        
+        if (ai && [sprite numberOfRunningActions] != 0) {
+            return;
+        }
+        
+        state = kCharacterStateIdle;
+        // TODO: Run idle animation
+            
+        // FIXME: Move to idle animation.
+        [sprite stopAllActions];
+        return;
+    }
     
     CharacterDirection old = characterDirection;
     
-    // It will set the direction!!
-    [self setDirection:ccpNormalize(position)];
+    // It will set the direction velocity
+    [self setDirection:ccpNormalize(direction)];
     
     if(characterDirection != old || [sprite numberOfRunningActions] == 0) {
-        [sprite runDirectionAnimate];
+        [sprite runWalkAnimate];
     }
+    
+    state = kCharacterStateMove;
 }
 
 -(void)setDirection:(CGPoint)velocity {
@@ -363,10 +387,11 @@
         CGPoint velocity = ccpSub(self.position, damage.position);
         [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
     }
-    
-    if (damage.type == kDamageTypeAttack) {
-        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
-    }
+
+    // TODO: Face to attack source
+//    if (damage.type == kDamageTypeAttack) {
+//        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
+//    }
     
     if (hp.currentValue == 0) {
         [self dead];
@@ -416,6 +441,10 @@
             [p characterWillRemoveDelegate:self];
         }
     }
+}
+
+-(void)deadAnimateCallback {
+    CCLOG(@"Player %i's %@ fade out", player, self.name);
 }
 
 -(void)handleRoundStartEvent {

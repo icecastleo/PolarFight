@@ -8,15 +8,14 @@
 
 #import "SimpleAI.h"
 #import "Character.h"
+#import "ActiveSkill.h"
+#import "Character.h"
+#import "AIState.h"
 @implementation SimpleAI
 
 -(void) AIUpdate{
-
-    if(aiState==Walking)
-    {
-        [character moveBy:ccp(100, 100)];
-    }
-
+    [_currentState execute:self];
+    
 }
 
 @end

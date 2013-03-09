@@ -189,7 +189,7 @@
     rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
 }
 
--(void)runDirectionAnimate {
+-(void)runWalkAnimate {
     [self stopAllActions];
     
     CharacterDirection direction = character.characterDirection;
@@ -263,6 +263,8 @@
 }
  
 -(void)runAnimationForName:(NSString *)animationName {
+    CCLOG(@"%@",animationName);
+    
     [self stopAllActions];
     CharacterDirection direction = character.characterDirection;
     
@@ -270,10 +272,18 @@
     NSString *animationKey = [NSString stringWithFormat:@"%@_%@_%@_Animation.plist",character.name,animationName,directionString];
     
     NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
-    NSAssert(animationClip != nil, @"Animation plist should exist.");
+    
+//    NSAssert(animationClip != nil, @"Animation plist should exist.");
+    
+    // FIXME: For test only.
+    if (animationClip == nil) {
+        [self runAction:[CCSequence actions:
+                         [CCDelayTime actionWithDuration:0.5],
+                         [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+        return;
+    }
     
     [akHelper applyAnimationClip:animationClip toNode:self];
-    
 }
 
 -(void)runDeadAnimate {
@@ -286,15 +296,11 @@
     [self addChild:emitter];
 
     [self runAction:[CCSequence actions:
-                     [CCFadeOut actionWithDuration:1.0f],
-                     [CCCallFunc actionWithTarget:self selector:@selector(deadAnimateCallback)]
-                     ,nil]];
-}
-
--(void)deadAnimateCallback {
-    // TODO : Comment out after test.
+//                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCCallFunc actionWithTarget:character selector:@selector(deadAnimateCallback)],
+                     nil]];
+    
     [self releaseCharacterRetain];
-//    [self removeFromParentAndCleanup:YES];
 }
 
 -(void)releaseCharacterRetain {
@@ -309,13 +315,13 @@
 - (void)animationClipOnNode:(CCNode*)node reachedTagWithName:(NSString*)tagName
 {
     if ([tagName isEqualToString:@"upAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"downAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"leftAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"rightAttackAction"]) {
-        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
+//        [node runAction:[CCEaseOut actionWithAction:[CCMoveCharacterByLength actionWithDuration:0.4 character:character length:25] rate:2]];
     }else if ([tagName isEqualToString:@"upJumpAttackAction"]) {
         [self jumpAction];
     }else if ([tagName isEqualToString:@"downJumpAttackAction"]) {
@@ -337,7 +343,10 @@
     CCSequence *sequence = [CCSequence actions: jump1, squeze1, expand1, nil];
     
     [self runAction:sequence];
+}
 
+-(void)dealloc {
+    CCLOG(@"dealloc");
 }
 
 @end

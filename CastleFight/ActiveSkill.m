@@ -89,6 +89,12 @@
                 format:@"You must override %@ in a ActiveSkill subclass", NSStringFromSelector(_cmd)];
 }
 
+-(NSArray *)checkTarget{
+    if(range!=nil)
+    return [range getEffectTargets];
+    return nil;
+}
+
 -(void)showAttackRange:(BOOL)visible {
     if (range == nil) {
         return;

@@ -14,39 +14,8 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-#import "ObjectiveCAdaptor.h"
-
-//@interface SwitchCharacterState : NSObject<GameState> {
-//    BOOL run;
-//}
-//
-//@end
-//
-//@implementation SwitchCharacterState
-//
-//-(id)init {
-//    if(self = [super init]) {
-//        run = NO;
-//    }
-//    return self;
-//}
-//
-//-(void)update:(ccTime)delta {
-//    if (run == YES) {
-//        return;
-//    }
-//    
-//    run = YES;
-//    
-//    
-//    run = NO;
-//}
-//
-//@end
 
 @interface BattleController () {
-    NSMutableArray *player1;
-    NSMutableArray *player2;
     CharacterQueue *characterQueue;
 }
 
@@ -82,14 +51,15 @@ __weak static BattleController* currentInstance;
         //statusLayer.queue = characterQueue; // For showing Queue Bar.
         [self addChild:statusLayer];
         
-        canMove = NO;
+//        canMove = NO;
         
         [characterQueue roundStart];
         [self scheduleUpdate];
         
-        ObjectiveCAdaptor *test = [[ObjectiveCAdaptor alloc] init];
+        // TODO: Add character also need an array.
         
-        [test objectiveFunc];
+        // FIXME: Maybe move to maylayer
+        removeCharacters = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -99,8 +69,6 @@ __weak static BattleController* currentInstance;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
-    player1 = [[NSMutableArray alloc] init];
-    player2 = [[NSMutableArray alloc] init];
     
     NSArray *characterIdArray;
     characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
@@ -110,7 +78,7 @@ __weak static BattleController* currentInstance;
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 1;
         [character.sprite addBloodSprite];
-        [player1 addObject:character];
+        [self addCharacter:character];
     }
     
     NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol"];
@@ -119,16 +87,7 @@ __weak static BattleController* currentInstance;
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
-        [player2 addObject:character];
-    }
-    
-    for (Character *character in player1) {
         [self addCharacter:character];
-//        character.position = ccp(0, -190);
-    }
-    for (Character *character in player2) {
-        [self addCharacter:character];
-//        character.position = ccp(0, -240);
     }
     
     Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
@@ -141,33 +100,31 @@ __weak static BattleController* currentInstance;
     
     [mapLayer addCastle:myCastle];
     [mapLayer addCastle:enemyCastle];
-    
-    player1 = nil;
-    player2 = nil;
 }
 
 -(void)addCharacter:(Character *)character {
 //    CCLOG(@"Add player %i's %@", character.player, character.name);
     [mapLayer addCharacter:character];
-    [characterQueue addCharacter:character];
+//    [characterQueue addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
 //    CCLOG(@"Remove player %i's %@", character.player, character.name);
 
-    [mapLayer removeCharacter:character];
-    [characterQueue removeCharacter:character withAnimated:YES];
+//    [mapLayer removeCharacter:character];
+    [removeCharacters addObject:character];
+//    [characterQueue removeCharacter:character withAnimated:YES];
     
-    // FIXME: Need a manager to control scene
-    if (self.characters.count == 0) {
-        [self unscheduleUpdate];
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
-        return;
-    }
+//    // FIXME: Need a manager to control scene
+//    if (self.characters.count == 0) {
+//        [self unscheduleUpdate];
+//        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+//        return;
+//    }
     
-    if(currentCharacter == character) {
-        [self roundEnd];
-    }
+//    if(currentCharacter == character) {
+//        [self roundEnd];
+//    }
 }
 
 -(void)moveCharacter:(Character *)character byPosition:(CGPoint)position isMove:(BOOL)move{
@@ -212,7 +169,7 @@ __weak static BattleController* currentInstance;
     // for castle fight
     velocity.y = 0;
     velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
-    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
+//    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
@@ -225,61 +182,69 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)update:(ccTime)delta {
-    
-    if(!canMove) {
-        if (roundStart == NO) {
-            [self roundStart];
-        }
-        return;
+    for (Character *character in self.characters) {
+        [character update:delta];
     }
     
-    if(!isMove && dPadLayer.isButtonPressed) {
-        [self characterMove];
+    if (removeCharacters.count > 0) {
+        [self.characters removeObjectsInArray:removeCharacters];
+        [removeCharacters removeAllObjects];
     }
-    
-    if(isMove) {
-        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
         
-        countdown -= delta;
-        
-        if (countdown < 0) {
-            countdown = 0;
-        }
-        
-        [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
-        
-        if(countdown == 0) {
-            if(currentCharacter.state == kCharacterStateUseSkill) {
-                //FIXME: Might stop more than one time
-                [currentCharacter stopSkill];
-                return;
-            }
-            
-            [self roundEnd];
-            return;
-        }
-        
-        if(dPadLayer.isButtonPressed) {
-            if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
-                [currentCharacter setDirection:dPadLayer.velocity];
-            }
-            
-            // Skill will handle for multiple button pressed
-            [currentCharacter useSkill];
-            return;
-        }
-        
-        if(currentCharacter.state == kCharacterStateUseSkill) {
-            return;
-        }
-        
-        // FIXME: change dpad layer
-        CGPoint velocity = dPadLayer.velocity;
-        velocity.y = 0;
-        
-        // Move character
-        [currentCharacter moveBy:ccpMult(velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
-    }
+//    if(!canMove) {
+//        if (roundStart == NO) {
+//            [self roundStart];
+//        }
+//        return;
+//    }
+//    
+//    if(!isMove && dPadLayer.isButtonPressed) {
+//        [self characterMove];
+//    }
+//    
+//    if(isMove) {
+//        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
+//        
+//        countdown -= delta;
+//        
+//        if (countdown < 0) {
+//            countdown = 0;
+//        }
+//        
+//        [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
+//        
+//        if(countdown == 0) {
+//            if(currentCharacter.state == kCharacterStateUseSkill) {
+//                //FIXME: Might stop more than one time
+//                [currentCharacter stopSkill];
+//                return;
+//            }
+//            
+//            [self roundEnd];
+//            return;
+//        }
+//        
+//        if(dPadLayer.isButtonPressed) {
+//            if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
+//                [currentCharacter setDirection:dPadLayer.velocity];
+//            }
+//            
+//            // Skill will handle for multiple button pressed
+//            [currentCharacter useSkill];
+//            return;
+//        }
+//        
+//        if(currentCharacter.state == kCharacterStateUseSkill) {
+//            return;
+//        }
+//        
+//        // FIXME: change dpad layer
+//        CGPoint velocity = dPadLayer.velocity;
+//        velocity.y = 0;
+//        
+//        // Move character
+//        [currentCharacter moveBy:ccpMult(velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
+//    }
 }
 
 -(void)roundStart {
