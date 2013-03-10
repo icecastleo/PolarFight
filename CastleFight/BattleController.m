@@ -37,6 +37,8 @@ __weak static BattleController* currentInstance;
         mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
         [self addChild:mapLayer];
         
+        [self setBattleSetObject];
+        
         // set character on may
         [self setCharacterArrayFromSelectLayer];
         
@@ -45,7 +47,6 @@ __weak static BattleController* currentInstance;
         [self addChild:dPadLayer];
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
-
         [self addChild:statusLayer];
         
         [self scheduleUpdate];

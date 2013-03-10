@@ -2199,6 +2199,7 @@
 				2D14424816E88EAC00969C12 /* AIStateAttack.m in Sources */,
 				2D14424C16E88EFD00969C12 /* AIState.m in Sources */,
 				2D6BFCD416E9D86200B77B7F /* RangeShooterNew.m in Sources */,
+				37DB3D6716E61F1100A8C89C /* BattleSetObject.m in Sources */,
 				9B5CD31916ED148F00C8B007 /* DelegateSkill.m in Sources */,
 				9B5CD31C16ED169100C8B007 /* AttackDelegateSkill.m in Sources */,
 			);
