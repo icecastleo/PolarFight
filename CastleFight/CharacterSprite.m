@@ -290,7 +290,7 @@
     [self addChild:emitter];
 
     [self runAction:[CCSequence actions:
-//                     [CCFadeOut actionWithDuration:1.0f],
+                     [CCFadeOut actionWithDuration:1.0f],
                      [CCCallFunc actionWithTarget:character selector:@selector(deadAnimateCallback)],
                      nil]];
     
@@ -337,10 +337,6 @@
     CCSequence *sequence = [CCSequence actions: jump1, squeze1, expand1, nil];
     
     [self runAction:sequence];
-}
-
--(void)dealloc {
-    CCLOG(@"dealloc");
 }
 
 @end

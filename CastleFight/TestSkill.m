@@ -9,15 +9,16 @@
 #import "TestSkill.h"
 #import "AttackEvent.h"
 #import "Character.h"
-#import "RangeCarrier.h"
 #import "RangeShooter.h"
 #import "RangeShooterNew.h"
 #import "BattleController.h"
+#import "AttackDelegateSkill.h"
+
 @implementation TestSkill
 
 -(void)setRanges {
     // TODO: Maybe show the arrow range.
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@150,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
@@ -31,38 +32,17 @@
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",nil];
     
-//    RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary]];
-//    
-//    [shooter shoot:character.direction speed:10 delegate:self];
-//    
-//    
-    RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary]];
+    DelegateSkill *delegate = [[AttackDelegateSkill alloc] initWithCharacter:character];
     
+//    RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
+
+//    [shooter shootFrom:character.position toPosition:ccpAdd(character.position, (character.player == 1)? ccp(200,0):ccp(-200,0)) speed:10];
+
+    RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
     
-    ///To DO: 可指定攻擊地點
-    CGPoint target = (character.player==1)?ccp(300,0):ccp(-300,0);
-    [shooter shoot:ccpAdd(character.position, target) time:2 delegate:self];
+    // TODO: 可指定攻擊地點
+    CGPoint target = (character.player ==1 )?ccp(200,0):ccp(-200,0);
+    [shooter shoot:ccpAdd(character.position, target) time:2];
 }
 
--(void)delayExecute:(NSArray *)targets effectPosition:(CGPoint)position {
-    for(Character *target in targets) {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
-        event.position = position;
-        [target receiveAttackEvent:event];
-    }
-}
--(NSArray *)checkTarget{
-    NSMutableSet *effectTargets = [NSMutableSet set];
-    
-    for(Character* temp in [BattleController currentInstance].characters)
-    {
-        if(character.player!=temp.player)
-        {
-            CGFloat distance= ccpDistance(character.position, temp.position);
-           if( distance>290&&distance<310)
-             [effectTargets addObject:temp];
-        }
-    }
-    return [effectTargets allObjects];
-}
 @end

@@ -7,25 +7,20 @@
 //
 
 #import "Range.h"
-
-@protocol RangeShooterNewDelegate <NSObject>
--(void)delayExecute:(NSArray *)targets effectPosition:(CGPoint)position;
-@end
+#import "DelegateSkill.h"
 
 @interface RangeShooterNew : CCNode {
     Range *range;
+    DelegateSkill *delegate;
     
     CGPoint targetPoint;
     float time;
-    
-    id<RangeShooterNewDelegate> delegate;
-    
+
     CGPoint startPoint;
     float distance;
 }
 
--(id)initWithRange:(Range *)aRange;
-
--(void)shoot:(CGPoint)targetPoint time:(float)aTime delegate:(id<RangeShooterNewDelegate>)aDelegate;
+-(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate;
+-(void)shoot:(CGPoint)targetPoint time:(float)aTime;
 
 @end

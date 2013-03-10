@@ -18,6 +18,15 @@
         ranges = [[NSMutableArray alloc] init];
         [self setRanges];
         
+        for (Range *r in ranges) {
+            // Add sprite on character
+            CCSprite *rangeSprite = r.rangeSprite;
+            rangeSprite.zOrder = -1;
+            rangeSprite.visible = NO;
+            rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2, character.sprite.boundingBox.size.height/2);
+            [character.sprite addChild:rangeSprite];
+        }
+        
         count = 0;
         
         if (ranges.count > 0) {
@@ -32,7 +41,7 @@
 
 -(void)setRanges {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a ActiveSkill subclass", NSStringFromSelector(_cmd)];
+                format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
 }
 
 -(void)execute {
@@ -52,10 +61,6 @@
             _hasNext = YES;
         }
     }
-}
-
--(void)stop {
-    _hasNext = NO;
 }
 
 -(void)next {
@@ -86,13 +91,11 @@
 
 -(void)activeSkill:(int)count {
     [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a ActiveSkill subclass", NSStringFromSelector(_cmd)];
+                format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
 }
 
--(NSArray *)checkTarget{
-    if(range!=nil)
+-(NSArray *)checkTarget {
     return [range getEffectTargets];
-    return nil;
 }
 
 -(void)showAttackRange:(BOOL)visible {

@@ -72,7 +72,6 @@
 -(void)setMoveDirection:(CGPoint)direction;
 
 -(void)useSkill;
--(void)stopSkill;
 -(void)attackAnimateCallback;
 
 -(void)receiveAttackEvent:(AttackEvent *)event;

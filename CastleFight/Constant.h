@@ -11,12 +11,19 @@
 
 #define kGameSettingFps 30
 
+// For touch dispatcher
+#define kTouchPriotiryPause 0
+
+// Not link since it is a library
+#define kTouchPriotiryDpad 1
+#define kTouchPriorityMap 3
+
 // For Aura and PassiveSkill
 #define kAuraInterval 0.4
 #define kPassiveSkillDuration 0.5
 #define kPassiveSkillInterval 0.1
 
-// For Knock out effect
+// For knock out effect
 #define kKnoutOutCount 10
 #define kKnoutOutRatio 0.9
 

@@ -11,7 +11,7 @@
 #import "BattleController.h"
 
 @implementation Range
-@synthesize character,rangeSprite;
+
 @dynamic effectPosition;
 
 static float scale;
@@ -34,7 +34,7 @@ static float scale;
 
 -(id)initWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
     if (self = [super init]) {
-        character = aCharacter;
+        _character = aCharacter;
         [self setParameter:dict];
     }
     return self;
@@ -45,7 +45,7 @@ static float scale;
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
     float cocosAngle = -1 * angleDegrees;
     
-    rangeSprite.rotation = cocosAngle;
+    _rangeSprite.rotation = cocosAngle;
 }
 
 -(void)setParameter:(NSMutableDictionary *)dict {    
@@ -63,25 +63,17 @@ static float scale;
         [self setRangeSprite];
     } else {
         // TODO: Maybe each range can set its special parameter based on the sprite.
-        rangeSprite = [CCSprite spriteWithFile:file];
+        _rangeSprite = [CCSprite spriteWithFile:file];
         [self setSpecialParameter:dict];
     }
 
-    rangeSprite.zOrder = -1;
-    rangeSprite.visible = NO;
-    rangeSprite.position = ccp(character.sprite.boundingBox.size.width/2,character.sprite.boundingBox.size.height/2);
-    [character.sprite addChild:rangeSprite];
-    
+    // TODO: Move to delay skill
     effectRange = [dict objectForKey:@"rangeEffectRange"];
     
     if (effectRange != nil) {
-        if (effectRange.rangeSprite.parent != nil) {
-            [effectRange.rangeSprite removeFromParentAndCleanup:NO];
-        }
-        
-        [rangeSprite addChild:effectRange.rangeSprite];
-        effectRange.rangeSprite.position = ccp(rangeSprite.boundingBox.size.width / 2, 0);
-        effectRange.rangeSprite.visible = YES;
+        [_rangeSprite addChild:effectRange.rangeSprite];
+        effectRange.rangeSprite.position = ccp(_rangeSprite.boundingBox.size.width / 2, 0);
+        effectRange.rangeSprite.visible = NO;
     }    
 }
 
@@ -102,7 +94,7 @@ static float scale;
     // Get CGImageRef
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
 
-    rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
+    _rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 }
 
 -(NSArray *)getEffectTargets {
@@ -125,9 +117,13 @@ static float scale;
 // Only used for RangeShooter for now
 -(CGPoint)effectPosition {
     if (effectRange == nil) {
-        return rangeSprite.position;
+        CGPoint position = _rangeSprite.position;
+        position = [_rangeSprite.parent convertToWorldSpace:position];
+        return [_character.sprite.parent convertToNodeSpace:position];
     } else {
-        return effectRange.rangeSprite.position;
+        CGPoint position = effectRange.rangeSprite.position;
+        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
+        return [_character.sprite.parent convertToNodeSpace:position];
     }
 }
 
@@ -142,7 +138,9 @@ static float scale;
     }
     
     if (attackRange == nil) {
-        if (CGRectIntersectsRect(rangeSprite.boundingBox, target.boundingBox)) {
+        NSAssert(_rangeSprite.parent == target.sprite.parent, @"Character can't hold a sprite as it's attack range");
+        
+        if (CGRectIntersectsRect(_rangeSprite.boundingBox, target.boundingBox)) {
             return YES;
         } else {
             return NO;
@@ -155,10 +153,10 @@ static float scale;
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
         loc = [target.sprite convertToWorldSpace:loc];
-        loc = [rangeSprite convertToNodeSpace:loc];
+        loc = [_rangeSprite convertToNodeSpace:loc];
 
-        loc.x = (loc.x - rangeSprite.boundingBox.size.width/2)* scale  + rangeWidth/2;
-        loc.y = (loc.y  - rangeSprite.boundingBox.size.height/2)* scale  + rangeHeight/2;
+        loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* scale  + rangeWidth/2;
+        loc.y = (loc.y  - _rangeSprite.boundingBox.size.height/2)* scale  + rangeHeight/2;
         
 //        CCLOG(@"%f,%f",loc.x,loc.y);
         
@@ -172,13 +170,13 @@ static float scale;
 
 -(BOOL)checkSide:(Character *)temp {
     if ([_sides containsObject:kRangeSideAlly]) {
-        if (temp.player == character.player) {
+        if (temp.player == _character.player) {
             return YES;
         }
     }
     
     if ([_sides containsObject:kRangeSideEnemy]) {
-        if (temp.player != character.player) {
+        if (temp.player != _character.player) {
             return YES;
         }
     }
@@ -191,7 +189,7 @@ static float scale;
     }
     
     if ([_filters containsObject:kRangeFilterSelf]) {
-        if (temp == character) {
+        if (temp == _character) {
             return YES;
         }
     }
@@ -199,7 +197,7 @@ static float scale;
 }
 
 -(void)dealloc {
-    [rangeSprite removeFromParentAndCleanup:YES];
+    [_rangeSprite removeFromParentAndCleanup:YES];
 //    CGPathRelease(attackRange);
 }
 

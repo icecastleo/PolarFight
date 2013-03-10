@@ -9,7 +9,7 @@
 
 #import "ActiveSkill.h"
 #import "RangeShooterNew.h"
-//#import "RangeShooter.h"
-@interface TestSkill : ActiveSkill<RangeShooterNewDelegate>
-//@interface TestSkill : ActiveSkill<RangeShooterDelegate>
+
+@interface TestSkill : ActiveSkill
+
 @end

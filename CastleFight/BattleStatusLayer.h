@@ -14,20 +14,11 @@
 
 @interface BattleStatusLayer : CCLayer {
 //    BattleController *controller;
-    
-    CCSprite *selectSprite;
-    CCAction *selectAction;
 }
 
 @property (readonly) CCLabelTTF *startLabel;
-@property (readonly) CCLabelBMFont *countdownLabel;
-@property (weak,nonatomic) CharacterQueue *queue;
 
--(id) initWithBattleController:(BattleController*) controller andQueue:(CharacterQueue *)aQueue;
-//-(void) update:(ccTime) delta;
-
--(void) startSelectCharacter:(Character*)character;
--(void) stopSelect;
+-(id)initWithBattleController:(BattleController *)controller;
 -(void)winTheGame:(BOOL)win;
 
 @end

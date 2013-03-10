@@ -26,7 +26,6 @@
 -(void)setRanges;
 
 -(void)execute;
--(void)stop;
 -(void)next;
 -(void)reset;
 

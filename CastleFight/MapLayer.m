@@ -49,7 +49,7 @@ const static int pathHeight = 60;
 }
 
 -(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:5 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:YES];
 }
 
 -(void)addCharacter:(Character *)character {

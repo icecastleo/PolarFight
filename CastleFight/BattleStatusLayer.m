@@ -11,85 +11,32 @@
 #import "CharacterQueueLayer.h"
 #import "CharacterQueue.h"
 
-@interface BattleStatusLayer() {
-    CharacterQueueLayer *queueLayer;
-}
-@end
-
 @implementation BattleStatusLayer
-@synthesize queue = _queue;
 
-static const int pauseLayerTag = 9999;
-
--(id) initWithBattleController:(BattleController *) battleController andQueue:(CharacterQueue *)aQueue{
+-(id)initWithBattleController:(BattleController *)battleController {
     if(self = [super init]) {        
         CGSize size = [CCDirector sharedDirector].winSize;
         
-        _countdownLabel = [[CCLabelBMFont alloc] initWithString:@"Loading..." fntFile:@"TestFont.fnt"];
-        _countdownLabel.position = ccp(size.width / 2, size.height - 30);
-        [self addChild:_countdownLabel];
-        
-        _startLabel = [CCLabelTTF labelWithString:@"Press to start!"  fontName:@"Marker Felt"  fontSize:21];
-        _startLabel.position = ccp(size.width / 2,size.height / 2);
+        // set start label
+        _startLabel = [CCLabelTTF labelWithString:@"Start!!"  fontName:@"Marker Felt"  fontSize:36];
+        _startLabel.position = ccp(size.width / 2, size.height / 2);
         _startLabel.opacity = 150;
-//        startLabel.visible = NO;
         [self addChild:_startLabel];
         
-        selectSprite = [[CCSprite alloc] init];
-        selectSprite.visible = NO;
-        
-        CCAnimation *animation = [CCAnimation animation];
-        
-        [animation addSpriteFrameWithFilename:@"select-1.png"];
-        [animation addSpriteFrameWithFilename:@"select-2.png"];
-        [animation addSpriteFrameWithFilename:@"select-3.png"];
-        animation.restoreOriginalFrame = NO;
-        animation.delayPerUnit = 0.25;
-        
-        CCAnimate *selectAnimate = [[CCAnimate alloc] initWithAnimation:animation];
-        selectAction = [CCRepeatForever actionWithAction:selectAnimate];
-        
-        _queue = aQueue;
+        [_startLabel runAction:[CCSequence actions:
+                                [CCFadeOut actionWithDuration:2.0f],
+                                [CCCallFuncN actionWithTarget:self selector:@selector(removeSelf:)],
+                                nil]];
+
         [self setPauseButton];
-        [self setCharacatQueueLayer];
-        // TODO: init other view like playing queue.
     }
     return self;
 }
 
--(void)winTheGame:(BOOL)win {
-    CCLabelTTF *gameOverLabel;
-    if (win) {
-         gameOverLabel = [CCLabelTTF labelWithString:@"You Win!"  fontName:@"Marker Felt"  fontSize:31];
-    }else {
-        gameOverLabel = [CCLabelTTF labelWithString:@"You Lose!"  fontName:@"Marker Felt"  fontSize:31];
-    }
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    gameOverLabel.position = ccp(winSize.width/2,winSize.height/2+gameOverLabel.boundingBox.size.height);
-    gameOverLabel.color = ccRED;
-    [self addChild:gameOverLabel];
-}
-
--(void) startSelectCharacter:(Character*)character {
-    [self setCurrentCharacterInQueueLayer:character];
-    [character.sprite addChild:selectSprite];
-    selectSprite.position = ccp(character.boundingBox.size.width / 2, character.boundingBox.size.height / 2);
-    [selectSprite runAction:selectAction];
-    selectSprite.visible = YES;
-}
-
--(void) stopSelect {
-    [selectSprite removeFromParentAndCleanup:NO];
-    selectSprite.visible = NO;
-    [selectSprite stopAllActions];
-}
-
--(void)pauseButtonTapped:(id)sender {
-    if(![self getChildByTag:pauseLayerTag]){
-        PauseLayer *layer = [PauseLayer node];
-        layer.tag = pauseLayerTag;
-        [self addChild:layer];
-    }
+-(void)removeSelf:(id)sender {
+    CCNode *node = (CCNode *)sender;
+    
+    [node removeFromParentAndCleanup:YES];
 }
 
 -(void)setPauseButton {
@@ -107,12 +54,21 @@ static const int pauseLayerTag = 9999;
     [self addChild:pauseMenu];
 }
 
--(void)setCharacatQueueLayer {
-    queueLayer = [[CharacterQueueLayer alloc] initWithQueue:self.queue];
-    [self addChild:queueLayer];
+-(void)pauseButtonTapped:(id)sender {
+    [self addChild:[PauseLayer node]];
 }
 
--(void)setCurrentCharacterInQueueLayer:(Character *)character {
-    [queueLayer setCurrentCharacter:character];
+-(void)winTheGame:(BOOL)win {
+    CCLabelTTF *gameOverLabel;
+    if (win) {
+        gameOverLabel = [CCLabelTTF labelWithString:@"You Win!"  fontName:@"Marker Felt"  fontSize:31];
+    }else {
+        gameOverLabel = [CCLabelTTF labelWithString:@"You Lose!"  fontName:@"Marker Felt"  fontSize:31];
+    }
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    gameOverLabel.position = ccp(winSize.width/2,winSize.height/2+gameOverLabel.boundingBox.size.height);
+    gameOverLabel.color = ccRED;
+    [self addChild:gameOverLabel];
 }
+
 @end

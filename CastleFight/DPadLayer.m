@@ -42,15 +42,18 @@ static const int ButtonDistance = 100;
     return self;
 }
 
--(CGPoint) velocity {
+-(CGPoint)velocity {
     if (leftJoystick.velocity.x == 0 && leftJoystick.velocity.y == 0) {
         return leftJoystick.velocity;
     } else {
+//        return leftJoystick.velocity;
+        
+        // Ignore the distance of thoumb and dpad's center point.
         return ccpNormalize(leftJoystick.velocity);
     }
 }
 
--(Boolean) isButtonPressed {
+-(Boolean)isButtonPressed {
     if(attackButton.active) {
         attackButton.active = NO;
         return YES;

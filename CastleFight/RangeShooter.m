@@ -12,60 +12,62 @@
 
 @implementation RangeShooter
 
--(id)initWithRange:(Range *)aRange {
+-(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate{
     if (self = [super init]) {
         range = aRange;
+        delegate = aDelegate;
+        [range.character.sprite.parent addChild:range.rangeSprite];
     }
     return self;
 }
 
--(void)shoot:(CGPoint)aVector speed:(float)aSpeed delegate:(id<RangeShooterDelegate>)aDelegate {
+-(void)shootFrom:(CGPoint)start toPosition:(CGPoint)end speed:(float)aSpeed {
 //    CCLOG(@"shoot");
-    delegate = aDelegate;
-    vector = aVector;
+    startPosition = start;
+    range.rangeSprite.position = start;
+    endPosition = end;
     speed = aSpeed;
+    vector = ccpNormalize(ccpSub(end, start));
     
-    if (range.rangeSprite.parent != nil) {
-        [range.rangeSprite removeFromParentAndCleanup:NO];
-    }
-    
-    range.rangeSprite.position = range.character.position;
-    [range.character.sprite.parent addChild:range.rangeSprite];
-    
-    range.rangeSprite.visible = YES;
-    
+    t = ccpDistance(start, end) / speed;
+
     float angle = atan2f(vector.y, vector.x);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angle);
     float cocosAngle = 270 - angleDegrees;
     
     range.rangeSprite.rotation = cocosAngle;
     
-    startPoint = range.rangeSprite.position;
     [self scheduleUpdate];
     
     [[BattleController currentInstance] addChild:self];
 }
 
--(void)update:(ccTime)delta
-{
-    range.rangeSprite.position = ccpAdd(range.rangeSprite.position, ccpMult(vector, speed));
-
-    if(ccpDistance(range.rangeSprite.position, startPoint) > 200)
-    {
-        [self unschedule:@selector(update:)];
-        [self removeFromParentAndCleanup:YES];
-        return;
+-(void)update:(ccTime)delta {
+    t -= delta;
+    
+    if(t < 0) {
+        range.rangeSprite.position = endPosition;
+    } else {
+        range.rangeSprite.position = ccpAdd(range.rangeSprite.position, ccpMult(vector, speed));
     }
     
     NSArray *effectTargets = [range getEffectTargets];
     
     if(effectTargets.count > 0) {
-        if ([delegate respondsToSelector:@selector(delayExecute:effectPosition:)]) {
-            [delegate delayExecute:effectTargets effectPosition:range.effectPosition];
+        if ([delegate respondsToSelector:@selector(effectTarget:atPosition:)]) {
+            for (Character *target in effectTargets) {
+                [delegate effectTarget:target atPosition:range.effectPosition];
+            }
+            [self unschedule:@selector(update:)];
+            [self removeFromParentAndCleanup:YES];
         }
+    };
+    
+    if(t < 0) {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
-    };
+        return;
+    }
 }
 
 @end

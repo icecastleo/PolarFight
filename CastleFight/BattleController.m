@@ -16,9 +16,8 @@
 #import "HelloWorldLayer.h"
 
 @interface BattleController () {
-    CharacterQueue *characterQueue;
+    
 }
-
 @end
 
 @implementation BattleController
@@ -34,26 +33,20 @@ __weak static BattleController* currentInstance;
     if(self = [super init]) {
         currentInstance = self;
         
-        // We need a tiled map file to show        
-//        mapLayer = [[TiledMapLayer alloc] initWithFile:@"TestMap.tmx"];
-        
         mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
         [self addChild:mapLayer];
+        
+        // set character on may
+        [self setCharacterArrayFromSelectLayer];
         
         // init Dpad
         dPadLayer = [DPadLayer node];
         [self addChild:dPadLayer];
         
-        characterQueue = [[CharacterQueue alloc] init];
-        
-        [self setCharacterArrayFromSelectLayer]; //should be above statusLayer.
-        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self andQueue:characterQueue];
-        //statusLayer.queue = characterQueue; // For showing Queue Bar.
+        statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
+
         [self addChild:statusLayer];
         
-//        canMove = NO;
-        
-        [characterQueue roundStart];
         [self scheduleUpdate];
         
         // TODO: Add character also need an array.
@@ -105,7 +98,6 @@ __weak static BattleController* currentInstance;
 -(void)addCharacter:(Character *)character {
 //    CCLOG(@"Add player %i's %@", character.player, character.name);
     [mapLayer addCharacter:character];
-//    [characterQueue addCharacter:character];
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -113,18 +105,6 @@ __weak static BattleController* currentInstance;
 
 //    [mapLayer removeCharacter:character];
     [removeCharacters addObject:character];
-//    [characterQueue removeCharacter:character withAnimated:YES];
-    
-//    // FIXME: Need a manager to control scene
-//    if (self.characters.count == 0) {
-//        [self unscheduleUpdate];
-//        [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
-//        return;
-//    }
-    
-//    if(currentCharacter == character) {
-//        [self roundEnd];
-//    }
 }
 
 -(void)moveCharacter:(Character *)character byPosition:(CGPoint)position isMove:(BOOL)move{
@@ -190,119 +170,9 @@ __weak static BattleController* currentInstance;
         [self.characters removeObjectsInArray:removeCharacters];
         [removeCharacters removeAllObjects];
     }
-        
-//    if(!canMove) {
-//        if (roundStart == NO) {
-//            [self roundStart];
-//        }
-//        return;
-//    }
-//    
-//    if(!isMove && dPadLayer.isButtonPressed) {
-//        [self characterMove];
-//    }
-//    
-//    if(isMove) {
-//        [mapLayer.cameraControl moveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y];
-//        
-//        countdown -= delta;
-//        
-//        if (countdown < 0) {
-//            countdown = 0;
-//        }
-//        
-//        [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
-//        
-//        if(countdown == 0) {
-//            if(currentCharacter.state == kCharacterStateUseSkill) {
-//                //FIXME: Might stop more than one time
-//                [currentCharacter stopSkill];
-//                return;
-//            }
-//            
-//            [self roundEnd];
-//            return;
-//        }
-//        
-//        if(dPadLayer.isButtonPressed) {
-//            if (dPadLayer.velocity.x != 0 || dPadLayer.velocity.y != 0) {
-//                [currentCharacter setDirection:dPadLayer.velocity];
-//            }
-//            
-//            // Skill will handle for multiple button pressed
-//            [currentCharacter useSkill];
-//            return;
-//        }
-//        
-//        if(currentCharacter.state == kCharacterStateUseSkill) {
-//            return;
-//        }
-//        
-//        // FIXME: change dpad layer
-//        CGPoint velocity = dPadLayer.velocity;
-//        velocity.y = 0;
-//        
-//        // Move character
-//        [currentCharacter moveBy:ccpMult(velocity, [currentCharacter getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta)];
-//    }
-}
-
--(void)roundStart {
-    roundStart = YES;
-    isMove = NO;
-    _state = kGameStateRoundStart;
     
-    currentCharacter = [self getCurrentCharacterFromQueue];
-    // TODO:If the player is com, maybe need to change state here!
-    // Use state pattern for update??
-    
-    // Select character
-    [statusLayer startSelectCharacter:currentCharacter];
-    
-    // Set count down for character
-    countdown = [currentCharacter getAttribute:kCharacterAttributeTime].value;
-    
-    // Show count down
-    [statusLayer.countdownLabel setString:[NSString stringWithFormat:@"%.2f",countdown]];
-    statusLayer.startLabel.visible = YES;
-    
-    [currentCharacter handleRoundStartEvent];
-    
-    [mapLayer.cameraControl smoothMoveCameraToX:currentCharacter.position.x Y:currentCharacter.position.y delegate:self selector:@selector(canMove)];
-}
-
--(void)characterMove {
-    isMove = YES;
-    _state = kGameStateCharacterMove;
-    statusLayer.startLabel.visible = NO;
-    [statusLayer stopSelect];
-}
-
--(void)roundEnd {
-    canMove = NO;
-    roundStart = NO;
-    _state = kGameStateRoundStart;
-    
-    if (currentCharacter.state != kCharacterStateDead) {
-        [currentCharacter handleRoundEndEvent];
-    }
-    
-    if ([self isGameOver]) {
-        [self unscheduleUpdate];
-        [self performSelector:@selector(replaceSceneToHelloWorldLayer) withObject:nil afterDelay:3.0];
-    }
-}
-
--(void)canMove {
-    canMove = YES;
-}
-
--(Character *)getCurrentCharacterFromQueue {
-    if ([self.characters containsObject:currentCharacter]) {
-        [characterQueue addCharacter:currentCharacter];
-    }
-    Character *character = [characterQueue pop];
-    return character;
+    // TODO: Add character
+    // TODO: Check for win or lose
 }
 
 @end

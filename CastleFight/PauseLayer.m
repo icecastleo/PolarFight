@@ -21,10 +21,46 @@ typedef enum {
 @implementation PauseLayer
 
 -(id)init {
-    if ((self = [super init])) {
+    if ((self = [super initWithColor:ccc4(50, 50, 50, 150)])) {
         [self showPauseMenu];
+        
+        self.isTouchEnabled = YES;
     }
     return self;
+}
+
+-(void)showPauseMenu {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    CCLabelTTF *restartLabel;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        restartLabel = [CCLabelBMFont labelWithString:@"Restart" fntFile:@"WhiteFont.fnt"];
+    } else {
+        restartLabel = [CCLabelTTF labelWithString:@"Restart" fontName:@"Marker Felt" fontSize:40];
+        restartLabel.color = ccBLACK;
+    }
+    
+    CCMenuItemLabel *restartItem = [CCMenuItemLabel itemWithLabel:restartLabel target:self selector:@selector(restartTapped:)];
+    restartItem.scale = 1.0;
+    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelsCount);
+    
+    CCLabelTTF *resumeLabel;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        resumeLabel = [CCLabelBMFont labelWithString:@"Resume" fntFile:@"WhiteFont.fnt"];
+    } else {
+        resumeLabel = [CCLabelTTF labelWithString:@"Resume" fontName:@"Marker Felt" fontSize:40];
+        resumeLabel.color = ccBLACK;
+    }
+    
+    CCMenuItemLabel *resumetItem = [CCMenuItemLabel itemWithLabel:resumeLabel target:self selector:@selector(resumeTapped:)];
+    resumetItem.scale = 1.0;
+    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelsCount);
+    
+    menu = [CCMenu menuWithItems:restartItem, resumetItem, nil];
+    menu.position = CGPointZero;
+    [self addChild:menu z:10];
+    
+    [self gamePause];
 }
 
 -(void)gamePause {
@@ -43,37 +79,12 @@ typedef enum {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:scene]];
 }
 
--(void)showPauseMenu {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCLabelTTF *restartLabel;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        restartLabel = [CCLabelBMFont labelWithString:@"Restart" fntFile:@"WhiteFont.fnt"];
-    } else {
-        restartLabel = [CCLabelTTF labelWithString:@"Restart" fontName:@"Marker Felt" fontSize:60];
-        restartLabel.color = ccBLACK;
-    }
-    
-    CCMenuItemLabel *restartItem = [CCMenuItemLabel itemWithLabel:restartLabel target:self selector:@selector(restartTapped:)];
-    restartItem.scale = 1.0;
-    restartItem.position = ccp(winSize.width/2, winSize.height*restartLabelY/labelsCount);
-    
-    CCLabelTTF *resumeLabel;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        resumeLabel = [CCLabelBMFont labelWithString:@"Resume" fntFile:@"WhiteFont.fnt"];
-    } else {
-        resumeLabel = [CCLabelTTF labelWithString:@"Resume" fontName:@"Marker Felt" fontSize:60];
-        resumeLabel.color = ccBLACK;
-    }
-    
-    CCMenuItemLabel *resumetItem = [CCMenuItemLabel itemWithLabel:resumeLabel target:self selector:@selector(resumeTapped:)];
-    resumetItem.scale = 1.0;
-    resumetItem.position = ccp(winSize.width/2, winSize.height*resumeLabelY/labelsCount);
-    
-    menu = [CCMenu menuWithItems:restartItem, resumetItem, nil];
-    menu.position = CGPointZero;
-    [self addChild:menu z:10];
-    
-    [self gamePause];
+-(void)registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return YES;
 }
 
 @end

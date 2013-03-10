@@ -23,7 +23,7 @@
 
 @property (readonly) CGPoint velocity;
 
--(CGPoint) velocity;
--(Boolean) isButtonPressed;
+-(CGPoint)velocity;
+-(Boolean)isButtonPressed;
 
 @end

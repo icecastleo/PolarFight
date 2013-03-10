@@ -169,10 +169,7 @@
 }
 
 -(void)dealloc {
-    // FIXME: Cleaned it when it is dead.
-    [sprite removeFromParentAndCleanup:YES];
-    
-//    CCLOG(@"Player %d's %@ is dealloc",player, self.name);
+    CCLOG(@"Player %d's %@ is dealloc",player, self.name);
 }
 
 -(void)makePoint {
@@ -314,10 +311,6 @@
     [skill execute];
 }
 
--(void)stopSkill {
-    [skill stop];
-}
-
 // Need to be called when attack animation finished
 -(void)attackAnimateCallback {
     if (skill.hasNext) {
@@ -444,7 +437,7 @@
 }
 
 -(void)deadAnimateCallback {
-    CCLOG(@"Player %i's %@ fade out", player, self.name);
+    [sprite removeFromParentAndCleanup:YES];
 }
 
 -(void)handleRoundStartEvent {

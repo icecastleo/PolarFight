@@ -14,7 +14,6 @@
 @interface Range : NSObject {
     NSString *name;
     CGMutablePathRef attackRange;
-    __weak Character* character;
     
     int rangeHeight;
     int rangeWidth;
@@ -25,7 +24,7 @@
 @property NSArray *filters;
 
 @property (readonly, weak) Character *character;
-@property (readonly, strong) CCSprite *rangeSprite;
+@property (readonly) CCSprite *rangeSprite;
 @property (readonly) CGPoint effectPosition;
 
 +(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict;
