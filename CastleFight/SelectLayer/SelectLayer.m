@@ -40,6 +40,10 @@ static const int tableviewPositionZ = 100;
 -(id) init {
     if( (self=[super init]) ) {
         
+        CCSpriteBatchNode *spritesBgNode;
+        spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+        
         backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)]; //white color
         [self addChild:backgroundLayer];
         
@@ -162,10 +166,13 @@ static const int tableviewPositionZ = 100;
     return @"Money: 100元";
 }
 -(NSArray *)loadAllCharacterFromFile {
-    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol"];
+    
+    GDataXMLDocument *doc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
+    
+    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"ol"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         [characters addObject:character];
     }
     return characters;

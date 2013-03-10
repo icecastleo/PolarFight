@@ -14,6 +14,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
+#import "BattleSetObject.h"
 
 @interface BattleController () {
     
@@ -61,33 +62,42 @@ __weak static BattleController* currentInstance;
     return mapLayer.characters;
 }
 
+-(void)setBattleSetObject {
+    _battleSetObject = [[BattleSetObject alloc] initWithBattleName:@"battle_01_01"];
+    CCSpriteBatchNode *spritesBgNode;
+    spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+}
+
 - (void)setCharacterArrayFromSelectLayer {
     
     NSArray *characterIdArray;
-    characterIdArray = [PartyParser getAllNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
+//    characterIdArray = [PartyParser getAllNodeFromXmlFileName:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
+    
+    characterIdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol"];
     NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
     
     for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 1;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol"];
     
     for (NSString *characterId in player2IdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"TestPlayer2.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
     myCastle.player = 1;
     [myCastle.sprite addBloodSprite];
     
-    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:@"AllCharacter.xml" tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
     enemyCastle.player = 2;
     [enemyCastle.sprite addBloodSprite];
     
