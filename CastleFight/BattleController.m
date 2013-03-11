@@ -94,11 +94,11 @@ __weak static BattleController* currentInstance;
         [self addCharacter:character];
     }
     
-    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
     myCastle.player = 1;
     [myCastle.sprite addBloodSprite];
     
-    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
     enemyCastle.player = 2;
     [enemyCastle.sprite addBloodSprite];
     

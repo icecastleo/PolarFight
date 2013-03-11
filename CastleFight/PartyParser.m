@@ -10,6 +10,7 @@
 #import "GDataXMLNode.h"
 #import "Character.h"
 #import "XmlParser.h"
+#import "AKHelpers.h"
 
 @interface PartyParser () {
     GDataXMLDocument *allCharacterDoc;
@@ -18,6 +19,8 @@
 @end
 
 @implementation PartyParser
+
+static NSMutableDictionary *animationDictionary = nil;
 
 //TODO: does not finish saveParty yet
 + (void)saveParty:(NSArray *)party fileName:(NSString *)fileName {
@@ -145,6 +148,41 @@
     }
     
     return targetFileNameArray;
+}
+
++(void)loadAnimation {
+    // Animation_Swordsman_walking_Down.plist
+    // ex: Animation_xxx.plist
+    
+    animationDictionary = [NSMutableDictionary dictionary];
+    NSArray *allAnimations = [PartyParser getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
+    
+    for (NSString *path in allAnimations) {
+        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+        NSString *fileName = [fileArray lastObject];
+        
+        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
+        [animationDictionary setValue:clip forKey:fileName];
+    }
+}
+
++(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
+    
+    if (!animationDictionary) {
+        [self loadAnimation];
+    }
+    
+    NSString *prefix = [NSString stringWithFormat:@"Animation_%@",animationName];
+    
+    NSMutableDictionary *animationDic = [NSMutableDictionary dictionary];
+    
+    for (NSString *key in animationDictionary) {
+        if ([key hasPrefix:prefix]) {
+            [animationDic setObject:[animationDictionary objectForKey:key] forKey:key];
+        }
+    }
+    
+    return animationDic;
 }
 
 @end

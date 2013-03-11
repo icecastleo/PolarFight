@@ -27,4 +27,6 @@
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type;
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName withPrefix:(NSString *)prefix fileType:(NSString *)type;
 
++ (NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
+
 @end

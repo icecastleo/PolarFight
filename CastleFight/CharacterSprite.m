@@ -13,8 +13,6 @@
 #import "AKHelperObject.h"
 #import "SimpleAudioEngine.h"
 #import "PartyParser.h"
-#import "BattleController.h"
-#import "BattleSetObject.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -143,10 +141,7 @@
 //            NSDictionary *clip = [akHelper animationClipFromPlist:path];
 //            [animationDictionary setValue:clip forKey:fileName];
 //        }
-        BattleController *battleController = [BattleController currentInstance];
-        if (battleController) {
-            animationDictionary = [battleController.battleSetObject getAnimationDictionaryByName:name];
-        }
+        animationDictionary = [PartyParser getAnimationDictionaryByName:name];
         return;
     }
     
