@@ -23,9 +23,6 @@
 @interface Character : NSObject <XMLParsingDelegate> {
     NSMutableArray *pointArray;
 //    TestSkill *skill;
-   
-    
-    BaseAI *ai;
     
     NSMutableDictionary *attributeDictionary;
     NSMutableDictionary *statePremissionDictionary;
@@ -33,7 +30,8 @@
     NSMutableArray *auraArray;
 }
 
-@property (readwrite) int player;
+@property int player;
+@property BaseAI *ai;
 @property ActiveSkill *skill;
 @property (readonly) CharacterType roleType;
 //@property (readonly) AttackType attackType;

@@ -15,6 +15,7 @@
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
 #import "BattleSetObject.h"
+#import "SimpleAI.h"
 
 @interface BattleController () {
     
@@ -65,9 +66,9 @@ __weak static BattleController* currentInstance;
 
 -(void)setBattleSetObject {
     _battleSetObject = [[BattleSetObject alloc] initWithBattleName:@"battle_01_01"];
-    CCSpriteBatchNode *spritesBgNode;
-    spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
+    
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+//    CCSpriteBatchNode *spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
 }
 
 - (void)setCharacterArrayFromSelectLayer {
@@ -81,6 +82,7 @@ __weak static BattleController* currentInstance;
     for (NSString *characterId in characterIdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 1;
+        character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
@@ -90,17 +92,16 @@ __weak static BattleController* currentInstance;
     for (NSString *characterId in player2IdArray) {
         Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
         character.player = 2;
+        character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    Character *myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
     myCastle.player = 1;
-    [myCastle.sprite addBloodSprite];
-    
+
     Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
     enemyCastle.player = 2;
-    [enemyCastle.sprite addBloodSprite];
     
     [mapLayer addCastle:myCastle];
     [mapLayer addCastle:enemyCastle];
@@ -142,10 +143,10 @@ __weak static BattleController* currentInstance;
     
     if (player1Number == 0 && player2Number != 0) {
         isOver = YES;
-        [statusLayer winTheGame:NO];
+//        [statusLayer winTheGame:NO];
     }else if (player2Number == 0 && player1Number != 0) {
         isOver = YES;
-        [statusLayer winTheGame:YES];
+//        [statusLayer winTheGame:YES];
     }
     // FIXME: Tile?
     
@@ -164,12 +165,12 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
-    if (_state == kGameStateCharacterMove) {
-        return;
-    }
-    
     [mapLayer.cameraControl smoothMoveCameraToX:x Y:y delegate:self selector:@selector(canMove)];
     canMove = NO;
+}
+
+-(void)canMove {
+    canMove = YES;
 }
 
 -(void)update:(ccTime)delta {

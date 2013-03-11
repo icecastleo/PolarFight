@@ -16,9 +16,7 @@
 //    BattleController *controller;
 }
 
-@property (readonly) CCLabelTTF *startLabel;
-
 -(id)initWithBattleController:(BattleController *)controller;
--(void)winTheGame:(BOOL)win;
+-(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 
 @end

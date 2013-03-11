@@ -41,7 +41,7 @@
     RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
     
     // TODO: 可指定攻擊地點
-    CGPoint target = (character.player ==1 )?ccp(200,0):ccp(-200,0);
+    CGPoint target = (character.player == 1)?ccp(200,0):ccp(-200,0);
     [shooter shoot:ccpAdd(character.position, target) time:2];
 }
 
