@@ -47,6 +47,7 @@
         if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
             character = aCharacter;
             [self setAnimationWithName:character.name];
+            [self addShadow];
         }
         return self;
     }
@@ -55,7 +56,7 @@
 
         if ((self = [super initWithSpriteFrameName:@"building_user_home_01.png"])) {
             character = aCharacter;
-            [self setAnimationWithName:character.name];
+            [self addShadow];
         }
 
         return self;
@@ -67,18 +68,34 @@
     {
         character = aCharacter;
         [self setAnimationWithName:character.picFilename];
+        [self addShadow];
     }
     return self;
 }
 
+-(void)addShadow {
+    CGRect sRect = CGRectMake(0, 0, self.boundingBox.size.width, self.boundingBox.size.height / kShadowHeightDivisor);
+//    CGRect sRect = CGRectMake(0, 0, 360, 60);
+    
+    CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, sRect.size.width, sRect.size.height, 8, sRect.size.width * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 0.6);
+    
+    CGContextFillEllipseInRect(context, sRect);
+    
+    CGImageRef imgRef = CGBitmapContextCreateImage(context);
+    
+    CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
+    shadow.position = ccp(sRect.size.width / 2, sRect.size.height / 2);
+    [self addChild:shadow z:-1];
+}
 
 -(void)addBloodSprite {
     bloodSprite = [CCSprite spriteWithFile:
                    [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
     bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
 
-    // blood sprite width -> character.radius * 2
-    bloodScaleMultiplier = character.radius * 2 / bloodSprite.boundingBox.size.width;
+    bloodScaleMultiplier = character.boundingBox.size.width / bloodSprite.boundingBox.size.width;
     
     [self updateBloodSprite];
     [self addChild:bloodSprite];
@@ -102,7 +119,7 @@
     float scale = (float) hp.currentValue / hp.value;
     
     bloodSprite.scaleX = scale * bloodScaleMultiplier;
-    bloodSprite.position = ccp(self.boundingBox.size.width / 2 - character.radius * (1 - scale), bloodSprite.position.y);
+    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
 }
 
 -(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {

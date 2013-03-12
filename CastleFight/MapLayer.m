@@ -12,8 +12,8 @@
 
 static float scale;
 const static int castleDistance = 100;
-const static int pathSizeHeight = 50;
-const static int pathHeight = 60;
+const static int pathSizeHeight = 25;
+const static int pathHeight = 70;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -73,12 +73,13 @@ const static int pathHeight = 60;
         NSAssert(_playerCastle == nil, @"Add second castle!!");
         
         _playerCastle = castle;
-        _playerCastle.position = ccp(castleDistance / 2, pathHeight);
+        _playerCastle.position = ccp(castleDistance + castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
+        
     } else {
         NSAssert(_enemyCastle == nil, @"Add second castle!!");
         
         _enemyCastle = castle;
-        _enemyCastle.position = ccp(self.boundaryX - castleDistance / 2, pathHeight);
+        _enemyCastle.position = ccp(self.boundaryX - castleDistance - castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
     }
     
     [self addChild:castle.sprite];
