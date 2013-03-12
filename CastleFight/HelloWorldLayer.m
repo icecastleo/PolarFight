@@ -14,8 +14,13 @@
 #import "AppDelegate.h"
 #import "SelectLayer.h"
 #import "ObjectiveCAdaptor.h"
+#import "BattleSetObject.h"
 
 #pragma mark - HelloWorldLayer
+
+@interface HelloWorldLayer ()
+@property (nonatomic,readonly)BattleSetObject *sceneObject;
+@end
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
@@ -109,6 +114,7 @@
         // Test for c++ code
 //        ObjectiveCAdaptor *test = [[ObjectiveCAdaptor alloc] init];
 //        [test objectiveFunc];
+        _sceneObject = [[BattleSetObject alloc] initWithBattleName:@"menu"];
 	}
 	return self;
 }

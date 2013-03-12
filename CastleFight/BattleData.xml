@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<scenes>
+    <menu id="001" name="menu" bgm="bgm_02.caf">
+    </menu>
+    <menu id="002" name="menu_select" bgm="bgm_04.caf">
+    </menu>
+    <battle id="003" name="battle_01_01" map="map_01.png" bgm="bgm_ffcd_b.caf">
+        <enemies>
+            <character ol="000" id="001" level="1"></character>
+            <character ol="001" id="001" level="1"></character>
+            <character ol="002" id="001" level="1"></character>
+            <character ol="003" id="001" level="1"></character>
+            <character ol="004" id="001" level="1"></character>
+            <character ol="005" id="001" level="1"></character>
+            <character ol="006" id="001" level="1"></character>
+            <character ol="007" id="001" level="1"></character>
+        </enemies>
+        <bosses>
+            <character ol="000" id="001" level="10"></character>
+            <character ol="001" id="001" level="15"></character>
+        </bosses>
+        <enemyCastle>
+            <character ol="000" id="009" level="1"></character>
+        </enemyCastle>
+    </battle>
+</scenes>

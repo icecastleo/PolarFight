@@ -105,24 +105,19 @@ static NSMutableDictionary *animationDictionary = nil;
     return nil;
 }
 
-+ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName {
-    
++ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName {
     if (doc == nil) { return nil; }
     
     NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
     NSArray *elements = [doc nodesForXPath:xPath error:nil];
     
-    NSMutableArray *characterIdArray = [[NSMutableArray alloc] init];
+    NSMutableArray *characterArray = [[NSMutableArray alloc] init];
     
     for (GDataXMLElement *element in elements) {
-        for (GDataXMLNode *attribute in element.attributes) {
-            if ([attribute.name isEqualToString:tagAttributeName]) {
-                [characterIdArray addObject:attribute.stringValue];
-            }
-        }
+        [characterArray addObject:element];
     }
     
-    return characterIdArray; //(NSString *)CharacterIds are in the array.
+    return characterArray; //(NSString *)CharacterIds are in the array.
 }
 
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
@@ -151,9 +146,6 @@ static NSMutableDictionary *animationDictionary = nil;
 }
 
 +(void)loadAnimation {
-    // Animation_Swordsman_walking_Down.plist
-    // ex: Animation_xxx.plist
-    
     animationDictionary = [NSMutableDictionary dictionary];
     NSArray *allAnimations = [PartyParser getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
     
@@ -167,22 +159,13 @@ static NSMutableDictionary *animationDictionary = nil;
 }
 
 +(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
+    // ex: animationName = Animation_Swordsman_walking_Down.plist
     
     if (!animationDictionary) {
         [self loadAnimation];
     }
     
-    NSString *prefix = [NSString stringWithFormat:@"Animation_%@",animationName];
-    
-    NSMutableDictionary *animationDic = [NSMutableDictionary dictionary];
-    
-    for (NSString *key in animationDictionary) {
-        if ([key hasPrefix:prefix]) {
-            [animationDic setObject:[animationDictionary objectForKey:key] forKey:key];
-        }
-    }
-    
-    return animationDic;
+    return [animationDictionary objectForKey:animationName];
 }
 
 @end
