@@ -39,7 +39,7 @@
 
 -(void)update:(ccTime)delta
 {
-    if(ccpDistance(range.rangeSprite.position, targetPoint) < 15)
+    if(ccpDistance(range.rangeSprite.position, targetPoint)==0)
     {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];

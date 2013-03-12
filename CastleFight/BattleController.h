@@ -16,36 +16,19 @@
 
 @class BattleStatusLayer, BattleSetObject;
 
-@protocol GameState <NSObject>
--(void)update:(ccTime)delta;
-@end
-
 @interface BattleController : CCScene {
+    Character *myCastle;
     
     BattleStatusLayer *statusLayer;
     DPadLayer *dPadLayer;
     MapLayer *mapLayer;
 //    TiledMapLayer *mapLayer;
     
-//    id<GameState> state;
-    
-    Character *currentCharacter;
-    
-    bool roundStart;
-    bool canMove;
-    bool isMove;
-    float countdown;
-    
-    int currentIndex;
+    BOOL canMove;
     
     NSMutableArray *removeCharacters;
 }
 
-//@property (readonly) DPadLayer *dPadLayer;
-//@property (readonly) BattleStatusLayer *statusLayer;
-//@property MapLayer *mapLayer;
-
-@property (readonly) GameState state;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) BattleSetObject *battleSetObject;
 

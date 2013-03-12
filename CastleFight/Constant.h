@@ -30,6 +30,8 @@
 // For character move
 #define kMoveMultiplier 5
 
+#define kShadowHeightDivisor 8
+
 typedef enum {
     kGameStateRoundStart,
     kGameStateCharacterMove,

@@ -268,9 +268,9 @@ static float scale;
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    if ([BattleController currentInstance].state == kGameStateCharacterMove) {
-        return NO;
-    }
+//    if ([BattleController currentInstance].state == kGameStateCharacterMove) {
+//        return NO;
+//    }
     
     [characterInfoView clean];
     

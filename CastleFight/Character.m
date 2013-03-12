@@ -116,10 +116,9 @@
         self.direction = ccp(0, -1);
         
         // FIXME: merge with barrier?
-        // FIXME: init with a ratio of boundingbox by XML?
-        _radius = self.boundingBox.size.width / 3;
+        // FIXME: Change to ellipse
+        _radius = self.boundingBox.size.height / kShadowHeightDivisor / 2;
         
-        ai = [[SimpleAI alloc] initWithCharacter:self];
     }
     return self;
 }
@@ -234,7 +233,7 @@
 
 -(void)update:(ccTime)delta {
     if (state == kCharacterStateIdle || state == kCharacterStateMove) {
-        [ai AIUpdate];
+        [_ai AIUpdate];
     }
     
     if (state == kCharacterStateMove) {
@@ -249,10 +248,6 @@
     
     if (direction.x == 0 && direction.y == 0) {
         if (state == kCharacterStateIdle) {
-            return;
-        }
-        
-        if (ai && [sprite numberOfRunningActions] != 0) {
             return;
         }
         
@@ -475,7 +470,7 @@
 -(void)setPosition:(CGPoint)position {
     @synchronized(self) {
         _position = position;
-        sprite.position = ccp(position.x, position.y - self.radius + self.boundingBox.size.height / 2);
+        sprite.position = ccp(position.x, position.y - self.radius + sprite.boundingBox.size.height / 2);
     }
 }
 
