@@ -98,10 +98,12 @@ __weak static BattleController* currentInstance;
         [self addCharacter:character];
     }
     
-    _playerCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    GDataXMLDocument *AllCharacterDoc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
+    
+    _playerCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
     _playerCastle.player = 1;
 
-    _enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
+    _enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
     _enemyCastle.player = 2;
     
     [mapLayer addCastle:_playerCastle];

@@ -47,9 +47,10 @@
     
     NSString *fileName = [music lastObject];
     
+    CCLOG(@"%@",fileName);
+    
     // If you have All Exceptions BreakPoint, you can not play the background music.
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:fileName];
-    
 }
 
 -(void)preloadSoundEffect:(NSString *)name {
