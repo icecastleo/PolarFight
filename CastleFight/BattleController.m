@@ -36,10 +36,10 @@ __weak static BattleController* currentInstance;
     if(self = [super init]) {
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
-        [self addChild:mapLayer];
-        
         [self setBattleSetObject];
+        mapLayer = [[MapLayer alloc] initWithFile:self.battleSetObject.mapName];
+//        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
+        [self addChild:mapLayer];
         
         // set character on may
         [self setCharacterArrayFromSelectLayer];
@@ -74,24 +74,24 @@ __weak static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     
-    NSArray *characterIdArray;
-//    characterIdArray = [PartyParser getAllNodeFromXmlFileName:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *characterArray;
     
-    characterIdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol"];
-    NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
+    characterArray = [PartyParser getAllNodeFromXmlFile:[PartyParser loadGDataXMLDocumentFromFileName:@"SelectedCharacters.xml"] tagName:@"character"];
     
-    for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+    NSAssert(characterArray != nil, @"Ooopse! you forgot to choose some characters.");
+    
+    for (GDataXMLElement *element in characterArray) {
+        Character *character = [[Character alloc] initWithXMLElement:element];
         character.player = 1;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];
         [self addCharacter:character];
     }
     
-    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *player2Array = self.battleSetObject.battleEnemyArray;
     
-    for (NSString *characterId in player2IdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+    for (GDataXMLElement *enemyElement in player2Array) {
+        Character *character = [[Character alloc] initWithXMLElement:enemyElement];
         character.player = 2;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];

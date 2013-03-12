@@ -10,6 +10,7 @@
 #import "GDataXMLNode.h"
 #import "Character.h"
 #import "XmlParser.h"
+#import "AKHelpers.h"
 
 @interface PartyParser () {
     GDataXMLDocument *allCharacterDoc;
@@ -18,6 +19,8 @@
 @end
 
 @implementation PartyParser
+
+static NSMutableDictionary *animationDictionary = nil;
 
 //TODO: does not finish saveParty yet
 + (void)saveParty:(NSArray *)party fileName:(NSString *)fileName {
@@ -102,24 +105,19 @@
     return nil;
 }
 
-+ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName {
-    
++ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName {
     if (doc == nil) { return nil; }
     
     NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
     NSArray *elements = [doc nodesForXPath:xPath error:nil];
     
-    NSMutableArray *characterIdArray = [[NSMutableArray alloc] init];
+    NSMutableArray *characterArray = [[NSMutableArray alloc] init];
     
     for (GDataXMLElement *element in elements) {
-        for (GDataXMLNode *attribute in element.attributes) {
-            if ([attribute.name isEqualToString:tagAttributeName]) {
-                [characterIdArray addObject:attribute.stringValue];
-            }
-        }
+        [characterArray addObject:element];
     }
     
-    return characterIdArray; //(NSString *)CharacterIds are in the array.
+    return characterArray; //(NSString *)CharacterIds are in the array.
 }
 
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
@@ -145,6 +143,29 @@
     }
     
     return targetFileNameArray;
+}
+
++(void)loadAnimation {
+    animationDictionary = [NSMutableDictionary dictionary];
+    NSArray *allAnimations = [PartyParser getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
+    
+    for (NSString *path in allAnimations) {
+        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+        NSString *fileName = [fileArray lastObject];
+        
+        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
+        [animationDictionary setValue:clip forKey:fileName];
+    }
+}
+
++(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
+    // ex: animationName = Animation_Swordsman_walking_Down.plist
+    
+    if (!animationDictionary) {
+        [self loadAnimation];
+    }
+    
+    return [animationDictionary objectForKey:animationName];
 }
 
 @end
