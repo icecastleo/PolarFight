@@ -378,6 +378,9 @@
 		9B9848C416EDD96500D3D55D /* standard-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9848C016EDD96500D3D55D /* standard-black-button.png */; };
 		9B9848C516EDD96500D3D55D /* viewstyle_icon_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9848C116EDD96500D3D55D /* viewstyle_icon_page.png */; };
 		9B9848C616EDD96500D3D55D /* viewstyle_icon_table.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9848C216EDD96500D3D55D /* viewstyle_icon_table.png */; };
+		9B9848CC16EF37DA00D3D55D /* BloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848CB16EF37D900D3D55D /* BloodSprite.m */; };
+		9B9848D016EF3B8200D3D55D /* CharacterBloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848CF16EF3B8200D3D55D /* CharacterBloodSprite.m */; };
+		9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848D216EF46E900D3D55D /* CastleBloodSprite.m */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
@@ -1012,6 +1015,12 @@
 		9B9848C016EDD96500D3D55D /* standard-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-black-button.png"; sourceTree = "<group>"; };
 		9B9848C116EDD96500D3D55D /* viewstyle_icon_page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewstyle_icon_page.png; sourceTree = "<group>"; };
 		9B9848C216EDD96500D3D55D /* viewstyle_icon_table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewstyle_icon_table.png; sourceTree = "<group>"; };
+		9B9848CA16EF37D800D3D55D /* BloodSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloodSprite.h; sourceTree = "<group>"; };
+		9B9848CB16EF37D900D3D55D /* BloodSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodSprite.m; sourceTree = "<group>"; };
+		9B9848CE16EF3B8200D3D55D /* CharacterBloodSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterBloodSprite.h; sourceTree = "<group>"; };
+		9B9848CF16EF3B8200D3D55D /* CharacterBloodSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterBloodSprite.m; sourceTree = "<group>"; };
+		9B9848D116EF46E900D3D55D /* CastleBloodSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastleBloodSprite.h; sourceTree = "<group>"; };
+		9B9848D216EF46E900D3D55D /* CastleBloodSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastleBloodSprite.m; sourceTree = "<group>"; };
 		9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPause.png; sourceTree = "<group>"; };
 		9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPauseSel.png; sourceTree = "<group>"; };
 		9B9FC8E0164C085900D11743 /* StatusKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusKit.h; sourceTree = "<group>"; };
@@ -1475,6 +1484,7 @@
 			isa = PBXGroup;
 			children = (
 				9B06F83C1678705600E1B09D /* Attribute */,
+				9B9848CD16EF3AD700D3D55D /* BloodSprite */,
 				9B92D2B416416D66000AF467 /* Character.h */,
 				9B92D2B516416D66000AF467 /* Character.m */,
 				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
@@ -2041,6 +2051,19 @@
 			name = Catwar;
 			sourceTree = "<group>";
 		};
+		9B9848CD16EF3AD700D3D55D /* BloodSprite */ = {
+			isa = PBXGroup;
+			children = (
+				9B9848CA16EF37D800D3D55D /* BloodSprite.h */,
+				9B9848CB16EF37D900D3D55D /* BloodSprite.m */,
+				9B9848CE16EF3B8200D3D55D /* CharacterBloodSprite.h */,
+				9B9848CF16EF3B8200D3D55D /* CharacterBloodSprite.m */,
+				9B9848D116EF46E900D3D55D /* CastleBloodSprite.h */,
+				9B9848D216EF46E900D3D55D /* CastleBloodSprite.m */,
+			);
+			name = BloodSprite;
+			sourceTree = "<group>";
+		};
 		9BA4E40D16E08C0300D5FA07 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -2526,6 +2549,9 @@
 				37DB3D6716E61F1100A8C89C /* BattleSetObject.m in Sources */,
 				9B5CD31916ED148F00C8B007 /* DelegateSkill.m in Sources */,
 				9B5CD31C16ED169100C8B007 /* AttackDelegateSkill.m in Sources */,
+				9B9848CC16EF37DA00D3D55D /* BloodSprite.m in Sources */,
+				9B9848D016EF3B8200D3D55D /* CharacterBloodSprite.m in Sources */,
+				9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

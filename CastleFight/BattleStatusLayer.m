@@ -1,4 +1,4 @@
-//
+
 //  StatusLayer.m
 //  LightBugBattle
 //
@@ -10,16 +10,40 @@
 #import "PauseLayer.h"
 #import "CharacterQueueLayer.h"
 #import "CharacterQueue.h"
+#import "CastleBloodSprite.h"
 
 @implementation BattleStatusLayer
 
 -(id)initWithBattleController:(BattleController *)battleController {
     if(self = [super init]) {
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ingame.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
         
-        CCSprite *s = [CCSprite spriteWithSpriteFrameName:@"gauge02.png"];
-        s.position = ccp(240, 280);
-        [self addChild:s];
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        
+        CCSprite *miniMap = [CCSprite spriteWithSpriteFrameName:@"bg_minimap.png"];
+        miniMap.position = ccp(winSize.width / 2, winSize.height - miniMap.boundingBox.size.height / 2);
+        [self addChild:miniMap];
+        
+        CCSprite *bloodBackground = [CCSprite spriteWithSpriteFrameName:@"bg_gauge.png"];
+        bloodBackground.position = ccp(miniMap.position.x, miniMap.position.y - 20);
+        [self addChild:bloodBackground];
+        
+        CastleBloodSprite *playerBlood = [[CastleBloodSprite alloc] initWithCharacter:battleController.playerCastle];
+        playerBlood.position = ccp(150, bloodBackground.position.y);
+        [self addChild:playerBlood];
+        [battleController.playerCastle.sprite addBloodSprite:playerBlood];
+        
+        CastleBloodSprite *enemyBlood = [[CastleBloodSprite alloc] initWithCharacter:battleController.enemyCastle];
+        enemyBlood.position = ccp(330, bloodBackground.position.y);
+        [self addChild:enemyBlood];
+        [battleController.enemyCastle.sprite addBloodSprite:enemyBlood];
+
+        CCSprite *bloodFrame = [CCSprite spriteWithSpriteFrameName:@"bg_gauge01.png"];
+        bloodFrame.position = bloodBackground.position;
+        [self addChild:bloodFrame];
+
         
         [self displayString:@"Start!!" withColor:ccWHITE];
         
@@ -31,7 +55,8 @@
 -(void)setPauseButton {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                 itemWithNormalImage:@"ButtonPause.png" selectedImage:nil
+                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
+                                 selectedSprite:nil
                                  target:self selector:@selector(pauseButtonTapped:)];
     
     float width = winSize.width - pauseMenuItem.boundingBox.size.width/2;

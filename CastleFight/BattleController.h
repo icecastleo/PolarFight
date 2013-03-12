@@ -16,9 +16,7 @@
 
 @class BattleStatusLayer, BattleSetObject;
 
-@interface BattleController : CCScene {
-    Character *myCastle;
-    
+@interface BattleController : CCScene {    
     BattleStatusLayer *statusLayer;
     DPadLayer *dPadLayer;
     MapLayer *mapLayer;
@@ -29,6 +27,7 @@
     NSMutableArray *removeCharacters;
 }
 
+@property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) BattleSetObject *battleSetObject;
 
