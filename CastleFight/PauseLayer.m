@@ -29,6 +29,11 @@ typedef enum {
     return self;
 }
 
+-(void)onEnter {
+    [super onEnter];
+    [menu setHandlerPriority:kTouchPriotiryPause - 1];
+}
+
 -(void)showPauseMenu {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
@@ -74,6 +79,7 @@ typedef enum {
 
 -(void)restartTapped:(id)sender {
     [[CCDirector sharedDirector] resume];
+    
     // Reload the current scene
     CCScene *scene = [HelloWorldLayer scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:scene]];

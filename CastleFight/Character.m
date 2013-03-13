@@ -365,44 +365,52 @@
 }
 
 -(void)receiveDamage:(Damage *)damage {
-    CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, damage.value);
-    
-    Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
-    
-    NSAssert(hp != nil, @"A character without hp gets damage...");
-    
-    [hp decreaseCurrentValue:damage.value];
-    
-    [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
-    
-    [sprite updateBloodSprite];
-    
-    // Knock out effect
-    if (damage.knockOutPower != 0) {
-        CGPoint velocity = ccpSub(self.position, damage.position);
-        [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
-    }
-
-    // TODO: Face to attack source
-//    if (damage.type == kDamageTypeAttack) {
-//        self.direction = ccpNormalize(ccpSub(damage.position, self.position));
-//    }
-    
-    if (hp.currentValue == 0) {
-        [self dead];
-    } else {
-//        state = kCharacterStateGetDamage;
-        // TODO: Run hurt animation and callback
+    @synchronized(self) {
+        if (state == kCharacterStateDead) {
+            return;
+        }
         
-        for (NSString *key in _passiveSkillDictionary) {
-            PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
+        CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, damage.value);
+        
+        Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
+        
+        NSAssert(hp != nil, @"A character without hp gets damage...");
+        
+        [hp decreaseCurrentValue:damage.value];
+        
+        [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
+        
+        [sprite updateBloodSprite];
+        
+        // Knock out effect
+        if (damage.knockOutPower != 0) {
+            CGPoint velocity = ccpSub(self.position, damage.position);
+            [[BattleController currentInstance] knockOut:self velocity:velocity power:damage.knockOutPower collision:damage.knouckOutCollision];
+        }
+        
+        if (hp.currentValue == 0) {
+            [self dead];
+        } else {
+            //        state = kCharacterStateGetDamage;
             
-            if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
-                [p  character:self didReceiveDamage:damage];
+            // TODO: Damage animate callback?
+            // TODO: Damage animation
+            [sprite runDamageAnimate];
+            
+            for (NSString *key in _passiveSkillDictionary) {
+                PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
+                
+                if ([p respondsToSelector:@selector(character:didReceiveDamage:)]) {
+                    [p  character:self didReceiveDamage:damage];
+                }
             }
         }
     }
 }
+
+//-(void)damageAnimateCallback {
+//    state = kCharacterStateIdle;
+//}
 
 -(void)getHeal:(int)heal {    
     Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];

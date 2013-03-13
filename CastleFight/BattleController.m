@@ -84,7 +84,7 @@ __weak static BattleController* currentInstance;
         Character *character = [[Character alloc] initWithXMLElement:element];
         character.player = 1;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];
+        [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
@@ -94,7 +94,7 @@ __weak static BattleController* currentInstance;
         Character *character = [[Character alloc] initWithXMLElement:enemyElement];
         character.player = 2;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];
+        [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
@@ -158,10 +158,10 @@ __weak static BattleController* currentInstance;
     
     // TODO: Add character
     
-    [self checkGameOver];
+    [self checkBattleEnd];
 }
 
--(void)checkGameOver {
+-(void)checkBattleEnd {
     if (_playerCastle.state == kCharacterStateDead) {
         [statusLayer displayString:@"Lose!!" withColor:ccWHITE];
         [self unscheduleUpdate];

@@ -12,7 +12,7 @@
 #define kGameSettingFps 30
 
 // For touch dispatcher
-#define kTouchPriotiryPause 0
+#define kTouchPriotiryPause -256
 
 // Not link since it is a library
 #define kTouchPriotiryDpad 1

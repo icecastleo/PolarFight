@@ -92,8 +92,8 @@
 	
     // TODO: Control by game setting plist
     SimpleAudioEngine *audioengine = [SimpleAudioEngine sharedEngine];
-    audioengine.effectsVolume = 0.1;
-    audioengine.backgroundMusicVolume = 0.1;
+    audioengine.effectsVolume = 0.05;
+    audioengine.backgroundMusicVolume = 0.05;
     
 	return YES;
 }

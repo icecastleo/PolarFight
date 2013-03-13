@@ -106,7 +106,7 @@
         CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, nil];
         
         [menu alignItemsVerticallyWithPadding:30];
-		[menu setPosition:ccp( size.width/2, size.height/2-20 )];
+		[menu setPosition:ccp(size.width/2, size.height/2 - 20)];
 		
 		// Add the menu to the layer
 		[self addChild:menu];

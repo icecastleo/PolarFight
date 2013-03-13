@@ -12,6 +12,7 @@
 #import "CCMoveCharacterByLength.h"
 #import "AKHelperObject.h"
 #import "PartyParser.h"
+#import "CharacterBloodSprite.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -85,25 +86,13 @@
     [self addChild:shadow z:-1];
 }
 
--(void)addBloodSprite:(BloodSprite *)sprite {
-    bloodSprite = sprite;
+-(void)addBloodSprite {
+    bloodSprite = [[CharacterBloodSprite alloc] initWithCharacter:character];
 }
 
-//-(void)addBloodSprite {
-//    bloodSprite = [CCSprite spriteWithFile:
-//                   [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
-//    bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
-//
-//    bloodScaleMultiplier = character.boundingBox.size.width / bloodSprite.boundingBox.size.width;
-//    
-//    [self updateBloodSprite];
-//    [self addChild:bloodSprite];
-//    
-//    CCSprite *bloodFrame = [CCSprite spriteWithFile:@"blood_frame.png"];
-//    bloodFrame.position = bloodSprite.position;
-//    bloodFrame.scaleX = bloodScaleMultiplier;
-//    [self addChild:bloodFrame];
-//}
+-(void)addOuterBloodSprite:(BloodSprite *)sprite {
+    outerBloodSprite = sprite;
+}
 
 -(void)removeBloodSprite {
     [bloodSprite removeFromParentAndCleanup:YES];
@@ -112,22 +101,8 @@
 
 -(void)updateBloodSprite {
     [bloodSprite update];
+    [outerBloodSprite update];
 }
-
-//-(void)updateBloodSprite {
-//    if (bloodSprite == nil) {
-//        return;
-//    }
-//    
-//    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
-//    
-//    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
-//    
-//    float scale = (float) hp.currentValue / hp.value;
-//    
-//    bloodSprite.scaleX = scale * bloodScaleMultiplier;
-//    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
-//}
 
 -(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
     CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
@@ -229,6 +204,7 @@
 
 -(void)runAttackAnimate {
     [self stopAllActions];
+    bloodSprite.visible = NO;
     
     CharacterDirection direction = character.characterDirection;
     
@@ -270,6 +246,16 @@
         [self runAction:rightAttackAction];
     }
 }
+
+-(void)runDamageAnimate {
+    if (bloodSprite != nil) {
+        [bloodSprite stopAllActions];
+        [bloodSprite runAction:[CCSequence actions:[CCShow action],
+                                [CCDelayTime actionWithDuration:2.0f],
+                                [CCHide action],
+                                nil]];
+    }
+}
  
 -(void)runAnimationForName:(NSString *)animationName {
     [self stopAllActions];
@@ -295,6 +281,8 @@
 
 -(void)runDeadAnimate {
     [self stopAllActions];
+    
+    [bloodSprite removeFromParentAndCleanup:YES];
     
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
     emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);

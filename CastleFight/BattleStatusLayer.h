@@ -16,6 +16,8 @@
 //    BattleController *controller;
 }
 
+@property (readonly) CCLabelBMFont *food;
+
 -(id)initWithBattleController:(BattleController *)controller;
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 

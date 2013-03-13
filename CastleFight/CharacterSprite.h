@@ -15,8 +15,8 @@
 @interface CharacterSprite : CCSprite {
     __weak Character *character;
     
-//    CCSprite *bloodSprite;
     BloodSprite *bloodSprite;
+    __weak BloodSprite *outerBloodSprite;
     
     CCAction *upAction;
     CCAction *downAction;
@@ -31,12 +31,14 @@
 
 -(id)initWithCharacter:(Character *)aCharacter;
 
--(void)addBloodSprite:(BloodSprite *)sprite;
+-(void)addBloodSprite;
+-(void)addOuterBloodSprite:(BloodSprite *)sprite;
 -(void)removeBloodSprite;
 -(void)updateBloodSprite;
 
 -(void)runWalkAnimate;
 -(void)runAttackAnimate;
+-(void)runDamageAnimate;
 -(void)runDeadAnimate;
 
 -(void)runAnimationForName:(NSString *)animationName;
