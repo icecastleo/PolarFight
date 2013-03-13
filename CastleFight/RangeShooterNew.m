@@ -26,9 +26,9 @@
     targetPoint = aTargetPoint;
     time = aTime;
     
-    range.rangeSprite.position = range.character.position;
+    range.rangeSprite.position =ccpAdd(range.character.position,ccp(0,range.character.boundingBox.size.height/2));
 
-    CGFloat endA = aTargetPoint.x >= range.rangeSprite.position.x?359:1;
+    CGFloat endA = aTargetPoint.x >= range.rangeSprite.position.x?300:60;
         
     [self moveWithParabola:range.rangeSprite startP:range.rangeSprite.position endP:aTargetPoint startA:180 endA:endA];
     
@@ -62,13 +62,13 @@
 -(void)moveWithParabola:(CCSprite*)mSprite startP:(CGPoint)aStartPoint endP:(CGPoint)endPoint startA:(float)startAngle endA:(float)endAngle {
     float sx = aStartPoint.x;
     float sy = aStartPoint.y;
-    float ex = endPoint.x + 50;
-    float ey = endPoint.y + 150;
+    float ex = endPoint.x ;
+    float ey = endPoint.y ;
     //设置精灵的起始角度
     mSprite.rotation = startAngle;
     ccBezierConfig bezier; // 创建贝塞尔曲线
     bezier.controlPoint_1 = ccp(sx, sy); // 起始点
-    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5+200); //控制点
+    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5+100); //控制点
     bezier.endPosition = ccp(endPoint.x, endPoint.y); // 结束位置
     CCBezierTo *actionMove = [CCBezierTo actionWithDuration:time bezier:bezier];
     //创建精灵旋转的动作

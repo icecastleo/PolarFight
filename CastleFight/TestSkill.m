@@ -44,7 +44,7 @@
      NSArray *effectTargets = [range getEffectTargets];
     if(effectTargets.count>0){
         Character *target = effectTargets[0];
-    [shooter shoot:target.position time:3];
+    [shooter shoot:target.position time:2];
 }
 }
 
