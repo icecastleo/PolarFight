@@ -17,15 +17,15 @@
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {
         character = aCharacter;
-        _currentState =[[AIStateWalking alloc] init];
+       //_currentState =[[AIStateWalking alloc] init];
            
     }
     return self;
 }
 
--(void)AIUpdate {
-        [NSException raise:NSInternalInconsistencyException
-                   format:@"You must override %@ in a AI subclass", NSStringFromSelector(_cmd)];
+-(void) AIUpdate{
+    [_currentState execute:self];
+    
 }
 - (void)changeState:(AIState *)state {
     
