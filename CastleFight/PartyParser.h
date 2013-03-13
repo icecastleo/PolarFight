@@ -22,9 +22,11 @@
 
 + (GDataXMLElement *)getNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue;
 
-+ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName;
++ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName;
 
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type;
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName withPrefix:(NSString *)prefix fileType:(NSString *)type;
+
++ (NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
 @end

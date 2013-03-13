@@ -23,8 +23,9 @@ const static int kMoveSlowRatio = 30;
         
         center = ccp(winSize.width / 2, winSize.height / 2);
         
-        widthMax = layer.boundaryX - winSize.width;
-        heightMax = layer.boundaryY - winSize.height;
+        // Prevent boundary < winSize
+        widthMax = MAX(0, layer.boundaryX - winSize.width);
+        heightMax = MAX(0, layer.boundaryY - winSize.height);
         
         move = NO;
     }

@@ -14,7 +14,6 @@
 
 }
 
-@property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;

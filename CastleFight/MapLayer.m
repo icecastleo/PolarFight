@@ -35,6 +35,12 @@ const static int pathHeight = 70;
         background.contentSize = map.contentSize;
         [self addChild:background z:-5];
         
+        // FIXME: Temp method for test map.
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        if (background.contentSize.height < winSize.height) {
+            background.contentSize = CGSizeMake(background.contentSize.width, winSize.height);
+        }
+        
         _boundaryX = map.boundingBox.size.width;
         _boundaryY = map.boundingBox.size.height;
         
@@ -70,16 +76,9 @@ const static int pathHeight = 70;
 
 -(void)addCastle:(Character *)castle {
     if (castle.player == 1) {
-        NSAssert(_playerCastle == nil, @"Add second castle!!");
-        
-        _playerCastle = castle;
-        _playerCastle.position = ccp(castleDistance + castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
-        
+        castle.position = ccp(castleDistance + castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
     } else {
-        NSAssert(_enemyCastle == nil, @"Add second castle!!");
-        
-        _enemyCastle = castle;
-        _enemyCastle.position = ccp(self.boundaryX - castleDistance - castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
+        castle.position = ccp(self.boundaryX - castleDistance - castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
     }
     
     [self addChild:castle.sprite];

@@ -11,10 +11,7 @@
 #import "Character.h"
 #import "CCMoveCharacterByLength.h"
 #import "AKHelperObject.h"
-#import "SimpleAudioEngine.h"
 #import "PartyParser.h"
-#import "BattleController.h"
-#import "BattleSetObject.h"
 
 @interface CharacterSprite() {
     float bloodScaleMultiplier;
@@ -23,7 +20,6 @@
     
     NSArray *directionStrings;
     
-    NSDictionary *animationDictionary;
 }
 @end
 
@@ -37,7 +33,6 @@
     akHelper = [[AKHelperObject alloc] init];
     akHelper.objectDelegate = self;
     directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
-    animationDictionary = [NSMutableDictionary dictionary];
     
     if ([aCharacter.name isEqualToString:@"Swordsman"]) {
         // Load the texture atlas sprite frames; this also loads the Texture with the same name
@@ -90,21 +85,25 @@
     [self addChild:shadow z:-1];
 }
 
--(void)addBloodSprite {
-    bloodSprite = [CCSprite spriteWithFile:
-                   [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
-    bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
-
-    bloodScaleMultiplier = character.boundingBox.size.width / bloodSprite.boundingBox.size.width;
-    
-    [self updateBloodSprite];
-    [self addChild:bloodSprite];
-    
-    CCSprite *bloodFrame = [CCSprite spriteWithFile:@"blood_frame.png"];
-    bloodFrame.position = bloodSprite.position;
-    bloodFrame.scaleX = bloodScaleMultiplier;
-    [self addChild:bloodFrame];
+-(void)addBloodSprite:(BloodSprite *)sprite {
+    bloodSprite = sprite;
 }
+
+//-(void)addBloodSprite {
+//    bloodSprite = [CCSprite spriteWithFile:
+//                   [NSString stringWithFormat:@"blood_%@.png",character.player == 1 ? @"green" : @"red"]];
+//    bloodSprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height + bloodSprite.boundingBox.size.height * 1.5);
+//
+//    bloodScaleMultiplier = character.boundingBox.size.width / bloodSprite.boundingBox.size.width;
+//    
+//    [self updateBloodSprite];
+//    [self addChild:bloodSprite];
+//    
+//    CCSprite *bloodFrame = [CCSprite spriteWithFile:@"blood_frame.png"];
+//    bloodFrame.position = bloodSprite.position;
+//    bloodFrame.scaleX = bloodScaleMultiplier;
+//    [self addChild:bloodFrame];
+//}
 
 -(void)removeBloodSprite {
     [bloodSprite removeFromParentAndCleanup:YES];
@@ -112,15 +111,23 @@
 }
 
 -(void)updateBloodSprite {
-    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
-    
-    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
-    
-    float scale = (float) hp.currentValue / hp.value;
-    
-    bloodSprite.scaleX = scale * bloodScaleMultiplier;
-    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
+    [bloodSprite update];
 }
+
+//-(void)updateBloodSprite {
+//    if (bloodSprite == nil) {
+//        return;
+//    }
+//    
+//    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
+//    
+//    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
+//    
+//    float scale = (float) hp.currentValue / hp.value;
+//    
+//    bloodSprite.scaleX = scale * bloodScaleMultiplier;
+//    bloodSprite.position = ccp(self.boundingBox.size.width / 2 * scale, bloodSprite.position.y);
+//}
 
 -(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
     CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
@@ -146,24 +153,6 @@
     
     if ([name isEqualToString:@"Swordsman"]) {
         NSAssert(akHelper != nil, @"akHelper should not be nil");
-//        NSArray *Sounds = [PartyParser getAllFilePathsInDirectory:name fileType:@"caf"];
-//        NSArray *Animations = [PartyParser getAllFilePathsInDirectory:name fileType:@"plist"];
-        
-//        for (NSString *fileName in Sounds) {
-//            [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
-//        }
-        
-//        for (NSString *path in Animations) {
-//            NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-//            NSString *fileName = [fileArray lastObject];
-//            
-//            NSDictionary *clip = [akHelper animationClipFromPlist:path];
-//            [animationDictionary setValue:clip forKey:fileName];
-//        }
-        BattleController *battleController = [BattleController currentInstance];
-        if (battleController) {
-            animationDictionary = [battleController.battleSetObject getAnimationDictionaryByName:name];
-        }
         return;
     }
     
@@ -219,7 +208,7 @@
         NSString *directionString = [directionStrings objectAtIndex:direction - 1];
         NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_Walking_%@.plist",character.name,directionString];
         
-        NSDictionary *walkingClip = [animationDictionary objectForKey:animationKey];
+        NSDictionary *walkingClip = [PartyParser getAnimationDictionaryByName:animationKey];
         NSAssert(walkingClip != nil, @"walking animation should exist.");
         
         [akHelper applyAnimationClip:walkingClip toNode:self];
@@ -289,14 +278,14 @@
     NSString *directionString = [directionStrings objectAtIndex:direction-1];
     NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_%@_%@.plist",character.name,animationName,directionString];
     
-    NSDictionary *animationClip = [animationDictionary objectForKey:animationKey];
+    NSDictionary *animationClip = [PartyParser getAnimationDictionaryByName:animationKey];
     
 //    NSAssert(animationClip != nil, @"Animation plist should exist.");
     
     // FIXME: For test only.
     if (animationClip == nil) {
         [self runAction:[CCSequence actions:
-                         [CCDelayTime actionWithDuration:0.5],
+                         [CCDelayTime actionWithDuration:1.0],
                          [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
         return;
     }

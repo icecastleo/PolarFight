@@ -16,6 +16,7 @@
 #import "HelloWorldLayer.h"
 #import "BattleSetObject.h"
 #import "SimpleAI.h"
+#import "CharacterBloodSprite.h"
 
 @interface BattleController () {
     
@@ -35,10 +36,10 @@ __weak static BattleController* currentInstance;
     if(self = [super init]) {
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
-        [self addChild:mapLayer];
-        
         [self setBattleSetObject];
+        mapLayer = [[MapLayer alloc] initWithFile:self.battleSetObject.mapName];
+//        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
+        [self addChild:mapLayer];
         
         // set character on may
         [self setCharacterArrayFromSelectLayer];
@@ -73,38 +74,40 @@ __weak static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     
-    NSArray *characterIdArray;
-//    characterIdArray = [PartyParser getAllNodeFromXmlFileName:@"SelectedCharacters.xml" tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *characterArray;
     
-    characterIdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol"];
-    NSAssert(characterIdArray != nil, @"Ooopse! you forgot to choose some characters.");
+    characterArray = [PartyParser getAllNodeFromXmlFile:[PartyParser loadGDataXMLDocumentFromFileName:@"SelectedCharacters.xml"] tagName:@"character"];
     
-    for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.playerCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+    NSAssert(characterArray != nil, @"Ooopse! you forgot to choose some characters.");
+    
+    for (GDataXMLElement *element in characterArray) {
+        Character *character = [[Character alloc] initWithXMLElement:element];
         character.player = 1;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite];
+        [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];
         [self addCharacter:character];
     }
     
-    NSArray *player2IdArray = [PartyParser getAllNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *player2Array = self.battleSetObject.battleEnemyArray;
     
-    for (NSString *characterId in player2IdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.battleEnemyFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+    for (GDataXMLElement *enemyElement in player2Array) {
+        Character *character = [[Character alloc] initWithXMLElement:enemyElement];
         character.player = 2;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite];
+        [character.sprite addBloodSprite:[[CharacterBloodSprite alloc] initWithCharacter:character]];
         [self addCharacter:character];
     }
     
-    myCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
-    myCastle.player = 1;
-
-    Character *enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:self.battleSetObject.allCharacterFile tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:@"009"]];
-    enemyCastle.player = 2;
+    GDataXMLDocument *AllCharacterDoc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
     
-    [mapLayer addCastle:myCastle];
-    [mapLayer addCastle:enemyCastle];
+    _playerCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
+    _playerCastle.player = 1;
+
+    _enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
+    _enemyCastle.player = 2;
+    
+    [mapLayer addCastle:_playerCastle];
+    [mapLayer addCastle:_enemyCastle];
 }
 
 -(void)addCharacter:(Character *)character {
@@ -125,36 +128,6 @@ __weak static BattleController* currentInstance;
 
 -(void)moveCharacter:(Character *)character toPosition:(CGPoint)position isMove:(BOOL)move{
     [mapLayer moveCharacter:character toPosition:position isMove:move];
-}
-
-// FIXME: You should not called isGameOver because you also show the status
--(BOOL)isGameOver {
-    // FIXME: Add number to local variable
-    int player1Number = 0;
-    int player2Number = 0;
-    for (Character *character in self.characters) {
-        if (character.player == 1) {
-            player1Number ++;
-        } else if (character.player == 2) {
-            player2Number ++;
-        }
-    }
-    BOOL isOver = NO;
-    
-    if (player1Number == 0 && player2Number != 0) {
-        isOver = YES;
-//        [statusLayer winTheGame:NO];
-    }else if (player2Number == 0 && player1Number != 0) {
-        isOver = YES;
-//        [statusLayer winTheGame:YES];
-    }
-    // FIXME: Tile?
-    
-    return isOver;
-}
-
--(void)replaceSceneToHelloWorldLayer {
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
 }
 
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
@@ -184,7 +157,24 @@ __weak static BattleController* currentInstance;
     }
     
     // TODO: Add character
-    // TODO: Check for win or lose
+    
+    [self checkGameOver];
+}
+
+-(void)checkGameOver {
+    if (_playerCastle.state == kCharacterStateDead) {
+        [statusLayer displayString:@"Lose!!" withColor:ccWHITE];
+        [self unscheduleUpdate];
+        [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
+    } else if (_enemyCastle.state == kCharacterStateDead) {
+        [statusLayer displayString:@"Win!!" withColor:ccWHITE];
+        [self unscheduleUpdate];
+        [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
+    }
+}
+
+-(void)endBattle {
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
 }
 
 @end

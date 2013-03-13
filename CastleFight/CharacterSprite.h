@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Attribute.h"
+#import "BloodSprite.h"
 
 @class Character;
 @interface CharacterSprite : CCSprite {
     __weak Character *character;
     
-    CCSprite *bloodSprite;
+//    CCSprite *bloodSprite;
+    BloodSprite *bloodSprite;
     
     CCAction *upAction;
     CCAction *downAction;
@@ -29,7 +31,7 @@
 
 -(id)initWithCharacter:(Character *)aCharacter;
 
--(void)addBloodSprite;
+-(void)addBloodSprite:(BloodSprite *)sprite;
 -(void)removeBloodSprite;
 -(void)updateBloodSprite;
 

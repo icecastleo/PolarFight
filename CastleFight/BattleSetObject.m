@@ -2,7 +2,7 @@
 //  BattleSetObject.m
 //  CastleFight
 //
-//  Created by  DAN on 13/3/5.
+//  Created by  浩翔 on 13/3/5.
 //
 //
 
@@ -10,60 +10,125 @@
 #import "PartyParser.h"
 #import "SimpleAudioEngine.h"
 #import "GDataXMLNode.h"
-#import "XmlParser.h"
-#import "CCSpriteBatchNode.h"
-#import "CCSpriteFrameCache.h"
 #import "AKHelpers.h"
+
+@interface BattleSetObject (){
+    NSString *backgroundMusicName;
+}
+
+@property (nonatomic) NSArray *sceneSounds;
+@property (nonatomic) NSArray *characterSounds;
+
+@end
 
 @implementation BattleSetObject
 
 -(id)initWithBattleName:(NSString *)name {
     
     if (self = [super init]) {
-        _battleName = name;
+        _sceneName = name;
         
-        [self playBackgroundMusic:name];
+        if ([name hasPrefix:@"battle"]) {
+            [self loadBattleInfo:name];
+            [self preloadCharacterSoundEffect];
+        }else {
+            [self loadSceneInfo:name];
+        }
+        
+        [self playBackgroundMusic:backgroundMusicName];
         [self preloadSoundEffect:name];
-        [self loadCharacterFile:name];
-        [self loadAnimation:name];
-
-        _battleAnimations = [self getAnimationDictionaryByName:name];
     }
     return self;
 }
 
 -(void)playBackgroundMusic:(NSString *)name {
-    // ex: bgm_battleName.mp3 (backgroundMusic)
-    NSString *prefix = [NSString stringWithFormat:@"bgm_%@",name];
-    NSArray *music = [PartyParser getAllFilePathsInDirectory:@"Sound_caf" withPrefix:prefix fileType:@"caf"];
+    
+    NSArray *music = [PartyParser getAllFilePathsInDirectory:@"BackgroundMusic_caf" withPrefix:name fileType:@"caf"];
     
     NSString *fileName = [music lastObject];
+    
+    CCLOG(@"%@",fileName);
+    
+    // If you have All Exceptions BreakPoint, you can not play the background music.
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:fileName];
 }
 
 -(void)preloadSoundEffect:(NSString *)name {
-    // ex: Effect_xxx.caf
-    NSString *prefix = @"Effect_";
-    NSArray *sounds = [PartyParser getAllFilePathsInDirectory:@"Sound_caf" withPrefix:prefix fileType:@"caf"];
+    // ex: Effect_sceneName_xxx.caf
+    if ([name hasPrefix:@"battle"]) {
+        name = @"battle";
+    }
+    NSString *prefix = [NSString stringWithFormat:@"Effect_%@",name];
+    _sceneSounds = [PartyParser getAllFilePathsInDirectory:@"Sound_scene_caf" withPrefix:prefix fileType:@"caf"];
     
-    for (NSString *fileName in sounds) {
+    for (NSString *fileName in self.sceneSounds) {
         [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
     }
 }
 
--(void)loadCharacterFile:(NSString *)name {
+-(void)preloadCharacterSoundEffect {
+    _characterSounds = [PartyParser getAllFilePathsInDirectory:@"Sound_character_caf" fileType:@"caf"];
+    for (NSString *fileName in self.characterSounds) {
+        [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
+    }
+}
+
+-(void)loadSceneInfo:(NSString *)name {
+    GDataXMLDocument *battleInfoDoc = [self loadFile:@"BattleData.xml"];
+    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:battleInfoDoc tagName:@"menu" tagAttributeName:@"name" tagAttributeValue:name];
+    
+    //get tag's attributes
+    for (GDataXMLNode *attribute in characterElement.attributes) {
+        if([attribute.name isEqualToString:@"bgm"]) {
+            backgroundMusicName = attribute.stringValue;
+        }
+    }
+}
+
+-(void)loadBattleInfo:(NSString *)name {
+    //TODO: load battle info from battle.file ?
+    // ex: BattleData.xml
+    GDataXMLDocument *battleInfoDoc = [self loadFile:@"BattleData.xml"];
+    GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:battleInfoDoc tagName:@"battle" tagAttributeName:@"name" tagAttributeValue:name];
+    
+    //get tag's attributes
+    for (GDataXMLNode *attribute in characterElement.attributes) {
+        if ([attribute.name isEqualToString:@"map"]) {
+            _mapName = attribute.stringValue;
+        } else if([attribute.name isEqualToString:@"bgm"]) {
+            backgroundMusicName = attribute.stringValue;
+        }
+    }
+    
+    NSMutableArray *enemyArray = [NSMutableArray array];
+    NSMutableArray *enemyBosses = [NSMutableArray array];
+    
+    for (GDataXMLElement *element in characterElement.children) {
+        if ([element.name isEqualToString:@"enemies"]) {
+            for (GDataXMLElement *enemy in element.children) {
+                [enemyArray addObject:enemy];
+            }
+        }
+        if ([element.name isEqualToString:@"bosses"]) {
+            for (GDataXMLElement *boss in element.children) {
+                [enemyBosses addObject:boss];
+            }
+        }
+        if ([element.name isEqualToString:@"enemyCastle"]) {
+            for (GDataXMLElement *castle in element.children) {
+                _enemyCastle = castle;
+                break;
+            }
+        }
+    }
+    
     // 1.CharacterData.xml (All character)
     _characterDataFile = [self loadFile:@"CharacterData.xml"];
     
-    _allCharacterFile = [self loadFile:@"AllCharacter.xml"];
-    
-    // 2.player1 Character file (saveFile)
-    _playerCharacterFile = [self loadFile:@"SelectedCharacters.xml"];
-    
     //TODO: select emeny file by Name
     // 3.player2 character file (enemy of the battle)
-    _battleEnemyFile = [self loadFile:@"TestPlayer2.xml"];
-    // ex: Enemy_battleName.xml
+    _enemyBossArray = enemyBosses;
+    _battleEnemyArray = enemyArray;
     
 }
 
@@ -75,35 +140,14 @@
     return [[GDataXMLDocument alloc] initWithData:xmlData options:0 error:&error];
 }
 
--(void)loadAnimation:(NSString *)name {
-    // Animation_Swordsman_walking_Down.plist
-    // ex: Animation_xxx.plist
-    
-    _animationDictionary = [NSMutableDictionary dictionary];
-    NSArray *allAnimations = [PartyParser getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
-    
-    for (NSString *path in allAnimations) {
-        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-        NSString *fileName = [fileArray lastObject];
-        
-        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
-        [_animationDictionary setValue:clip forKey:fileName];
+-(void)dealloc {
+    // unload soundeffect
+    for (NSString *fileName in self.sceneSounds) {
+        [[SimpleAudioEngine sharedEngine] unloadEffect:fileName];
     }
-}
-
--(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
-
-    NSString *prefix = [NSString stringWithFormat:@"Animation_%@",animationName];
-
-    NSMutableDictionary *animationDic = [NSMutableDictionary dictionary];
-    
-    for (NSString *key in self.animationDictionary) {
-        if ([key hasPrefix:prefix]) {
-            [animationDic setObject:[self.animationDictionary objectForKey:key] forKey:key];
-        }
+    for (NSString *fileName in self.characterSounds) {
+        [[SimpleAudioEngine sharedEngine] unloadEffect:fileName];
     }
-    
-    return animationDic;
 }
 
 @end

@@ -14,6 +14,11 @@
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 #import "MyCell.h"
+#import "BattleSetObject.h"
+
+@interface SelectLayer()
+@property (nonatomic,readonly)BattleSetObject *sceneObject;
+@end
 
 @implementation SelectLayer
 
@@ -44,6 +49,8 @@ static const int tableviewPositionZ = 100;
         spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
         
+        [self setSceneSetObject]; //before background
+        
         backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)]; //white color
         [self addChild:backgroundLayer];
         
@@ -64,6 +71,11 @@ static const int tableviewPositionZ = 100;
 	}
 	return self;
 }
+
+-(void)setSceneSetObject {
+    _sceneObject = [[BattleSetObject alloc] initWithBattleName:@"menu_select"];
+}
+
 - (void)SetLabels {
     CGSize windowSize = [[CCDirector sharedDirector] winSize];
     
@@ -169,10 +181,10 @@ static const int tableviewPositionZ = 100;
     
     GDataXMLDocument *doc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
     
-    NSArray *characterIdArray = [PartyParser getAllNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"ol"];
+    NSArray *characterArray = [PartyParser getAllNodeFromXmlFile:doc tagName:@"character"];
     NSMutableArray *characters = [[NSMutableArray alloc] init];
-    for (NSString *characterId in characterIdArray) {
-        Character *character = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"ol" tagAttributeValue:characterId]];
+    for (GDataXMLElement *element in characterArray) {
+        Character *character = [[Character alloc] initWithXMLElement:element];
         [characters addObject:character];
     }
     return characters;
