@@ -10,15 +10,14 @@
 #import "cocos2d.h"
 #import "BattleController.h"
 
-@class CharacterQueue;
-
 @interface BattleStatusLayer : CCLayer {
 //    BattleController *controller;
+    CCLabelBMFont *food;
+    NSMutableArray *unitItems;
 }
 
-@property (readonly) CCLabelBMFont *food;
-
 -(id)initWithBattleController:(BattleController *)controller;
+-(void)updateFood:(int)anInt;
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 
 @end

@@ -18,7 +18,7 @@
 
 -(void)setRanges {
     // TODO: Maybe show the arrow range.
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@150,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
@@ -28,9 +28,9 @@
     
     //    Range *effectRange = [Range rangeWithCharacter:character parameters:effectDictionary];
     
-    //    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
+    //    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",nil];
     
     DelegateSkill *delegate = [[AttackDelegateSkill alloc] initWithCharacter:character];
     
@@ -41,11 +41,13 @@
     RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
     
     // TODO: 可指定攻擊地點
-     NSArray *effectTargets = [range getEffectTargets];
-    if(effectTargets.count>0){
+    NSArray *effectTargets = [range getEffectTargets];
+    
+    if(effectTargets.count > 0){
         Character *target = effectTargets[0];
-    [shooter shoot:target.position time:2];
-}
+    
+        [shooter shoot:target.position time:0.75];
+    }
 }
 
 @end

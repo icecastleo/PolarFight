@@ -24,9 +24,12 @@
     
     BOOL canMove;
     
+    float foodRate;
+    
     NSMutableArray *removeCharacters;
 }
 
+@property (readonly) float food;
 @property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) BattleSetObject *battleSetObject;

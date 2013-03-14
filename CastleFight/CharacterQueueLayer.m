@@ -128,7 +128,7 @@ static const int arrowTag = 990;
     CGSize winSize = [CCDirector sharedDirector].winSize;
 //    NSLog(@"%d",index);
     SWTableViewCell *cell = [tableView cellAtIndex:index];
-    CCSprite *insertArrow = [[CCSprite alloc] initWithFile:@"Arrow.png"];
+    CCSprite *insertArrow = [[CCSprite alloc] initWithFile:@"arrow.png"];
     int height;
     BOOL show = NO;
     insertArrow.tag = arrowTag;

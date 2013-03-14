@@ -34,6 +34,9 @@ __weak static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
+        self.food = 0;
+        foodRate = 0.8;
+        
         currentInstance = self;
         
         [self setBattleSetObject];
@@ -45,8 +48,8 @@ __weak static BattleController* currentInstance;
         [self setCharacterArrayFromSelectLayer];
         
         // init Dpad
-        dPadLayer = [DPadLayer node];
-        [self addChild:dPadLayer];
+//        dPadLayer = [DPadLayer node];
+//        [self addChild:dPadLayer];
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
@@ -57,8 +60,23 @@ __weak static BattleController* currentInstance;
         
         // FIXME: Maybe move to maylayer
         removeCharacters = [[NSMutableArray alloc] init];
+        
+        [self runAction:[CCRepeatForever actionWithAction:
+                         [CCSequence actions:
+                          [CCCallFunc actionWithTarget:self selector:@selector(foodUpdate)],
+                          [CCDelayTime actionWithDuration:0.25],
+                          nil]]];
     }
     return self;
+}
+
+-(void)setFood:(float)food {
+    _food = food;
+    [statusLayer updateFood:(int)food];
+}
+
+-(void)foodUpdate {
+    self.food += foodRate;
 }
 
 -(NSMutableArray *)characters {
@@ -72,7 +90,7 @@ __weak static BattleController* currentInstance;
 //    CCSpriteBatchNode *spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
 }
 
-- (void)setCharacterArrayFromSelectLayer {
+-(void)setCharacterArrayFromSelectLayer {
     
     NSArray *characterArray;
     
@@ -108,6 +126,13 @@ __weak static BattleController* currentInstance;
     
     [mapLayer addCastle:_playerCastle];
     [mapLayer addCastle:_enemyCastle];
+    
+    
+    Character *character = [[Character alloc] initWithId:@"001" andLevel:1];
+    character.player = 1;
+    character.ai = [[SimpleAI alloc] initWithCharacter:character];
+    [character.sprite addBloodSprite];
+    [self addCharacter:character];
 }
 
 -(void)addCharacter:(Character *)character {

@@ -16,7 +16,7 @@
 }
 
 -(void)execute {
-//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"Arrow.png",@"rangeSpriteFile",nil];
+//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",nil];
 //    
 //    RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary]];
 //    

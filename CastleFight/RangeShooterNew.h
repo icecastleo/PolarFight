@@ -16,7 +16,6 @@
     CGPoint targetPoint;
     float time;
 
-    CGPoint startPoint;
     float distance;
 }
 
