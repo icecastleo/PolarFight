@@ -21,7 +21,7 @@
             <character ol="001" id="001" level="15"></character>
         </bosses>
         <enemyCastle>
-            <character ol="000" id="009" level="1"></character>
+            <character ol="000" id="010" level="1"></character>
         </enemyCastle>
     </battle>
 </scenes>

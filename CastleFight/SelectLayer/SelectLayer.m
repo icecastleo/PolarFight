@@ -10,15 +10,11 @@
 #import "HelloWorldLayer.h"
 #import "BattleController.h"
 #import "Character.h"
-#import "PartyParser.h"
+#import "FileManager.h"
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 #import "MyCell.h"
 #import "BattleSetObject.h"
-
-@interface SelectLayer()
-@property (nonatomic,readonly)BattleSetObject *sceneObject;
-@end
 
 @implementation SelectLayer
 
@@ -49,8 +45,6 @@ static const int tableviewPositionZ = 100;
         spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
         
-        [self setSceneSetObject]; //before background
-        
         backgroundLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)]; //white color
         [self addChild:backgroundLayer];
         
@@ -70,10 +64,6 @@ static const int tableviewPositionZ = 100;
         
 	}
 	return self;
-}
-
--(void)setSceneSetObject {
-    _sceneObject = [[BattleSetObject alloc] initWithBattleName:@"menu_select"];
 }
 
 - (void)SetLabels {
@@ -178,15 +168,7 @@ static const int tableviewPositionZ = 100;
     return @"Money: 100元";
 }
 -(NSArray *)loadAllCharacterFromFile {
-    
-    GDataXMLDocument *doc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
-    
-    NSArray *characterArray = [PartyParser getAllNodeFromXmlFile:doc tagName:@"character"];
-    NSMutableArray *characters = [[NSMutableArray alloc] init];
-    for (GDataXMLElement *element in characterArray) {
-        Character *character = [[Character alloc] initWithXMLElement:element];
-        [characters addObject:character];
-    }
+    NSArray *characters = [FileManager getChararcterArray];
     return characters;
 }
 - (void)loadAllRolesCanBeSelected {
@@ -355,7 +337,7 @@ static const int tableviewPositionZ = 100;
     if (saveCharacterArray.count < characterMinNumber) {
         CCLOG(@"you don't choose any character.");
     }else {
-        [PartyParser saveParty:saveCharacterArray fileName:@"SelectedCharacters.xml"];
+        [FileManager saveCharacterArray:saveCharacterArray];
         [[CCDirector sharedDirector] replaceScene:[BattleController node]];
     }
 }

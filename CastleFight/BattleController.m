@@ -10,13 +10,13 @@
 #import "CCMoveCharacterTo.h"
 #import "CCMoveCharacterBy.h"
 #import "BattleStatusLayer.h"
-#import "PartyParser.h"
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
 #import "BattleSetObject.h"
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
+#import "FileManager.h"
 
 @interface BattleController () {
     
@@ -36,9 +36,8 @@ __weak static BattleController* currentInstance;
     if(self = [super init]) {
         currentInstance = self;
         
-        [self setBattleSetObject];
-        mapLayer = [[MapLayer alloc] initWithFile:self.battleSetObject.mapName];
-//        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
+        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
         [self addChild:mapLayer];
         
         // set character on may
@@ -65,45 +64,31 @@ __weak static BattleController* currentInstance;
     return mapLayer.characters;
 }
 
--(void)setBattleSetObject {
-    _battleSetObject = [[BattleSetObject alloc] initWithBattleName:@"battle_01_01"];
-    
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
-//    CCSpriteBatchNode *spritesBgNode = [CCSpriteBatchNode batchNodeWithFile:@"building.pvr.ccz"];
-}
-
 - (void)setCharacterArrayFromSelectLayer {
     
-    NSArray *characterArray;
+    //test battleData
+    BattleSetObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
-    characterArray = [PartyParser getAllNodeFromXmlFile:[PartyParser loadGDataXMLDocumentFromFileName:@"SelectedCharacters.xml"] tagName:@"character"];
+    NSAssert(battleData.playerCharacterArray != nil, @"Ooopse! you forgot to choose some characters.");
     
-    NSAssert(characterArray != nil, @"Ooopse! you forgot to choose some characters.");
-    
-    for (GDataXMLElement *element in characterArray) {
-        Character *character = [[Character alloc] initWithXMLElement:element];
+    for (Character *character in battleData.playerCharacterArray) {
         character.player = 1;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    NSArray *player2Array = self.battleSetObject.battleEnemyArray;
-    
-    for (GDataXMLElement *enemyElement in player2Array) {
-        Character *character = [[Character alloc] initWithXMLElement:enemyElement];
+    for (Character *character in battleData.battleEnemyArray) {
         character.player = 2;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    GDataXMLDocument *AllCharacterDoc = [PartyParser loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
-    
-    _playerCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
+    _playerCastle = battleData.playerCastle;
     _playerCastle.player = 1;
 
-    _enemyCastle = [[Character alloc] initWithXMLElement:[PartyParser getNodeFromXmlFile:AllCharacterDoc tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
+    _enemyCastle = battleData.enemyCastle;
     _enemyCastle.player = 2;
     
     [mapLayer addCastle:_playerCastle];

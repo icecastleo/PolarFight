@@ -8,17 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class GDataXMLDocument,GDataXMLElement;
+@class Character;
 
 @interface BattleSetObject : NSObject
 
 @property (nonatomic,readonly) NSString *sceneName;
 //battle info
-@property (nonatomic,readonly) NSString *mapName;
-@property (nonatomic,readonly) GDataXMLDocument *characterDataFile;
-@property (nonatomic,readonly) NSArray *battleEnemyArray;
-@property (nonatomic,readonly) NSArray *enemyBossArray;
-@property (nonatomic,readonly) GDataXMLElement *enemyCastle;
+@property (nonatomic) NSString *mapName;
+@property (nonatomic) NSArray *playerCharacterArray;
+@property (nonatomic) NSArray *battleEnemyArray;
+@property (nonatomic) NSArray *enemyBossArray;
+@property (nonatomic) Character *playerCastle;
+@property (nonatomic) Character *enemyCastle;
 
 -(id)initWithBattleName:(NSString *)name;
 

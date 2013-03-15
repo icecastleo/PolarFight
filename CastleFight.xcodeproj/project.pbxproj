@@ -127,7 +127,6 @@
 		37675A4516EF449C000671B0 /* Sound_scene_caf in Resources */ = {isa = PBXBuildFile; fileRef = 37675A4416EF449C000671B0 /* Sound_scene_caf */; };
 		37675A4716EF450B000671B0 /* BackgroundMusic_caf in Resources */ = {isa = PBXBuildFile; fileRef = 37675A4616EF450B000671B0 /* BackgroundMusic_caf */; };
 		37799E2416D645D000349750 /* Swordsman in Resources */ = {isa = PBXBuildFile; fileRef = 37799E2316D645D000349750 /* Swordsman */; };
-		3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799B7151650DDDD00A9A394 /* PartyParser.m */; };
 		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
@@ -138,6 +137,7 @@
 		37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2F16BBD08300C0368D /* AKHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F3C16BBD2F600C0368D /* TouchTracker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB3D6716E61F1100A8C89C /* BattleSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB3D6616E61F1100A8C89C /* BattleSetObject.m */; };
+		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
 		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -570,8 +570,6 @@
 		37675A4416EF449C000671B0 /* Sound_scene_caf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sound_scene_caf; path = Resources/Sound_scene_caf; sourceTree = "<group>"; };
 		37675A4616EF450B000671B0 /* BackgroundMusic_caf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BackgroundMusic_caf; path = Resources/BackgroundMusic_caf; sourceTree = "<group>"; };
 		37799E2316D645D000349750 /* Swordsman */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Swordsman; path = Resources/Swordsman; sourceTree = "<group>"; };
-		3799B7141650DDDD00A9A394 /* PartyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyParser.h; sourceTree = "<group>"; };
-		3799B7151650DDDD00A9A394 /* PartyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyParser.m; sourceTree = "<group>"; };
 		3799B71B1650DFC100A9A394 /* CharacterData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CharacterData.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BB1957169E9F2300AC56FC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
@@ -591,6 +589,8 @@
 		37DB1F3C16BBD2F600C0368D /* TouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTracker.m; sourceTree = "<group>"; };
 		37DB3D6516E61F1100A8C89C /* BattleSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleSetObject.h; sourceTree = "<group>"; };
 		37DB3D6616E61F1100A8C89C /* BattleSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleSetObject.m; sourceTree = "<group>"; };
+		37DCA5C716F1CBD90006D656 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
 		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
@@ -1422,6 +1422,8 @@
 				9B062E741635275300E06018 /* IntroLayer.m */,
 				9BC8FD931652261D00A9EAC7 /* Helper.h */,
 				9BC8FD941652261D00A9EAC7 /* Helper.m */,
+				37DCA5C716F1CBD90006D656 /* FileManager.h */,
+				37DCA5C816F1CBD90006D656 /* FileManager.m */,
 			);
 			path = CastleFight;
 			sourceTree = "<group>";
@@ -1507,8 +1509,6 @@
 				9B92D2B516416D66000AF467 /* Character.m */,
 				9B92D2BF16424E74000AF467 /* CharacterSprite.h */,
 				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
-				3799B7141650DDDD00A9A394 /* PartyParser.h */,
-				3799B7151650DDDD00A9A394 /* PartyParser.m */,
 				37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */,
 				37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */,
 				374070831683144A007BEDDF /* XMLParsingDelegate.h */,
@@ -2493,7 +2493,6 @@
 				9B82F793164FB2780001A357 /* TiledMapLayer.m in Sources */,
 				9B82F79E164FB38A0001A357 /* SelectLayer.m in Sources */,
 				2DD7058C16511724001E3155 /* RangeLine.m in Sources */,
-				3799B7161650DDDD00A9A394 /* PartyParser.m in Sources */,
 				9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */,
 				9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */,
 				9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */,
@@ -2574,6 +2573,7 @@
 				9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */,
 				2DED399B16F08A38009802A0 /* CastleAI.m in Sources */,
 				2DED399E16F08AE8009802A0 /* AIStateCastleWaiting.m in Sources */,
+				37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

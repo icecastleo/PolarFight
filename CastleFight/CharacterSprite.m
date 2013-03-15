@@ -11,7 +11,7 @@
 #import "Character.h"
 #import "CCMoveCharacterByLength.h"
 #import "AKHelperObject.h"
-#import "PartyParser.h"
+#import "FileManager.h"
 #import "CharacterBloodSprite.h"
 
 @interface CharacterSprite() {
@@ -55,6 +55,16 @@
             [self addShadow];
         }
 
+        return self;
+    }
+    //test
+    if ([aCharacter.name isEqualToString:@"Tower2"]) {
+        
+        if ((self = [super initWithSpriteFrameName:@"building_enemy_home.png"])) {
+            character = aCharacter;
+            [self addShadow];
+        }
+        
         return self;
     }
     
@@ -183,7 +193,7 @@
         NSString *directionString = [directionStrings objectAtIndex:direction - 1];
         NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_Walking_%@.plist",character.name,directionString];
         
-        NSDictionary *walkingClip = [PartyParser getAnimationDictionaryByName:animationKey];
+        NSDictionary *walkingClip = [FileManager getAnimationDictionaryByName:animationKey];
         NSAssert(walkingClip != nil, @"walking animation should exist.");
         
         [akHelper applyAnimationClip:walkingClip toNode:self];
@@ -264,7 +274,7 @@
     NSString *directionString = [directionStrings objectAtIndex:direction-1];
     NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_%@_%@.plist",character.name,animationName,directionString];
     
-    NSDictionary *animationClip = [PartyParser getAnimationDictionaryByName:animationKey];
+    NSDictionary *animationClip = [FileManager getAnimationDictionaryByName:animationKey];
     
 //    NSAssert(animationClip != nil, @"Animation plist should exist.");
     

@@ -8,12 +8,11 @@
 
 #import "Character.h"
 #import "BattleController.h"
-#import "BattleSetObject.h"
 
 #import "SkillKit.h"
 #import "StatusKit.h"
 #import "StatusFactory.h"
-#import "PartyParser.h"
+#import "FileManager.h"
 
 #import "SimpleAI.h"
 
@@ -60,12 +59,9 @@
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
-        GDataXMLDocument *doc = [BattleController currentInstance].battleSetObject.characterDataFile;
-        if (!doc) {
-            doc = [PartyParser loadGDataXMLDocumentFromFileName:@"CharacterData.xml"];
-        }
+        GDataXMLDocument *doc = [FileManager getCharacterBasicData];
         
-        GDataXMLElement *characterElement = [PartyParser getNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"id" tagAttributeValue:anId];
+        GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"id" tagAttributeValue:anId];
         
         //get tag's attributes
         for (GDataXMLNode *attribute in characterElement.attributes) {
