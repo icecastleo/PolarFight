@@ -2582,6 +2582,7 @@
 				9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */,
 				2DED399B16F08A38009802A0 /* CastleAI.m in Sources */,
 				2DED399E16F08AE8009802A0 /* AIStateCastleWaiting.m in Sources */,
+				9B6EA71516F1FAED00C61AD9 /* UnitMenuItem.m in Sources */,
 				37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

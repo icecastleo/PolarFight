@@ -329,6 +329,7 @@ static FileManager *sharedFileManager = nil;
     return battleData;
 }
 
+//FIXME: Testing.
 -(void)playBackgroundMusic:(NSString *)name {
     
     NSArray *music = [FileManager getAllFilePathsInDirectory:@"BackgroundMusic_caf" withPrefix:name fileType:@"caf"];

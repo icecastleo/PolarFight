@@ -43,6 +43,7 @@
 @property (readonly) NSString *headImageFileName;
 
 @property (readonly) int level;
+@property (readonly) int cost;
 
 @property (readonly) NSMutableDictionary *passiveSkillDictionary;
 @property (readonly) NSMutableDictionary *timeStatusDictionary;
