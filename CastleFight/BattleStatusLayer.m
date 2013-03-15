@@ -11,6 +11,8 @@
 #import "CharacterQueueLayer.h"
 #import "CharacterQueue.h"
 #import "CastleBloodSprite.h"
+#import "ColoredSquareSprite.h"
+#import "UnitMenuItem.h"
 
 @implementation BattleStatusLayer
 
@@ -56,12 +58,12 @@
         diamond.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 - 1);
         [self addChild:diamond];
         
-        _food = [[CCLabelBMFont alloc] initWithString:@"425" fntFile:@"font/jungle_24_o.fnt"];
-        _food.anchorPoint = ccp(1, 0.5);
-        _food.scale = 0.5;
-        _food.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3 + 1);
-        _food.color = ccGOLD;
-        [self addChild:_food];
+        food = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)battleController.food] fntFile:@"font/jungle_24_o.fnt"];
+        food.anchorPoint = ccp(1, 0.5);
+        food.scale = 0.5;
+        food.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3 + 1);
+        food.color = ccGOLD;
+        [self addChild:food];
         
         [self setUnitBoard];
         [self setPauseButton];
@@ -105,20 +107,17 @@
     select.position = ccp(winSize.width / 2, 0);
     [self addChild:select];
     
-    NSMutableArray *unitItems = [[NSMutableArray alloc] init];
+    unitItems = [[NSMutableArray alloc] init];
+    
+    Character *temp = [[Character alloc] initWithId:@"001" andLevel:1];
     
     for (int i = 1; i < 10; i++) {
-        CCMenuItem *item = [CCMenuItemImage
-                            itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",i]]
-                            selectedSprite:nil
-                            target:nil selector:nil];
+        CCMenuItem *item = [[UnitMenuItem alloc] initWithCharacter:temp];
+        
         [unitItems addObject:item];
     }
     
-    CCMenuItem *item = [CCMenuItemImage
-                        itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_char_lock.png"]
-                        selectedSprite:nil
-                        target:nil selector:nil];
+    CCMenuItem *item = [[UnitMenuItem alloc] initWithCharacter:nil];
     [unitItems addObject:item];
     
     CCMenu *pauseMenu = [CCMenu menuWithArray:unitItems];
@@ -127,13 +126,20 @@
     [select addChild:pauseMenu];
 }
 
+-(void)updateFood:(int)anInt {
+    [food setString:[NSString stringWithFormat:@"%d",(int)anInt]];
+    
+    for (UnitMenuItem *item in unitItems) {
+        [item updateFood:anInt];
+    }
+}
+
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {
     CGSize size = [CCDirector sharedDirector].winSize;
     
     CCLabelTTF *label = [CCLabelBMFont labelWithString:string fntFile:@"WhiteFont.fnt"];
     label.color = color;
     label.position = ccp(size.width / 2, size.height / 2);
-//    label.opacity = 150;
     [self addChild:label];
     
     [label runAction:[CCSequence actions:

@@ -26,11 +26,12 @@
     targetPoint = aTargetPoint;
     time = aTime;
     
-    range.rangeSprite.position =ccpAdd(range.character.position,ccp(0,range.character.boundingBox.size.height/2));
+    range.rangeSprite.position = ccpAdd(range.character.boundingBox.origin, ccp(aTargetPoint.x >= range.character.position.x ? range.character.boundingBox.size.width : 0, range.character.boundingBox.size.height / 4 * 3));
 
-    CGFloat endA = aTargetPoint.x >= range.rangeSprite.position.x?300:60;
+    CGFloat startA = aTargetPoint.x >= range.character.position.x ? 45 : 135;
+    CGFloat endA = aTargetPoint.x >= range.character.position.x ? 315 : 225;
         
-    [self moveWithParabola:range.rangeSprite startP:range.rangeSprite.position endP:aTargetPoint startA:180 endA:endA];
+    [self moveWithParabola:range.rangeSprite startP:range.rangeSprite.position endP:aTargetPoint startA:startA endA:endA];
     
     [self scheduleUpdate];
     
@@ -39,7 +40,7 @@
 
 -(void)update:(ccTime)delta
 {
-    if(ccpDistance(range.rangeSprite.position, targetPoint)==0)
+    if(ccpDistance(range.rangeSprite.position, targetPoint) == 0)
     {
         [self unschedule:@selector(update:)];
         [self removeFromParentAndCleanup:YES];
@@ -59,23 +60,26 @@
     };
 }
 
--(void)moveWithParabola:(CCSprite*)mSprite startP:(CGPoint)aStartPoint endP:(CGPoint)endPoint startA:(float)startAngle endA:(float)endAngle {
-    float sx = aStartPoint.x;
-    float sy = aStartPoint.y;
-    float ex = endPoint.x ;
-    float ey = endPoint.y ;
-    //设置精灵的起始角度
-    mSprite.rotation = startAngle;
-    ccBezierConfig bezier; // 创建贝塞尔曲线
-    bezier.controlPoint_1 = ccp(sx, sy); // 起始点
-    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5+100); //控制点
-    bezier.endPosition = ccp(endPoint.x, endPoint.y); // 结束位置
+-(void)moveWithParabola:(CCSprite*)sprite startP:(CGPoint)startPoint endP:(CGPoint)endPoint startA:(float)startAngle endA:(float)endAngle {
+    float sx = startPoint.x;
+    float sy = startPoint.y;
+    float ex = endPoint.x;
+    float ey = endPoint.y;
+    
+    startAngle = 270 - startAngle;
+    endAngle = 270 - endAngle;
+    
+    sprite.rotation = startAngle;
+    
+    ccBezierConfig bezier;
+    bezier.controlPoint_1 = ccp(sx, sy); // start point
+    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5 + 125); // control point
+    bezier.endPosition = ccp(endPoint.x, endPoint.y); // end point
+    
     CCBezierTo *actionMove = [CCBezierTo actionWithDuration:time bezier:bezier];
-    //创建精灵旋转的动作
     CCRotateTo *actionRotate =[CCRotateTo actionWithDuration:time angle:endAngle];
-
-    //将两个动作封装成一个同时播放进行的动作
     CCAction * action = [CCSpawn actions:actionMove, actionRotate, nil];
-    [mSprite runAction:action];
+    
+    [sprite runAction:action];
 }
 @end
