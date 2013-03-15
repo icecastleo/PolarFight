@@ -24,7 +24,7 @@
 		2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446BE16E4A59F00BDC060 /* BaseAI.m */; };
 		2DA446C216E4A6E400BDC060 /* SimpleAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446C116E4A6E400BDC060 /* SimpleAI.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
-		2DED399B16F08A38009802A0 /* CastleAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DED399A16F08A38009802A0 /* CastleAI.m */; };
+		2DED399B16F08A38009802A0 /* EnemyAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DED399A16F08A38009802A0 /* EnemyAI.m */; };
 		2DED399E16F08AE8009802A0 /* AIStateCastleWaiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
 		3725262416EF684500C79A9E /* standard-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261C16EF684500C79A9E /* standard-black-button.png */; };
@@ -455,8 +455,8 @@
 		2DA446C116E4A6E400BDC060 /* SimpleAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAI.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
 		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
-		2DED399916F08A38009802A0 /* CastleAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastleAI.h; sourceTree = "<group>"; };
-		2DED399A16F08A38009802A0 /* CastleAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastleAI.m; sourceTree = "<group>"; };
+		2DED399916F08A38009802A0 /* EnemyAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAI.h; sourceTree = "<group>"; };
+		2DED399A16F08A38009802A0 /* EnemyAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAI.m; sourceTree = "<group>"; };
 		2DED399C16F08AE8009802A0 /* AIStateCastleWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateCastleWaiting.h; sourceTree = "<group>"; };
 		2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateCastleWaiting.m; sourceTree = "<group>"; };
 		3725261B16EF684500C79A9E /* standard-black-button-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-black-button-1.png"; sourceTree = "<group>"; };
@@ -1201,8 +1201,8 @@
 				2DA446BE16E4A59F00BDC060 /* BaseAI.m */,
 				2DA446C016E4A6E400BDC060 /* SimpleAI.h */,
 				2DA446C116E4A6E400BDC060 /* SimpleAI.m */,
-				2DED399916F08A38009802A0 /* CastleAI.h */,
-				2DED399A16F08A38009802A0 /* CastleAI.m */,
+				2DED399916F08A38009802A0 /* EnemyAI.h */,
+				2DED399A16F08A38009802A0 /* EnemyAI.m */,
 			);
 			name = AI;
 			sourceTree = "<group>";
@@ -2580,7 +2580,7 @@
 				9B9848CC16EF37DA00D3D55D /* BloodSprite.m in Sources */,
 				9B9848D016EF3B8200D3D55D /* CharacterBloodSprite.m in Sources */,
 				9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */,
-				2DED399B16F08A38009802A0 /* CastleAI.m in Sources */,
+				2DED399B16F08A38009802A0 /* EnemyAI.m in Sources */,
 				2DED399E16F08AE8009802A0 /* AIStateCastleWaiting.m in Sources */,
 				9B6EA71516F1FAED00C61AD9 /* UnitMenuItem.m in Sources */,
 				37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */,

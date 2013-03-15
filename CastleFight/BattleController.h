@@ -13,7 +13,7 @@
 #import "DPadLayer.h"
 #import "TiledMapLayer.h"
 #import "Barrier.h"
-
+#import "EnemyAI.h"
 @class BattleStatusLayer, BattleSetObject;
 
 @interface BattleController : CCScene {    
@@ -33,7 +33,7 @@
 @property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) BattleSetObject *battleSetObject;
-
+@property (readonly) EnemyAI *enemyAi;
 +(BattleController *)currentInstance;
 
 -(void)addCharacter:(Character *)character;

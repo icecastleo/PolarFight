@@ -17,7 +17,7 @@
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
-
+#import "EnemyAI.h"
 @interface BattleController () {
     
 }
@@ -112,6 +112,7 @@ __weak static BattleController* currentInstance;
     [mapLayer addCastle:_playerCastle];
     [mapLayer addCastle:_enemyCastle];
     
+    _enemyAi=[[EnemyAI alloc] initWithCharacter:_enemyCastle];
     
     Character *character = [[Character alloc] initWithId:@"001" andLevel:1];
     character.player = 1;
@@ -157,6 +158,8 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)update:(ccTime)delta {
+    
+    [_enemyAi AIUpdate];
     for (Character *character in self.characters) {
         [character update:delta];
     }

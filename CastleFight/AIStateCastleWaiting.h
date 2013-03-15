@@ -9,5 +9,8 @@
 #import "AIState.h"
 
 @interface AIStateCastleWaiting : AIState
+{
+    double nextDecisionTime;
+}
 
 @end

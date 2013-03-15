@@ -8,6 +8,8 @@
 
 #import "BaseAI.h"
 
-@interface CastleAI : BaseAI
-
+@interface EnemyAI : BaseAI
+{
+       NSMutableDictionary * mutableDictionary;
+}
 @end
