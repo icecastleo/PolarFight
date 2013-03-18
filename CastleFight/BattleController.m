@@ -13,7 +13,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-#import "BattleSetObject.h"
+#import "BattleDataObject.h"
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
@@ -85,7 +85,7 @@ __weak static BattleController* currentInstance;
 - (void)setCharacterArrayFromSelectLayer {
     
     //test battleData
-    BattleSetObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+    BattleDataObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
     NSAssert(battleData.playerCharacterArray != nil, @"Ooopse! you forgot to choose some characters.");
     
