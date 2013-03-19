@@ -23,8 +23,8 @@
 {
     
     //EnemyAI *a = (EnemyAI*)ai;
-    CCLOG(@"test");
-    nextDecisionTime=CACurrentMediaTime()+1;
+//    CCLOG(@"test");
+    nextDecisionTime = CACurrentMediaTime()+1;
     
 }
 

@@ -18,6 +18,8 @@
     BloodSprite *bloodSprite;
     __weak BloodSprite *outerBloodSprite;
     
+    NSMutableDictionary *actions;
+    
     CCAction *upAction;
     CCAction *downAction;
     CCAction *rightAction;

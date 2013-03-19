@@ -10,11 +10,6 @@
             <character ol="000" id="001" level="1"></character>
             <character ol="001" id="001" level="1"></character>
             <character ol="002" id="001" level="1"></character>
-            <character ol="003" id="001" level="1"></character>
-            <character ol="004" id="001" level="1"></character>
-            <character ol="005" id="001" level="1"></character>
-            <character ol="006" id="001" level="1"></character>
-            <character ol="007" id="001" level="1"></character>
         </enemies>
         <bosses>
             <character ol="000" id="001" level="10"></character>
