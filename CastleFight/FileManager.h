@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GDataXMLDocument,GDataXMLElement,BattleSetObject;
+@class GDataXMLDocument,GDataXMLElement,BattleDataObject;
 
 @interface FileManager : NSObject
 
@@ -20,6 +20,6 @@
 + (GDataXMLDocument *)getCharacterBasicData;
 +(void)preloadSoundsEffect:(NSString *)sceneName;
 
-+(BattleSetObject *)loadBattleInfo:(NSString *)name;
++(BattleDataObject *)loadBattleInfo:(NSString *)name;
 
 @end

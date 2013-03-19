@@ -14,7 +14,6 @@
 #import "AppDelegate.h"
 #import "SelectLayer.h"
 #import "ObjectiveCAdaptor.h"
-#import "BattleSetObject.h"
 
 #pragma mark - HelloWorldLayer
 

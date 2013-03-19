@@ -9,10 +9,9 @@
 #import "FileManager.h"
 #import "GDataXMLNode.h"
 #import "Character.h"
-#import "XmlParser.h"
 #import "AKHelpers.h"
 #import "SimpleAudioEngine.h"
-#import "BattleSetObject.h"
+#import "BattleDataObject.h"
 
 @interface FileManager () {
     GDataXMLDocument *allCharacterDoc;
@@ -268,7 +267,7 @@ static FileManager *sharedFileManager = nil;
     }
 }
 
-+(BattleSetObject *)loadBattleInfo:(NSString *)name {
++(BattleDataObject *)loadBattleInfo:(NSString *)name {
     //TODO: load battle info from battle.file ?
     // ex: BattleData.xml
     GDataXMLDocument *battleInfoDoc = [self loadGDataXMLDocumentFromFileName:@"BattleData.xml"];
@@ -311,7 +310,7 @@ static FileManager *sharedFileManager = nil;
         }
     }
     
-    BattleSetObject *battleData = [[BattleSetObject alloc] initWithBattleName:name];
+    BattleDataObject *battleData = [[BattleDataObject alloc] initWithBattleName:name];
     
     
     battleData.playerCharacterArray = [self getChararcterArray];

@@ -1,14 +1,14 @@
 //
-//  BattleSetObject.m
+//  BattleDataObject.m
 //  CastleFight
 //
-//  Created by  浩翔 on 13/3/5.
+//  Created by  浩翔 on 13/3/18.
 //
 //
 
-#import "BattleSetObject.h"
+#import "BattleDataObject.h"
 
-@implementation BattleSetObject
+@implementation BattleDataObject
 
 -(id)initWithBattleName:(NSString *)name {
     

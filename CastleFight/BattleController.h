@@ -14,7 +14,7 @@
 #import "TiledMapLayer.h"
 #import "Barrier.h"
 #import "EnemyAI.h"
-@class BattleStatusLayer, BattleSetObject;
+@class BattleStatusLayer;
 
 @interface BattleController : CCScene {    
     BattleStatusLayer *statusLayer;
@@ -32,7 +32,6 @@
 @property (readonly) float food;
 @property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;
-@property (readonly) BattleSetObject *battleSetObject;
 @property (readonly) EnemyAI *enemyAi;
 +(BattleController *)currentInstance;
 

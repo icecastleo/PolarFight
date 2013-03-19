@@ -14,7 +14,7 @@
 #import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 #import "MyCell.h"
-#import "BattleSetObject.h"
+#import "BattleDataObject.h"
 
 @implementation SelectLayer
 

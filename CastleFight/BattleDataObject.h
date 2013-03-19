@@ -1,8 +1,8 @@
 //
-//  BattleSetObject.h
+//  BattleDataObject.h
 //  CastleFight
 //
-//  Created by  浩翔 on 13/3/5.
+//  Created by  浩翔 on 13/3/18.
 //
 //
 
@@ -10,7 +10,7 @@
 
 @class Character;
 
-@interface BattleSetObject : NSObject
+@interface BattleDataObject : NSObject
 
 @property (nonatomic,readonly) NSString *sceneName;
 //battle info
