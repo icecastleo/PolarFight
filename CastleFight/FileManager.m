@@ -7,19 +7,20 @@
 //
 
 #import "FileManager.h"
-#import "GDataXMLNode.h"
 #import "Character.h"
 #import "AKHelpers.h"
 #import "SimpleAudioEngine.h"
 #import "BattleDataObject.h"
+#import "UserDataObject.h"
 
-@interface FileManager () {
-    GDataXMLDocument *allCharacterDoc;
-}
-@property (nonatomic) NSArray *characterElements;
-@property (nonatomic) NSMutableDictionary *animationDictionary;
-@property (nonatomic,readonly) GDataXMLDocument *characterDataFile;
-@property (nonatomic) NSArray *sceneSounds;
+#define kUserDataKey        @"UserData"
+
+@interface FileManager ()
+
+@property (nonatomic,strong) NSDictionary *animationDictionary;
+@property (nonatomic,readonly) NSArray *characterDataFile;
+@property (nonatomic,strong) NSArray *sceneSounds;
+@property (nonatomic, strong) UserDataObject *userDataObject;
 
 @end
 
@@ -28,8 +29,7 @@
 static FileManager *sharedFileManager = nil;
 
 // Init
-+(FileManager *)sharedFileManager
-{
++(FileManager *)sharedFileManager {
 	@synchronized(self)     {
 		if (!sharedFileManager)
 			sharedFileManager = [[FileManager alloc] init];
@@ -37,8 +37,7 @@ static FileManager *sharedFileManager = nil;
 	return sharedFileManager;
 }
 
-+(id)alloc
-{
++(id)alloc {
 	@synchronized(self)     {
 		NSAssert(sharedFileManager == nil, @"Attempted to allocate a second instance of a singleton.");
 		return [super alloc];
@@ -46,29 +45,73 @@ static FileManager *sharedFileManager = nil;
 	return nil;
 }
 
--(id)init
-{
+- (UserDataObject *)loadUserDataObject {
+    
+    if (_userDataObject != nil) return _userDataObject;
+    //When someone tries to access the data property, we’re going to check if we have it loaded into memory – and if so go ahead and return it. But if not, we’ll load it from disk!
+    
+    NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
+    NSData *codedData = [[NSData alloc] initWithContentsOfFile:dataPath];
+    
+    if (!codedData) {
+        dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:NO];
+        _userDataObject = [[UserDataObject alloc] initWithPlistPath:dataPath];
+    }else {
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
+        
+        _userDataObject = [unarchiver decodeObjectForKey:kUserDataKey];
+        [unarchiver finishDecoding];
+        
+    }
+    
+    return _userDataObject;
+}
+
+-(NSDictionary *)loadAnimation {
+    NSMutableDictionary *tempDicionary = [NSMutableDictionary dictionary];
+    NSArray *allAnimations = [FileManager getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
+    
+    for (NSString *path in allAnimations) {
+        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
+        NSString *fileName = [fileArray lastObject];
+        
+        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
+        [tempDicionary setValue:clip forKey:fileName];
+    }
+    return tempDicionary;
+}
+
++ (NSArray *)loadPlistFromFileName:(NSString *)fileName {
+    
+    NSString *filePath = [self dataFilePath:fileName forSave:NO];
+    
+    // characterBasicData and BattleData are array.
+    NSArray *plist = [[NSArray alloc] initWithContentsOfFile:filePath];
+    
+    return plist;
+}
+
+-(id)init {
 	if((self=[super init])) {
-        _characterElements = [FileManager getAllNodeFromXmlFile:[FileManager loadGDataXMLDocumentFromFileName:@"SelectedCharacters.xml"] tagName:@"character"];
-        _characterDataFile = [FileManager loadGDataXMLDocumentFromFileName:@"CharacterData.xml"];
+        _userDataObject =  [self loadUserDataObject];
+        _animationDictionary = [self loadAnimation];
+        _characterDataFile = [FileManager loadPlistFromFileName:@"CharacterBasicData.plist"];
 	}
 	return self;
 }
 
 // Memory
--(void)dealloc
-{
-    self.characterElements = nil;
-    self.animationDictionary = nil;
+-(void)dealloc {
+    _userDataObject = nil;
+    _animationDictionary = nil;
+    _characterDataFile = nil;
 }
 
-+(void)end
-{
++(void)end {
 	sharedFileManager = nil;
 }
 
-+ (NSString *)dataFilePath:(NSString *)fileName forSave:(BOOL)save
-{
++ (NSString *)dataFilePath:(NSString *)fileName forSave:(BOOL)save {
     if (!fileName)
     {
         fileName = @"Default.xml";
@@ -89,51 +132,6 @@ static FileManager *sharedFileManager = nil;
     } else {
         return [[NSBundle mainBundle] pathForResource:fname ofType:ftype];
     }
-}
-
-//in Disk. load slowly.
-+ (GDataXMLDocument *)loadGDataXMLDocumentFromFileName:(NSString *)fileName {
-    NSString *filePath = [self dataFilePath:fileName forSave:NO];
-    NSData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
-    NSError *error;
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
-                                                           options:0 error:&error];
-    return doc;
-}
-
-+ (GDataXMLElement *)getNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue
-{
-    
-    if (doc == nil) { return nil; }
-    
-    NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
-    NSArray *elements = [doc nodesForXPath:xPath error:nil];
-    
-    for (GDataXMLElement *element in elements) {
-        for (GDataXMLNode *attribute in element.attributes) {
-            if ([attribute.name isEqualToString:tagAttributeName]) {
-                if ([attribute.stringValue isEqualToString:tagAttributeValue]) {
-                    return [element copy];
-                }
-            }
-        }
-    }
-    return nil;
-}
-
-+ (NSArray *)getAllNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName {
-    if (doc == nil) { return nil; }
-    
-    NSString *xPath = [[NSString alloc] initWithFormat:@"//%@",tagName];
-    NSArray *elements = [doc nodesForXPath:xPath error:nil];
-    
-    NSMutableArray *characterArray = [[NSMutableArray alloc] init];
-    
-    for (GDataXMLElement *element in elements) {
-        [characterArray addObject:element];
-    }
-    
-    return characterArray;
 }
 
 + (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
@@ -161,73 +159,74 @@ static FileManager *sharedFileManager = nil;
     return targetFileNameArray;
 }
 
-+(void)updateCharacterElements {
-    [self sharedFileManager].characterElements = nil;
-    [self sharedFileManager].characterElements = [FileManager getAllNodeFromXmlFile:[FileManager loadGDataXMLDocumentFromFileName:@"SelectedCharacters.xml"] tagName:@"character"];
++(NSDictionary *)getDictionaryInArray:(NSArray *)anArray WithTagName:(NSString *)tagName tagValue:(NSString *)tagValue {
+    for (NSDictionary *dic in anArray) {
+        if ([tagValue isEqualToString:[dic objectForKey:tagName]]) {
+            return dic;
+        }
+    }
+    return nil;
 }
 
-+(void)loadAnimation {
-    [self sharedFileManager].animationDictionary = [NSMutableDictionary dictionary];
-    NSArray *allAnimations = [FileManager getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
+-(void)updateUserDataObject {
+    _userDataObject = nil;
+    _userDataObject = [self loadUserDataObject];
+}
+
+- (void)saveUserData {
     
-    for (NSString *path in allAnimations) {
-        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-        NSString *fileName = [fileArray lastObject];
+    if (_userDataObject == nil) return;
+    
+    NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
+    
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:_userDataObject forKey:kUserDataKey];
+    [archiver finishEncoding];
+    [data writeToFile:dataPath atomically:YES];
+    NSLog(@"Saving xml data to %@...", dataPath);
+    
+    [self updateUserDataObject];
+}
+
+#pragma mark Testing
+//FIXME: save plist file
+/*
++(void)testSave:(NSArray *)characterArray {
+    
+    NSMutableArray *books = [NSMutableArray new];
+    
+    for (Character *character in characterArray) {
+        NSMutableDictionary *book = [NSMutableDictionary new];
         
-        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
-        [[self sharedFileManager].animationDictionary setValue:clip forKey:fileName];
+        NSString *levelString = [NSString stringWithFormat:@"%d",character.level];
+        [book setObject:character.characterId forKey:@"id"];
+        [book setObject:levelString forKey:@"level"];
+        
+        [books addObject:book];
+    }
+    
+    //serialization Binary
+    NSString *filePath = [self dataFilePath:@"SelectedCharacters.plist" forSave:TRUE];
+    NSLog(@"Saving xml data to %@...", filePath);
+    NSString *error;
+    NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:books format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
+    
+    if(xmlData)
+    {
+        NSLog(@"No error creating XML data.");
+        [xmlData writeToFile:filePath atomically:YES];
+    }
+    else
+    {
+        NSLog(@"%@",error);
     }
 }
+//*/
 
 +(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
     // ex: animationName = Animation_Swordsman_walking_Down.plist
-    
-    if (![self sharedFileManager].animationDictionary) {
-        [self loadAnimation];
-    }
-    
     return [[self sharedFileManager].animationDictionary objectForKey:animationName];
-}
-
-+ (GDataXMLDocument *)getCharacterBasicData {
-    return [self sharedFileManager].characterDataFile;
-}
-
-+ (void)saveCharacterArray:(NSArray *)characterArray {
-    GDataXMLElement * partyElement = [GDataXMLNode elementWithName:@"party"];
-    int i=0;
-    for (Character *character in characterArray) {
-        GDataXMLElement * characterElement =
-        [GDataXMLNode elementWithName:@"character"];
-        NSString *count = [NSString stringWithFormat:@"%03d",i];
-        [characterElement addAttribute:[GDataXMLNode elementWithName:@"ol" stringValue:count]];
-        
-        [characterElement addAttribute:[GDataXMLNode elementWithName:@"id" stringValue:character.characterId]];
-        NSString *levelString = [NSString stringWithFormat:@"%d",character.level];
-        [characterElement addAttribute:[GDataXMLNode elementWithName:@"level" stringValue:levelString]];
-        [partyElement addChild:characterElement];
-        i=i+1;
-    }
-    GDataXMLDocument *document = [[GDataXMLDocument alloc]
-                                  initWithRootElement:partyElement];
-    NSData *xmlData = document.XMLData;
-    
-    NSString *filePath = [self dataFilePath:@"SelectedCharacters.xml" forSave:TRUE];
-    NSLog(@"Saving xml data to %@...", filePath);
-    [xmlData writeToFile:filePath atomically:YES];
-    
-    [self updateCharacterElements];
-}
-
-+ (NSArray *)getChararcterArray {
-    
-    NSMutableArray *tempCharacterArray = [NSMutableArray array];
-    for (GDataXMLElement *element in [self sharedFileManager].characterElements) {
-        Character *character = [[Character alloc] initWithXMLElement:element];
-        [tempCharacterArray addObject:character];
-    }
-    
-    return tempCharacterArray;
 }
 
 +(void)unloadSoundsEffect {
@@ -252,83 +251,44 @@ static FileManager *sharedFileManager = nil;
     
 }
 
-+(void)loadSceneInfo:(NSString *)name {
-    GDataXMLDocument *battleInfoDoc = [self loadGDataXMLDocumentFromFileName:@"BattleData.xml"];
-    GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:battleInfoDoc tagName:@"menu" tagAttributeName:@"name" tagAttributeValue:name];
-    
-    
-    NSString *backgroundMusicName;
-    
-    //get tag's attributes
-    for (GDataXMLNode *attribute in characterElement.attributes) {
-        if([attribute.name isEqualToString:@"bgm"]) {
-            backgroundMusicName = attribute.stringValue;
-        }
-    }
++(void)saveUserData {
+    [[self sharedFileManager] saveUserData];
 }
 
++ (UserDataObject *)getUserDataObject {
+    return [self sharedFileManager].userDataObject;
+}
+
++(NSDictionary *)getCharacterDataWithId:(NSString *)anId {
+    return [self getDictionaryInArray:[self sharedFileManager].characterDataFile WithTagName:@"id" tagValue:anId];
+}
+
++ (NSArray *)getChararcterArray {
+    return [[self sharedFileManager].userDataObject getPlayerCharacterArray];
+}
+
++ (Character *)getPlayerHero {
+    return [[self sharedFileManager].userDataObject getPlayerHero];
+}
+
++ (Character *)getPlayerCastle {
+    return [[self sharedFileManager].userDataObject getPlayerCastle];
+}
+
+//loadBattleInfo
 +(BattleDataObject *)loadBattleInfo:(NSString *)name {
-    //TODO: load battle info from battle.file ?
-    // ex: BattleData.xml
-    GDataXMLDocument *battleInfoDoc = [self loadGDataXMLDocumentFromFileName:@"BattleData.xml"];
-    GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:battleInfoDoc tagName:@"battle" tagAttributeName:@"name" tagAttributeValue:name];
-    
-    NSString *mapName;
-    NSString *backgroundMusicName;
-    
-    //get tag's attributes
-    for (GDataXMLNode *attribute in characterElement.attributes) {
-        if ([attribute.name isEqualToString:@"map"]) {
-            mapName = attribute.stringValue;
-        } else if([attribute.name isEqualToString:@"bgm"]) {
-            backgroundMusicName = attribute.stringValue;
+    NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
+    for (NSDictionary *dic in allBattleDataArray) {
+        if ([name isEqualToString:[dic objectForKey:@"name"]]) {
+            BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:dic];
+            return battleDataObject;
         }
     }
-    
-    NSMutableArray *enemyArray = [NSMutableArray array];
-    NSMutableArray *enemyBosses = [NSMutableArray array];
-    Character *enemyCastle;
-    
-    for (GDataXMLElement *element in characterElement.children) {
-        if ([element.name isEqualToString:@"enemies"]) {
-            for (GDataXMLElement *enemy in element.children) {
-                Character *character = [[Character alloc] initWithXMLElement:enemy];
-                [enemyArray addObject:character];
-            }
-        }
-        if ([element.name isEqualToString:@"bosses"]) {
-            for (GDataXMLElement *boss in element.children) {
-                Character *character = [[Character alloc] initWithXMLElement:boss];
-                [enemyBosses addObject:character];
-            }
-        }
-        if ([element.name isEqualToString:@"enemyCastle"]) {
-            for (GDataXMLElement *castle in element.children) {
-                enemyCastle = [[Character alloc] initWithXMLElement:castle];
-                break;
-            }
-        }
-    }
-    
-    BattleDataObject *battleData = [[BattleDataObject alloc] initWithBattleName:name];
-    
-    
-    battleData.playerCharacterArray = [self getChararcterArray];
-    battleData.battleEnemyArray = enemyArray;
-    battleData.enemyBossArray = enemyBosses;
-    battleData.enemyCastle = enemyCastle;
-    
-    //FIXME: load castle from file
-    GDataXMLDocument *castleElement = [FileManager loadGDataXMLDocumentFromFileName:@"AllCharacter.xml"];
-    Character *playerCastle = [[Character alloc] initWithXMLElement:[FileManager getNodeFromXmlFile:castleElement tagName:@"character" tagAttributeName:@"castle" tagAttributeValue:@"001"]];
-    NSLog(@"castle :: %@", playerCastle.name);
-    NSLog(@"enemyCastle :: %@", enemyCastle.name);
-    battleData.playerCastle = playerCastle;
-    
-    return battleData;
+    return nil;
 }
 
-//FIXME: Testing.
+#pragma mark not done
+//FIXME: not done
 -(void)playBackgroundMusic:(NSString *)name {
     
     NSArray *music = [FileManager getAllFilePathsInDirectory:@"BackgroundMusic_caf" withPrefix:name fileType:@"caf"];
@@ -337,6 +297,20 @@ static FileManager *sharedFileManager = nil;
     
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:fileName];
 }
-
-
+/*
+ +(void)loadSceneInfo:(NSString *)name {
+ GDataXMLDocument *battleInfoDoc = [self loadGDataXMLDocumentFromFileName:@"BattleData.xml"];
+ GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:battleInfoDoc tagName:@"menu" tagAttributeName:@"name" tagAttributeValue:name];
+ 
+ 
+ NSString *backgroundMusicName;
+ 
+ //get tag's attributes
+ for (GDataXMLNode *attribute in characterElement.attributes) {
+ if([attribute.name isEqualToString:@"bgm"]) {
+ backgroundMusicName = attribute.stringValue;
+ }
+ }
+ }
+ //*/
 @end

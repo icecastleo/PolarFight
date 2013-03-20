@@ -59,36 +59,20 @@
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
-        GDataXMLDocument *doc = [FileManager getCharacterBasicData];
+        NSDictionary *characterData = [FileManager getCharacterDataWithId:anId];
+        _name = [characterData objectForKey:@"name"];
+        _picFilename = [characterData objectForKey:@"image"];
+        _headImageFileName = [characterData objectForKey:@"headImage"];
+        _cost = [[characterData objectForKey:@"cost"] intValue];
         
-        GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:doc tagName:@"character" tagAttributeName:@"id" tagAttributeValue:anId];
+        NSArray *attributes = [characterData objectForKey:@"attributes"];
         
-        //get tag's attributes
-        for (GDataXMLNode *attribute in characterElement.attributes) {
-            if ([attribute.name isEqualToString:@"name"]) {
-                _name = attribute.stringValue;
-            } else if ([attribute.name isEqualToString:@"img"]) {
-                _picFilename = attribute.stringValue;
-            }else if ([attribute.name isEqualToString:@"headImage"]) {
-                _headImageFileName = attribute.stringValue;
-            }else if ([attribute.name isEqualToString:@"cost"]) {
-                _cost = attribute.stringValue.intValue;
-            }
+        for (NSDictionary *dic in attributes) {
+            Attribute *attr = [[Attribute alloc] initWithDictionary:dic];
+            [self addAttribute:attr];
         }
         
-        //get tag's children
-        for (GDataXMLElement *element in characterElement.children) {
-            if ([element.name isEqualToString:@"attributes"]) {
-                for (GDataXMLElement *attribute in element.children) {
-                    Attribute *attr = [[Attribute alloc] initWithXMLElement:attribute];
-                    [self addAttribute:attr];
-                }
-            }
-            //TODO: skill part
-            else if ([element.name isEqualToString:@"skill"]) {
-                
-            }
-        }
+        //TODO: skill part
         
         _characterId = anId;
         
@@ -154,22 +138,6 @@
     } else if ([name isEqualToString:@"Archer"]) {
         [self addPassiveSkill:[[ContinuousAttackSkill alloc] initWithPercent:20]];
     }
-}
-
--(id)initWithXMLElement:(GDataXMLElement *)anElement {
-    NSString *tempId;
-    NSString *tempLevel;
-    for (GDataXMLNode *attribute in anElement.attributes) {
-        if ([attribute.name isEqualToString:@"id"]) {
-            tempId = attribute.stringValue;
-        } else if ([attribute.name isEqualToString:@"level"]) {
-            tempLevel = attribute.stringValue;
-        }
-    }
-    
-    self = [self initWithId:tempId andLevel:tempLevel.intValue];
-    
-    return self;
 }
 
 -(void)dealloc {

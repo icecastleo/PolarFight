@@ -20,7 +20,7 @@
 #import "BaseAI.h"
 @class BattleController;
 
-@interface Character : NSObject <XMLParsingDelegate> {
+@interface Character : NSObject {
     NSMutableArray *pointArray;
 //    TestSkill *skill;
     
@@ -62,7 +62,6 @@
 @property (nonatomic) NSMutableArray *pointArray;
 
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel;
--(id)initWithXMLElement:(GDataXMLElement *)anElement;
 
 -(void)addAttribute:(Attribute *)attribute;
 -(Attribute*)getAttribute:(CharacterAttributeType)type;

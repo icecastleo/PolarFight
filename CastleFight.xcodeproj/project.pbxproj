@@ -110,8 +110,6 @@
 		372526BF16EF68D800C79A9E /* shopbutton.plist in Resources */ = {isa = PBXBuildFile; fileRef = 372526B716EF68D800C79A9E /* shopbutton.plist */; };
 		372526C016EF68D800C79A9E /* shopbutton.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 372526B816EF68D800C79A9E /* shopbutton.pvr.ccz */; };
 		3725D4FC16A807C000BF49E2 /* CharacterQueueLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */; };
-		3725D51816A83E3A00BF49E2 /* AllCharacter.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51716A83E3A00BF49E2 /* AllCharacter.xml */; };
-		3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */; };
 		3725D52316A982B000BF49E2 /* CharacterQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725D52216A982B000BF49E2 /* CharacterQueueObject.m */; };
 		3727AEE0169D6ACA00160620 /* CCNode+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED1169D6ACA00160620 /* CCNode+Autolayout.m */; };
 		3727AEE2169D6ACA00160620 /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AED5169D6ACA00160620 /* SWMultiColumnTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -122,14 +120,12 @@
 		3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815016F7550800F1F7EE /* BattleDataObject.m */; };
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
-		3730815616F75B9C00F1F7EE /* SelectedCharacters.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3730815516F75B9C00F1F7EE /* SelectedCharacters.xml */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		37598BDE1696D2550007013B /* CharacterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37598BDD1696D2550007013B /* CharacterInfoView.m */; };
 		37675A4316EF4170000671B0 /* Sound_character_caf in Resources */ = {isa = PBXBuildFile; fileRef = 37675A4216EF4170000671B0 /* Sound_character_caf */; };
 		37675A4516EF449C000671B0 /* Sound_scene_caf in Resources */ = {isa = PBXBuildFile; fileRef = 37675A4416EF449C000671B0 /* Sound_scene_caf */; };
 		37675A4716EF450B000671B0 /* BackgroundMusic_caf in Resources */ = {isa = PBXBuildFile; fileRef = 37675A4616EF450B000671B0 /* BackgroundMusic_caf */; };
 		37799E2416D645D000349750 /* Swordsman in Resources */ = {isa = PBXBuildFile; fileRef = 37799E2316D645D000349750 /* Swordsman */; };
-		3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3799B71B1650DFC100A9A394 /* CharacterData.xml */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
@@ -141,12 +137,6 @@
 		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
-		37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39631664AD48000677B2 /* XmlHeaderHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37DF396D1664AD48000677B2 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39651664AD48000677B2 /* XmlParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39671664AD48000677B2 /* TypeMapping.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF39691664AD48000677B2 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37DF39701664AD48000677B2 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF396B1664AD48000677B2 /* Util.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37E08D8E16EF161D00237FCB /* BattleData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 37E08D8D16EF161D00237FCB /* BattleData.xml */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */; };
 		37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96016AE2E4B00D492E6 /* archerHead32.png */; };
@@ -166,6 +156,10 @@
 		37E4F97E16AE2E4B00D492E6 /* wizardHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96E16AE2E4B00D492E6 /* wizardHead32.png */; };
 		37E4F97F16AE2E4B00D492E6 /* wizardHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */; };
 		37E4F98116AE2E6D00D492E6 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F98016AE2E6D00D492E6 /* map@2x.png */; };
+		37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */; };
+		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
+		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
+		37E68CA516F97B4900AB5FBD /* CharacterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterData.m */; };
 		37EDE73816EB6B8E000345DA /* Animation in Resources */ = {isa = PBXBuildFile; fileRef = 37EDE73716EB6B8E000345DA /* Animation */; };
 		37F585C516AF723600917637 /* currentCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585BF16AF723600917637 /* currentCharacter.png */; };
 		37F585C616AF723600917637 /* currentCharacter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C016AF723600917637 /* currentCharacter@2x.png */; };
@@ -546,8 +540,6 @@
 		372526B816EF68D800C79A9E /* shopbutton.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = shopbutton.pvr.ccz; sourceTree = "<group>"; };
 		3725D4FA16A807C000BF49E2 /* CharacterQueueLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueueLayer.h; sourceTree = "<group>"; };
 		3725D4FB16A807C000BF49E2 /* CharacterQueueLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueLayer.m; sourceTree = "<group>"; };
-		3725D51716A83E3A00BF49E2 /* AllCharacter.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AllCharacter.xml; sourceTree = "<group>"; };
-		3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestPlayer2.xml; sourceTree = "<group>"; };
 		3725D52116A982B000BF49E2 /* CharacterQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueueObject.h; sourceTree = "<group>"; };
 		3725D52216A982B000BF49E2 /* CharacterQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueueObject.m; sourceTree = "<group>"; };
 		3727AED0169D6ACA00160620 /* CCNode+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+Autolayout.h"; sourceTree = "<group>"; };
@@ -568,8 +560,6 @@
 		3730815016F7550800F1F7EE /* BattleDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleDataObject.m; sourceTree = "<group>"; };
 		3730815216F7578100F1F7EE /* UserDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataObject.h; sourceTree = "<group>"; };
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
-		3730815516F75B9C00F1F7EE /* SelectedCharacters.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SelectedCharacters.xml; sourceTree = "<group>"; };
-		374070831683144A007BEDDF /* XMLParsingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParsingDelegate.h; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
@@ -578,7 +568,6 @@
 		37675A4416EF449C000671B0 /* Sound_scene_caf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sound_scene_caf; path = Resources/Sound_scene_caf; sourceTree = "<group>"; };
 		37675A4616EF450B000671B0 /* BackgroundMusic_caf */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BackgroundMusic_caf; path = Resources/BackgroundMusic_caf; sourceTree = "<group>"; };
 		37799E2316D645D000349750 /* Swordsman */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Swordsman; path = Resources/Swordsman; sourceTree = "<group>"; };
-		3799B71B1650DFC100A9A394 /* CharacterData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CharacterData.xml; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BB1957169E9F2300AC56FC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
@@ -599,16 +588,6 @@
 		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
-		37DF39621664AD48000677B2 /* XmlHeaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlHeaderHelper.h; sourceTree = "<group>"; };
-		37DF39631664AD48000677B2 /* XmlHeaderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlHeaderHelper.m; sourceTree = "<group>"; };
-		37DF39641664AD48000677B2 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
-		37DF39651664AD48000677B2 /* XmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParser.m; sourceTree = "<group>"; };
-		37DF39661664AD48000677B2 /* TypeMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeMapping.h; sourceTree = "<group>"; };
-		37DF39671664AD48000677B2 /* TypeMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeMapping.m; sourceTree = "<group>"; };
-		37DF39681664AD48000677B2 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		37DF39691664AD48000677B2 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
-		37DF396A1664AD48000677B2 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		37DF396B1664AD48000677B2 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -627,7 +606,6 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
-		37E08D8D16EF161D00237FCB /* BattleData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BattleData.xml; sourceTree = "<group>"; };
 		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
@@ -649,6 +627,11 @@
 		37E4F96E16AE2E4B00D492E6 /* wizardHead32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wizardHead32.png; sourceTree = "<group>"; };
 		37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wizardHead32@2x.png"; sourceTree = "<group>"; };
 		37E4F98016AE2E6D00D492E6 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
+		37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
+		37E68C9F16F95B1700AB5FBD /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
+		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
+		37E68CA316F97B4800AB5FBD /* CharacterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterData.h; sourceTree = "<group>"; };
+		37E68CA416F97B4800AB5FBD /* CharacterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterData.m; sourceTree = "<group>"; };
 		37EDE73716EB6B8E000345DA /* Animation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Animation; path = Resources/Animation; sourceTree = "<group>"; };
 		37F585BF16AF723600917637 /* currentCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = currentCharacter.png; sourceTree = "<group>"; };
 		37F585C016AF723600917637 /* currentCharacter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currentCharacter@2x.png"; sourceTree = "<group>"; };
@@ -1256,36 +1239,19 @@
 		3730814D16F7548F00F1F7EE /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				37E68CA316F97B4800AB5FBD /* CharacterData.h */,
+				37E68CA416F97B4800AB5FBD /* CharacterData.m */,
 				3730815216F7578100F1F7EE /* UserDataObject.h */,
 				3730815316F7578100F1F7EE /* UserDataObject.m */,
 				3730814F16F7550800F1F7EE /* BattleDataObject.h */,
 				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				37DCA5C716F1CBD90006D656 /* FileManager.h */,
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
-				37E08D8D16EF161D00237FCB /* BattleData.xml */,
-				3799B71B1650DFC100A9A394 /* CharacterData.xml */,
-				3725D51716A83E3A00BF49E2 /* AllCharacter.xml */,
-				3730815516F75B9C00F1F7EE /* SelectedCharacters.xml */,
-				3725D51B16A83E9000BF49E2 /* TestPlayer2.xml */,
+				37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */,
+				37E68C9F16F95B1700AB5FBD /* UserData.plist */,
+				37E68CA116F95D3500AB5FBD /* BattleData.plist */,
 			);
 			name = Files;
-			sourceTree = "<group>";
-		};
-		3799B7171650DE2000A9A394 /* XMLSupport */ = {
-			isa = PBXGroup;
-			children = (
-				37DF39621664AD48000677B2 /* XmlHeaderHelper.h */,
-				37DF39631664AD48000677B2 /* XmlHeaderHelper.m */,
-				37DF39641664AD48000677B2 /* XmlParser.h */,
-				37DF39651664AD48000677B2 /* XmlParser.m */,
-				37DF39661664AD48000677B2 /* TypeMapping.h */,
-				37DF39671664AD48000677B2 /* TypeMapping.m */,
-				37DF39681664AD48000677B2 /* GDataXMLNode.h */,
-				37DF39691664AD48000677B2 /* GDataXMLNode.m */,
-				37DF396A1664AD48000677B2 /* Util.h */,
-				37DF396B1664AD48000677B2 /* Util.m */,
-			);
-			name = XMLSupport;
 			sourceTree = "<group>";
 		};
 		37DB1F2616BBD06B00C0368D /* AnimationKit */ = {
@@ -1539,8 +1505,6 @@
 				9B92D2C016424E74000AF467 /* CharacterSprite.m */,
 				37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */,
 				37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */,
-				374070831683144A007BEDDF /* XMLParsingDelegate.h */,
-				3799B7171650DE2000A9A394 /* XMLSupport */,
 			);
 			name = Character;
 			sourceTree = "<group>";
@@ -2322,7 +2286,6 @@
 				9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */,
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
-				3799B71C1650DFC100A9A394 /* CharacterData.xml in Resources */,
 				2B85A7BA16635BF100D5962F /* tree01.gif in Resources */,
 				37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */,
 				37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */,
@@ -2334,8 +2297,6 @@
 				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
 				9B08F96116A40805006BF34F /* vald_sword.png in Resources */,
 				2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */,
-				3725D51816A83E3A00BF49E2 /* AllCharacter.xml in Resources */,
-				3725D51C16A83E9000BF49E2 /* TestPlayer2.xml in Resources */,
 				9BF3260616AC559700D5782B /* fire.png in Resources */,
 				9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */,
 				37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */,
@@ -2388,7 +2349,6 @@
 				9B23A08016E1203A006E052F /* map_01-hd.png in Resources */,
 				9B23A08116E1203A006E052F /* map_01.png in Resources */,
 				37EDE73816EB6B8E000345DA /* Animation in Resources */,
-				37E08D8E16EF161D00237FCB /* BattleData.xml in Resources */,
 				37675A4316EF4170000671B0 /* Sound_character_caf in Resources */,
 				37675A4516EF449C000671B0 /* Sound_scene_caf in Resources */,
 				37675A4716EF450B000671B0 /* BackgroundMusic_caf in Resources */,
@@ -2478,7 +2438,9 @@
 				9B9848D716F09D5E00D3D55D /* font in Resources */,
 				9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */,
 				9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */,
-				3730815616F75B9C00F1F7EE /* SelectedCharacters.xml in Resources */,
+				37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */,
+				37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */,
+				37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2526,11 +2488,6 @@
 				9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */,
 				9B2AB06B16668F6B00B78136 /* PassiveSkill.m in Sources */,
 				2B85A7B7166357DB00D5962F /* Barrier.m in Sources */,
-				37DF396C1664AD48000677B2 /* XmlHeaderHelper.m in Sources */,
-				37DF396D1664AD48000677B2 /* XmlParser.m in Sources */,
-				37DF396E1664AD48000677B2 /* TypeMapping.m in Sources */,
-				37DF396F1664AD48000677B2 /* GDataXMLNode.m in Sources */,
-				37DF39701664AD48000677B2 /* Util.m in Sources */,
 				9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */,
 				9B288206166FA61C0041604F /* AttackEffect.m in Sources */,
 				9B28820A166FA76D0041604F /* Armor.m in Sources */,
@@ -2602,6 +2559,7 @@
 				37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */,
 				3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */,
 				3730815416F7578100F1F7EE /* UserDataObject.m in Sources */,
+				37E68CA516F97B4900AB5FBD /* CharacterData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

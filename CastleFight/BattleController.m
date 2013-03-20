@@ -87,26 +87,28 @@ __weak static BattleController* currentInstance;
     //test battleData
     BattleDataObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
-    NSAssert(battleData.playerCharacterArray != nil, @"Ooopse! you forgot to choose some characters.");
+    NSArray *characterArray = [FileManager getChararcterArray];
     
-    for (Character *character in battleData.playerCharacterArray) {
+    NSAssert(characterArray != nil, @"Ooopse! you forgot to choose some characters.");
+    
+    for (Character *character in characterArray) {
         character.player = 1;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    for (Character *character in battleData.battleEnemyArray) {
+    for (Character *character in [battleData getEnemyArray]) {
         character.player = 2;
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
         [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
-    _playerCastle = battleData.playerCastle;
+    _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
 
-    _enemyCastle = battleData.enemyCastle;
+    _enemyCastle = [battleData getEnemyCastle];
     _enemyCastle.player = 2;
     
     [mapLayer addCastle:_playerCastle];

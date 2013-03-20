@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class GDataXMLDocument,GDataXMLElement,BattleDataObject;
+@class BattleDataObject,UserDataObject,Character;
 
 @interface FileManager : NSObject
 
-+ (GDataXMLElement *)getNodeFromXmlFile:(GDataXMLDocument *)doc tagName:(NSString *)tagName tagAttributeName:(NSString *)tagAttributeName tagAttributeValue:(NSString *)tagAttributeValue;
 + (NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
-+ (NSArray *)getChararcterArray;
-+ (void)saveCharacterArray:(NSArray *)characterArray;
-+ (GDataXMLDocument *)getCharacterBasicData;
 +(void)preloadSoundsEffect:(NSString *)sceneName;
+
++ (void)saveUserData;
++ (UserDataObject *)getUserDataObject;
+
++(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
++ (NSArray *)getChararcterArray;
++ (Character *)getPlayerHero;
++ (Character *)getPlayerCastle;
 
 +(BattleDataObject *)loadBattleInfo:(NSString *)name;
 

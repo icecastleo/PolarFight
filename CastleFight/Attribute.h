@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "DependentAttribute.h"
-#import "XMLParsingDelegate.h"
+
 
 @class Character;
 
-@interface Attribute : NSObject <XMLParsingDelegate> {
+@interface Attribute : NSObject {
     float quadratic;
     float linear;
     float constantTerm;
@@ -40,6 +40,6 @@
 -(void)increaseCurrentValue:(int)aValue;
 -(void)decreaseCurrentValue:(int)aValue;
 
--(id)initWithXMLElement:(GDataXMLElement *)anElement;
+-(id)initWithDictionary:(NSDictionary *)dic;
 
 @end

@@ -33,25 +33,12 @@
     return self;
 }
 
--(id)initWithXMLElement:(GDataXMLElement *)anElement {
-    CharacterAttributeType attributeType;
-    int tempQuadratic;
-    int tempLinear;
-    int tempConstantTerm;
+-(id)initWithDictionary:(NSDictionary *)dic {
+    CharacterAttributeType attributeType = [self getAttributeTypeFromAttributeName:[dic objectForKey:@"name"]];
+    int tempQuadratic = [[dic objectForKey:@"a"] intValue];
+    int tempLinear = [[dic objectForKey:@"b"] intValue];
+    int tempConstantTerm = [[dic objectForKey:@"c"] intValue];
     
-    for (GDataXMLNode *attribute in anElement.attributes) {
-//        NSLog(@"attribute.name : %@, attribute.value : %@",attribute.name, attribute.stringValue);
-        
-        if ([attribute.name isEqualToString:@"name"]) {
-            attributeType = [self getAttributeTypeFromAttributeName:attribute.stringValue];
-        } else if ([attribute.name isEqualToString:@"a"]) {
-            tempQuadratic = attribute.stringValue.intValue;
-        } else if ([attribute.name isEqualToString:@"b"]) {
-            tempLinear = attribute.stringValue.intValue;
-        } else if ([attribute.name isEqualToString:@"c"]) {
-            tempConstantTerm = attribute.stringValue.intValue;
-        }
-    }
     return [self initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
 }
 
