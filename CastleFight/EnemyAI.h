@@ -9,7 +9,10 @@
 #import "BaseAI.h"
 
 @interface EnemyAI : BaseAI
-{
-       NSMutableDictionary * mutableDictionary;
-}
+
+@property NSMutableDictionary *mutableDictionary;
+@property float food;
+@property Character *nextMonster;
+
+-(NSMutableDictionary*) getCurrentMonsters;
 @end

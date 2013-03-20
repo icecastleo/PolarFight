@@ -39,7 +39,7 @@ __weak static BattleController* currentInstance;
         
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
+        mapLayer = [[MapLayer alloc] initWithFile:@"map_01"];
         [self addChild:mapLayer];
         
         // set character on may

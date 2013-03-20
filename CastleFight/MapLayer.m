@@ -30,29 +30,61 @@ const static int pathHeight = 70;
         _characters = [[NSMutableArray alloc] init];
         _castles = [[NSMutableArray alloc] initWithCapacity:2];
         
-        CCSprite *map = [CCSprite spriteWithFile:file];
-        map.anchorPoint = ccp(0, 0);
-        [self addChild:map z:-1];
         
+        // Background Image
+        
+        
+        CCSprite *map1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
+        map1.anchorPoint = ccp(0, 0);
+        
+        CCSprite *map2 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
+        map2.anchorPoint = ccp(0, 0);
+
+        CCSprite *map3 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
+        map3.anchorPoint = ccp(0, 0);
+       
         CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
-        background.contentSize = map.contentSize;
+        background.contentSize = map1.contentSize;
         [self addChild:background z:-5];
+       
+       	// Create a void Node, parent Node
+		CCParallaxNode *voidNode = [CCParallaxNode node];
+		
+		// Now we add our children "layers" to void Node
+		
+		// Background Image
+		[voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(0,106)];
+		
+		// TileMap
+		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,106)];
+        [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,0)];
         
+        [self addChild:voidNode];
+        
+        
+        //        CCSprite *map = [CCSprite spriteWithFile:file];
+        //        map.anchorPoint = ccp(0, 0);
+        //        [self addChild:map z:-1];
+        //
+        //        CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
+        //        background.contentSize = map.contentSize;
+        //        [self addChild:background z:-5];
+        //
         // FIXME: Temp method for test map.
         CGSize winSize = [CCDirector sharedDirector].winSize;
         if (background.contentSize.height < winSize.height) {
             background.contentSize = CGSizeMake(background.contentSize.width, winSize.height);
         }
         
-        _boundaryX = map.boundingBox.size.width;
-        _boundaryY = map.boundingBox.size.height;
+        _boundaryX = map1.boundingBox.size.width;
+        _boundaryY = map1.boundingBox.size.height;
         
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
         [self addChild:_cameraControl];
         
         self.isTouchEnabled = YES;
         
-//        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
+        //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
     }
     return self;
 }
@@ -84,9 +116,9 @@ const static int pathHeight = 70;
     } else {
         position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
     }
-
+    
     [self setPosition:position forCharacter:character];
-
+    
     [self addChild:character.sprite];
     [_characters addObject:character];
     
@@ -116,7 +148,7 @@ const static int pathHeight = 70;
 }
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
-//    CCLOG(@"%f %f",position.x, position.y);
+    //    CCLOG(@"%f %f",position.x, position.y);
     position = [self getPositionInBoundary:position forCharacter:character];
     [self setPosition:position forCharacter:character];
 }
