@@ -18,6 +18,7 @@
     if(a.nextMonster!=nil)
     {
         if(a.nextMonster.cost<=a.food){
+            [a.nextMonster.sprite addBloodSprite];
             [[BattleController currentInstance] addCharacter:a.nextMonster];
             a.nextMonster=nil;
             a.food-=a.nextMonster.cost;
