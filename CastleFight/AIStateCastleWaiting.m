@@ -8,26 +8,53 @@
 
 #import "AIStateCastleWaiting.h"
 #import "EnemyAI.h"
+#import "Character.h"
+#import "BattleController.h"
 @implementation AIStateCastleWaiting
 
 - (void)execute:(BaseAI *)ai {
     // Check if should change state
+    EnemyAI *a = (EnemyAI*)ai;
+    if(a.nextMonster!=nil)
+    {
+        if(a.nextMonster.cost<=a.food){
+            [[BattleController currentInstance] addCharacter:a.nextMonster];
+            a.nextMonster=nil;
+            a.food-=a.nextMonster.cost;
+        }
+        
+    }
+ 
     
-    //examine once a sec
+    // TODO: Food Supply
+    
     if(CACurrentMediaTime()>nextDecisionTime)
-        [self examineNextMonster:ai];
+    {
+        //examine once a sec
+        NSString* next= [self examineNextMonster:ai];
+        a.nextMonster= [self newMonster:next];
+        a.food+=4;
+    }
     
 }
 
--(void) examineNextMonster:(BaseAI *)ai
+-(Character*) newMonster:(NSString*)monsterID
+{
+    
+    Character* character = [[Character alloc] initWithId:monsterID andLevel:1];
+    character.player=2;
+    return character;
+}
+
+-(NSString*) examineNextMonster:(BaseAI *)ai
 {
     
     EnemyAI *a = (EnemyAI*)ai;
     CCLOG(@"test");
     nextDecisionTime=CACurrentMediaTime()+1;
-    NSDictionary* dic = a.mutableDictionary;
-  
-   
+    NSDictionary* dic = [a getCurrentMonsters];
+    
+    
     NSMutableArray *Name = [NSMutableArray arrayWithCapacity:dic.count];
     
     
@@ -46,7 +73,7 @@
     }
     
     if(compare1.count!=compare2.count)
-        return;
+        return nil;
     int count =0;
     for(int i = 0;i< compare1.count;i++)
     {
@@ -65,13 +92,14 @@
     for(int i = 0;i< compare1.count;i++)
     {
         if(
-        [[floatArray4 objectAtIndex:i] doubleValue]<min)
+           [[floatArray4 objectAtIndex:i] doubleValue]<min)
         {
             min=[[floatArray3 objectAtIndex:i] doubleValue];
             position = i;
         }
     }
     
+    return Name[position];
     
 }
 
