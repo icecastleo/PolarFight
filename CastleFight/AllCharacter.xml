@@ -2,12 +2,12 @@
 
 <party>
     <character ol="000" id="001" level="1"></character>
-    <character ol="001" id="002" level="2"></character>
-    <character ol="002" id="003" level="2"></character>
-    <character ol="003" id="004" level="2"></character>
-    <character ol="004" id="005" level="2"></character>
-    <character ol="005" id="006" level="2"></character>
-    <character ol="006" id="007" level="2"></character>
-    <character ol="007" id="008" level="2"></character>
+    <character ol="001" id="002" level="1"></character>
+    <character ol="002" id="003" level="1"></character>
+    <character ol="003" id="004" level="1"></character>
+    <character ol="004" id="005" level="1"></character>
+    <character ol="005" id="006" level="1"></character>
+    <character ol="006" id="007" level="1"></character>
+    <character ol="007" id="008" level="1"></character>
     <character castle="001" id="009" level="1"></character>
 </party>

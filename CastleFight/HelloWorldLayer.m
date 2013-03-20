@@ -109,13 +109,8 @@
         // Test for c++ code
 //        ObjectiveCAdaptor *test = [[ObjectiveCAdaptor alloc] init];
 //        [test objectiveFunc];
-        
 	}
 	return self;
 }
-
-
-
-// on "dealloc" you need to release all your retained objects
 
 @end

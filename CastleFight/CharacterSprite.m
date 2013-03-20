@@ -15,38 +15,42 @@
 #import "CharacterBloodSprite.h"
 
 @interface CharacterSprite() {
-    float bloodScaleMultiplier;
-    
     AKHelperObject *akHelper;
-    
-    NSArray *directionStrings;
-    
 }
 @end
-
 
 #define kAttackAnimation @"Attack"
 #define kWalkingAnimation @"Walking"
 
 @implementation CharacterSprite
 
+static const NSArray *directionStrings;
+
++(void)initialize {
+    directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"user.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"enemy.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"hero.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+}
+
 -(id)initWithCharacter:(Character *)aCharacter {
     akHelper = [[AKHelperObject alloc] init];
     akHelper.objectDelegate = self;
-    directionStrings = @[@"Up",@"Down",@"Left",@"Right"];
     
-    if ([aCharacter.name isEqualToString:@"Swordsman"]) {
-        // Load the texture atlas sprite frames; this also loads the Texture with the same name
-        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [frameCache addSpriteFramesWithFile:@"Minotaur.plist"];
-        
-        if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
-            character = aCharacter;
-            [self setAnimationWithName:character.name];
-            [self addShadow];
-        }
-        return self;
-    }
+//    if ([aCharacter.name isEqualToString:@"Swordsman"]) {
+//        // Load the texture atlas sprite frames; this also loads the Texture with the same name
+//        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+//        [frameCache addSpriteFramesWithFile:@"Minotaur.plist"];
+//        
+//        if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
+//            character = aCharacter;
+//            [self setAnimationWithName:character.name];
+//            [self addShadow];
+//        }
+//        return self;
+//    }
     
     if ([aCharacter.name isEqualToString:@"Tower"]) {
 
@@ -68,24 +72,27 @@
         return self;
     }
     
-    // FIXME: replace player with direction.
-    if(self = [super initWithFile:
-               [NSString stringWithFormat:@"%@_%@2.gif",aCharacter.picFilename, aCharacter.player == 1 ? @"fr" : @"fr"]])
-    {
+    // TODO: Seperate user, enemy, hero
+    if (self = [super initWithSpriteFrameName:[NSString stringWithFormat:@"user_%02d_move_01.png", [aCharacter.characterId intValue]]]) {
         character = aCharacter;
-        [self setAnimationWithName:character.picFilename];
+        actions = [[NSMutableDictionary alloc] init];
+        
+        if (character.player == 2) {
+            self.flipX = YES;
+        }
+        
         [self addShadow];
+        [self setAnimation];
     }
     return self;
 }
 
 -(void)addShadow {
     CGRect sRect = CGRectMake(0, 0, self.boundingBox.size.width, self.boundingBox.size.height / kShadowHeightDivisor);
-//    CGRect sRect = CGRectMake(0, 0, 360, 60);
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(NULL, sRect.size.width, sRect.size.height, 8, sRect.size.width * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
-    CGContextSetRGBFillColor(context, 0.0, 0.0, 0.0, 0.6);
+    CGContextSetRGBFillColor(context, 0.1, 0.1, 0.1, 0.6);
     
     CGContextFillEllipseInRect(context, sRect);
     
@@ -114,147 +121,110 @@
     [outerBloodSprite update];
 }
 
--(CCAnimate *)createAnimateWithName:(NSString*)name frameNumber:(int)anInteger {
-    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-    
-    // Load the animation frames
-    NSMutableArray* frames = [NSMutableArray arrayWithCapacity:5];
-    
-    for (int i = 1; i <= anInteger; i++)
-    {
-        NSString* file = [NSString stringWithFormat:@"%@%03d.png",name, i];
-        CCSpriteFrame* frame = [frameCache spriteFrameByName:file];
-        [frames addObject:frame];
-    }
-    // Create an animation object from all the sprite animation frames
-    CCAnimation* animation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f];
-    animation.restoreOriginalFrame = YES;
-    CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
-    
-    return animate;
-}
-
--(void)setAnimationWithName:(NSString*)name {
-    
-    if ([name isEqualToString:@"Swordsman"]) {
-        NSAssert(akHelper != nil, @"akHelper should not be nil");
-        return;
-    }
+-(void)setAnimation {
     
     CCAnimation *animation = [CCAnimation animation];
     
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_bk1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_bk2.gif",name]];
+    for (int i = 1; i <= 4; i++) {
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"user_%02d_attack_%02d.png", [character.characterId intValue], i]]];
+    }
+
     animation.restoreOriginalFrame = YES;
-    animation.delayPerUnit = 0.3;
+    animation.delayPerUnit = 0.1;
     
-    upAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
+    [actions setObject:[CCAnimate actionWithAnimation:animation] forKey:@"attack"];
     
     animation = [CCAnimation animation];
     
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_fr2.gif",name]];
+    for (int i = 1; i <= 2; i++) {
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"user_%02d_move_%02d.png", [character.characterId intValue], i]]];
+    }
     
-    animation.restoreOriginalFrame = YES;
-    animation.delayPerUnit = 0.3;
+    animation.delayPerUnit = 0.2;
     
-    downAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
-    
-    
-    animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_lf1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_lf2.gif",name]];
-    
-    animation.restoreOriginalFrame = YES;
-    animation.delayPerUnit = 0.3;
-    
-    leftAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];    
-    
-    animation = [CCAnimation animation];
-    
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_rt1.gif",name]];
-    [animation addSpriteFrameWithFilename:[NSString stringWithFormat:@"%@_rt2.gif",name]];
-    
-    animation.restoreOriginalFrame = YES;
-    animation.delayPerUnit = 0.3;
-    
-    rightAction = [[CCRepeatForever alloc] initWithAction:[CCAnimate actionWithAnimation:animation]];
+    [actions setObject:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation]] forKey:@"move"];
 }
 
 -(void)runWalkAnimate {
     [self stopAllActions];
     
-    CharacterDirection direction = character.characterDirection;
+    [self runAction:[actions objectForKey:@"move"]];
     
-    // All character might use the applyAnimation method.
-    if ([character.name isEqualToString:@"Swordsman"]) {
-        
-        NSString *directionString = [directionStrings objectAtIndex:direction - 1];
-        NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_Walking_%@.plist",character.name,directionString];
-        
-        NSDictionary *walkingClip = [FileManager getAnimationDictionaryByName:animationKey];
-        NSAssert(walkingClip != nil, @"walking animation should exist.");
-        
-        [akHelper applyAnimationClip:walkingClip toNode:self];
-        return;
-    }
-    
-    // after test, these things will be deleted
-    if(direction == kCharacterDirectionUp) {
-        [self runAction:upAction];
-    } else if (direction == kCharacterDirectionDown) {
-        [self runAction:downAction];
-    } else if (direction == kCharacterDirectionLeft) {
-        [self runAction:leftAction];
-    } else if (direction == kCharacterDirectionRight) {
-        [self runAction:rightAction];
-    }
+//    CharacterDirection direction = character.characterDirection;
+//
+//    // All character might use the applyAnimation method.
+//    if ([character.name isEqualToString:@"Swordsman"]) {
+//        
+//        NSString *directionString = [directionStrings objectAtIndex:direction - 1];
+//        NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_Walking_%@.plist",character.name,directionString];
+//        
+//        NSDictionary *walkingClip = [FileManager getAnimationDictionaryByName:animationKey];
+//        NSAssert(walkingClip != nil, @"walking animation should exist.");
+//        
+//        [akHelper applyAnimationClip:walkingClip toNode:self];
+//        return;
+//    }
+//    
+//    // after test, these things will be deleted
+//    if(direction == kCharacterDirectionUp) {
+//        [self runAction:upAction];
+//    } else if (direction == kCharacterDirectionDown) {
+//        [self runAction:downAction];
+//    } else if (direction == kCharacterDirectionLeft) {
+//        [self runAction:leftAction];
+//    } else if (direction == kCharacterDirectionRight) {
+//        [self runAction:rightAction];
+//    }
 }
 
 -(void)runAttackAnimate {
     [self stopAllActions];
-    bloodSprite.visible = NO;
+
+    [self runAction:[actions objectForKey:@"attack"]];
     
-    CharacterDirection direction = character.characterDirection;
-    
-    if(direction == kCharacterDirectionUp) {
-        // TODO: Just delete me when there are attack animation.
-        if (upAttackAction == nil) {
-            [self runAction:[CCSequence actions:
-                             [CCDelayTime actionWithDuration:0.5],
-                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
-            return;
-        }
-        [self runAction:upAttackAction];
-    } else if (direction == kCharacterDirectionDown) {
-        // TODO: Just delete me when there are attack animation.
-        if (downAttackAction == nil) {
-            [self runAction:[CCSequence actions:
-                             [CCDelayTime actionWithDuration:0.5],
-                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
-            return;
-        }
-        [self runAction:downAttackAction];
-    } else if (direction == kCharacterDirectionLeft) {
-        // TODO: Just delete me when there are attack animation.
-        if (leftAttackAction == nil) {
-            [self runAction:[CCSequence actions:
-                             [CCDelayTime actionWithDuration:0.5],
-                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
-            return;
-        }
-        [self runAction:leftAttackAction];
-    } else if (direction == kCharacterDirectionRight) {
-        // TODO: Just delete me when there are attack animation.
-        if (rightAttackAction == nil) {
-            [self runAction:[CCSequence actions:
-                             [CCDelayTime actionWithDuration:0.5],
-                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
-            return;
-        }
-        [self runAction:rightAttackAction];
-    }
+    [self runAction:[CCSequence actions:
+                     [CCDelayTime actionWithDuration:1.0],
+                     [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+
+//    CharacterDirection direction = character.characterDirection;
+//
+//    if(direction == kCharacterDirectionUp) {
+//        // TODO: Just delete me when there are attack animation.
+//        if (upAttackAction == nil) {
+//            [self runAction:[CCSequence actions:
+//                             [CCDelayTime actionWithDuration:0.5],
+//                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+//            return;
+//        }
+//        [self runAction:upAttackAction];
+//    } else if (direction == kCharacterDirectionDown) {
+//        // TODO: Just delete me when there are attack animation.
+//        if (downAttackAction == nil) {
+//            [self runAction:[CCSequence actions:
+//                             [CCDelayTime actionWithDuration:0.5],
+//                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+//            return;
+//        }
+//        [self runAction:downAttackAction];
+//    } else if (direction == kCharacterDirectionLeft) {
+//        // TODO: Just delete me when there are attack animation.
+//        if (leftAttackAction == nil) {
+//            [self runAction:[CCSequence actions:
+//                             [CCDelayTime actionWithDuration:0.5],
+//                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+//            return;
+//        }
+//        [self runAction:leftAttackAction];
+//    } else if (direction == kCharacterDirectionRight) {
+//        // TODO: Just delete me when there are attack animation.
+//        if (rightAttackAction == nil) {
+//            [self runAction:[CCSequence actions:
+//                             [CCDelayTime actionWithDuration:0.5],
+//                             [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+//            return;
+//        }
+//        [self runAction:rightAttackAction];
+//    }
 }
 
 -(void)runDamageAnimate {
@@ -268,31 +238,32 @@
 }
  
 -(void)runAnimationForName:(NSString *)animationName {
-    [self stopAllActions];
-    CharacterDirection direction = character.characterDirection;
+    [self runAttackAnimate];
     
-    NSString *directionString = [directionStrings objectAtIndex:direction-1];
-    NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_%@_%@.plist",character.name,animationName,directionString];
-    
-    NSDictionary *animationClip = [FileManager getAnimationDictionaryByName:animationKey];
-    
-//    NSAssert(animationClip != nil, @"Animation plist should exist.");
-    
-    // FIXME: For test only.
-    if (animationClip == nil) {
-        [self runAction:[CCSequence actions:
-                         [CCDelayTime actionWithDuration:1.0],
-                         [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
-        return;
-    }
-    
-    [akHelper applyAnimationClip:animationClip toNode:self];
+//    [self stopAllActions];
+//    CharacterDirection direction = character.characterDirection;
+//    
+//    NSString *directionString = [directionStrings objectAtIndex:direction-1];
+//    NSString *animationKey = [NSString stringWithFormat:@"Animation_%@_%@_%@.plist",character.name,animationName,directionString];
+//    
+//    NSDictionary *animationClip = [FileManager getAnimationDictionaryByName:animationKey];
+//    
+////    NSAssert(animationClip != nil, @"Animation plist should exist.");
+//    
+//    // FIXME: For test only.
+//    if (animationClip == nil) {
+//        [self runAction:[CCSequence actions:
+//                         [CCDelayTime actionWithDuration:1.0],
+//                         [CCCallFunc actionWithTarget:character selector:@selector(attackAnimateCallback)],nil]];
+//        return;
+//    }
+//    
+//    [akHelper applyAnimationClip:animationClip toNode:self];
 }
 
 -(void)runDeadAnimate {
     [self stopAllActions];
-    
-    [bloodSprite removeFromParentAndCleanup:YES];
+    [self removeAllChildrenWithCleanup:YES];
     
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
     emitter.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);

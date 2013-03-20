@@ -145,7 +145,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="009" name="Tower" img="Tower" headImage="Tower.png" cost="0">
+    <character id="009" name="Tower" img="Tower" headImage="Tower.png">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="2500"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>
@@ -163,7 +163,7 @@
         <passiveskill>
         </passiveskill>
     </character>
-    <character id="010" name="Tower2" img="Tower2" headImage="Tower2.png" cost="0">
+    <character id="010" name="Tower2" img="Tower2" headImage="Tower2.png">
         <attributes>
             <attribute name="maxHp" a="0" b="0" c="2500"></attribute>
             <attribute name="maxMp" a="0" b="0" c="0"></attribute>

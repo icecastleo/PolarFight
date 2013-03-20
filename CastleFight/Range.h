@@ -13,12 +13,15 @@
 
 @interface Range : NSObject {
     NSString *name;
+    
     CGMutablePathRef attackRange;
     
     int rangeHeight;
     int rangeWidth;
     
     Range *effectRange;
+    
+    int count;
 }
 @property NSArray *sides;
 @property NSArray *filters;

@@ -11,9 +11,11 @@
 @implementation MapLayer
 
 static float scale;
-const static int castleDistance = 100;
+const static int castleDistance = 200;
 const static int pathSizeHeight = 25;
 const static int pathHeight = 70;
+
+@synthesize characters = _characters;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -26,6 +28,7 @@ const static int pathHeight = 70;
 -(id)initWithFile:(NSString *)file {
     if(self = [super init]) {
         _characters = [[NSMutableArray alloc] init];
+        _castles = [[NSMutableArray alloc] initWithCapacity:2];
         
         CCSprite *map = [CCSprite spriteWithFile:file];
         map.anchorPoint = ccp(0, 0);
@@ -58,8 +61,22 @@ const static int pathHeight = 70;
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:YES];
 }
 
--(void)addCharacter:(Character *)character {
+-(NSMutableArray *)characters {
+    if (counts[0] > 0 && counts[1] > 0) {
+        return _characters;
+    }
     
+    NSMutableArray *result = [_characters mutableCopy];
+    
+    for (int i = 0; i < 2; i++) {
+        if (counts[i] == 0) {
+            [result addObject:_castles[i]];
+        }
+    }
+    return result;
+}
+
+-(void)addCharacter:(Character *)character {
     CGPoint position;
     
     if (character.player == 1) {
@@ -72,19 +89,20 @@ const static int pathHeight = 70;
 
     [self addChild:character.sprite];
     [_characters addObject:character];
+    
+    counts[character.player - 1]++;
 }
 
 -(void)addCastle:(Character *)castle {
     if (castle.player == 1) {
-        castle.position = ccp(castleDistance + castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
+        castle.position = ccp(castleDistance, pathHeight + pathSizeHeight / 2);
     } else {
-        castle.position = ccp(self.boundaryX - castleDistance - castle.boundingBox.size.width / 2, pathHeight + pathSizeHeight / 2);
+        castle.position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
     }
     
     [self addChild:castle.sprite];
     
-    // FIXME: Seperate from characters.
-    [_characters addObject:castle];
+    [_castles setObject:castle atIndexedSubscript:castle.player - 1];
 }
 
 -(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
@@ -94,6 +112,7 @@ const static int pathHeight = 70;
 
 -(void)removeCharacter:(Character *)character {
     [_characters removeObject:character];
+    counts[character.player - 1]--;
 }
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{

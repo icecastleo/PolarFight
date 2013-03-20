@@ -7,12 +7,13 @@
 //
 
 #import "UnitMenuItem.h"
+#import "BattleController.h"
 
 @implementation UnitMenuItem
 
 -(id)initWithCharacter:(Character *)character {
     if (character == nil) {
-        if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bg_user_button.png"]
+        if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_char_lock.png"]
                                 selectedSprite:nil disabledSprite:nil target:nil selector:nil]) {
             
         }
@@ -24,7 +25,7 @@
         
         cId = character.characterId;
         level = character.level;
-        cost = 20;
+        cost = character.cost;
         
         CCLabelBMFont *costLabel = [[CCLabelBMFont alloc] initWithString:[[NSNumber numberWithInt:cost] stringValue] fntFile:@"font/cooper_20_o.fnt"];
         costLabel.anchorPoint = ccp(0.5, 0);
@@ -56,8 +57,15 @@
 
 -(void)click {
     self.isEnabled = NO;
+
+    Character *temp = [[Character alloc] initWithId:cId andLevel:level];
+    temp.player = 1;
+    [[BattleController currentInstance] addCharacter:temp];
     
-    [timer runAction:[CCSequence actions:[CCProgressFromTo actionWithDuration:2.0f from:100 to:0],
+    // FIXME: How to calculate cooldown
+    float cooldown = 2.0;
+    
+    [timer runAction:[CCSequence actions:[CCProgressFromTo actionWithDuration:cooldown from:100 to:0],
                       [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
                       nil]];
 }
@@ -71,9 +79,13 @@
 -(void)updateFood:(int)food {
     if (food >= cost) {
         mask.visible = NO;
-        self.isEnabled = YES;
+        
+        if ([self numberOfRunningActions] == 0) {
+            self.isEnabled = YES;
+        }
     } else {
         mask.visible = YES;
+        self.isEnabled = NO;
     }
 }
 

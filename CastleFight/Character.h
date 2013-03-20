@@ -30,9 +30,7 @@
     NSMutableArray *auraArray;
 }
 
-@property int player;
-@property BaseAI *ai;
-@property ActiveSkill *skill;
+@property (nonatomic) int player;
 @property (readonly) CharacterType roleType;
 //@property (readonly) AttackType attackType;
 @property (readonly) ArmorType armorType;
@@ -42,8 +40,11 @@
 @property (readonly) NSString *picFilename;
 @property (readonly) NSString *headImageFileName;
 
-@property (readonly) int level;
 @property (readonly) int cost;
+@property (readonly) int level;
+
+@property BaseAI *ai;
+@property ActiveSkill *skill;
 
 @property (readonly) NSMutableDictionary *passiveSkillDictionary;
 @property (readonly) NSMutableDictionary *timeStatusDictionary;

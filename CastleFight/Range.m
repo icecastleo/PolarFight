@@ -66,6 +66,9 @@ static float scale;
         _rangeSprite = [CCSprite spriteWithFile:file];
         [self setSpecialParameter:dict];
     }
+    
+    // TODO: Set by dictionary as an option value
+    count = 1;
 
     // TODO: Move to delay skill
     effectRange = [dict objectForKey:@"rangeEffectRange"];
@@ -111,19 +114,46 @@ static float scale;
             }
         }
     }
-    return [effectTargets allObjects];
-}
-
-// Only used for RangeShooter for now
--(CGPoint)effectPosition {
-    if (effectRange == nil) {
-        CGPoint position = _rangeSprite.position;
-        position = [_rangeSprite.parent convertToWorldSpace:position];
-        return [_character.sprite.parent convertToNodeSpace:position];
+    
+    if (effectTargets.count > count) {
+        NSArray *targets = [effectTargets allObjects];
+        
+        // Compare distance between effect position
+        NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:@"" ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
+            float distance1 = ccpDistance(self.effectPosition, obj1.position);
+            float distance2 = ccpDistance(self.effectPosition, obj2.position);
+            
+            if (distance1 < distance2) {
+                return NSOrderedAscending;
+            } else if (distance1 > distance2) {
+                return NSOrderedDescending;
+            } else {
+                return NSOrderedSame;
+            }
+        }];
+        
+        // Compare hp
+        NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:@"" ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
+            int hp1 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
+            int hp2 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
+            
+            if (hp1 < hp2) {
+                return NSOrderedAscending;
+            } else if (hp1 > hp2) {
+                return NSOrderedDescending;
+            } else {
+                return NSOrderedSame;
+            }
+        }];
+        
+        NSArray *sorts = [NSArray arrayWithObjects:hpSort, distanceSort, nil];
+        [targets sortedArrayUsingDescriptors:sorts];
+        
+        NSRange range = NSMakeRange(0, count);
+        
+        return [targets subarrayWithRange:range];
     } else {
-        CGPoint position = effectRange.rangeSprite.position;
-        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
-        return [_character.sprite.parent convertToNodeSpace:position];
+        return [effectTargets allObjects];
     }
 }
 
@@ -138,7 +168,7 @@ static float scale;
     }
     
     if (attackRange == nil) {
-        NSAssert(_rangeSprite.parent == target.sprite.parent, @"Character can't hold a sprite as it's attack range");
+        NSAssert(_rangeSprite.parent == target.sprite.parent, @"Sprites must have the same parent! Might happen when a character hold a sprite as it's attack range");
         
         if (CGRectIntersectsRect(_rangeSprite.boundingBox, target.boundingBox)) {
             return YES;
@@ -194,6 +224,18 @@ static float scale;
         }
     }
     return NO;
+}
+
+-(CGPoint)effectPosition {
+    if (effectRange == nil) {
+        CGPoint position = _rangeSprite.position;
+        position = [_rangeSprite.parent convertToWorldSpace:position];
+        return [_character.sprite.parent convertToNodeSpace:position];
+    } else {
+        CGPoint position = effectRange.rangeSprite.position;
+        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
+        return [_character.sprite.parent convertToNodeSpace:position];
+    }
 }
 
 -(void)dealloc {
