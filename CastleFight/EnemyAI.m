@@ -14,21 +14,21 @@
     if (self = [super init]) {
         character = aCharacter;
         _currentState =[[AIStateCastleWaiting alloc] init];
-        mutableDictionary = [NSMutableDictionary new];
-        
+        _mutableDictionary = [NSMutableDictionary new];
+        [self initMosterData];
     }
     return self;
 }
 
 -(void) initMosterData{
     NSArray *monster1Array =[NSArray arrayWithObjects:
-                             [NSNumber numberWithInt:10],
+                             [NSNumber numberWithInt:0.25],
                              [NSNumber numberWithInt:8],nil];
     NSArray *monster2Array =[NSArray arrayWithObjects:
-                             [NSNumber numberWithInt:30],
+                             [NSNumber numberWithInt:0.75],
                              [NSNumber numberWithInt:3],nil];
-    [mutableDictionary setObject:monster1Array forKey:@"Monster1"];
-    [mutableDictionary setObject:monster2Array forKey:@"Monster2"];
+    [_mutableDictionary setObject:monster1Array forKey:@"Monster1"];
+    [_mutableDictionary setObject:monster2Array forKey:@"Monster2"];
     
 }
 

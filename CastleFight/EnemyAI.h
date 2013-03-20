@@ -9,7 +9,6 @@
 #import "BaseAI.h"
 
 @interface EnemyAI : BaseAI
-{
-       NSMutableDictionary * mutableDictionary;
-}
+
+@property NSMutableDictionary *mutableDictionary;
 @end
