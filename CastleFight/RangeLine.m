@@ -16,31 +16,39 @@
 //effectWidth=攻擊寬度
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
-    NSNumber *distance = [dict valueForKey:@"effectDistance"];
-    if(distance!=nil)
+    int length;
+    NSNumber *l = [dict valueForKey:kRangeKeyLength];
+    
+    if(l != nil)
     {
-        int rangeRadius = [distance intValue]<=0?700:[distance intValue];
-        rangeWidth= rangeRadius;
-        rangeHeight=rangeRadius;
-    }else{
-        rangeWidth= 700;
-        rangeHeight=700;
-    }
-    int effectWidth=40;
-    NSNumber *width = [dict valueForKey:@"effectWidth"];
-    if(width!=nil)
-    {
-        effectWidth = [width intValue]<=0?20:[width intValue];
-      
+        NSAssert([l intValue] > 0, @"You can't set a length value below 0!!");
+        length = [l intValue];
+    } else {
+        length = 500;
     }
     
+    int lineWidth;
+    NSNumber *w = [dict valueForKey:kRangeKeyWidth];
+    
+    if(w != nil)
+    {
+        NSAssert([w intValue] > 0, @"You can't set a width value below 0!!");
+        lineWidth = [w intValue];
+    } else {
+        lineWidth = 20;
+    }
+    
+    length *= kScale;
+    lineWidth *= kScale;
+    width = length*2;
+    height = length*2;
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddLineToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2-effectWidth/2);
-    CGPathAddLineToPoint(attackRange, NULL, rangeWidth,rangeHeight/2-effectWidth/2);
-    CGPathAddLineToPoint(attackRange, NULL, rangeWidth,rangeHeight/2+effectWidth/2);
-    CGPathAddLineToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2+effectWidth/2);
+    CGPathMoveToPoint(attackRange, NULL, width/2, height/2);
+    CGPathAddLineToPoint(attackRange, NULL, width/2, height/2- lineWidth/2);
+    CGPathAddLineToPoint(attackRange, NULL, width, height/2 - lineWidth/2);
+    CGPathAddLineToPoint(attackRange, NULL, width, height/2 + lineWidth/2);
+    CGPathAddLineToPoint(attackRange, NULL, width/2, height/2 + lineWidth/2);
     
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);

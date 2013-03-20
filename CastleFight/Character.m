@@ -399,11 +399,11 @@
         if (hp.currentValue == 0) {
             [self dead];
         } else {
-            //        state = kCharacterStateGetDamage;
+            // state = kCharacterStateGetDamage;
             
             // TODO: Damage animate callback?
             // TODO: Damage animation
-            [sprite runDamageAnimate];
+            [sprite runDamageAnimate:damage];
             
             for (NSString *key in _passiveSkillDictionary) {
                 PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];

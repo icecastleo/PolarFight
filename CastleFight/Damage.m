@@ -11,10 +11,11 @@
 
 @implementation Damage
 
--(id)initWithValue:(int)aNumber damageType:(DamageType)aType damager:(Character *)aCharacter {
+-(id)initWithValue:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter {
     if (self = [super init]) {
         _value = aNumber;
         _type = aType;
+        _source = aSource;
         _damager = aCharacter;
     }
     return self;

@@ -12,11 +12,12 @@
 
 @implementation AttackEvent
 
--(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender {
+-(id)initWithAttacker:(Character *)anAttacker damageType:(DamageType)aType damageSource:(DamageSource)aSource defender:(Character*)aDefender {
     if(self = [super init]) {
         _attacker = anAttacker;
         _defender = aDefender;
         _type = aType;
+        _source = aSource;
         bonus = 0;
         multiplier = 1;
         
@@ -54,7 +55,7 @@
 }
 
 -(DamageEvent*)convertToDamageEvent {
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:[self getDamage] damageType:kDamageTypeAttack damager:_attacker];
+    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:[self getDamage] damageType:_type damageSource:_source damager:_attacker];
     event.position = _position;
     event.knockOutPower = _knockOutPower;
     event.knouckOutCollision = _knouckOutCollision;

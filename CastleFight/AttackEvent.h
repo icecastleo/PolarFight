@@ -17,13 +17,14 @@
 
 @property (readonly) Character *attacker;
 @property (readonly) Character *defender;
-@property (readonly) AttackType type;
+@property (readonly) DamageType type;
+@property (readonly) DamageSource source;
 @property (readonly) int attack;
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 
--(id)initWithAttacker:(Character *)anAttacker attackType:(AttackType)aType defender:(Character*)aDefender;
+-(id)initWithAttacker:(Character *)anAttacker damageType:(DamageType)aType damageSource:(DamageSource)aSource defender:(Character*)aDefender;
 
 -(void)addAttack:(float)aBonus;
 -(void)subtractAttack:(float)aBonus;

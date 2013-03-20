@@ -12,7 +12,7 @@
 
 @implementation AttackEffect
 
--(id)initWithAttackType:(AttackType)aType {
+-(id)initWithAttackType:(DamageType)aType {
     if(self = [super init]) {
         type = aType;
     }

@@ -14,18 +14,8 @@
 
 @dynamic effectPosition;
 
-static float scale;
-
-+(void)initialize {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
-    } else {
-        scale = 1.0;
-    }
-}
-
 +(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
-    NSString* rangeName = [dict objectForKey:@"rangeType"];
+    NSString* rangeName = [dict objectForKey:kRangeKeyType];
     
     NSAssert(rangeName != nil, @"You must define rangeType for a range");
     
@@ -49,16 +39,16 @@ static float scale;
 }
 
 -(void)setParameter:(NSMutableDictionary *)dict {    
-    _sides = [dict objectForKey:@"rangeSides"];
+    _sides = [dict objectForKey:kRangeKeySide];
     
     NSAssert(_sides != nil, @"You must define rangeSides for a range");
     
-    _filters = [dict objectForKey:@"rangeFilters"];
+    _filters = [dict objectForKey:kRangeKeyFilter];
     
-    NSString *file = [dict objectForKey:@"rangeSpriteFile"];
+    NSString *file = [dict objectForKey:kRangeKeySpriteFile];
     
     if (file == nil) {
-        NSAssert(![[dict objectForKey:@"rangeType"]isEqualToString:kRangeTypeSprite], @"You must define rangeSpriteFile for a range of kRangeTypeSprite");
+        NSAssert(![[dict objectForKey:kRangeKeyType] isEqualToString:kRangeTypeSprite], @"You must define spriteFile for a range of kRangeTypeSprite");
         [self setSpecialParameter:dict];
         [self setRangeSprite];
     } else {
@@ -67,11 +57,14 @@ static float scale;
         [self setSpecialParameter:dict];
     }
     
-    // TODO: Set by dictionary as an option value
-    count = 1;
+    NSNumber *limit = [dict objectForKey:kRangeKeyTargetLimit];
+
+    if(limit != nil) {
+        targetLimit = [limit intValue];
+    }
 
     // TODO: Move to delay skill
-    effectRange = [dict objectForKey:@"rangeEffectRange"];
+    effectRange = [dict objectForKey:kRangeKeyEffectRange];
     
     if (effectRange != nil) {
         [_rangeSprite addChild:effectRange.rangeSprite];
@@ -88,7 +81,7 @@ static float scale;
 -(void)setRangeSprite {
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(NULL, rangeWidth, rangeHeight, 8, rangeWidth * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, width * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
     CGContextSetRGBFillColor(context, 1.0, 0.8, 0.8, 0.8);
     
     CGContextAddPath(context, attackRange);
@@ -115,11 +108,11 @@ static float scale;
         }
     }
     
-    if (effectTargets.count > count) {
+    if (targetLimit > 0 && effectTargets.count > targetLimit) {
         NSArray *targets = [effectTargets allObjects];
         
         // Compare distance between effect position
-        NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:@"" ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
+        NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
             float distance1 = ccpDistance(self.effectPosition, obj1.position);
             float distance2 = ccpDistance(self.effectPosition, obj2.position);
             
@@ -133,7 +126,7 @@ static float scale;
         }];
         
         // Compare hp
-        NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:@"" ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
+        NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
             int hp1 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
             int hp2 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
             
@@ -149,7 +142,7 @@ static float scale;
         NSArray *sorts = [NSArray arrayWithObjects:hpSort, distanceSort, nil];
         [targets sortedArrayUsingDescriptors:sorts];
         
-        NSRange range = NSMakeRange(0, count);
+        NSRange range = NSMakeRange(0, targetLimit);
         
         return [targets subarrayWithRange:range];
     } else {
@@ -185,8 +178,8 @@ static float scale;
         loc = [target.sprite convertToWorldSpace:loc];
         loc = [_rangeSprite convertToNodeSpace:loc];
 
-        loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* scale  + rangeWidth/2;
-        loc.y = (loc.y  - _rangeSprite.boundingBox.size.height/2)* scale  + rangeHeight/2;
+        loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* kScale + width/2;
+        loc.y = (loc.y - _rangeSprite.boundingBox.size.height/2)* kScale + height/2;
         
 //        CCLOG(@"%f,%f",loc.x,loc.y);
         

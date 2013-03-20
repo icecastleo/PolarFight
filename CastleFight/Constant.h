@@ -9,6 +9,8 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
+#define kScale [[UIScreen mainScreen] scale]
+
 #define kGameSettingFps 30
 
 // For touch dispatcher
@@ -76,17 +78,16 @@ typedef enum {
 } CharacterDirection;
 
 typedef enum {
-    kAttackNoraml
-} AttackType;
+    kDamageTypeNormal,
+    kDamageTypeFire,
+    kDamageTypeIce,
+} DamageType;
 
 typedef enum {
-    kDamageTypeAttack,
-    kDamageTypeSkill,
-    kDamageTypePassiveSkill,
-//    kDamageTypePhysical,
-//    kDamageTypeMagical,
-    // fire, water?
-} DamageType;
+    kDamageSourceMelee,
+    kDamageSourceRanged,
+    kDamageSourcePassiveSkill,
+} DamageSource;
 
 typedef enum {
     kArmorNoraml,
@@ -110,24 +111,24 @@ typedef enum {
     statusAttackBuff,
 } AuraStatusType;
 
-//typedef enum {
-//    kRangeTypeCircle,
-//    kRangeTypeFanShape,
-//    kRangeTypeLine,
-//} RangeType;
-
-//typedef enum {
-//    kRangeSideAlly,
-//    kRangeSideEnemy,
-//    kRangeSideBoth,
-//} RangeSide;
+// RangeKey
+#define kRangeKeyType @"Type"
+#define kRangeKeySide @"Side"
+#define kRangeKeyFilter @"Filter"
+#define kRangeKeyRadius @"Radius"
+#define kRangeKeyAngle @"Angle"
+#define kRangeKeyWidth @"Width"
+#define kRangeKeyLength @"Length"
+#define kRangeKeyDistance @"Distance"
+#define kRangeKeyTargetLimit @"TargetLimit"
+#define kRangeKeySpriteFile @"SpriteFile"
+#define kRangeKeyEffectRange @"EffectRange"
 
 // RangeType
 #define kRangeTypeSprite @"Range"
 #define kRangeTypeCircle @"RangeCircle"
 #define kRangeTypeFanShape @"RangeFanShape"
 #define kRangeTypeLine @"RangeLine"
-#define kRangeTypeFarCircle @"RangeFarCircle"
 
 // RangeSide
 #define kRangeSideAlly @"Ally"

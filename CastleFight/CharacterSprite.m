@@ -33,6 +33,7 @@ static const NSArray *directionStrings;
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"enemy.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"hero.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
 }
 
 -(id)initWithCharacter:(Character *)aCharacter {
@@ -143,6 +144,7 @@ static const NSArray *directionStrings;
     animation.delayPerUnit = 0.2;
     
     [actions setObject:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animation]] forKey:@"move"];
+    
 }
 
 -(void)runWalkAnimate {
@@ -227,7 +229,22 @@ static const NSArray *directionStrings;
 //    }
 }
 
--(void)runDamageAnimate {
+-(void)runDamageAnimate:(Damage *)damage {
+    if (damage.value > 0) {
+        CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"hit_01.png"];
+        
+        if (damage.source == kDamageSourceRanged) {
+            sprite.position = [self convertToNodeSpace:[self.parent convertToWorldSpace:damage.position]];
+        } else {
+            sprite.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
+        }
+        
+        CCAction *action = [CCSequence actions:[CCFadeOut actionWithDuration:0.5f],[CCCallFuncN actionWithTarget:self selector:@selector(removeSelf:)], nil];
+        [sprite runAction:action];
+        
+        [self addChild:sprite];
+    }
+    
     if (bloodSprite != nil) {
         [bloodSprite stopAllActions];
         [bloodSprite runAction:[CCSequence actions:[CCShow action],
@@ -235,6 +252,11 @@ static const NSArray *directionStrings;
                                 [CCHide action],
                                 nil]];
     }
+}
+
+-(void)removeSelf:(id)sender {
+    CCNode *node = (CCNode *)sender;
+    [node removeFromParentAndCleanup:YES];
 }
  
 -(void)runAnimationForName:(NSString *)animationName {

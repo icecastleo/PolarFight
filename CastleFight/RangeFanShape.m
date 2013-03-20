@@ -19,36 +19,35 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
-    float scale = 0;
+    int radius;
+    NSNumber *r = [dict valueForKey:kRangeKeyRadius];
     
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
+    if(r != nil) {
+        NSAssert([r intValue] > 0, @"You can't set a radius value below 0!!");
+        radius = [r intValue];
     } else {
-        scale = 1.0;
+        radius = 50;
     }
     
-    int rangeRadius=50;
-    NSNumber *radius = [dict valueForKey:@"effectRadius"];
-    if(radius!=nil)
-    {
-        rangeRadius = [radius intValue]<=0?50:[radius intValue];
-       
-    }
-    rangeRadius*=scale;
-    rangeWidth= rangeRadius*2;
-    rangeHeight=rangeRadius*2;
-    double rangeAngle= M_PI/2;
+    radius *= kScale;
+    width = radius*2;
+    height = radius*2;
     
-    NSNumber *angle = [dict valueForKey:@"effectAngle"];
-    if(angle!=nil)
-    {
-        rangeAngle = ([angle doubleValue]<M_PI*-2||[angle doubleValue]>M_PI*2)? M_PI/2:[angle doubleValue];
-       
+    double angle;
+    
+    NSNumber *a = [dict valueForKey:kRangeKeyAngle];
+    
+    if(a != nil) {
+        NSAssert([a doubleValue] > 0, @"You can't set an angle value below 0!!");
+        NSAssert(M_PI * 2 >= [a doubleValue], @"You can't set an angle value bigger than M_PI * 2!!");
+        angle = [a doubleValue];
+    } else {
+        angle = M_PI/2;
     }
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, rangeHeight/2, rangeRadius, rangeAngle/(-2), rangeAngle/2,NO);
+    CGPathMoveToPoint(attackRange, NULL, width/2, height/2);
+    CGPathAddArc(attackRange, NULL, width/2, height/2, radius, angle/(-2), angle/2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }

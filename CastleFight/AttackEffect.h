@@ -9,9 +9,9 @@
 #import "Effect.h"
 
 @interface AttackEffect : Effect {
-    AttackType type;
+    DamageType type;
 }
 
--(id)initWithAttackType:(AttackType)aType;
+-(id)initWithAttackType:(DamageType)aType;
 
 @end

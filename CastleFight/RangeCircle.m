@@ -18,22 +18,34 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*)dict {
     
-    int effectRadius;
+    int radius;
+    NSNumber *r = [dict valueForKey:kRangeKeyRadius];
     
-    NSNumber *radius = [dict valueForKey:@"effectRadius"];
-    
-    if(radius != nil) {
-        NSAssert([radius intValue] > 0,@"You can not set a radius value below 0.");
-        effectRadius = [radius intValue];
+    if(r != nil) {
+        NSAssert([r intValue] > 0, @"You can not set a radius value below 0!!");
+        radius = [r intValue];
     } else {
-        effectRadius = 50;
+        radius = 50;
     }
     
-    rangeWidth = effectRadius*2;
-    rangeHeight = effectRadius*2;
+    int distance;
+    NSNumber *d = [dict valueForKey:kRangeKeyDistance];
+    
+    if(d != nil) {
+        NSAssert([d intValue] > 0, @"You can not set a distance value below 0!!");
+        distance = [d intValue];
+    } else {
+        distance = 0;
+    }
+    
+    radius *= kScale;
+    distance *= kScale;
+    width = (radius + distance)*2;
+    height = radius*2;
+    
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, rangeWidth/2,rangeHeight/2);
-    CGPathAddArc(attackRange, NULL, rangeWidth/2, effectRadius, effectRadius, 0, M_PI*2, NO);
+    CGPathMoveToPoint(attackRange, NULL, width/2 + distance, height/2);
+    CGPathAddArc(attackRange, NULL, width/2 + distance, height/2, radius, 0, M_PI*2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }

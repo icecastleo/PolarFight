@@ -9,19 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@class Character;
 
+
+@class Character;
 @interface Range : NSObject {
     NSString *name;
     
     CGMutablePathRef attackRange;
     
-    int rangeHeight;
-    int rangeWidth;
-    
+    int width;
+    int height;
+
     Range *effectRange;
     
-    int count;
+    int targetLimit;
 }
 @property NSArray *sides;
 @property NSArray *filters;

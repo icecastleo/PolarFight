@@ -16,13 +16,14 @@
 }
 
 @property (readonly) DamageType type;
+@property (readonly) DamageSource source;
 @property (readonly) Character *damager;
 @property (readonly) int baseDamage;
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 
--(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damager:(Character*)aCharacter;
+-(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter;
 
 -(void)addDamage:(float)aBonus;
 -(void)subtractDamage:(float)aBonus;
