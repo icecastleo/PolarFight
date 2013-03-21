@@ -17,8 +17,8 @@
 @implementation TestSkill
 
 -(void)setRanges {
-    // TODO: Maybe show the arrow range.
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@150,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
@@ -30,13 +30,9 @@
     
     //    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSprite,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
     
     DelegateSkill *delegate = [[AttackDelegateSkill alloc] initWithCharacter:character];
-    
-//    RangeShooter *shooter = [[RangeShooter alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
-
-//    [shooter shootFrom:character.position toPosition:ccpAdd(character.position, (character.player == 1)? ccp(200,0):ccp(-200,0)) speed:10];
 
     RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
     
@@ -45,7 +41,6 @@
     
     if(effectTargets.count > 0){
         Character *target = effectTargets[0];
-    
         [shooter shoot:target.position time:0.75];
     }
 }

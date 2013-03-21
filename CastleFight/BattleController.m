@@ -39,8 +39,7 @@ __weak static BattleController* currentInstance;
         
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map_01.png"];
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
+        mapLayer = [[MapLayer alloc] initWithFile:@"map/map_01"];
         [self addChild:mapLayer];
         
         // set character on may
@@ -100,8 +99,6 @@ __weak static BattleController* currentInstance;
     
     for (Character *character in [battleData getEnemyArray]) {
         character.player = 2;
-        character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite];
         [self addCharacter:character];
     }
     
@@ -114,17 +111,21 @@ __weak static BattleController* currentInstance;
     [mapLayer addCastle:_playerCastle];
     [mapLayer addCastle:_enemyCastle];
     
-    _enemyAi=[[EnemyAI alloc] initWithCharacter:_enemyCastle];
-    
-    Character *character = [[Character alloc] initWithId:@"001" andLevel:1];
-    character.player = 1;
-    character.ai = [[SimpleAI alloc] initWithCharacter:character];
-    [character.sprite addBloodSprite];
-    [self addCharacter:character];
+    _enemyAi = [[EnemyAI alloc] initWithCharacter:_enemyCastle];
+
 }
 
 -(void)addCharacter:(Character *)character {
-//    CCLOG(@"Add player %i's %@", character.player, character.name);
+    NSAssert(character.player != 0, @"You must set a player for the character!!");
+    
+    CCLOG(@"Add player %i's %@", character.player, character.name);
+    if (character.player == 1) {
+        self.food -= character.cost;
+    }
+    
+    character.ai = [[SimpleAI alloc] initWithCharacter:character];
+    [character.sprite addBloodSprite];
+    
     [mapLayer addCharacter:character];
 }
 
@@ -167,11 +168,12 @@ __weak static BattleController* currentInstance;
     }
     
     if (removeCharacters.count > 0) {
-        [self.characters removeObjectsInArray:removeCharacters];
+        for (Character *character in removeCharacters) {
+            [mapLayer removeCharacter:character];
+        }
+        
         [removeCharacters removeAllObjects];
     }
-    
-    // TODO: Add character
     
     [self checkBattleEnd];
 }

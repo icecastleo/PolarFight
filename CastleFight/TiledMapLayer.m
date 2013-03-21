@@ -14,16 +14,6 @@
 @implementation TiledMapLayer
 @synthesize cameraControl;
 
-static float scale;
-
-+(void)initialize {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
-    } else {
-        scale = 1.0;
-    }
-}
-
 -(id)initWithFile:(NSString *)file {
     if(self = [super init]) {
         _characters = [[NSMutableArray alloc] init];
@@ -36,8 +26,8 @@ static float scale;
             [[child texture] setAntiAliasTexParameters];
         }
         
-        boundaryX = map.mapSize.width * map.tileSize.width / scale;
-        boundaryY = map.mapSize.height * map.tileSize.height / scale;
+        boundaryX = map.mapSize.width * map.tileSize.width / kScale;
+        boundaryY = map.mapSize.height * map.tileSize.height / kScale;
         
         zOrder = boundaryY;
         

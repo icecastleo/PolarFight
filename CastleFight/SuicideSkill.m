@@ -19,7 +19,7 @@
 -(void)activeSkill:(int)count {
     int damage = [character getAttribute:kCharacterAttributeHp].value;
     
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeSkill damager:character];
+    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeNormal damageSource:kDamageSourceMelee damager:character];
     
     [character receiveDamageEvent:event];
 }

@@ -12,7 +12,7 @@
 @implementation HealSkill
 
 -(void)setRanges {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],@"rangeSides",@[kRangeFilterSelf],@"rangeFilters",kRangeTypeCircle,@"rangeType",@75,@"effectRadius",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,@[kRangeFilterSelf],kRangeKeyFilter,kRangeTypeCircle,kRangeKeyType,@75,kRangeKeyRadius,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
@@ -20,7 +20,7 @@
 -(void)execute {
     int attack = [character getAttribute:kCharacterAttributeAttack].value;
     
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 3 damageType:kDamageTypeSkill damager:character];
+    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 3 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill damager:character];
     [character receiveDamageEvent:event];
     
     for (Character *target in [range getEffectTargets]) {

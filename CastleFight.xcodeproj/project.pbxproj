@@ -20,7 +20,6 @@
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D66E84216A54CB900A3F5D5 /* Red_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D66E84116A54CB900A3F5D5 /* Red_point.png */; };
 		2D6BFCD416E9D86200B77B7F /* RangeShooterNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */; };
-		2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D97F28A1679DFF200030713 /* RangeFarCircle.m */; };
 		2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446BE16E4A59F00BDC060 /* BaseAI.m */; };
 		2DA446C216E4A6E400BDC060 /* SimpleAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446C116E4A6E400BDC060 /* SimpleAI.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
@@ -345,8 +344,6 @@
 		9B6EA71516F1FAED00C61AD9 /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
-		9B6F997516D37DD100A5C492 /* CPlusPlusClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */; };
-		9B6F997816D37EB600A5C492 /* ObjectiveCAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
@@ -386,6 +383,9 @@
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
+		9BC514B316FAEBDD00ABE811 /* sound_caf in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481716EDD27600D3D55D /* sound_caf */; };
+		9BC514B416FAEBE000ABE811 /* map in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481616EDD27600D3D55D /* map */; };
+		9BC514B516FAEBE400ABE811 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481516EDD27600D3D55D /* bg */; };
 		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
@@ -443,8 +443,6 @@
 		2D66E84116A54CB900A3F5D5 /* Red_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_point.png; sourceTree = "<group>"; };
 		2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooterNew.h; sourceTree = "<group>"; };
 		2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeShooterNew.m; sourceTree = "<group>"; };
-		2D97F2891679DFF200030713 /* RangeFarCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFarCircle.h; sourceTree = "<group>"; };
-		2D97F28A1679DFF200030713 /* RangeFarCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFarCircle.m; sourceTree = "<group>"; };
 		2DA446BD16E4A59F00BDC060 /* BaseAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAI.h; sourceTree = "<group>"; };
 		2DA446BE16E4A59F00BDC060 /* BaseAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAI.m; sourceTree = "<group>"; };
 		2DA446C016E4A6E400BDC060 /* SimpleAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAI.h; sourceTree = "<group>"; };
@@ -968,10 +966,6 @@
 		9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitMenuItem.m; sourceTree = "<group>"; };
 		9B6EA71816F220BB00C61AD9 /* arrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-hd.png"; sourceTree = "<group>"; };
 		9B6EA71A16F270BB00C61AD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
-		9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPlusPlusClass.cpp; sourceTree = "<group>"; };
-		9B6F997416D37DD100A5C492 /* CPlusPlusClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPlusPlusClass.h; sourceTree = "<group>"; };
-		9B6F997616D37EB600A5C492 /* ObjectiveCAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveCAdaptor.h; sourceTree = "<group>"; };
-		9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectiveCAdaptor.mm; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B82F788164FB2780001A357 /* BattleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleController.h; sourceTree = "<group>"; };
 		9B82F789164FB2780001A357 /* BattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleController.m; sourceTree = "<group>"; };
@@ -1057,7 +1051,6 @@
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
-		9BF2DDBC168B3A0F00545940 /* BattleControllerEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattleControllerEventDelegate.h; sourceTree = "<group>"; };
 		9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuousAttackSkill.h; sourceTree = "<group>"; };
 		9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuousAttackSkill.m; sourceTree = "<group>"; };
 		9BF3254E16A6EA0200D5782B /* RangeShooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooter.h; sourceTree = "<group>"; };
@@ -1171,8 +1164,6 @@
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 				2DD7058A16511724001E3155 /* RangeLine.h */,
 				2DD7058B16511724001E3155 /* RangeLine.m */,
-				2D97F2891679DFF200030713 /* RangeFarCircle.h */,
-				2D97F28A1679DFF200030713 /* RangeFarCircle.m */,
 				9BF3254E16A6EA0200D5782B /* RangeShooter.h */,
 				9BF3254F16A6EA0300D5782B /* RangeShooter.m */,
 				2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */,
@@ -1525,7 +1516,6 @@
 			children = (
 				9BDC077D166E3719009559C3 /* Attack */,
 				9BDC0782166E392B009559C3 /* Armor */,
-				9BF2DDBC168B3A0F00545940 /* BattleControllerEventDelegate.h */,
 				9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */,
 				9B514DEB1688541900359C2A /* Damage.h */,
 				9B514DEC1688541900359C2A /* Damage.m */,
@@ -2151,10 +2141,6 @@
 				9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */,
 				9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */,
 				9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */,
-				9B6F997416D37DD100A5C492 /* CPlusPlusClass.h */,
-				9B6F997316D37DD100A5C492 /* CPlusPlusClass.cpp */,
-				9B6F997616D37EB600A5C492 /* ObjectiveCAdaptor.h */,
-				9B6F997716D37EB600A5C492 /* ObjectiveCAdaptor.mm */,
 			);
 			name = BattleController;
 			sourceTree = "<group>";
@@ -2441,6 +2427,10 @@
 				37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */,
 				37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */,
 				37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */,
+				3730815616F75B9C00F1F7EE /* SelectedCharacters.xml in Resources */,
+				9BC514B316FAEBDD00ABE811 /* sound_caf in Resources */,
+				9BC514B416FAEBE000ABE811 /* map in Resources */,
+				9BC514B516FAEBE400ABE811 /* bg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2494,7 +2484,6 @@
 				9B10C67A167745160026E796 /* DamageEffect.m in Sources */,
 				9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */,
 				9B06F84016787F3800E1B09D /* Attribute.m in Sources */,
-				2D97F28B1679DFF200030713 /* RangeFarCircle.m in Sources */,
 				9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */,
 				9B92B1A71680F2F300D965AF /* ReflectAttackDamageSkill.m in Sources */,
 				9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */,
@@ -2538,8 +2527,6 @@
 				37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */,
 				37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */,
 				9B6E290C16C3005B0041BA61 /* TiledMapCamera.m in Sources */,
-				9B6F997516D37DD100A5C492 /* CPlusPlusClass.cpp in Sources */,
-				9B6F997816D37EB600A5C492 /* ObjectiveCAdaptor.mm in Sources */,
 				9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */,
 				9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */,
 				2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */,

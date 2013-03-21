@@ -13,7 +13,7 @@
 @implementation AttackDelegateSkill
 
 -(void)effectTarget:(Character *)target atPosition:(CGPoint)position {
-    AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+    AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:target];
     event.position = position;
     [target receiveAttackEvent:event];
 }

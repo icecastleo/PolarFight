@@ -13,14 +13,18 @@
 @implementation TankSkill
 
 -(void)setRanges {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@100,@"effectRadius",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @[kRangeSideEnemy],kRangeKeySide,
+                                       kRangeTypeCircle,kRangeKeyType,
+                                       @100,kRangeKeyRadius,
+                                       nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
 
 -(void)execute {
     for (Character *target in [range getEffectTargets]) {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:target];
         event.knockOutPower = -20;
         [target receiveAttackEvent:event];
     }

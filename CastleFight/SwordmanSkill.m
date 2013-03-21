@@ -12,14 +12,12 @@
 
 @implementation SwordmanSkill
 
--(void)setRanges {
-    //        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"tree01.gif",@"rangeSpriteFile",@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@50,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
-    
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:character,@"rangeCharacter",@[kRangeSideEnemy],@"rangeSides",kRangeTypeFanShape,@"rangeType",@75,@"effectRadius",@(M_PI/2),@"effectAngle",nil];
+-(void)setRanges {    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@75,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
     
-    NSMutableDictionary *dictionary2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@150,@"effectRadius",nil];
+    NSMutableDictionary *dictionary2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@150,kRangeKeyRadius,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary2]];
     [ranges addObject:ranges[0]];
@@ -28,7 +26,7 @@
 
 -(void)activeSkill:(int)count {
     for (Character *target in [range getEffectTargets]) {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:target];
         event.knockOutPower = 25;
         event.knouckOutCollision = YES;
         [target receiveAttackEvent:event];

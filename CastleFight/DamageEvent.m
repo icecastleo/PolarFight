@@ -12,10 +12,11 @@
 @implementation DamageEvent
 //@dynamic damage;
 
--(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damager:(Character*)aCharacter {
+-(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter {
     if(self = [super init]) {
         _baseDamage = aNumber;
         _type = aType;
+        _source = aSource;
         _damager = aCharacter;
         bonus = 0;
         multiplier = 1;
@@ -47,7 +48,7 @@
 }
 
 -(Damage *)convertToDamage {
-    Damage *damage = [[Damage alloc] initWithValue:[self damage] damageType:_type damager:_damager];
+    Damage *damage = [[Damage alloc] initWithValue:[self damage] damageType:_type damageSource:_source damager:_damager];
     damage.position = _position;
     damage.knockOutPower = _knockOutPower;
     damage.knouckOutCollision = _knouckOutCollision;

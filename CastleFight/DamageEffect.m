@@ -11,6 +11,7 @@
 
 @implementation DamageEffect
 
+// TODO: init with damage type & source
 -(id)initWithDamage:(int)aNumber {
     if(self = [super init]) {
         damage = aNumber;
@@ -19,9 +20,9 @@
 }
 
 -(void)doEffectFromCharacter:(Character *)aCharacter toCharacter:(Character *)bCharacter {
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeSkill damager:aCharacter];
+//    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeNormal damageSource:kda damager:<#(Character *)#> damager:aCharacter];
     
-    [bCharacter receiveDamageEvent:event];
+//    [bCharacter receiveDamageEvent:event];
 }
 
 @end

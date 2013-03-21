@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Attribute.h"
 #import "BloodSprite.h"
+#import "Damage.h"
 
 @class Character;
 @interface CharacterSprite : CCSprite {
@@ -17,6 +18,8 @@
     
     BloodSprite *bloodSprite;
     __weak BloodSprite *outerBloodSprite;
+    
+    NSMutableDictionary *actions;
     
     CCAction *upAction;
     CCAction *downAction;
@@ -38,7 +41,7 @@
 
 -(void)runWalkAnimate;
 -(void)runAttackAnimate;
--(void)runDamageAnimate;
+-(void)runDamageAnimate:(Damage *)damage;
 -(void)runDeadAnimate;
 
 -(void)runAnimationForName:(NSString *)animationName;

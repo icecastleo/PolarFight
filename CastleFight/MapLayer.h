@@ -11,10 +11,11 @@
 #import "Character.h"
 
 @interface MapLayer : CCLayer {
-
+    int counts[2];
 }
 
 @property (readonly) NSMutableArray *characters;
+@property (readonly) NSMutableArray *castles;
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
 

@@ -33,7 +33,6 @@
 
 @implementation Character
 
-@synthesize player;
 @synthesize skill;
 @synthesize level;
 //@synthesize attackType;
@@ -45,6 +44,7 @@
 
 @synthesize direction = _direction;
 @synthesize position = _position;
+
 @dynamic boundingBox;
 
 // FIXME: fix name reference.
@@ -73,6 +73,11 @@
         }
         
         //TODO: skill part
+        
+        // FIXME: Delete aura array and use dictionary
+//        auraStatusDictionary = [[NSMutableDictionary alloc] init];
+        auraArray = [[NSMutableArray alloc] init];
+        timeStatusDictionary = [[NSMutableDictionary alloc] init];
         
         _characterId = anId;
         
@@ -141,7 +146,7 @@
 }
 
 -(void)dealloc {
-    CCLOG(@"Player %d's %@ is dealloc",player, self.name);
+    CCLOG(@"Player %d's %@ is dealloc",_player, self.name);
 }
 
 -(void)makePoint {
@@ -155,6 +160,15 @@
                   [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width/2, 0)],
                   [NSValue valueWithCGPoint:ccp(0, 0)]
                   ,nil];
+}
+
+-(void)setPlayer:(int)player {
+    _player = player;
+    
+    // FIXME: Decide by sprite
+    if (player == 2) {
+        sprite.flipX = YES;
+    }
 }
 
 -(void)addAttribute:(Attribute *)attribute {
@@ -271,7 +285,7 @@
 }
 
 -(void)useSkill {
-    CCLOG(@"Player %d's %@ is using skill",player, self.name);
+    CCLOG(@"Player %d's %@ is using skill",_player, self.name);
     
     // FIXME: If skill is cooldown or ?, it can't be true
     state = kCharacterStateUseSkill;
@@ -336,7 +350,7 @@
             return;
         }
         
-        CCLOG(@"Player %i's %@ gets %d damage!", player, self.name, damage.value);
+        CCLOG(@"Player %i's %@ gets %d damage!",_player, self.name, damage.value);
         
         Attribute *hp = [attributeDictionary objectForKey:[NSNumber numberWithInt:kCharacterAttributeHp]];
         
@@ -357,11 +371,11 @@
         if (hp.currentValue == 0) {
             [self dead];
         } else {
-            //        state = kCharacterStateGetDamage;
+            // state = kCharacterStateGetDamage;
             
             // TODO: Damage animate callback?
             // TODO: Damage animation
-            [sprite runDamageAnimate];
+            [sprite runDamageAnimate:damage];
             
             for (NSString *key in _passiveSkillDictionary) {
                 PassiveSkill *p = [_passiveSkillDictionary objectForKey:key];
@@ -396,7 +410,7 @@
 -(void)dead {
     state = kCharacterStateDead;
     
-//    CCLOG(@"Player %i's %@ is dead", player, self.name);
+//    CCLOG(@"Player %i's %@ is dead",_player, self.name);
 
     // Run dead animation, then clean up
     [sprite runDeadAnimate];

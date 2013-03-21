@@ -12,14 +12,14 @@
 @implementation WizardSkill
 
 -(void)setRanges {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeFarCircle,@"rangeType",@50,@"effectRadius",@100,@"effectDistance",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@100,kRangeKeyRadius,@150,kRangeKeyDistance,nil];
 
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }
 
 -(void)execute {
     for (Character *target in [range getEffectTargets]) {
-        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character attackType:kAttackNoraml defender:target];
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeFire damageSource:kDamageSourceRanged defender:target];
         [target receiveAttackEvent:event];
     }
 }
