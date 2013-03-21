@@ -32,7 +32,7 @@
     if(CACurrentMediaTime()>nextDecisionTime)
     {
         //examine once a sec
-        if(a.nextMonster!=nil){
+        if(a.nextMonster==nil){
             NSString* next= [self examineNextMonster:ai];
             a.nextMonster= [self newMonster:next];
         }
