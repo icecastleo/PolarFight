@@ -9,6 +9,7 @@
 #import "BattleDataObject.h"
 #import "CharacterData.h"
 #import "Character.h"
+#import "EnemyAIData.h"
 
 @implementation BattleDataObject
 
@@ -44,34 +45,37 @@
     return self;
 }
 
--(NSArray *)getEnemyBoss {
+-(NSArray *)getMonsterDataArrayFromCharacterDataArray:(NSArray *)anArray {
     
     NSMutableArray *characterArray = [NSMutableArray array];
     
-    for (CharacterData *data in self.enemyBossArray) {
+    for (CharacterData *data in anArray) {
         Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
-        [characterArray addObject:character];
+        MonsterData *monsterData = [[MonsterData alloc] init];
+        monsterData.Name = data.characterId;
+        monsterData.level = [data.level intValue];
+        monsterData.summonCost = character.cost;
+        monsterData.targetRatio = [data.targetRatio floatValue];
+        
+        [characterArray addObject:monsterData];
     }
     
     return characterArray;
 }
+
+-(NSArray *)getEnemyArray {
+    return [self getMonsterDataArrayFromCharacterDataArray:self.enemyArray];
+}
+
+-(NSArray *)getEnemyBoss {    
+    return [self getMonsterDataArrayFromCharacterDataArray:self.enemyBossArray];
+}
+
 -(Character *)getEnemyCastle {
     
     CharacterData *data = [self.enemyCastleArray lastObject];
     Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
     return castle;
-}
-
--(NSArray *)getEnemyArray {
-    
-    NSMutableArray *characterArray = [NSMutableArray array];
-    
-    for (CharacterData *data in self.enemyArray) {
-        Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
-        [characterArray addObject:character];
-    }
-    
-    return characterArray;
 }
 
 @end

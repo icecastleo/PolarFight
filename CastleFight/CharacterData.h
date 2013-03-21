@@ -12,6 +12,7 @@
 
 @property (strong) NSString *characterId;
 @property (strong) NSString *level;
+@property (strong) NSString *targetRatio;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
 

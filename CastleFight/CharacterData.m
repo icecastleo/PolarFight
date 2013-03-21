@@ -23,6 +23,7 @@
     if (self = [super init]) {
         _characterId = [dic objectForKey:@"id"];
         _level = [dic objectForKey:@"level"];
+        _targetRatio = [dic objectForKey:@"targetRatio"];
     }
     return self;
 }
