@@ -72,7 +72,7 @@ const static int pathHeight = 70;
         
         self.isTouchEnabled = YES;
         
-        //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
+//        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
     }
     return self;
 }
@@ -116,8 +116,10 @@ const static int pathHeight = 70;
 -(void)addCastle:(Character *)castle {
     if (castle.player == 1) {
         castle.position = ccp(castleDistance, pathHeight + pathSizeHeight / 2);
+        castle.sprite.anchorPoint = ccp(1, 0.5);
     } else {
         castle.position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
+        castle.sprite.anchorPoint = ccp(0, 0.5);
     }
     
     [self addChild:castle.sprite];

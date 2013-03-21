@@ -13,15 +13,13 @@
 @implementation SwordmanSkill
 
 -(void)setRanges {    
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@75,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@40,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
     
-    NSMutableDictionary *dictionary2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@150,kRangeKeyRadius,nil];
+//    NSMutableDictionary *dictionary2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@150,kRangeKeyRadius,nil];
     
-    [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary2]];
-    [ranges addObject:ranges[0]];
-    
+//    [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary2]];    
 }
 
 -(void)activeSkill:(int)count {

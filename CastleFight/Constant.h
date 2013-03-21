@@ -9,9 +9,12 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
+#define kGameSettingFps 30
+
 #define kScale [[UIScreen mainScreen] scale]
 
-#define kGameSettingFps 30
+// For Character make collision CGPath
+#define kCollisionPointRange 16
 
 // For touch dispatcher
 #define kTouchPriotiryPause -256
