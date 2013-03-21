@@ -129,10 +129,13 @@ static const NSArray *directionStrings;
 -(void)runWalkAnimate {
     [self stopAllActions];
     
-    if (character.characterDirection == kCharacterDirectionLeft) {
-        self.flipX = YES;
-    } else {
-        self.flipX = NO;
+    // For hero
+    if (character.player == 1) {
+        if (character.characterDirection == kCharacterDirectionLeft) {
+            self.flipX = YES;
+        } else {
+            self.flipX = NO;
+        }
     }
     
     [self runAction:[actions objectForKey:@"move"]];
