@@ -7,12 +7,13 @@
 //
 
 #import "BaseAI.h"
-
+#import "EnemyAIData.h"
 @interface EnemyAI : BaseAI
 
 @property NSMutableDictionary *mutableDictionary;
 @property float food;
-@property Character *nextMonster;
-
--(NSMutableDictionary*) getCurrentMonsters;
+@property float foodSupplySpeed;
+@property MonsterData *nextMonster;
+@property EnemyAIData *data;
+-(MonsterDataCollection*) getCurrentMonsters;
 @end

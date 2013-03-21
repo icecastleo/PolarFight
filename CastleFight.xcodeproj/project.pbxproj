@@ -23,6 +23,7 @@
 		2DA446BF16E4A59F00BDC060 /* BaseAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446BE16E4A59F00BDC060 /* BaseAI.m */; };
 		2DA446C216E4A6E400BDC060 /* SimpleAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA446C116E4A6E400BDC060 /* SimpleAI.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
+		2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDD14616FB050A00CBA47F /* EnemyAIData.m */; };
 		2DED399B16F08A38009802A0 /* EnemyAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DED399A16F08A38009802A0 /* EnemyAI.m */; };
 		2DED399E16F08AE8009802A0 /* AIStateCastleWaiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
@@ -444,6 +445,8 @@
 		2DA446C116E4A6E400BDC060 /* SimpleAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAI.m; sourceTree = "<group>"; };
 		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
 		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
+		2DDDD14516FB050A00CBA47F /* EnemyAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAIData.h; sourceTree = "<group>"; };
+		2DDDD14616FB050A00CBA47F /* EnemyAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAIData.m; sourceTree = "<group>"; };
 		2DED399916F08A38009802A0 /* EnemyAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAI.h; sourceTree = "<group>"; };
 		2DED399A16F08A38009802A0 /* EnemyAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAI.m; sourceTree = "<group>"; };
 		2DED399C16F08AE8009802A0 /* AIStateCastleWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateCastleWaiting.h; sourceTree = "<group>"; };
@@ -1172,6 +1175,8 @@
 				2DA446C116E4A6E400BDC060 /* SimpleAI.m */,
 				2DED399916F08A38009802A0 /* EnemyAI.h */,
 				2DED399A16F08A38009802A0 /* EnemyAI.m */,
+				2DDDD14516FB050A00CBA47F /* EnemyAIData.h */,
+				2DDDD14616FB050A00CBA47F /* EnemyAIData.m */,
 			);
 			name = AI;
 			sourceTree = "<group>";
@@ -2526,6 +2531,7 @@
 				3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */,
 				3730815416F7578100F1F7EE /* UserDataObject.m in Sources */,
 				37E68CA516F97B4900AB5FBD /* CharacterData.m in Sources */,
+				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
