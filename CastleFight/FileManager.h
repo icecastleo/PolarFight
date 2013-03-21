@@ -17,13 +17,19 @@
 +(void)preloadSoundsEffect:(NSString *)sceneName;
 
 +(void)saveUserData;
-+(UserDataObject *)getUserDataObject;
+//+(UserDataObject *)getUserDataObject;
+
++(BattleDataObject *)loadBattleInfo:(NSString *)name;
 
 +(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
 +(NSArray *)getChararcterArray;
 +(Character *)getPlayerHero;
 +(Character *)getPlayerCastle;
++(int)getPlayerMoney;
 
-+(BattleDataObject *)loadBattleInfo:(NSString *)name;
++(void)updatePlayerMoney:(int)value;
++(void)updatePlayerCharacterArray:(NSArray *)array;
++(void)updatePlayerHero:(Character *)hero;
++(void)updatePlayerCastle:(Character *)castle;
 
 @end
