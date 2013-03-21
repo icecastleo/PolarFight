@@ -38,7 +38,7 @@ static FileManager *sharedFileManager = nil;
 }
 
 +(id)alloc {
-	@synchronized(self)     {
+	@synchronized(self) {
 		NSAssert(sharedFileManager == nil, @"Attempted to allocate a second instance of a singleton.");
 		return [super alloc];
 	}

@@ -12,7 +12,7 @@
 @implementation UnitMenuItem
 
 -(id)initWithCharacter:(Character *)character {
-    if (character == nil) {
+    if (character == nil || character.level == 0) {
         if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_char_lock.png"]
                                 selectedSprite:nil disabledSprite:nil target:nil selector:nil]) {
             

@@ -12,17 +12,17 @@
 
 @interface FileManager : NSObject
 
-+ (NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
++(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
 +(void)preloadSoundsEffect:(NSString *)sceneName;
 
-+ (void)saveUserData;
-+ (UserDataObject *)getUserDataObject;
++(void)saveUserData;
++(UserDataObject *)getUserDataObject;
 
 +(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
-+ (NSArray *)getChararcterArray;
-+ (Character *)getPlayerHero;
-+ (Character *)getPlayerCastle;
++(NSArray *)getChararcterArray;
++(Character *)getPlayerHero;
++(Character *)getPlayerCastle;
 
 +(BattleDataObject *)loadBattleInfo:(NSString *)name;
 

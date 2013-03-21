@@ -86,11 +86,6 @@ __weak static BattleController* currentInstance;
     //test battleData
     BattleDataObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
-    for (Character *character in [battleData getEnemyArray]) {
-        character.player = 2;
-        [self addCharacter:character];
-    }
-    
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
 

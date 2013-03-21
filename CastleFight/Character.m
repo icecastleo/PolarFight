@@ -96,7 +96,7 @@
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
-        [self setSkillForCharacter:_name];
+        [self setSkillForCharacter:_picFilename];
         [self setPassiveSkillForCharacter:_name];
         
         // FIXME: set direction with init parameter?
@@ -111,20 +111,14 @@
 }
 
 -(void)setSkillForCharacter:(NSString *)name {
-    if ([name isEqualToString:@"Swordsman"]) {
-//        skill = [[SwordmanSkill alloc] initWithCharacter:self];
-        skill = [[TestSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Wizard"]) {
-        skill = [[WizardSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Priest"]) {
-        skill = [[HealSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Tank"]) {
-        skill = [[TankSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Bomber"]) {
-        skill = [[BombSkill alloc] initWithCharacter:self];
-//        skill = [[SuicideSkill alloc] initWithCharacter:self];
-    } else if ([name isEqualToString:@"Archer"]) {
-        skill = [[TestSkill alloc] initWithCharacter:self];
+    if ([name hasPrefix:@"user"]) {
+        NSString *suffix = [name substringFromIndex:name.length - 2];
+        
+        if ([suffix intValue] % 2 == 1) {
+            skill = [[SwordmanSkill alloc] initWithCharacter:self];
+        } else {
+            skill = [[TestSkill alloc] initWithCharacter:self];
+        }
     }
 }
 
@@ -151,15 +145,25 @@
 
 -(void)makePoint {
     pointArray = [NSMutableArray arrayWithObjects:
-                  [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height/2)],
                   [NSValue valueWithCGPoint:ccp(0, self.boundingBox.size.height)],
-                  [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width/2, self.boundingBox.size.height)],
                   [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height)],
-                  [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, self.boundingBox.size.height/2)],
                   [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, 0)],
-                  [NSValue valueWithCGPoint:ccp(self.boundingBox.size.width/2, 0)],
                   [NSValue valueWithCGPoint:ccp(0, 0)]
                   ,nil];
+    
+    int count = (int)self.boundingBox.size.height / kCollisionPointRange;
+    
+    for (int i = 1; i <= count; i++) {
+        [pointArray addObject:[NSValue valueWithCGPoint:ccp(0, i * kCollisionPointRange)]];
+        [pointArray addObject:[NSValue valueWithCGPoint:ccp(self.boundingBox.size.width, i * kCollisionPointRange)]];
+    }
+    
+    count = (int)self.boundingBox.size.width / kCollisionPointRange;
+    
+    for (int i = 1; i <= count; i++) {
+        [pointArray addObject:[NSValue valueWithCGPoint:ccp(i * kCollisionPointRange, 0)]];
+        [pointArray addObject:[NSValue valueWithCGPoint:ccp(i * kCollisionPointRange, self.boundingBox.size.height)]];
+    }
 }
 
 -(void)setPlayer:(int)player {

@@ -13,6 +13,7 @@
 #import "CastleBloodSprite.h"
 #import "ColoredSquareSprite.h"
 #import "UnitMenuItem.h"
+#import "FileManager.h"
 
 @implementation BattleStatusLayer
 
@@ -109,11 +110,10 @@
     
     unitItems = [[NSMutableArray alloc] init];
     
-    Character *temp = [[Character alloc] initWithId:@"001" andLevel:1];
+    NSArray *characters = [FileManager getChararcterArray];
     
-    for (int i = 1; i < 10; i++) {
-        CCMenuItem *item = [[UnitMenuItem alloc] initWithCharacter:temp];
-        
+    for (Character *character in characters) {
+        CCMenuItem *item = [[UnitMenuItem alloc] initWithCharacter:character];
         [unitItems addObject:item];
     }
     
