@@ -333,10 +333,28 @@ static const int tableviewPositionZ = 100;
         }
     }
     
+    /* //test update UserData
+    NSArray *characterArray = [FileManager getChararcterArray];
+    
+    for (Character *character in characterArray) {
+        NSLog(@"[1]id ::%@, level ::%d",character.characterId,character.level);
+//        character.level += [characterArray indexOfObject:character];
+        NSLog(@"[2]id ::%@, level ::%d",character.characterId,character.level);
+    }
+    [FileManager updatePlayerCharacterArray:characterArray];
+    for (Character *character in characterArray) {
+        NSLog(@"[3]id ::%@, level ::%d",character.characterId,character.level);
+    }
+    
+    NSLog(@"[1]%d",[FileManager getPlayerMoney]);
+    [FileManager updatePlayerMoney:+5000];
+    NSLog(@"[2]%d",[FileManager getPlayerMoney]);
+    //*/
+    
     if (saveCharacterArray.count < characterMinNumber) {
         CCLOG(@"you don't choose any character.");
     }else {
-//        [FileManager saveCharacterArray:saveCharacterArray];
+//        [FileManager saveUserData];
         [[CCDirector sharedDirector] replaceScene:[BattleController node]];
     }
 }

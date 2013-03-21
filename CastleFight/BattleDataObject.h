@@ -14,8 +14,8 @@
 
 @property (nonatomic,readonly) NSString *battleName;
 //battle info
-@property (nonatomic,strong) NSString *mapName;
-@property (nonatomic,strong) NSString *backgroundMusic;
+@property (nonatomic,readonly) NSString *mapName;
+@property (nonatomic,readonly) NSString *backgroundMusic;
 
 //@property (nonatomic) NSArray *playerCharacterArray;
 

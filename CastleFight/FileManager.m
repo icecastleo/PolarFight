@@ -177,6 +177,9 @@ static FileManager *sharedFileManager = nil;
 
 - (void)saveUserData {
     
+    //now is testing without saving
+    //return;
+    
     if (_userDataObject == nil) return;
     
     NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
@@ -257,8 +260,21 @@ static FileManager *sharedFileManager = nil;
     [[self sharedFileManager] saveUserData];
 }
 
+/* //do not need this temporary
 + (UserDataObject *)getUserDataObject {
     return [self sharedFileManager].userDataObject;
+}
+//*/
+
++(BattleDataObject *)loadBattleInfo:(NSString *)name {
+    NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
+    for (NSDictionary *dic in allBattleDataArray) {
+        if ([name isEqualToString:[dic objectForKey:@"name"]]) {
+            BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:dic];
+            return battleDataObject;
+        }
+    }
+    return nil;
 }
 
 +(NSDictionary *)getCharacterDataWithId:(NSString *)anId {
@@ -277,15 +293,25 @@ static FileManager *sharedFileManager = nil;
     return [[self sharedFileManager].userDataObject getPlayerCastle];
 }
 
-+(BattleDataObject *)loadBattleInfo:(NSString *)name {
-    NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
-    for (NSDictionary *dic in allBattleDataArray) {
-        if ([name isEqualToString:[dic objectForKey:@"name"]]) {
-            BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:dic];
-            return battleDataObject;
-        }
-    }
-    return nil;
++(int)getPlayerMoney {
+    return [[self sharedFileManager].userDataObject getPlayerMoney];
+}
+
++(void)updatePlayerMoney:(int)value {
+    [[self sharedFileManager].userDataObject updatePlayerMoney:value];
+//    [self saveUserData];
+}
+
++(void)updatePlayerCharacterArray:(NSArray *)array {
+    [[self sharedFileManager].userDataObject updatePlayerCharacterArray:array];
+}
+
++(void)updatePlayerHero:(Character *)hero {
+    [[self sharedFileManager].userDataObject updatePlayerHero:hero];
+}
+
++(void)updatePlayerCastle:(Character *)castle {
+    [[self sharedFileManager].userDataObject updatePlayerCastle:castle];
 }
 
 #pragma mark not done

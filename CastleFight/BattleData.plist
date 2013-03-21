@@ -8,7 +8,7 @@
 		<key>name</key>
 		<string>battle_01_01</string>
 		<key>map</key>
-		<string>map_01.png</string>
+		<string>map/map_01</string>
 		<key>backgroundMusic</key>
 		<string>bgm_ffcd_b.caf</string>
 		<key>enemies</key>
@@ -18,36 +18,16 @@
 				<string>001</string>
 				<key>level</key>
 				<string>1</string>
+				<key>targetRatio</key>
+				<string>0.25</string>
 			</dict>
 			<dict>
 				<key>id</key>
-				<string>001</string>
+				<string>002</string>
 				<key>level</key>
 				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
+				<key>targetRatio</key>
+				<string>0.75</string>
 			</dict>
 		</array>
 		<key>bosses</key>
@@ -85,59 +65,9 @@
 		<key>backgroundMusic</key>
 		<string>bgm_ffcd_b.caf</string>
 		<key>enemies</key>
-		<array>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-		</array>
+		<array/>
 		<key>bosses</key>
-		<array>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>10</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>15</string>
-			</dict>
-		</array>
+		<array/>
 		<key>castle</key>
 		<array>
 			<dict>

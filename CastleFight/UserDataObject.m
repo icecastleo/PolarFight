@@ -66,6 +66,43 @@
     return characterArray;
 }
 
+-(int)getPlayerMoney {
+    //trick: user never search the real money value in memory.
+    return [self.money intValue] - 1000;
+}
+
+-(void)updatePlayerMoney:(int)value {
+    _money = [NSString stringWithFormat:@"%d",[self.money intValue]+value];
+}
+
+-(void)updatePlayerCharacterArray:(NSArray *)array {
+    
+//    NSLog(@"Character count::%d == array count ::%d",self.playerCharacterArray.count,array.count);
+    NSAssert(array.count == self.playerCharacterArray.count, @"the sum of character should be the same. Why does the character dispear from the list.");
+    
+    for (CharacterData *data in self.playerCharacterArray) {
+        for (Character *character in array) {
+            if ([data.characterId isEqualToString:character.characterId]) {
+                data.level = [NSString stringWithFormat:@"%d",character.level];
+            }
+        }
+    }
+}
+
+-(void)updatePlayerHero:(Character *)hero {
+    CharacterData *data = [self.playerHeroArray lastObject];
+    if ([data.characterId isEqualToString:hero.characterId]) {
+        data.level = [NSString stringWithFormat:@"%d",hero.level];
+    }
+}
+
+-(void)updatePlayerCastle:(Character *)castle {
+    CharacterData *data = [self.playerCastleArray lastObject];
+    if ([data.characterId isEqualToString:castle.characterId]) {
+        data.level = [NSString stringWithFormat:@"%d",castle.level];
+    }
+}
+
 #pragma mark NSCoding
 
 #define kMoneyKey       @"Money"

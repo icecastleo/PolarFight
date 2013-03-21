@@ -24,6 +24,15 @@
 -(Character *)getPlayerHero;
 -(Character *)getPlayerCastle;
 -(NSArray *)getPlayerCharacterArray;
+-(int)getPlayerMoney;
 
+-(void)updatePlayerMoney:(int)value;
+-(void)updatePlayerCharacterArray:(NSArray *)array;
+-(void)updatePlayerHero:(Character *)hero;
+-(void)updatePlayerCastle:(Character *)castle;
+
+//TODO:
+//-(NSArray *)getPlayerItemArray;
+//-(void)updatePlayerItemArray:(NSArray *)array;
 
 @end

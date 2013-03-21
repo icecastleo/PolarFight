@@ -29,13 +29,9 @@
 -(void) initMosterData{
     
     NSArray *enemyArry= [[BattleController currentInstance].battleData getEnemyArray];
-    for (Character *item in enemyArry) {
-        MonsterData *md= [MonsterData alloc];
-        md.Name=item.characterId;
-        md.summonCost=item.cost;
-        md.targetRatio=0.5;
-        md.currentCount=0;
-         [_data.monsterDataCollection addMonsterDataObject:md];
+    for (MonsterData *item in enemyArry) {
+        
+         [_data.monsterDataCollection addMonsterDataObject:item];
     }
     
    
