@@ -24,7 +24,7 @@
 -(id) init
 {
     if (self = [super init]) {
-        monsterData = [NSMutableDictionary alloc];
+        monsterData = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -36,22 +36,28 @@
 
 -(MonsterData*) getMonsterData:(NSString *)name
 {
-   return (MonsterData*)[monsterData objectForKey:name];
+    return (MonsterData*)[monsterData objectForKey:name];
 }
 -(void) clearCurrentMonsters
 {
-    for(MonsterData *md in monsterData)
-    {
+    for (NSString* key in monsterData) {
+        MonsterData *md = [monsterData objectForKey:key];
         md.currentCount=0;
+        
     }
+    
 }
 
 -(int) getCurrentMonsters
 {
     int count= 0;
-    for (MonsterData *md in monsterData) {
+    for (NSString* key in monsterData) {
+        MonsterData *md = [monsterData objectForKey:key];
         count+=md.currentCount;
+        
     }
+    
+    
     return count;
 }
 
@@ -62,19 +68,21 @@
     
     MonsterData *result;
     
-    for (MonsterData *md in monsterData) {
-    
+    for (NSString* key in monsterData) {
+        MonsterData *md = [monsterData objectForKey:key];
         if(result==nil)
             result=md;
         float currentRatio= (float)md.currentCount/count;
         md.subRatio= currentRatio-md.targetRatio;
         if(md.subRatio<result.subRatio)
             result=md;
-        
+
     }
     
+    
+    
     return result;
-
+    
 }
 
 

@@ -11,6 +11,7 @@
 @interface MonsterData:NSObject
 
 @property NSString *Name;
+@property int level;
 @property float summonCost;
 @property int currentCount;
 @property float targetRatio;

@@ -17,32 +17,32 @@
         character = aCharacter;
         _currentState =[[AIStateCastleWaiting alloc] init];
         _mutableDictionary = [NSMutableDictionary new];
+         _data = [[EnemyAIData alloc] init];
         [self initMosterData];
-        _foodSupplySpeed= 0.8;
-        _data = [[EnemyAIData alloc] init];
+        _foodSupplySpeed= 3;
+        _food=20;
+       
     }
     return self;
 }
 // TODO: Get Data from Dan
 -(void) initMosterData{
     
-    MonsterData *md1= [MonsterData alloc];
-    md1.Name=@"001";
-    md1.summonCost=20;
-    md1.targetRatio=0.25;
-    md1.currentCount=0;
+    NSArray *enemyArry= [[BattleController currentInstance].battleData getEnemyArray];
+    for (Character *item in enemyArry) {
+        MonsterData *md= [MonsterData alloc];
+        md.Name=item.characterId;
+        md.summonCost=item.cost;
+        md.targetRatio=0.5;
+        md.currentCount=0;
+         [_data.monsterDataCollection addMonsterDataObject:md];
+    }
+    
+   
     
     
-    MonsterData *md2= [MonsterData alloc];
-    md2.Name=@"002";
-    md2.summonCost=20;
-    md2.targetRatio=0.75;
-    md2.currentCount=0;
     
-    [_data.monsterDataCollection addMonsterDataObject:md1];
-    [_data.monsterDataCollection addMonsterDataObject:md2];
-    
-    
+ 
 }
 
 -(MonsterDataCollection*) getCurrentMonsters

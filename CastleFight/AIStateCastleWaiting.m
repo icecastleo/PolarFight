@@ -10,7 +10,7 @@
 #import "EnemyAI.h"
 #import "Character.h"
 #import "BattleController.h"
-
+#import "EnemyAIData.h"
 @implementation AIStateCastleWaiting
 
 - (void)execute:(BaseAI *)ai {
@@ -21,8 +21,9 @@
         if(a.nextMonster.summonCost<=a.food){
             Character *next = [self newMonster:a.nextMonster.Name];
             [[BattleController currentInstance] addCharacter:next];
-            a.nextMonster=nil;
             a.food-=a.nextMonster.summonCost;
+            a.nextMonster=nil;
+            
         }
         
     }
@@ -36,7 +37,9 @@
         if(a.nextMonster==nil){
 
             a.nextMonster= [self examineNextMonster:ai];
+            
         }
+        nextDecisionTime=CACurrentMediaTime()+1;
         a.food+=a.foodSupplySpeed;
     }
     
@@ -54,7 +57,7 @@
 {
     
     EnemyAI *a = (EnemyAI*)ai;
-    nextDecisionTime=CACurrentMediaTime()+1;
+   
     MonsterDataCollection* dic = [a getCurrentMonsters];
     
     return [dic getNextMonster];
