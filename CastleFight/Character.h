@@ -37,7 +37,7 @@
 
 @property (readonly) NSString *characterId;
 @property (readonly) NSString *name;
-@property (readonly) NSString *picFilename;
+@property (readonly) NSString *spriteFile;
 @property (readonly) NSString *headImageFileName;
 
 @property (readonly) int cost;

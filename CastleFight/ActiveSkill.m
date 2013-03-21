@@ -69,9 +69,9 @@
     
     count++;
     
-    range.rangeSprite.visible = NO;
+//    range.rangeSprite.visible = NO;
     range = ranges[count];
-    range.rangeSprite.visible = YES;
+//    range.rangeSprite.visible = YES;
 }
 
 -(void)reset {
@@ -84,9 +84,9 @@
     
     count = 0;
     
-    range.rangeSprite.visible = NO;
+//    range.rangeSprite.visible = NO;
     range = ranges[count];
-    range.rangeSprite.visible = YES;
+//    range.rangeSprite.visible = YES;
 }
 
 -(void)activeSkill:(int)count {

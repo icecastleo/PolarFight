@@ -12,6 +12,8 @@
 
 @interface MapLayer : CCLayer {
     int counts[2];
+    
+    Character *hero;
 }
 
 @property (readonly) NSMutableArray *characters;
