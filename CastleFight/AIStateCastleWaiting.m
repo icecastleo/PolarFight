@@ -25,16 +25,18 @@
         }
         
     }
- 
+    
     
     // TODO: Food Supply
     
     if(CACurrentMediaTime()>nextDecisionTime)
     {
         //examine once a sec
-        NSString* next= [self examineNextMonster:ai];
-        a.nextMonster= [self newMonster:next];
-        a.food+=4;
+        if(a.nextMonster!=nil){
+            NSString* next= [self examineNextMonster:ai];
+            a.nextMonster= [self newMonster:next];
+        }
+        a.food+=a.foodSupplySpeed;
     }
     
 }

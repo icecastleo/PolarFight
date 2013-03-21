@@ -33,34 +33,39 @@ const static int pathHeight = 70;
         // Background image
         CCSprite *map1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
         map1.anchorPoint = ccp(0, 0);
-        
+        CCSprite *map1_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
+        map1_1.anchorPoint = ccp(0, 0);
         CCSprite *map2 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
         map2.anchorPoint = ccp(0, 0);
-
+        CCSprite *map2_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
+        map2_1.anchorPoint = ccp(0, 0);
         CCSprite *map3 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
         map3.anchorPoint = ccp(0, 0);
-       
+        CCSprite *map3_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
+        map3_1.anchorPoint = ccp(0, 0);
+        
         CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
         // To fullfill the screen
-        background.contentSize = CGSizeMake(map3.contentSize.width, map3.contentSize.height + 21);
+        background.contentSize = CGSizeMake(map1.boundingBox.size.width*2, [CCDirector sharedDirector].winSize.height);
         [map3 addChild:background z:-5];
        
+
+        
        	// Create a void Node, parent Node
 		CCParallaxNode *voidNode = [CCParallaxNode node];
 		
 		// We add our children "layers"(sprite) to void node
-		
-		// Background Image
-		[voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(0,100)];
-		
-		// TileMap
-		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,90)];
         [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,0)];
+        [voidNode addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(map1.boundingBox.size.width-1,0)];
+		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,90)];
+        [voidNode addChild:map2_1 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(map2.boundingBox.size.width-1,90)];
+        [voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(0,100)];
+        [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(map3.boundingBox.size.width-1,100)];
         
         [self addChild:voidNode];
                 
-        _boundaryX = map1.boundingBox.size.width;
-        _boundaryY = map1.boundingBox.size.height;
+        _boundaryX = map1.boundingBox.size.width*2;
+        _boundaryY = map1.boundingBox.size.height*2;
         
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
         [self addChild:_cameraControl];

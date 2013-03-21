@@ -18,6 +18,7 @@
         _currentState =[[AIStateCastleWaiting alloc] init];
         _mutableDictionary = [NSMutableDictionary new];
         [self initMosterData];
+        _foodSupplySpeed= 0.8;
     }
     return self;
 }

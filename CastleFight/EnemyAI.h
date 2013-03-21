@@ -12,6 +12,7 @@
 
 @property NSMutableDictionary *mutableDictionary;
 @property float food;
+@property float foodSupplySpeed;
 @property Character *nextMonster;
 
 -(NSMutableDictionary*) getCurrentMonsters;
