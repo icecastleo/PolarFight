@@ -13,7 +13,7 @@
 @implementation SlowMoveAura
 
 -(NSMutableDictionary *)getRangeDictionary {
-    return [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@125,@"effectRadius",nil];
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@125,kRangeKeyRadius,nil];
 }
 
 -(void)execute:(Character *)target {
