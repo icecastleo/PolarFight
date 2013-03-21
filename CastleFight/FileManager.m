@@ -50,10 +50,12 @@ static FileManager *sharedFileManager = nil;
     if (_userDataObject != nil) return _userDataObject;
     //When someone tries to access the data property, we’re going to check if we have it loaded into memory – and if so go ahead and return it. But if not, we’ll load it from disk!
     
+    //get File in Documents
     NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
     NSData *codedData = [[NSData alloc] initWithContentsOfFile:dataPath];
     
     if (!codedData) {
+        //get file in bundle
         dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:NO];
         _userDataObject = [[UserDataObject alloc] initWithPlistPath:dataPath];
     }else {
@@ -94,7 +96,7 @@ static FileManager *sharedFileManager = nil;
 -(id)init {
 	if((self=[super init])) {
         _userDataObject =  [self loadUserDataObject];
-        _animationDictionary = [self loadAnimation];
+//        _animationDictionary = [self loadAnimation];
         _characterDataFile = [FileManager loadPlistFromFileName:@"CharacterBasicData.plist"];
 	}
 	return self;
@@ -151,7 +153,7 @@ static FileManager *sharedFileManager = nil;
         NSArray *fileArray = [path componentsSeparatedByString:@"/"];
         NSString *fileName = [fileArray lastObject];
         if ([fileName hasPrefix:prefix]) {
-            //            NSLog(@"targetFile:%@",fileName);
+            //NSLog(@"targetFile:%@",fileName);
             [targetFileNameArray addObject:path];
         }
     }
@@ -275,7 +277,6 @@ static FileManager *sharedFileManager = nil;
     return [[self sharedFileManager].userDataObject getPlayerCastle];
 }
 
-//loadBattleInfo
 +(BattleDataObject *)loadBattleInfo:(NSString *)name {
     NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
     for (NSDictionary *dic in allBattleDataArray) {
@@ -291,6 +292,7 @@ static FileManager *sharedFileManager = nil;
 //FIXME: not done
 -(void)playBackgroundMusic:(NSString *)name {
     
+    //FIXME: No BackgroundMusic_caf Folder
     NSArray *music = [FileManager getAllFilePathsInDirectory:@"BackgroundMusic_caf" withPrefix:name fileType:@"caf"];
     
     NSString *fileName = [music lastObject];

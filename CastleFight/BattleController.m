@@ -13,7 +13,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-#import "BattleDataObject.h"
+
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
@@ -46,8 +46,8 @@ __weak static BattleController* currentInstance;
         [self setCharacterArrayFromSelectLayer];
         
         // init Dpad
-//        dPadLayer = [DPadLayer node];
-//        [self addChild:dPadLayer];
+        //        dPadLayer = [DPadLayer node];
+        //        [self addChild:dPadLayer];
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
@@ -84,19 +84,19 @@ __weak static BattleController* currentInstance;
 - (void)setCharacterArrayFromSelectLayer {
     
     //test battleData
-    BattleDataObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+    _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
-
-    _enemyCastle = [battleData getEnemyCastle];
+    
+    _enemyCastle = [_battleData getEnemyCastle];
     _enemyCastle.player = 2;
     
     [mapLayer addCastle:_playerCastle];
     [mapLayer addCastle:_enemyCastle];
     
     _enemyAi = [[EnemyAI alloc] initWithCharacter:_enemyCastle];
-
+    
 }
 
 -(void)addCharacter:(Character *)character {
@@ -114,9 +114,9 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)removeCharacter:(Character *)character {
-//    CCLOG(@"Remove player %i's %@", character.player, character.name);
-
-//    [mapLayer removeCharacter:character];
+    //    CCLOG(@"Remove player %i's %@", character.player, character.name);
+    
+    //    [mapLayer removeCharacter:character];
     [removeCharacters addObject:character];
 }
 
@@ -132,7 +132,7 @@ __weak static BattleController* currentInstance;
     // for castle fight
     velocity.y = 0;
     velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
-//    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
+    //    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
 }
 
 -(void)smoothMoveCameraToX:(float)x Y:(float)y {
