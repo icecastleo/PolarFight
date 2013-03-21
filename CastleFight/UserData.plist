@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>id</key>
+	<string>001</string>
+	<key>money</key>
+	<string>1000</string>
+	<key>characters</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+	</array>
+	<key>heroes</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<string>10</string>
+		</dict>
+	</array>
+	<key>castle</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>009</string>
+			<key>level</key>
+			<string>1</string>
+		</dict>
+	</array>
+	<key>items</key>
+	<array/>
+</dict>
+</plist>

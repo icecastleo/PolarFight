@@ -10,13 +10,20 @@
 
 @class Character;
 
-@interface UserDataObject : NSObject
+@interface UserDataObject : NSObject <NSCoding>
 
-@property (nonatomic) NSArray *playerCharacterArray;
-@property (nonatomic) Character *playerHero;
-@property (nonatomic) Character *playerCastle;
+@property (strong) NSArray *playerCharacterArray;
+@property (strong) NSArray *playerHeroArray;
+@property (strong) NSArray *playerCastleArray;
 
-@property (nonatomic) NSString *money;
-@property (nonatomic) NSArray *items;
+@property (strong) NSString *money;
+@property (strong) NSArray *items;
+
+-(id)initWithPlistPath:(NSString *)path;
+
+-(Character *)getPlayerHero;
+-(Character *)getPlayerCastle;
+-(NSArray *)getPlayerCharacterArray;
+
 
 @end

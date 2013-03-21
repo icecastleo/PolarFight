@@ -18,7 +18,7 @@
 
 -(void)setRanges {
 
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
 }

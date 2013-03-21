@@ -11,7 +11,6 @@
 #import "BattleController.h"
 #import "Character.h"
 #import "FileManager.h"
-#import "GDataXMLNode.h"
 #import "CharacterInfoView.h"
 #import "MyCell.h"
 #import "BattleDataObject.h"
@@ -337,7 +336,7 @@ static const int tableviewPositionZ = 100;
     if (saveCharacterArray.count < characterMinNumber) {
         CCLOG(@"you don't choose any character.");
     }else {
-        [FileManager saveCharacterArray:saveCharacterArray];
+//        [FileManager saveCharacterArray:saveCharacterArray];
         [[CCDirector sharedDirector] replaceScene:[BattleController node]];
     }
 }

@@ -13,7 +13,7 @@
 @implementation SwordmanSkill
 
 -(void)setRanges {    
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@75,kRangeKeyRadius,@(M_PI/2),@"effectAngle",nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@75,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
     
     [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
     
