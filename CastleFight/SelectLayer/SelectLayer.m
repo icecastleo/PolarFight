@@ -336,7 +336,7 @@ static const int tableviewPositionZ = 100;
     if (saveCharacterArray.count < characterMinNumber) {
         CCLOG(@"you don't choose any character.");
     }else {
-//        [FileManager saveCharacterArray:saveCharacterArray];
+        [FileManager saveUserData];
         [[CCDirector sharedDirector] replaceScene:[BattleController node]];
     }
 }

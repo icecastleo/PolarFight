@@ -177,6 +177,9 @@ static FileManager *sharedFileManager = nil;
 
 - (void)saveUserData {
     
+    //now is testing without saving
+    return;
+    
     if (_userDataObject == nil) return;
     
     NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];

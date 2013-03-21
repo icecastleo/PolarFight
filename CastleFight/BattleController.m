@@ -39,7 +39,10 @@ __weak static BattleController* currentInstance;
         
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map/map_01"];
+        //test battleData
+        _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+        
+        mapLayer = [[MapLayer alloc] initWithFile:_battleData.mapName];
         [self addChild:mapLayer];
         
         // set character on may
@@ -82,9 +85,6 @@ __weak static BattleController* currentInstance;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
-    
-    //test battleData
-    _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;

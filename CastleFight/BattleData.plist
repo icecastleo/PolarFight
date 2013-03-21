@@ -8,7 +8,7 @@
 		<key>name</key>
 		<string>battle_01_01</string>
 		<key>map</key>
-		<string>map_01.png</string>
+		<string>map/map_01</string>
 		<key>backgroundMusic</key>
 		<string>bgm_ffcd_b.caf</string>
 		<key>enemies</key>
