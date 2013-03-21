@@ -19,40 +19,48 @@
         _mutableDictionary = [NSMutableDictionary new];
         [self initMosterData];
         _foodSupplySpeed= 0.8;
+        _data = [[EnemyAIData alloc] init];
     }
     return self;
 }
 // TODO: Get Data from Dan
 -(void) initMosterData{
-    NSMutableArray *monster1Array =[NSMutableArray arrayWithObjects:
-                             [NSNumber numberWithInt:0.25],
-                             [NSNumber numberWithInt:0],nil];
-    NSMutableArray *monster2Array =[NSMutableArray arrayWithObjects:
-                             [NSNumber numberWithInt:0.75],
-                             [NSNumber numberWithInt:0],nil];
-    [_mutableDictionary setObject:monster1Array forKey:@"001"];
-    [_mutableDictionary setObject:monster2Array forKey:@"002"];
+    
+    MonsterData *md1= [MonsterData alloc];
+    md1.Name=@"001";
+    md1.summonCost=20;
+    md1.targetRatio=0.25;
+    md1.currentCount=0;
+    
+    
+    MonsterData *md2= [MonsterData alloc];
+    md2.Name=@"002";
+    md2.summonCost=20;
+    md2.targetRatio=0.75;
+    md2.currentCount=0;
+    
+    [_data.monsterDataCollection addMonsterDataObject:md1];
+    [_data.monsterDataCollection addMonsterDataObject:md2];
+    
     
 }
 
--(NSMutableDictionary*) getCurrentMonsters
+-(MonsterDataCollection*) getCurrentMonsters
 {
-    for (NSString* key in _mutableDictionary) {
-        NSMutableArray* s =(NSMutableArray*)[_mutableDictionary objectForKey:key];
-        [s replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:0]];
-    }
+ 
+    [_data.monsterDataCollection clearCurrentMonsters];
     
     for(Character* temp in [BattleController currentInstance].characters)
     {
         if(temp.player==2)
         {
-            NSMutableArray* s =[_mutableDictionary objectForKey:temp.characterId];
-           NSInteger count= [[s objectAtIndex:1] integerValue]+1;
-            [s replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:count]];
+            MonsterData *item = [_data.monsterDataCollection getMonsterData:temp.characterId];
+            item.currentCount++;
+            
         }
     
     }
-    return _mutableDictionary;
+    return _data.monsterDataCollection;
 }
 
 @end
