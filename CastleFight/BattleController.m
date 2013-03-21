@@ -86,17 +86,6 @@ __weak static BattleController* currentInstance;
     //test battleData
     BattleDataObject *battleData = [FileManager loadBattleInfo:@"battle_01_01"];
     
-    NSArray *characterArray = [FileManager getChararcterArray];
-    
-    NSAssert(characterArray != nil, @"Ooopse! you forgot to choose some characters.");
-    
-    for (Character *character in characterArray) {
-        character.player = 1;
-        character.ai = [[SimpleAI alloc] initWithCharacter:character];
-        [character.sprite addBloodSprite];
-        [self addCharacter:character];
-    }
-    
     for (Character *character in [battleData getEnemyArray]) {
         character.player = 2;
         [self addCharacter:character];
