@@ -92,7 +92,7 @@
 	
     // TODO: Control by game setting plist
     SimpleAudioEngine *audioengine = [SimpleAudioEngine sharedEngine];
-    audioengine.effectsVolume = 0.05;
+    audioengine.effectsVolume = 0.5;
     audioengine.backgroundMusicVolume = 0.05;
     
 	return YES;
@@ -103,7 +103,6 @@
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-
 
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application

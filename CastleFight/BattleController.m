@@ -18,6 +18,8 @@
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
 #import "EnemyAI.h"
+#import "SimpleAudioEngine.h"
+
 @interface BattleController () {
     
 }
@@ -34,15 +36,18 @@ __weak static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
+        NSString *prefix = @"01";
+        NSString *suffix = @"01";
+        
         self.food = 0;
         foodRate = 0.8;
         
         currentInstance = self;
         
         //test battleData
-        _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"battle_%@_%@", prefix, suffix]];
         
-        mapLayer = [[MapLayer alloc] initWithFile:_battleData.mapName];
+        mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
         [self addChild:mapLayer];
         
         // set character on may
@@ -65,6 +70,8 @@ __weak static BattleController* currentInstance;
                           [CCCallFunc actionWithTarget:self selector:@selector(foodUpdate)],
                           [CCDelayTime actionWithDuration:0.25],
                           nil]]];
+        
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", [prefix intValue]]];
     }
     return self;
 }

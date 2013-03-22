@@ -46,19 +46,19 @@ const static int pathHeight = 70;
         
         CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
         // To fullfill the screen
-        background.contentSize = CGSizeMake(map1.boundingBox.size.width*2, [CCDirector sharedDirector].winSize.height);
+        background.contentSize = CGSizeMake(map3.contentSize.width * 2, map3.contentSize.height + 21);
         [map3 addChild:background z:-5];
        
        	// Create a void Node, parent Node
 		CCParallaxNode *voidNode = [CCParallaxNode node];
 		
 		// We add our children "layers"(sprite) to void node
-        [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,0)];
-        [voidNode addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(map1.boundingBox.size.width-1,0)];
-		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(0,90)];
-        [voidNode addChild:map2_1 z:-2 parallaxRatio:ccp(1.0f,1.0f) positionOffset:ccp(map2.boundingBox.size.width-1,90)];
-        [voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(0,100)];
-        [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.4f,0.5f) positionOffset:ccp(map3.boundingBox.size.width-1,100)];
+        [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(0,0)];
+        [voidNode addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(map1.boundingBox.size.width-1, 0)];
+		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(0.75f, 1.f) positionOffset:ccp(0,90)];
+        [voidNode addChild:map2_1 z:-2 parallaxRatio:ccp(0.75f, 1.0f) positionOffset:ccp(map2.boundingBox.size.width-1, 90)];
+        [voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(0,100)];
+        [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(map3.boundingBox.size.width-1, 100)];
         
         [self addChild:voidNode];
                 
@@ -74,6 +74,7 @@ const static int pathHeight = 70;
         
         hero = [[Character alloc] initWithId:@"209" andLevel:1];
         hero.player = 1;
+        [hero.sprite addBloodSprite];
         [self addCharacter:hero];
         
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];

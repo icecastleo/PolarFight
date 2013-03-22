@@ -13,6 +13,7 @@
 #import "AKHelperObject.h"
 #import "FileManager.h"
 #import "CharacterBloodSprite.h"
+#import "SimpleAudioEngine.h"
 
 @interface CharacterSprite() {
     AKHelperObject *akHelper;
@@ -240,6 +241,12 @@ static const NSArray *directionStrings;
                                 [CCHide action],
                                 nil]];
     }
+    
+    if ([character.characterId hasPrefix:@"4"]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_building_damage.caf"];
+    } else {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_damage.caf"];
+    }
 }
 
 -(void)removeSelf:(id)sender {
@@ -287,6 +294,16 @@ static const NSArray *directionStrings;
                      nil]];
     
     [self releaseCharacterRetain];
+    
+    if ([character.characterId hasPrefix:@"4"]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_building_remove.caf"];
+    } else {
+        if (character.player == 1) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
+        } else {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_dog.caf"];
+        }
+    }
 }
 
 -(void)releaseCharacterRetain {
