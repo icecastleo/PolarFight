@@ -155,7 +155,7 @@
 		37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */; };
 		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
 		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
-		37E68CA516F97B4900AB5FBD /* CharacterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterData.m */; };
+		37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterDataObject.m */; };
 		37F585C516AF723600917637 /* currentCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585BF16AF723600917637 /* currentCharacter.png */; };
 		37F585C616AF723600917637 /* currentCharacter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C016AF723600917637 /* currentCharacter@2x.png */; };
 		37F585C716AF723600917637 /* player1Character.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C116AF723600917637 /* player1Character.png */; };
@@ -622,8 +622,8 @@
 		37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
 		37E68C9F16F95B1700AB5FBD /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
-		37E68CA316F97B4800AB5FBD /* CharacterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterData.h; sourceTree = "<group>"; };
-		37E68CA416F97B4800AB5FBD /* CharacterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterData.m; sourceTree = "<group>"; };
+		37E68CA316F97B4800AB5FBD /* CharacterDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterDataObject.h; sourceTree = "<group>"; };
+		37E68CA416F97B4800AB5FBD /* CharacterDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterDataObject.m; sourceTree = "<group>"; };
 		37F585BF16AF723600917637 /* currentCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = currentCharacter.png; sourceTree = "<group>"; };
 		37F585C016AF723600917637 /* currentCharacter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currentCharacter@2x.png"; sourceTree = "<group>"; };
 		37F585C116AF723600917637 /* player1Character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player1Character.png; sourceTree = "<group>"; };
@@ -1220,8 +1220,8 @@
 		3730814D16F7548F00F1F7EE /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				37E68CA316F97B4800AB5FBD /* CharacterData.h */,
-				37E68CA416F97B4800AB5FBD /* CharacterData.m */,
+				37E68CA316F97B4800AB5FBD /* CharacterDataObject.h */,
+				37E68CA416F97B4800AB5FBD /* CharacterDataObject.m */,
 				3730815216F7578100F1F7EE /* UserDataObject.h */,
 				3730815316F7578100F1F7EE /* UserDataObject.m */,
 				3730814F16F7550800F1F7EE /* BattleDataObject.h */,
@@ -2530,7 +2530,7 @@
 				37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */,
 				3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */,
 				3730815416F7578100F1F7EE /* UserDataObject.m in Sources */,
-				37E68CA516F97B4900AB5FBD /* CharacterData.m in Sources */,
+				37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */,
 				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

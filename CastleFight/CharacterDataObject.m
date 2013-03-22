@@ -6,9 +6,9 @@
 //
 //
 
-#import "CharacterData.h"
+#import "CharacterDataObject.h"
 
-@implementation CharacterData
+@implementation CharacterDataObject
 
 -(id)init {
     

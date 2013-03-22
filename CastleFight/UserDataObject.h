@@ -27,12 +27,11 @@
 -(int)getPlayerMoney;
 
 -(void)updatePlayerMoney:(int)value;
--(void)updatePlayerCharacterArray:(NSArray *)array;
--(void)updatePlayerHero:(Character *)hero;
--(void)updatePlayerCastle:(Character *)castle;
+
+-(void)updatePlayerCharacter:(Character *)character;
 
 //TODO:
 //-(NSArray *)getPlayerItemArray;
-//-(void)updatePlayerItemArray:(NSArray *)array;
+//-(void)updatePlayerItem;
 
 @end

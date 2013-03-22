@@ -7,7 +7,7 @@
 //
 
 #import "BattleDataObject.h"
-#import "CharacterData.h"
+#import "CharacterDataObject.h"
 #import "Character.h"
 #import "EnemyAIData.h"
 
@@ -24,7 +24,7 @@
 -(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
     NSMutableArray *tempCharacterArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
-        CharacterData *characterData = [[CharacterData alloc] initWithDictionary:dic];
+        CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
         [tempCharacterArray addObject:characterData];
     }
     return tempCharacterArray;
@@ -49,7 +49,7 @@
     
     NSMutableArray *characterArray = [NSMutableArray array];
     
-    for (CharacterData *data in anArray) {
+    for (CharacterDataObject *data in anArray) {
         Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
         MonsterData *monsterData = [[MonsterData alloc] init];
         monsterData.Name = data.characterId;
@@ -73,7 +73,7 @@
 
 -(Character *)getEnemyCastle {
     
-    CharacterData *data = [self.enemyCastleArray lastObject];
+    CharacterDataObject *data = [self.enemyCastleArray lastObject];
     Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
     return castle;
 }

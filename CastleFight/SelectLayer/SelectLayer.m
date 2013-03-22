@@ -338,16 +338,13 @@ static const int tableviewPositionZ = 100;
     
     for (Character *character in characterArray) {
         NSLog(@"[1]id ::%@, level ::%d",character.characterId,character.level);
-//        character.level += [characterArray indexOfObject:character];
+//        character.level += [characterArray indexOfObject:character]*10;
         NSLog(@"[2]id ::%@, level ::%d",character.characterId,character.level);
-    }
-    [FileManager updatePlayerCharacterArray:characterArray];
-    for (Character *character in characterArray) {
-        NSLog(@"[3]id ::%@, level ::%d",character.characterId,character.level);
+        [FileManager updatePlayerCharacter:character];
     }
     
     NSLog(@"[1]%d",[FileManager getPlayerMoney]);
-    [FileManager updatePlayerMoney:+5000];
+    [FileManager updatePlayerMoney:-100];
     NSLog(@"[2]%d",[FileManager getPlayerMoney]);
     //*/
     

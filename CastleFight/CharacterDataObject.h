@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CharacterData : NSObject <NSCoding>
+@interface CharacterDataObject : NSObject <NSCoding>
 
 @property (strong) NSString *characterId;
 @property (strong) NSString *level;

@@ -170,19 +170,11 @@ static FileManager *sharedFileManager = nil;
     return nil;
 }
 
--(void)updateUserDataObject {
-    _userDataObject = nil;
-    _userDataObject = [self loadUserDataObject];
-}
-
 - (void)saveUserData {
-    
-    //now is testing without saving
-    //return;
     
     if (_userDataObject == nil) return;
     
-    NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
+    NSString *dataPath = [FileManager dataFilePath:@"UserData" forSave:YES];
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -190,44 +182,7 @@ static FileManager *sharedFileManager = nil;
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
     NSLog(@"Saving xml data to %@...", dataPath);
-    
-    [self updateUserDataObject];
 }
-
-#pragma mark Testing
-//FIXME: save plist file
-/*
-+(void)testSave:(NSArray *)characterArray {
-    
-    NSMutableArray *books = [NSMutableArray new];
-    
-    for (Character *character in characterArray) {
-        NSMutableDictionary *book = [NSMutableDictionary new];
-        
-        NSString *levelString = [NSString stringWithFormat:@"%d",character.level];
-        [book setObject:character.characterId forKey:@"id"];
-        [book setObject:levelString forKey:@"level"];
-        
-        [books addObject:book];
-    }
-    
-    //serialization Binary
-    NSString *filePath = [self dataFilePath:@"SelectedCharacters.plist" forSave:TRUE];
-    NSLog(@"Saving xml data to %@...", filePath);
-    NSString *error;
-    NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:books format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
-    
-    if(xmlData)
-    {
-        NSLog(@"No error creating XML data.");
-        [xmlData writeToFile:filePath atomically:YES];
-    }
-    else
-    {
-        NSLog(@"%@",error);
-    }
-}
-//*/
 
 +(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
     // ex: animationName = Animation_Swordsman_walking_Down.plist
@@ -259,12 +214,6 @@ static FileManager *sharedFileManager = nil;
 +(void)saveUserData {
     [[self sharedFileManager] saveUserData];
 }
-
-/* //do not need this temporary
-+ (UserDataObject *)getUserDataObject {
-    return [self sharedFileManager].userDataObject;
-}
-//*/
 
 +(BattleDataObject *)loadBattleInfo:(NSString *)name {
     NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
@@ -299,19 +248,11 @@ static FileManager *sharedFileManager = nil;
 
 +(void)updatePlayerMoney:(int)value {
     [[self sharedFileManager].userDataObject updatePlayerMoney:value];
-//    [self saveUserData];
+    [self saveUserData];
 }
 
-+(void)updatePlayerCharacterArray:(NSArray *)array {
-    [[self sharedFileManager].userDataObject updatePlayerCharacterArray:array];
-}
-
-+(void)updatePlayerHero:(Character *)hero {
-    [[self sharedFileManager].userDataObject updatePlayerHero:hero];
-}
-
-+(void)updatePlayerCastle:(Character *)castle {
-    [[self sharedFileManager].userDataObject updatePlayerCastle:castle];
++(void)updatePlayerCharacter:(Character *)character {
+    [[self sharedFileManager].userDataObject updatePlayerCharacter:character];
 }
 
 #pragma mark not done
