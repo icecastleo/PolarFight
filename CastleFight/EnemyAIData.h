@@ -10,7 +10,7 @@
 
 @interface MonsterData:NSObject
 
-@property NSString *Name;
+@property NSString *characterId;
 @property int level;
 @property float summonCost;
 @property int currentCount;

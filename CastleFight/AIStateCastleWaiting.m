@@ -19,7 +19,7 @@
     if(a.nextMonster!=nil)
     {
         if(a.nextMonster.summonCost<=a.food){
-            Character *next = [self newMonster:a.nextMonster.Name];
+            Character *next = [self newMonster:a.nextMonster.characterId];
             [[BattleController currentInstance] addCharacter:next];
             a.food-=a.nextMonster.summonCost;
             a.nextMonster=nil;

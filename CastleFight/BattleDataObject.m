@@ -7,7 +7,6 @@
 //
 
 #import "BattleDataObject.h"
-#import "CharacterDataObject.h"
 #import "Character.h"
 #import "EnemyAIData.h"
 
@@ -24,8 +23,13 @@
 -(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
     NSMutableArray *tempCharacterArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
-        CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
-        [tempCharacterArray addObject:characterData];
+        MonsterData *monsterData = [[MonsterData alloc] init];
+        monsterData.characterId = [dic objectForKey:@"id"];
+        monsterData.level = [[dic objectForKey:@"level"] intValue];
+        monsterData.targetRatio = [[dic objectForKey:@"targetRatio"] floatValue];
+        Character *character = [[Character alloc] initWithId:monsterData.characterId andLevel:monsterData.level];
+        monsterData.summonCost = character.cost;
+        [tempCharacterArray addObject:monsterData];
     }
     return tempCharacterArray;
 }
@@ -45,36 +49,17 @@
     return self;
 }
 
--(NSArray *)getMonsterDataArrayFromCharacterDataArray:(NSArray *)anArray {
-    
-    NSMutableArray *characterArray = [NSMutableArray array];
-    
-    for (CharacterDataObject *data in anArray) {
-        Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
-        MonsterData *monsterData = [[MonsterData alloc] init];
-        monsterData.Name = data.characterId;
-        monsterData.level = [data.level intValue];
-        monsterData.summonCost = character.cost;
-        monsterData.targetRatio = [data.targetRatio floatValue];
-        
-        [characterArray addObject:monsterData];
-    }
-    
-    return characterArray;
-}
-
 -(NSArray *)getEnemyArray {
-    return [self getMonsterDataArrayFromCharacterDataArray:self.enemyArray];
+    return self.enemyArray;
 }
 
 -(NSArray *)getEnemyBoss {    
-    return [self getMonsterDataArrayFromCharacterDataArray:self.enemyBossArray];
+    return self.enemyBossArray;
 }
 
 -(Character *)getEnemyCastle {
-    
-    CharacterDataObject *data = [self.enemyCastleArray lastObject];
-    Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
+    MonsterData *data = [self.enemyCastleArray lastObject];
+    Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level];
     return castle;
 }
 

@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSString *characterId;
 @property (nonatomic, strong) NSString *level;
-@property (nonatomic, strong) NSString *targetRatio;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
 
