@@ -12,12 +12,12 @@
 
 @interface UserDataObject : NSObject <NSCoding>
 
-@property (strong) NSArray *playerCharacterArray;
-@property (strong) NSArray *playerHeroArray;
-@property (strong) NSArray *playerCastleArray;
+@property (nonatomic, strong) NSArray *playerCharacterArray;
+@property (nonatomic, strong) NSArray *playerHeroArray;
+@property (nonatomic, strong) NSArray *playerCastleArray;
 
-@property (strong) NSString *money;
-@property (strong) NSArray *items;
+@property (nonatomic, strong) NSString *money;
+@property (nonatomic, strong) NSArray *items;
 
 -(id)initWithPlistPath:(NSString *)path;
 
@@ -27,12 +27,11 @@
 -(int)getPlayerMoney;
 
 -(void)updatePlayerMoney:(int)value;
--(void)updatePlayerCharacterArray:(NSArray *)array;
--(void)updatePlayerHero:(Character *)hero;
--(void)updatePlayerCastle:(Character *)castle;
+
+-(void)updatePlayerCharacter:(Character *)character;
 
 //TODO:
 //-(NSArray *)getPlayerItemArray;
-//-(void)updatePlayerItemArray:(NSArray *)array;
+//-(void)updatePlayerItem;
 
 @end

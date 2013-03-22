@@ -17,7 +17,6 @@
 +(void)preloadSoundsEffect:(NSString *)sceneName;
 
 +(void)saveUserData;
-//+(UserDataObject *)getUserDataObject;
 
 +(BattleDataObject *)loadBattleInfo:(NSString *)name;
 
@@ -28,8 +27,6 @@
 +(int)getPlayerMoney;
 
 +(void)updatePlayerMoney:(int)value;
-+(void)updatePlayerCharacterArray:(NSArray *)array;
-+(void)updatePlayerHero:(Character *)hero;
-+(void)updatePlayerCastle:(Character *)castle;
++(void)updatePlayerCharacter:(Character *)character;
 
 @end

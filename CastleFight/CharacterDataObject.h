@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CharacterData : NSObject <NSCoding>
+@interface CharacterDataObject : NSObject <NSCoding>
 
-@property (strong) NSString *characterId;
-@property (strong) NSString *level;
-@property (strong) NSString *targetRatio;
+@property (nonatomic, strong) NSString *characterId;
+@property (nonatomic, strong) NSString *level;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
 

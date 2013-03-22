@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array>
+<dict>
+	<key>001</key>
 	<dict>
 		<key>id</key>
 		<string>001</string>
@@ -11,7 +12,7 @@
 		<string>20</string>
 		<key>image</key>
 		<string>user_01</string>
-        <key>attributes</key>
+		<key>attributes</key>
 		<array>
 			<dict>
 				<key>name</key>
@@ -85,6 +86,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>002</key>
 	<dict>
 		<key>id</key>
 		<string>002</string>
@@ -168,6 +170,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>003</key>
 	<dict>
 		<key>id</key>
 		<string>003</string>
@@ -251,6 +254,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>004</key>
 	<dict>
 		<key>id</key>
 		<string>004</string>
@@ -334,6 +338,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>005</key>
 	<dict>
 		<key>id</key>
 		<string>005</string>
@@ -417,6 +422,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>006</key>
 	<dict>
 		<key>id</key>
 		<string>006</string>
@@ -500,6 +506,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>007</key>
 	<dict>
 		<key>id</key>
 		<string>007</string>
@@ -583,6 +590,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>008</key>
 	<dict>
 		<key>id</key>
 		<string>008</string>
@@ -666,6 +674,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>009</key>
 	<dict>
 		<key>id</key>
 		<string>009</string>
@@ -749,6 +758,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>010</key>
 	<dict>
 		<key>id</key>
 		<string>010</string>
@@ -832,173 +842,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>101</key>
 	<dict>
-		<key>id</key>
-		<string>011</string>
-		<key>name</key>
-		<string>Tower</string>
-		<key>cost</key>
-		<string>0</string>
-		<key>image</key>
-		<string>Tower</string>
-		<key>attributes</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>maxHp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>2500</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>maxMp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>attack</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>defense</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>agile</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>speed</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>moveTime</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>id</key>
-		<string>012</string>
-		<key>name</key>
-		<string>Tower2</string>
-		<key>cost</key>
-		<string>0</string>
-		<key>image</key>
-		<string>Tower2</string>
-		<key>attributes</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>maxHp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>2500</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>maxMp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>attack</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>defense</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>agile</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>speed</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>moveTime</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-		</array>
-	</dict>
-    <dict>
 		<key>id</key>
 		<string>101</string>
 		<key>name</key>
@@ -1007,7 +852,7 @@
 		<string>20</string>
 		<key>image</key>
 		<string>enemy_01</string>
-        <key>attributes</key>
+		<key>attributes</key>
 		<array>
 			<dict>
 				<key>name</key>
@@ -1081,6 +926,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>102</key>
 	<dict>
 		<key>id</key>
 		<string>102</string>
@@ -1164,6 +1010,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>103</key>
 	<dict>
 		<key>id</key>
 		<string>103</string>
@@ -1247,6 +1094,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>104</key>
 	<dict>
 		<key>id</key>
 		<string>104</string>
@@ -1330,6 +1178,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>105</key>
 	<dict>
 		<key>id</key>
 		<string>105</string>
@@ -1413,6 +1262,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>106</key>
 	<dict>
 		<key>id</key>
 		<string>106</string>
@@ -1496,6 +1346,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>107</key>
 	<dict>
 		<key>id</key>
 		<string>107</string>
@@ -1579,6 +1430,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>108</key>
 	<dict>
 		<key>id</key>
 		<string>108</string>
@@ -1662,6 +1514,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>109</key>
 	<dict>
 		<key>id</key>
 		<string>109</string>
@@ -1745,6 +1598,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>110</key>
 	<dict>
 		<key>id</key>
 		<string>110</string>
@@ -1828,7 +1682,8 @@
 			</dict>
 		</array>
 	</dict>
-    <dict>
+	<key>201</key>
+	<dict>
 		<key>id</key>
 		<string>201</string>
 		<key>name</key>
@@ -1837,7 +1692,7 @@
 		<string>0</string>
 		<key>image</key>
 		<string>hero_01</string>
-        <key>attributes</key>
+		<key>attributes</key>
 		<array>
 			<dict>
 				<key>name</key>
@@ -1911,6 +1766,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>202</key>
 	<dict>
 		<key>id</key>
 		<string>202</string>
@@ -1994,6 +1850,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>203</key>
 	<dict>
 		<key>id</key>
 		<string>203</string>
@@ -2077,6 +1934,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>204</key>
 	<dict>
 		<key>id</key>
 		<string>204</string>
@@ -2160,6 +2018,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>205</key>
 	<dict>
 		<key>id</key>
 		<string>205</string>
@@ -2243,6 +2102,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>206</key>
 	<dict>
 		<key>id</key>
 		<string>206</string>
@@ -2326,6 +2186,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>207</key>
 	<dict>
 		<key>id</key>
 		<string>207</string>
@@ -2409,6 +2270,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>208</key>
 	<dict>
 		<key>id</key>
 		<string>208</string>
@@ -2492,6 +2354,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>209</key>
 	<dict>
 		<key>id</key>
 		<string>209</string>
@@ -2575,7 +2438,8 @@
 			</dict>
 		</array>
 	</dict>
-    <dict>
+	<key>301</key>
+	<dict>
 		<key>id</key>
 		<string>301</string>
 		<key>name</key>
@@ -2584,7 +2448,7 @@
 		<string>0</string>
 		<key>image</key>
 		<string>boss_01</string>
-        <key>attributes</key>
+		<key>attributes</key>
 		<array>
 			<dict>
 				<key>name</key>
@@ -2658,6 +2522,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>302</key>
 	<dict>
 		<key>id</key>
 		<string>302</string>
@@ -2741,6 +2606,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>303</key>
 	<dict>
 		<key>id</key>
 		<string>303</string>
@@ -2824,6 +2690,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>304</key>
 	<dict>
 		<key>id</key>
 		<string>304</string>
@@ -2907,6 +2774,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>305</key>
 	<dict>
 		<key>id</key>
 		<string>305</string>
@@ -2990,5 +2858,173 @@
 			</dict>
 		</array>
 	</dict>
-    </array>
+	<key>401</key>
+	<dict>
+		<key>id</key>
+		<string>401</string>
+		<key>name</key>
+		<string>Tower</string>
+		<key>cost</key>
+		<string>0</string>
+		<key>image</key>
+		<string>Tower</string>
+		<key>attributes</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>maxHp</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>2500</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>maxMp</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>attack</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>defense</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>agile</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>speed</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>moveTime</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+		</array>
+	</dict>
+	<key>411</key>
+	<dict>
+		<key>id</key>
+		<string>411</string>
+		<key>name</key>
+		<string>Tower2</string>
+		<key>cost</key>
+		<string>0</string>
+		<key>image</key>
+		<string>Tower2</string>
+		<key>attributes</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>maxHp</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>2500</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>maxMp</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>attack</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>defense</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>agile</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>speed</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>moveTime</string>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0</string>
+				<key>c</key>
+				<string>0</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
 </plist>

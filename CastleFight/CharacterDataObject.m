@@ -6,9 +6,9 @@
 //
 //
 
-#import "CharacterData.h"
+#import "CharacterDataObject.h"
 
-@implementation CharacterData
+@implementation CharacterDataObject
 
 -(id)init {
     
@@ -23,7 +23,6 @@
     if (self = [super init]) {
         _characterId = [dic objectForKey:@"id"];
         _level = [dic objectForKey:@"level"];
-        _targetRatio = [dic objectForKey:@"targetRatio"];
     }
     return self;
 }

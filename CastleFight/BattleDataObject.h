@@ -17,14 +17,9 @@
 @property (nonatomic,readonly) NSString *mapName;
 @property (nonatomic,readonly) NSString *backgroundMusic;
 
-//@property (nonatomic) NSArray *playerCharacterArray;
-
 @property (nonatomic,strong) NSArray *enemyArray;
 @property (nonatomic,strong) NSArray *enemyBossArray;
 @property (nonatomic,strong) NSArray *enemyCastleArray;
-
-//@property (nonatomic) Character *playerCastle;
-//@property (nonatomic) Character *enemyCastle;
 
 -(id)initWithBattleName:(NSString *)name;
 

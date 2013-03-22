@@ -13,18 +13,28 @@
 #import "BattleDataObject.h"
 #import "UserDataObject.h"
 
-#define kUserDataKey @"UserData"
-
 @interface FileManager ()
 
 @property (nonatomic,strong) NSDictionary *animationDictionary;
-@property (nonatomic,readonly) NSArray *characterDataFile;
+@property (nonatomic,readonly) NSDictionary *characterDataFile;
 @property (nonatomic,strong) NSArray *sceneSounds;
 @property (nonatomic, strong) UserDataObject *userDataObject;
 
 @end
 
 @implementation FileManager
+
+#define kUserDataKey @"UserData"
+
+#define kAnimationDirectory @"Animation"
+#define kSoundsDirectory @"Sounds_caf"
+
+#define kUserDataPlistFileName @"UserData.plist"
+#define kCharacterDataPlistFileName @"CharacterBasicData.plist"
+#define kBattleDataPlistFileName @"BattleData.plist"
+
+#define kBattleDataTagKey @"id"
+#define kCharacterDataTagKey @"id"
 
 static FileManager *sharedFileManager = nil;
 
@@ -51,12 +61,12 @@ static FileManager *sharedFileManager = nil;
     //When someone tries to access the data property, we’re going to check if we have it loaded into memory – and if so go ahead and return it. But if not, we’ll load it from disk!
     
     //get File in Documents
-    NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
+    NSString *dataPath = [FileManager dataFilePath:kUserDataPlistFileName forSave:YES];
     NSData *codedData = [[NSData alloc] initWithContentsOfFile:dataPath];
     
     if (!codedData) {
         //get file in bundle
-        dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:NO];
+        dataPath = [FileManager dataFilePath:kUserDataPlistFileName forSave:NO];
         _userDataObject = [[UserDataObject alloc] initWithPlistPath:dataPath];
     }else {
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
@@ -71,7 +81,7 @@ static FileManager *sharedFileManager = nil;
 
 -(NSDictionary *)loadAnimation {
     NSMutableDictionary *tempDicionary = [NSMutableDictionary dictionary];
-    NSArray *allAnimations = [FileManager getAllFilePathsInDirectory:@"Animation" fileType:@"plist"];
+    NSArray *allAnimations = [FileManager getAllFilePathsInDirectory:kAnimationDirectory fileType:@"plist"];
     
     for (NSString *path in allAnimations) {
         NSArray *fileArray = [path componentsSeparatedByString:@"/"];
@@ -83,21 +93,33 @@ static FileManager *sharedFileManager = nil;
     return tempDicionary;
 }
 
-+ (NSArray *)loadPlistFromFileName:(NSString *)fileName {
++ (NSDictionary *)getDictionaryFromPlistFileName:(NSString *)fileName {
     
-    NSString *filePath = [self dataFilePath:fileName forSave:NO];
+    NSString *path = [self dataFilePath:fileName forSave:NO];
+    NSDictionary *plistDic = [[NSDictionary alloc] initWithContentsOfFile:path];
     
-    // characterBasicData and BattleData are array.
-    NSArray *plist = [[NSArray alloc] initWithContentsOfFile:filePath];
+    return plistDic;
+}
+
++ (NSDictionary *)getDictionaryFromPlistDictionary:(NSDictionary *)plistDic tagName:(NSString *)tagName tagValue:(NSString *)tagValue {
     
-    return plist;
+    for (NSString *key in plistDic) {
+        id object = [plistDic objectForKey:key];
+        if ([object isKindOfClass:[NSDictionary class]]) {
+            if ([tagValue isEqualToString:[object objectForKey:tagName]]) {
+                return object;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 -(id)init {
 	if((self=[super init])) {
         _userDataObject =  [self loadUserDataObject];
-//        _animationDictionary = [self loadAnimation];
-        _characterDataFile = [FileManager loadPlistFromFileName:@"CharacterBasicData.plist"];
+//        _animationDictionary = [self loadAnimation]; //do not use temporary
+        _characterDataFile = [FileManager getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
 	}
 	return self;
 }
@@ -119,7 +141,6 @@ static FileManager *sharedFileManager = nil;
         fileName = @"Default.xml";
     }
     
-    //the app directory path not bundle //bundle is readonly
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     NSArray *fileArray = [fileName componentsSeparatedByString:@"."];
@@ -153,7 +174,6 @@ static FileManager *sharedFileManager = nil;
         NSArray *fileArray = [path componentsSeparatedByString:@"/"];
         NSString *fileName = [fileArray lastObject];
         if ([fileName hasPrefix:prefix]) {
-            //NSLog(@"targetFile:%@",fileName);
             [targetFileNameArray addObject:path];
         }
     }
@@ -161,28 +181,11 @@ static FileManager *sharedFileManager = nil;
     return targetFileNameArray;
 }
 
-+(NSDictionary *)getDictionaryInArray:(NSArray *)anArray WithTagName:(NSString *)tagName tagValue:(NSString *)tagValue {
-    for (NSDictionary *dic in anArray) {
-        if ([tagValue isEqualToString:[dic objectForKey:tagName]]) {
-            return dic;
-        }
-    }
-    return nil;
-}
-
--(void)updateUserDataObject {
-    _userDataObject = nil;
-    _userDataObject = [self loadUserDataObject];
-}
-
 - (void)saveUserData {
-    
-    //now is testing without saving
-    //return;
     
     if (_userDataObject == nil) return;
     
-    NSString *dataPath = [FileManager dataFilePath:@"UserData.plist" forSave:YES];
+    NSString *dataPath = [FileManager dataFilePath:kUserDataPlistFileName forSave:YES];
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -190,44 +193,9 @@ static FileManager *sharedFileManager = nil;
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
     NSLog(@"Saving xml data to %@...", dataPath);
-    
-    [self updateUserDataObject];
 }
 
-#pragma mark Testing
-//FIXME: save plist file
-/*
-+(void)testSave:(NSArray *)characterArray {
-    
-    NSMutableArray *books = [NSMutableArray new];
-    
-    for (Character *character in characterArray) {
-        NSMutableDictionary *book = [NSMutableDictionary new];
-        
-        NSString *levelString = [NSString stringWithFormat:@"%d",character.level];
-        [book setObject:character.characterId forKey:@"id"];
-        [book setObject:levelString forKey:@"level"];
-        
-        [books addObject:book];
-    }
-    
-    //serialization Binary
-    NSString *filePath = [self dataFilePath:@"SelectedCharacters.plist" forSave:TRUE];
-    NSLog(@"Saving xml data to %@...", filePath);
-    NSString *error;
-    NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:books format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
-    
-    if(xmlData)
-    {
-        NSLog(@"No error creating XML data.");
-        [xmlData writeToFile:filePath atomically:YES];
-    }
-    else
-    {
-        NSLog(@"%@",error);
-    }
-}
-//*/
+#pragma mark Public Functions
 
 +(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
     // ex: animationName = Animation_Swordsman_walking_Down.plist
@@ -247,7 +215,7 @@ static FileManager *sharedFileManager = nil;
         [self unloadSoundsEffect];
     }
     
-    NSString *path = [NSString stringWithFormat:@"Sounds_caf/%@",sceneName];
+    NSString *path = [kSoundsDirectory stringByAppendingFormat:@"/%@",sceneName];
     
     [self sharedFileManager].sceneSounds = [self getAllFilePathsInDirectory:path fileType:@"caf"];
     for (NSString *fileName in [self sharedFileManager].sceneSounds) {
@@ -260,25 +228,19 @@ static FileManager *sharedFileManager = nil;
     [[self sharedFileManager] saveUserData];
 }
 
-/* //do not need this temporary
-+ (UserDataObject *)getUserDataObject {
-    return [self sharedFileManager].userDataObject;
-}
-//*/
-
 +(BattleDataObject *)loadBattleInfo:(NSString *)name {
-    NSArray *allBattleDataArray = [FileManager loadPlistFromFileName:@"BattleData.plist"];
-    for (NSDictionary *dic in allBattleDataArray) {
-        if ([name isEqualToString:[dic objectForKey:@"name"]]) {
-            BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:dic];
-            return battleDataObject;
-        }
-    }
-    return nil;
+    
+    NSDictionary *plistDic = [self getDictionaryFromPlistFileName:kBattleDataPlistFileName];
+    
+    NSDictionary *battleDic = [self getDictionaryFromPlistDictionary:plistDic tagName:kBattleDataTagKey tagValue:name];
+    
+    BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:battleDic];
+        
+    return battleDataObject;
 }
 
 +(NSDictionary *)getCharacterDataWithId:(NSString *)anId {
-    return [self getDictionaryInArray:[self sharedFileManager].characterDataFile WithTagName:@"id" tagValue:anId];
+    return  [self getDictionaryFromPlistDictionary:[self sharedFileManager].characterDataFile tagName:kCharacterDataTagKey tagValue:anId];
 }
 
 + (NSArray *)getChararcterArray {
@@ -302,16 +264,8 @@ static FileManager *sharedFileManager = nil;
 //    [self saveUserData];
 }
 
-+(void)updatePlayerCharacterArray:(NSArray *)array {
-    [[self sharedFileManager].userDataObject updatePlayerCharacterArray:array];
-}
-
-+(void)updatePlayerHero:(Character *)hero {
-    [[self sharedFileManager].userDataObject updatePlayerHero:hero];
-}
-
-+(void)updatePlayerCastle:(Character *)castle {
-    [[self sharedFileManager].userDataObject updatePlayerCastle:castle];
++(void)updatePlayerCharacter:(Character *)character {
+    [[self sharedFileManager].userDataObject updatePlayerCharacter:character];
 }
 
 #pragma mark not done

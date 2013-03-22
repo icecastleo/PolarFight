@@ -92,7 +92,8 @@ __weak static BattleController* currentInstance;
 - (void)setCharacterArrayFromSelectLayer {
     
     // FIXME: Replace by battle name
-    _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+    _battleData = [FileManager loadBattleInfo:@"01_01"];
+    NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
     
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;

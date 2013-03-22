@@ -7,8 +7,10 @@
 //
 
 #import "UserDataObject.h"
-#import "CharacterData.h"
+#import "CharacterDataObject.h"
 #import "Character.h"
+
+#define kMoneyTrickKey 1000
 
 @implementation UserDataObject
 
@@ -23,7 +25,7 @@
 -(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
     NSMutableArray *tempCharacterArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
-        CharacterData *characterData = [[CharacterData alloc] initWithDictionary:dic];
+        CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
         [tempCharacterArray addObject:characterData];
     }
     return tempCharacterArray;
@@ -33,6 +35,8 @@
     if (self = [super init]) {
         NSMutableDictionary *tempPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         _money = [tempPlist objectForKey:@"money"];
+        
+        //all character array keep characterDataObject.
         _playerCharacterArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:@"characters"]];
         _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:@"heroes"]];
         _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:@"castle"]];
@@ -43,13 +47,12 @@
 }
 
 -(Character *)getPlayerHero {
-    CharacterData *data = [self.playerHeroArray lastObject];
+    CharacterDataObject *data = [self.playerHeroArray lastObject];
     Character *hero = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
     return hero;
 }
 -(Character *)getPlayerCastle {
-    
-    CharacterData *data = [self.playerCastleArray lastObject];
+    CharacterDataObject *data = [self.playerCastleArray lastObject];
     Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
     return castle;
 }
@@ -58,7 +61,7 @@
     
     NSMutableArray *characterArray = [NSMutableArray array];
     
-    for (CharacterData *data in self.playerCharacterArray) {
+    for (CharacterDataObject *data in self.playerCharacterArray) {
         Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
         [characterArray addObject:character];
     }
@@ -68,39 +71,26 @@
 
 -(int)getPlayerMoney {
     //trick: user never search the real money value in memory.
-    return [self.money intValue] - 1000;
+    return [self.money intValue] - kMoneyTrickKey;
 }
 
 -(void)updatePlayerMoney:(int)value {
     _money = [NSString stringWithFormat:@"%d",[self.money intValue]+value];
 }
 
--(void)updatePlayerCharacterArray:(NSArray *)array {
-    
-//    NSLog(@"Character count::%d == array count ::%d",self.playerCharacterArray.count,array.count);
-    NSAssert(array.count == self.playerCharacterArray.count, @"the sum of character should be the same. Why does the character dispear from the list.");
-    
-    for (CharacterData *data in self.playerCharacterArray) {
-        for (Character *character in array) {
-            if ([data.characterId isEqualToString:character.characterId]) {
-                data.level = [NSString stringWithFormat:@"%d",character.level];
-            }
+-(void)updatePlayerCharacter:(Character *)character inArray:(NSArray *)array {
+    for (CharacterDataObject *data in array) {
+        if ([data.characterId isEqualToString:character.characterId]) {
+            data.level = [NSString stringWithFormat:@"%d",character.level];
+            return;
         }
     }
 }
 
--(void)updatePlayerHero:(Character *)hero {
-    CharacterData *data = [self.playerHeroArray lastObject];
-    if ([data.characterId isEqualToString:hero.characterId]) {
-        data.level = [NSString stringWithFormat:@"%d",hero.level];
-    }
-}
-
--(void)updatePlayerCastle:(Character *)castle {
-    CharacterData *data = [self.playerCastleArray lastObject];
-    if ([data.characterId isEqualToString:castle.characterId]) {
-        data.level = [NSString stringWithFormat:@"%d",castle.level];
-    }
+-(void)updatePlayerCharacter:(Character *)character {
+    [self updatePlayerCharacter:character inArray:self.playerCharacterArray];
+    [self updatePlayerCharacter:character inArray:self.playerHeroArray];
+    [self updatePlayerCharacter:character inArray:self.playerCastleArray];
 }
 
 #pragma mark NSCoding

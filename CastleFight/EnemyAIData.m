@@ -31,7 +31,7 @@
 
 -(void) addMonsterDataObject:(MonsterData *)object
 {
-    [monsterData setValue:object forKey:object.Name];
+    [monsterData setValue:object forKey:object.characterId];
 }
 
 -(MonsterData*) getMonsterData:(NSString *)name
