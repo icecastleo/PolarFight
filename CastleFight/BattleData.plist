@@ -34,13 +34,7 @@
 		<array>
 			<dict>
 				<key>id</key>
-				<string>001</string>
-				<key>level</key>
-				<string>10</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<string>001</string>
+				<string>301</string>
 				<key>level</key>
 				<string>15</string>
 			</dict>
@@ -50,29 +44,6 @@
 			<dict>
 				<key>id</key>
 				<string>012</string>
-				<key>level</key>
-				<string>1</string>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>id</key>
-		<string>002</string>
-		<key>name</key>
-		<string>battle_01_02</string>
-		<key>map</key>
-		<string>map_01.png</string>
-		<key>backgroundMusic</key>
-		<string>bgm_ffcd_b.caf</string>
-		<key>enemies</key>
-		<array/>
-		<key>bosses</key>
-		<array/>
-		<key>castle</key>
-		<array>
-			<dict>
-				<key>id</key>
-				<string>010</string>
 				<key>level</key>
 				<string>1</string>
 			</dict>
