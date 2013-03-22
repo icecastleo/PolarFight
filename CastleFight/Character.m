@@ -30,6 +30,7 @@
 #import "BombPassiveSkill.h"
 #import "TestSkill.h"
 #import "BombSkill.h"
+#import "HeroSkill.h"
 
 @implementation Character
 
@@ -61,7 +62,7 @@
         
         NSDictionary *characterData = [FileManager getCharacterDataWithId:anId];
         _name = [characterData objectForKey:@"name"];
-        _picFilename = [characterData objectForKey:@"image"];
+        _spriteFile = [characterData objectForKey:@"image"];
         _headImageFileName = [characterData objectForKey:@"headImage"];
         _cost = [[characterData objectForKey:@"cost"] intValue];
         
@@ -72,15 +73,12 @@
             [self addAttribute:attr];
         }
         
-        //TODO: skill part
-        
         // FIXME: Delete aura array and use dictionary
 //        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         
         _characterId = anId;
-        
         level = aLevel;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
@@ -96,7 +94,7 @@
         // TODO: Let change state or something to use this map...
         statePremissionDictionary = [[NSMutableDictionary alloc] init];
         
-        [self setSkillForCharacter:_picFilename];
+        [self setSkillForCharacter:_name];
         [self setPassiveSkillForCharacter:_name];
         
         // FIXME: set direction with init parameter?
@@ -119,6 +117,8 @@
         } else {
             skill = [[TestSkill alloc] initWithCharacter:self];
         }
+    } else if ([name hasPrefix:@"hero"]) {
+        skill = [[HeroSkill alloc] initWithCharacter:self];
     }
 }
 
@@ -166,14 +166,14 @@
     }
 }
 
--(void)setPlayer:(int)player {
-    _player = player;
-    
-    // FIXME: Decide by sprite
-    if (player == 2) {
-        sprite.flipX = YES;
-    }
-}
+//-(void)setPlayer:(int)player {
+//    _player = player;
+//    
+//    // FIXME: Decide by sprite
+//    if (player == 2) {
+//        sprite.flipX = YES;
+//    }
+//}
 
 -(void)addAttribute:(Attribute *)attribute {
     [attributeDictionary setObject:attribute forKey:[NSNumber numberWithInt:attribute.type]];

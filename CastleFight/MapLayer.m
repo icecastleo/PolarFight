@@ -49,8 +49,6 @@ const static int pathHeight = 70;
         background.contentSize = CGSizeMake(map1.boundingBox.size.width*2, [CCDirector sharedDirector].winSize.height);
         [map3 addChild:background z:-5];
        
-
-        
        	// Create a void Node, parent Node
 		CCParallaxNode *voidNode = [CCParallaxNode node];
 		
@@ -73,12 +71,38 @@ const static int pathHeight = 70;
         self.isTouchEnabled = YES;
         
 //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
+        
+        hero = [[Character alloc] initWithId:@"209" andLevel:1];
+        hero.player = 1;
+        [self addCharacter:hero];
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
+        longPress.minimumPressDuration = 0.2f;
+        
+        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
     }
     return self;
 }
 
 -(void)registerWithTouchDispatcher {
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:YES];
+}
+
+-(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        [hero setMoveDirection:ccp(0, 0)];
+        return;
+    }
+    
+    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
+    
+    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
+    
+    if (location.x < halfWidth) {
+        [hero setMoveDirection:ccp(-1, 0)];
+    } else {
+        [hero setMoveDirection:ccp(1, 0)];
+    }
 }
 
 -(NSMutableArray *)characters {
@@ -197,13 +221,7 @@ const static int pathHeight = 70;
     
     // Tap
     if (location.x == lastLocation.x && location.y == lastLocation.y) {
-        location = [self convertScreenPositionToMap:location];
-        
-        Character *character = [self getCharacterAtLocation:location];
-        
-        if (character != nil) {
-            // TODO: ?
-        }
+        [hero useSkill];
     }
 }
 

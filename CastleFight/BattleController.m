@@ -57,8 +57,6 @@ __weak static BattleController* currentInstance;
         
         [self scheduleUpdate];
         
-        // TODO: Add character also need an array.
-        
         // FIXME: Maybe move to maylayer
         removeCharacters = [[NSMutableArray alloc] init];
         
@@ -86,6 +84,9 @@ __weak static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     
+    // FIXME: Replace by battle name
+    _battleData = [FileManager loadBattleInfo:@"battle_01_01"];
+    
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
     
@@ -96,7 +97,6 @@ __weak static BattleController* currentInstance;
     [mapLayer addCastle:_enemyCastle];
     
     _enemyAi = [[EnemyAI alloc] initWithCharacter:_enemyCastle];
-    
 }
 
 -(void)addCharacter:(Character *)character {
@@ -107,10 +107,18 @@ __weak static BattleController* currentInstance;
         self.food -= character.cost;
     }
     
-    character.ai = [[SimpleAI alloc] initWithCharacter:character];
+    [self setAI:character];
     [character.sprite addBloodSprite];
     
     [mapLayer addCharacter:character];
+}
+
+-(void)setAI:(Character *)character {
+    if ([character.characterId intValue] < 200) {
+        character.ai = [[SimpleAI alloc] initWithCharacter:character];
+    } else if ([character.characterId hasPrefix:@"3"]) {
+        // boss AI
+    }
 }
 
 -(void)removeCharacter:(Character *)character {
@@ -147,6 +155,7 @@ __weak static BattleController* currentInstance;
 -(void)update:(ccTime)delta {
     
     [_enemyAi AIUpdate];
+    
     for (Character *character in self.characters) {
         [character update:delta];
     }

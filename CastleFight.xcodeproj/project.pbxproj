@@ -382,6 +382,7 @@
 		9BC514B316FAEBDD00ABE811 /* sound_caf in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481716EDD27600D3D55D /* sound_caf */; };
 		9BC514B416FAEBE000ABE811 /* map in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481616EDD27600D3D55D /* map */; };
 		9BC514B516FAEBE400ABE811 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481516EDD27600D3D55D /* bg */; };
+		9BC514B816FB60F800ABE811 /* HeroSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC514B716FB60F700ABE811 /* HeroSkill.m */; };
 		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BC8FDA31654F11900A9EAC7 /* ProbabilityEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDA21654F11900A9EAC7 /* ProbabilityEffect.m */; };
 		9BC8FDB71657E1E900A9EAC7 /* AttackBuffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FDB61657E1E900A9EAC7 /* AttackBuffStatus.m */; };
@@ -1024,6 +1025,8 @@
 		9BA4E41016E09D5D00D5FA07 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
 		9BA4E41216E09F0700D5FA07 /* MapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCamera.h; sourceTree = "<group>"; };
 		9BA4E41316E09F0700D5FA07 /* MapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCamera.m; sourceTree = "<group>"; };
+		9BC514B616FB60F700ABE811 /* HeroSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroSkill.h; sourceTree = "<group>"; };
+		9BC514B716FB60F700ABE811 /* HeroSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroSkill.m; sourceTree = "<group>"; };
 		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BC8FDA11654F11900A9EAC7 /* ProbabilityEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProbabilityEffect.h; sourceTree = "<group>"; };
@@ -1377,12 +1380,12 @@
 		9B062CF51635275000E06018 /* CastleFight */ = {
 			isa = PBXGroup;
 			children = (
-				3730814D16F7548F00F1F7EE /* Files */,
 				2DA446BC16E4A53C00BDC060 /* AI */,
 				37DB1F2616BBD06B00C0368D /* AnimationKit */,
 				9B28820B166FC7EE0041604F /* Battle */,
 				9B82F787164FB2510001A357 /* BattleScene */,
 				9B062E7F16353A2B00E06018 /* Character */,
+				3730814D16F7548F00F1F7EE /* Files */,
 				9B3E48C01675ECD1000CFFFB /* libs */,
 				9B062CF61635275000E06018 /* Resources */,
 				9B019B0F16494D7700A6976F /* Status */,
@@ -2115,6 +2118,8 @@
 				9B08F95816A3FBB0006BF34F /* TestSkill.m */,
 				9B93798616B1655800F1A05A /* BombSkill.h */,
 				9B93798716B1655800F1A05A /* BombSkill.m */,
+				9BC514B616FB60F700ABE811 /* HeroSkill.h */,
+				9BC514B716FB60F700ABE811 /* HeroSkill.m */,
 			);
 			name = ActiveSkill;
 			sourceTree = "<group>";
@@ -2532,6 +2537,7 @@
 				3730815416F7578100F1F7EE /* UserDataObject.m in Sources */,
 				37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */,
 				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
+				9BC514B816FB60F800ABE811 /* HeroSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,7 @@
 #import "BattleDataObject.h"
 #import "UserDataObject.h"
 
-#define kUserDataKey        @"UserData"
+#define kUserDataKey @"UserData"
 
 @interface FileManager ()
 

@@ -34,7 +34,7 @@
         costLabel.color = ccGOLD;
         [self addChild:costLabel];
         
-        CCLabelBMFont *levelLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"Lv.%d",[cId intValue]] fntFile:@"font/cooper_20_o.fnt"];
+        CCLabelBMFont *levelLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"Lv.%d",level] fntFile:@"font/cooper_20_o.fnt"];
         levelLabel.anchorPoint = ccp(0.5, 1);
         levelLabel.scale = 0.5;
         levelLabel.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height);

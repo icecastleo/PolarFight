@@ -40,48 +40,27 @@ static const NSArray *directionStrings;
     akHelper = [[AKHelperObject alloc] init];
     akHelper.objectDelegate = self;
     
-//    if ([aCharacter.name isEqualToString:@"Swordsman"]) {
-//        // Load the texture atlas sprite frames; this also loads the Texture with the same name
-//        CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-//        [frameCache addSpriteFramesWithFile:@"Minotaur.plist"];
-//        
-//        if ((self = [super initWithSpriteFrameName:@"minotaur_walking_s001.png"])) {
-//            character = aCharacter;
-//            [self setAnimationWithName:character.name];
-//            [self addShadow];
-//        }
-//        return self;
-//    }
-    
+    // FIXME: Add character type for init logic?
     if ([aCharacter.name isEqualToString:@"Tower"]) {
 
         if ((self = [super initWithSpriteFrameName:@"building_user_home_01.png"])) {
             character = aCharacter;
             [self addShadow];
         }
-
         return self;
-    }
-    //test
-    if ([aCharacter.name isEqualToString:@"Tower2"]) {
+    } else if ([aCharacter.name isEqualToString:@"Tower2"]) {
         
         if ((self = [super initWithSpriteFrameName:@"building_enemy_home.png"])) {
             character = aCharacter;
             [self addShadow];
         }
-        
         return self;
     }
     
-    // TODO: Seperate user, enemy, hero
-    if (self = [super initWithSpriteFrameName:[NSString stringWithFormat:@"user_%02d_move_01.png", [aCharacter.characterId intValue]]]) {
+    if (self = [super initWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", aCharacter.spriteFile]]) {
         character = aCharacter;
         actions = [[NSMutableDictionary alloc] init];
-        
-        if (character.player == 2) {
-            self.flipX = YES;
-        }
-        
+
         [self addShadow];
         [self setAnimation];
     }
@@ -127,7 +106,7 @@ static const NSArray *directionStrings;
     CCAnimation *animation = [CCAnimation animation];
     
     for (int i = 1; i <= 4; i++) {
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"user_%02d_attack_%02d.png", [character.characterId intValue], i]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_attack_%02d.png", character.spriteFile, i]]];
     }
 
     animation.restoreOriginalFrame = YES;
@@ -138,7 +117,7 @@ static const NSArray *directionStrings;
     animation = [CCAnimation animation];
     
     for (int i = 1; i <= 2; i++) {
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"user_%02d_move_%02d.png", [character.characterId intValue], i]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_move_%02d.png", character.spriteFile, i]]];
     }
     
     animation.delayPerUnit = 0.2;
@@ -149,6 +128,15 @@ static const NSArray *directionStrings;
 
 -(void)runWalkAnimate {
     [self stopAllActions];
+    
+    // For hero
+    if (character.player == 1) {
+        if (character.characterDirection == kCharacterDirectionLeft) {
+            self.flipX = YES;
+        } else {
+            self.flipX = NO;
+        }
+    }
     
     [self runAction:[actions objectForKey:@"move"]];
     
