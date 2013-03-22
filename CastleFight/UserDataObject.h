@@ -12,12 +12,12 @@
 
 @interface UserDataObject : NSObject <NSCoding>
 
-@property (strong) NSArray *playerCharacterArray;
-@property (strong) NSArray *playerHeroArray;
-@property (strong) NSArray *playerCastleArray;
+@property (nonatomic, strong) NSArray *playerCharacterArray;
+@property (nonatomic, strong) NSArray *playerHeroArray;
+@property (nonatomic, strong) NSArray *playerCastleArray;
 
-@property (strong) NSString *money;
-@property (strong) NSArray *items;
+@property (nonatomic, strong) NSString *money;
+@property (nonatomic, strong) NSArray *items;
 
 -(id)initWithPlistPath:(NSString *)path;
 
