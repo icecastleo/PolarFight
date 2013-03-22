@@ -36,6 +36,7 @@ __weak static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
+        // FIXME: set by init
         NSString *prefix = @"01";
         NSString *suffix = @"01";
         
@@ -44,8 +45,8 @@ __weak static BattleController* currentInstance;
         
         currentInstance = self;
         
-        //test battleData
-        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"battle_%@_%@", prefix, suffix]];
+        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
+        NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
         mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
         [self addChild:mapLayer];
@@ -90,10 +91,6 @@ __weak static BattleController* currentInstance;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
-    
-    // FIXME: Replace by battle name
-    _battleData = [FileManager loadBattleInfo:@"01_01"];
-    NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
     
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
@@ -193,6 +190,10 @@ __weak static BattleController* currentInstance;
 
 -(void)endBattle {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+}
+
+-(void)dealloc {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
 @end
