@@ -2433,6 +2433,8 @@
 				9BC514B316FAEBDD00ABE811 /* sound_caf in Resources */,
 				9BC514B416FAEBE000ABE811 /* map in Resources */,
 				9BC514B516FAEBE400ABE811 /* bg in Resources */,
+				37DA84A316FC961F007B3F72 /* Localizable.strings in Resources */,
+				37DA84C616FC99BB007B3F72 /* InfoPlist.strings in Resources */,
 				9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */,
 				9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */,
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
