@@ -109,7 +109,7 @@
 }
 
 -(void)setSkillForCharacter:(NSString *)name {
-    if ([name hasPrefix:@"user"]) {
+    if ([self.characterId intValue] < 200) {
         NSString *suffix = [name substringFromIndex:name.length - 2];
         
         if ([suffix intValue] % 2 == 1) {

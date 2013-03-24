@@ -8,6 +8,7 @@
 
 #import "UnitMenuItem.h"
 #import "BattleController.h"
+#import "SimpleAudioEngine.h"
 
 @implementation UnitMenuItem
 
@@ -68,6 +69,8 @@
     [timer runAction:[CCSequence actions:[CCProgressFromTo actionWithDuration:cooldown from:100 to:0],
                       [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
                       nil]];
+    
+    [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
 }
 
 -(void)clickCallback:(id)sender {

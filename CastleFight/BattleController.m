@@ -18,6 +18,8 @@
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
 #import "EnemyAI.h"
+#import "SimpleAudioEngine.h"
+
 @interface BattleController () {
     
 }
@@ -34,12 +36,19 @@ __weak static BattleController* currentInstance;
 
 -(id)init {
     if(self = [super init]) {
+        // FIXME: set by init
+        NSString *prefix = @"01";
+        NSString *suffix = @"01";
+        
         self.food = 0;
         foodRate = 0.8;
         
         currentInstance = self;
         
-        mapLayer = [[MapLayer alloc] initWithFile:@"map/map_01"];
+        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
+        NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
+        
+        mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
         [self addChild:mapLayer];
         
         // set character on may
@@ -62,6 +71,8 @@ __weak static BattleController* currentInstance;
                           [CCCallFunc actionWithTarget:self selector:@selector(foodUpdate)],
                           [CCDelayTime actionWithDuration:0.25],
                           nil]]];
+        
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", [prefix intValue]]];
     }
     return self;
 }
@@ -80,10 +91,6 @@ __weak static BattleController* currentInstance;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
-    
-    // FIXME: Replace by battle name
-    _battleData = [FileManager loadBattleInfo:@"01_01"];
-    NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
     
     _playerCastle = [FileManager getPlayerCastle];
     _playerCastle.player = 1;
@@ -183,6 +190,10 @@ __weak static BattleController* currentInstance;
 
 -(void)endBattle {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+}
+
+-(void)dealloc {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
 @end
