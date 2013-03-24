@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  CastleFight
+
+  Created by  浩翔 on 13/3/22.
+
+*/
+
+//How to use:
+//example: self.titleLabel.text = NSLocalizedString(@"TITLE", nil);
+
+//The format for the strings file is:
+//"KEY" = "CONTENT";
+
+//So for our ‘Hello!’ text add in:
+"TITLE" = "哈囉!";
