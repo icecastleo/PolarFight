@@ -34,12 +34,12 @@
         [self addChild:bloodBackground];
         
         CastleBloodSprite *playerBlood = [[CastleBloodSprite alloc] initWithCharacter:battleController.playerCastle];
-        playerBlood.position = ccp(175, bloodBackground.position.y);
+        playerBlood.position = ccp(miniMap.position.x - 91, bloodBackground.position.y);
         [self addChild:playerBlood];
         [battleController.playerCastle.sprite addOuterBloodSprite:playerBlood];
         
         CastleBloodSprite *enemyBlood = [[CastleBloodSprite alloc] initWithCharacter:battleController.enemyCastle];
-        enemyBlood.position = ccp(355, bloodBackground.position.y);
+        enemyBlood.position = ccp(miniMap.position.x + 91, bloodBackground.position.y);
         [self addChild:enemyBlood];
         [battleController.enemyCastle.sprite addOuterBloodSprite:enemyBlood];
 
