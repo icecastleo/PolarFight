@@ -29,4 +29,7 @@
 +(void)updatePlayerMoney:(int)value;
 +(void)updatePlayerCharacter:(Character *)character;
 
++(void)switchSoundsMusic;
++(void)switchBackgroundMusic;
+
 @end

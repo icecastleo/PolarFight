@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSString *money;
 @property (nonatomic, strong) NSArray *items;
 
+@property (nonatomic) float soundsEffectVolume;
+@property (nonatomic) float backgroundMusicVolume;
+
 -(id)initWithPlistPath:(NSString *)path;
 
 -(Character *)getPlayerHero;
