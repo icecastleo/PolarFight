@@ -296,7 +296,7 @@ static FileManager *sharedFileManager = nil;
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeDefault];
         [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeDefault;
     }
-    [self saveUserData];
+//    [self saveUserData];
 }
 
 @end
