@@ -122,7 +122,7 @@ __weak static BattleController* currentInstance;
     if ([character.characterId intValue] < 200) {
         character.ai = [[SimpleAI alloc] initWithCharacter:character];
     } else if ([character.characterId hasPrefix:@"3"]) {
-        // boss AI
+        // TODO: boss AI
     }
 }
 

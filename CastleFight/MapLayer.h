@@ -13,7 +13,8 @@
 @interface MapLayer : CCLayer {
     int counts[2];
     
-    Character *hero;
+    __weak Character *hero;
+    BOOL isMove;
 }
 
 @property (readonly) NSMutableArray *characters;

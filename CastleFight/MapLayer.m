@@ -198,10 +198,13 @@ const static int pathHeight = 70;
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    isMove = NO;
     return YES;
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    isMove = YES;
+    
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
@@ -214,14 +217,13 @@ const static int pathHeight = 70;
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint location = [touch locationInView:touch.view];
-    location = [[CCDirector sharedDirector] convertToGL:location];
+//    CGPoint location = [touch locationInView:touch.view];
+//    location = [[CCDirector sharedDirector] convertToGL:location];
+//    
+//    CGPoint lastLocation = [touch previousLocationInView:touch.view];
+//    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
     
-    CGPoint lastLocation = [touch previousLocationInView:touch.view];
-    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
-    
-    // Tap
-    if (location.x == lastLocation.x && location.y == lastLocation.y) {
+    if (!isMove) {
         [hero useSkill];
     }
 }

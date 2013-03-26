@@ -201,8 +201,6 @@
 		9B08F96116A40805006BF34F /* vald_sword.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B08F95D16A40805006BF34F /* vald_sword.png */; };
 		9B10C67A167745160026E796 /* DamageEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C679167745160026E796 /* DamageEffect.m */; };
 		9B10C67E1677B1EB0026E796 /* RegenerationSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */; };
-		9B2040C4169F0C30000EF31F /* blood_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C2169F0C30000EF31F /* blood_green.png */; };
-		9B2040C5169F0C30000EF31F /* blood_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2040C3169F0C30000EF31F /* blood_red.png */; };
 		9B2040C8169F0C84000EF31F /* TankSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040C7169F0C84000EF31F /* TankSkill.m */; };
 		9B2040CF169F2E7C000EF31F /* SuicideSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040CE169F2E7C000EF31F /* SuicideSkill.m */; };
 		9B2040D2169F2F6D000EF31F /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
@@ -381,6 +379,9 @@
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
+		9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE316FF935E00D0BDC3 /* blood_white.png */; };
+		9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */; };
+		9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */; };
 		9BC514B316FAEBDD00ABE811 /* sound_caf in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481716EDD27600D3D55D /* sound_caf */; };
 		9BC514B416FAEBE000ABE811 /* map in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481616EDD27600D3D55D /* map */; };
 		9BC514B516FAEBE400ABE811 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481516EDD27600D3D55D /* bg */; };
@@ -690,8 +691,6 @@
 		9B10C679167745160026E796 /* DamageEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageEffect.m; sourceTree = "<group>"; };
 		9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegenerationSkill.h; sourceTree = "<group>"; };
 		9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegenerationSkill.m; sourceTree = "<group>"; };
-		9B2040C2169F0C30000EF31F /* blood_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_green.png; sourceTree = "<group>"; };
-		9B2040C3169F0C30000EF31F /* blood_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_red.png; sourceTree = "<group>"; };
 		9B2040C6169F0C84000EF31F /* TankSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TankSkill.h; sourceTree = "<group>"; };
 		9B2040C7169F0C84000EF31F /* TankSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TankSkill.m; sourceTree = "<group>"; };
 		9B2040CD169F2E7C000EF31F /* SuicideSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuicideSkill.h; sourceTree = "<group>"; };
@@ -1033,6 +1032,9 @@
 		9BA4E41016E09D5D00D5FA07 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
 		9BA4E41216E09F0700D5FA07 /* MapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCamera.h; sourceTree = "<group>"; };
 		9BA4E41316E09F0700D5FA07 /* MapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCamera.m; sourceTree = "<group>"; };
+		9BBAECE316FF935E00D0BDC3 /* blood_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_white.png; sourceTree = "<group>"; };
+		9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_frame-hd.png"; sourceTree = "<group>"; };
+		9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_white-hd.png"; sourceTree = "<group>"; };
 		9BC514B616FB60F700ABE811 /* HeroSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroSkill.h; sourceTree = "<group>"; };
 		9BC514B716FB60F700ABE811 /* HeroSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroSkill.m; sourceTree = "<group>"; };
 		9BC8FD931652261D00A9EAC7 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
@@ -1433,8 +1435,9 @@
 				9B6EA71A16F270BB00C61AD9 /* arrow.png */,
 				9B6EA71816F220BB00C61AD9 /* arrow-hd.png */,
 				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
-				9B2040C2169F0C30000EF31F /* blood_green.png */,
-				9B2040C3169F0C30000EF31F /* blood_red.png */,
+				9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */,
+				9BBAECE316FF935E00D0BDC3 /* blood_white.png */,
+				9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */,
 				9BF3260816AC891A00D5782B /* bloodParticle.plist */,
 				9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */,
 				9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */,
@@ -2283,8 +2286,6 @@
 				37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */,
 				37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */,
 				9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */,
-				9B2040C4169F0C30000EF31F /* blood_green.png in Resources */,
-				9B2040C5169F0C30000EF31F /* blood_red.png in Resources */,
 				9B08F95E16A40805006BF34F /* vald_sword-hd.plist in Resources */,
 				9B08F95F16A40805006BF34F /* vald_sword-hd.png in Resources */,
 				9B08F96016A40805006BF34F /* vald_sword.plist in Resources */,
@@ -2434,6 +2435,9 @@
 				9BC514B516FAEBE400ABE811 /* bg in Resources */,
 				37DA84A316FC961F007B3F72 /* Localizable.strings in Resources */,
 				37DA84C616FC99BB007B3F72 /* InfoPlist.strings in Resources */,
+				9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */,
+				9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */,
+				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
