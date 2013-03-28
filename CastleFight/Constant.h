@@ -19,7 +19,7 @@
 // For touch dispatcher
 #define kTouchPriotiryPause -256
 
-// Not link since it is a library
+// It is not used since 'SneakyJoystick' is a library
 #define kTouchPriotiryDpad 1
 #define kTouchPriorityMap 3
 
@@ -55,7 +55,7 @@ typedef enum {
     kCharacterAttributeMp,
     
     // For seperation.
-    kCharacterAttributeBoundary,
+    kCharacterAttributeFluidBoundary,
     
     // Other attributes.
     kCharacterAttributeAttack,
@@ -63,6 +63,12 @@ typedef enum {
     kCharacterAttributeAgile,
     kCharacterAttributeSpeed,
     kCharacterAttributeTime,
+    
+    // For seperation.
+    kCharacterAttributeSpecialBoundary,
+    
+    // For upgrade
+    kCharacterAttributeUpdatePrice,
 } CharacterAttributeType;
 
 typedef enum {

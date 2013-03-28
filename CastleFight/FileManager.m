@@ -15,9 +15,9 @@
 
 @interface FileManager ()
 
-@property (nonatomic,strong) NSDictionary *animationDictionary;
-@property (nonatomic,readonly) NSDictionary *characterDataFile;
-@property (nonatomic,strong) NSArray *sceneSounds;
+@property (nonatomic, strong) NSDictionary *animationDictionary;
+@property (nonatomic, readonly) NSDictionary *characterDataFile;
+@property (nonatomic, strong) NSArray *sceneSounds;
 @property (nonatomic, strong) UserDataObject *userDataObject;
 
 @end
@@ -35,6 +35,8 @@
 
 #define kBattleDataTagKey @"id"
 #define kCharacterDataTagKey @"id"
+
+@dynamic userMoney;
 
 static FileManager *sharedFileManager = nil;
 
@@ -131,6 +133,14 @@ static FileManager *sharedFileManager = nil;
     _characterDataFile = nil;
 }
 
+-(void)setUserMoney:(int)userMoney {
+    _userDataObject.money = userMoney;
+}
+
+-(int)userMoney {
+    return _userDataObject.money;
+}
+
 +(void)end {
 	sharedFileManager = nil;
 }
@@ -181,7 +191,7 @@ static FileManager *sharedFileManager = nil;
     return targetFileNameArray;
 }
 
-- (void)saveUserData {
+-(void)saveUserData {
     
     if (_userDataObject == nil) return;
     
@@ -253,15 +263,6 @@ static FileManager *sharedFileManager = nil;
 
 + (Character *)getPlayerCastle {
     return [[self sharedFileManager].userDataObject getPlayerCastle];
-}
-
-+(int)getPlayerMoney {
-    return [[self sharedFileManager].userDataObject getPlayerMoney];
-}
-
-+(void)updatePlayerMoney:(int)value {
-    [[self sharedFileManager].userDataObject updatePlayerMoney:value];
-//    [self saveUserData];
 }
 
 +(void)updatePlayerCharacter:(Character *)character {

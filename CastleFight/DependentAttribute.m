@@ -19,18 +19,9 @@
     return self;
 }
 
--(void)increaseValue:(int)aValue {
-    _value = MIN(father.value, _value + aValue);
-}
-
--(void)decreaseValue:(int)aValue {
-    _value = MAX(0, _value - aValue);
-}
-
 -(void)setValue:(int)value {    
-    NSAssert(father.value >= value && value >= 0, @"Set current value out of its range.");
-    
-    _value = value;
+    _value = MIN(father.value, value);
+    _value = MAX(0, _value);
 }
 
 @end
