@@ -95,6 +95,11 @@ static FileManager *sharedFileManager = nil;
     return tempDicionary;
 }
 
+-(void)setGameConfig {
+    [[SimpleAudioEngine sharedEngine] setEffectsVolume:self.userDataObject.soundsEffectVolume];
+    [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:self.userDataObject.backgroundMusicVolume];
+}
+
 + (NSDictionary *)getDictionaryFromPlistFileName:(NSString *)fileName {
     
     NSString *path = [self dataFilePath:fileName forSave:NO];
@@ -122,6 +127,7 @@ static FileManager *sharedFileManager = nil;
         _userDataObject =  [self loadUserDataObject];
 //        _animationDictionary = [self loadAnimation]; //do not use temporary
         _characterDataFile = [FileManager getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
+        [self setGameConfig];
 	}
 	return self;
 }
@@ -269,31 +275,26 @@ static FileManager *sharedFileManager = nil;
     [[self sharedFileManager].userDataObject updatePlayerCharacter:character];
 }
 
-#pragma mark not done
-//FIXME: not done
--(void)playBackgroundMusic:(NSString *)name {
-    
-    //FIXME: No BackgroundMusic_caf Folder
-    NSArray *music = [FileManager getAllFilePathsInDirectory:@"BackgroundMusic_caf" withPrefix:name fileType:@"caf"];
-    
-    NSString *fileName = [music lastObject];
-    
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:fileName];
++(void)switchSoundsMusic {
+    if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
+        [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeMute;
+    }else {
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeDefault];
+        [self sharedFileManager].userDataObject.soundsEffectVolume = 1.0;
+    }
+//    [self saveUserData];
 }
-/*
- +(void)loadSceneInfo:(NSString *)name {
- GDataXMLDocument *battleInfoDoc = [self loadGDataXMLDocumentFromFileName:@"BattleData.xml"];
- GDataXMLElement *characterElement = [FileManager getNodeFromXmlFile:battleInfoDoc tagName:@"menu" tagAttributeName:@"name" tagAttributeValue:name];
- 
- 
- NSString *backgroundMusicName;
- 
- //get tag's attributes
- for (GDataXMLNode *attribute in characterElement.attributes) {
- if([attribute.name isEqualToString:@"bgm"]) {
- backgroundMusicName = attribute.stringValue;
- }
- }
- }
- //*/
+
++(void)switchBackgroundMusic {
+    if ([SimpleAudioEngine sharedEngine].backgroundMusicVolume != kVolumeMute) {
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
+        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeMute;
+    }else {
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeDefault];
+        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeDefault;
+    }
+//    [self saveUserData];
+}
+
 @end

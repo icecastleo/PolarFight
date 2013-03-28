@@ -8,8 +8,6 @@
 
 #import "cocos2d.h"
 
-@interface PauseLayer : CCLayerColor {
-    CCMenu *menu;
-}
+@interface PauseLayer : CCLayerColor
 
 @end

@@ -128,6 +128,8 @@
     [encoder encodeObject:_playerCastleArray forKey:kCastleKey];
     [encoder encodeObject:moneyNumber forKey:kMoneyKey];
     [encoder encodeObject:_items forKey:kItemArrayKey];
+    [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectKey];
+    [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicKey];
 }
 
 @end
