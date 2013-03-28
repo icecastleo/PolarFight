@@ -33,7 +33,7 @@
 
 +(void)updatePlayerCharacter:(Character *)character;
 
-+(void)switchSoundsMusic;
++(void)switchSoundsEffect;
 +(void)switchBackgroundMusic;
 
 @end

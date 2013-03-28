@@ -36,6 +36,10 @@
 #define kBattleDataTagKey @"id"
 #define kCharacterDataTagKey @"id"
 
+#define kVolumeMute 0
+#define kVolumeBackgroundMusicDefault 0.05
+#define kVolumeEffectDefault 0.5
+
 @dynamic userMoney;
 
 static FileManager *sharedFileManager = nil;
@@ -275,13 +279,13 @@ static FileManager *sharedFileManager = nil;
     [[self sharedFileManager].userDataObject updatePlayerCharacter:character];
 }
 
-+(void)switchSoundsMusic {
++(void)switchSoundsEffect {
     if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeMute;
     }else {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeDefault];
-        [self sharedFileManager].userDataObject.soundsEffectVolume = 1.0;
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeEffectDefault];
+        [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeEffectDefault;
     }
 //    [self saveUserData];
 }
@@ -291,8 +295,8 @@ static FileManager *sharedFileManager = nil;
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeMute;
     }else {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeDefault];
-        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeDefault;
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeBackgroundMusicDefault];
+        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeBackgroundMusicDefault;
     }
 //    [self saveUserData];
 }

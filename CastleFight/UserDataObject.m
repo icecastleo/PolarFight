@@ -17,6 +17,8 @@
 #define kHeroKey @"hero"
 #define kCharacterArrayKey @"characters"
 #define kItemArrayKey @"items"
+#define kSoundsEffectKey @"soundsEffectVolume"
+#define kBackgroundMucsicKey @"backgroundMusicVolume"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
@@ -66,7 +68,8 @@
         _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
         _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
         _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
-    
+        _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectKey] floatValue];
+        _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicKey] floatValue];
     }
     return self;
 }
@@ -108,9 +111,9 @@
     [self updatePlayerCharacter:character inArray:self.playerHeroArray];
     [self updatePlayerCharacter:character inArray:self.playerCastleArray];
 }
-
-#pragma mark NSCoding
-
+        
+#pragma mark NSCoding    
+    
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
         _playerCharacterArray = [decoder decodeObjectForKey:kCharacterArrayKey];
@@ -118,6 +121,9 @@
         _playerCastleArray = [decoder decodeObjectForKey:kCastleKey];
         moneyNumber = [decoder decodeObjectForKey:kMoneyKey];
         _items = [decoder decodeObjectForKey:kItemArrayKey];
+        _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectKey];
+        _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicKey];
+
     }
     return self;
 }
