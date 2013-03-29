@@ -13,6 +13,9 @@
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
+		2D07E0C21702E1EA0028C492 /* HeroAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C11702E1EA0028C492 /* HeroAI.m */; };
+		2D07E0C51702E2AF0028C492 /* AIStateHeroWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */; };
+		2D07E0C91702E2E80028C492 /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		2D14424716E88EAC00969C12 /* AIStateWalking.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424216E88EAB00969C12 /* AIStateWalking.m */; };
 		2D14424816E88EAC00969C12 /* AIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424416E88EAB00969C12 /* AIStateAttack.m */; };
 		2D14424C16E88EFD00969C12 /* AIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424B16E88EFD00969C12 /* AIState.m */; };
@@ -430,6 +433,12 @@
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutObject.h; sourceTree = "<group>"; };
 		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
+		2D07E0C01702E1EA0028C492 /* HeroAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAI.h; sourceTree = "<group>"; };
+		2D07E0C11702E1EA0028C492 /* HeroAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroAI.m; sourceTree = "<group>"; };
+		2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroWalk.h; sourceTree = "<group>"; };
+		2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroWalk.m; sourceTree = "<group>"; };
+		2D07E0C71702E2E80028C492 /* AIStateHeroIdle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroIdle.h; sourceTree = "<group>"; };
+		2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroIdle.m; sourceTree = "<group>"; };
 		2D14424116E88EAB00969C12 /* AIStateWalking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateWalking.h; sourceTree = "<group>"; };
 		2D14424216E88EAB00969C12 /* AIStateWalking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateWalking.m; sourceTree = "<group>"; };
 		2D14424316E88EAB00969C12 /* AIStateAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateAttack.h; sourceTree = "<group>"; };
@@ -1137,6 +1146,10 @@
 				2D14424B16E88EFD00969C12 /* AIState.m */,
 				2DED399C16F08AE8009802A0 /* AIStateCastleWaiting.h */,
 				2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */,
+				2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */,
+				2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */,
+				2D07E0C71702E2E80028C492 /* AIStateHeroIdle.h */,
+				2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */,
 			);
 			name = AIState;
 			sourceTree = "<group>";
@@ -1181,6 +1194,8 @@
 		2DA446BC16E4A53C00BDC060 /* AI */ = {
 			isa = PBXGroup;
 			children = (
+				2D07E0C01702E1EA0028C492 /* HeroAI.h */,
+				2D07E0C11702E1EA0028C492 /* HeroAI.m */,
 				2D14424916E88EBC00969C12 /* AIState */,
 				2DA446BD16E4A59F00BDC060 /* BaseAI.h */,
 				2DA446BE16E4A59F00BDC060 /* BaseAI.m */,
@@ -2556,6 +2571,9 @@
 				37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */,
 				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
 				9BC514B816FB60F800ABE811 /* HeroSkill.m in Sources */,
+				2D07E0C21702E1EA0028C492 /* HeroAI.m in Sources */,
+				2D07E0C51702E2AF0028C492 /* AIStateHeroWalk.m in Sources */,
+				2D07E0C91702E2E80028C492 /* AIStateHeroIdle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

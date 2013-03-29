@@ -28,6 +28,7 @@
     NSMutableDictionary *statePremissionDictionary;
     
     NSMutableArray *auraArray;
+    CGPoint targetPoint;
 }
 
 @property (nonatomic) int player;
@@ -69,6 +70,8 @@
 
 -(void)update:(ccTime)delta;
 -(void)setMoveDirection:(CGPoint)direction;
+-(void) setMovePosition:(CGPoint)point;
+
 
 -(void)useSkill;
 -(void)attackAnimateCallback;

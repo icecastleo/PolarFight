@@ -13,7 +13,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-
+#import "HeroAI.h"
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
@@ -60,7 +60,12 @@ __weak static BattleController* currentInstance;
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
-        
+        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
+        _hero.player = 1;
+       
+        [_hero.sprite addBloodSprite];
+        [self addCharacter:_hero];
+         _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
         [self scheduleUpdate];
         
         // FIXME: Maybe move to maylayer
@@ -160,7 +165,7 @@ __weak static BattleController* currentInstance;
 -(void)update:(ccTime)delta {
     
     [_enemyAi AIUpdate];
-    
+    [_hero.ai AIUpdate];
     for (Character *character in self.characters) {
         [character update:delta];
     }
