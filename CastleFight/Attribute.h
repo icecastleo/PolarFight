@@ -17,7 +17,7 @@
     float linear;
     float constantTerm;
     
-    int baseValue;
+    float baseValue;
     float bonus;
     float multiplier;
 }
@@ -28,18 +28,14 @@
 @property (readonly, strong) DependentAttribute *dependent;
 @property int currentValue;
 
-
 // Init with a quadratic equation.
 -(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
+-(id)initWithDictionary:(NSDictionary *)dic;
+
 -(void)addBonus:(float)aBonus;
 -(void)subtractBonus:(float)aBonus;
 -(void)addMultiplier:(float)aMultiplier;
 -(void)subtractMultiplier:(float)aMultiplier;
 -(void)updateValueWithLevel:(int)level;
-
--(void)increaseCurrentValue:(int)aValue;
--(void)decreaseCurrentValue:(int)aValue;
-
--(id)initWithDictionary:(NSDictionary *)dic;
 
 @end

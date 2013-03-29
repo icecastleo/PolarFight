@@ -121,7 +121,7 @@ typedef enum {
 }
 
 -(void)switchSoundsEffect {
-    [FileManager switchSoundsMusic];
+    [FileManager switchSoundsEffect];
 }
 
 -(void)gamePause {

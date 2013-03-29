@@ -24,10 +24,13 @@
         bonus = 0;
         multiplier = 1;
         
-        [self updateValueWithLevel:1];
-        
-        if (_type < kCharacterAttributeBoundary) {
+        if (_type < kCharacterAttributeFluidBoundary) {
             _dependent = [[DependentAttribute alloc] initWithAttribute:self];
+        }
+        
+        // For castle fight game
+        if (_type < kCharacterAttributeSpecialBoundary) {
+            b = 0.02 * c;
         }
     }
     return self;
@@ -57,6 +60,8 @@
         return kCharacterAttributeSpeed;
     } else if ([attributeName isEqualToString:@"moveTime"]) {
         return kCharacterAttributeTime;
+    } else if ([attributeName isEqualToString:@"updatePrice"]) {
+        return kCharacterAttributeUpdatePrice;
     } else {
         [NSException raise:@"Invalid attribute name" format:@"Unknown attribute %@",attributeName];
         return -1;
@@ -104,24 +109,15 @@
 }
 
 -(void)updateValue {
-    _value = (baseValue + bonus) * multiplier;
+    _value = roundf((baseValue + bonus) * multiplier);
 }
 
 -(void)updateValueWithLevel:(int)level {
     baseValue = quadratic * pow(level, 2) + linear * level + constantTerm;
     [self updateValue];
-}
-
--(void)increaseCurrentValue:(int)aValue {
-    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
     
-    [_dependent increaseValue:aValue];
-}
-
--(void)decreaseCurrentValue:(int)aValue {
-    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
-    
-    [_dependent decreaseValue:aValue];
+    // Set to max when level change
+    _dependent.value = _value;
 }
 
 -(void)setCurrentValue:(int)currentValue {

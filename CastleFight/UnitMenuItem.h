@@ -13,6 +13,7 @@
     NSString *cId;
     int level;
     int cost;
+    float cooldown;
     
     CCSprite *mask;
     CCProgressTimer *timer;

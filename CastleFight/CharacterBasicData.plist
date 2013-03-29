@@ -9,7 +9,7 @@
 		<key>name</key>
 		<string>user_01</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>15</string>
 		<key>image</key>
 		<string>user_01</string>
 		<key>attributes</key>
@@ -177,7 +177,7 @@
 		<key>name</key>
 		<string>user_03</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>25</string>
 		<key>image</key>
 		<string>user_03</string>
 		<key>attributes</key>
@@ -261,7 +261,7 @@
 		<key>name</key>
 		<string>user_04</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>30</string>
 		<key>image</key>
 		<string>user_04</string>
 		<key>attributes</key>
@@ -345,7 +345,7 @@
 		<key>name</key>
 		<string>user_05</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>35</string>
 		<key>image</key>
 		<string>user_05</string>
 		<key>attributes</key>
@@ -429,7 +429,7 @@
 		<key>name</key>
 		<string>user_06</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>40</string>
 		<key>image</key>
 		<string>user_06</string>
 		<key>attributes</key>
@@ -513,7 +513,7 @@
 		<key>name</key>
 		<string>user_07</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>45</string>
 		<key>image</key>
 		<string>user_07</string>
 		<key>attributes</key>
@@ -597,7 +597,7 @@
 		<key>name</key>
 		<string>user_08</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>50</string>
 		<key>image</key>
 		<string>user_08</string>
 		<key>attributes</key>
@@ -681,93 +681,9 @@
 		<key>name</key>
 		<string>user_09</string>
 		<key>cost</key>
-		<string>20</string>
+		<string>55</string>
 		<key>image</key>
 		<string>user_09</string>
-		<key>attributes</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>maxHp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>250</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>maxMp</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>attack</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>25</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>defense</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>agile</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>15</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>speed</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>11</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>moveTime</string>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>6</string>
-			</dict>
-		</array>
-	</dict>
-	<key>010</key>
-	<dict>
-		<key>id</key>
-		<string>010</string>
-		<key>name</key>
-		<string>user_10</string>
-		<key>cost</key>
-		<string>20</string>
-		<key>image</key>
-		<string>user_10</string>
 		<key>attributes</key>
 		<array>
 			<dict>

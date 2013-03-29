@@ -8,6 +8,9 @@
 
 #import "EnemyAIData.h"
 
+@implementation MonsterData
+@end
+
 @implementation EnemyAIData
 
 -(id) init
@@ -21,7 +24,7 @@
 
 @implementation MonsterDataCollection
 
--(id) init
+-(id)init
 {
     if (self = [super init]) {
         monsterData = [[NSMutableDictionary alloc] init];
@@ -34,10 +37,11 @@
     [monsterData setValue:object forKey:object.characterId];
 }
 
--(MonsterData*) getMonsterData:(NSString *)name
+-(MonsterData *) getMonsterData:(NSString *)name
 {
     return (MonsterData*)[monsterData objectForKey:name];
 }
+
 -(void) clearCurrentMonsters
 {
     for (NSString* key in monsterData) {
@@ -56,14 +60,11 @@
         count+=md.currentCount;
         
     }
-    
-    
     return count;
 }
 
 -(MonsterData*) getNextMonster
 {
-    
     int count =[self getCurrentMonsters];
     
     MonsterData *result;
@@ -78,15 +79,6 @@
             result=md;
 
     }
-    
-    
-    
     return result;
-    
 }
-
-
-
-@end
-@implementation MonsterData
 @end

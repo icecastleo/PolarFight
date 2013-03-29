@@ -35,7 +35,6 @@
 @implementation Character
 
 @synthesize skill;
-@synthesize level;
 //@synthesize attackType;
 @synthesize armorType;
 @synthesize state;
@@ -51,6 +50,8 @@
 // FIXME: fix name reference.
 -(id)initWithId:(NSString *)anId andLevel:(int)aLevel {
     if ((self = [super init])) {
+        _characterId = anId;
+        _level = aLevel;
         
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
         
@@ -70,16 +71,21 @@
         
         for (NSDictionary *dic in attributes) {
             Attribute *attr = [[Attribute alloc] initWithDictionary:dic];
+            [attr updateValueWithLevel:self.level];
             [self addAttribute:attr];
         }
+        
+        // FIXME: Add to character data
+        float updatePrice = 30;
+        
+        Attribute *attr = [[Attribute alloc] initWithType:kCharacterAttributeUpdatePrice withQuadratic:updatePrice/10 withLinear:updatePrice withConstantTerm:updatePrice];
+        [attr updateValueWithLevel:self.level];
+        [self addAttribute:attr];
         
         // FIXME: Delete aura array and use dictionary
 //        auraStatusDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         timeStatusDictionary = [[NSMutableDictionary alloc] init];
-        
-        _characterId = anId;
-        level = aLevel;
         
         sprite = [[CharacterSprite alloc] initWithCharacter:self];
         
@@ -103,9 +109,17 @@
         // FIXME: merge with barrier?
         // FIXME: Change to ellipse
         _radius = self.boundingBox.size.height / kShadowHeightDivisor / 2;
-        
     }
     return self;
+}
+
+-(void)setLevel:(int)level {
+    _level = level;
+    
+    for (id key in attributeDictionary) {
+        Attribute *att = [attributeDictionary objectForKey:key];
+        [att updateValueWithLevel:level];
+    }
 }
 
 -(void)setSkillForCharacter:(NSString *)name {
@@ -360,7 +374,7 @@
         
         NSAssert(hp != nil, @"A character without hp gets damage...");
         
-        [hp decreaseCurrentValue:damage.value];
+        hp.currentValue -= damage.value;
         
         [self displayString:[NSString stringWithFormat:@"%d",damage.value] withColor:ccRED];
         
@@ -401,7 +415,7 @@
   
     NSAssert(hp != nil, @"A character without hp gets heal...");
     
-    [hp increaseCurrentValue:heal];
+    hp.currentValue += heal;
     
     // FIXME: It may exceed the maxHp...
     [self displayString:[NSString stringWithFormat:@"+%d",heal] withColor:ccGREEN];

@@ -10,7 +10,13 @@
 
 @class BattleDataObject,UserDataObject,Character;
 
-@interface FileManager : NSObject
+@interface FileManager : NSObject {
+    
+}
+
+@property int userMoney;
+
++(FileManager *)sharedFileManager;
 
 +(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
@@ -24,12 +30,10 @@
 +(NSArray *)getChararcterArray;
 +(Character *)getPlayerHero;
 +(Character *)getPlayerCastle;
-+(int)getPlayerMoney;
 
-+(void)updatePlayerMoney:(int)value;
 +(void)updatePlayerCharacter:(Character *)character;
 
-+(void)switchSoundsMusic;
++(void)switchSoundsEffect;
 +(void)switchBackgroundMusic;
 
 @end

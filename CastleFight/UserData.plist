@@ -7,9 +7,9 @@
 	<key>money</key>
 	<string>1500</string>
 	<key>soundsEffectVolume</key>
-	<string>1</string>
+	<string>0.5</string>
 	<key>backgroundMusicVolume</key>
-	<string>1</string>
+	<string>0.05</string>
 	<key>characters</key>
 	<array>
 		<dict>

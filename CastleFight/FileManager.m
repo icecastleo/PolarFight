@@ -15,9 +15,9 @@
 
 @interface FileManager ()
 
-@property (nonatomic,strong) NSDictionary *animationDictionary;
-@property (nonatomic,readonly) NSDictionary *characterDataFile;
-@property (nonatomic,strong) NSArray *sceneSounds;
+@property (nonatomic, strong) NSDictionary *animationDictionary;
+@property (nonatomic, readonly) NSDictionary *characterDataFile;
+@property (nonatomic, strong) NSArray *sceneSounds;
 @property (nonatomic, strong) UserDataObject *userDataObject;
 
 @end
@@ -37,7 +37,10 @@
 #define kCharacterDataTagKey @"id"
 
 #define kVolumeMute 0
-#define kVolumeDefault 1
+#define kVolumeBackgroundMusicDefault 0.05
+#define kVolumeEffectDefault 0.5
+
+@dynamic userMoney;
 
 static FileManager *sharedFileManager = nil;
 
@@ -140,6 +143,14 @@ static FileManager *sharedFileManager = nil;
     _characterDataFile = nil;
 }
 
+-(void)setUserMoney:(int)userMoney {
+    _userDataObject.money = userMoney;
+}
+
+-(int)userMoney {
+    return _userDataObject.money;
+}
+
 +(void)end {
 	sharedFileManager = nil;
 }
@@ -190,7 +201,7 @@ static FileManager *sharedFileManager = nil;
     return targetFileNameArray;
 }
 
-- (void)saveUserData {
+-(void)saveUserData {
     
     if (_userDataObject == nil) return;
     
@@ -264,26 +275,17 @@ static FileManager *sharedFileManager = nil;
     return [[self sharedFileManager].userDataObject getPlayerCastle];
 }
 
-+(int)getPlayerMoney {
-    return [[self sharedFileManager].userDataObject getPlayerMoney];
-}
-
-+(void)updatePlayerMoney:(int)value {
-    [[self sharedFileManager].userDataObject updatePlayerMoney:value];
-//    [self saveUserData];
-}
-
 +(void)updatePlayerCharacter:(Character *)character {
     [[self sharedFileManager].userDataObject updatePlayerCharacter:character];
 }
 
-+(void)switchSoundsMusic {
++(void)switchSoundsEffect {
     if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeMute;
     }else {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeDefault];
-        [self sharedFileManager].userDataObject.soundsEffectVolume = 1.0;
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeEffectDefault];
+        [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeEffectDefault;
     }
 //    [self saveUserData];
 }
@@ -293,8 +295,8 @@ static FileManager *sharedFileManager = nil;
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeMute;
     }else {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeDefault];
-        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeDefault;
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeBackgroundMusicDefault];
+        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeBackgroundMusicDefault;
     }
 //    [self saveUserData];
 }

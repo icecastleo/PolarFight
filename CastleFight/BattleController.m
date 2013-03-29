@@ -30,6 +30,8 @@
 
 __weak static BattleController* currentInstance;
 
+const float foodAddend = 0.05;
+
 +(BattleController *)currentInstance {
     return currentInstance;
 }
@@ -41,7 +43,9 @@ __weak static BattleController* currentInstance;
         NSString *suffix = @"01";
         
         self.food = 0;
-        foodRate = 0.8;
+        // TODO: Set by init, maybe can upgrade
+        foodRate = 1.0f;
+        maxRate = foodRate * 4;
         
         currentInstance = self;
         
@@ -110,6 +114,11 @@ __weak static BattleController* currentInstance;
     CCLOG(@"Add player %i's %@", character.player, character.name);
     if (character.player == 1) {
         self.food -= character.cost;
+
+        if (foodRate < maxRate) {
+//            foodRate += character.cost / 200.0;
+            foodRate += foodAddend;
+        }
     }
     
     [self setAI:character];

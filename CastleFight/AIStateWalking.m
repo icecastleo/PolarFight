@@ -29,11 +29,10 @@
         [ai changeState:[[AIStateAttack alloc] init]];
         return;
     } else {
-        //to do: change back to ai init?
+        //TODO: change back to ai init?
         if (ai.character.player == 1) {
             ai.targetPoint=ccp(1,0);
-        }else
-        {
+        } else {
             ai.targetPoint=ccp(-1,0);
         }
         [ai.character setMoveDirection:ai.targetPoint];
