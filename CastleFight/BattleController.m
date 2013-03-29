@@ -46,7 +46,8 @@ const float foodAddend = 0.05;
         
         currentInstance = self;
         
-        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
+        NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
         mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
@@ -166,6 +167,7 @@ const float foodAddend = 0.05;
     
     [_enemyAi AIUpdate];
     [_hero.ai AIUpdate];
+    
     for (Character *character in self.characters) {
         [character update:delta];
     }
@@ -177,8 +179,11 @@ const float foodAddend = 0.05;
         
         [removeCharacters removeAllObjects];
     }
-    if(mapLayer.isFollowing)
-        [mapLayer.cameraControl limitMoveCameraToX:_hero.position.x Y:_hero.position.y];
+    
+    if(mapLayer.isFollowing) {
+//        [mapLayer.cameraControl moveTo:_hero.position];
+    }
+    
     [self checkBattleEnd];
 }
 

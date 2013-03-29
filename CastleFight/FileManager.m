@@ -288,8 +288,9 @@ static FileManager *sharedFileManager = nil;
 -(void)switchSoundsEffect {
     if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
-        [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeMute;
-    } else {
+        self.userDataObject.soundsEffectVolume = kVolumeMute;
+        self.userDataObject.soundsEffectSwitch = FALSE;
+    }else {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeEffectDefault];
         self.userDataObject.soundsEffectVolume = kVolumeEffectDefault;
         self.userDataObject.soundsEffectSwitch = TRUE;
@@ -300,8 +301,9 @@ static FileManager *sharedFileManager = nil;
 -(void)switchBackgroundMusic {
     if ([SimpleAudioEngine sharedEngine].backgroundMusicVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
-        [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeMute;
-    } else {
+        self.userDataObject.backgroundMusicVolume = kVolumeMute;
+        self.userDataObject.backgroundMusicSwitch = FALSE;
+    }else {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeBackgroundMusicDefault];
         self.userDataObject.backgroundMusicVolume = kVolumeBackgroundMusicDefault;
         self.userDataObject.backgroundMusicSwitch = TRUE;

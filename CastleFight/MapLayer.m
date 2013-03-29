@@ -211,6 +211,8 @@ const static int pathHeight = 70;
     CGPoint diff = ccpSub(lastLocation, location);
     
     [_cameraControl moveBy:ccpMult(diff, 0.5)];
+    
+    _isFollowing = NO;
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -237,7 +239,7 @@ const static int pathHeight = 70;
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         if(heroPointOnscreen.x>winSize.width||heroPointOnscreen.x<0||heroPointOnscreen.y<0||heroPointOnscreen.y>winSize.height)
         {
-            [_cameraControl limitMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
+//            [_cameraControl limitMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
         }
         _isFollowing=YES;
 

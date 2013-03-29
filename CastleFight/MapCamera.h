@@ -34,5 +34,4 @@
 -(void)moveBy:(CGPoint)position;
 -(void)smoothMoveTo:(CGPoint)position duration:(ccTime)d;
 
-
 @end

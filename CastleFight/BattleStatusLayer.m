@@ -77,8 +77,8 @@
 -(void)setPauseButton {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
-                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
+                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
+                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
                                  target:self selector:@selector(pauseButtonTapped:)];
     
     float width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
@@ -102,8 +102,8 @@
 -(void)setAttackButton {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCMenuItem *attackMenuItem = [CCMenuItemImage
-                                  itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
-                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
+                                  itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
+                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
                                   target:self selector:@selector(attackButtonTapped:)];
     
     float width = winSize.width- attackMenuItem.boundingBox.size.width/2;
