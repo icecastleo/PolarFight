@@ -34,5 +34,5 @@
 -(void)moveCameraToX:(float)x Y:(float)y;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y;
 -(void)smoothMoveCameraToX:(float)x Y:(float)y delegate:(id)aTarget selector:(SEL)aSelector;
-
+-(void)limitMoveCameraToX:(float)x Y:(float)y;
 @end

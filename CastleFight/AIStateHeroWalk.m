@@ -13,6 +13,7 @@
 #import "Character.h"
 #import "AIState.h"
 #import "AIStateHeroIdle.h"
+#import "MapCamera.h"
 @implementation AIStateHeroWalk
 - (NSString *)name {
     return @"HeroWalking";
@@ -34,6 +35,7 @@
             [ai.character setMoveDirection:ccp(1,0)];
         else
             [ai.character setMoveDirection:ccp(-1,0)];
+        
     }
     else
     {

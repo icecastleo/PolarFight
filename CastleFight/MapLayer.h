@@ -15,14 +15,14 @@
     
 
     BOOL isMove;
-    BOOL isFollowing;
+
 }
 
 @property (readonly) NSMutableArray *characters;
 @property (readonly) NSMutableArray *castles;
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
-
+@property BOOL isFollowing;
 -(id)initWithFile:(NSString *)file;
 
 -(void)addCastle:(Character *)castle;

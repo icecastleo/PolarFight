@@ -14,7 +14,7 @@
 const static int kMoveTotalFps = kGameSettingFps;
 const static int kMoveSlowFPS = kGameSettingFps / 3;
 const static int kMoveSlowRatio = 30;
-
+const static int kMoveLimit = 8;
 -(id)initWithMapLayer:(MapLayer *)aLayer {
     if (self = [super init]) {
         layer = aLayer;
@@ -83,7 +83,9 @@ const static int kMoveSlowRatio = 30;
     
     [self scheduleUpdate];
 }
-
+-(void)limitMoveCameraToX:(float)x Y:(float)y {
+    [self moveCameraX:MAX(MIN(kMoveLimit, layer.position.x - x), -kMoveLimit) Y:MAX(MIN(kMoveLimit, layer.position.y - y), -kMoveLimit)];
+}
 -(void)update:(ccTime)deltaTime {
     moveCountDown --;
     

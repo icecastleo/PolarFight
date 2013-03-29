@@ -186,7 +186,8 @@ const float foodAddend = 0.05;
         
         [removeCharacters removeAllObjects];
     }
-    
+    if(mapLayer.isFollowing)
+        [mapLayer.cameraControl limitMoveCameraToX:_hero.position.x Y:_hero.position.y];
     [self checkBattleEnd];
 }
 

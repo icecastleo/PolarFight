@@ -209,7 +209,7 @@ const static int pathHeight = 70;
     lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
     
     CGPoint diff = ccpSub(lastLocation, location);
-    
+    _isFollowing=NO;
     [_cameraControl moveCameraX: 0.5 * diff.x Y: 0.5 * diff.y];
 }
 
@@ -235,9 +235,12 @@ const static int pathHeight = 70;
         
         CGPoint heroPointOnscreen = [self convertMapPositionToScreen:hero.position];
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        if(heroPointOnscreen.x>winSize.width||heroPointOnscreen.x<0||heroPointOnscreen.y<0||heroPointOnscreen.y>winSize.height){
-            [_cameraControl moveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
+        if(heroPointOnscreen.x>winSize.width||heroPointOnscreen.x<0||heroPointOnscreen.y<0||heroPointOnscreen.y>winSize.height)
+        {
+            [_cameraControl limitMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
         }
+        _isFollowing=YES;
+
     }
 }
 
