@@ -5,7 +5,15 @@
 	<key>id</key>
 	<string>001</string>
 	<key>money</key>
-	<string>1000</string>
+	<integer>1500</integer>
+	<key>soundsEffectSwitch</key>
+	<true/>
+	<key>backgroundMusicSwitch</key>
+	<true/>
+	<key>soundsEffectVolume</key>
+	<real>0.5</real>
+	<key>backgroundMusicVolume</key>
+	<real>0.05</real>
 	<key>characters</key>
 	<array>
 		<dict>

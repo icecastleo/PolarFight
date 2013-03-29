@@ -10,6 +10,14 @@
 #import "Character.h"
 #import "EnemyAIData.h"
 
+@interface BattleDataObject ()
+
+@property (nonatomic,strong) NSArray *enemyArray;
+@property (nonatomic,strong) NSArray *enemyBossArray;
+@property (nonatomic,strong) NSArray *enemyCastleArray;
+
+@end
+
 @implementation BattleDataObject
 
 -(id)initWithBattleName:(NSString *)name {

@@ -17,7 +17,4 @@
 
 -(id)initWithAttribute:(Attribute*)anAttribute;
 
--(void)increaseValue:(int)aValue;
--(void)decreaseValue:(int)aValue;
-
 @end

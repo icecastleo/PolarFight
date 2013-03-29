@@ -30,6 +30,8 @@
 
 __weak static BattleController* currentInstance;
 
+const float foodAddend = 0.05;
+
 +(BattleController *)currentInstance {
     return currentInstance;
 }
@@ -41,11 +43,13 @@ __weak static BattleController* currentInstance;
         NSString *suffix = @"01";
         
         self.food = 0;
-        foodRate = 0.8;
+        // TODO: Set by init, maybe can upgrade
+        foodRate = 1.0f;
+        maxRate = foodRate * 4;
         
         currentInstance = self;
         
-        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
         mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
@@ -97,7 +101,7 @@ __weak static BattleController* currentInstance;
 
 - (void)setCharacterArrayFromSelectLayer {
     
-    _playerCastle = [FileManager getPlayerCastle];
+    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
     _playerCastle.player = 1;
     
     _enemyCastle = [_battleData getEnemyCastle];
@@ -115,6 +119,11 @@ __weak static BattleController* currentInstance;
     CCLOG(@"Add player %i's %@", character.player, character.name);
     if (character.player == 1) {
         self.food -= character.cost;
+
+        if (foodRate < maxRate) {
+//            foodRate += character.cost / 200.0;
+            foodRate += foodAddend;
+        }
     }
     
     [self setAI:character];

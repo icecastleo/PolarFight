@@ -8,25 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
-@class BattleDataObject,UserDataObject,Character;
+@class BattleDataObject,Character;
 
 @interface FileManager : NSObject
 
-+(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
+@property int userMoney;
 
-+(void)preloadSoundsEffect:(NSString *)sceneName;
++(FileManager *)sharedFileManager;
 
-+(void)saveUserData;
+-(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
-+(BattleDataObject *)loadBattleInfo:(NSString *)name;
+-(void)preloadSoundsEffect:(NSString *)sceneName;
 
-+(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
-+(NSArray *)getChararcterArray;
-+(Character *)getPlayerHero;
-+(Character *)getPlayerCastle;
-+(int)getPlayerMoney;
+-(void)saveUserData;
 
-+(void)updatePlayerMoney:(int)value;
-+(void)updatePlayerCharacter:(Character *)character;
+-(BattleDataObject *)loadBattleInfo:(NSString *)name;
+
+-(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
+-(NSArray *)getChararcterArray;
+-(Character *)getPlayerHero;
+-(Character *)getPlayerCastle;
+
+-(void)updatePlayerCharacter:(Character *)character;
+
+-(void)switchSoundsEffect;
+-(void)switchBackgroundMusic;
 
 @end

@@ -26,6 +26,7 @@
     BOOL canMove;
     
     float foodRate;
+    float maxRate;
     
     NSMutableArray *removeCharacters;
 }

@@ -27,6 +27,7 @@
         cId = character.characterId;
         level = character.level;
         cost = character.cost;
+        [self setCooldown];
         
         CCLabelBMFont *costLabel = [[CCLabelBMFont alloc] initWithString:[[NSNumber numberWithInt:cost] stringValue] fntFile:@"font/cooper_20_o.fnt"];
         costLabel.anchorPoint = ccp(0.5, 0);
@@ -56,6 +57,11 @@
     return self;
 }
 
+-(void)setCooldown {
+    // Assume min cost of monster -> 15
+    cooldown = 3.0 + (cost - 15) / 25.0 * 2;
+}
+
 -(void)click {
     self.isEnabled = NO;
 
@@ -63,28 +69,24 @@
     temp.player = 1;
     [[BattleController currentInstance] addCharacter:temp];
     
-    // FIXME: How to calculate cooldown
-    float cooldown = 2.0;
-    
     [timer runAction:[CCSequence actions:[CCProgressFromTo actionWithDuration:cooldown from:100 to:0],
-                      [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
+//                      [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
                       nil]];
     
     [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
 }
 
--(void)clickCallback:(id)sender {
-    if (mask.visible == NO) {
-        self.isEnabled = YES;
-    }
-}
+//-(void)clickCallback:(id)sender {
+//    if (mask.visible == NO) {
+//        self.isEnabled = YES;
+//    }
+//}
 
 -(void)updateFood:(int)food {
     if (food >= cost) {
-        mask.visible = NO;
-        
-        if ([self numberOfRunningActions] == 0) {
+        if ([timer numberOfRunningActions] == 0) {
             self.isEnabled = YES;
+            mask.visible = NO;
         }
     } else {
         mask.visible = YES;
