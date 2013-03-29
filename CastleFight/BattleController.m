@@ -13,7 +13,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-
+#import "HeroAI.h"
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
@@ -60,7 +60,12 @@ const float foodAddend = 0.05;
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
-        
+        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
+        _hero.player = 1;
+       
+        [_hero.sprite addBloodSprite];
+        [self addCharacter:_hero];
+         _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
         [self scheduleUpdate];
         
         // FIXME: Maybe move to maylayer
@@ -92,7 +97,7 @@ const float foodAddend = 0.05;
 
 - (void)setCharacterArrayFromSelectLayer {
     
-    _playerCastle = [FileManager getPlayerCastle];
+    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
     _playerCastle.player = 1;
     
     _enemyCastle = [_battleData getEnemyCastle];
@@ -160,7 +165,7 @@ const float foodAddend = 0.05;
 -(void)update:(ccTime)delta {
     
     [_enemyAi AIUpdate];
-    
+    [_hero.ai AIUpdate];
     for (Character *character in self.characters) {
         [character update:delta];
     }
@@ -172,7 +177,8 @@ const float foodAddend = 0.05;
         
         [removeCharacters removeAllObjects];
     }
-    
+    if(mapLayer.isFollowing)
+        [mapLayer.cameraControl limitMoveCameraToX:_hero.position.x Y:_hero.position.y];
     [self checkBattleEnd];
 }
 

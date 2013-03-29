@@ -167,7 +167,7 @@ static const int tableviewPositionZ = 100;
     return @"Money: 100元";
 }
 -(NSArray *)loadAllCharacterFromFile {
-    NSArray *characters = [FileManager getChararcterArray];
+    NSArray *characters = [[FileManager sharedFileManager] getChararcterArray];
     return characters;
 }
 - (void)loadAllRolesCanBeSelected {

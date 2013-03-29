@@ -123,11 +123,11 @@ typedef enum {
 }
 
 -(void)switchBackgroundMusic {
-    [FileManager switchBackgroundMusic];
+    [[FileManager sharedFileManager] switchBackgroundMusic];
 }
 
 -(void)switchSoundsEffect {
-    [FileManager switchSoundsEffect];
+    [[FileManager sharedFileManager] switchSoundsEffect];
 }
 
 -(void)gamePause {

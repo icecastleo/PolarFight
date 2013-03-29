@@ -7,7 +7,7 @@
 //
 
 #import "MapLayer.h"
-
+#import "BattleController.h"
 @implementation MapLayer
 
 static float scale;
@@ -48,7 +48,7 @@ const static int pathHeight = 70;
         // To fullfill the screen
         background.contentSize = CGSizeMake(map3.contentSize.width * 2, map3.contentSize.height + 21);
         [map3 addChild:background z:-5];
-       
+        
        	// Create a void Node, parent Node
 		CCParallaxNode *voidNode = [CCParallaxNode node];
 		
@@ -61,7 +61,7 @@ const static int pathHeight = 70;
         [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(map3.boundingBox.size.width-1, 100)];
         
         [self addChild:voidNode];
-                
+        
         _boundaryX = map1.boundingBox.size.width*2;
         _boundaryY = map1.boundingBox.size.height*2;
         
@@ -70,12 +70,9 @@ const static int pathHeight = 70;
         
         self.isTouchEnabled = YES;
         
-//        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
+        //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
         
-        hero = [[Character alloc] initWithId:@"209" andLevel:1];
-        hero.player = 1;
-        [hero.sprite addBloodSprite];
-        [self addCharacter:hero];
+        
         
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
         longPress.minimumPressDuration = 0.2f;
@@ -90,20 +87,20 @@ const static int pathHeight = 70;
 }
 
 -(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [hero setMoveDirection:ccp(0, 0)];
-        return;
-    }
-    
-    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
-    
-    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
-    
-    if (location.x < halfWidth) {
-        [hero setMoveDirection:ccp(-1, 0)];
-    } else {
-        [hero setMoveDirection:ccp(1, 0)];
-    }
+    //    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    //        [hero setMoveDirection:ccp(0, 0)];
+    //        return;
+    //    }
+    //
+    //    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
+    //
+    //    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
+    //
+    //    if (location.x < halfWidth) {
+    //        [hero setMoveDirection:ccp(-1, 0)];
+    //    } else {
+    //        [hero setMoveDirection:ccp(1, 0)];
+    //    }
 }
 
 -(NSMutableArray *)characters {
@@ -217,14 +214,33 @@ const static int pathHeight = 70;
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-//    CGPoint location = [touch locationInView:touch.view];
-//    location = [[CCDirector sharedDirector] convertToGL:location];
-//    
-//    CGPoint lastLocation = [touch previousLocationInView:touch.view];
-//    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+    //    CGPoint location = [touch locationInView:touch.view];
+    //    location = [[CCDirector sharedDirector] convertToGL:location];
+    //
+    //    CGPoint lastLocation = [touch previousLocationInView:touch.view];
+    //    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
     
     if (!isMove) {
-        [hero useSkill];
+        // [hero useSkill];
+        
+        
+        CGPoint location = [touch locationInView:touch.view];
+        location = [[CCDirector sharedDirector] convertToGL:location];
+        location = [self convertScreenPositionToMap:location];
+        //location = [touch.view convertToWorldSpace:location];
+        // int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
+        Character *hero = [BattleController currentInstance].hero;
+        hero.ai.targetPoint=location;
+        //        [_cameraControl smoothMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
+        
+        CGPoint heroPointOnscreen = [self convertMapPositionToScreen:hero.position];
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        if(heroPointOnscreen.x>winSize.width||heroPointOnscreen.x<0||heroPointOnscreen.y<0||heroPointOnscreen.y>winSize.height)
+        {
+            [_cameraControl limitMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
+        }
+        _isFollowing=YES;
+
     }
 }
 

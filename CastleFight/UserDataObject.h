@@ -12,13 +12,10 @@
 
 @interface UserDataObject : NSObject <NSCoding>
 
-@property NSArray *playerCharacterArray;
-@property NSArray *playerHeroArray;
-@property NSArray *playerCastleArray;
-
 @property int money;
-@property NSArray *items;
 
+@property (nonatomic) BOOL soundsEffectSwitch;
+@property (nonatomic) BOOL backgroundMusicSwitch;
 @property (nonatomic) float soundsEffectVolume;
 @property (nonatomic) float backgroundMusicVolume;
 

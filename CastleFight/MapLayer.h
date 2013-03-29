@@ -13,15 +13,16 @@
 @interface MapLayer : CCLayer {
     int counts[2];
     
-    __weak Character *hero;
+
     BOOL isMove;
+
 }
 
 @property (readonly) NSMutableArray *characters;
 @property (readonly) NSMutableArray *castles;
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
-
+@property BOOL isFollowing;
 -(id)initWithFile:(NSString *)file;
 
 -(void)addCastle:(Character *)castle;
