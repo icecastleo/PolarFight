@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B51EB031643EB0000441FB1 /* debugColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B51EB021643EB0000441FB1 /* debugColor.png */; };
 		2B85A7B7166357DB00D5962F /* Barrier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B85A7B6166357DB00D5962F /* Barrier.m */; };
 		2B85A7BA16635BF100D5962F /* tree01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2B85A7B916635BF100D5962F /* tree01.gif */; };
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
@@ -379,6 +378,13 @@
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
+		9BAF5AEE1705E10700945271 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */; };
+		9BAF5AEF1705E10700945271 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */; };
+		9BAF5AF01705E10700945271 /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */; };
+		9BAF5AF11705E10700945271 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AC51705E10700945271 /* CCScrollLayer.m */; };
+		9BAF5AF31705E10700945271 /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5ACD1705E10700945271 /* CCSlider.m */; };
+		9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0017060B8500945271 /* StageMenuItem.m */; };
+		9BAF5B04170610CB00945271 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B03170610CB00945271 /* StageLayer.m */; };
 		9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE316FF935E00D0BDC3 /* blood_white.png */; };
 		9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */; };
 		9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */; };
@@ -398,6 +404,8 @@
 		9BE01A391695E81900B9C427 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		9BE01A4C16960E9E00B9C427 /* SwordmanSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */; };
 		9BE01A531696DA1200B9C427 /* WizardSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A521696DA1100B9C427 /* WizardSkill.m */; };
+		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
+		9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF753217058047006DE945 /* StageScrollLayer.m */; };
 		9BF2DDE6168C8F0300545940 /* ContinuousAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */; };
 		9BF3255016A6EA0300D5782B /* RangeShooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF3254F16A6EA0300D5782B /* RangeShooter.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
@@ -422,7 +430,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2B51EB021643EB0000441FB1 /* debugColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugColor.png; sourceTree = "<group>"; };
 		2B85A7B5166357DB00D5962F /* Barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barrier.h; sourceTree = "<group>"; };
 		2B85A7B6166357DB00D5962F /* Barrier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barrier.m; sourceTree = "<group>"; };
 		2B85A7B916635BF100D5962F /* tree01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tree01.gif; sourceTree = "<group>"; };
@@ -1032,6 +1039,25 @@
 		9BA4E41016E09D5D00D5FA07 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
 		9BA4E41216E09F0700D5FA07 /* MapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCamera.h; sourceTree = "<group>"; };
 		9BA4E41316E09F0700D5FA07 /* MapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCamera.m; sourceTree = "<group>"; };
+		9BAF5AB81705E10700945271 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
+		9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
+		9BAF5ABA1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5ABC1705E10700945271 /* CCMenuAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuAdvanced.h; sourceTree = "<group>"; };
+		9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
+		9BAF5ABE1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5AC01705E10700945271 /* CCMenuItemSpriteIndependent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuItemSpriteIndependent.h; sourceTree = "<group>"; };
+		9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemSpriteIndependent.m; sourceTree = "<group>"; };
+		9BAF5AC21705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5AC41705E10700945271 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
+		9BAF5AC51705E10700945271 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
+		9BAF5AC61705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5ACC1705E10700945271 /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
+		9BAF5ACD1705E10700945271 /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
+		9BAF5ACE1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5AFF17060B8500945271 /* StageMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageMenuItem.h; sourceTree = "<group>"; };
+		9BAF5B0017060B8500945271 /* StageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageMenuItem.m; sourceTree = "<group>"; };
+		9BAF5B02170610CA00945271 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
+		9BAF5B03170610CB00945271 /* StageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageLayer.m; sourceTree = "<group>"; };
 		9BBAECE316FF935E00D0BDC3 /* blood_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_white.png; sourceTree = "<group>"; };
 		9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_frame-hd.png"; sourceTree = "<group>"; };
 		9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_white-hd.png"; sourceTree = "<group>"; };
@@ -1057,6 +1083,10 @@
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
+		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
+		9BEF752F1705802B006DE945 /* ShopLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopLayer.m; sourceTree = "<group>"; };
+		9BEF753117058047006DE945 /* StageScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScrollLayer.h; sourceTree = "<group>"; };
+		9BEF753217058047006DE945 /* StageScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageScrollLayer.m; sourceTree = "<group>"; };
 		9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuousAttackSkill.h; sourceTree = "<group>"; };
 		9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuousAttackSkill.m; sourceTree = "<group>"; };
 		9BF3254E16A6EA0200D5782B /* RangeShooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooter.h; sourceTree = "<group>"; };
@@ -1393,7 +1423,7 @@
 				2DA446BC16E4A53C00BDC060 /* AI */,
 				37DB1F2616BBD06B00C0368D /* AnimationKit */,
 				9B28820B166FC7EE0041604F /* Battle */,
-				9B82F787164FB2510001A357 /* BattleScene */,
+				9BEF752C17057F49006DE945 /* Scene */,
 				9B062E7F16353A2B00E06018 /* Character */,
 				3730814D16F7548F00F1F7EE /* Files */,
 				9B3E48C01675ECD1000CFFFB /* libs */,
@@ -1442,7 +1472,6 @@
 				9B9FAD7B16ADA77E00FA0C2C /* ButtonPause.png */,
 				9B9FAD7C16ADA77E00FA0C2C /* ButtonPauseSel.png */,
 				2BBF991A163E6532005AD8B9 /* controlBall.png */,
-				2B51EB021643EB0000441FB1 /* debugColor.png */,
 				9B062CF91635275100E06018 /* Default-Landscape~ipad.png */,
 				9B062CF71635275000E06018 /* Default.png */,
 				9BF3260516AC559700D5782B /* fire.png */,
@@ -1572,6 +1601,7 @@
 			children = (
 				9B3E4E891675F139000CFFFB /* cocos2d */,
 				9B3E4F4C1675F139000CFFFB /* CocosDenshion */,
+				9BAF5AB01705E08100945271 /* Extensions */,
 				9B3E4F561675F139000CFFFB /* kazmath */,
 				9BA4E40D16E08C0300D5FA07 /* Support */,
 				9B3E4F791675F139000CFFFB /* LICENSE_cocos2d.txt */,
@@ -2078,6 +2108,81 @@
 			path = cocos2d;
 			sourceTree = "<group>";
 		};
+		9BAF5AB01705E08100945271 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5AB71705E10700945271 /* CCLayerPanZoom */,
+				9BAF5ABB1705E10700945271 /* CCMenuAdvanced */,
+				9BAF5ABF1705E10700945271 /* CCMenuItemSpriteIndependent */,
+				9BAF5AC31705E10700945271 /* CCScrollLayer */,
+				9BAF5ACB1705E10700945271 /* CCSlider */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		9BAF5AB71705E10700945271 /* CCLayerPanZoom */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5AB81705E10700945271 /* CCLayerPanZoom.h */,
+				9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */,
+				9BAF5ABA1705E10700945271 /* README.md */,
+			);
+			path = CCLayerPanZoom;
+			sourceTree = "<group>";
+		};
+		9BAF5ABB1705E10700945271 /* CCMenuAdvanced */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5ABC1705E10700945271 /* CCMenuAdvanced.h */,
+				9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */,
+				9BAF5ABE1705E10700945271 /* README.md */,
+			);
+			path = CCMenuAdvanced;
+			sourceTree = "<group>";
+		};
+		9BAF5ABF1705E10700945271 /* CCMenuItemSpriteIndependent */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5AC01705E10700945271 /* CCMenuItemSpriteIndependent.h */,
+				9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */,
+				9BAF5AC21705E10700945271 /* README.md */,
+			);
+			path = CCMenuItemSpriteIndependent;
+			sourceTree = "<group>";
+		};
+		9BAF5AC31705E10700945271 /* CCScrollLayer */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5AC41705E10700945271 /* CCScrollLayer.h */,
+				9BAF5AC51705E10700945271 /* CCScrollLayer.m */,
+				9BAF5AC61705E10700945271 /* README.md */,
+			);
+			path = CCScrollLayer;
+			sourceTree = "<group>";
+		};
+		9BAF5ACB1705E10700945271 /* CCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5ACC1705E10700945271 /* CCSlider.h */,
+				9BAF5ACD1705E10700945271 /* CCSlider.m */,
+				9BAF5ACE1705E10700945271 /* README.md */,
+			);
+			path = CCSlider;
+			sourceTree = "<group>";
+		};
+		9BAF5AFE17060B3900945271 /* StageLayer */ = {
+			isa = PBXGroup;
+			children = (
+				9BEF753117058047006DE945 /* StageScrollLayer.h */,
+				9BEF753217058047006DE945 /* StageScrollLayer.m */,
+				9BAF5AFF17060B8500945271 /* StageMenuItem.h */,
+				9BAF5B0017060B8500945271 /* StageMenuItem.m */,
+				9BAF5B02170610CA00945271 /* StageLayer.h */,
+				9BAF5B03170610CB00945271 /* StageLayer.m */,
+			);
+			name = StageLayer;
+			sourceTree = "<group>";
+		};
 		9BC8FD961652942200A9EAC7 /* TimeStatus */ = {
 			isa = PBXGroup;
 			children = (
@@ -2135,6 +2240,25 @@
 				9BC514B716FB60F700ABE811 /* HeroSkill.m */,
 			);
 			name = ActiveSkill;
+			sourceTree = "<group>";
+		};
+		9BEF752C17057F49006DE945 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9B82F787164FB2510001A357 /* BattleScene */,
+				9BEF752D17057F50006DE945 /* MainScene */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		9BEF752D17057F50006DE945 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5AFE17060B3900945271 /* StageLayer */,
+				9BEF752E1705802B006DE945 /* ShopLayer.h */,
+				9BEF752F1705802B006DE945 /* ShopLayer.m */,
+			);
+			name = MainScene;
 			sourceTree = "<group>";
 		};
 		9BF467C316BA7361005B1BBE /* BattleController */ = {
@@ -2278,7 +2402,6 @@
 				9B520E21163972F500057A3D /* TestFont.png in Resources */,
 				2BBF9910163E6134005AD8B9 /* map.png in Resources */,
 				2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */,
-				2B51EB031643EB0000441FB1 /* debugColor.png in Resources */,
 				9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */,
 				9B82F79C164FB38A0001A357 /* open_spot.jpg in Resources */,
 				9B82F79D164FB38A0001A357 /* SelectedRolesPostion.plist in Resources */,
@@ -2556,6 +2679,10 @@
 				37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */,
 				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
 				9BC514B816FB60F800ABE811 /* HeroSkill.m in Sources */,
+				9BEF75301705802B006DE945 /* ShopLayer.m in Sources */,
+				9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */,
+				9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */,
+				9BAF5B04170610CB00945271 /* StageLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2663,6 +2790,11 @@
 				9B3E4FDD1675F139000CFFFB /* vec2.c in Sources */,
 				9B3E4FDE1675F139000CFFFB /* vec3.c in Sources */,
 				9B3E4FDF1675F139000CFFFB /* vec4.c in Sources */,
+				9BAF5AEE1705E10700945271 /* CCLayerPanZoom.m in Sources */,
+				9BAF5AEF1705E10700945271 /* CCMenuAdvanced.m in Sources */,
+				9BAF5AF01705E10700945271 /* CCMenuItemSpriteIndependent.m in Sources */,
+				9BAF5AF11705E10700945271 /* CCScrollLayer.m in Sources */,
+				9BAF5AF31705E10700945271 /* CCSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,9 +30,9 @@
 }
 
 -(id)initWithMapLayer:(MapLayer *)aLayer;
--(void)moveCameraX:(float)x Y:(float)y;
--(void)moveCameraToX:(float)x Y:(float)y;
--(void)smoothMoveCameraToX:(float)x Y:(float)y;
--(void)smoothMoveCameraToX:(float)x Y:(float)y delegate:(id)aTarget selector:(SEL)aSelector;
+-(void)moveTo:(CGPoint)position;
+-(void)moveBy:(CGPoint)position;
+-(void)smoothMoveTo:(CGPoint)position duration:(ccTime)d;
+
 
 @end

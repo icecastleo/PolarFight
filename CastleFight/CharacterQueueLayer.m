@@ -250,7 +250,7 @@ static const int arrowTag = 990;
     CharacterHeadView *characterHeadView = [queueBarSprite objectAtIndex:cell.idx];
     Character *character = characterHeadView.character;
     BattleController *controller = [BattleController currentInstance];
-    [controller smoothMoveCameraToX:character.position.x Y:character.position.y];
+    [controller smoothMoveCameraTo:character.position];
 }
 
 #pragma mark Custom Table animation method

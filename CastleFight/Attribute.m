@@ -29,7 +29,7 @@
         }
         
         // For castle fight game
-        if (_type < kCharacterAttributeSpecialBoundary) {
+        if (_type < kCharacterAttributeUpdateBoundary) {
             b = 0.02 * c;
         }
     }

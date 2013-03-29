@@ -254,6 +254,8 @@ static FileManager *sharedFileManager = nil;
     
     NSDictionary *battleDic = [self getDictionaryFromPlistDictionary:plistDic tagName:kBattleDataTagKey tagValue:name];
     
+    NSAssert(battleDic != nil, @"Loading battle %@'s data failed.", name);
+    
     BattleDataObject *battleDataObject = [[BattleDataObject alloc] initWithBattleDictionary:battleDic];
         
     return battleDataObject;
@@ -283,7 +285,7 @@ static FileManager *sharedFileManager = nil;
     if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeMute;
-    }else {
+    } else {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeEffectDefault];
         [self sharedFileManager].userDataObject.soundsEffectVolume = kVolumeEffectDefault;
     }
@@ -294,7 +296,7 @@ static FileManager *sharedFileManager = nil;
     if ([SimpleAudioEngine sharedEngine].backgroundMusicVolume != kVolumeMute) {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
         [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeMute;
-    }else {
+    } else {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeBackgroundMusicDefault];
         [self sharedFileManager].userDataObject.backgroundMusicVolume = kVolumeBackgroundMusicDefault;
     }

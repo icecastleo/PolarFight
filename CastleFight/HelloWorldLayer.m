@@ -13,6 +13,7 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #import "SelectLayer.h"
+#import "StageLayer.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -57,14 +58,9 @@
 		// Default font size will be 20 points.
 		[CCMenuItemFont setFontSize:20];
 		
-		CCMenuItem *defaultMenu = [CCMenuItemFont itemWithString:@"Battle Scene" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[BattleController node]];
+		CCMenuItem *startMenu = [CCMenuItemFont itemWithString:@"Start!" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[[StageLayer alloc] initWithPage:1]];
         }];
-        
-        CCMenuItem *selectScene = [CCMenuItemFont itemWithString:@"Select Scene" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[SelectLayer node]];
-        }];
-        
         
         // Jump Test Code
         
@@ -97,7 +93,7 @@
 //        
 //		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, zTest, nil];
 		
-        CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, nil];
+        CCMenu *menu = [CCMenu menuWithItems:startMenu, nil];
         
         [menu alignItemsVerticallyWithPadding:30];
 		[menu setPosition:ccp(size.width/2, size.height/2 - 20)];

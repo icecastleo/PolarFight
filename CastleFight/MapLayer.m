@@ -213,7 +213,7 @@ const static int pathHeight = 70;
     
     CGPoint diff = ccpSub(lastLocation, location);
     
-    [_cameraControl moveCameraX: 0.5 * diff.x Y: 0.5 * diff.y];
+    [_cameraControl moveBy:ccpMult(diff, 0.5)];
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {

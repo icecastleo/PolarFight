@@ -36,16 +36,18 @@
 @property (readonly) NSMutableArray *characters;
 @property (readonly) EnemyAI *enemyAi;
 @property (readonly) BattleDataObject *battleData;
+
 +(BattleController *)currentInstance;
 
+-(id)initWithPrefix:(int)prefix suffix:(int)suffix;
 -(void)addCharacter:(Character *)character;
 -(void)removeCharacter:(Character *)character;
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move;
 -(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move;
+-(void)smoothMoveCameraTo:(CGPoint)position;
 
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
--(void)smoothMoveCameraToX:(float)x Y:(float)y;
 
 @end
 
