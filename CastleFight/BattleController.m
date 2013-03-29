@@ -49,7 +49,7 @@ const float foodAddend = 0.05;
         
         currentInstance = self;
         
-        _battleData = [FileManager loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
         mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
@@ -96,7 +96,7 @@ const float foodAddend = 0.05;
 
 - (void)setCharacterArrayFromSelectLayer {
     
-    _playerCastle = [FileManager getPlayerCastle];
+    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
     _playerCastle.player = 1;
     
     _enemyCastle = [_battleData getEnemyCastle];

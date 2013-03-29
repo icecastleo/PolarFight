@@ -61,7 +61,7 @@
         _passiveSkillDictionary = [[NSMutableDictionary alloc] init];
         auraArray = [[NSMutableArray alloc] init];
         
-        NSDictionary *characterData = [FileManager getCharacterDataWithId:anId];
+        NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithId:anId];
         _name = [characterData objectForKey:@"name"];
         _spriteFile = [characterData objectForKey:@"image"];
         _headImageFileName = [characterData objectForKey:@"headImage"];

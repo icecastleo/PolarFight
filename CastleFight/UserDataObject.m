@@ -17,12 +17,20 @@
 #define kHeroKey @"hero"
 #define kCharacterArrayKey @"characters"
 #define kItemArrayKey @"items"
-#define kSoundsEffectKey @"soundsEffectVolume"
-#define kBackgroundMucsicKey @"backgroundMusicVolume"
+#define kSoundsEffectVolumeKey @"soundsEffectVolume"
+#define kBackgroundMucsicVolumeKey @"backgroundMusicVolume"
+#define kSoundsEffectSwitchKey @"soundsEffectSwitch"
+#define kBackgroundMucsicSwitchKey @"backgroundMusicSwitch"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
 }
+
+@property NSArray *playerCharacterArray;
+@property NSArray *playerHeroArray;
+@property NSArray *playerCastleArray;
+@property NSArray *items;
+
 @end
 
 
@@ -68,8 +76,11 @@
         _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
         _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
         _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
-        _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectKey] floatValue];
-        _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicKey] floatValue];
+        _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectVolumeKey] floatValue];
+        _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolumeKey] floatValue];
+        _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitchKey] boolValue];
+        _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitchKey] boolValue];
+        
     }
     return self;
 }
@@ -121,9 +132,10 @@
         _playerCastleArray = [decoder decodeObjectForKey:kCastleKey];
         moneyNumber = [decoder decodeObjectForKey:kMoneyKey];
         _items = [decoder decodeObjectForKey:kItemArrayKey];
-        _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectKey];
-        _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicKey];
-
+        _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolumeKey];
+        _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolumeKey];
+        _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitchKey];
+        _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitchKey];
     }
     return self;
 }
@@ -134,8 +146,10 @@
     [encoder encodeObject:_playerCastleArray forKey:kCastleKey];
     [encoder encodeObject:moneyNumber forKey:kMoneyKey];
     [encoder encodeObject:_items forKey:kItemArrayKey];
-    [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectKey];
-    [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicKey];
+    [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolumeKey];
+    [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolumeKey];
+    [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitchKey];
+    [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitchKey];
 }
 
 @end

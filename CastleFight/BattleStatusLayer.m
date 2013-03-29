@@ -53,7 +53,7 @@
         resource.position = ccp(0, winSize.height);
         [self addChild:resource];
         
-        CCLabelBMFont *diamond = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[FileManager getPlayerMoney]] fntFile:@"font/jungle_24_o.fnt"];
+        CCLabelBMFont *diamond = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[FileManager sharedFileManager].userMoney] fntFile:@"font/jungle_24_o.fnt"];
         diamond.anchorPoint = ccp(1, 0.5);
         diamond.scale = 0.5;
         diamond.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 - 1);
@@ -110,7 +110,7 @@
     
     unitItems = [[NSMutableArray alloc] init];
     
-    NSArray *characters = [FileManager getChararcterArray];
+    NSArray *characters = [[FileManager sharedFileManager] getChararcterArray];
     
     for (Character *character in characters) {
         CCMenuItem *item = [[UnitMenuItem alloc] initWithCharacter:character];
