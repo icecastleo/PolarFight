@@ -8,6 +8,7 @@
 
 #import "MapLayer.h"
 #import "BattleController.h"
+#import "HeroAI.h"
 @implementation MapLayer
 
 static float scale;
@@ -70,14 +71,16 @@ const static int pathHeight = 70;
         
         self.isTouchEnabled = YES;
         
-        //        CCLOG(@"Map size : (%f, %f)", map.boundingBox.size.width, map.boundingBox.size.height);
+        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
+        _hero.player = 1;
+        [_hero.sprite addBloodSprite];
+        [self addCharacter:_hero];
+        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
         
-        
-        
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
-        longPress.minimumPressDuration = 0.2f;
-        
-        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
+//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
+//        longPress.minimumPressDuration = 0.2f;
+//        
+//        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
     }
     return self;
 }
@@ -86,37 +89,22 @@ const static int pathHeight = 70;
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:YES];
 }
 
--(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
-    //    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-    //        [hero setMoveDirection:ccp(0, 0)];
-    //        return;
-    //    }
-    //
-    //    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
-    //
-    //    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
-    //
-    //    if (location.x < halfWidth) {
-    //        [hero setMoveDirection:ccp(-1, 0)];
-    //    } else {
-    //        [hero setMoveDirection:ccp(1, 0)];
-    //    }
-}
-
--(NSMutableArray *)characters {
-    if (counts[0] > 0 && counts[1] > 0) {
-        return _characters;
-    }
-    
-    NSMutableArray *result = [_characters mutableCopy];
-    
-    for (int i = 0; i < 2; i++) {
-        if (counts[i] == 0) {
-            [result addObject:_castles[i]];
-        }
-    }
-    return result;
-}
+//-(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
+//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+//        [hero setMoveDirection:ccp(0, 0)];
+//        return;
+//    }
+//    
+//    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
+//    
+//    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
+//    
+//    if (location.x < halfWidth) {
+//        [hero setMoveDirection:ccp(-1, 0)];
+//    } else {
+//        [hero setMoveDirection:ccp(1, 0)];
+//    }
+//}
 
 -(void)addCharacter:(Character *)character {
     CGPoint position;
@@ -131,8 +119,6 @@ const static int pathHeight = 70;
     
     [self addChild:character.sprite];
     [_characters addObject:character];
-    
-    counts[character.player - 1]++;
 }
 
 -(void)addCastle:(Character *)castle {
@@ -156,7 +142,6 @@ const static int pathHeight = 70;
 
 -(void)removeCharacter:(Character *)character {
     [_characters removeObject:character];
-    counts[character.player - 1]--;
 }
 
 -(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
@@ -212,37 +197,26 @@ const static int pathHeight = 70;
     
     [_cameraControl moveBy:ccpMult(diff, 0.5)];
     
-    _isFollowing = NO;
+    if (isFollow) {
+        isFollow = NO;
+        [_cameraControl stopFollow];
+    }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    //    CGPoint location = [touch locationInView:touch.view];
-    //    location = [[CCDirector sharedDirector] convertToGL:location];
-    //
-    //    CGPoint lastLocation = [touch previousLocationInView:touch.view];
-    //    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+    // map location
+    CGPoint location = [self convertTouchToNodeSpace:touch];
+    
+    //        // win location
+    //        location = [touch locationInView:[CCDirector sharedDirector].view];
     
     if (!isMove) {
-        // [hero useSkill];
+        _hero.ai.targetPoint = location;
         
-        
-        CGPoint location = [touch locationInView:touch.view];
-        location = [[CCDirector sharedDirector] convertToGL:location];
-        location = [self convertScreenPositionToMap:location];
-        //location = [touch.view convertToWorldSpace:location];
-        // int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
-        Character *hero = [BattleController currentInstance].hero;
-        hero.ai.targetPoint=location;
-        //        [_cameraControl smoothMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
-        
-        CGPoint heroPointOnscreen = [self convertMapPositionToScreen:hero.position];
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
-        if(heroPointOnscreen.x>winSize.width||heroPointOnscreen.x<0||heroPointOnscreen.y<0||heroPointOnscreen.y>winSize.height)
-        {
-//            [_cameraControl limitMoveCameraToX:[BattleController currentInstance].hero.position.x Y:[BattleController currentInstance].hero.position.y];
+        if (isFollow == NO) {
+            isFollow = YES;
+            [_cameraControl followCharacter:_hero];
         }
-        _isFollowing=YES;
-
     }
 }
 
@@ -256,14 +230,6 @@ const static int pathHeight = 70;
         }
     }
     return nil;
-}
-
--(CGPoint)convertScreenPositionToMap:(CGPoint)position {
-    return ccpSub(position, self.position);
-}
-
--(CGPoint)convertMapPositionToScreen:(CGPoint)position {
-    return ccpAdd(position, self.position);
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 
 @class MapLayer;
+@class Character;
 @interface MapCamera : CCNode {
     MapLayer *layer;
     
@@ -16,22 +17,13 @@
     
     float widthMax;
     float heightMax;
-    
-    id target;
-    SEL selector;
-    
-    float moveX;
-    float moveY;
-    bool move;
-    
-    int moveCountDown;
-    CGPoint delta;
-    CGPoint acceleration;
 }
 
 -(id)initWithMapLayer:(MapLayer *)aLayer;
 -(void)moveTo:(CGPoint)position;
 -(void)moveBy:(CGPoint)position;
 -(void)smoothMoveTo:(CGPoint)position duration:(ccTime)d;
+-(void)followCharacter:(Character *)character;
+-(void)stopFollow;
 
 @end

@@ -19,8 +19,8 @@
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {
         character = aCharacter;
-        _currentState =[[AIStateHeroIdle alloc] init];
-        _targetPoint=character.position;
+        _currentState = [[AIStateHeroIdle alloc] init];
+        _targetPoint = character.position;
         
     }
     return self;

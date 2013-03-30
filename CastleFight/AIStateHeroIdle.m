@@ -13,24 +13,26 @@
 #import "ActiveSkill.h"
 #import "Character.h"
 #import "AIState.h"
+
 @implementation AIStateHeroIdle
-- (NSString *)name {
+
+-(NSString *)name {
     return @"HeroWalking";
 }
 
-- (void)enter:(BaseAI *)ai {
-    
+-(void)enter:(BaseAI *)ai {
+
 }
 
-- (void)execute:(BaseAI *)ai {
+-(void)execute:(BaseAI *)ai {
 
-    if(fabs(ccpSub(ai.targetPoint,ai.character.position).x)>1)
+    if(fabs(ccpSub(ai.targetPoint, ai.character.position).x)>1)
     {
         [ai changeState:[[AIStateHeroWalk alloc] init]];
     }
 }
 
-- (void)exit:(BaseAI *)ai {
+-(void)exit:(BaseAI *)ai {
     
 }
 @end

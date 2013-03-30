@@ -27,6 +27,7 @@
 
 @implementation BattleController
 @dynamic characters;
+@dynamic hero;
 
 __weak static BattleController* currentInstance;
 
@@ -61,12 +62,7 @@ const float foodAddend = 0.05;
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
-        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
-        _hero.player = 1;
-       
-        [_hero.sprite addBloodSprite];
-        [self addCharacter:_hero];
-         _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
+
         [self scheduleUpdate];
         
         // FIXME: Maybe move to maylayer
@@ -94,6 +90,10 @@ const float foodAddend = 0.05;
 
 -(NSMutableArray *)characters {
     return mapLayer.characters;
+}
+
+-(Character *)hero {
+    return mapLayer.hero;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
@@ -166,7 +166,6 @@ const float foodAddend = 0.05;
 -(void)update:(ccTime)delta {
     
     [_enemyAi AIUpdate];
-    [_hero.ai AIUpdate];
     
     for (Character *character in self.characters) {
         [character update:delta];
@@ -178,10 +177,6 @@ const float foodAddend = 0.05;
         }
         
         [removeCharacters removeAllObjects];
-    }
-    
-    if(mapLayer.isFollowing) {
-//        [mapLayer.cameraControl moveTo:_hero.position];
     }
     
     [self checkBattleEnd];

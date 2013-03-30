@@ -9,6 +9,34 @@
 #import "MapCamera.h"
 #import "MapLayer.h"
 
+@interface CCSmoothFollow : CCFollow
+
+@end
+
+const static int kFollowLimit = 50;
+
+@implementation CCSmoothFollow
+
+-(void) step:(ccTime) dt
+{
+	if(boundarySet)
+	{
+		// whole map fits inside a single screen, no need to modify the position - unless map boundaries are increased
+		if(boundaryFullyCovered)
+			return;
+        
+		CGPoint tempPos = ccpSub( halfScreenSize, followedNode_.position);
+        
+        tempPos = ccp(clampf(tempPos.x, [target_ position].x - kFollowLimit, [target_ position].x + kFollowLimit), clampf(tempPos.y, [target_ position].y - kFollowLimit, [target_ position].y + kFollowLimit));
+        
+		[target_ setPosition:ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary))];
+	}
+	else
+		[target_ setPosition:ccpSub( halfScreenSize, followedNode_.position )];
+}
+
+@end
+
 @implementation MapCamera
 
 -(id)initWithMapLayer:(MapLayer *)aLayer {
@@ -22,8 +50,6 @@
         // Prevent boundary < winSize
         widthMax = MAX(0, layer.boundaryX - winSize.width);
         heightMax = MAX(0, layer.boundaryY - winSize.height);
-        
-        move = NO;
     }
     return self;
 }
@@ -55,6 +81,18 @@
     }
     
     [layer runAction:[CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:d position:[self convertPosition:position]] rate:5.0f]];
+}
+
+-(void)followCharacter:(Character *)character {
+    if (layer.numberOfRunningActions != 0) {
+        [layer stopAllActions];
+    }
+    
+    [layer runAction:[CCSmoothFollow actionWithTarget:character.sprite worldBoundary:CGRectMake(0, 0, layer.boundaryX, [CCDirector sharedDirector].winSize.height)]];
+}
+
+-(void)stopFollow {
+    [layer stopAllActions];
 }
 
 @end
