@@ -49,25 +49,6 @@
     moneyNumber = [NSNumber numberWithInt:money + kMoneyTrickValue];
 }
 
--(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
-    NSMutableArray *tempCharacterArray = [NSMutableArray array];
-    
-    for (NSDictionary *dic in array) {
-        CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
-        [tempCharacterArray addObject:characterData];
-    }
-    return tempCharacterArray;
-}
-
--(NSDictionary *)convertDictionary:(NSDictionary *)dic className:(Class)className {
-    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
-    for (NSString *key in dic) {
-        Class<UserDataDelegate> __autoreleasing class = [[className alloc] initWithDictionary:[dic objectForKey:key]];
-        [tempDic setValue:class forKey:key];
-    }
-    return tempDic;
-}
-
 -(NSArray *)convertArray:(NSArray *)array className:(Class)className {
     NSMutableArray *tempArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
@@ -96,28 +77,6 @@
         
         //FIXME: [CharacterDataObject class] change to item class?
         _items = [self convertArray:[tempPlist objectForKey:kItemArrayKey] className:[CharacterDataObject class]];
-        
-        /*
-         //all character array keep characterDataObject.
-         _playerCharacterArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCharacterArrayKey]];
-         _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
-         _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
-         _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
-         
-        NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
-        for (NSString *key in [tempPlist objectForKey:kAchievementsKey]) {
-            Achievement *achievement = [[Achievement alloc] initWithDictionary:[[tempPlist objectForKey:kAchievementsKey] objectForKey:key]];
-            [tempDictionary setValue:achievement forKey:achievement.name];
-        }
-        _achievements = tempDictionary;
-        
-        NSMutableDictionary *tempDictionary2 = [NSMutableDictionary dictionary];
-        for (NSString *key in [tempPlist objectForKey:kPropertiesKey]) {
-            Property *property = [[Property alloc] initWithDictionary:[[tempPlist objectForKey:kPropertiesKey] objectForKey:key]];
-            [tempDictionary2 setValue:property forKey:property.name];
-        }
-        _properties = tempDictionary2;
-        //*/
     }
     return self;
 }

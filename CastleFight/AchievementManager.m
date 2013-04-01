@@ -145,14 +145,4 @@
     return unlockedAchievements;
 }
 
--(void)printAchievements {
-    NSLog(@"Achievements: %@",self.achievements);
-}
--(void)printProperties {
-    for (NSString *key in self.properties) {
-        Property *pro = [self.properties objectForKey:key];
-        NSLog(@"property'name:%@ ,value:%d",pro.name, pro.value);
-    }
-}
-
 @end

@@ -26,7 +26,4 @@
 //only get the achievements during this time that you finished.
 -(NSArray *)checkAndGetAllFinishedAchievementsForTags:(NSArray *)tags;
 
--(void)printProperties;
--(void)printAchievements;
-
 @end
