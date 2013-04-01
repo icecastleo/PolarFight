@@ -11,12 +11,11 @@
 #import "Character.h"
 
 @interface MapLayer : CCLayer {
-    int counts[2];
-    
-    __weak Character *hero;
     BOOL isMove;
+    BOOL isFollow;
 }
 
+@property (readonly, weak) Character *hero;
 @property (readonly) NSMutableArray *characters;
 @property (readonly) NSMutableArray *castles;
 @property (readonly) MapCamera *cameraControl;

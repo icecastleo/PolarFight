@@ -13,7 +13,7 @@
 #import "Character.h"
 #import "CharacterQueue.h"
 #import "HelloWorldLayer.h"
-
+#import "HeroAI.h"
 #import "SimpleAI.h"
 #import "CharacterBloodSprite.h"
 #import "FileManager.h"
@@ -27,6 +27,7 @@
 
 @implementation BattleController
 @dynamic characters;
+@dynamic hero;
 
 __weak static BattleController* currentInstance;
 
@@ -36,12 +37,9 @@ const float foodAddend = 0.05;
     return currentInstance;
 }
 
--(id)init {
+-(id)initWithPrefix:(int)prefix suffix:(int)suffix {
     if(self = [super init]) {
-        // FIXME: set by init
-        NSString *prefix = @"01";
-        NSString *suffix = @"01";
-        
+
         self.food = 0;
         // TODO: Set by init, maybe can upgrade
         foodRate = 1.0f;
@@ -49,10 +47,10 @@ const float foodAddend = 0.05;
         
         currentInstance = self;
         
-        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%@_%@", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
-        mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%@", prefix]];
+        mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         // set character on may
@@ -64,7 +62,7 @@ const float foodAddend = 0.05;
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
-        
+
         [self scheduleUpdate];
         
         // FIXME: Maybe move to maylayer
@@ -76,7 +74,7 @@ const float foodAddend = 0.05;
                           [CCDelayTime actionWithDuration:0.25],
                           nil]]];
         
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", [prefix intValue]]];
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", prefix]];
     }
     return self;
 }
@@ -92,6 +90,10 @@ const float foodAddend = 0.05;
 
 -(NSMutableArray *)characters {
     return mapLayer.characters;
+}
+
+-(Character *)hero {
+    return mapLayer.hero;
 }
 
 - (void)setCharacterArrayFromSelectLayer {
@@ -150,20 +152,15 @@ const float foodAddend = 0.05;
     [mapLayer moveCharacter:character toPosition:position isMove:move];
 }
 
+-(void)smoothMoveCameraTo:(CGPoint)position {
+    [mapLayer.cameraControl smoothMoveTo:position duration:1.0f];
+}
+
 -(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision {
     // for castle fight
     velocity.y = 0;
     velocity = ccpForAngle(atan2f(velocity.y, velocity.x));
     //    [character.sprite runAction:[CCEaseOut actionWithAction:[CCMoveCharacterBy actionWithDuration:0.5 character:character position:ccpMult(velocity, power)] rate:2]];
-}
-
--(void)smoothMoveCameraToX:(float)x Y:(float)y {
-    [mapLayer.cameraControl smoothMoveCameraToX:x Y:y delegate:self selector:@selector(canMove)];
-    canMove = NO;
-}
-
--(void)canMove {
-    canMove = YES;
 }
 
 -(void)update:(ccTime)delta {

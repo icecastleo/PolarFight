@@ -66,12 +66,13 @@ typedef enum {
     // Other attributes.
     kCharacterAttributeAttack,
     kCharacterAttributeDefense,
+    
+    // For seperation.
+    kCharacterAttributeUpdateBoundary,
+    
     kCharacterAttributeAgile,
     kCharacterAttributeSpeed,
     kCharacterAttributeTime,
-    
-    // For seperation.
-    kCharacterAttributeSpecialBoundary,
     
     // For upgrade
     kCharacterAttributeUpdatePrice,

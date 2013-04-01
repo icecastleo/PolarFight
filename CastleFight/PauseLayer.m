@@ -29,12 +29,10 @@ typedef enum {
 @implementation PauseLayer
 
 -(id)init {
-    
     if ((self = [super initWithColor:ccc4(50, 50, 50, 150)])) {
-        
+        [self gamePause];
         [self setOptionView];
         self.isTouchEnabled = YES;
-        [self gamePause];
     }
     return self;
 }
@@ -42,6 +40,14 @@ typedef enum {
 -(void)onEnter {
     [super onEnter];
     [menu setHandlerPriority:kTouchPriotiryPause - 1];
+}
+
+-(void)registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return YES;
 }
 
 -(void)setOptionView {
@@ -139,14 +145,6 @@ typedef enum {
     // Reload the current scene
     CCScene *scene = [HelloWorldLayer scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:scene]];
-}
-
--(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
-}
-
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
 }
 
 @end

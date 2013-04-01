@@ -8,7 +8,6 @@
 
 #import "DPadLayer.h"
 
-
 @implementation DPadLayer
 
 @dynamic velocity;

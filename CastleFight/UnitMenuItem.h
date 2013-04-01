@@ -13,6 +13,8 @@
     NSString *cId;
     int level;
     int cost;
+    
+    bool click;
     float cooldown;
     
     CCSprite *mask;

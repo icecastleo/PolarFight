@@ -237,6 +237,8 @@
     if (state == kCharacterStateMove) {
         [[BattleController currentInstance] moveCharacter:self byPosition:ccpMult(self.direction, [self getAttribute:kCharacterAttributeSpeed].value * kMoveMultiplier * delta) isMove:YES];
     }
+    
+    
 }
 
 -(void)setMoveDirection:(CGPoint)direction {
@@ -268,6 +270,12 @@
     
     state = kCharacterStateMove;
 }
+
+-(void) setMovePosition:(CGPoint)point
+{
+        
+}
+
 
 -(void)setDirection:(CGPoint)velocity {
     @synchronized(self) {

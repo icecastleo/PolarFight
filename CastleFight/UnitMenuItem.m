@@ -53,6 +53,8 @@
         timer.percentage = 0;
         timer.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2);
         [self addChild:timer];
+        
+        click = NO;
     }
     return self;
 }
@@ -63,34 +65,34 @@
 }
 
 -(void)click {
+    click = YES;
     self.isEnabled = NO;
+    mask.visible = YES;
 
     Character *temp = [[Character alloc] initWithId:cId andLevel:level];
     temp.player = 1;
     [[BattleController currentInstance] addCharacter:temp];
     
     [timer runAction:[CCSequence actions:[CCProgressFromTo actionWithDuration:cooldown from:100 to:0],
-//                      [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
+                      [CCCallFuncN actionWithTarget:self selector:@selector(clickCallback:)],
                       nil]];
     
     [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
 }
 
-//-(void)clickCallback:(id)sender {
-//    if (mask.visible == NO) {
-//        self.isEnabled = YES;
-//    }
-//}
+-(void)clickCallback:(id)sender {
+    click = NO;
+}
 
 -(void)updateFood:(int)food {
-    if (food >= cost) {
-        if ([timer numberOfRunningActions] == 0) {
+    if (click == NO) {
+        if (food >= cost) {
             self.isEnabled = YES;
             mask.visible = NO;
+        } else {
+            self.isEnabled = NO;
+            mask.visible = YES;
         }
-    } else {
-        mask.visible = YES;
-        self.isEnabled = NO;
     }
 }
 
