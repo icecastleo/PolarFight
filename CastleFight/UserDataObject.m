@@ -21,11 +21,12 @@
 #define kBackgroundMucsicVolumeKey @"backgroundMusicVolume"
 #define kSoundsEffectSwitchKey @"soundsEffectSwitch"
 #define kBackgroundMucsicSwitchKey @"backgroundMusicSwitch"
+#define kAchievementsKey @"achievements"
+#define kPropertiesKey @"properties"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
 }
-
 @property NSArray *playerCharacterArray;
 @property NSArray *playerHeroArray;
 @property NSArray *playerCastleArray;
@@ -33,18 +34,9 @@
 
 @end
 
-
 @implementation UserDataObject
 
 @dynamic money;
-
--(id)init {
-    
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
 
 -(int)money {
     return [moneyNumber intValue] - kMoneyTrickValue;
@@ -80,6 +72,8 @@
         _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolumeKey] floatValue];
         _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitchKey] boolValue];
         _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitchKey] boolValue];
+        _achievements = [tempPlist objectForKey:kAchievementsKey];
+        _properties = [tempPlist objectForKey:kPropertiesKey];
         
     }
     return self;
@@ -136,6 +130,8 @@
         _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolumeKey];
         _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitchKey];
         _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitchKey];
+        _achievements = [decoder decodeObjectForKey:kAchievementsKey];
+        _properties = [decoder decodeObjectForKey:kPropertiesKey];
     }
     return self;
 }
@@ -150,6 +146,8 @@
     [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolumeKey];
     [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitchKey];
     [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitchKey];
+    [encoder encodeObject:_achievements forKey:kAchievementsKey];
+    [encoder encodeObject:_properties forKey:kPropertiesKey];
 }
 
 @end

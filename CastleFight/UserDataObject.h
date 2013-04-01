@@ -18,6 +18,8 @@
 @property (nonatomic) BOOL backgroundMusicSwitch;
 @property (nonatomic) float soundsEffectVolume;
 @property (nonatomic) float backgroundMusicVolume;
+@property NSDictionary *achievements;
+@property NSDictionary *properties;
 
 -(id)initWithPlistPath:(NSString *)path;
 

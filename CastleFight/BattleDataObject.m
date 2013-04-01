@@ -21,7 +21,6 @@
 @implementation BattleDataObject
 
 -(id)initWithBattleName:(NSString *)name {
-    
     if (self = [super init]) {
         _battleName = name;
     }
@@ -44,7 +43,6 @@
 
 -(id)initWithBattleDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        
         _battleName = [dic objectForKey:@"name"];
         _mapName = [dic objectForKey:@"map"];
         _backgroundMusic = [dic objectForKey:@"backgroundMusic"];

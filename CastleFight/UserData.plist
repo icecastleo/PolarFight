@@ -91,5 +91,39 @@
 	</array>
 	<key>items</key>
 	<array/>
+	<key>properties</key>
+	<dict>
+		<key>testProperty</key>
+		<dict>
+			<key>name</key>
+			<string>testProperty</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>5</integer>
+			<key>tags</key>
+			<array>
+				<string>testTag</string>
+			</array>
+		</dict>
+	</dict>
+	<key>achievements</key>
+	<dict>
+		<key>testAchievement</key>
+		<dict>
+			<key>unLocked</key>
+			<false/>
+			<key>name</key>
+			<string>testAchievement</string>
+			<key>propertyNames</key>
+			<array>
+				<string>testProperty</string>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>

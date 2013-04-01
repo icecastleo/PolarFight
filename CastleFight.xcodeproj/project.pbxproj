@@ -135,6 +135,9 @@
 		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
+		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
+		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
+		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */; };
 		37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96016AE2E4B00D492E6 /* archerHead32.png */; };
@@ -590,6 +593,12 @@
 		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
 		37DD1C5C168D96560058E450 /* WhiteFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteFont.png; sourceTree = "<group>"; };
+		37DDA2C11709638A0016E8CB /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
+		37DDA2C21709638A0016E8CB /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
+		37DDA2C31709638A0016E8CB /* AchievementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementManager.m; sourceTree = "<group>"; };
+		37DDA2C41709638A0016E8CB /* AchievementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementManager.h; sourceTree = "<group>"; };
+		37DDA2C51709638A0016E8CB /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
+		37DDA2C61709638A0016E8CB /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1298,6 +1307,19 @@
 			path = CCTableViewKit;
 			sourceTree = "<group>";
 		};
+		37DDA2BF170962F30016E8CB /* AchievementSystem */ = {
+			isa = PBXGroup;
+			children = (
+				37DDA2C41709638A0016E8CB /* AchievementManager.h */,
+				37DDA2C31709638A0016E8CB /* AchievementManager.m */,
+				37DDA2C61709638A0016E8CB /* Achievement.h */,
+				37DDA2C51709638A0016E8CB /* Achievement.m */,
+				37DDA2C21709638A0016E8CB /* Property.h */,
+				37DDA2C11709638A0016E8CB /* Property.m */,
+			);
+			name = AchievementSystem;
+			sourceTree = "<group>";
+		};
 		37E02F1216676B8B00BAF11B /* SneakyJoystick */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,6 +1412,7 @@
 		9B062CF51635275000E06018 /* CastleFight */ = {
 			isa = PBXGroup;
 			children = (
+				37DDA2BF170962F30016E8CB /* AchievementSystem */,
 				2DA446BC16E4A53C00BDC060 /* AI */,
 				37DB1F2616BBD06B00C0368D /* AnimationKit */,
 				9B28820B166FC7EE0041604F /* Battle */,
@@ -2556,6 +2579,9 @@
 				37E68CA516F97B4900AB5FBD /* CharacterDataObject.m in Sources */,
 				2DDDD14716FB050A00CBA47F /* EnemyAIData.m in Sources */,
 				9BC514B816FB60F800ABE811 /* HeroSkill.m in Sources */,
+				37DDA2C71709638A0016E8CB /* Property.m in Sources */,
+				37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */,
+				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

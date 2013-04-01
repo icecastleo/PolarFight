@@ -8,16 +8,10 @@
 
 #import "CharacterDataObject.h"
 
+#define kIdKey       @"Id"
+#define kLevelKey      @"Level"
+
 @implementation CharacterDataObject
-
--(id)init {
-    
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
-
 
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
@@ -29,23 +23,15 @@
 
 #pragma mark NSCoding
 
-#define kIdKey       @"Id"
-#define kLevelKey      @"Level"
-
-- (void) encodeWithCoder:(NSCoder *)encoder {
-    
+-(void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_characterId forKey:kIdKey];
     [encoder encodeObject:_level forKey:kLevelKey];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
-    
-    NSString *tempId = [decoder decodeObjectForKey:kIdKey];
-    NSString *tempLevel = [decoder decodeObjectForKey:kLevelKey];
-    
+-(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _characterId = tempId;
-        _level = tempLevel;
+        _characterId = [decoder decodeObjectForKey:kIdKey];
+        _level = [decoder decodeObjectForKey:kLevelKey];
     }
     
     return self;

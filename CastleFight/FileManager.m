@@ -12,6 +12,7 @@
 #import "SimpleAudioEngine.h"
 #import "BattleDataObject.h"
 #import "UserDataObject.h"
+#import "AchievementManager.h"
 
 @interface FileManager ()
 
@@ -79,7 +80,6 @@ static FileManager *sharedFileManager = nil;
         
         _userDataObject = [unarchiver decodeObjectForKey:kUserDataKey];
         [unarchiver finishDecoding];
-        
     }
     
     return _userDataObject;
@@ -139,6 +139,7 @@ static FileManager *sharedFileManager = nil;
         _userDataObject =  [self loadUserDataObject];
 //        _animationDictionary = [self loadAnimation]; //do not use temporary
         _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
+        _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
         [self setGameConfig];
 	}
 	return self;
