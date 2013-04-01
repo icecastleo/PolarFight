@@ -14,6 +14,7 @@
 #import "ColoredSquareSprite.h"
 #import "UnitMenuItem.h"
 #import "FileManager.h"
+#import "AchievementManager.h"
 
 @implementation BattleStatusLayer
 
@@ -91,6 +92,18 @@
 }
 
 -(void)pauseButtonTapped:(id)sender {
+    /* // test achievementManager
+    [[FileManager sharedFileManager].achievementManager printAchievements];
+    [[FileManager sharedFileManager].achievementManager printProperties];
+    
+    [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[@"testProperty"] Value:5];
+    NSArray *array = [[FileManager sharedFileManager].achievementManager  checkAndGetAllFinishedAchievementsForTags:nil];
+    NSLog(@"testArray:: %@",array);
+    [[FileManager sharedFileManager].achievementManager printAchievements];
+    [[FileManager sharedFileManager].achievementManager printProperties];
+    
+    [[FileManager sharedFileManager] saveUserData];
+    //*/
     if ([CCDirector sharedDirector].isPaused) {
         return;
     }

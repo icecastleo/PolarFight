@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserDataDelegate.h"
 
-@interface Property : NSObject <NSCoding>
+@interface Property : NSObject <NSCoding,UserDataDelegate>
 
 @property int value;
 

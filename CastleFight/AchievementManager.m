@@ -31,10 +31,16 @@
     return self;
 }
 
--(id)initWithAchievements:(NSDictionary *)achievements AndProperties:(NSDictionary *)properties {
+-(id)initWithAchievements:(NSArray *)achievements AndProperties:(NSArray *)properties {
     if (self = [super init]) {
-        _properties = [achievements mutableCopy];
-        _achievements = [properties mutableCopy];
+        _properties = [NSMutableDictionary dictionary];
+        _achievements = [NSMutableDictionary dictionary];
+        for (Achievement *achievement in achievements) {
+            [_achievements setValue:achievement forKey:achievement.name];
+        }
+        for (Property *property in properties) {
+            [_properties setValue:property forKey:property.name];
+        }
     }
     return self;
 }
@@ -116,7 +122,7 @@
     }
 }
 
--(NSArray *)checkAndGetAllFinishedAchievements:(NSArray *)tags {
+-(NSArray *)checkAndGetAllFinishedAchievementsForTags:(NSArray *)tags {
     NSMutableArray *unlockedAchievements = [NSMutableArray array];
     
     for (NSString *key in self.achievements) {
@@ -137,6 +143,16 @@
     }
     
     return unlockedAchievements;
+}
+
+-(void)printAchievements {
+    NSLog(@"Achievements: %@",self.achievements);
+}
+-(void)printProperties {
+    for (NSString *key in self.properties) {
+        Property *pro = [self.properties objectForKey:key];
+        NSLog(@"property'name:%@ ,value:%d",pro.name, pro.value);
+    }
 }
 
 @end

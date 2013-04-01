@@ -10,7 +10,7 @@
 
 @interface AchievementManager : NSObject
 
--(id)initWithAchievements:(NSDictionary *)achievements AndProperties:(NSDictionary *)properties;
+-(id)initWithAchievements:(NSArray *)achievements AndProperties:(NSArray *)properties;
 
 -(void)definePropertyWithName:(NSString *)name InitialValue:(int)initialValue theActivationMode:(NSString *)mode ActivationValue:(int)theValue Tags:(NSArray *)tags;
 -(void)defineAchievementWithName:(NSString *)name theRelatedPropertyNames:(NSArray *)propertyNames;
@@ -24,6 +24,9 @@
 -(void)resetPropertiesWithTags:(NSArray *)tags;
 
 //only get the achievements during this time that you finished.
--(NSArray *)checkAndGetAllFinishedAchievements:(NSArray *)tags;
+-(NSArray *)checkAndGetAllFinishedAchievementsForTags:(NSArray *)tags;
+
+-(void)printProperties;
+-(void)printAchievements;
 
 @end

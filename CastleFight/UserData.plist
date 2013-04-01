@@ -92,8 +92,7 @@
 	<key>items</key>
 	<array/>
 	<key>properties</key>
-	<dict>
-		<key>testProperty</key>
+	<array>
 		<dict>
 			<key>name</key>
 			<string>testProperty</string>
@@ -110,20 +109,19 @@
 				<string>testTag</string>
 			</array>
 		</dict>
-	</dict>
+	</array>
 	<key>achievements</key>
-	<dict>
-		<key>testAchievement</key>
+	<array>
 		<dict>
-			<key>unLocked</key>
-			<false/>
 			<key>name</key>
 			<string>testAchievement</string>
+			<key>unLocked</key>
+			<false/>
 			<key>propertyNames</key>
 			<array>
 				<string>testProperty</string>
 			</array>
 		</dict>
-	</dict>
+	</array>
 </dict>
 </plist>

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserDataDelegate.h"
 
-@interface Achievement : NSObject <NSCoding>
+@interface Achievement : NSObject <NSCoding,UserDataDelegate>
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *propertyNames;

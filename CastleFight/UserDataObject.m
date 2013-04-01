@@ -9,6 +9,9 @@
 #import "UserDataObject.h"
 #import "CharacterDataObject.h"
 #import "Character.h"
+#import "Property.h"
+#import "Achievement.h"
+#import "UserDataDelegate.h"
 
 #define kMoneyTrickValue 1000
 
@@ -53,8 +56,25 @@
         CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
         [tempCharacterArray addObject:characterData];
     }
-    
     return tempCharacterArray;
+}
+
+-(NSDictionary *)convertDictionary:(NSDictionary *)dic className:(Class)className {
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
+    for (NSString *key in dic) {
+        Class<UserDataDelegate> __autoreleasing class = [[className alloc] initWithDictionary:[dic objectForKey:key]];
+        [tempDic setValue:class forKey:key];
+    }
+    return tempDic;
+}
+
+-(NSArray *)convertArray:(NSArray *)array className:(Class)className {
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (NSDictionary *dic in array) {
+        Class<UserDataDelegate> __autoreleasing class = [[className alloc] initWithDictionary:dic];
+        [tempArray addObject:class];
+    }
+    return tempArray;
 }
 
 -(id)initWithPlistPath:(NSString *)path {
@@ -62,19 +82,42 @@
         NSMutableDictionary *tempPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         
         moneyNumber = [tempPlist objectForKey:kMoneyKey];
-        
-        //all character array keep characterDataObject.
-        _playerCharacterArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCharacterArrayKey]];
-        _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
-        _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
-        _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
         _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectVolumeKey] floatValue];
         _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolumeKey] floatValue];
         _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitchKey] boolValue];
         _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitchKey] boolValue];
-        _achievements = [tempPlist objectForKey:kAchievementsKey];
-        _properties = [tempPlist objectForKey:kPropertiesKey];
         
+        //all character array keep CharacterDataObject.
+        _playerCharacterArray = [self convertArray:[tempPlist objectForKey:kCharacterArrayKey] className:[CharacterDataObject class]];
+        _playerHeroArray = [self convertArray:[tempPlist objectForKey:kHeroKey] className:[CharacterDataObject class]];
+        _playerCastleArray = [self convertArray:[tempPlist objectForKey:kCastleKey] className:[CharacterDataObject class]];
+        _achievements = [self convertArray:[tempPlist objectForKey:kAchievementsKey] className:[Achievement class]];
+        _properties = [self convertArray:[tempPlist objectForKey:kPropertiesKey] className:[Property class]];
+        
+        //FIXME: [CharacterDataObject class] change to item class?
+        _items = [self convertArray:[tempPlist objectForKey:kItemArrayKey] className:[CharacterDataObject class]];
+        
+        /*
+         //all character array keep characterDataObject.
+         _playerCharacterArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCharacterArrayKey]];
+         _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
+         _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
+         _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
+         
+        NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
+        for (NSString *key in [tempPlist objectForKey:kAchievementsKey]) {
+            Achievement *achievement = [[Achievement alloc] initWithDictionary:[[tempPlist objectForKey:kAchievementsKey] objectForKey:key]];
+            [tempDictionary setValue:achievement forKey:achievement.name];
+        }
+        _achievements = tempDictionary;
+        
+        NSMutableDictionary *tempDictionary2 = [NSMutableDictionary dictionary];
+        for (NSString *key in [tempPlist objectForKey:kPropertiesKey]) {
+            Property *property = [[Property alloc] initWithDictionary:[[tempPlist objectForKey:kPropertiesKey] objectForKey:key]];
+            [tempDictionary2 setValue:property forKey:property.name];
+        }
+        _properties = tempDictionary2;
+        //*/
     }
     return self;
 }
