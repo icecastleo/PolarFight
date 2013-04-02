@@ -19,6 +19,8 @@
 
 -(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
 
+-(void)setGameConfig;
+
 -(void)preloadSoundsEffect:(NSString *)sceneName;
 
 -(void)saveUserData;

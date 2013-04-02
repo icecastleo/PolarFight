@@ -140,7 +140,6 @@ static FileManager *sharedFileManager = nil;
 //        _animationDictionary = [self loadAnimation]; //do not use temporary
         _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
         _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
-        [self setGameConfig];
 	}
 	return self;
 }

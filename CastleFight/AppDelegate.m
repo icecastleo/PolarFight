@@ -91,6 +91,8 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
     
+    [[FileManager sharedFileManager] setGameConfig];
+    
 	return YES;
 }
 

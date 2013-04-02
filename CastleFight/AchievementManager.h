@@ -12,18 +12,15 @@
 
 -(id)initWithAchievements:(NSArray *)achievements AndProperties:(NSArray *)properties;
 
--(void)definePropertyWithName:(NSString *)name InitialValue:(int)initialValue theActivationMode:(NSString *)mode ActivationValue:(int)theValue Tags:(NSArray *)tags;
--(void)defineAchievementWithName:(NSString *)name theRelatedPropertyNames:(NSArray *)propertyNames;
-
 -(int)getValueFromProperty:(NSString *)propertyName;
-
 -(void)addValueForPropertyNames:(NSArray *)propertyNames Value:(int)value;
-
--(void)setValueForProperty:(NSString *)propertyName Value:(int)value IgnoreActivationContraint:(BOOL)ignore;
+-(void)setValueForProperty:(NSString *)propertyName Value:(int)value IgnoreActivationConstraint:(BOOL)ignored;
 
 -(void)resetPropertiesWithTags:(NSArray *)tags;
+-(void)checkAchievementsForTags:(NSArray *)tags;
 
-//only get the achievements during this time that you finished.
--(NSArray *)checkAndGetAllFinishedAchievementsForTags:(NSArray *)tags;
+-(NSArray *)getAllUnLockedAchievementsForTags:(NSArray *)tags;
+-(NSArray *)getPropertiesForTags:(NSArray *)tags;
+-(BOOL)getStatusfromAchievement:(NSString *)achievementName;
 
 @end
