@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserDataDelegate.h"
 
-@interface CharacterDataObject : NSObject <NSCoding>
+@interface CharacterDataObject : NSObject <NSCoding,UserDataDelegate>
 
 @property (nonatomic, strong) NSString *characterId;
 @property (nonatomic, strong) NSString *level;

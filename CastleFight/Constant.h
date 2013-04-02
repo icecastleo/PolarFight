@@ -37,6 +37,12 @@
 
 #define kShadowHeightDivisor 8
 
+//For Achievement System
+#define ACTIVE_IF_GREATER_THAN @">"
+#define ACTIVE_IF_LESS_THAN @"<"
+#define ACTIVE_IF_EQUALS_TO @"=="
+
+
 typedef enum {
     kGameStateRoundStart,
     kGameStateCharacterMove,

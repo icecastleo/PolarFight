@@ -14,6 +14,7 @@
 #import "ColoredSquareSprite.h"
 #import "UnitMenuItem.h"
 #import "FileManager.h"
+#import "AchievementManager.h"
 
 @implementation BattleStatusLayer
 

@@ -9,6 +9,9 @@
 #import "UserDataObject.h"
 #import "CharacterDataObject.h"
 #import "Character.h"
+#import "Property.h"
+#import "Achievement.h"
+#import "UserDataDelegate.h"
 
 #define kMoneyTrickValue 1000
 
@@ -21,11 +24,12 @@
 #define kBackgroundMucsicVolumeKey @"backgroundMusicVolume"
 #define kSoundsEffectSwitchKey @"soundsEffectSwitch"
 #define kBackgroundMucsicSwitchKey @"backgroundMusicSwitch"
+#define kAchievementsKey @"achievements"
+#define kPropertiesKey @"properties"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
 }
-
 @property NSArray *playerCharacterArray;
 @property NSArray *playerHeroArray;
 @property NSArray *playerCastleArray;
@@ -33,18 +37,9 @@
 
 @end
 
-
 @implementation UserDataObject
 
 @dynamic money;
-
--(id)init {
-    
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
 
 -(int)money {
     return [moneyNumber intValue] - kMoneyTrickValue;
@@ -54,15 +49,13 @@
     moneyNumber = [NSNumber numberWithInt:money + kMoneyTrickValue];
 }
 
--(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
-    NSMutableArray *tempCharacterArray = [NSMutableArray array];
-    
+-(NSArray *)convertArray:(NSArray *)array className:(Class)className {
+    NSMutableArray *tempArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
-        CharacterDataObject *characterData = [[CharacterDataObject alloc] initWithDictionary:dic];
-        [tempCharacterArray addObject:characterData];
+        Class<UserDataDelegate> __autoreleasing class = [[className alloc] initWithDictionary:dic];
+        [tempArray addObject:class];
     }
-    
-    return tempCharacterArray;
+    return tempArray;
 }
 
 -(id)initWithPlistPath:(NSString *)path {
@@ -70,17 +63,20 @@
         NSMutableDictionary *tempPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         
         moneyNumber = [tempPlist objectForKey:kMoneyKey];
-        
-        //all character array keep characterDataObject.
-        _playerCharacterArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCharacterArrayKey]];
-        _playerHeroArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kHeroKey]];
-        _playerCastleArray = [self getCharacterArrayFromArray:[tempPlist objectForKey:kCastleKey]];
-        _items = [self getCharacterArrayFromArray:[tempPlist objectForKey:kItemArrayKey]];
         _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectVolumeKey] floatValue];
         _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolumeKey] floatValue];
         _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitchKey] boolValue];
         _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitchKey] boolValue];
         
+        //all character array keep CharacterDataObject.
+        _playerCharacterArray = [self convertArray:[tempPlist objectForKey:kCharacterArrayKey] className:[CharacterDataObject class]];
+        _playerHeroArray = [self convertArray:[tempPlist objectForKey:kHeroKey] className:[CharacterDataObject class]];
+        _playerCastleArray = [self convertArray:[tempPlist objectForKey:kCastleKey] className:[CharacterDataObject class]];
+        _achievements = [self convertArray:[tempPlist objectForKey:kAchievementsKey] className:[Achievement class]];
+        _properties = [self convertArray:[tempPlist objectForKey:kPropertiesKey] className:[Property class]];
+        
+        //FIXME: [CharacterDataObject class] change to item class?
+        _items = [self convertArray:[tempPlist objectForKey:kItemArrayKey] className:[CharacterDataObject class]];
     }
     return self;
 }
@@ -136,6 +132,8 @@
         _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolumeKey];
         _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitchKey];
         _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitchKey];
+        _achievements = [decoder decodeObjectForKey:kAchievementsKey];
+        _properties = [decoder decodeObjectForKey:kPropertiesKey];
     }
     return self;
 }
@@ -150,6 +148,8 @@
     [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolumeKey];
     [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitchKey];
     [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitchKey];
+    [encoder encodeObject:_achievements forKey:kAchievementsKey];
+    [encoder encodeObject:_properties forKey:kPropertiesKey];
 }
 
 @end
