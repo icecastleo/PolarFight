@@ -391,6 +391,8 @@
 		9BAF5AF31705E10700945271 /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5ACD1705E10700945271 /* CCSlider.m */; };
 		9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0017060B8500945271 /* StageMenuItem.m */; };
 		9BAF5B04170610CB00945271 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B03170610CB00945271 /* StageLayer.m */; };
+		9BAF5B0A1709764A00945271 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B091709764A00945271 /* MainScene.m */; };
+		9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0C1709899C00945271 /* MainStatusLayer.m */; };
 		9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE316FF935E00D0BDC3 /* blood_white.png */; };
 		9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */; };
 		9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */; };
@@ -1077,6 +1079,10 @@
 		9BAF5B0017060B8500945271 /* StageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageMenuItem.m; sourceTree = "<group>"; };
 		9BAF5B02170610CA00945271 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
 		9BAF5B03170610CB00945271 /* StageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageLayer.m; sourceTree = "<group>"; };
+		9BAF5B081709764A00945271 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		9BAF5B091709764A00945271 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		9BAF5B0B1709899C00945271 /* MainStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainStatusLayer.h; sourceTree = "<group>"; };
+		9BAF5B0C1709899C00945271 /* MainStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainStatusLayer.m; sourceTree = "<group>"; };
 		9BBAECE316FF935E00D0BDC3 /* blood_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_white.png; sourceTree = "<group>"; };
 		9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_frame-hd.png"; sourceTree = "<group>"; };
 		9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_white-hd.png"; sourceTree = "<group>"; };
@@ -2295,6 +2301,10 @@
 			isa = PBXGroup;
 			children = (
 				9BAF5AFE17060B3900945271 /* StageLayer */,
+				9BAF5B081709764A00945271 /* MainScene.h */,
+				9BAF5B091709764A00945271 /* MainScene.m */,
+				9BAF5B0B1709899C00945271 /* MainStatusLayer.h */,
+				9BAF5B0C1709899C00945271 /* MainStatusLayer.m */,
 				9BEF752E1705802B006DE945 /* ShopLayer.h */,
 				9BEF752F1705802B006DE945 /* ShopLayer.m */,
 			);
@@ -2729,6 +2739,8 @@
 				37DDA2C71709638A0016E8CB /* Property.m in Sources */,
 				37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */,
 				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
+				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
+				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "SelectLayer.h"
 #import "StageLayer.h"
+#import "MainScene.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -59,7 +60,8 @@
 		[CCMenuItemFont setFontSize:20];
 		
 		CCMenuItem *startMenu = [CCMenuItemFont itemWithString:@"Start!" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[[StageLayer alloc] initWithPage:1]];
+//            [[CCDirector sharedDirector] replaceScene:[[StageLayer alloc] initWithPage:1]];
+            [[CCDirector sharedDirector] replaceScene:[[MainScene alloc] init]];
         }];
         
         // Jump Test Code

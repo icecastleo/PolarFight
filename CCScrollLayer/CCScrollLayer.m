@@ -60,7 +60,9 @@ enum
 @end
 #endif
 
-@interface CCScrollLayer ()
+@interface CCScrollLayer () {
+    CCLayer *indicatorLayer;
+}
 
 - (int) pageNumberForPosition: (CGPoint) position;
 
@@ -140,6 +142,9 @@ enum
 	
 	[layers_ release];
 	layers_ = nil;
+    
+    [indicatorLayer release];
+    indicatorLayer = nil;
 	
 	[super dealloc];
 }
@@ -157,7 +162,66 @@ enum
 			[self addChild:l];
 		i++;
 	}
+    
+    if (showPagesIndicator_ && indicatorLayer) {
+        [self setIndicator];
+    }
 }
+
+-(void)setParent:(CCNode *)parent {
+    if (showPagesIndicator_ && indicatorLayer) {
+        if (indicatorLayer.parent) {
+            [indicatorLayer removeFromParentAndCleanup:NO];
+        }
+        [parent addChild:indicatorLayer];
+    }
+    
+    [super setParent:parent];
+}
+
+-(void)addIndicatorLayer {
+    NSAssert(_indicatorFile != nil && _selectIndicatorFile != nil, @"You must set sprite files for indicator layer.");
+    
+    indicatorLayer = [[CCLayer alloc] init];
+    
+    if (self.parent) {
+        [self.parent addChild:indicatorLayer];
+    }
+    
+    [self updatePages];
+}
+
+#pragma mark Custom Indicator
+
+#define selectSpriteTag 30
+
+-(void)setIndicator {
+    [indicatorLayer removeAllChildrenWithCleanup:YES];
+    
+    int totalScreens = [layers_ count];
+    
+    CGFloat pY = self.pagesIndicatorPosition.y;
+    
+    for (int i = 0; i < totalScreens; i++)
+    {
+        CGFloat pX = self.pagesIndicatorPosition.x + _spriteIndicatorDistance * ( (CGFloat)i - 0.5f*(totalScreens-1.0f) );
+        
+        CCSprite *sprite = [CCSprite spriteWithFile:_indicatorFile];
+        sprite.position = ccp(pX, pY);
+        [indicatorLayer addChild:sprite];
+    }
+    
+    CCSprite *select = [CCSprite spriteWithFile:_selectIndicatorFile];
+    [indicatorLayer addChild:select z:0 tag:selectSpriteTag];
+    [self updateIndicator];
+}
+
+-(void)updateIndicator {
+    CCSprite *select = (CCSprite *)[indicatorLayer getChildByTag:selectSpriteTag];
+    
+    select.position = ccp(self.pagesIndicatorPosition.x + _spriteIndicatorDistance * ( (CGFloat)self.currentScreen - 0.5f*(layers_.count-1.0f) ), self.pagesIndicatorPosition.y);
+}
+
 
 #pragma mark CCLayer Methods ReImpl
 
@@ -165,7 +229,7 @@ enum
 {
 	[super visit];//< Will draw after glPopScene. 
 	
-	if (self.showPagesIndicator)
+	if (self.showPagesIndicator && _indicatorFile == nil && _selectIndicatorFile == nil)
 	{
 		int totalScreens = [layers_ count];
 		
@@ -235,15 +299,17 @@ enum
 
 #pragma mark Moving To / Selecting Pages
 
+- (void) moveToPageStarted
+{
+    if ([self.delegate respondsToSelector:@selector(scrollLayer:scrollToPageNumber:)])
+            [self.delegate scrollLayer: self scrollToPageNumber: currentScreen_];
+}
+
+
 - (void) moveToPageEnded
 {
-    if (prevScreen_ != currentScreen_)
-    {
-        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+    if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
             [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
-    }
-    
-    prevScreen_ = currentScreen_ = [self pageNumberForPosition:self.position];
 }
 
 - (int) pageNumberForPosition: (CGPoint) position
@@ -273,11 +339,16 @@ enum
 		return;
     }
 
-	id changePage = [CCMoveTo actionWithDuration:0.3 position: [self positionForPageWithNumber: page]];
-	changePage = [CCSequence actions: changePage,[CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
-    [self runAction:changePage];
+    prevScreen_ = currentScreen_;
     currentScreen_ = page;
-
+    
+    if (prevScreen_ != currentScreen_) {
+        id changePage = [CCMoveTo actionWithDuration:0.3 position: [self positionForPageWithNumber: page]];
+        changePage = [CCSequence actions:[CCCallFunc actionWithTarget:self selector:@selector(moveToPageStarted)], changePage, [CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
+        [self runAction:changePage];
+    }
+    
+    [self updateIndicator];
 }
 
 -(void) selectPage:(int)page
@@ -291,6 +362,7 @@ enum
     prevScreen_ = currentScreen_;
     currentScreen_ = page;
 	
+    [self updateIndicator];
 }
 
 #pragma mark Dynamic Pages Control
