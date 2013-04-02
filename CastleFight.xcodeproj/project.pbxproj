@@ -2736,6 +2736,9 @@
 				9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */,
 				9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */,
 				9BAF5B04170610CB00945271 /* StageLayer.m in Sources */,
+				37DDA2C71709638A0016E8CB /* Property.m in Sources */,
+				37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */,
+				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
 				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
 			);
