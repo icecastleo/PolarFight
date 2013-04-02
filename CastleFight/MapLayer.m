@@ -29,7 +29,7 @@ const static int pathHeight = 70;
 -(id)initWithFile:(NSString *)file {
     if(self = [super init]) {
         _characters = [[NSMutableArray alloc] init];
-        _castles = [[NSMutableArray alloc] initWithCapacity:2];
+//        _castles = [[NSMutableArray alloc] initWithCapacity:2];
         
         // Background image
         CCSprite *map1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
@@ -131,8 +131,8 @@ const static int pathHeight = 70;
     }
     
     [self addChild:castle.sprite];
-    
-    [_castles setObject:castle atIndexedSubscript:castle.player - 1];
+    [_characters addObject:castle];
+//    [_castles setObject:castle atIndexedSubscript:castle.player - 1];
 }
 
 -(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
@@ -207,8 +207,9 @@ const static int pathHeight = 70;
     // map location
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
-    //        // win location
-    //        location = [touch locationInView:[CCDirector sharedDirector].view];
+//    // win location
+//    location = [touch locationInView:[CCDirector sharedDirector].view];
+//    location = [[CCDirector sharedDirector] convertToGL: location];
     
     if (!isMove) {
         _hero.ai.targetPoint = location;

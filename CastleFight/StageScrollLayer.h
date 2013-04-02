@@ -9,8 +9,9 @@
 #import "cocos2d.h"
 #import "CCScrollLayer.h"
 
-@interface StageScrollLayer : CCLayer {
-    CCScrollLayer *layer;
+@interface StageScrollLayer : CCLayer<CCScrollLayerDelegate> {
+    CCScrollLayer *stageLayer;
+    CCScrollLayer *backgroundLayer;
 }
 
 @end

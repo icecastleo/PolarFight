@@ -46,6 +46,11 @@
  */
 - (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender;
 
+/** Called at the start of moveToPage:
+ * Doesn't get called in selectPage:
+ */
+- (void) scrollLayer: (CCScrollLayer *) sender scrollToPageNumber: (int) page;
+
 /** Called at the end of moveToPage:
  * Doesn't get called in selectPage:
  */
@@ -138,6 +143,10 @@
  */
 @property(readwrite, assign) BOOL showPagesIndicator;
 
+@property(readwrite, retain, nonatomic) NSString *indicatorFile;
+@property(readwrite, retain, nonatomic) NSString *selectIndicatorFile;
+@property(readwrite, assign) float spriteIndicatorDistance;
+
 /** Position of dots center in parent coordinates. 
  * (Default value is screenWidth/2, screenHeight/4)
  */
@@ -183,6 +192,8 @@
  * for update after dynamic page add/remove. 
  */
 - (void) updatePages;
+
+-(void)addIndicatorLayer;
 
 #pragma mark Adding/Removing Pages
 

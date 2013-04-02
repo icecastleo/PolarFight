@@ -72,13 +72,6 @@
     if (self = [super init]) {
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"bg/selectstage/bg_selectstage_map_%02d.png", page]];
-        background.position = ccp(winSize.width / 2, winSize.height / 2);
-        [self addChild:background];
-        
-        CCLayerColor *color = [[CCLayerColor alloc] initWithColor:ccc4(50, 50, 50, 150)];
-        [self addChild:color];
-        
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
         for (int i = 1; i <= 15; i++) {
