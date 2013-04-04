@@ -49,7 +49,6 @@
         //        CGSize contentSize = CGSizeMake(lastNode.contentSize.width, winSize.height - 120 - lastNode.position.y + lastNode.contentSize.height);
         CGSize contentSize = CGSizeMake(lastNode.contentSize.width, 51 * 75);
         scrollingNode.scrollView.contentSize = contentSize;
-
     }
     return self;
 }

@@ -35,7 +35,7 @@
         starLabel.color = ccRED;
         
         [self addChild:label];
-        [self addChild:starLabel];
+//        [self addChild:starLabel];
     }
     return self;
 }

@@ -17,6 +17,7 @@
     
     if (self = [super init]) {
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"selstagebutton.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         

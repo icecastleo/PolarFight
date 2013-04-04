@@ -29,8 +29,8 @@
     
     int row = (children_.count + column - 1) / column;
     
-    CGFloat width = self.boundingBox.size.width * column + padding.x * (column - 1);
-    CGFloat height = self.boundingBox.size.height * row + padding.y * (row - 1);
+    CGFloat width = boundingBox.size.width * column + padding.x * (column - 1);
+    CGFloat height = boundingBox.size.height * row + padding.y * (row - 1);
     
     [self setContentSize:CGSizeMake(width, height)];
     
@@ -63,8 +63,8 @@
         for (int i = 1; i <= 15; i++) {
             NSString *name = [NSString stringWithFormat:@"%02d_%02d",page,i];
             BOOL unLocked = [[FileManager sharedFileManager].achievementManager getStatusfromAchievement:name];
-            int stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
-            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:stars];
+//            int stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
+            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:2];
             [array addObject:item];
         }
         
