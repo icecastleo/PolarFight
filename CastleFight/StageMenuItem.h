@@ -11,8 +11,9 @@
 @interface StageMenuItem : CCMenuItemImage {
     int prefix;
     int suffix;
+    BOOL unLocked;
 }
 
--(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix;
+-(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unLocked:(BOOL)unLocked stars:(int)stars;
 
 @end

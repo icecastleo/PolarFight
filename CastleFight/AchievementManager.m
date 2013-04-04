@@ -86,16 +86,6 @@
 
 #pragma mark public fuctions
 
--(void)definePropertyWithName:(NSString *)name InitialValue:(int)initialValue theActivationMode:(NSString *)activationMode ActivationValue:(int)activationValue Tags:(NSArray *)tags {
-    Property *property = [[Property alloc] initWithPropertyName:name InitialValue:initialValue theActivationMode:activationMode ActivationValue:activationValue tags:tags];
-    [self.properties setValue:property forKey:name];
-}
--(void)defineAchievementWithName:(NSString *)name theRelatedPropertyNames:(NSArray *)propertyNames {
-    [self checkPropertyExistsForArray:propertyNames];
-    Achievement *achievement = [[Achievement alloc] initWithAchievementName:name theRelatedPropertyNames:propertyNames];
-    [self.achievements setValue:achievement forKey:name];
-}
-
 -(int)getValueFromProperty:(NSString *)propertyName {
     [self checkPropertyExistsForArray:@[propertyName]];
     Property *property = [self.properties objectForKey:propertyName];
@@ -105,11 +95,11 @@
 -(void)addValueForPropertyNames:(NSArray *)propertyNames Value:(int)value {
     for (NSString *propertyName in propertyNames) {
         int addValue = [self getValueFromProperty:propertyName] + value;
-        [self setValueForProperty:propertyName Value:addValue IgnoreActivationContraint:NO];
+        [self setValueForProperty:propertyName Value:addValue IgnoreActivationConstraint:NO];
     }
 }
 
--(void)setValueForProperty:(NSString *)propertyName Value:(int)value IgnoreActivationContraint:(BOOL)ignored {
+-(void)setValueForProperty:(NSString *)propertyName Value:(int)value IgnoreActivationConstraint:(BOOL)ignored {
     [self doSetValue:propertyName Value:value IgnoreActivationContraint:ignored];
 }
 
@@ -122,9 +112,7 @@
     }
 }
 
--(NSArray *)checkAndGetAllFinishedAchievementsForTags:(NSArray *)tags {
-    NSMutableArray *unlockedAchievements = [NSMutableArray array];
-    
+-(void)checkAchievementsForTags:(NSArray *)tags {
     for (NSString *key in self.achievements) {
         Achievement *aAchievement = [self.achievements objectForKey:key];
         if (aAchievement.unLocked == FALSE) {
@@ -136,13 +124,44 @@
                 }
                 if (activePropertySum == aAchievement.propertyNames.count) {
                     aAchievement.unLocked = TRUE;
+                    //TODO: do something after unlock. like popping an alert.
+                    NSLog(@"%@",aAchievement);
+                }
+            }
+        }
+    }
+}
+
+-(NSArray *)getAllUnLockedAchievementsForTags:(NSArray *)tags {
+    NSMutableArray *unlockedAchievements = [NSMutableArray array];
+    for (NSString *key in self.achievements) {
+        Achievement *aAchievement = [self.achievements objectForKey:key];
+        if (aAchievement.unLocked == TRUE) {
+            for (NSString *propertyName in aAchievement.propertyNames) {
+                Property *aProperty = [self.properties objectForKey:propertyName];
+                if (tags == nil || [self hasTagInTheProperty:aProperty Tags:tags]) {
                     [unlockedAchievements addObject:aAchievement];
                 }
             }
         }
     }
-    
     return unlockedAchievements;
+}
+
+-(NSArray *)getPropertiesForTags:(NSArray *)tags {
+    NSMutableArray *targetProperties = [NSMutableArray array];
+    for (NSString *key in self.properties) {
+        Property *aProperty = [self.properties objectForKey:key];
+        if (tags == nil || [self hasTagInTheProperty:aProperty Tags:tags]) {
+            [targetProperties addObject:aProperty];
+        }
+    }
+    return targetProperties;
+}
+
+-(BOOL)getStatusfromAchievement:(NSString *)achievementName {
+    Achievement *achievement = [self.achievements objectForKey:achievementName];
+    return achievement.unLocked;
 }
 
 @end
