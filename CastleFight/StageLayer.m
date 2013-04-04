@@ -9,13 +9,15 @@
 #import "StageLayer.h"
 #import "StageMenuItem.h"
 
+@interface CCMenu (RowColumnExtend)
+
+-(void)alignItemsInColumn:(int)column padding:(CGPoint)padding;
+
+@end
+
 @implementation CCMenu (RowColumnExtend)
 
-+(void)initialize {
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"selstagebutton.plist"];
-}
-
--(void)alignItemsWithColumn:(int)column columnPadding:(float)columnPadding row:(int)row rowPadding:(float)rowPadding
+-(void)alignItemsInColumn:(int)column padding:(CGPoint)padding
 {
     if (children_.count == 0) {
         return;
@@ -23,19 +25,15 @@
     
     CGRect boundingBox = ((CCMenuItem *)[children_ objectAtIndex:0]).boundingBox;
     
-    float width = -columnPadding;
-    float height = -rowPadding;
+    int row = (children_.count + column - 1) / column;
     
-    for (int i = 0; i < column; i++) {
-        width += boundingBox.size.width + columnPadding;
-    }
+    CGFloat width = self.boundingBox.size.width * column + padding.x * (column - 1);
+    CGFloat height = self.boundingBox.size.height * row + padding.y * (row - 1);
     
-    for (int i = 0; i < row; i++) {
-        height += boundingBox.size.height + rowPadding;
-    }
+    [self setContentSize:CGSizeMake(width, height)];
     
-    float x = -width / 2;
-    float y = height / 2;
+    CGFloat x = -width / 2;
+    CGFloat y = height / 2;
     
     for (int i = 0; i < children_.count; i++) {
         CCMenuItem *item = [children_ objectAtIndex:i];
@@ -43,25 +41,11 @@
         
         if ((i + 1) % column == 0) {
             x = -width / 2;
-            y -= boundingBox.size.height + rowPadding;
+            y -= boundingBox.size.height + padding.y;
         } else {
-            x += boundingBox.size.width + columnPadding;
+            x += boundingBox.size.width + padding.x;
         }
     }
-    
-//    float height = -padding;
-//    
-//	CCMenuItem *item;
-//	CCARRAY_FOREACH(children_, item)
-//    height += item.contentSize.height * item.scaleY + padding;
-//    
-//	float y = height / 2.0f;
-//    
-//	CCARRAY_FOREACH(children_, item) {
-//		CGSize itemSize = item.contentSize;
-//	    [item setPosition:ccp(0, y - itemSize.height * item.scaleY / 2.0f)];
-//	    y -= itemSize.height * item.scaleY + padding;
-//	}
 }
 
 @end
@@ -81,11 +65,10 @@
         
         CCMenu *menu = [[CCMenu alloc] initWithArray:array];
         menu.position = ccp(winSize.width / 2, winSize.height / 2);
-        [menu alignItemsWithColumn:5 columnPadding:0 row:3 rowPadding:0];
+        [menu alignItemsInColumn:5 padding:ccp(15, 0)];
         [self addChild:menu];
     }
     return self;
 }
-
 
 @end

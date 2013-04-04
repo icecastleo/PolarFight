@@ -106,7 +106,6 @@ enum
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
         self.isMouseEnabled = YES;
 #endif
-		
 		self.stealTouches = YES;
 		
 		// Set default minimum touch length to scroll.
@@ -219,7 +218,7 @@ enum
 -(void)updateIndicator {
     CCSprite *select = (CCSprite *)[indicatorLayer getChildByTag:selectSpriteTag];
     
-    select.position = ccp(self.pagesIndicatorPosition.x + _spriteIndicatorDistance * ( (CGFloat)self.currentScreen - 0.5f*(layers_.count-1.0f) ), self.pagesIndicatorPosition.y);
+    select.position = ccp(self.pagesIndicatorPosition.x + _spriteIndicatorDistance * ( (CGFloat)nextScreen_ - 0.5f*(layers_.count-1.0f) ), self.pagesIndicatorPosition.y);
 }
 
 
@@ -293,7 +292,7 @@ enum
         
         // always restore the blending functions too
         glBlendFunc( blend_src, blend_dst );
-#endif		
+#endif
 	}
 }
 
@@ -301,15 +300,21 @@ enum
 
 - (void) moveToPageStarted
 {
-    if ([self.delegate respondsToSelector:@selector(scrollLayer:scrollToPageNumber:)])
-            [self.delegate scrollLayer: self scrollToPageNumber: currentScreen_];
+    if (currentScreen_ != nextScreen_) {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrollToPageNumber:)])
+            [self.delegate scrollLayer: self scrollToPageNumber: nextScreen_];
+    }
 }
 
 
 - (void) moveToPageEnded
 {
-    if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
-            [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    if (currentScreen_ != nextScreen_) {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+            [self.delegate scrollLayer: self scrolledToPageNumber: nextScreen_];
+    }
+    
+    currentScreen_ = nextScreen_;
 }
 
 - (int) pageNumberForPosition: (CGPoint) position
@@ -339,15 +344,12 @@ enum
 		return;
     }
 
-    prevScreen_ = currentScreen_;
-    currentScreen_ = page;
+    nextScreen_ = page;
     
-    if (prevScreen_ != currentScreen_) {
-        id changePage = [CCMoveTo actionWithDuration:0.3 position: [self positionForPageWithNumber: page]];
-        changePage = [CCSequence actions:[CCCallFunc actionWithTarget:self selector:@selector(moveToPageStarted)], changePage, [CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
-        [self runAction:changePage];
-    }
-    
+    id changePage = [CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:0.75 position: [self positionForPageWithNumber: page]] rate:1.75];
+    changePage = [CCSequence actions:[CCCallFunc actionWithTarget:self selector:@selector(moveToPageStarted)], changePage, [CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
+    [self runAction:changePage];
+
     [self updateIndicator];
 }
 
@@ -359,9 +361,9 @@ enum
     }
 	
     self.position = [self positionForPageWithNumber: page];
-    prevScreen_ = currentScreen_;
-    currentScreen_ = page;
-	
+    nextScreen_ = page;
+	currentScreen_ = nextScreen_;
+    
     [self updateIndicator];
 }
 
@@ -391,9 +393,8 @@ enum
 	
 	[self updatePages];
 	
-    prevScreen_ = currentScreen_;
-	currentScreen_ = MIN(currentScreen_, [layers_ count] - 1);
-	[self moveToPage: currentScreen_];
+	nextScreen_ = MIN(currentScreen_, [layers_ count] - 1);
+	[self moveToPage: nextScreen_];
 }
 
 - (void) removePageWithNumber: (int) page
@@ -467,6 +468,12 @@ enum
 {
 	if( scrollTouch_ == nil ) {
 		scrollTouch_ = touch;
+        
+        if (self.numberOfRunningActions != 0) {
+            [self stopAllActions];
+            currentScreen_ = [self pageNumberForPosition:self.position];
+        }
+        
 	} else {
 		return NO;
 	}
@@ -498,6 +505,8 @@ enum
 		
 		// Avoid jerk after state change.
 		startSwipe_ = touchPoint.x;
+        
+        startX_ = self.position.x;
 		
 		if (self.stealTouches)
         {
@@ -512,9 +521,10 @@ enum
 	
 	if (state_ == kCCScrollLayerStateSliding)
 	{
-		CGFloat desiredX = (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + touchPoint.x - startSwipe_;
-		int page = [self pageNumberForPosition:ccp(desiredX, 0)];
-		CGFloat offset = desiredX - [self positionForPageWithNumber:page].x; 
+        CGFloat desiredX = startX_ + touchPoint.x - startSwipe_;
+        
+        int page = [self pageNumberForPosition:ccp(desiredX, 0)];
+		CGFloat offset = desiredX - [self positionForPageWithNumber:page].x;
 		if ((page == 0 && offset > 0) || (page == [layers_ count] - 1 && offset < 0))
 			offset -= marginOffset_ * offset / [[CCDirector sharedDirector] winSize].width;
 		else
@@ -531,19 +541,18 @@ enum
 	
 	CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
-	
+    
 	int selectedPage = currentScreen_;
 	CGFloat delta = touchPoint.x - startSwipe_;
-	if (fabsf(delta) >= self.minimumTouchLengthToChangePage)
+	if (fabsf([touch previousLocationInView:[touch view]].x - startSwipe_) < fabsf(delta) && fabsf(delta) >= self.minimumTouchLengthToChangePage)
 	{
-		selectedPage = [self pageNumberForPosition:self.position];
-		if (selectedPage == currentScreen_)
-		{
+//		if (selectedPage == currentScreen_)
+//		{
 			if (delta < 0.f && selectedPage < [layers_ count] - 1)
 				selectedPage++;
 			else if (delta > 0.f && selectedPage > 0)
 				selectedPage--;
-		}
+//		}
 	}
 	[self moveToPage:selectedPage];	
 }
@@ -638,17 +647,17 @@ enum
 	newPos.x = MAX(newPos.x, [self positionForPageWithNumber: [layers_ count] - 1].x);
 	
 	self.position = newPos;
-    prevScreen_ = currentScreen_;
-	currentScreen_ = [self pageNumberForPosition:self.position];
+
+	nextScreen_ = [self pageNumberForPosition:self.position];
     
     // Inform delegate about new currentScreen.
-    if (prevScreen_ != currentScreen_)
+    if (currentScreen_ != nextScreen_)
     {
         if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
             [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
     }
     
-    prevScreen_ = currentScreen_;
+    currentScreen_ = nextScreen_;
 	
 	return NO;
 	

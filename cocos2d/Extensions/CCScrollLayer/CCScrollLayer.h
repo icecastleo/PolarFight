@@ -73,9 +73,12 @@
 	// Holds the current page being displayed.
 	int currentScreen_;
     
-    // Number of previous page being displayed.
-    int prevScreen_;
+    // Number of next page being displayed.
+    int nextScreen_;
 	
+    // The x coord of layer the user starts their swipe.
+    CGFloat startX_;
+    
 	// The x coord of initial point the user starts their swipe.
 	CGFloat startSwipe_;
 	

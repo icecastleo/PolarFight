@@ -9,9 +9,12 @@
 #import "cocos2d.h"
 
 @interface MainScene : CCScene {
+    int layerIndex;
+    
     CCLayer *subLayer;
 }
 
--(void)addStageLayer;
+-(void)back;
+-(void)next;
 
 @end

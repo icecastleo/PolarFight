@@ -8,6 +8,7 @@
 
 #import "StageScrollLayer.h"
 #import "StageLayer.h"
+#import "CCScissorLayer.h"
 
 @implementation StageScrollLayer
 
@@ -18,6 +19,11 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"selstagebutton.plist"];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
+        
+//        CCNode *node = [[CCNode alloc] init];
+//        node.anchorPoint = ccp(0, 0);
+//        node.contentSize = CGSizeMake(winSize.width, 0);
+//        [self addChild:node];
         
         NSMutableArray *backgrounds = [[NSMutableArray alloc] init];
         
@@ -31,10 +37,14 @@
         
         backgroundLayer = [[CCScrollLayer alloc] initWithLayers:backgrounds widthOffset:0];
         backgroundLayer.showPagesIndicator = NO;
+        backgroundLayer.isTouchEnabled = NO;
         [self addChild:backgroundLayer];
         
         CCLayerColor *color = [[CCLayerColor alloc] initWithColor:ccc4(50, 50, 50, 150)];
         [self addChild:color];
+        
+        CCScissorLayer *scissor = [[CCScissorLayer alloc] initWithRect:CGRectMake(40, 0, 400, 320)];
+        [self addChild:scissor];
         
         NSMutableArray *layers = [[NSMutableArray alloc] init];
         
@@ -45,7 +55,7 @@
         stageLayer = [[CCScrollLayer alloc] initWithLayers:layers widthOffset:0];
         
         stageLayer.marginOffset = winSize.width * 0.1;
-        stageLayer.minimumTouchLengthToSlide = 20;
+        stageLayer.minimumTouchLengthToSlide = 0;
         stageLayer.minimumTouchLengthToChangePage = 20;
         stageLayer.delegate = self;
         stageLayer.pagesIndicatorPosition = ccp(stageLayer.pagesIndicatorPosition.x, 30);
@@ -53,13 +63,14 @@
         stageLayer.selectIndicatorFile = @"bg/selectstage/bg_chapter_page_selected.png";
         stageLayer.spriteIndicatorDistance = 32;
         [stageLayer addIndicatorLayer];
-        [self addChild:stageLayer];
+        [scissor addChild:stageLayer];
     }
     return self;
 }
 
 -(void)scrollLayer:(CCScrollLayer *)sender scrollToPageNumber:(int)page {
     [backgroundLayer moveToPage:page];
+    CCLOG(@"%d",page);
 }
 
 @end

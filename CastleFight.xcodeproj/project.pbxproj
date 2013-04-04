@@ -384,15 +384,18 @@
 		9BA147FE167BAE920012F2C0 /* DependentAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* DependentAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
-		9BAF5AEE1705E10700945271 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */; };
-		9BAF5AEF1705E10700945271 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */; };
-		9BAF5AF01705E10700945271 /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */; };
-		9BAF5AF11705E10700945271 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5AC51705E10700945271 /* CCScrollLayer.m */; };
-		9BAF5AF31705E10700945271 /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5ACD1705E10700945271 /* CCSlider.m */; };
 		9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0017060B8500945271 /* StageMenuItem.m */; };
 		9BAF5B04170610CB00945271 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B03170610CB00945271 /* StageLayer.m */; };
 		9BAF5B0A1709764A00945271 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B091709764A00945271 /* MainScene.m */; };
 		9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0C1709899C00945271 /* MainStatusLayer.m */; };
+		9BAF5B2B170B66DC00945271 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B19170B66DA00945271 /* CCLayerPanZoom.m */; };
+		9BAF5B2C170B66DC00945271 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B1D170B66DA00945271 /* CCMenuAdvanced.m */; };
+		9BAF5B2D170B66DC00945271 /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B21170B66DB00945271 /* CCMenuItemSpriteIndependent.m */; };
+		9BAF5B2E170B66DC00945271 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B25170B66DB00945271 /* CCScrollLayer.m */; };
+		9BAF5B2F170B66DC00945271 /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B29170B66DC00945271 /* CCSlider.m */; };
+		9BAF5B30170B671000945271 /* CCScissorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B15170B661000945271 /* CCScissorLayer.m */; };
+		9BAF5C2A170D6F5900945271 /* CCScrollingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C27170D6F5900945271 /* CCScrollingNode.m */; };
+		9BAF5C2B170D6F5900945271 /* CCScrollingNodeOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */; };
 		9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE316FF935E00D0BDC3 /* blood_white.png */; };
 		9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */; };
 		9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */; };
@@ -1060,21 +1063,6 @@
 		9BA4E41016E09D5D00D5FA07 /* MapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLayer.m; sourceTree = "<group>"; };
 		9BA4E41216E09F0700D5FA07 /* MapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCamera.h; sourceTree = "<group>"; };
 		9BA4E41316E09F0700D5FA07 /* MapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCamera.m; sourceTree = "<group>"; };
-		9BAF5AB81705E10700945271 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
-		9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
-		9BAF5ABA1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9BAF5ABC1705E10700945271 /* CCMenuAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuAdvanced.h; sourceTree = "<group>"; };
-		9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
-		9BAF5ABE1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9BAF5AC01705E10700945271 /* CCMenuItemSpriteIndependent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuItemSpriteIndependent.h; sourceTree = "<group>"; };
-		9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemSpriteIndependent.m; sourceTree = "<group>"; };
-		9BAF5AC21705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9BAF5AC41705E10700945271 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
-		9BAF5AC51705E10700945271 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
-		9BAF5AC61705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9BAF5ACC1705E10700945271 /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
-		9BAF5ACD1705E10700945271 /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
-		9BAF5ACE1705E10700945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		9BAF5AFF17060B8500945271 /* StageMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageMenuItem.h; sourceTree = "<group>"; };
 		9BAF5B0017060B8500945271 /* StageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageMenuItem.m; sourceTree = "<group>"; };
 		9BAF5B02170610CA00945271 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
@@ -1083,6 +1071,27 @@
 		9BAF5B091709764A00945271 /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
 		9BAF5B0B1709899C00945271 /* MainStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainStatusLayer.h; sourceTree = "<group>"; };
 		9BAF5B0C1709899C00945271 /* MainStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainStatusLayer.m; sourceTree = "<group>"; };
+		9BAF5B14170B661000945271 /* CCScissorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCScissorLayer.h; path = cocos2d/Extensions/CCScissorLayer.h; sourceTree = "<group>"; };
+		9BAF5B15170B661000945271 /* CCScissorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCScissorLayer.m; path = cocos2d/Extensions/CCScissorLayer.m; sourceTree = "<group>"; };
+		9BAF5B18170B66DA00945271 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
+		9BAF5B19170B66DA00945271 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
+		9BAF5B1A170B66DA00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5B1C170B66DA00945271 /* CCMenuAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuAdvanced.h; sourceTree = "<group>"; };
+		9BAF5B1D170B66DA00945271 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
+		9BAF5B1E170B66DA00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5B20170B66DB00945271 /* CCMenuItemSpriteIndependent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuItemSpriteIndependent.h; sourceTree = "<group>"; };
+		9BAF5B21170B66DB00945271 /* CCMenuItemSpriteIndependent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemSpriteIndependent.m; sourceTree = "<group>"; };
+		9BAF5B22170B66DB00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5B24170B66DB00945271 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
+		9BAF5B25170B66DB00945271 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
+		9BAF5B26170B66DB00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5B28170B66DC00945271 /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
+		9BAF5B29170B66DC00945271 /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
+		9BAF5B2A170B66DC00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9BAF5C26170D6F5900945271 /* CCScrollingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollingNode.h; sourceTree = "<group>"; };
+		9BAF5C27170D6F5900945271 /* CCScrollingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollingNode.m; sourceTree = "<group>"; };
+		9BAF5C28170D6F5900945271 /* CCScrollingNodeOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollingNodeOverlay.h; sourceTree = "<group>"; };
+		9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollingNodeOverlay.m; sourceTree = "<group>"; };
 		9BBAECE316FF935E00D0BDC3 /* blood_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_white.png; sourceTree = "<group>"; };
 		9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_frame-hd.png"; sourceTree = "<group>"; };
 		9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_white-hd.png"; sourceTree = "<group>"; };
@@ -1360,7 +1369,7 @@
 			path = CCTableViewKit;
 			sourceTree = "<group>";
 		};
-		37DDA2BF170962F30016E8CB /* AchievementSystem */ = {
+		37DDA2BF170962F30016E8CB /* Achievement */ = {
 			isa = PBXGroup;
 			children = (
 				37DDA2C41709638A0016E8CB /* AchievementManager.h */,
@@ -1370,7 +1379,7 @@
 				37DDA2C21709638A0016E8CB /* Property.h */,
 				37DDA2C11709638A0016E8CB /* Property.m */,
 			);
-			name = AchievementSystem;
+			name = Achievement;
 			sourceTree = "<group>";
 		};
 		37E02F1216676B8B00BAF11B /* SneakyJoystick */ = {
@@ -1465,7 +1474,7 @@
 		9B062CF51635275000E06018 /* CastleFight */ = {
 			isa = PBXGroup;
 			children = (
-				37DDA2BF170962F30016E8CB /* AchievementSystem */,
+				37DDA2BF170962F30016E8CB /* Achievement */,
 				2DA446BC16E4A53C00BDC060 /* AI */,
 				37DB1F2616BBD06B00C0368D /* AnimationKit */,
 				9B28820B166FC7EE0041604F /* Battle */,
@@ -2157,63 +2166,9 @@
 		9BAF5AB01705E08100945271 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9BAF5AB71705E10700945271 /* CCLayerPanZoom */,
-				9BAF5ABB1705E10700945271 /* CCMenuAdvanced */,
-				9BAF5ABF1705E10700945271 /* CCMenuItemSpriteIndependent */,
-				9BAF5AC31705E10700945271 /* CCScrollLayer */,
-				9BAF5ACB1705E10700945271 /* CCSlider */,
+				9BAF5B13170B643900945271 /* Custom */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		9BAF5AB71705E10700945271 /* CCLayerPanZoom */ = {
-			isa = PBXGroup;
-			children = (
-				9BAF5AB81705E10700945271 /* CCLayerPanZoom.h */,
-				9BAF5AB91705E10700945271 /* CCLayerPanZoom.m */,
-				9BAF5ABA1705E10700945271 /* README.md */,
-			);
-			path = CCLayerPanZoom;
-			sourceTree = "<group>";
-		};
-		9BAF5ABB1705E10700945271 /* CCMenuAdvanced */ = {
-			isa = PBXGroup;
-			children = (
-				9BAF5ABC1705E10700945271 /* CCMenuAdvanced.h */,
-				9BAF5ABD1705E10700945271 /* CCMenuAdvanced.m */,
-				9BAF5ABE1705E10700945271 /* README.md */,
-			);
-			path = CCMenuAdvanced;
-			sourceTree = "<group>";
-		};
-		9BAF5ABF1705E10700945271 /* CCMenuItemSpriteIndependent */ = {
-			isa = PBXGroup;
-			children = (
-				9BAF5AC01705E10700945271 /* CCMenuItemSpriteIndependent.h */,
-				9BAF5AC11705E10700945271 /* CCMenuItemSpriteIndependent.m */,
-				9BAF5AC21705E10700945271 /* README.md */,
-			);
-			path = CCMenuItemSpriteIndependent;
-			sourceTree = "<group>";
-		};
-		9BAF5AC31705E10700945271 /* CCScrollLayer */ = {
-			isa = PBXGroup;
-			children = (
-				9BAF5AC41705E10700945271 /* CCScrollLayer.h */,
-				9BAF5AC51705E10700945271 /* CCScrollLayer.m */,
-				9BAF5AC61705E10700945271 /* README.md */,
-			);
-			path = CCScrollLayer;
-			sourceTree = "<group>";
-		};
-		9BAF5ACB1705E10700945271 /* CCSlider */ = {
-			isa = PBXGroup;
-			children = (
-				9BAF5ACC1705E10700945271 /* CCSlider.h */,
-				9BAF5ACD1705E10700945271 /* CCSlider.m */,
-				9BAF5ACE1705E10700945271 /* README.md */,
-			);
-			path = CCSlider;
 			sourceTree = "<group>";
 		};
 		9BAF5AFE17060B3900945271 /* StageLayer */ = {
@@ -2227,6 +2182,97 @@
 				9BAF5B03170610CB00945271 /* StageLayer.m */,
 			);
 			name = StageLayer;
+			sourceTree = "<group>";
+		};
+		9BAF5B11170B0B5300945271 /* ShopLayer */ = {
+			isa = PBXGroup;
+			children = (
+				9BEF752E1705802B006DE945 /* ShopLayer.h */,
+				9BEF752F1705802B006DE945 /* ShopLayer.m */,
+			);
+			name = ShopLayer;
+			sourceTree = "<group>";
+		};
+		9BAF5B13170B643900945271 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5C25170D6F5800945271 /* CCScrollingNode */,
+				9BAF5B17170B66D900945271 /* CCLayerPanZoom */,
+				9BAF5B1B170B66DA00945271 /* CCMenuAdvanced */,
+				9BAF5B1F170B66DA00945271 /* CCMenuItemSpriteIndependent */,
+				9BAF5B23170B66DB00945271 /* CCScrollLayer */,
+				9BAF5B27170B66DB00945271 /* CCSlider */,
+				9BAF5B14170B661000945271 /* CCScissorLayer.h */,
+				9BAF5B15170B661000945271 /* CCScissorLayer.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		9BAF5B17170B66D900945271 /* CCLayerPanZoom */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5B18170B66DA00945271 /* CCLayerPanZoom.h */,
+				9BAF5B19170B66DA00945271 /* CCLayerPanZoom.m */,
+				9BAF5B1A170B66DA00945271 /* README.md */,
+			);
+			name = CCLayerPanZoom;
+			path = cocos2d/Extensions/CCLayerPanZoom;
+			sourceTree = "<group>";
+		};
+		9BAF5B1B170B66DA00945271 /* CCMenuAdvanced */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5B1C170B66DA00945271 /* CCMenuAdvanced.h */,
+				9BAF5B1D170B66DA00945271 /* CCMenuAdvanced.m */,
+				9BAF5B1E170B66DA00945271 /* README.md */,
+			);
+			name = CCMenuAdvanced;
+			path = cocos2d/Extensions/CCMenuAdvanced;
+			sourceTree = "<group>";
+		};
+		9BAF5B1F170B66DA00945271 /* CCMenuItemSpriteIndependent */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5B20170B66DB00945271 /* CCMenuItemSpriteIndependent.h */,
+				9BAF5B21170B66DB00945271 /* CCMenuItemSpriteIndependent.m */,
+				9BAF5B22170B66DB00945271 /* README.md */,
+			);
+			name = CCMenuItemSpriteIndependent;
+			path = cocos2d/Extensions/CCMenuItemSpriteIndependent;
+			sourceTree = "<group>";
+		};
+		9BAF5B23170B66DB00945271 /* CCScrollLayer */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5B24170B66DB00945271 /* CCScrollLayer.h */,
+				9BAF5B25170B66DB00945271 /* CCScrollLayer.m */,
+				9BAF5B26170B66DB00945271 /* README.md */,
+			);
+			name = CCScrollLayer;
+			path = cocos2d/Extensions/CCScrollLayer;
+			sourceTree = "<group>";
+		};
+		9BAF5B27170B66DB00945271 /* CCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5B28170B66DC00945271 /* CCSlider.h */,
+				9BAF5B29170B66DC00945271 /* CCSlider.m */,
+				9BAF5B2A170B66DC00945271 /* README.md */,
+			);
+			name = CCSlider;
+			path = cocos2d/Extensions/CCSlider;
+			sourceTree = "<group>";
+		};
+		9BAF5C25170D6F5800945271 /* CCScrollingNode */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF5C26170D6F5900945271 /* CCScrollingNode.h */,
+				9BAF5C27170D6F5900945271 /* CCScrollingNode.m */,
+				9BAF5C28170D6F5900945271 /* CCScrollingNodeOverlay.h */,
+				9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */,
+			);
+			name = CCScrollingNode;
+			path = cocos2d/Extensions/CCScrollingNode;
 			sourceTree = "<group>";
 		};
 		9BC8FD961652942200A9EAC7 /* TimeStatus */ = {
@@ -2300,13 +2346,12 @@
 		9BEF752D17057F50006DE945 /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				9BAF5B11170B0B5300945271 /* ShopLayer */,
 				9BAF5AFE17060B3900945271 /* StageLayer */,
 				9BAF5B081709764A00945271 /* MainScene.h */,
 				9BAF5B091709764A00945271 /* MainScene.m */,
 				9BAF5B0B1709899C00945271 /* MainStatusLayer.h */,
 				9BAF5B0C1709899C00945271 /* MainStatusLayer.m */,
-				9BEF752E1705802B006DE945 /* ShopLayer.h */,
-				9BEF752F1705802B006DE945 /* ShopLayer.m */,
 			);
 			name = MainScene;
 			sourceTree = "<group>";
@@ -2848,11 +2893,14 @@
 				9B3E4FDD1675F139000CFFFB /* vec2.c in Sources */,
 				9B3E4FDE1675F139000CFFFB /* vec3.c in Sources */,
 				9B3E4FDF1675F139000CFFFB /* vec4.c in Sources */,
-				9BAF5AEE1705E10700945271 /* CCLayerPanZoom.m in Sources */,
-				9BAF5AEF1705E10700945271 /* CCMenuAdvanced.m in Sources */,
-				9BAF5AF01705E10700945271 /* CCMenuItemSpriteIndependent.m in Sources */,
-				9BAF5AF11705E10700945271 /* CCScrollLayer.m in Sources */,
-				9BAF5AF31705E10700945271 /* CCSlider.m in Sources */,
+				9BAF5B2B170B66DC00945271 /* CCLayerPanZoom.m in Sources */,
+				9BAF5B2C170B66DC00945271 /* CCMenuAdvanced.m in Sources */,
+				9BAF5B2D170B66DC00945271 /* CCMenuItemSpriteIndependent.m in Sources */,
+				9BAF5B2E170B66DC00945271 /* CCScrollLayer.m in Sources */,
+				9BAF5B2F170B66DC00945271 /* CCSlider.m in Sources */,
+				9BAF5B30170B671000945271 /* CCScissorLayer.m in Sources */,
+				9BAF5C2A170D6F5900945271 /* CCScrollingNode.m in Sources */,
+				9BAF5C2B170D6F5900945271 /* CCScrollingNodeOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

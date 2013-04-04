@@ -8,6 +8,8 @@
 
 #import "cocos2d.h"
 
-@interface ShopLayer : CCLayer
+@interface ShopLayer : CCLayer {
+    CCMenu *menu;
+}
 
 @end

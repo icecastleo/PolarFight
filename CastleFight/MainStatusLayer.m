@@ -37,7 +37,7 @@
         CCMenuItem *back = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_up.png"]
                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_down.png"]
                                                            block:^(id sender) {
-                                                               [[CCDirector sharedDirector] replaceScene:[HelloWorldLayer scene]];
+                                                               [scene back];
                                                            }];
         back.anchorPoint = ccp(0, 0.5);
         back.position = ccp(0, background.boundingBox.size.height / 2);
@@ -45,7 +45,7 @@
         CCMenuItem *next = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_up.png"]
                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_down.png"]
                                                            block:^(id sender) {
-                                                               [scene addStageLayer];
+                                                               [scene next];
                                                            }];
         next.anchorPoint = ccp(1, 0.5);
         next.position = ccp(background.boundingBox.size.width, background.boundingBox.size.height / 2);
