@@ -63,8 +63,14 @@
         for (int i = 1; i <= 15; i++) {
             NSString *name = [NSString stringWithFormat:@"%02d_%02d",page,i];
             BOOL unLocked = [[FileManager sharedFileManager].achievementManager getStatusfromAchievement:name];
-//            int stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
-            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:2];
+            int stars;
+            if (page != 1) {
+                // others acheivement data are not built yet.
+                stars = 3;
+            }else {
+                stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
+            }
+            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:stars];
             [array addObject:item];
         }
         

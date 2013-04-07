@@ -19,9 +19,10 @@
 #import "FileManager.h"
 #import "EnemyAI.h"
 #import "SimpleAudioEngine.h"
+#import "AchievementManager.h"
 
 @interface BattleController () {
-    
+    NSString *battleName;
 }
 @end
 
@@ -46,6 +47,8 @@ const float foodAddend = 0.05;
         maxRate = foodRate * 4;
         
         currentInstance = self;
+        
+        battleName = [NSString stringWithFormat:@"%02d_%02d",prefix,suffix];
         
         _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
@@ -189,6 +192,12 @@ const float foodAddend = 0.05;
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     } else if (_enemyCastle.state == kCharacterStateDead) {
         [statusLayer displayString:@"Win!!" withColor:ccWHITE];
+        
+        [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_completed"]] Value:1];
+        //TODO: calculate the number of star.
+//        [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:1];
+        [[FileManager sharedFileManager].achievementManager checkAchievementsForTags:nil];
+        
         [self unscheduleUpdate];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     }
