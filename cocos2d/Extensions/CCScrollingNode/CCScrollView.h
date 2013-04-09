@@ -12,6 +12,6 @@
 #define noDisableVerticalScrollTag 836913
 #define noDisableHorizontalScrollTag 836914
 
-@interface CCScrollingNodeOverlay : UIScrollView
+@interface CCScrollView : UIScrollView
 
 @end

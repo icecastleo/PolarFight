@@ -8,12 +8,11 @@
 
 #import "cocos2d.h"
 
-@interface StageMenuItem : CCMenuItemImage {
+@interface StageMenuItem : CCMenuItemSprite {
     int prefix;
     int suffix;
-    BOOL unLocked;
 }
 
--(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unLocked:(BOOL)unLocked stars:(int)stars;
+-(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unlocked:(BOOL)unlocked stars:(int)stars;
 
 @end

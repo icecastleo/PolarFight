@@ -9,7 +9,7 @@
 #import "CCMenuItem.h"
 #import "Character.h"
 
-@interface UnitMenuItem : CCMenuItemImage {
+@interface UnitMenuItem : CCMenuItemSprite {
     NSString *cId;
     int level;
     int cost;

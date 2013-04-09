@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CCScrollingNodeOverlay.h"
+#import "CCScrollView.h"
 
 @implementation UIImageView (ForScrollView)
 
@@ -38,15 +38,47 @@
 }
 @end
 
+@interface TouchTimerObject : NSObject  {
+   
+}
 
-@implementation CCScrollingNodeOverlay
+@property (readonly) NSSet *touches;
+@property (readonly) UIEvent *event;
+
+-(id)initWithTouches:(NSSet *)touches event:(UIEvent *)event;
+
+@end
+
+@implementation TouchTimerObject
+
+-(id)initWithTouches:(NSSet *)t event:(UIEvent *)e {
+    if (self = [super init]) {
+        _touches = [t retain];
+        _event = [e retain];
+    }
+    return self;
+}
+
+-(void)dealloc {
+    [_touches release];
+    [_event release];
+    [super dealloc];
+}
+
+@end
+
+@implementation CCScrollView
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if(!self.dragging) {
-        [self.nextResponder touchesBegan:touches withEvent:event];
-    }
+    [self.nextResponder touchesBegan:touches withEvent:event];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    [self.nextResponder touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -58,9 +90,16 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    if(!self.dragging) {
-        [self.nextResponder touchesEnded:touches withEvent:event];
-    }
+//    [self.nextResponder touchesEnded:touches withEvent:event];
+    
+    TouchTimerObject *object = [[TouchTimerObject alloc] initWithTouches:touches event:event];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.075f target:self selector:@selector(timerFireMethod:) userInfo:object repeats:NO];
+}
+
+-(void)timerFireMethod:(NSTimer *)timer {
+    TouchTimerObject *object = timer.userInfo;
+    [self.nextResponder touchesEnded:object.touches withEvent:object.event];
 }
 
 @end
