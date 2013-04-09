@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CCScrollView.h"
 
-@interface CCScrollingNode : CCNode<UIScrollViewDelegate> {
+@interface CCScrollNode : CCNode<UIScrollViewDelegate> {
     CGFloat uiY;
 }
 
-@property (nonatomic, readonly) UIScrollView *scrollView;
+@property (nonatomic, readonly) CCScrollView *scrollView;
 @property (readonly) CGRect rect;
+@property (nonatomic) BOOL adjustPosition;
 
 -(id)initWithRect:(CGRect)aRect;
 

@@ -20,11 +20,14 @@
         unLocked = status;
         
         CCNode *label;
+        
         if (unLocked) {
             label = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d - %d", prefix, suffix] fntFile:@"font/jungle_24_o.fnt"];
-        }else {
-            label= [CCSprite spriteWithSpriteFrameName:@"lock.png"];
+        } else {
+            label = [CCSprite spriteWithSpriteFrameName:@"lock.png"];
+            self.isEnabled = NO;
         }
+        
         label.scale = 0.7;
         label.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2 - 10);
         
@@ -41,9 +44,7 @@
 }
                 
 -(void)click:(id)sender {
-    if (unLocked) {
-        [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:prefix suffix:suffix]];
-    }
+    [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:prefix suffix:suffix]];
 }
 
 @end

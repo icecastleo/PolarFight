@@ -64,9 +64,9 @@
             NSString *name = [NSString stringWithFormat:@"%02d_%02d",page,i];
             BOOL unLocked = [[FileManager sharedFileManager].achievementManager getStatusfromAchievement:name];
 //            int stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
-            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:2];
+            CCMenuItemSprite *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:2];
             [array addObject:item];
-        }
+         }
         
         CCMenu *menu = [[CCMenu alloc] initWithArray:array];
         menu.position = ccp(winSize.width / 2, winSize.height / 2);

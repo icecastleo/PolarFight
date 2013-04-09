@@ -9,7 +9,7 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
-#define kGameSettingFps 30
+#define kGameSettingFps 60
 
 #define kScale [[UIScreen mainScreen] scale]
 

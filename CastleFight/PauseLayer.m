@@ -67,11 +67,11 @@ typedef enum {
     CCMenuItemToggle *bgmToggleItem = [CCMenuItemToggle itemWithTarget:self
                                                                 selector:@selector(switchBackgroundMusic)
                                                                    items:bgmOnItem, bgmOffItem, nil];
-    CCMenuItem *effectOnItem = [CCMenuItemImage
+    CCMenuItem *effectOnItem = [CCMenuItemSprite
                                itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_up.png"]
                                selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_down.png"]
                                target:nil selector:nil];
-    CCMenuItem *effectOffItem = [CCMenuItemImage
+    CCMenuItem *effectOffItem = [CCMenuItemSprite
                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_up.png"]
                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_down.png"]
                                 target:nil selector:nil];

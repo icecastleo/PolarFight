@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 
-@interface StageMenuItem : CCMenuItemImage {
+@interface StageMenuItem : CCMenuItemSprite {
     int prefix;
     int suffix;
     BOOL unLocked;

@@ -362,6 +362,8 @@
 		9B92B1AB1681D63D00D965AF /* DamageEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1AA1681D63D00D965AF /* DamageEvent.m */; };
 		9B92D2B616416D66000AF467 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2B516416D66000AF467 /* Character.m */; };
 		9B92D2C116424E74000AF467 /* CharacterSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92D2C016424E74000AF467 /* CharacterSprite.m */; };
+		9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92F3671712BC4000DAF766 /* ShopUnitLayer.m */; };
+		9B92F36C17130CDB00DAF766 /* CCScrollLayerAdvance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92F36A1712F5BB00DAF766 /* CCScrollLayerAdvance.m */; };
 		9B93798816B1655800F1A05A /* BombSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93798716B1655800F1A05A /* BombSkill.m */; };
 		9B93799816B1677500F1A05A /* Bomb_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93798B16B1677500F1A05A /* Bomb_01.png */; };
 		9B93799916B1677500F1A05A /* Bomb_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93798C16B1677500F1A05A /* Bomb_02.png */; };
@@ -394,8 +396,8 @@
 		9BAF5B2E170B66DC00945271 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B25170B66DB00945271 /* CCScrollLayer.m */; };
 		9BAF5B2F170B66DC00945271 /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B29170B66DC00945271 /* CCSlider.m */; };
 		9BAF5B30170B671000945271 /* CCScissorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B15170B661000945271 /* CCScissorLayer.m */; };
-		9BAF5C2A170D6F5900945271 /* CCScrollingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C27170D6F5900945271 /* CCScrollingNode.m */; };
-		9BAF5C2B170D6F5900945271 /* CCScrollingNodeOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */; };
+		9BAF5C2A170D6F5900945271 /* CCScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C27170D6F5900945271 /* CCScrollNode.m */; };
+		9BAF5C2B170D6F5900945271 /* CCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5C29170D6F5900945271 /* CCScrollView.m */; };
 		9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE316FF935E00D0BDC3 /* blood_white.png */; };
 		9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */; };
 		9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */; };
@@ -1026,6 +1028,10 @@
 		9B92D2B516416D66000AF467 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		9B92D2BF16424E74000AF467 /* CharacterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSprite.h; sourceTree = "<group>"; };
 		9B92D2C016424E74000AF467 /* CharacterSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSprite.m; sourceTree = "<group>"; };
+		9B92F3661712BC4000DAF766 /* ShopUnitLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopUnitLayer.h; sourceTree = "<group>"; };
+		9B92F3671712BC4000DAF766 /* ShopUnitLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopUnitLayer.m; sourceTree = "<group>"; };
+		9B92F3691712F5BA00DAF766 /* CCScrollLayerAdvance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayerAdvance.h; sourceTree = "<group>"; };
+		9B92F36A1712F5BB00DAF766 /* CCScrollLayerAdvance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayerAdvance.m; sourceTree = "<group>"; };
 		9B93798616B1655800F1A05A /* BombSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombSkill.h; sourceTree = "<group>"; };
 		9B93798716B1655800F1A05A /* BombSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombSkill.m; sourceTree = "<group>"; };
 		9B93798B16B1677500F1A05A /* Bomb_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bomb_01.png; sourceTree = "<group>"; };
@@ -1088,10 +1094,10 @@
 		9BAF5B28170B66DC00945271 /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
 		9BAF5B29170B66DC00945271 /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
 		9BAF5B2A170B66DC00945271 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9BAF5C26170D6F5900945271 /* CCScrollingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollingNode.h; sourceTree = "<group>"; };
-		9BAF5C27170D6F5900945271 /* CCScrollingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollingNode.m; sourceTree = "<group>"; };
-		9BAF5C28170D6F5900945271 /* CCScrollingNodeOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollingNodeOverlay.h; sourceTree = "<group>"; };
-		9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollingNodeOverlay.m; sourceTree = "<group>"; };
+		9BAF5C26170D6F5900945271 /* CCScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollNode.h; sourceTree = "<group>"; };
+		9BAF5C27170D6F5900945271 /* CCScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollNode.m; sourceTree = "<group>"; };
+		9BAF5C28170D6F5900945271 /* CCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollView.h; sourceTree = "<group>"; };
+		9BAF5C29170D6F5900945271 /* CCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollView.m; sourceTree = "<group>"; };
 		9BBAECE316FF935E00D0BDC3 /* blood_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_white.png; sourceTree = "<group>"; };
 		9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_frame-hd.png"; sourceTree = "<group>"; };
 		9BBAECE616FF98D000D0BDC3 /* blood_white-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blood_white-hd.png"; sourceTree = "<group>"; };
@@ -2189,6 +2195,8 @@
 			children = (
 				9BEF752E1705802B006DE945 /* ShopLayer.h */,
 				9BEF752F1705802B006DE945 /* ShopLayer.m */,
+				9B92F3661712BC4000DAF766 /* ShopUnitLayer.h */,
+				9B92F3671712BC4000DAF766 /* ShopUnitLayer.m */,
 			);
 			name = ShopLayer;
 			sourceTree = "<group>";
@@ -2266,10 +2274,12 @@
 		9BAF5C25170D6F5800945271 /* CCScrollingNode */ = {
 			isa = PBXGroup;
 			children = (
-				9BAF5C26170D6F5900945271 /* CCScrollingNode.h */,
-				9BAF5C27170D6F5900945271 /* CCScrollingNode.m */,
-				9BAF5C28170D6F5900945271 /* CCScrollingNodeOverlay.h */,
-				9BAF5C29170D6F5900945271 /* CCScrollingNodeOverlay.m */,
+				9BAF5C26170D6F5900945271 /* CCScrollNode.h */,
+				9BAF5C27170D6F5900945271 /* CCScrollNode.m */,
+				9BAF5C28170D6F5900945271 /* CCScrollView.h */,
+				9BAF5C29170D6F5900945271 /* CCScrollView.m */,
+				9B92F3691712F5BA00DAF766 /* CCScrollLayerAdvance.h */,
+				9B92F36A1712F5BB00DAF766 /* CCScrollLayerAdvance.m */,
 			);
 			name = CCScrollingNode;
 			path = cocos2d/Extensions/CCScrollingNode;
@@ -2786,6 +2796,7 @@
 				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
 				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
+				9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2899,8 +2910,9 @@
 				9BAF5B2E170B66DC00945271 /* CCScrollLayer.m in Sources */,
 				9BAF5B2F170B66DC00945271 /* CCSlider.m in Sources */,
 				9BAF5B30170B671000945271 /* CCScissorLayer.m in Sources */,
-				9BAF5C2A170D6F5900945271 /* CCScrollingNode.m in Sources */,
-				9BAF5C2B170D6F5900945271 /* CCScrollingNodeOverlay.m in Sources */,
+				9BAF5C2A170D6F5900945271 /* CCScrollNode.m in Sources */,
+				9BAF5C2B170D6F5900945271 /* CCScrollView.m in Sources */,
+				9B92F36C17130CDB00DAF766 /* CCScrollLayerAdvance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
