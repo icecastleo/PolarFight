@@ -194,8 +194,18 @@ const float foodAddend = 0.05;
         [statusLayer displayString:@"Win!!" withColor:ccWHITE];
         
         [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_completed"]] Value:1];
-        //TODO: calculate the number of star.
-//        [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:1];
+        
+        //FIXME: calculate the number of star.
+        int stars = 2; // fix it.
+        int oldStars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[battleName stringByAppendingString:@"_star"]];
+        
+        [[FileManager sharedFileManager].achievementManager resetPropertiesWithTags:@[battleName,@"star"]];
+        if (oldStars < stars) {
+            [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:stars];
+        }else {
+            [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:oldStars];
+        }
+        
         [[FileManager sharedFileManager].achievementManager checkAchievementsForTags:nil];
         
         [self unscheduleUpdate];

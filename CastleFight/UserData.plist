@@ -403,6 +403,10 @@
 		<dict>
 			<key>name</key>
 			<string>01_01</string>
+			<key>message</key>
+			<string>1-1 is unlocked.</string>
+			<key>content</key>
+			<string>Battle 1-1.</string>
 			<key>unLocked</key>
 			<true/>
 			<key>propertyNames</key>
@@ -411,6 +415,10 @@
 		<dict>
 			<key>name</key>
 			<string>01_02</string>
+			<key>message</key>
+			<string>Congratulations, You&apos;ve Just Passed 1-1. 1-2 is unlocked.</string>
+			<key>content</key>
+			<string>Battle 1-2.</string>
 			<key>unLocked</key>
 			<false/>
 			<key>propertyNames</key>
@@ -421,6 +429,10 @@
 		<dict>
 			<key>name</key>
 			<string>AllCompleted</string>
+			<key>message</key>
+			<string>Congratulations, You are great.</string>
+			<key>content</key>
+			<string>Please Pass All Battle and Get All Stars.</string>
 			<key>unLocked</key>
 			<false/>
 			<key>propertyNames</key>

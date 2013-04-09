@@ -8,9 +8,11 @@
 
 #import "Achievement.h"
 
-#define kNameKey       @"name"
-#define kPropertyNamesKey      @"propertyNames"
-#define kUnLockedKey       @"unLocked"
+#define kName       @"name"
+#define kPropertyNames      @"propertyNames"
+#define kUnLocked       @"unLocked"
+#define kMessage       @"message"
+#define kContent       @"content"
 
 @implementation Achievement
 
@@ -25,32 +27,32 @@
 
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        _name = [dic objectForKey:@"name"];
-        _propertyNames = [dic objectForKey:@"propertyNames"];
-        _unLocked = [[dic objectForKey:@"unLocked"] boolValue];
+        _name = [dic objectForKey:kName];
+        _propertyNames = [dic objectForKey:kPropertyNames];
+        _unLocked = [[dic objectForKey:kUnLocked] boolValue];
+        _message = [dic objectForKey:kMessage];
+        _content = [dic objectForKey:kContent];
     }
     return self;
-}
-
--(NSString *)description {
-    NSString *status = self.unLocked ? @"unlocked" : @"locked";
-    NSString *description = [NSString stringWithFormat:@"[Achievement: %@ status:%@]",self.name, status];
-    return description;
 }
 
 #pragma mark NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_name forKey:kNameKey];
-    [encoder encodeObject:_propertyNames forKey:kPropertyNamesKey];
-    [encoder encodeBool:_unLocked forKey:kUnLockedKey];
+    [encoder encodeObject:_name forKey:kName];
+    [encoder encodeObject:_propertyNames forKey:kPropertyNames];
+    [encoder encodeBool:_unLocked forKey:kUnLocked];
+    [encoder encodeObject:_message forKey:kMessage];
+    [encoder encodeObject:_content forKey:kContent];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _name = [decoder decodeObjectForKey:kNameKey];
-        _propertyNames = [decoder decodeObjectForKey:kPropertyNamesKey];
-        _unLocked = [decoder decodeBoolForKey:kUnLockedKey];
+        _name = [decoder decodeObjectForKey:kName];
+        _propertyNames = [decoder decodeObjectForKey:kPropertyNames];
+        _unLocked = [decoder decodeBoolForKey:kUnLocked];
+        _message = [decoder decodeObjectForKey:kMessage];
+        _content = [decoder decodeObjectForKey:kContent];
     }
     return self;
 }

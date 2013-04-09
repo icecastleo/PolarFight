@@ -29,17 +29,16 @@
         label.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2 - 6);
         [self addChild:label];
         
-        CCSprite *star = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
         switch (stars) {
             case 1: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 newStar1.position = ccp(label.position.x,15);
                 [self addChild:newStar1];
                 break;
             }
             case 2: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar2 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width/2,15);
                 newStar2.position = ccp(label.position.x+newStar1.boundingBox.size.width/2,15);
                 [self addChild:newStar1];
@@ -47,9 +46,9 @@
                 break;
             }
             case 3: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar3 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar2 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar3 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 
                 newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width,20);
                 newStar2.position = ccp(label.position.x,15);
@@ -60,7 +59,7 @@
                 break;
             }
             default:
-                CCLOG(@"stars:%d",stars);
+//                CCLOG(@"stars:%d",stars);
                 break;
         }
     }

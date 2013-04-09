@@ -10,6 +10,9 @@
 #import "Property.h"
 #import "Achievement.h"
 
+//game center
+#import "AppSpecificValues.h"
+
 @interface AchievementManager()
 
 @property NSMutableDictionary *properties;
@@ -18,6 +21,14 @@
 -(void)doSetValue:(NSString *)propertyName Value:(int)value IgnoreActivationContraint:(BOOL)ignored;
 -(BOOL)hasTagInTheProperty:(Property *)property Tags:(NSArray *)tags;
 -(void)checkPropertyExistsForArray:(NSArray *)propertyNames;
+
+//game center
+@property (nonatomic) GameCenterManager *gameCenterManager;
+@property (nonatomic) NSString* currentLeaderBoard;
+
+- (void) showLeaderboard;
+- (void) showAchievements;
+- (void) submitScore;
 
 @end
 
@@ -40,6 +51,15 @@
         }
         for (Property *property in properties) {
             [_properties setValue:property forKey:property.name];
+        }
+        //FIXME: game center can not work.
+        self.currentLeaderBoard = kLeaderboardID;
+        if ([GameCenterManager isGameCenterAvailable]) {
+            self.gameCenterManager = [[GameCenterManager alloc] init];
+            [self.gameCenterManager setDelegate:self];
+            [self.gameCenterManager authenticateLocalUser];
+        } else {
+            CCLOG(@"The current device does not support Game Center");
         }
     }
     return self;
@@ -65,8 +85,9 @@
     
     for (NSString *tag in tags) {
         if (property.tags != nil) {
-            if ([property.tags containsObject:tag]) {
-                hasTag = YES;
+            hasTag = YES;
+            if (![property.tags containsObject:tag]) {
+                hasTag = NO;
                 break;
             }
         }
@@ -125,7 +146,8 @@
                 if (activePropertySum == aAchievement.propertyNames.count) {
                     aAchievement.unLocked = TRUE;
                     //TODO: do something after unlock. like popping an alert.
-                    NSLog(@"%@",aAchievement);
+                    //NSLog(@"%@",aAchievement);
+                    [self unlockAchievement:aAchievement];
                 }
             }
         }
@@ -162,6 +184,65 @@
 -(BOOL)getStatusfromAchievement:(NSString *)achievementName {
     Achievement *achievement = [self.achievements objectForKey:achievementName];
     return achievement.unLocked;
+}
+
+-(void)unlockAchievement:(Achievement *)aAchievement {
+    //TODO: we might let the game center deal with the message.
+    
+    if(aAchievement.name == nil){
+        return;
+    }
+    //TODO: aAchievement.percent ??
+    [self.gameCenterManager submitAchievement:aAchievement.name percentComplete:1];
+    /*
+    if (aAchievement.message != nil && ![aAchievement.message isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Achievement Earned!"
+                                                        message:(aAchievement.message)
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }//*/
+}
+
+# pragma mark Game Center
+
+- (void) showLeaderboard
+{
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    if (leaderboardController != NULL)
+    {
+        leaderboardController.category = self.currentLeaderBoard;
+        leaderboardController.timeScope = GKLeaderboardTimeScopeWeek;
+        leaderboardController.leaderboardDelegate = self;
+//        [self presentModalViewController: leaderboardController animated: YES];
+    }
+}
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+{
+//    [self dismissModalViewControllerAnimated: YES];
+}
+- (void) showAchievements
+{
+    GKAchievementViewController *achievements = [[GKAchievementViewController alloc] init];
+    if (achievements != NULL)
+    {
+        achievements.achievementDelegate = self;
+//        [self presentModalViewController: achievements animated: YES];
+    }
+}
+- (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController;
+{
+//    [self dismissModalViewControllerAnimated: YES];
+}
+- (void) submitScore
+{
+    // do we need?
+//    if(self.currentScore > 0)
+//    {
+//        [self.gameCenterManager reportScore: self.currentScore forCategory: self.currentLeaderBoard];
+//    }
 }
 
 @end

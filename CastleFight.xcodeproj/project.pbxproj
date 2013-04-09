@@ -127,6 +127,7 @@
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BB1959169E9F2300AC56FC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BB1958169E9F2300AC56FC /* MyCell.m */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
+		37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D832A017130EF2001A1C3A /* GameCenterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DA84A316FC961F007B3F72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84A516FC961F007B3F72 /* Localizable.strings */; };
 		37DA84C616FC99BB007B3F72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84C816FC99BB007B3F72 /* InfoPlist.strings */; };
 		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -140,6 +141,10 @@
 		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
+		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
+		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
+		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
+		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */; };
 		37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96016AE2E4B00D492E6 /* archerHead32.png */; };
@@ -593,6 +598,9 @@
 		37BB1958169E9F2300AC56FC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelperObject.h; sourceTree = "<group>"; };
 		37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelperObject.m; sourceTree = "<group>"; };
+		37D8329E17130EF2001A1C3A /* AppSpecificValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSpecificValues.h; sourceTree = "<group>"; };
+		37D8329F17130EF2001A1C3A /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
+		37D832A017130EF2001A1C3A /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
 		37DA84A416FC961F007B3F72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37DA84A616FC9681007B3F72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37DA84A716FC96AC007B3F72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -639,6 +647,12 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
+		37E0DB821714285A0039C94C /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		37E0DB831714285A0039C94C /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		37E0DB841714285A0039C94C /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		37E0DB8817143C110039C94C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		37E0DB8A17143C1D0039C94C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		37E0DB8C17143C280039C94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
@@ -1144,6 +1158,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */,
+				37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */,
+				37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */,
 				9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */,
 				3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */,
 				9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */,
@@ -1319,6 +1336,16 @@
 			name = Files;
 			sourceTree = "<group>";
 		};
+		37D8329C17130ED9001A1C3A /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8329E17130EF2001A1C3A /* AppSpecificValues.h */,
+				37D8329F17130EF2001A1C3A /* GameCenterManager.h */,
+				37D832A017130EF2001A1C3A /* GameCenterManager.m */,
+			);
+			name = GameCenter;
+			sourceTree = "<group>";
+		};
 		37DB1F2616BBD06B00C0368D /* AnimationKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1372,6 +1399,8 @@
 		37DDA2BF170962F30016E8CB /* Achievement */ = {
 			isa = PBXGroup;
 			children = (
+				37E0DB81171428410039C94C /* Rating */,
+				37D8329C17130ED9001A1C3A /* GameCenter */,
 				37DDA2C41709638A0016E8CB /* AchievementManager.h */,
 				37DDA2C31709638A0016E8CB /* AchievementManager.m */,
 				37DDA2C61709638A0016E8CB /* Achievement.h */,
@@ -1406,6 +1435,16 @@
 			);
 			name = SneakyJoystick;
 			path = libs/SneakyJoystick;
+			sourceTree = "<group>";
+		};
+		37E0DB81171428410039C94C /* Rating */ = {
+			isa = PBXGroup;
+			children = (
+				37E0DB821714285A0039C94C /* Appirater.h */,
+				37E0DB831714285A0039C94C /* Appirater.m */,
+				37E0DB841714285A0039C94C /* AppiraterDelegate.h */,
+			);
+			name = Rating;
 			sourceTree = "<group>";
 		};
 		9B019B0F16494D7700A6976F /* Status */ = {
@@ -1457,6 +1496,9 @@
 		9B062CE21635275000E06018 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37E0DB8C17143C280039C94C /* SystemConfiguration.framework */,
+				37E0DB8A17143C1D0039C94C /* StoreKit.framework */,
+				37E0DB8817143C110039C94C /* CFNetwork.framework */,
 				3799B71D1650E06D00A9A394 /* libxml2.dylib */,
 				9B062CE31635275000E06018 /* QuartzCore.framework */,
 				9B062CE51635275000E06018 /* OpenGLES.framework */,
@@ -2786,6 +2828,8 @@
 				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
 				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
+				37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */,
+				37E0DB851714285A0039C94C /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

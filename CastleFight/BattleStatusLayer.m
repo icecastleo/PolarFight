@@ -93,7 +93,7 @@
 
 -(void)pauseButtonTapped:(id)sender {
     
-    // test Achievement System. delete this after test.
+    /*// test Achievement System. delete this after test.
     [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[@"01_01_completed"] Value:1];
     [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[@"01_01_star"] Value:1];
     [[FileManager sharedFileManager].achievementManager checkAchievementsForTags:nil];

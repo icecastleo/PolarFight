@@ -15,17 +15,17 @@
 
 #define kMoneyTrickValue 1000
 
-#define kMoneyKey @"money"
-#define kCastleKey @"castle"
-#define kHeroKey @"hero"
-#define kCharacterArrayKey @"characters"
-#define kItemArrayKey @"items"
-#define kSoundsEffectVolumeKey @"soundsEffectVolume"
-#define kBackgroundMucsicVolumeKey @"backgroundMusicVolume"
-#define kSoundsEffectSwitchKey @"soundsEffectSwitch"
-#define kBackgroundMucsicSwitchKey @"backgroundMusicSwitch"
-#define kAchievementsKey @"achievements"
-#define kPropertiesKey @"properties"
+#define kMoney @"money"
+#define kCastle @"castle"
+#define kHero @"hero"
+#define kCharacterArray @"characters"
+#define kItemArray @"items"
+#define kSoundsEffectVolume @"soundsEffectVolume"
+#define kBackgroundMucsicVolume @"backgroundMusicVolume"
+#define kSoundsEffectSwitch @"soundsEffectSwitch"
+#define kBackgroundMucsicSwitch @"backgroundMusicSwitch"
+#define kAchievements @"achievements"
+#define kProperties @"properties"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
@@ -62,21 +62,21 @@
     if (self = [super init]) {
         NSMutableDictionary *tempPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         
-        moneyNumber = [tempPlist objectForKey:kMoneyKey];
-        _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectVolumeKey] floatValue];
-        _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolumeKey] floatValue];
-        _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitchKey] boolValue];
-        _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitchKey] boolValue];
+        moneyNumber = [tempPlist objectForKey:kMoney];
+        _soundsEffectVolume = [[tempPlist objectForKey:kSoundsEffectVolume] floatValue];
+        _backgroundMusicVolume = [[tempPlist objectForKey:kBackgroundMucsicVolume] floatValue];
+        _soundsEffectSwitch = [[tempPlist objectForKey:kSoundsEffectSwitch] boolValue];
+        _backgroundMusicSwitch = [[tempPlist objectForKey:kBackgroundMucsicSwitch] boolValue];
         
         //all character array keep CharacterDataObject.
-        _playerCharacterArray = [self convertArray:[tempPlist objectForKey:kCharacterArrayKey] className:[CharacterDataObject class]];
-        _playerHeroArray = [self convertArray:[tempPlist objectForKey:kHeroKey] className:[CharacterDataObject class]];
-        _playerCastleArray = [self convertArray:[tempPlist objectForKey:kCastleKey] className:[CharacterDataObject class]];
-        _achievements = [self convertArray:[tempPlist objectForKey:kAchievementsKey] className:[Achievement class]];
-        _properties = [self convertArray:[tempPlist objectForKey:kPropertiesKey] className:[Property class]];
+        _playerCharacterArray = [self convertArray:[tempPlist objectForKey:kCharacterArray] className:[CharacterDataObject class]];
+        _playerHeroArray = [self convertArray:[tempPlist objectForKey:kHero] className:[CharacterDataObject class]];
+        _playerCastleArray = [self convertArray:[tempPlist objectForKey:kCastle] className:[CharacterDataObject class]];
+        _achievements = [self convertArray:[tempPlist objectForKey:kAchievements] className:[Achievement class]];
+        _properties = [self convertArray:[tempPlist objectForKey:kProperties] className:[Property class]];
         
         //FIXME: [CharacterDataObject class] change to item class?
-        _items = [self convertArray:[tempPlist objectForKey:kItemArrayKey] className:[CharacterDataObject class]];
+        _items = [self convertArray:[tempPlist objectForKey:kItemArray] className:[CharacterDataObject class]];
     }
     return self;
 }
@@ -123,33 +123,33 @@
     
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _playerCharacterArray = [decoder decodeObjectForKey:kCharacterArrayKey];
-        _playerHeroArray = [decoder decodeObjectForKey:kHeroKey];
-        _playerCastleArray = [decoder decodeObjectForKey:kCastleKey];
-        moneyNumber = [decoder decodeObjectForKey:kMoneyKey];
-        _items = [decoder decodeObjectForKey:kItemArrayKey];
-        _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolumeKey];
-        _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolumeKey];
-        _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitchKey];
-        _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitchKey];
-        _achievements = [decoder decodeObjectForKey:kAchievementsKey];
-        _properties = [decoder decodeObjectForKey:kPropertiesKey];
+        _playerCharacterArray = [decoder decodeObjectForKey:kCharacterArray];
+        _playerHeroArray = [decoder decodeObjectForKey:kHero];
+        _playerCastleArray = [decoder decodeObjectForKey:kCastle];
+        moneyNumber = [decoder decodeObjectForKey:kMoney];
+        _items = [decoder decodeObjectForKey:kItemArray];
+        _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolume];
+        _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolume];
+        _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitch];
+        _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitch];
+        _achievements = [decoder decodeObjectForKey:kAchievements];
+        _properties = [decoder decodeObjectForKey:kProperties];
     }
     return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_playerCharacterArray forKey:kCharacterArrayKey];
-    [encoder encodeObject:_playerHeroArray forKey:kHeroKey];
-    [encoder encodeObject:_playerCastleArray forKey:kCastleKey];
-    [encoder encodeObject:moneyNumber forKey:kMoneyKey];
-    [encoder encodeObject:_items forKey:kItemArrayKey];
-    [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolumeKey];
-    [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolumeKey];
-    [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitchKey];
-    [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitchKey];
-    [encoder encodeObject:_achievements forKey:kAchievementsKey];
-    [encoder encodeObject:_properties forKey:kPropertiesKey];
+    [encoder encodeObject:_playerCharacterArray forKey:kCharacterArray];
+    [encoder encodeObject:_playerHeroArray forKey:kHero];
+    [encoder encodeObject:_playerCastleArray forKey:kCastle];
+    [encoder encodeObject:moneyNumber forKey:kMoney];
+    [encoder encodeObject:_items forKey:kItemArray];
+    [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolume];
+    [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolume];
+    [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitch];
+    [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitch];
+    [encoder encodeObject:_achievements forKey:kAchievements];
+    [encoder encodeObject:_properties forKey:kProperties];
 }
 
 @end
