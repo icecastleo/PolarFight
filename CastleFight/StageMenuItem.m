@@ -29,16 +29,43 @@
         }
         
         label.scale = 0.7;
-        label.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2 - 10);
-        
-        //FIXME: change to star images
-        CCLabelBMFont *starLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", stars] fntFile:@"font/jungle_24_o.fnt"];
-        starLabel.scale = 0.4;
-        starLabel.position = ccp(label.position.x,15);
-        starLabel.color = ccRED;
-        
+        label.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2 - 6);
         [self addChild:label];
-//        [self addChild:starLabel];
+        
+        CCSprite *star = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+        switch (stars) {
+            case 1: {
+                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                newStar1.position = ccp(label.position.x,15);
+                [self addChild:newStar1];
+                break;
+            }
+            case 2: {
+                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width/2,15);
+                newStar2.position = ccp(label.position.x+newStar1.boundingBox.size.width/2,15);
+                [self addChild:newStar1];
+                [self addChild:newStar2];
+                break;
+            }
+            case 3: {
+                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar3 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                
+                newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width,20);
+                newStar2.position = ccp(label.position.x,15);
+                newStar3.position = ccp(label.position.x+newStar1.boundingBox.size.width,20);
+                [self addChild:newStar1];
+                [self addChild:newStar2];
+                [self addChild:newStar3];
+                break;
+            }
+            default:
+                CCLOG(@"stars:%d",stars);
+                break;
+        }
     }
     return self;
 }
