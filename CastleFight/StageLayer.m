@@ -67,9 +67,8 @@
             // FIXME: Other star data are not built yet.
             int stars;
             if (page != 1) {
-                // others acheivement data are not built yet.
-                stars = 0;
-            }else {
+                stars = 3;
+            } else {
                 stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
             }
             
