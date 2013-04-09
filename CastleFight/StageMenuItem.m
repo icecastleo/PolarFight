@@ -11,17 +11,16 @@
 
 @implementation StageMenuItem
 
--(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unLocked:(BOOL)status stars:(int)stars {
+-(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unlocked:(BOOL)unlocked stars:(int)stars {
     if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_stage_%02d_up.png",aPrefix]]
                             selectedSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_stage_%02d_down.png",aPrefix]]
                                                                 disabledSprite:nil target:self selector:@selector(click:)]) {
         prefix = aPrefix;
         suffix = aSuffix;
-        unLocked = status;
         
         CCNode *label;
         
-        if (unLocked) {
+        if (unlocked) {
             label = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d - %d", prefix, suffix] fntFile:@"font/jungle_24_o.fnt"];
         } else {
             label = [CCSprite spriteWithSpriteFrameName:@"lock.png"];
@@ -63,7 +62,6 @@
                 break;
             }
             default:
-                CCLOG(@"stars:%d",stars);
                 break;
         }
     }
