@@ -12,7 +12,7 @@
 
 -(id)initWithRect:(CGRect)aRect {
     if (self = [super init]) {
-        rect = aRect;
+        rect = CC_RECT_POINTS_TO_PIXELS(aRect);
     }
     return self;
 }
@@ -28,8 +28,6 @@
         return;
     
     glEnable(GL_SCISSOR_TEST);
-    
-    rect = CC_RECT_POINTS_TO_PIXELS(rect);
     
     glScissor((GLint) rect.origin.x, (GLint)rect.origin.y,
               (GLint) rect.size.width, (GLint) rect.size.height);

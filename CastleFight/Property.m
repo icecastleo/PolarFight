@@ -9,12 +9,12 @@
 
 #import "Property.h"
 
-#define kNameKey       @"name"
-#define kValueKey      @"value"
-#define kActivationKey       @"activation"
-#define kInitialValueKey      @"initialValue"
-#define kActivationValueKey       @"activationValue"
-#define kTagsKey      @"tags"
+#define kName       @"name"
+#define kValue      @"value"
+#define kActivation       @"activation"
+#define kInitialValue      @"initialValue"
+#define kActivationValue       @"activationValue"
+#define kTags      @"tags"
 
 @interface Property()
 
@@ -41,12 +41,12 @@
 
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        _name = [dic objectForKey:@"name"];
-        _value = [[dic objectForKey:@"value"] intValue];
-        _activation = [dic objectForKey:@"activation"];
-        _initialValue = [[dic objectForKey:@"initialValue"] intValue];
-        _activationValue = [[dic objectForKey:@"activationValue"] intValue];
-        _tags = [dic objectForKey:@"tags"];
+        _name = [dic objectForKey:kName];
+        _value = [[dic objectForKey:kValue] intValue];
+        _activation = [dic objectForKey:kActivation];
+        _initialValue = [[dic objectForKey:kInitialValue] intValue];
+        _activationValue = [[dic objectForKey:kActivationValue] intValue];
+        _tags = [dic objectForKey:kTags];
     }
     return self;
 }
@@ -72,22 +72,22 @@
 #pragma mark NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_name forKey:kNameKey];
-    [encoder encodeInt:_value forKey:kValueKey];
-    [encoder encodeObject:_activation forKey:kActivationKey];
-    [encoder encodeInt:_initialValue forKey:kInitialValueKey];
-    [encoder encodeInt:_activationValue forKey:kActivationValueKey];
-    [encoder encodeObject:_tags forKey:kTagsKey];
+    [encoder encodeObject:_name forKey:kName];
+    [encoder encodeInt:_value forKey:kValue];
+    [encoder encodeObject:_activation forKey:kActivation];
+    [encoder encodeInt:_initialValue forKey:kInitialValue];
+    [encoder encodeInt:_activationValue forKey:kActivationValue];
+    [encoder encodeObject:_tags forKey:kTags];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _name = [decoder decodeObjectForKey:kNameKey];
-        _value = [decoder decodeIntForKey:kValueKey];
-        _activation = [decoder decodeObjectForKey:kActivationKey];
-        _initialValue = [decoder decodeIntForKey:kInitialValueKey];
-        _activationValue = [decoder decodeIntForKey:kActivationValueKey];
-        _tags = [decoder decodeObjectForKey:kTagsKey];
+        _name = [decoder decodeObjectForKey:kName];
+        _value = [decoder decodeIntForKey:kValue];
+        _activation = [decoder decodeObjectForKey:kActivation];
+        _initialValue = [decoder decodeIntForKey:kInitialValue];
+        _activationValue = [decoder decodeIntForKey:kActivationValue];
+        _tags = [decoder decodeObjectForKey:kTags];
     }
     return self;
 }

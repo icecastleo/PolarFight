@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 @interface ShopLayer : CCLayer {
-    CCMenu *menu;
+    CCMenuItemSprite *current;
 }
 
 @end

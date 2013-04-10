@@ -55,40 +55,24 @@ typedef enum {
     CCSprite *optionImage = [[CCSprite alloc] initWithFile:@"bg/bg_option.png"];
     optionImage.position = ccp(winSize.width/2, winSize.height/2);
     
-    CCMenuItem *bgmOnItem = [CCMenuItemImage
-                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmon_up.png"]
-                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmon_down.png"]
-                                 target:nil selector:nil];
-    CCMenuItem *bgmOffItem = [CCMenuItemImage
-                   itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmoff_up.png"]
-                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmoff_down.png"]
-                   target:nil selector:nil];
+    CCMenuItem *bgmOnItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmon_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmon_down.png"] target:nil selector:nil];
+    
+    CCMenuItem *bgmOffItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmoff_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_bgmoff_down.png"] target:nil selector:nil];
     
     CCMenuItemToggle *bgmToggleItem = [CCMenuItemToggle itemWithTarget:self
                                                                 selector:@selector(switchBackgroundMusic)
                                                                    items:bgmOnItem, bgmOffItem, nil];
-    CCMenuItem *effectOnItem = [CCMenuItemImage
-                               itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_up.png"]
-                               selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_down.png"]
-                               target:nil selector:nil];
-    CCMenuItem *effectOffItem = [CCMenuItemImage
-                                itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_up.png"]
-                                selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_down.png"]
-                                target:nil selector:nil];
+    
+    CCMenuItem *effectOnItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxon_down.png"] target:nil selector:nil];
+    
+    CCMenuItem *effectOffItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_fxoff_down.png"] target:nil selector:nil];
     
     CCMenuItemToggle *effectToggleItem = [CCMenuItemToggle itemWithTarget:self
                                                               selector:@selector(switchSoundsEffect)
                                                                  items:effectOnItem, effectOffItem, nil];
     
-    CCMenuItemImage *giveUpMenuItem = [CCMenuItemImage
-                                  itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_giveup_up.png"]
-                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_giveup_down.png"]
-                                  target:self selector:@selector(restartTapped)];
-    
-    CCMenuItemImage *continueMenuItem = [CCMenuItemImage
-                                  itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_continue_up.png"]
-                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_continue_down.png"]
-                                    target:self selector:@selector(resumeTapped)];
+    CCMenuItem *giveUpMenuItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_giveup_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_giveup_down.png"] target:self selector:@selector(restartTapped)];
+    CCMenuItem *continueMenuItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_continue_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_continue_down.png"] target:self selector:@selector(resumeTapped)];
     
     float width = optionImage.position.x - bgmToggleItem.boundingBox.size.width;
     float height = optionImage.position.y;

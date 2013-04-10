@@ -11,35 +11,36 @@
 
 @implementation StageMenuItem
 
--(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unLocked:(BOOL)status stars:(int)stars {
+-(id)initWithStagePrefix:(int)aPrefix suffix:(int)aSuffix unlocked:(BOOL)unlocked stars:(int)stars {
     if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_stage_%02d_up.png",aPrefix]]
                             selectedSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_stage_%02d_down.png",aPrefix]]
                                                                 disabledSprite:nil target:self selector:@selector(click:)]) {
         prefix = aPrefix;
         suffix = aSuffix;
-        unLocked = status;
         
         CCNode *label;
-        if (unLocked) {
+        
+        if (unlocked) {
             label = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d - %d", prefix, suffix] fntFile:@"font/jungle_24_o.fnt"];
-        }else {
-            label= [CCSprite spriteWithSpriteFrameName:@"lock.png"];
+        } else {
+            label = [CCSprite spriteWithSpriteFrameName:@"lock.png"];
+            self.isEnabled = NO;
         }
+        
         label.scale = 0.7;
         label.position = ccp(self.boundingBox.size.width / 2, self.boundingBox.size.height / 2 - 6);
         [self addChild:label];
         
-        CCSprite *star = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
         switch (stars) {
             case 1: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 newStar1.position = ccp(label.position.x,15);
                 [self addChild:newStar1];
                 break;
             }
             case 2: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar2 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width/2,15);
                 newStar2.position = ccp(label.position.x+newStar1.boundingBox.size.width/2,15);
                 [self addChild:newStar1];
@@ -47,9 +48,9 @@
                 break;
             }
             case 3: {
-                CCSprite *newStar1 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar2 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
-                CCSprite *newStar3 = [CCSprite spriteWithTexture:[star texture] rect:[star textureRect]];
+                CCSprite *newStar1 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar2 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
+                CCSprite *newStar3 = [[CCSprite alloc] initWithFile:@"bg/ingame/star_small.png"];
                 
                 newStar1.position = ccp(label.position.x-newStar1.boundingBox.size.width,20);
                 newStar2.position = ccp(label.position.x,15);
@@ -60,7 +61,7 @@
                 break;
             }
             default:
-                CCLOG(@"stars:%d",stars);
+//                CCLOG(@"stars:%d",stars);
                 break;
         }
     }
@@ -68,9 +69,7 @@
 }
                 
 -(void)click:(id)sender {
-    if (unLocked) {
-        [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:prefix suffix:suffix]];
-    }
+    [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:prefix suffix:suffix]];
 }
 
 @end

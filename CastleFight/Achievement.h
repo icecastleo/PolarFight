@@ -13,13 +13,12 @@
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *propertyNames;
+@property (readonly) NSString *message;
+@property (readonly) NSString *content;
 @property BOOL unLocked;
 
 -(id)initWithAchievementName:(NSString *)name theRelatedPropertyNames:(NSArray *)propertyNames;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
-
-//FIXME: delete this after test
--(NSString *)description;
 
 @end

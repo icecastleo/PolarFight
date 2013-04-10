@@ -12,6 +12,7 @@
 #import "IntroLayer.h"
 #import "SimpleAudioEngine.h"
 #import "FileManager.h"
+#import "Appirater.h"
 
 @implementation AppController
 
@@ -93,6 +94,15 @@
     
     [[FileManager sharedFileManager] setGameConfig];
     
+    //FIXME: AppID should change.
+    [Appirater setAppId:@"633931508"];
+    [Appirater setDaysUntilPrompt:1];
+    [Appirater setUsesUntilPrompt:10];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:YES];
+    [Appirater appLaunched:YES];
+    
 	return YES;
 }
 
@@ -124,7 +134,7 @@
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
+    if( [navController_ visibleViewController] == director_ )
 		[director_ startAnimation];
 }
 

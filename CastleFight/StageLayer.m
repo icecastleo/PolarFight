@@ -62,17 +62,19 @@
         
         for (int i = 1; i <= 15; i++) {
             NSString *name = [NSString stringWithFormat:@"%02d_%02d",page,i];
-            BOOL unLocked = [[FileManager sharedFileManager].achievementManager getStatusfromAchievement:name];
+            BOOL unlocked = [[FileManager sharedFileManager].achievementManager getStatusfromAchievement:name];
+            
+            // FIXME: Other star data are not built yet.
             int stars;
             if (page != 1) {
-                // others acheivement data are not built yet.
                 stars = 3;
-            }else {
+            } else {
                 stars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[name stringByAppendingFormat:@"_star"]];
             }
-            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unLocked:unLocked stars:stars];
+            
+            CCMenuItem *item = [[StageMenuItem alloc] initWithStagePrefix:page suffix:i unlocked:unlocked stars:stars];
             [array addObject:item];
-        }
+         }
         
         CCMenu *menu = [[CCMenu alloc] initWithArray:array];
         menu.position = ccp(winSize.width / 2, winSize.height / 2);

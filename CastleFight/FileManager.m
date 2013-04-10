@@ -25,7 +25,7 @@
 
 @implementation FileManager
 
-#define kUserDataKey @"UserData"
+#define kUserData @"UserData"
 
 #define kAnimationDirectory @"Animation"
 #define kSoundsDirectory @"Sounds_caf"
@@ -34,8 +34,8 @@
 #define kCharacterDataPlistFileName @"CharacterBasicData.plist"
 #define kBattleDataPlistFileName @"BattleData.plist"
 
-#define kBattleDataTagKey @"id"
-#define kCharacterDataTagKey @"id"
+#define kBattleDataTag @"id"
+#define kCharacterDataTag @"id"
 
 #define kVolumeMute 0
 #define kVolumeBackgroundMusicDefault 0.05
@@ -78,7 +78,7 @@ static FileManager *sharedFileManager = nil;
     }else {
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
         
-        _userDataObject = [unarchiver decodeObjectForKey:kUserDataKey];
+        _userDataObject = [unarchiver decodeObjectForKey:kUserData];
         [unarchiver finishDecoding];
     }
     
@@ -217,7 +217,7 @@ static FileManager *sharedFileManager = nil;
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:_userDataObject forKey:kUserDataKey];
+    [archiver encodeObject:_userDataObject forKey:kUserData];
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
     NSLog(@"Saving xml data to %@...", dataPath);
@@ -256,7 +256,7 @@ static FileManager *sharedFileManager = nil;
     
     NSDictionary *plistDic = [self getDictionaryFromPlistFileName:kBattleDataPlistFileName];
     
-    NSDictionary *battleDic = [self getDictionaryFromPlistDictionary:plistDic tagName:kBattleDataTagKey tagValue:name];
+    NSDictionary *battleDic = [self getDictionaryFromPlistDictionary:plistDic tagName:kBattleDataTag tagValue:name];
     
     NSAssert(battleDic != nil, @"Loading battle %@'s data failed.", name);
     
@@ -266,7 +266,7 @@ static FileManager *sharedFileManager = nil;
 }
 
 -(NSDictionary *)getCharacterDataWithId:(NSString *)anId {
-    return  [self getDictionaryFromPlistDictionary:self.characterDataFile tagName:kCharacterDataTagKey tagValue:anId];
+    return  [self getDictionaryFromPlistDictionary:self.characterDataFile tagName:kCharacterDataTag tagValue:anId];
 }
 
 -(NSArray *)getChararcterArray {
