@@ -12,6 +12,10 @@
 		2BBF9910163E6134005AD8B9 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF990D163E6134005AD8B9 /* map.png */; };
 		2BBF991B163E6533005AD8B9 /* controlBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BBF991A163E6532005AD8B9 /* controlBall.png */; };
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
+		2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D055968171427A200F82A08 /* InAppPurchaseManager.m */; };
+		2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */; };
+		2D05596E171443E300F82A08 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05596D171443E300F82A08 /* StoreKit.framework */; };
+		2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05597117144A3E00F82A08 /* MarketLayer.m */; };
 		2D07E0C21702E1EA0028C492 /* HeroAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C11702E1EA0028C492 /* HeroAI.m */; };
 		2D07E0C51702E2AF0028C492 /* AIStateHeroWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */; };
 		2D07E0C91702E2E80028C492 /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
@@ -448,6 +452,13 @@
 		2BBF991A163E6532005AD8B9 /* controlBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controlBall.png; sourceTree = "<group>"; };
 		2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutObject.h; sourceTree = "<group>"; };
 		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
+		2D055967171427A200F82A08 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
+		2D055968171427A200F82A08 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		2D05596A17143A7400F82A08 /* SKProduct+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPrice.h"; sourceTree = "<group>"; };
+		2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPrice.m"; sourceTree = "<group>"; };
+		2D05596D171443E300F82A08 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2D05597017144A3E00F82A08 /* MarketLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketLayer.h; sourceTree = "<group>"; };
+		2D05597117144A3E00F82A08 /* MarketLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketLayer.m; sourceTree = "<group>"; };
 		2D07E0C01702E1EA0028C492 /* HeroAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAI.h; sourceTree = "<group>"; };
 		2D07E0C11702E1EA0028C492 /* HeroAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroAI.m; sourceTree = "<group>"; };
 		2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroWalk.h; sourceTree = "<group>"; };
@@ -1144,6 +1155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D05596E171443E300F82A08 /* StoreKit.framework in Frameworks */,
 				9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */,
 				3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */,
 				9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */,
@@ -1188,6 +1200,26 @@
 				2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */,
 			);
 			name = MapLayer;
+			sourceTree = "<group>";
+		};
+		2D0559661714277B00F82A08 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				2D055967171427A200F82A08 /* InAppPurchaseManager.h */,
+				2D055968171427A200F82A08 /* InAppPurchaseManager.m */,
+				2D05596A17143A7400F82A08 /* SKProduct+LocalizedPrice.h */,
+				2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */,
+			);
+			name = IAP;
+			sourceTree = "<group>";
+		};
+		2D05596F1714464300F82A08 /* IAPLayer */ = {
+			isa = PBXGroup;
+			children = (
+				2D05597017144A3E00F82A08 /* MarketLayer.h */,
+				2D05597117144A3E00F82A08 /* MarketLayer.m */,
+			);
+			name = IAPLayer;
 			sourceTree = "<group>";
 		};
 		2D14424916E88EBC00969C12 /* AIState */ = {
@@ -1437,6 +1469,7 @@
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
+				2D05596D171443E300F82A08 /* StoreKit.framework */,
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */,
 				9B062CE21635275000E06018 /* Frameworks */,
@@ -1474,6 +1507,7 @@
 		9B062CF51635275000E06018 /* CastleFight */ = {
 			isa = PBXGroup;
 			children = (
+				2D0559661714277B00F82A08 /* IAP */,
 				37DDA2BF170962F30016E8CB /* Achievement */,
 				2DA446BC16E4A53C00BDC060 /* AI */,
 				37DB1F2616BBD06B00C0368D /* AnimationKit */,
@@ -2346,6 +2380,7 @@
 		9BEF752D17057F50006DE945 /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				2D05596F1714464300F82A08 /* IAPLayer */,
 				9BAF5B11170B0B5300945271 /* ShopLayer */,
 				9BAF5AFE17060B3900945271 /* StageLayer */,
 				9BAF5B081709764A00945271 /* MainScene.h */,
@@ -2786,6 +2821,9 @@
 				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
 				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
+				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
+				2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */,
+				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2938,6 +2976,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shih-Kuang Chu (94P334L2UA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2955,6 +2994,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "BF35D5F3-20FC-4485-825F-CAAF74CB111E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2969,6 +3009,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shih-Kuang Chu (94P334L2UA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2984,6 +3025,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "BF35D5F3-20FC-4485-825F-CAAF74CB111E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
