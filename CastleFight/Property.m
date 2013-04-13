@@ -69,6 +69,20 @@
     self.value = self.initialValue;
 }
 
+-(double)percentage {
+    if ([self isActive]) {
+        return 1;
+    }
+    double progress = abs(self.value - self.initialValue);
+    double total = abs(self.activationValue - self.initialValue);
+    
+    if (![self.activation isEqualToString:ACTIVE_IF_EQUALS_TO]) {
+        total += 1;
+    }
+    
+    return progress / total;
+}
+
 #pragma mark NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)encoder {

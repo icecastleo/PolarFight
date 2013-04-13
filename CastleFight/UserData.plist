@@ -441,6 +441,21 @@
 				<string>01_02_completed</string>
 			</array>
 		</dict>
+		<dict>
+			<key>name</key>
+			<string>AllStars</string>
+			<key>message</key>
+			<string>Congratulations, You are great.</string>
+			<key>content</key>
+			<string>Please Pass All Battle and Get All Stars.</string>
+			<key>unLocked</key>
+			<false/>
+			<key>propertyNames</key>
+			<array>
+				<string>01_01_star</string>
+				<string>01_02_star</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>

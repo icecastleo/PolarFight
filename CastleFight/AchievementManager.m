@@ -21,6 +21,8 @@
 -(void)doSetValue:(NSString *)propertyName Value:(int)value IgnoreActivationContraint:(BOOL)ignored;
 -(BOOL)hasTagInTheProperty:(Property *)property Tags:(NSArray *)tags;
 -(void)checkPropertyExistsForArray:(NSArray *)propertyNames;
+-(void)calculateAchievementPercentage:(Achievement *)aAchievement;
+-(void)dealWithUnLockedAchievement:(Achievement *)aAchievement;
 
 //game center
 @property (nonatomic) GameCenterManager *gameCenterManager;
@@ -137,6 +139,7 @@
     for (NSString *key in self.achievements) {
         Achievement *aAchievement = [self.achievements objectForKey:key];
         if (aAchievement.unLocked == FALSE) {
+            [self calculateAchievementPercentage:aAchievement];
             int activePropertySum = 0;
             for (NSString *propertyName in aAchievement.propertyNames) {
                 Property *aProperty = [self.properties objectForKey:propertyName];
@@ -145,9 +148,7 @@
                 }
                 if (activePropertySum == aAchievement.propertyNames.count) {
                     aAchievement.unLocked = TRUE;
-                    //TODO: do something after unlock. like popping an alert.
-                    //NSLog(@"%@",aAchievement);
-                    [self unlockAchievement:aAchievement];
+                    [self dealWithUnLockedAchievement:aAchievement];
                 }
             }
         }
@@ -186,24 +187,24 @@
     return achievement.unLocked;
 }
 
--(void)unlockAchievement:(Achievement *)aAchievement {
+-(void)calculateAchievementPercentage:(Achievement *)aAchievement {
+    double percentageCompleted = 0;
+    for (NSString *propertyName in aAchievement.propertyNames) {
+        Property *aProperty = [self.properties objectForKey:propertyName];
+        percentageCompleted += aProperty.percentage;
+    }
+    percentageCompleted = percentageCompleted/aAchievement.propertyNames.count;
+    aAchievement.percentage = percentageCompleted > 1 ? 1 : percentageCompleted;
+    [self.gameCenterManager submitAchievement:aAchievement.name percentComplete:aAchievement.percentage];
+}
+
+-(void)dealWithUnLockedAchievement:(Achievement *)aAchievement {
     //TODO: we might let the game center deal with the message.
-    
     if(aAchievement.name == nil){
         return;
     }
-    //TODO: aAchievement.percent ??
-    [self.gameCenterManager submitAchievement:aAchievement.name percentComplete:1];
-    /*
-    if (aAchievement.message != nil && ![aAchievement.message isEqualToString:@""]) {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Achievement Earned!"
-                                                        message:(aAchievement.message)
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }//*/
+    
+    [self.gameCenterManager showNotification:aAchievement.name message:aAchievement.message identifier:aAchievement.name];
 }
 
 # pragma mark Game Center

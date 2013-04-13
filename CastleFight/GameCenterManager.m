@@ -256,4 +256,12 @@
 	}];
 	
 }
+
+-(void) showNotification:(NSString*)title message:(NSString*)message identifier:(NSString*)identifier {
+    
+    [GKNotificationBanner showBannerWithTitle:title message:message completionHandler:^{
+        //
+    }];
+}
+
 @end

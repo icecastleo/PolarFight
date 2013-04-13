@@ -10,9 +10,10 @@
 
 #define kName       @"name"
 #define kPropertyNames      @"propertyNames"
-#define kUnLocked       @"unLocked"
+#define kUnLocked      @"unLocked"
 #define kMessage       @"message"
 #define kContent       @"content"
+#define kPercentage    @"percentage"
 
 @implementation Achievement
 
@@ -32,6 +33,10 @@
         _unLocked = [[dic objectForKey:kUnLocked] boolValue];
         _message = [dic objectForKey:kMessage];
         _content = [dic objectForKey:kContent];
+        _percentage = [[dic objectForKey:kPercentage] doubleValue];
+        if (self.unLocked) {
+            _percentage = 1.0;
+        }
     }
     return self;
 }
@@ -44,6 +49,7 @@
     [encoder encodeBool:_unLocked forKey:kUnLocked];
     [encoder encodeObject:_message forKey:kMessage];
     [encoder encodeObject:_content forKey:kContent];
+    [encoder encodeDouble:_percentage forKey:kPercentage];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
@@ -53,6 +59,7 @@
         _unLocked = [decoder decodeBoolForKey:kUnLocked];
         _message = [decoder decodeObjectForKey:kMessage];
         _content = [decoder decodeObjectForKey:kContent];
+        _percentage = [decoder decodeDoubleForKey:kPercentage];
     }
     return self;
 }

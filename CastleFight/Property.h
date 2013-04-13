@@ -16,6 +16,7 @@
 @property (readonly) NSString *name;
 @property (readonly) NSString *activation;
 @property (readonly) NSArray *tags;
+@property (readonly) double percentage;
 
 -(id)initWithPropertyName:(NSString *)name InitialValue:(int)initialValue theActivationMode:(NSString *)activation ActivationValue:(int)activationValue tags:(NSArray *)tags;
 
