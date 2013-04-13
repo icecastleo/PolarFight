@@ -41,7 +41,7 @@
 {
 	CGPoint touchLocation = [touch locationInView: [CCDirector sharedDirector].view];
 	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
-    
+
 	CCMenuItem* item;
 	CCARRAY_FOREACH(children_, item){
 		// ignore invisible and disabled items: issue #779, #866
@@ -85,8 +85,8 @@
 
 - (void)onExit
 {
-    [super onExit];
     [scrollView_ removeFromSuperview];
+    [super onExit];
 }
 
 #pragma mark - Initialization
@@ -97,8 +97,9 @@
         _rect = aRect;
         uiY = [CCDirector sharedDirector].winSize.height - _rect.size.height - _rect.origin.y;
         scrollView_ = [[[CCScrollView alloc] initWithFrame:CGRectMake(_rect.origin.x, uiY, _rect.size.width, _rect.size.height)] retain];
-        self.position = ccp(0, 0);
         scrollView_.delegate = self;
+        
+        self.position = ccp(0, 0);
     }
     return self;
 }

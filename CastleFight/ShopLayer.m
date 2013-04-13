@@ -9,11 +9,14 @@
 #import "ShopLayer.h"
 #import "CCScrollNode.h"
 #import "CCScissorLayer.h"
+#import "ShopUnitLayer.h"
 
 @implementation ShopLayer
 
 -(id)init {
     if (self = [super init]) {
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
+        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
         CCSprite *background = [CCSprite spriteWithFile:@"bg/shop/bg_shop_back.png"];
@@ -43,42 +46,14 @@
         item.tag = 3;
 
         CCMenu *menu = [CCMenu menuWithItems:unit, hero, item, nil];
-        menu.position = ccp(winSize.width / 2 - 240 + unit.boundingBox.size.width / 2, winSize.height - 50 - unit.boundingBox.size.height * menu.children.count / 2);
+        menu.position = ccp(winSize.width/2 - 240 + unit.boundingBox.size.width/2, winSize.height - 50 - unit.boundingBox.size.height/2 * menu.children.count);
         [menu alignItemsVerticallyWithPadding:0];
         [self addChild:menu];
         
         current = unit;
-
-        CGPoint origin = ccp(winSize.width / 2 - 240 + 75, 0);
-        CGRect rect = CGRectMake(origin.x, origin.y, 405, winSize.height - 50);
         
-        CCScrollNode *scrollingNode = [[CCScrollNode alloc] initWithRect:rect];
-        scrollingNode.adjustPosition = YES;
-        
-        CCScrollView *scrollView = scrollingNode.scrollView;
-        scrollView.showsVerticalScrollIndicator = YES;
-        scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-        scrollView.bounces = NO;
-        scrollView.tag = noDisableVerticalScrollTag;
-        
-        CCScissorLayer *layer = [[CCScissorLayer alloc] initWithRect:rect];
-        [layer addChild:scrollingNode];
-        
-        [self addChild:layer];
-
-        for(NSInteger i = 0; i <= 50; i++) {
-            CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", i]
-                                                   fontName:@"Marker Felt"
-                                                   fontSize:64];
-            label.anchorPoint = ccp(0.5, 1.0);
-            label.position = ccp(winSize.width * 0.5, winSize.height + i * -75);
-            [scrollingNode addChild:label];
-        }
-        
-        CCNode *lastNode = [scrollingNode.children lastObject];
-        //        CGSize contentSize = CGSizeMake(lastNode.contentSize.width, winSize.height - 120 - lastNode.position.y + lastNode.contentSize.height);
-        CGSize contentSize = CGSizeMake(lastNode.contentSize.width, 51 * 75);
-        scrollingNode.scrollView.contentSize = contentSize;
+        ShopUnitLayer *unitLayer = [[ShopUnitLayer alloc] init];
+        [self addChild:unitLayer];
     }
     return self;
 }

@@ -6,10 +6,11 @@
 //
 //
 
-#import "CCLayer.h"
+#import "cocos2d.h"
 
 @interface CCScissorLayer : CCLayer {
     CGRect rect;
+    CGRect pixelRect;
 }
 
 -(id)initWithRect:(CGRect)aRect;

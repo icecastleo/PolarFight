@@ -61,7 +61,6 @@
                 break;
             }
             default:
-//                CCLOG(@"stars:%d",stars);
                 break;
         }
     }
