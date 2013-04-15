@@ -11,7 +11,8 @@
 #import "HelloWorldLayer.h"
 #import "MarketLayer.h"
 #import "StageScrollLayer.h"
-
+#import "TapjoyConnect.h"
+#import "AppDelegate.h"
 @implementation MainStatusLayer
 
 -(id)initWithMainScene:(MainScene *)scene {
@@ -61,7 +62,7 @@
         CCMenuItem *free = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_up.png"]
                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_down.png"]
                                                           block:^(id sender) {
-                                                              ;
+                                                              [TapjoyConnect showOffersWithViewController:[CCDirector sharedDirector]];
                                                           }];
         free.position = ccp(background.boundingBox.size.width / 10 * 3.25, background.boundingBox.size.height / 2);
         

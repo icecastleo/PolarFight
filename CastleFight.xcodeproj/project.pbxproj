@@ -14,8 +14,12 @@
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
 		2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D055968171427A200F82A08 /* InAppPurchaseManager.m */; };
 		2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */; };
-		2D05596E171443E300F82A08 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05596D171443E300F82A08 /* StoreKit.framework */; };
 		2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05597117144A3E00F82A08 /* MarketLayer.m */; };
+		2D055978171579F600F82A08 /* TapjoyPublisherLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D055976171579F600F82A08 /* TapjoyPublisherLibrary.a */; };
+		2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D055977171579F600F82A08 /* TapjoyResources.bundle */; };
+		2D05597B17157A4200F82A08 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05597A17157A4200F82A08 /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2D05597D17157A5100F82A08 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05597C17157A5100F82A08 /* MediaPlayer.framework */; };
+		2D05597F17157A6200F82A08 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05597E17157A6200F82A08 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D07E0C21702E1EA0028C492 /* HeroAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C11702E1EA0028C492 /* HeroAI.m */; };
 		2D07E0C51702E2AF0028C492 /* AIStateHeroWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */; };
 		2D07E0C91702E2E80028C492 /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
@@ -466,6 +470,13 @@
 		2D05596D171443E300F82A08 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D05597017144A3E00F82A08 /* MarketLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketLayer.h; sourceTree = "<group>"; };
 		2D05597117144A3E00F82A08 /* MarketLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketLayer.m; sourceTree = "<group>"; };
+		2D055974171579F600F82A08 /* TapjoyConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnect.h; sourceTree = "<group>"; };
+		2D055975171579F600F82A08 /* TapjoyConnectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnectConstants.h; sourceTree = "<group>"; };
+		2D055976171579F600F82A08 /* TapjoyPublisherLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = TapjoyPublisherLibrary.a; sourceTree = "<group>"; };
+		2D055977171579F600F82A08 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		2D05597A17157A4200F82A08 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2D05597C17157A5100F82A08 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		2D05597E17157A6200F82A08 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2D07E0C01702E1EA0028C492 /* HeroAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroAI.h; sourceTree = "<group>"; };
 		2D07E0C11702E1EA0028C492 /* HeroAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroAI.m; sourceTree = "<group>"; };
 		2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroWalk.h; sourceTree = "<group>"; };
@@ -1175,7 +1186,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D05596E171443E300F82A08 /* StoreKit.framework in Frameworks */,
+				2D05597F17157A6200F82A08 /* AdSupport.framework in Frameworks */,
+				2D05597D17157A5100F82A08 /* MediaPlayer.framework in Frameworks */,
+				2D05597B17157A4200F82A08 /* CoreTelephony.framework in Frameworks */,
+				9B062CF01635275000E06018 /* Foundation.framework in Frameworks */,
+				37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */,
+				37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */,
+				37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */,
 				9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */,
 				3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */,
 				9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */,
@@ -1184,9 +1201,9 @@
 				9B062CEA1635275000E06018 /* AudioToolbox.framework in Frameworks */,
 				9B062CEC1635275000E06018 /* AVFoundation.framework in Frameworks */,
 				9B062CEE1635275000E06018 /* UIKit.framework in Frameworks */,
-				9B062CF01635275000E06018 /* Foundation.framework in Frameworks */,
 				9B062CF21635275000E06018 /* CoreGraphics.framework in Frameworks */,
 				9B062CF41635275000E06018 /* GameKit.framework in Frameworks */,
+				2D055978171579F600F82A08 /* TapjoyPublisherLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,6 +1257,17 @@
 				2D05597117144A3E00F82A08 /* MarketLayer.m */,
 			);
 			name = IAPLayer;
+			sourceTree = "<group>";
+		};
+		2D055973171579F600F82A08 /* TapjoyPublisherLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				2D055974171579F600F82A08 /* TapjoyConnect.h */,
+				2D055975171579F600F82A08 /* TapjoyConnectConstants.h */,
+				2D055976171579F600F82A08 /* TapjoyPublisherLibrary.a */,
+				2D055977171579F600F82A08 /* TapjoyResources.bundle */,
+			);
+			path = TapjoyPublisherLibrary;
 			sourceTree = "<group>";
 		};
 		2D14424916E88EBC00969C12 /* AIState */ = {
@@ -1511,6 +1539,10 @@
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
+				2D05597E17157A6200F82A08 /* AdSupport.framework */,
+				2D05597C17157A5100F82A08 /* MediaPlayer.framework */,
+				2D05597A17157A4200F82A08 /* CoreTelephony.framework */,
+				2D055973171579F600F82A08 /* TapjoyPublisherLibrary */,
 				2D05596D171443E300F82A08 /* StoreKit.framework */,
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */,
@@ -2740,6 +2772,7 @@
 				9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */,
 				9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */,
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
+				2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2870,6 +2903,9 @@
 				37DDA2C91709638A0016E8CB /* Achievement.m in Sources */,
 				9BAF5B0A1709764A00945271 /* MainScene.m in Sources */,
 				9BAF5B0D1709899D00945271 /* MainStatusLayer.m in Sources */,
+				9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */,
+				37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */,
+				37E0DB851714285A0039C94C /* Appirater.m in Sources */,
 				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
 				2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */,
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
@@ -3098,10 +3134,15 @@
 				);
 				INFOPLIST_FILE = CastleFight/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TapjoyPublisherLibrary\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = CastleFight;
 				SDKROOT = iphoneos;
@@ -3126,10 +3167,15 @@
 				);
 				INFOPLIST_FILE = CastleFight/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TapjoyPublisherLibrary\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = CastleFight;
 				SDKROOT = iphoneos;
