@@ -16,5 +16,5 @@
 
 -(void)back;
 -(void)next;
-
+-(void)get;
 @end

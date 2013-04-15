@@ -12,7 +12,7 @@
 #import "StageScrollLayer.h"
 #import "HelloWorldLayer.h"
 #import "ShopLayer.h"
-
+#import "MarketLayer.h"
 @implementation MainScene
 
 -(id)init {
@@ -59,6 +59,8 @@
             break;
     }
 }
+
+
 
 -(void)dealloc {
 //    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];

@@ -9,8 +9,10 @@
 #import "MainStatusLayer.h"
 #import "FileManager.h"
 #import "HelloWorldLayer.h"
+#import "MarketLayer.h"
 #import "StageScrollLayer.h"
-
+#import "TapjoyConnect.h"
+#import "AppDelegate.h"
 @implementation MainStatusLayer
 
 -(id)initWithMainScene:(MainScene *)scene {
@@ -50,21 +52,21 @@
         next.anchorPoint = ccp(1, 0.5);
         next.position = ccp(background.boundingBox.size.width, background.boundingBox.size.height / 2);
         
-        CCMenuItem *get = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_get_up.png"]
+        CCMenuItem *market = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_get_up.png"]
                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_get_down.png"]
-                                                           block:^(id sender) {
-                                                               ;
+                                                           block:^(id sender) {                            
+                                                                   [[CCDirector sharedDirector] pushScene:[MarketLayer scene]];
                                                            }];
-        get.position = ccp(background.boundingBox.size.width / 10 * 2.25, background.boundingBox.size.height / 2);
+        market.position = ccp(background.boundingBox.size.width / 10 * 2.25, background.boundingBox.size.height / 2);
         
         CCMenuItem *free = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_up.png"]
                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_down.png"]
                                                           block:^(id sender) {
-                                                              ;
+                                                              [TapjoyConnect showOffersWithViewController:[CCDirector sharedDirector]];
                                                           }];
         free.position = ccp(background.boundingBox.size.width / 10 * 3.25, background.boundingBox.size.height / 2);
         
-        CCMenu *menu = [CCMenu menuWithItems:back, next, get, free, nil];
+        CCMenu *menu = [CCMenu menuWithItems:back, next, market, free, nil];
         menu.position = ccp(0, 0);
         [background addChild:menu];
     }
