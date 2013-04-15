@@ -71,7 +71,7 @@ static InAppPurchaseManager* _sharedStoreManager;
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     // get the product description (defined in early sections)
-    [self requestProUpgradeProductData];
+    //[self requestProUpgradeProductData];
 }
 
 //

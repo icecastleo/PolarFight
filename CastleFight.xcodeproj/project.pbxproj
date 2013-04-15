@@ -2758,6 +2758,7 @@
 				9BBAECE416FF935E00D0BDC3 /* blood_white.png in Resources */,
 				9BBAECE716FF98D200D0BDC3 /* blood_frame-hd.png in Resources */,
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
+				9B293EBE17170CA800C1E728 /* noise.png in Resources */,
 				2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2892,6 +2893,9 @@
 				9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */,
 				37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */,
 				37E0DB851714285A0039C94C /* Appirater.m in Sources */,
+				9B293EB91715723600C1E728 /* ShopFrameSprite.m in Sources */,
+				9B293EBC1715DB3B00C1E728 /* ShopUnitSprite.m in Sources */,
+				9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */,
 				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
 				2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */,
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
