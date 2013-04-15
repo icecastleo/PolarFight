@@ -20,6 +20,8 @@
     float baseValue;
     float bonus;
     float multiplier;
+    
+    int _value;
 }
 
 @property (readonly) CharacterAttributeType type;
@@ -36,6 +38,7 @@
 -(void)subtractBonus:(float)aBonus;
 -(void)addMultiplier:(float)aMultiplier;
 -(void)subtractMultiplier:(float)aMultiplier;
+-(int)valueWithLevel:(int)level;
 -(void)updateValueWithLevel:(int)level;
 
 @end

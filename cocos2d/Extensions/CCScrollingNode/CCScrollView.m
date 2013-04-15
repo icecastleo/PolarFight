@@ -93,7 +93,6 @@
 //    [self.nextResponder touchesEnded:touches withEvent:event];
     
     TouchTimerObject *object = [[TouchTimerObject alloc] initWithTouches:touches event:event];
-    
     [NSTimer scheduledTimerWithTimeInterval:0.075f target:self selector:@selector(timerFireMethod:) userInfo:object repeats:NO];
 }
 

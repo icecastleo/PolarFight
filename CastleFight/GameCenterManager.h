@@ -85,4 +85,15 @@
 - (void) resetAchievements;
 
 - (void) mapPlayerIDtoPlayer: (NSString*) playerID;
+
+//FIXME: do we need the following things?
+@property (nonatomic) BOOL isAuthenticated;
+@property (nonatomic) BOOL isActivated;
+
+-(void) showAchievements;
+-(void) showLeaderboard:(NSString*)leaderboardID;
+
+// we need this.
+-(void) showNotification:(NSString*)title message:(NSString*)message identifier:(NSString*)identifier;
+
 @end

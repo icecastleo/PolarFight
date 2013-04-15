@@ -169,6 +169,8 @@
 {
     if( [navController_ visibleViewController] == director_ )
 		[director_ startAnimation];
+    
+    [Appirater appEnteredForeground:YES];
 }
 
 // application will be killed

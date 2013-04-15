@@ -42,7 +42,7 @@
 @property (readonly) NSString *headImageFileName;
 
 @property (readonly) int cost;
-@property (readonly) int level;
+@property int level;
 
 @property BaseAI *ai;
 @property ActiveSkill *skill;

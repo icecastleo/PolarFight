@@ -8,9 +8,11 @@
 
 #import "Attribute.h"
 #import "Character.h"
+#import "AccumulateAttribute.h"
 
 @implementation Attribute
 
+@synthesize value = _value;
 @dynamic currentValue;
 
 -(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
@@ -27,11 +29,6 @@
         if (_type < kCharacterAttributeFluidBoundary) {
             _dependent = [[DependentAttribute alloc] initWithAttribute:self];
         }
-        
-        // For castle fight game
-        if (_type < kCharacterAttributeUpdateBoundary) {
-            b = 0.02 * c;
-        }
     }
     return self;
 }
@@ -41,6 +38,11 @@
     int tempQuadratic = [[dic objectForKey:@"a"] intValue];
     int tempLinear = [[dic objectForKey:@"b"] intValue];
     int tempConstantTerm = [[dic objectForKey:@"c"] intValue];
+    
+    // FIXME: Abstract attribute and define type by dic
+    if (attributeType < kCharacterAttributeUpdateBoundary) {
+        return [[AccumulateAttribute alloc] initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
+    }
     
     return [self initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
 }
@@ -112,8 +114,12 @@
     _value = roundf((baseValue + bonus) * multiplier);
 }
 
+-(int)valueWithLevel:(int)level {
+    return quadratic * pow(level, 2) + linear * level + constantTerm;
+}
+
 -(void)updateValueWithLevel:(int)level {
-    baseValue = quadratic * pow(level, 2) + linear * level + constantTerm;
+    baseValue = [self valueWithLevel:level];
     [self updateValue];
     
     // Set to max when level change

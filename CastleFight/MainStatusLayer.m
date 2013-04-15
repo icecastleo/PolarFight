@@ -30,13 +30,13 @@
         money.position = ccp(background.boundingBox.size.width / 10 * 7.25, background.boundingBox.size.height / 2);
         [background addChild:money];
         
-        CCLabelBMFont *moneyLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[FileManager sharedFileManager].userMoney] fntFile:@"font/jungle_24_o.fnt"];
+        moneyLabel = [[CCLabelBMFont alloc] initWithString:@"" fntFile:@"font/jungle_24_o.fnt"];
         moneyLabel.anchorPoint = ccp(1, 0.5);
         moneyLabel.scale = 0.5;
         moneyLabel.position = ccp(money.boundingBox.size.width - 6, money.boundingBox.size.height / 2);
         [money addChild:moneyLabel];
         
-        CCMenuItem *back = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_up.png"]
+        CCMenuItem *back = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_up.png"]
                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_down.png"]
                                                            block:^(id sender) {
                                                                [scene back];
@@ -44,7 +44,7 @@
         back.anchorPoint = ccp(0, 0.5);
         back.position = ccp(0, background.boundingBox.size.height / 2);
         
-        CCMenuItem *next = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_up.png"]
+        CCMenuItem *next = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_up.png"]
                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_down.png"]
                                                            block:^(id sender) {
                                                                [scene next];
@@ -59,7 +59,7 @@
                                                            }];
         market.position = ccp(background.boundingBox.size.width / 10 * 2.25, background.boundingBox.size.height / 2);
         
-        CCMenuItem *free = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_up.png"]
+        CCMenuItem *free = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_up.png"]
                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_down.png"]
                                                           block:^(id sender) {
                                                               [TapjoyConnect showOffersWithViewController:[CCDirector sharedDirector]];
@@ -69,9 +69,23 @@
         CCMenu *menu = [CCMenu menuWithItems:back, next, market, free, nil];
         menu.position = ccp(0, 0);
         [background addChild:menu];
-        
     }
     return self;
+}
+
+-(void)onEnter {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMoneyLabel:) name:@"MoneyChangedNotify" object:nil];
+    [self updateMoneyLabel:nil];
+    [super onEnter];
+}
+
+-(void)onExit {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MoneyChangedNotify" object:nil];
+    [super onExit];
+}
+
+-(void)updateMoneyLabel:(NSNotification *)sender {
+    [moneyLabel setString:[NSString stringWithFormat:@"%d",[FileManager sharedFileManager].userMoney]];
 }
 
 -(void)dealloc {

@@ -9,7 +9,9 @@
 #import "cocos2d.h"
 #import "MainScene.h"
 
-@interface MainStatusLayer : CCLayer
+@interface MainStatusLayer : CCLayer {
+    CCLabelBMFont *moneyLabel;
+}
 
 -(id)initWithMainScene:(MainScene *)scene;
 

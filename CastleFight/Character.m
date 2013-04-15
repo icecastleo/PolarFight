@@ -75,10 +75,10 @@
             [self addAttribute:attr];
         }
         
-        // FIXME: Add to character data
+        // FIXME: Add price to character data
         float updatePrice = 30;
         
-        Attribute *attr = [[Attribute alloc] initWithType:kCharacterAttributeUpdatePrice withQuadratic:updatePrice/10 withLinear:updatePrice withConstantTerm:updatePrice];
+        Attribute *attr = [[Attribute alloc] initWithType:kCharacterAttributeUpdatePrice withQuadratic:updatePrice/10 withLinear:updatePrice withConstantTerm:0];
         [attr updateValueWithLevel:self.level];
         [self addAttribute:attr];
         

@@ -15,6 +15,7 @@
 @property (readonly) NSArray *propertyNames;
 @property (readonly) NSString *message;
 @property (readonly) NSString *content;
+@property double percentage;
 @property BOOL unLocked;
 
 -(id)initWithAchievementName:(NSString *)name theRelatedPropertyNames:(NSArray *)propertyNames;
