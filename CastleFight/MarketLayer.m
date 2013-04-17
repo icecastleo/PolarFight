@@ -8,21 +8,15 @@
 
 #import "MarketLayer.h"
 #import "InAppPurchaseManager.h"
-#define ProductID_Test1 @"com.sayagain.moonfight.Test1"
-#define ProductID_Test2 @"com.sayagain.moonfight.Test2"
-#define ProductID_Test3 @"com.sayagain.moonfight.Test3"
-#define ProductID_Test4 @"com.sayagain.moonfight.Test4"
-#define ProductID_Test5 @"com.sayagain.moonfight.Test5"
-#define ProductID_Test6 @"com.sayagain.moonfight.Test6" 
+#import "CCMenu+RowColumnExtend.h"
+
 @implementation MarketLayer
 
-+(CCScene *) scene
++(CCScene *)sceneWithProducts:(NSArray *)products
 {
-	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
-	// 'layer' is an autorelease object.
-	MarketLayer *layer = [MarketLayer node];
+	MarketLayer *layer = [[MarketLayer alloc] initWithProducts:products];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -31,125 +25,108 @@
 	return scene;
 }
 
-
-
--(id)init {
+-(id)initWithProducts:(NSArray *)array {
     if (self = [super init]) {
-          CGSize winSize = [CCDirector sharedDirector].winSize;
-        if([[InAppPurchaseManager sharedManager] canMakePurchases])
-        {
-            
-            [self prepareButtons];
-        }
-        else{
+        products = array;
         
-            UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                message:@"You can‘t purchase in app store"
-                                                               delegate:nil cancelButtonTitle:NSLocalizedString(@"Close",nil) otherButtonTitles:nil];
+        for (SKProduct *product in products) {
+            CCLOG(@"Product title: %@" , product.localizedTitle);
+            CCLOG(@"Product description: %@" , product.localizedDescription);
+            CCLOG(@"Product price: %@", product.localizedPrice);
+            CCLOG(@"Product id: %@" , product.productIdentifier);
+        }
+        
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        
+        CCSprite *background = [CCSprite spriteWithFile:@"bg/shop/bg_market.png"];
+        background.position = ccp(winSize.width / 2, winSize.height / 2);
+        [self addChild:background];
+        
+        CCMenuItem *buy1 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:0];
+                                                           }];
+        buy1.position = ccp(background.boundingBox.size.width*8/20, background.boundingBox.size.height*13/20);
+        
+        CCMenuItem *buy2 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:1];
+                                                           }];
+        buy2.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height*13/20);
+        
+        
+        CCMenuItem *buy3 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:2];
+                                                           }];
+        buy3.position = ccp(background.boundingBox.size.width*8/20, background.boundingBox.size.height*10/20);
+        
+        CCMenuItem *buy4 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:3];
+                                                           }];
+        buy4.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height*10/20);
+        
+        CCMenuItem *buy5 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:4];
+                                                           }];
+        buy5.position = ccp(background.boundingBox.size.width*8/20, background.boundingBox.size.height*7/20);
+        
+        CCMenuItem *buy6 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
+                                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
+                                                           block:^(id sender) {
+                                                               [self buy:5];
+                                                           }];
+        buy6.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height*7/20);
+        
+        
+        CCMenuItem *close = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_close_up.png"]
+                                                   selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_close_down.png"]
+                                                            block:^(id sender) {
+                                                                [self close];
+                                                            }];
+        close.position = ccp(background.boundingBox.size.width/2, background.boundingBox.size.height*1/5);
+        
+        CCMenu *menu = [CCMenu menuWithItems:buy1, buy2, buy3, buy4, buy5, buy6, close, nil];
+        menu.position = ccp(0, 0);
+        [background addChild:menu];
+        
+        NSArray *contents = [InAppPurchaseManager sharedManager].productContents;
+        
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+        
+        for (int i = 0; i < products.count; i++) {
+            CGPoint position = ((CCNode *)[menu.children objectAtIndex:i]).position;
+                        
+            CCLabelBMFont *content = [[CCLabelBMFont alloc] initWithString:[formatter stringFromNumber:[NSNumber numberWithInt:[contents[i] intValue]]] fntFile:@"font/jungle_24_o.fnt"];
+            content.anchorPoint = ccp(1, 0);
+            content.scale = 0.75;
+            content.position = ccp(position.x - 40, position.y - 5);
+            [background addChild:content];
             
-            [alerView show];
+            CCLabelBMFont *price = [[CCLabelBMFont alloc] initWithString:((SKProduct *)products[i]).localizedPrice fntFile:@"font/jungle_24_o.fnt"];
+            price.anchorPoint = ccp(1, 1);
+            price.scale = 0.375;
+            price.position = ccp(position.x - 40, position.y - 5);
+            [background addChild:price];
         }
     }
     return self;
 }
--(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
-}
--(void)close
-{
+
+-(void)close {
     [[CCDirector sharedDirector] popScene];
 }
--(void)buy:(int)type
-{
-      NSArray *product = nil; 
-    switch (type) {
-        case 1:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test1,nil];
-            break;
-        case 2:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test2,nil];
-            break;
-        case 3:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test3,nil];
-            break;
-        case 4:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test4,nil];
-            break;
-        case 5:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test5,nil];
-            break;
-        case 6:
-            product=[[NSArray alloc] initWithObjects:ProductID_Test6,nil];
-            break;
-        default:
-            break;
-    }
-    NSSet *nsset = [NSSet setWithArray:product];
-    SKProductsRequest *request=[[SKProductsRequest alloc] initWithProductIdentifiers: nsset];
-    request.delegate=[InAppPurchaseManager sharedManager];
-    [request start];
-}
 
-- (void)prepareButtons {
-    CCSprite *background = [CCSprite spriteWithFile:@"bg/shop/bg_market.png"];
-    background.anchorPoint = ccp(0, 0);
-    [self addChild:background];
-    
-    CCMenuItem *close = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_close_up.png"]
-                                               selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_close_down.png"]
-                                                        block:^(id sender) {
-                                                            [self close];
-                                                        }];
-    close.position = ccp(background.boundingBox.size.width/2, background.boundingBox.size.height* 1/ 5);
-    CCMenuItem *buy1 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:1];
-                                                       }];
-    buy1.position = ccp(background.boundingBox.size.width*2/5, background.boundingBox.size.height* 13/ 20);
-    
-    CCMenuItem *buy2 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:2];
-                                                       }];
-    buy2.position = ccp(background.boundingBox.size.width*2/5, background.boundingBox.size.height/2);
-    
-    
-    CCMenuItem *buy3 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:3];
-                                                       }];
-    buy3.position = ccp(background.boundingBox.size.width*2/5, background.boundingBox.size.height* 7/20);
-    
-    CCMenuItem *buy4 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:4];
-                                                       }];
-    buy4.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height* 13/20);
-    
-    CCMenuItem *buy5 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:5];
-                                                       }];
-    buy5.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height* 5/10);
-    
-    CCMenuItem *buy6 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_up.png"]
-                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_buy_down.png"]
-                                                       block:^(id sender) {
-                                                           [self buy:6];
-                                                       }];
-    buy6.position = ccp(background.boundingBox.size.width*17/20, background.boundingBox.size.height* 7/20);
-    
-    
-    
-    
-    CCMenu *menu = [CCMenu menuWithItems:close,buy1,buy2,buy3,buy4,buy5,buy6, nil];
-    menu.position = ccp(0, 0);
-    [background addChild:menu];
+-(void)buy:(int)type {
+    [[InAppPurchaseManager sharedManager] buyProduct:products[type]];
 }
 
 @end

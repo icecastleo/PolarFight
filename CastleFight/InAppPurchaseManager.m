@@ -7,187 +7,88 @@
 //
 
 #import "InAppPurchaseManager.h"
+#import "FileManager.h"
+
+@implementation SKProduct (LocalizedPrice)
+
+- (NSString *)localizedPrice
+{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setLocale:self.priceLocale];
+    NSString *formattedString = [numberFormatter stringFromNumber:self.price];
+    
+    return formattedString;
+}
+
+@end
 
 @implementation InAppPurchaseManager
-- (void)requestProUpgradeProductData
-{
-    NSSet *productIdentifiers = [NSSet setWithObject:@"com.sayagain.moonfight.Test1" ];
-    productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
-    productsRequest.delegate = self;
-    [productsRequest start];
-    
-    // we will release the request object in the delegate callback
-}
-
-#pragma mark -
-#pragma mark SKProductsRequestDelegate methods
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
-    NSArray *products = response.products;
-    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
-    if (proUpgradeProduct)
-    {
-        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
-        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
-        NSLog(@"Product price: %@" , proUpgradeProduct.price);
-        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
-    }
-    
-    for (NSString *invalidProductId in response.invalidProductIdentifiers)
-    {
-        NSLog(@"Invalid product id: %@" , invalidProductId);
-    }
-    
-    
-    SKPayment *payment = [SKPayment paymentWithProduct:proUpgradeProduct];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
-    
-}
-
-#define kInAppPurchaseProUpgradeProductId @"com.sayagain.moonfight.Test1"
 
 #pragma mark Singleton Methods
-static InAppPurchaseManager* _sharedStoreManager;
-+ (InAppPurchaseManager*)sharedManager
-{
-	if(!_sharedStoreManager) {
-        _sharedStoreManager= [[InAppPurchaseManager alloc] init] ;
-        [_sharedStoreManager loadStore];
-    }
-    return _sharedStoreManager;
+
+static dispatch_once_t once;
+static InAppPurchaseManager *sharedInstance;
+
++(InAppPurchaseManager *)sharedManager {
+    dispatch_once(&once, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
 }
 
+-(id)init {
+    if (self = [super init]) {
+        productIdentifiers = [NSArray arrayWithObjects:
+                              @"com.sayagain.moonfight.Test1",
+                              @"com.sayagain.moonfight.Test2",
+                              @"com.sayagain.moonfight.Test3",
+                              @"com.sayagain.moonfight.Test4",
+                              @"com.sayagain.moonfight.Test5",
+                              @"com.sayagain.moonfight.Test6",
+                              nil];
+        
+        _productContents = [NSArray arrayWithObjects:
+                           @"45000",
+                           @"26000",
+                           @"12000",
+                           @"5500",
+                           @"3150",
+                           @"1000",
+                           nil];
+        
+        // restarts any purchases if they were interrupted last time the app was open
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    }
+    return self;
+}
 
 #pragma -
 #pragma Public methods
 
-//
-// call this method once on startup
-//
-- (void)loadStore
-{
-    // restarts any purchases if they were interrupted last time the app was open
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    
-    // get the product description (defined in early sections)
-    //[self requestProUpgradeProductData];
+-(void)sendProductRequest:(id<SKProductsRequestDelegate>)delegate {
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:productIdentifiers]];
+    productsRequest.delegate = delegate;
+    [productsRequest start];
 }
 
-//
-// call this before making a purchase
-//
-- (BOOL)canMakePurchases
-{
-    return [SKPaymentQueue canMakePayments];
-}
-
-//
-// kick off the upgrade transaction
-//
-- (void)purchaseProUpgrade
-{
-    //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseProUpgradeProductId];
-    
-    //    SKPayment *payment = [SKPayment paymentWithProduct:validProduct]
-    //[[SKPaymentQueue defaultQueue] addPayment:payment];
+-(void)buyProduct:(SKProduct *)product {
+    if ([SKPaymentQueue canMakePayments]) {
+        SKPayment *payment = [SKPayment paymentWithProduct:product];
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    } else {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"In-App Purchases Disabled", nil)
+                                                            message:NSLocalizedString(@"You need to enable in-app purchases in Home > Settings > General > Restrictions to buy features", nil)
+                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 #pragma -
 #pragma Purchase helpers
 
-//
-// saves a record of the transaction by storing the receipt to disk
-//
-- (void)recordTransaction:(SKPaymentTransaction *)transaction
-{
-    if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProUpgradeProductId])
-    {
-        // save the transaction receipt to disk
-        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionReceipt forKey:@"proUpgradeTransactionReceipt" ];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-//
-// enable pro features
-//
-- (void)provideContent:(NSString *)productId
-{
-    if ([productId isEqualToString:kInAppPurchaseProUpgradeProductId])
-    {
-        // enable the pro features
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isProUpgradePurchased" ];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-//
-// removes the transaction from the queue and posts a notification with the transaction result
-//
-- (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful
-{
-    // remove the transaction from the payment queue.
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:transaction, @"transaction" , nil];
-    if (wasSuccessful)
-    {
-        // send out a notification that we’ve finished the transaction
-        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"Successful"
-                                                            message:@"You already buy blablabla"
-                                                           delegate:nil cancelButtonTitle:NSLocalizedString(@"Close",nil) otherButtonTitles:nil];
-        
-        [alerView show];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionSucceededNotification object:self userInfo:userInfo];
-    }
-    else
-    {
-        // send out a notification for the failed transaction
-        [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionFailedNotification object:self userInfo:userInfo];
-    }
-}
-
-//
-// called when the transaction was successful
-//
-- (void)completeTransaction:(SKPaymentTransaction *)transaction
-{
-    [self recordTransaction:transaction];
-    [self provideContent:transaction.payment.productIdentifier];
-    [self finishTransaction:transaction wasSuccessful:YES];
-}
-
-//
-// called when a transaction has been restored and and successfully completed
-//
-- (void)restoreTransaction:(SKPaymentTransaction *)transaction
-{
-    [self recordTransaction:transaction.originalTransaction];
-    [self provideContent:transaction.originalTransaction.payment.productIdentifier];
-    [self finishTransaction:transaction wasSuccessful:YES];
-}
-
-//
-// called when a transaction has failed
-//
-- (void)failedTransaction:(SKPaymentTransaction *)transaction
-{
-    if (transaction.error.code != SKErrorPaymentCancelled)
-    {
-        // error!
-        [self finishTransaction:transaction wasSuccessful:NO];
-    }
-    else
-    {
-        // this is fine, the user just cancelled, so don’t notify
-        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    }
-}
-
-//
 // called when the transaction status is updated
-//
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
     for (SKPaymentTransaction *transaction in transactions)
@@ -209,6 +110,82 @@ static InAppPurchaseManager* _sharedStoreManager;
     }
 }
 
+
+// saves a record of the transaction by storing the receipt to disk
+- (void)recordTransaction:(SKPaymentTransaction *)transaction
+{
+    // If we have some Non-Consumable product, we need to save the transaction receipt to disk.
+
+//    [[NSUserDefaults standardUserDefaults] [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier]; ];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+// provide product
+- (void)provideContent:(NSString *)productIdentifier
+{
+    for (int i = 0; i < productIdentifiers.count; i++) {
+        if ([productIdentifier isEqualToString:productIdentifiers[i]]) {
+            [FileManager sharedFileManager].userMoney += [_productContents[i] intValue];
+            break;
+        }
+    }
+    
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"Purchase successfully!", nil)
+                                                       delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+    [alertView show];
+    
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+}
+
+// called when the transaction was successful
+- (void)completeTransaction:(SKPaymentTransaction *)transaction
+{
+    [self recordTransaction:transaction];
+    [self provideContent:transaction.payment.productIdentifier];
+    [self finishTransaction:transaction wasSuccessful:YES];
+}
+
+// called when a transaction has been restored and and successfully completed
+- (void)restoreTransaction:(SKPaymentTransaction *)transaction
+{
+    [self recordTransaction:transaction.originalTransaction];
+    [self provideContent:transaction.originalTransaction.payment.productIdentifier];
+    [self finishTransaction:transaction wasSuccessful:YES];
+}
+
+// called when a transaction has failed
+- (void)failedTransaction:(SKPaymentTransaction *)transaction
+{
+    if (transaction.error.code != SKErrorPaymentCancelled)
+    {
+        // error!
+        [self finishTransaction:transaction wasSuccessful:NO];
+    }
+    else
+    {
+        // this is fine, the user just cancelled, so don’t notify
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }
+}
+
+// removes the transaction from the queue and posts a notification with the transaction result
+- (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful
+{
+    // remove the transaction from the payment queue.
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:transaction, @"transaction" , nil];
+    
+    if (wasSuccessful) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionSucceededNotification object:self userInfo:userInfo];
+    }
+    else {
+        // send out a notification for the failed transaction
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionFailedNotification object:self userInfo:userInfo];
+    }
+}
 
 @end
 

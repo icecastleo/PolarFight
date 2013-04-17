@@ -8,7 +8,10 @@
 #import "cocos2d.h"
 #import "CCLayer.h"
 
-@interface MarketLayer : CCLayer
+@interface MarketLayer : CCLayer {
+    NSArray *products;
+}
 
-+(CCScene *) scene;
++(CCScene *)sceneWithProducts:(NSArray *)products;
+
 @end

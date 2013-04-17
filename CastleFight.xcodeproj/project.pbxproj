@@ -11,7 +11,6 @@
 		2B85A7BA16635BF100D5962F /* tree01.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2B85A7B916635BF100D5962F /* tree01.gif */; };
 		2BF344C2168D8F0800BAA3E0 /* KnockOutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */; };
 		2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D055968171427A200F82A08 /* InAppPurchaseManager.m */; };
-		2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */; };
 		2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D05597117144A3E00F82A08 /* MarketLayer.m */; };
 		2D055978171579F600F82A08 /* TapjoyPublisherLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D055976171579F600F82A08 /* TapjoyPublisherLibrary.a */; };
 		2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D055977171579F600F82A08 /* TapjoyResources.bundle */; };
@@ -354,6 +353,7 @@
 		9B6EA71516F1FAED00C61AD9 /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
+		9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
@@ -459,8 +459,6 @@
 		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
 		2D055967171427A200F82A08 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		2D055968171427A200F82A08 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
-		2D05596A17143A7400F82A08 /* SKProduct+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPrice.h"; sourceTree = "<group>"; };
-		2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPrice.m"; sourceTree = "<group>"; };
 		2D05596D171443E300F82A08 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D05597017144A3E00F82A08 /* MarketLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketLayer.h; sourceTree = "<group>"; };
 		2D05597117144A3E00F82A08 /* MarketLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketLayer.m; sourceTree = "<group>"; };
@@ -1033,6 +1031,8 @@
 		9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitMenuItem.m; sourceTree = "<group>"; };
 		9B6EA71816F220BB00C61AD9 /* arrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-hd.png"; sourceTree = "<group>"; };
 		9B6EA71A16F270BB00C61AD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		9B7AF549171EF36C00CB419F /* CCMenu+RowColumnExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCMenu+RowColumnExtend.h"; sourceTree = "<group>"; };
+		9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCMenu+RowColumnExtend.m"; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		9B82F788164FB2780001A357 /* BattleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleController.h; sourceTree = "<group>"; };
 		9B82F789164FB2780001A357 /* BattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleController.m; sourceTree = "<group>"; };
@@ -1239,8 +1239,6 @@
 			children = (
 				2D055967171427A200F82A08 /* InAppPurchaseManager.h */,
 				2D055968171427A200F82A08 /* InAppPurchaseManager.m */,
-				2D05596A17143A7400F82A08 /* SKProduct+LocalizedPrice.h */,
-				2D05596B17143A7400F82A08 /* SKProduct+LocalizedPrice.m */,
 			);
 			name = IAP;
 			sourceTree = "<group>";
@@ -1534,11 +1532,7 @@
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
-				2D05597E17157A6200F82A08 /* AdSupport.framework */,
-				2D05597C17157A5100F82A08 /* MediaPlayer.framework */,
-				2D05597A17157A4200F82A08 /* CoreTelephony.framework */,
 				2D055973171579F600F82A08 /* TapjoyPublisherLibrary */,
-				2D05596D171443E300F82A08 /* StoreKit.framework */,
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */,
 				9B062CE21635275000E06018 /* Frameworks */,
@@ -1559,6 +1553,10 @@
 		9B062CE21635275000E06018 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D05597E17157A6200F82A08 /* AdSupport.framework */,
+				2D05597C17157A5100F82A08 /* MediaPlayer.framework */,
+				2D05597A17157A4200F82A08 /* CoreTelephony.framework */,
+				2D05596D171443E300F82A08 /* StoreKit.framework */,
 				37E0DB8C17143C280039C94C /* SystemConfiguration.framework */,
 				37E0DB8A17143C1D0039C94C /* StoreKit.framework */,
 				37E0DB8817143C110039C94C /* CFNetwork.framework */,
@@ -2100,6 +2098,15 @@
 			name = DelegateSkill;
 			sourceTree = "<group>";
 		};
+		9B7AF548171EF30F00CB419F /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				9B7AF549171EF36C00CB419F /* CCMenu+RowColumnExtend.h */,
+				9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */,
+			);
+			name = Extend;
+			sourceTree = "<group>";
+		};
 		9B82F787164FB2510001A357 /* BattleScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -2268,6 +2275,7 @@
 			isa = PBXGroup;
 			children = (
 				9BAF5B13170B643900945271 /* Custom */,
+				9B7AF548171EF30F00CB419F /* Extend */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2897,8 +2905,8 @@
 				9B293EBC1715DB3B00C1E728 /* ShopUnitSprite.m in Sources */,
 				9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */,
 				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
-				2D05596C17143A7400F82A08 /* SKProduct+LocalizedPrice.m in Sources */,
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
+				9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3070,7 +3078,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BF35D5F3-20FC-4485-825F-CAAF74CB111E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -3101,7 +3108,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BF35D5F3-20FC-4485-825F-CAAF74CB111E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

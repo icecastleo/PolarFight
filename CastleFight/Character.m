@@ -42,6 +42,7 @@
 @synthesize timeStatusDictionary;
 @synthesize pointArray;
 
+@synthesize level = _level;
 @synthesize direction = _direction;
 @synthesize position = _position;
 
@@ -120,6 +121,10 @@
         Attribute *att = [attributeDictionary objectForKey:key];
         [att updateValueWithLevel:level];
     }
+}
+
+-(int)level {
+    return _level;
 }
 
 -(void)setSkillForCharacter:(NSString *)name {

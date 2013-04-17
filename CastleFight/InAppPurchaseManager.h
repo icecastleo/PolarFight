@@ -10,17 +10,21 @@
 #define kInAppPurchaseManagerTransactionFailedNotification @"kInAppPurchaseManagerTransactionFailedNotification"
 #define kInAppPurchaseManagerTransactionSucceededNotification @"kInAppPurchaseManagerTransactionSucceededNotification"
 
-#define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
+@interface SKProduct (LocalizedPrice)
+
+@property (nonatomic, readonly) NSString *localizedPrice;
+
+@end
 
 
-@interface InAppPurchaseManager : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>
-{
-    SKProduct *proUpgradeProduct;
-    SKProductsRequest *productsRequest;
+@interface InAppPurchaseManager : NSObject <SKPaymentTransactionObserver> {
+    NSArray *productIdentifiers;
 }
-+ (InAppPurchaseManager*)sharedManager;
-- (void)loadStore;
-- (BOOL)canMakePurchases;
-- (void)purchaseProUpgrade;
+@property (readonly) NSArray *productContents;
+
++(InAppPurchaseManager*)sharedManager;
+
+-(void)sendProductRequest:(id<SKProductsRequestDelegate>)delegate;
+-(void)buyProduct:(SKProduct *)product;
 
 @end

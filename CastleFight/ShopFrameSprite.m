@@ -126,6 +126,7 @@
     [noise.texture setTexParameters:&params];
     noise.position = ccp(size.width/2, size.height/2);
     // Should be GL_NERO for the second parameter, but maybe some bug here.
+//    [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ZERO}];
     [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA}];
     [noise visit];
 
