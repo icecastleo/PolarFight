@@ -13,6 +13,7 @@
 #import "SimpleAudioEngine.h"
 #import "FileManager.h"
 #import "Appirater.h"
+#import "TapjoyConnect.h"
 
 @implementation AppController
 
@@ -103,9 +104,41 @@
     [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
     
+    
+    // Tapjoy Connect
+    [TapjoyConnect requestTapjoyConnect:@"3abab290-a53d-4269-a6ee-c301e5cf740e" secretKey:@"TA72KNqMaFsc1nlAycTb"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdatedPoints:) name:TJC_TAP_POINTS_RESPONSE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showEarnedCurrencyAlert:)
+                                                 name:TJC_TAPPOINTS_EARNED_NOTIFICATION
+                                               object:nil];
 	return YES;
 }
 
+-(void)getUpdatedPoints:(NSNotification*)notifyObj
+{
+    NSNumber *tapPoints = notifyObj.object;
+    NSString *tapPointsStr = [NSString stringWithFormat:@"Tap Points: %d", [tapPoints intValue]];
+    // Print out the updated points value.
+    [FileManager sharedFileManager].userMoney+=tapPoints.intValue;
+    [TapjoyConnect spendTapPoints:tapPoints.intValue];
+    NSLog(@"%d", [FileManager sharedFileManager].userMoney);
+    NSLog(@"%@", tapPointsStr);
+}
+- (void)showEarnedCurrencyAlert:(NSNotification*)notifyObj
+{
+    NSNumber *tapPointsEarned = notifyObj.object;
+    int earnedNum = [tapPointsEarned intValue];
+    
+    NSLog(@"Currency earned: %d", earnedNum);
+    
+    // Pops up a UIAlert notifying the user that they have successfully earned some currency.
+    // This is the default alert, so you may place a custom alert here if you choose to do so.
+    [TapjoyConnect showDefaultEarnedCurrencyAlert];
+    
+    // This is a good place to remove this notification since it is undesirable to have a pop-up alert more than once per app run.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:TJC_TAPPOINTS_EARNED_NOTIFICATION object:nil];
+}
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -136,6 +169,8 @@
 {
     if( [navController_ visibleViewController] == director_ )
 		[director_ startAnimation];
+    
+    [Appirater appEnteredForeground:YES];
 }
 
 // application will be killed

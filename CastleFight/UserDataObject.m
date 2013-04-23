@@ -47,6 +47,9 @@
 
 -(void)setMoney:(int)money {
     moneyNumber = [NSNumber numberWithInt:money + kMoneyTrickValue];
+    
+    NSNotification *notification = [NSNotification notificationWithName:@"MoneyChangedNotify" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 -(NSArray *)convertArray:(NSArray *)array className:(Class)className {

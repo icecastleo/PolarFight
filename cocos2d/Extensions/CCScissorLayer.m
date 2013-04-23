@@ -12,9 +12,15 @@
 
 -(id)initWithRect:(CGRect)aRect {
     if (self = [super init]) {
-        rect = CC_RECT_POINTS_TO_PIXELS(aRect);
+        rect = aRect;
+        pixelRect = CC_RECT_POINTS_TO_PIXELS(rect);
     }
     return self;
+}
+
+-(void)registerWithTouchDispatcher {
+	CCDirector *director = [CCDirector sharedDirector];
+	[[director touchDispatcher] addTargetedDelegate:self priority:kCCMenuHandlerPriority+1 swallowsTouches:YES];
 }
 
 -(void)visit {
@@ -29,12 +35,22 @@
     
     glEnable(GL_SCISSOR_TEST);
     
-    glScissor((GLint) rect.origin.x, (GLint)rect.origin.y,
-              (GLint) rect.size.width, (GLint) rect.size.height);
+    glScissor((GLint) pixelRect.origin.x, (GLint) pixelRect.origin.y,
+              (GLint) pixelRect.size.width, (GLint) pixelRect.size.height);
 }
 
 -(void)postVisit {
     glDisable(GL_SCISSOR_TEST);
+}
+
+-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint point = [self convertTouchToNodeSpace:touch];
+    
+    if (CGRectContainsPoint(rect, point)) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

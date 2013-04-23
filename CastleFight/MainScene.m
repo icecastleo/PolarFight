@@ -12,6 +12,7 @@
 #import "StageScrollLayer.h"
 #import "HelloWorldLayer.h"
 #import "ShopLayer.h"
+#import "MarketLayer.h"
 
 @implementation MainScene
 

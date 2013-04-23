@@ -8,8 +8,13 @@
 
 #import "cocos2d.h"
 #import "MainScene.h"
+#import <StoreKit/StoreKit.h>
 
-@interface MainStatusLayer : CCLayer
+@interface MainStatusLayer : CCLayer<SKProductsRequestDelegate> {
+    CCLabelBMFont *moneyLabel;
+    
+    UIAlertView *baseAlert;
+}
 
 -(id)initWithMainScene:(MainScene *)scene;
 

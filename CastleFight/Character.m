@@ -42,6 +42,7 @@
 @synthesize timeStatusDictionary;
 @synthesize pointArray;
 
+@synthesize level = _level;
 @synthesize direction = _direction;
 @synthesize position = _position;
 
@@ -75,10 +76,10 @@
             [self addAttribute:attr];
         }
         
-        // FIXME: Add to character data
+        // FIXME: Add price to character data
         float updatePrice = 30;
         
-        Attribute *attr = [[Attribute alloc] initWithType:kCharacterAttributeUpdatePrice withQuadratic:updatePrice/10 withLinear:updatePrice withConstantTerm:updatePrice];
+        Attribute *attr = [[Attribute alloc] initWithType:kCharacterAttributeUpdatePrice withQuadratic:updatePrice/10 withLinear:updatePrice withConstantTerm:0];
         [attr updateValueWithLevel:self.level];
         [self addAttribute:attr];
         
@@ -120,6 +121,10 @@
         Attribute *att = [attributeDictionary objectForKey:key];
         [att updateValueWithLevel:level];
     }
+}
+
+-(int)level {
+    return _level;
 }
 
 -(void)setSkillForCharacter:(NSString *)name {

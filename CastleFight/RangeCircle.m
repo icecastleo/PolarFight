@@ -40,12 +40,12 @@
     
     radius *= kScale;
     distance *= kScale;
-    width = (radius + distance)*2;
+    width =  distance + radius*2;
     height = radius*2;
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, width/2 + distance, height/2);
-    CGPathAddArc(attackRange, NULL, width/2 + distance, height/2, radius, 0, M_PI*2, NO);
+    CGPathMoveToPoint(attackRange, NULL, distance + width/2, height/2);
+    CGPathAddArc(attackRange, NULL, distance + width/2, height/2, radius, 0, M_PI*2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }
