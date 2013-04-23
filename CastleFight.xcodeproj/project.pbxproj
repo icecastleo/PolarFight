@@ -2906,6 +2906,12 @@
 				9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */,
 				37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */,
 				37E0DB851714285A0039C94C /* Appirater.m in Sources */,
+				9B293EB91715723600C1E728 /* ShopFrameSprite.m in Sources */,
+				9B293EBC1715DB3B00C1E728 /* ShopUnitSprite.m in Sources */,
+				9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */,
+				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
+				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
+				9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */,
 				37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

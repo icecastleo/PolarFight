@@ -13,6 +13,7 @@
 #import "HelloWorldLayer.h"
 #import "ShopLayer.h"
 #import "MarketLayer.h"
+#import "GameCenterLayer.h"
 
 @implementation MainScene
 
@@ -53,6 +54,11 @@
             break;
         case 1:
             subLayer = [[StageScrollLayer alloc] init];
+            subLayer.position = ccp(0, -15);
+            [self addChild:subLayer];
+            break;
+        case 2:
+            subLayer = [[GameCenterLayer alloc] init];
             subLayer.position = ccp(0, -15);
             [self addChild:subLayer];
             break;
