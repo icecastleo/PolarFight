@@ -13,6 +13,8 @@
 #import "BattleDataObject.h"
 #import "UserDataObject.h"
 #import "AchievementManager.h"
+#import "GameCenterManager.h"
+#import "AppSpecificValues.h"
 
 @interface FileManager ()
 
@@ -20,6 +22,7 @@
 @property (nonatomic, readonly) NSDictionary *characterDataFile;
 @property (nonatomic, strong) NSArray *sceneSounds;
 @property (nonatomic, strong) UserDataObject *userDataObject;
+@property (nonatomic) NSString* currentLeaderBoard;
 
 @end
 
@@ -140,6 +143,10 @@ static FileManager *sharedFileManager = nil;
 //        _animationDictionary = [self loadAnimation]; //do not use temporary
         _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
         _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
+        // game center
+        self.currentLeaderBoard = kLeaderboardID;
+        self.gameCenterManager = [[GameCenterManager alloc] init];
+        [self.gameCenterManager authenticateLocalPlayer];
 	}
 	return self;
 }

@@ -1,267 +1,641 @@
-/*
- 
- File: GameCenterManager.m
- Abstract: Basic introduction to GameCenter
- 
- Version: 1.0
- 
- Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
- ("Apple") in consideration of your agreement to the following terms, and your
- use, installation, modification or redistribution of this Apple software
- constitutes acceptance of these terms.  If you do not agree with these terms,
- please do not use, install, modify or redistribute this Apple software.
- 
- In consideration of your agreement to abide by the following terms, and subject
- to these terms, Apple grants you a personal, non-exclusive license, under
- Apple's copyrights in this original Apple software (the "Apple Software"), to
- use, reproduce, modify and redistribute the Apple Software, with or without
- modifications, in source and/or binary forms; provided that if you redistribute
- the Apple Software in its entirety and without modifications, you must retain
- this notice and the following text and disclaimers in all such redistributions
- of the Apple Software.
- Neither the name, trademarks, service marks or logos of Apple Inc. may be used
- to endorse or promote products derived from the Apple Software without specific
- prior written permission from Apple.  Except as expressly stated in this notice,
- no other rights or licenses, express or implied, are granted by Apple herein,
- including but not limited to any patent rights that may be infringed by your
- derivative works or by other works in which the Apple Software may be
- incorporated.
- 
- The Apple Software is provided by Apple on an "AS IS" basis.  APPLE MAKES NO
- WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED
- WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND OPERATION ALONE OR IN
- COMBINATION WITH YOUR PRODUCTS.
- 
- IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL OR
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION, MODIFICATION AND/OR
- DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED AND WHETHER UNDER THEORY OF
- CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, EVEN IF
- APPLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
- Copyright (C) 2010 Apple Inc. All Rights Reserved.
- 
- */
+//
+//  GameCenterManager.m
+//
+//  Created by Steffen Itterheim on 05.10.10.
+//  Copyright 2010 Steffen Itterheim. All rights reserved.
+//
 
 #import "GameCenterManager.h"
-#import <GameKit/GameKit.h>
+#import "AppDelegate.h"
 
-
+@interface GameCenterManager (Private)
+-(void) registerForLocalPlayerAuthChange;
+-(void) setLastError:(NSError*)error;
+@end
 
 @implementation GameCenterManager
 
-@synthesize earnedAchievementCache;
-@synthesize delegate;
+#pragma mark Init & Dealloc
 
-- (id) init
+@synthesize delegate;
+@synthesize isGameCenterAvailable, matchStarted;
+@synthesize lastError;
+@synthesize achievements;
+@synthesize currentMatch;
+
+-(id) init
 {
-	self = [super init];
-	if(self!= NULL)
+	if ((self = [super init]))
 	{
-		earnedAchievementCache= NULL;
+		// Test for Game Center availability
+		Class gameKitLocalPlayerClass = NSClassFromString(@"GKLocalPlayer");
+		BOOL isLocalPlayerAvailable = (gameKitLocalPlayerClass != nil);
+		
+		// Test if device is running iOS 4.1 or higher
+		NSString* reqSysVer = @"4.1";
+		NSString* currSysVer = [UIDevice currentDevice].systemVersion;
+		BOOL isOSVer41 = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
+		
+		isGameCenterAvailable = (isLocalPlayerAvailable && isOSVer41);
+		NSLog(@"GameCenter available = %@", isGameCenterAvailable ? @"YES" : @"NO");
+		
+		[self registerForLocalPlayerAuthChange];
 	}
+	
 	return self;
 }
 
-- (void) dealloc
+-(void) dealloc
 {
-	self.earnedAchievementCache= NULL;
-	[super dealloc];
+	CCLOG(@"dealloc %@", self);
+	
+	lastError = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
 }
 
+#pragma mark setLastError
 
-// NOTE:  GameCenter does not guarantee that callback blocks will be execute on the main thread. 
-// As such, your application needs to be very careful in how it handles references to view
-// controllers.  If a view controller is referenced in a block that executes on a secondary queue,
-// that view controller may be released (and dealloc'd) outside the main queue.  This is true
-// even if the actual block is scheduled on the main thread.  In concrete terms, this code
-// snippet is not safe, even though viewController is dispatching to the main queue:
-//
-//	[object doSomethingWithCallback:  ^()
-//	{
-//		dispatch_async(dispatch_get_main_queue(), ^(void)
-//		{
-//			[viewController doSomething];
-//		});
-//	}];
-//
-// UIKit view controllers should only be accessed on the main thread, so the snippet above may
-// lead to subtle and hard to trace bugs.  Many solutions to this problem exist.  In this sample,
-// I'm bottlenecking everything through  "callDelegateOnMainThread" which calls "callDelegate". 
-// Because "callDelegate" is the only method to access the delegate, I can ensure that delegate
-// is not visible in any of my block callbacks.
-
-- (void) callDelegate: (SEL) selector withArg: (id) arg error: (NSError*) err
+-(void) setLastError:(NSError*)error
 {
-	assert([NSThread isMainThread]);
-	if([delegate respondsToSelector: selector])
+	lastError = error.copy;
+	if (lastError != nil)
 	{
-		if(arg != NULL)
-		{
-			[delegate performSelector: selector withObject: arg withObject: err];
-		}
-		else
-		{
-			[delegate performSelector: selector withObject: err];
-		}
+		NSLog(@"GameCenterManager ERROR: %@", lastError.userInfo.description);
+	}
+}
+
+#pragma mark Player Authentication
+
+-(void) authenticateLocalPlayer
+{
+	if (isGameCenterAvailable == NO)
+		return;
+    
+	GKLocalPlayer* localPlayer = GKLocalPlayer.localPlayer;
+	if (localPlayer.authenticated == NO)
+	{
+		// Authenticate player, using a block object. See Apple's Block Programming guide for more info about Block Objects:
+		// http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html
+		[localPlayer authenticateWithCompletionHandler:^(NSError* error)
+         {
+             [self setLastError:error];
+             
+             if (error == nil)
+             {
+                 [self loadAchievements];
+             }
+         }];
+	}
+}
+
+-(void) onLocalPlayerAuthenticationChanged
+{
+	if ([delegate respondsToSelector:@selector(onLocalPlayerAuthenticationChanged)])
+	{
+		[delegate onLocalPlayerAuthenticationChanged];
+	}
+}
+
+-(void) registerForLocalPlayerAuthChange
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	// Register to receive notifications when local player authentication status changes
+	NSNotificationCenter* nc = NSNotificationCenter.defaultCenter;
+	[nc addObserver:self
+		   selector:@selector(onLocalPlayerAuthenticationChanged)
+			   name:GKPlayerAuthenticationDidChangeNotificationName
+			 object:nil];
+}
+
+#pragma mark Friends & Player Info
+
+-(void) getLocalPlayerFriends
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKLocalPlayer* localPlayer = GKLocalPlayer.localPlayer;
+	if (localPlayer.authenticated)
+	{
+		// First, get the list of friends (player IDs)
+		[localPlayer loadFriendsWithCompletionHandler:^(NSArray* friends, NSError* error)
+         {
+             [self setLastError:error];
+             if ([delegate respondsToSelector:@selector(onFriendListReceived:)])
+             {
+                 [delegate onFriendListReceived:friends];
+             }
+         }];
+	}
+}
+
+-(void) getPlayerInfo:(NSArray*)playerList
+{
+	if (isGameCenterAvailable == NO)
+		return;
+    
+	if (playerList.count > 0)
+	{
+		// Get detailed information about a list of players
+		[GKPlayer loadPlayersForIdentifiers:playerList withCompletionHandler:^(NSArray* players, NSError* error)
+		 {
+			 [self setLastError:error];
+			 if ([delegate respondsToSelector:@selector(onPlayerInfoReceived:)])
+			 {
+				 [delegate onPlayerInfoReceived:players];
+			 }
+		 }];
+	}
+}
+
+#pragma mark Scores & Leaderboard
+
+-(void) submitScore:(int64_t)score category:(NSString*)category
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKScore* gkScore = [[GKScore alloc] initWithCategory:category];
+	gkScore.value = score;
+	
+	[gkScore reportScoreWithCompletionHandler:^(NSError* error)
+     {
+         [self setLastError:error];
+		 
+         BOOL success = (error == nil);
+         if ([delegate respondsToSelector:@selector(onScoresSubmitted:)])
+         {
+             [delegate onScoresSubmitted:success];
+         }
+     }];
+}
+
+-(void) retrieveScoresForPlayers:(NSArray*)players
+						category:(NSString*)category
+						   range:(NSRange)range
+					 playerScope:(GKLeaderboardPlayerScope)playerScope
+					   timeScope:(GKLeaderboardTimeScope)timeScope
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKLeaderboard* leaderboard = nil;
+	if (players.count > 0)
+	{
+		leaderboard = [[GKLeaderboard alloc] initWithPlayerIDs:players];
 	}
 	else
 	{
-		NSLog(@"Missed Method");
+		leaderboard = [[GKLeaderboard alloc] init];
+		leaderboard.playerScope = playerScope;
+	}
+	
+	if (leaderboard != nil)
+	{
+		leaderboard.timeScope = timeScope;
+		leaderboard.category = category;
+		leaderboard.range = range;
+		[leaderboard loadScoresWithCompletionHandler:^(NSArray* scores, NSError* error)
+		 {
+			 [self setLastError:error];
+			 if ([delegate respondsToSelector:@selector(onScoresReceived:)])
+			 {
+				 [delegate onScoresReceived:scores];
+			 }
+		 }];
 	}
 }
 
-
-- (void) callDelegateOnMainThread: (SEL) selector withArg: (id) arg error: (NSError*) err
+-(void) retrieveTopTenAllTimeGlobalScores
 {
-	dispatch_async(dispatch_get_main_queue(), ^(void)
-	{
-	   [self callDelegate: selector withArg: arg error: err];
-	});
+	[self retrieveScoresForPlayers:nil
+						  category:nil
+							 range:NSMakeRange(1, 10)
+					   playerScope:GKLeaderboardPlayerScopeGlobal
+						 timeScope:GKLeaderboardTimeScopeAllTime];
 }
 
-+ (BOOL) isGameCenterAvailable
+#pragma mark Achievements
+
+-(void) loadAchievements
 {
-	// check for presence of GKLocalPlayer API
-	Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
+	if (isGameCenterAvailable == NO)
+		return;
 	
-	// check if the device is running iOS 4.1 or later
-	NSString *reqSysVer = @"4.1";
-	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-	BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
-	
-	return (gcClass && osVersionSupported);
-}
-
-
-- (void) authenticateLocalUser
-{
-	if([GKLocalPlayer localPlayer].authenticated == NO)
-	{
-		[[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) 
-		{
-			[self callDelegateOnMainThread: @selector(processGameCenterAuth:) withArg: NULL error: error];
-		}];
-	}
-}
-
-- (void) reloadHighScoresForCategory: (NSString*) category
-{
-	GKLeaderboard* leaderBoard= [[[GKLeaderboard alloc] init] autorelease];
-	leaderBoard.category= category;
-	leaderBoard.timeScope= GKLeaderboardTimeScopeAllTime;
-	leaderBoard.range= NSMakeRange(1, 1);
-	
-	[leaderBoard loadScoresWithCompletionHandler:  ^(NSArray *scores, NSError *error)
-	{
-		[self callDelegateOnMainThread: @selector(reloadScoresComplete:error:) withArg: leaderBoard error: error];
-	}];
-}
-
-- (void) reportScore: (int64_t) score forCategory: (NSString*) category 
-{
-	GKScore *scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];	
-	scoreReporter.value = score;
-	[scoreReporter reportScoreWithCompletionHandler: ^(NSError *error) 
+	[GKAchievement loadAchievementsWithCompletionHandler:^(NSArray* loadedAchievements, NSError* error)
 	 {
-		 [self callDelegateOnMainThread: @selector(scoreReported:) withArg: NULL error: error];
+		 [self setLastError:error];
+		 
+		 if (achievements == nil)
+		 {
+			 achievements = [[NSMutableDictionary alloc] init];
+		 }
+		 else
+		 {
+			 [achievements removeAllObjects];
+		 }
+		 
+		 for (GKAchievement* achievement in loadedAchievements)
+		 {
+			 [achievements setObject:achievement forKey:achievement.identifier];
+		 }
+		 
+		 if ([delegate respondsToSelector:@selector(onAchievementsLoaded:)])
+		 {
+			 [delegate onAchievementsLoaded:achievements];
+		 }
 	 }];
 }
 
-- (void) submitAchievement: (NSString*) identifier percentComplete: (double) percentComplete
+-(GKAchievement*) getAchievementByID:(NSString*)identifier
 {
-	//GameCenter check for duplicate achievements when the achievement is submitted, but if you only want to report 
-	// new achievements to the user, then you need to check if it's been earned 
-	// before you submit.  Otherwise you'll end up with a race condition between loadAchievementsWithCompletionHandler
-	// and reportAchievementWithCompletionHandler.  To avoid this, we fetch the current achievement list once,
-	// then cache it and keep it updated with any new achievements.
-	if(self.earnedAchievementCache == NULL)
-	{
-		[GKAchievement loadAchievementsWithCompletionHandler: ^(NSArray *scores, NSError *error)
-		{
-			if(error == NULL)
-			{
-				NSMutableDictionary* tempCache= [NSMutableDictionary dictionaryWithCapacity: [scores count]];
-				for (GKAchievement* score in tempCache)
-				{
-					[tempCache setObject: score forKey: score.identifier];
-				}
-				self.earnedAchievementCache= tempCache;
-				[self submitAchievement: identifier percentComplete: percentComplete];
-			}
-			else
-			{
-				//Something broke loading the achievement list.  Error out, and we'll try again the next time achievements submit.
-				[self callDelegateOnMainThread: @selector(achievementSubmitted:error:) withArg: NULL error: error];
-			}
-
-		}];
-	}
-	else
-	{
-		 //Search the list for the ID we're using...
-		GKAchievement* achievement= [self.earnedAchievementCache objectForKey: identifier];
-		if(achievement != NULL)
-		{
-			if((achievement.percentComplete >= 100.0) || (achievement.percentComplete >= percentComplete))
-			{
-				//Achievement has already been earned so we're done.
-				achievement= NULL;
-			}
-			achievement.percentComplete= percentComplete;
-		}
-		else
-		{
-			achievement= [[[GKAchievement alloc] initWithIdentifier: identifier] autorelease];
-			achievement.percentComplete= percentComplete;
-			//Add achievement to achievement cache...
-			[self.earnedAchievementCache setObject: achievement forKey: achievement.identifier];
-		}
-		if(achievement!= NULL)
-		{
-			//Submit the Achievement...
-			[achievement reportAchievementWithCompletionHandler: ^(NSError *error)
-			{
-				 [self callDelegateOnMainThread: @selector(achievementSubmitted:error:) withArg: achievement error: error];
-			}];
-		}
-	}
-}
-
-- (void) resetAchievements
-{
-	self.earnedAchievementCache= NULL;
-	[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error) 
-	{
-		 [self callDelegateOnMainThread: @selector(achievementResetResult:) withArg: NULL error: error];
-	}];
-}
-
-- (void) mapPlayerIDtoPlayer: (NSString*) playerID
-{
-	[GKPlayer loadPlayersForIdentifiers: [NSArray arrayWithObject: playerID] withCompletionHandler:^(NSArray *playerArray, NSError *error)
-	{
-		GKPlayer* player= NULL;
-		for (GKPlayer* tempPlayer in playerArray)
-		{
-			if([tempPlayer.playerID isEqualToString: playerID])
-			{
-				player= tempPlayer;
-				break;
-			}
-		}
-		[self callDelegateOnMainThread: @selector(mappedPlayerIDToPlayer:error:) withArg: player error: error];
-	}];
+	if (isGameCenterAvailable == NO)
+		return nil;
 	
+	// Try to get an existing achievement with this identifier
+	GKAchievement* achievement = [achievements objectForKey:identifier];
+	
+	if (achievement == nil)
+	{
+		// Create a new achievement object
+		achievement = [[GKAchievement alloc] initWithIdentifier:identifier];
+		[achievements setObject:achievement forKey:achievement.identifier];
+	}
+	
+	return achievement;
+}
+
+-(void) reportAchievementWithID:(NSString*)identifier percentComplete:(float)percent
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKAchievement* achievement = [self getAchievementByID:identifier];
+	if (achievement != nil && achievement.percentComplete < percent)
+	{
+		achievement.percentComplete = percent;
+		[achievement reportAchievementWithCompletionHandler:^(NSError* error)
+		 {
+			 [self setLastError:error];
+			 if ([delegate respondsToSelector:@selector(onAchievementReported:)])
+			 {
+				 [delegate onAchievementReported:achievement];
+			 }
+		 }];
+	}
+    
+    NSLog(@"Report:: %@:%g",achievement.identifier,achievement.percentComplete);
+    
+}
+
+-(void) resetAchievements
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	[achievements removeAllObjects];
+	
+	[GKAchievement resetAchievementsWithCompletionHandler:^(NSError* error)
+	 {
+		 [self setLastError:error];
+		 BOOL success = (error == nil);
+		 if ([delegate respondsToSelector:@selector(onResetAchievements:)])
+		 {
+			 [delegate onResetAchievements:success];
+		 }
+	 }];
 }
 
 -(void) showNotification:(NSString*)title message:(NSString*)message identifier:(NSString*)identifier {
-    
     [GKNotificationBanner showBannerWithTitle:title message:message completionHandler:^{
-        //
     }];
 }
 
+#pragma mark Matchmaking
+
+-(void) disconnectCurrentMatch
+{
+	[currentMatch disconnect];
+	currentMatch.delegate = nil;
+	currentMatch = nil;
+}
+
+-(void) setCurrentMatch:(GKMatch*)match
+{
+	if ([currentMatch isEqual:match] == NO)
+	{
+		[self disconnectCurrentMatch];
+		currentMatch = match;
+		currentMatch.delegate = self;
+	}
+}
+
+-(void) initMatchInvitationHandler
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	[GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite* acceptedInvite, NSArray* playersToInvite)
+	{
+		[self disconnectCurrentMatch];
+		
+		if (acceptedInvite)
+		{
+			[self showMatchmakerWithInvite:acceptedInvite];
+		}
+		else if (playersToInvite)
+		{
+			GKMatchRequest* request = [[GKMatchRequest alloc] init];
+			request.minPlayers = 2;
+			request.maxPlayers = 4;
+			request.playersToInvite = playersToInvite;
+			
+			[self showMatchmakerWithRequest:request];
+		}
+	};
+}
+
+-(void) findMatchForRequest:(GKMatchRequest*)request
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	[[GKMatchmaker sharedMatchmaker] findMatchForRequest:request
+								   withCompletionHandler:^(GKMatch* match, NSError* error)
+	 {
+		 [self setLastError:error];
+		 
+		 if (match != nil)
+		 {
+			 [self setCurrentMatch:match];
+			 if ([delegate respondsToSelector:@selector(onMatchFound:)])
+			 {
+				 [delegate onMatchFound:match];
+			 }
+		 }
+	 }];
+}
+
+-(void) cancelMatchmakingRequest
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	[[GKMatchmaker sharedMatchmaker] cancel];
+}
+
+-(void) addPlayersToMatch:(GKMatchRequest*)request
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	if (currentMatch == nil)
+		return;
+	
+	[[GKMatchmaker sharedMatchmaker] addPlayersToMatch:currentMatch
+										  matchRequest:request
+									 completionHandler:^(NSError* error)
+	 {
+		 [self setLastError:error];
+		 
+		 BOOL success = (error == nil);
+		 if ([delegate respondsToSelector:@selector(onPlayersAddedToMatch:)])
+		 {
+			 [delegate onPlayersAddedToMatch:success];
+		 }
+	 }];
+}
+
+-(void) queryMatchmakingActivity
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	[[GKMatchmaker sharedMatchmaker] queryActivityWithCompletionHandler:^(NSInteger activity, NSError* error)
+	 {
+		 [self setLastError:error];
+		 
+		 if (error == nil)
+		 {
+			 [delegate onReceivedMatchmakingActivity:activity];
+		 }
+	 }];
+}
+
+#pragma mark Match Connection
+
+-(void) match:(GKMatch*)match player:(NSString*)playerID didChangeState:(GKPlayerConnectionState)state
+{
+	switch (state)
+	{
+		case GKPlayerStateConnected:
+			if ([delegate respondsToSelector:@selector(onPlayerConnected:)])
+			{
+				[delegate onPlayerConnected:playerID];
+			}
+			break;
+		case GKPlayerStateDisconnected:
+			if ([delegate respondsToSelector:@selector(onPlayerDisconnected:)])
+			{
+				[delegate onPlayerDisconnected:playerID];
+			}
+			break;
+	}
+	
+	if (matchStarted == NO && match.expectedPlayerCount == 0)
+	{
+		matchStarted = YES;
+		if ([delegate respondsToSelector:@selector(onStartMatch)])
+		{
+			[delegate onStartMatch];
+		}
+	}
+}
+
+-(void) sendDataToAllPlayers:(void*)data sizeInBytes:(NSUInteger)sizeInBytes
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	NSError* error = nil;
+	NSData* packet = [NSData dataWithBytes:data length:sizeInBytes];
+	[currentMatch sendDataToAllPlayers:packet withDataMode:GKMatchSendDataUnreliable error:&error];
+	[self setLastError:error];
+}
+
+-(void) match:(GKMatch*)match didReceiveData:(NSData*)data fromPlayer:(NSString*)playerID
+{
+	if ([delegate respondsToSelector:@selector(onReceivedData:fromPlayer:)])
+	{
+		[delegate onReceivedData:data fromPlayer:playerID];
+	}
+}
+
+-(void) match:(GKMatch*)match connectionWithPlayerFailed:(NSString*)playerID withError:(NSError*)error
+{
+	CCLOG(@"match:connectionWithPlayerFailed: %@", playerID);
+	[self setLastError:error];
+}
+
+-(void) match:(GKMatch*)match didFailWithError:(NSError*)error
+{
+	CCLOG(@"match:didFailWithError");
+	[self setLastError:error];
+}
+
+#pragma mark Views (Leaderboard, Achievements)
+
+// Helper methods
+
+-(UINavigationController*) appNavigationController
+{
+	AppController* app = (AppController*)[UIApplication sharedApplication].delegate;
+	return app.navController;
+}
+
+-(void) presentViewController:(UIViewController*)vc
+{
+	UINavigationController* navController = [self appNavigationController];
+	[navController presentModalViewController:vc animated:YES];
+}
+
+-(void) dismissModalViewController
+{
+	UINavigationController* navController = [self appNavigationController];
+	[navController dismissModalViewControllerAnimated:YES];
+}
+
+// Leaderboards
+
+-(void) showLeaderboard
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKLeaderboardViewController* leaderboardVC = [[GKLeaderboardViewController alloc] init];
+	if (leaderboardVC != nil)
+	{
+		leaderboardVC.leaderboardDelegate = (id<GKLeaderboardViewControllerDelegate>)self;
+		[self presentViewController:leaderboardVC];
+	}
+}
+
+-(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController*)viewController
+{
+	[self dismissModalViewController];
+	if ([delegate respondsToSelector:@selector(onLeaderboardViewDismissed)])
+	{
+		[delegate onLeaderboardViewDismissed];
+	}
+}
+
+// Achievements
+
+-(void) showAchievements
+{
+	if (isGameCenterAvailable == NO)
+		return;
+	
+	GKAchievementViewController* achievementsVC = [[GKAchievementViewController alloc] init];
+	if (achievementsVC != nil)
+	{
+		achievementsVC.achievementDelegate = self;
+		[self presentViewController:achievementsVC];
+	}
+}
+
+-(void) achievementViewControllerDidFinish:(GKAchievementViewController*)viewController
+{
+	[self dismissModalViewController];
+	if ([delegate respondsToSelector:@selector(onAchievementsViewDismissed)])
+	{
+		[delegate onAchievementsViewDismissed];
+	}
+}
+
+// Matchmaking
+
+-(void) showMatchmakerWithInvite:(GKInvite*)invite
+{
+	GKMatchmakerViewController* inviteVC = [[GKMatchmakerViewController alloc] initWithInvite:invite];
+	if (inviteVC != nil)
+	{
+		inviteVC.matchmakerDelegate = self;
+		[self presentViewController:inviteVC];
+	}
+}
+
+-(void) showMatchmakerWithRequest:(GKMatchRequest*)request
+{
+	GKMatchmakerViewController* hostVC = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+	if (hostVC != nil)
+	{
+		hostVC.matchmakerDelegate = self;
+		[self presentViewController:hostVC];
+	}
+}
+
+-(void) matchmakerViewControllerWasCancelled:(GKMatchmakerViewController*)viewController
+{
+	[self dismissModalViewController];
+	if ([delegate respondsToSelector:@selector(onMatchmakingViewDismissed)])
+	{
+		[delegate onMatchmakingViewDismissed];
+	}
+}
+
+-(void) matchmakerViewController:(GKMatchmakerViewController*)viewController
+				didFailWithError:(NSError*)error
+{
+	[self dismissModalViewController];
+	[self setLastError:error];
+	if ([delegate respondsToSelector:@selector(onMatchmakingViewError)])
+	{
+		[delegate onMatchmakingViewError];
+	}
+}
+
+-(void) matchmakerViewController:(GKMatchmakerViewController*)viewController
+					didFindMatch:(GKMatch*)match
+{
+	[self dismissModalViewController];
+	[self setCurrentMatch:match];
+	if ([delegate respondsToSelector:@selector(onMatchFound:)])
+	{
+		[delegate onMatchFound:match];
+	}
+}
+
+-(void) matchmakerViewController:(GKMatchmakerViewController*)viewController
+				  didFindPlayers:(NSArray*)playerIDs
+{
+	[self dismissModalViewController];
+	CCLOG(@"matchmakerViewController:didFindPlayers not implemented!");
+}
+
+@end
+
+
+@implementation GKLeaderboardViewController (OrientationFix)
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+@end
+
+@implementation GKAchievementViewController (OrientationFix)
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+@end
+
+@implementation GKMatchmakerViewController (OrientationFix)
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
 @end

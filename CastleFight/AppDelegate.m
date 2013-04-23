@@ -100,7 +100,7 @@
     [Appirater setUsesUntilPrompt:10];
     [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:2];
-    [Appirater setDebug:YES];
+    [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
     
 	return YES;
@@ -154,6 +154,12 @@
 -(void) applicationSignificantTimeChange:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
+}
+
+//game center login view only support portrait view. it's a bug now.
+- (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow*)window
+{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

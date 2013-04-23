@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class BattleDataObject,Character,AchievementManager;
+@class BattleDataObject,Character,AchievementManager,GameCenterManager;
 
 @interface FileManager : NSObject
 
 @property int userMoney;
 @property AchievementManager *achievementManager;
+//game center
+@property (nonatomic) GameCenterManager *gameCenterManager;
 
 +(FileManager *)sharedFileManager;
 

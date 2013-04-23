@@ -147,6 +147,7 @@
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */; };
+		37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C0711726872C00541F87 /* GameCenterLayer.m */; };
 		37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96016AE2E4B00D492E6 /* archerHead32.png */; };
 		37E4F97116AE2E4B00D492E6 /* archerHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96116AE2E4B00D492E6 /* archerHead32@2x.png */; };
 		37E4F97216AE2E4B00D492E6 /* assassinHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96216AE2E4B00D492E6 /* assassinHead32.png */; };
@@ -659,6 +660,8 @@
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
 		37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterHeadView.m; sourceTree = "<group>"; };
+		37E4C0701726872C00541F87 /* GameCenterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterLayer.h; sourceTree = "<group>"; };
+		37E4C0711726872C00541F87 /* GameCenterLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterLayer.m; sourceTree = "<group>"; };
 		37E4F96016AE2E4B00D492E6 /* archerHead32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archerHead32.png; sourceTree = "<group>"; };
 		37E4F96116AE2E4B00D492E6 /* archerHead32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "archerHead32@2x.png"; sourceTree = "<group>"; };
 		37E4F96216AE2E4B00D492E6 /* assassinHead32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = assassinHead32.png; sourceTree = "<group>"; };
@@ -1348,6 +1351,8 @@
 				37D8329E17130EF2001A1C3A /* AppSpecificValues.h */,
 				37D8329F17130EF2001A1C3A /* GameCenterManager.h */,
 				37D832A017130EF2001A1C3A /* GameCenterManager.m */,
+				37E4C0701726872C00541F87 /* GameCenterLayer.h */,
+				37E4C0711726872C00541F87 /* GameCenterLayer.m */,
 			);
 			name = GameCenter;
 			sourceTree = "<group>";
@@ -2841,6 +2846,7 @@
 				9B92F3681712BC4000DAF766 /* ShopUnitLayer.m in Sources */,
 				37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */,
 				37E0DB851714285A0039C94C /* Appirater.m in Sources */,
+				37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

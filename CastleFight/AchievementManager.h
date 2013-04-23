@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GameKit/GameKit.h>
-#import "GameCenterManager.h"
 
-@interface AchievementManager : NSObject <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate,GameCenterManagerDelegate>
+@interface AchievementManager : NSObject 
 
 -(id)initWithAchievements:(NSArray *)achievements AndProperties:(NSArray *)properties;
 

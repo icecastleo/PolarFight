@@ -9,9 +9,10 @@
 #import "AchievementManager.h"
 #import "Property.h"
 #import "Achievement.h"
+#import "FileManager.h"
 
 //game center
-#import "AppSpecificValues.h"
+#import "GameCenterManager.h"
 
 @interface AchievementManager()
 
@@ -23,14 +24,6 @@
 -(void)checkPropertyExistsForArray:(NSArray *)propertyNames;
 -(void)calculateAchievementPercentage:(Achievement *)aAchievement;
 -(void)dealWithUnLockedAchievement:(Achievement *)aAchievement;
-
-//game center
-@property (nonatomic) GameCenterManager *gameCenterManager;
-@property (nonatomic) NSString* currentLeaderBoard;
-
-- (void) showLeaderboard;
-- (void) showAchievements;
-- (void) submitScore;
 
 @end
 
@@ -53,15 +46,6 @@
         }
         for (Property *property in properties) {
             [_properties setValue:property forKey:property.name];
-        }
-        //FIXME: game center can not work.
-        self.currentLeaderBoard = kLeaderboardID;
-        if ([GameCenterManager isGameCenterAvailable]) {
-            self.gameCenterManager = [[GameCenterManager alloc] init];
-            [self.gameCenterManager setDelegate:self];
-            [self.gameCenterManager authenticateLocalUser];
-        } else {
-            CCLOG(@"The current device does not support Game Center");
         }
     }
     return self;
@@ -140,15 +124,14 @@
         Achievement *aAchievement = [self.achievements objectForKey:key];
         if (aAchievement.unLocked == FALSE) {
             [self calculateAchievementPercentage:aAchievement];
-            int activePropertySum = 0;
             for (NSString *propertyName in aAchievement.propertyNames) {
                 Property *aProperty = [self.properties objectForKey:propertyName];
-                if ((tags == nil || [self hasTagInTheProperty:aProperty Tags:tags]) && aProperty.isActive) {
-                    activePropertySum++;
-                }
-                if (activePropertySum == aAchievement.propertyNames.count) {
-                    aAchievement.unLocked = TRUE;
-                    [self dealWithUnLockedAchievement:aAchievement];
+                if ((tags == nil || [self hasTagInTheProperty:aProperty Tags:tags]) && [aProperty isActive]) {
+                    if (aAchievement.percentage == 1) {
+                        aAchievement.unLocked = TRUE;
+                        [self dealWithUnLockedAchievement:aAchievement];
+                        break;
+                    }
                 }
             }
         }
@@ -195,7 +178,8 @@
     }
     percentageCompleted = percentageCompleted/aAchievement.propertyNames.count;
     aAchievement.percentage = percentageCompleted > 1 ? 1 : percentageCompleted;
-    [self.gameCenterManager submitAchievement:aAchievement.name percentComplete:aAchievement.percentage];
+    [[FileManager sharedFileManager].gameCenterManager reportAchievementWithID:aAchievement.name percentComplete:aAchievement.percentage*100];
+    NSLog(@"name:%@,percent:%g",aAchievement.name,aAchievement.percentage);
 }
 
 -(void)dealWithUnLockedAchievement:(Achievement *)aAchievement {
@@ -204,46 +188,7 @@
         return;
     }
     
-    [self.gameCenterManager showNotification:aAchievement.name message:aAchievement.message identifier:aAchievement.name];
-}
-
-# pragma mark Game Center
-
-- (void) showLeaderboard
-{
-    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
-    if (leaderboardController != NULL)
-    {
-        leaderboardController.category = self.currentLeaderBoard;
-        leaderboardController.timeScope = GKLeaderboardTimeScopeWeek;
-        leaderboardController.leaderboardDelegate = self;
-//        [self presentModalViewController: leaderboardController animated: YES];
-    }
-}
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-//    [self dismissModalViewControllerAnimated: YES];
-}
-- (void) showAchievements
-{
-    GKAchievementViewController *achievements = [[GKAchievementViewController alloc] init];
-    if (achievements != NULL)
-    {
-        achievements.achievementDelegate = self;
-//        [self presentModalViewController: achievements animated: YES];
-    }
-}
-- (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController;
-{
-//    [self dismissModalViewControllerAnimated: YES];
-}
-- (void) submitScore
-{
-    // do we need?
-//    if(self.currentScore > 0)
-//    {
-//        [self.gameCenterManager reportScore: self.currentScore forCategory: self.currentLeaderBoard];
-//    }
+    [[FileManager sharedFileManager].gameCenterManager showNotification:aAchievement.name message:aAchievement.message identifier:aAchievement.name];
 }
 
 @end
