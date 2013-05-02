@@ -354,6 +354,10 @@
 		9B6EA71516F1FAED00C61AD9 /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
+		9B73C782172E7E69008575E5 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C780172E7E69008575E5 /* background-hd.png */; };
+		9B73C783172E7E69008575E5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C781172E7E69008575E5 /* background.png */; };
+		9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C785172E8247008575E5 /* BattleCatMapLayer.m */; };
+		9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */; };
 		9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F791164FB2780001A357 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
@@ -1034,6 +1038,12 @@
 		9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitMenuItem.m; sourceTree = "<group>"; };
 		9B6EA71816F220BB00C61AD9 /* arrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-hd.png"; sourceTree = "<group>"; };
 		9B6EA71A16F270BB00C61AD9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		9B73C780172E7E69008575E5 /* background-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-hd.png"; sourceTree = "<group>"; };
+		9B73C781172E7E69008575E5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		9B73C784172E8247008575E5 /* BattleCatMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleCatMapLayer.h; sourceTree = "<group>"; };
+		9B73C785172E8247008575E5 /* BattleCatMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleCatMapLayer.m; sourceTree = "<group>"; };
+		9B73C787172E82E4008575E5 /* ThreeLineMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeLineMapLayer.h; sourceTree = "<group>"; };
+		9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeLineMapLayer.m; sourceTree = "<group>"; };
 		9B7AF549171EF36C00CB419F /* CCMenu+RowColumnExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCMenu+RowColumnExtend.h"; sourceTree = "<group>"; };
 		9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCMenu+RowColumnExtend.m"; sourceTree = "<group>"; };
 		9B82F786164FB2250001A357 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -1221,6 +1231,10 @@
 			children = (
 				9BA4E40F16E09D5D00D5FA07 /* MapLayer.h */,
 				9BA4E41016E09D5D00D5FA07 /* MapLayer.m */,
+				9B73C784172E8247008575E5 /* BattleCatMapLayer.h */,
+				9B73C785172E8247008575E5 /* BattleCatMapLayer.m */,
+				9B73C787172E82E4008575E5 /* ThreeLineMapLayer.h */,
+				9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */,
 				9BA4E41216E09F0700D5FA07 /* MapCamera.h */,
 				9BA4E41316E09F0700D5FA07 /* MapCamera.m */,
 				9B82F78E164FB2780001A357 /* TiledMapLayer.h */,
@@ -1628,6 +1642,8 @@
 				3725D4D816A7FDBD00BF49E2 /* CharacterHeadImages */,
 				9B6EA71A16F270BB00C61AD9 /* arrow.png */,
 				9B6EA71816F220BB00C61AD9 /* arrow-hd.png */,
+				9B73C781172E7E69008575E5 /* background.png */,
+				9B73C780172E7E69008575E5 /* background-hd.png */,
 				9B2C785F1699E6B500CA1A1C /* blood_frame.png */,
 				9BBAECE516FF98CF00D0BDC3 /* blood_frame-hd.png */,
 				9BBAECE316FF935E00D0BDC3 /* blood_white.png */,
@@ -1680,6 +1696,7 @@
 		9B062E7F16353A2B00E06018 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				9B737AB0173007D70060B98B /* Action */,
 				9B06F83C1678705600E1B09D /* Attribute */,
 				9B9848CD16EF3AD700D3D55D /* BloodSprite */,
 				9B92D2B416416D66000AF467 /* Character.h */,
@@ -2103,6 +2120,19 @@
 			name = DelegateSkill;
 			sourceTree = "<group>";
 		};
+		9B737AB0173007D70060B98B /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				9BF467C416BA73C9005B1BBE /* CCMoveCharacterTo.h */,
+				9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */,
+				9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */,
+				9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */,
+				9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */,
+				9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */,
+			);
+			name = Action;
+			sourceTree = "<group>";
+		};
 		9B7AF548171EF30F00CB419F /* Extend */ = {
 			isa = PBXGroup;
 			children = (
@@ -2485,12 +2515,6 @@
 				9BF467CA16BA8286005B1BBE /* CharacterQueue */,
 				9B82F788164FB2780001A357 /* BattleController.h */,
 				9B82F789164FB2780001A357 /* BattleController.m */,
-				9BF467C416BA73C9005B1BBE /* CCMoveCharacterTo.h */,
-				9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */,
-				9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */,
-				9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */,
-				9B8652A616BAFB800062AAD7 /* CCMoveCharacterByLength.h */,
-				9B8652A716BAFB800062AAD7 /* CCMoveCharacterByLength.m */,
 			);
 			name = BattleController;
 			sourceTree = "<group>";
@@ -2773,6 +2797,8 @@
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
 				9B293EBE17170CA800C1E728 /* noise.png in Resources */,
 				2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */,
+				9B73C782172E7E69008575E5 /* background-hd.png in Resources */,
+				9B73C783172E7E69008575E5 /* background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2913,6 +2939,8 @@
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
 				9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */,
 				37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */,
+				9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */,
+				9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

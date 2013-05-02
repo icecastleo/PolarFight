@@ -69,7 +69,6 @@
         
         [self setUnitBoard];
         [self setPauseButton];
-        [self setAttackButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
     }
     return self;
@@ -104,26 +103,6 @@
     }
     
     [self addChild:[PauseLayer node]];
-}
-
-
--(void)setAttackButton {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCMenuItem *attackMenuItem = [CCMenuItemImage
-                                  itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
-                                  selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_skill_01.png"]
-                                  target:self selector:@selector(attackButtonTapped:)];
-    
-    float width = winSize.width- attackMenuItem.boundingBox.size.width/2;
-    float height = winSize.height/4;
-    attackMenuItem.position = ccp(width, height);
-    
-    CCMenu *attackMenu = [CCMenu menuWithItems:attackMenuItem, nil];
-    attackMenu.position = CGPointZero;
-    [self addChild:attackMenu];
-}
--(void)attackButtonTapped:(id)sender {
-    [[BattleController currentInstance].hero useSkill];
 }
 
 -(void)setUnitBoard {

@@ -46,10 +46,8 @@
 {
     for (NSString* key in monsterData) {
         MonsterData *md = [monsterData objectForKey:key];
-        md.currentCount=0;
-        
+        md.currentCount = 0;
     }
-    
 }
 
 -(int) getCurrentMonsters
@@ -71,13 +69,14 @@
     
     for (NSString* key in monsterData) {
         MonsterData *md = [monsterData objectForKey:key];
-        if(result==nil)
-            result=md;
-        float currentRatio= (float)md.currentCount/count;
-        md.subRatio= currentRatio-md.targetRatio;
-        if(md.subRatio<result.subRatio)
-            result=md;
-
+        if(result == nil)
+            result = md;
+        
+        float currentRatio = (float)md.currentCount/count;
+        md.subRatio = currentRatio - md.targetRatio;
+        
+        if(md.subRatio < result.subRatio)
+            result = md;
     }
     return result;
 }

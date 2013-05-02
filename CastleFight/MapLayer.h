@@ -11,17 +11,16 @@
 #import "Character.h"
 
 @interface MapLayer : CCLayer {
-    BOOL isMove;
-    BOOL isFollow;
+
 }
 
-@property (readonly, weak) Character *hero;
 @property (readonly) NSMutableArray *characters;
-//@property (readonly) NSMutableArray *castles;
+
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
 
--(id)initWithFile:(NSString *)file;
+-(id)initWithName:(NSString *)name;
+-(void)setMap:(NSString *)name;
 
 -(void)addCastle:(Character *)castle;
 -(void)addCharacter:(Character *)character;

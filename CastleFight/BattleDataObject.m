@@ -50,7 +50,6 @@
         _enemyArray = [self getCharacterArrayFromArray:[dic objectForKey:@"enemies"]];
         _enemyBossArray = [self getCharacterArrayFromArray:[dic objectForKey:@"bosses"]];
         _enemyCastleArray = [self getCharacterArrayFromArray:[dic objectForKey:@"castle"]];
-        
     }
     return self;
 }

@@ -20,6 +20,7 @@
 #import "EnemyAI.h"
 #import "SimpleAudioEngine.h"
 #import "AchievementManager.h"
+#import "ThreeLineMapLayer.h"
 
 @interface BattleController () {
     NSString *battleName;
@@ -28,7 +29,6 @@
 
 @implementation BattleController
 @dynamic characters;
-@dynamic hero;
 
 __weak static BattleController* currentInstance;
 
@@ -53,7 +53,8 @@ const float foodAddend = 0.05;
         _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
-        mapLayer = [[MapLayer alloc] initWithFile:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+//        mapLayer = [[MapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         // set character on may
@@ -93,10 +94,6 @@ const float foodAddend = 0.05;
 
 -(NSMutableArray *)characters {
     return mapLayer.characters;
-}
-
--(Character *)hero {
-    return mapLayer.hero;
 }
 
 - (void)setCharacterArrayFromSelectLayer {

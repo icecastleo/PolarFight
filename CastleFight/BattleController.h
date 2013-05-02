@@ -31,7 +31,6 @@
     NSMutableArray *removeCharacters;
 }
 
-@property (readonly) Character *hero;
 @property (readonly) float food;
 @property (readonly) Character *playerCastle, *enemyCastle;
 @property (readonly) NSMutableArray *characters;

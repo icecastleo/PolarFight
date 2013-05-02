@@ -18,7 +18,7 @@
 @property float subRatio;
 @end
 
-@interface MonsterDataCollection:NSObject
+@interface MonsterDataCollection : NSObject
 {
     NSDictionary *monsterData;
 }

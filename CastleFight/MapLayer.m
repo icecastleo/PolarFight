@@ -8,7 +8,7 @@
 
 #import "MapLayer.h"
 #import "BattleController.h"
-#import "HeroAI.h"
+
 @implementation MapLayer
 
 static float scale;
@@ -26,56 +26,16 @@ const static int pathHeight = 70;
     }
 }
 
--(id)initWithFile:(NSString *)file {
+-(id)initWithName:(NSString *)name {
     if(self = [super init]) {
         _characters = [[NSMutableArray alloc] init];
-//        _castles = [[NSMutableArray alloc] initWithCapacity:2];
         
-        // Background image
-        CCSprite *map1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
-        map1.anchorPoint = ccp(0, 0);
-        CCSprite *map1_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
-        map1_1.anchorPoint = ccp(0, 0);
-        CCSprite *map2 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
-        map2.anchorPoint = ccp(0, 0);
-        CCSprite *map2_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
-        map2_1.anchorPoint = ccp(0, 0);
-        CCSprite *map3 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
-        map3.anchorPoint = ccp(0, 0);
-        CCSprite *map3_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
-        map3_1.anchorPoint = ccp(0, 0);
-        
-        CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
-        // To fullfill the screen
-        background.contentSize = CGSizeMake(map3.contentSize.width * 2, map3.contentSize.height + 21);
-        [map3 addChild:background z:-5];
-        
-       	// Create a void Node, parent Node
-		CCParallaxNode *voidNode = [CCParallaxNode node];
-		
-		// We add our children "layers"(sprite) to void node
-        [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(0,0)];
-        [voidNode addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(map1.boundingBox.size.width-1, 0)];
-		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(0.75f, 1.f) positionOffset:ccp(0,90)];
-        [voidNode addChild:map2_1 z:-2 parallaxRatio:ccp(0.75f, 1.0f) positionOffset:ccp(map2.boundingBox.size.width-1, 90)];
-        [voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(0,100)];
-        [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(map3.boundingBox.size.width-1, 100)];
-        
-        [self addChild:voidNode];
-        
-        _boundaryX = map1.boundingBox.size.width*2;
-        _boundaryY = map1.boundingBox.size.height*2;
+        [self setMap:name];
         
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
         [self addChild:_cameraControl];
         
         self.isTouchEnabled = YES;
-        
-        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
-        _hero.player = 1;
-        [_hero.sprite addBloodSprite];
-        [self addCharacter:_hero];
-        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
         
 //        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
 //        longPress.minimumPressDuration = 0.2f;
@@ -83,6 +43,19 @@ const static int pathHeight = 70;
 //        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
     }
     return self;
+}
+
+-(void)setMap:(NSString *)name {
+    // You must set map sprite and contentSize
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])] userInfo:nil];
+}
+
+-(int)boundaryX {
+    return self.contentSize.width;
+}
+
+-(int)boundaryY {
+    return self.contentSize.height;
 }
 
 -(void)registerWithTouchDispatcher {
@@ -132,7 +105,6 @@ const static int pathHeight = 70;
     
     [self addChild:castle.sprite];
     [_characters addObject:castle];
-//    [_castles setObject:castle atIndexedSubscript:castle.player - 1];
 }
 
 -(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
@@ -180,13 +152,10 @@ const static int pathHeight = 70;
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = NO;
     return YES;
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = YES;
-    
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
@@ -197,28 +166,15 @@ const static int pathHeight = 70;
     
     [_cameraControl moveBy:ccpMult(diff, 0.5)];
     
-    if (isFollow) {
-        isFollow = NO;
-        [_cameraControl stopFollow];
-    }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     // map location
-    CGPoint location = [self convertTouchToNodeSpace:touch];
+//    CGPoint location = [self convertTouchToNodeSpace:touch];
     
 //    // win location
 //    location = [touch locationInView:[CCDirector sharedDirector].view];
 //    location = [[CCDirector sharedDirector] convertToGL: location];
-    
-    if (!isMove) {
-        _hero.ai.targetPoint = location;
-        
-        if (isFollow == NO) {
-            isFollow = YES;
-            [_cameraControl followCharacter:_hero];
-        }
-    }
 }
 
 // By bounding box
