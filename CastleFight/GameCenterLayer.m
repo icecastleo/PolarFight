@@ -21,14 +21,16 @@
         
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCMenuItem *showAchievement = [CCMenuItemFont itemWithString:@"Show Achievement" target:gkHelper selector:@selector(showAchievements)];
-        
         CCMenuItem *showLeaderboard = [CCMenuItemFont itemWithString:@"Show LeaderBoard" target:gkHelper selector:@selector(showLeaderboard)];
         
-        CCMenu *menu = [CCMenu menuWithItems:showLeaderboard,showAchievement, nil];
+        CCMenuItem *showAchievement = [CCMenuItemFont itemWithString:@"Show Achievement" target:gkHelper selector:@selector(showAchievements)];
+        
+        CCMenuItem *resetAchievement = [CCMenuItemFont itemWithString:@"Reset Achievement" target:gkHelper selector:@selector(resetAchievements)];
+        
+        CCMenu *menu = [CCMenu menuWithItems:showLeaderboard,showAchievement,resetAchievement, nil];
         
         [menu alignItemsVerticallyWithPadding:30];
-		[menu setPosition:ccp(size.width/2, size.height/2 - 20)];
+		[menu setPosition:ccp(size.width/2, size.height/2)];
 		
 		// Add the menu to the layer
 		[self addChild:menu];
