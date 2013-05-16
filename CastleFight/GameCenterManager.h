@@ -37,7 +37,6 @@
 @interface GameCenterManager : NSObject <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate, GKMatchDelegate, GKMatchmakerViewControllerDelegate>
 {
 	id<GameCenterManagerDelegate> delegate;
-	BOOL isGameCenterAvailable;
 	NSError* lastError;
 	
 	NSMutableDictionary* achievements;
@@ -47,7 +46,6 @@
 }
 
 @property (nonatomic, retain) id<GameCenterManagerDelegate> delegate;
-@property (nonatomic, readonly) BOOL isGameCenterAvailable;
 @property (nonatomic, readonly) NSError* lastError;
 @property (nonatomic, readonly) NSMutableDictionary* achievements;
 @property (nonatomic, readonly) GKMatch* currentMatch;

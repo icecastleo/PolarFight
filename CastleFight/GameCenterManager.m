@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 
 @interface GameCenterManager (Private)
--(void) registerForLocalPlayerAuthChange;
--(void) setLastError:(NSError*)error;
+-(void)registerForLocalPlayerAuthChange;
+-(void)setLastError:(NSError*)error;
+-(BOOL)isGameCenterAvailable;
 @end
 
 @implementation GameCenterManager
@@ -18,27 +19,29 @@
 #pragma mark Init & Dealloc
 
 @synthesize delegate;
-@synthesize isGameCenterAvailable, matchStarted;
+@synthesize matchStarted;
 @synthesize lastError;
 @synthesize achievements;
 @synthesize currentMatch;
+
+-(BOOL)isGameCenterAvailable
+{
+	// check for presence of GKLocalPlayer API
+	Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
+	
+	// check if the device is running iOS 4.1 or later
+	NSString *reqSysVer = @"4.1";
+	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+	BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
+	
+	return (gcClass && osVersionSupported);
+}
 
 -(id) init
 {
 	if ((self = [super init]))
 	{
-		// Test for Game Center availability
-		Class gameKitLocalPlayerClass = NSClassFromString(@"GKLocalPlayer");
-		BOOL isLocalPlayerAvailable = (gameKitLocalPlayerClass != nil);
-		
-		// Test if device is running iOS 4.1 or higher
-		NSString* reqSysVer = @"4.1";
-		NSString* currSysVer = [UIDevice currentDevice].systemVersion;
-		BOOL isOSVer41 = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
-		
-		isGameCenterAvailable = (isLocalPlayerAvailable && isOSVer41);
-		NSLog(@"GameCenter available = %@", isGameCenterAvailable ? @"YES" : @"NO");
-		
+		[self isGameCenterAvailable];
 		[self registerForLocalPlayerAuthChange];
 	}
 	
@@ -69,7 +72,7 @@
 
 -(void) authenticateLocalPlayer
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
     
 	GKLocalPlayer* localPlayer = GKLocalPlayer.localPlayer;
@@ -99,7 +102,7 @@
 
 -(void) registerForLocalPlayerAuthChange
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	// Register to receive notifications when local player authentication status changes
@@ -114,7 +117,7 @@
 
 -(void) getLocalPlayerFriends
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKLocalPlayer* localPlayer = GKLocalPlayer.localPlayer;
@@ -134,7 +137,7 @@
 
 -(void) getPlayerInfo:(NSArray*)playerList
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
     
 	if (playerList.count > 0)
@@ -155,7 +158,7 @@
 
 -(void) submitScore:(int64_t)score category:(NSString*)category
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKScore* gkScore = [[GKScore alloc] initWithCategory:category];
@@ -179,7 +182,7 @@
 					 playerScope:(GKLeaderboardPlayerScope)playerScope
 					   timeScope:(GKLeaderboardTimeScope)timeScope
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKLeaderboard* leaderboard = nil;
@@ -222,7 +225,7 @@
 
 -(void) loadAchievements
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[GKAchievement loadAchievementsWithCompletionHandler:^(NSArray* loadedAchievements, NSError* error)
@@ -252,7 +255,7 @@
 
 -(GKAchievement*) getAchievementByID:(NSString*)identifier
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return nil;
 	
 	// Try to get an existing achievement with this identifier
@@ -270,7 +273,7 @@
 
 -(void) reportAchievementWithID:(NSString*)identifier percentComplete:(float)percent
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKAchievement* achievement = [self getAchievementByID:identifier];
@@ -293,7 +296,7 @@
 
 -(void) resetAchievements
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[achievements removeAllObjects];
@@ -335,7 +338,7 @@
 
 -(void) initMatchInvitationHandler
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite* acceptedInvite, NSArray* playersToInvite)
@@ -360,7 +363,7 @@
 
 -(void) findMatchForRequest:(GKMatchRequest*)request
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[[GKMatchmaker sharedMatchmaker] findMatchForRequest:request
@@ -381,7 +384,7 @@
 
 -(void) cancelMatchmakingRequest
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[[GKMatchmaker sharedMatchmaker] cancel];
@@ -389,7 +392,7 @@
 
 -(void) addPlayersToMatch:(GKMatchRequest*)request
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	if (currentMatch == nil)
@@ -411,7 +414,7 @@
 
 -(void) queryMatchmakingActivity
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	[[GKMatchmaker sharedMatchmaker] queryActivityWithCompletionHandler:^(NSInteger activity, NSError* error)
@@ -457,7 +460,7 @@
 
 -(void) sendDataToAllPlayers:(void*)data sizeInBytes:(NSUInteger)sizeInBytes
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	NSError* error = nil;
@@ -512,7 +515,7 @@
 
 -(void) showLeaderboard
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKLeaderboardViewController* leaderboardVC = [[GKLeaderboardViewController alloc] init];
@@ -536,7 +539,7 @@
 
 -(void) showAchievements
 {
-	if (isGameCenterAvailable == NO)
+	if ([self isGameCenterAvailable] == NO)
 		return;
 	
 	GKAchievementViewController* achievementsVC = [[GKAchievementViewController alloc] init];

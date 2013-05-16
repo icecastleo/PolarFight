@@ -211,11 +211,5 @@
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
-//game center login view only support portrait view. it's a bug now.
-- (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow*)window
-{
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-
 @end
 
