@@ -112,9 +112,29 @@
                                              selector:@selector(showEarnedCurrencyAlert:)
                                                  name:TJC_TAPPOINTS_EARNED_NOTIFICATION
                                                object:nil];
+    // This method asks the tapjoy server for the fullscreen ad object.
+    [TapjoyConnect getDailyRewardAd];
+  
+    // A notification method must be set to retrieve the fullscreen ad object.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDailyRewardAd:) name:TJC_DAILY_REWARD_RESPONSE_NOTIFICATION object:nil];
+    //[FileManager sharedFileManager].userMoney+=100;
+   
 	return YES;
 }
 
+///tap joy 
+- (void)getDailyRewardAd:(NSNotification*)notifyObj
+{
+    // Displays a daily reward unit
+    [TapjoyConnect showDailyRewardAdWithViewController:[CCDirector sharedDirector] ];
+    
+    // This method requests the tapjoy server for current virtual currency of the user.
+    [TapjoyConnect getTapPoints];
+    
+    // OR
+    // This is used when you want to add the daily reward unit to an existing view controller.
+    //[TapjoyConnect showDailyRewardAdWithViewController:self];
+}
 -(void)getUpdatedPoints:(NSNotification*)notifyObj
 {
     NSNumber *tapPoints = notifyObj.object;
@@ -191,12 +211,6 @@
 -(void) applicationSignificantTimeChange:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
-}
-
-//game center login view only support portrait view. it's a bug now.
-- (NSUInteger)application:(UIApplication*)application supportedInterfaceOrientationsForWindow:(UIWindow*)window
-{
-    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end
