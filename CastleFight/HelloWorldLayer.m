@@ -44,93 +44,52 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-		
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World Label!" fontName:@"Marker Felt" fontSize:32];
-
+        
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/4 * 3);
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
-		
-		// Default font size will be 20 points.
-		[CCMenuItemFont setFontSize:20];
-		
-		CCMenuItem *startMenu = [CCMenuItemFont itemWithString:@"Start!" block:^(id sender) {
-//            [[CCDirector sharedDirector] replaceScene:[[StageLayer alloc] initWithPage:1]];
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"mainbutton.plist"];
+        
+        // GameCenter 
+        GameCenterManager *gkHelper = [FileManager sharedFileManager].gameCenterManager;
+        gkHelper.delegate = self;
+        
+        CCMenuItem *startMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_down.png"] block:^(id sender) {
             [[CCDirector sharedDirector] replaceScene:[[MainScene alloc] init]];
         }];
         
-        // Jump Test Code
+        float width = size.width - startMenuItem.boundingBox.size.width;
+        float height = startMenuItem.boundingBox.size.height;
+        startMenuItem.position = ccp(width, height);
         
-//        CCSprite *sprite = [CCSprite spriteWithFile:@"Bomb_01.png"];
-//        sprite.position = ccp(50, 50);
-//        [self addChild:sprite];
-//        
-//        CCMenuItem *zTest = [CCMenuItemFont itemWithString:@"zTest" block:^(id sender) {
-//
-//            CCActionInterval *jump = [CCSpawn actions: [CCEaseOut actionWithAction:[CCMoveBy actionWithDuration:0.6 position:ccp(40, 10)] rate:1.5], nil];
-//
-//            CCSprite *s = [CCSprite spriteWithFile:@"blood_red.png"];
-//            
-//            CCAnimation *animation = [CCAnimation animationWithSpriteFrames:@[[CCSpriteFrame frameWithTexture:s.texture rect:s.textureRect]] delay:0.6];
-//            animation.restoreOriginalFrame = YES;
-//            CCAnimate *animate = [CCAnimate actionWithAnimation:animation];
-//            
-//            CCSprite *test = [CCSprite spriteWithFile:@"Bomb_01.png"];
-//            test.position = ccp(sprite.boundingBox.size.width / 2, sprite.boundingBox.size.height / 2);
-//            [sprite addChild:test];
-//
-//            [test runAction:[CCSequence actions:[CCEaseOut actionWithAction:[CCMoveBy actionWithDuration:0.3 position:ccp(0, 125)] rate:3], [CCEaseIn actionWithAction: [CCMoveBy actionWithDuration:0.3 position:ccp(0, -125)] rate:3],[CCFadeOut actionWithDuration:0.01], nil]];
-//            
-//            [sprite runAction:[CCSpawn actions:jump, animate, nil] ];
-//        }];
-//        
-//        [self runAction:[CCFollow actionWithTarget:sprite]];
-//        
-//        [self addChild:[CCSprite spriteWithFile:@"map.png"] z:-1];
-//        
-//		CCMenu *menu = [CCMenu menuWithItems:defaultMenu, selectScene, zTest, nil];
-		
-        CCMenu *menu = [CCMenu menuWithItems:startMenu, nil];
+        CCMenuItem *gameCenterMenuItem = [CCMenuItemImage itemWithNormalImage:@"game-center-icon.jpg" selectedImage:@"game-center-icon.jpg" target:gkHelper selector:@selector(showLeaderboard)];
+        width = size.width - gameCenterMenuItem.boundingBox.size.width;
+        height = size.height - gameCenterMenuItem.boundingBox.size.height;
+        gameCenterMenuItem.position = ccp(width, height);
         
-        [menu alignItemsVerticallyWithPadding:30];
-		[menu setPosition:ccp(size.width/2, size.height/2 - 20)];
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, nil];
+        menu.position = CGPointZero;
         
-		// Add the menu to the layer
-		[self addChild:menu];
+        [self addChild:menu];
         
-        // GameCenter Button
-        [self setGameCenterButton];
+        CCSprite *background = [CCSprite spriteWithFile:@"bg/main/bg_main.png"];
+        background.anchorPoint = ccp(0.5, 0);
+        background.position = ccp(size.width / 2, 0);
+        [self addChild:background z:-3];
+        
+        CCSprite *background1 = [CCSprite spriteWithFile:@"bg/main/bg_main_01.png"];
+        background1.anchorPoint = ccp(0.5, 0);
+        background1.position = ccp(size.width / 2, 0);
+        [self addChild:background1 z:-1];
+        
+        CCSprite *background2 = [CCSprite spriteWithFile:@"bg/main/bg_main_02.png"];
+        background2.anchorPoint = ccp(0.5, 0);
+        background2.position = ccp(size.width / 3, 0);
+        [self addChild:background2 z:-2];
         
 	}
 	return self;
-}
-
--(void)setGameCenterButton {
-    
-    // GameCenter Button
-    GameCenterManager *gkHelper = [FileManager sharedFileManager].gameCenterManager;
-    gkHelper.delegate = self;
-    
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCMenuItem *gameCenterMenuItem = [CCMenuItemImage
-                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
-                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
-                                 target:gkHelper selector:@selector(showLeaderboard)];
-    
-    float width = winSize.width - gameCenterMenuItem.boundingBox.size.width/2;
-    float height = winSize.height - gameCenterMenuItem.boundingBox.size.height/2;
-    gameCenterMenuItem.position = ccp(width, height);
-    
-    CCMenu *gameCenterMenu = [CCMenu menuWithItems:gameCenterMenuItem, nil];
-    gameCenterMenu.position = CGPointZero;
-    [self addChild:gameCenterMenu];
 }
 
 @end

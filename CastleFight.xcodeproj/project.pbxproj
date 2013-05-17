@@ -149,6 +149,7 @@
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
+		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E2B4AE16A7F41C006CB5B4 /* CharacterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */; };
 		37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C0711726872C00541F87 /* GameCenterLayer.m */; };
@@ -669,6 +670,7 @@
 		37E0DB8817143C110039C94C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		37E0DB8A17143C1D0039C94C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		37E0DB8C17143C280039C94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		37E20C36174621C80017231D /* game-center-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-center-icon.jpg"; sourceTree = "<group>"; };
 		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
@@ -1612,6 +1614,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				37E20C36174621C80017231D /* game-center-icon.jpg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
 				9B98481516EDD27600D3D55D /* bg */,
 				9B9848D616F09D5A00D3D55D /* font */,
@@ -2773,6 +2776,7 @@
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
 				9B293EBE17170CA800C1E728 /* noise.png in Resources */,
 				2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */,
+				37E20C37174621C90017231D /* game-center-icon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
