@@ -15,6 +15,7 @@
 #import "SelectLayer.h"
 #import "StageLayer.h"
 #import "MainScene.h"
+#import "FileManager.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -99,11 +100,37 @@
         
         [menu alignItemsVerticallyWithPadding:30];
 		[menu setPosition:ccp(size.width/2, size.height/2 - 20)];
-		
+        
 		// Add the menu to the layer
 		[self addChild:menu];
+        
+        // GameCenter Button
+        [self setGameCenterButton];
+        
 	}
 	return self;
+}
+
+-(void)setGameCenterButton {
+    
+    // GameCenter Button
+    GameCenterManager *gkHelper = [FileManager sharedFileManager].gameCenterManager;
+    gkHelper.delegate = self;
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CCMenuItem *gameCenterMenuItem = [CCMenuItemImage
+                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
+                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
+                                 target:gkHelper selector:@selector(showLeaderboard)];
+    
+    float width = winSize.width - gameCenterMenuItem.boundingBox.size.width/2;
+    float height = winSize.height - gameCenterMenuItem.boundingBox.size.height/2;
+    gameCenterMenuItem.position = ccp(width, height);
+    
+    CCMenu *gameCenterMenu = [CCMenu menuWithItems:gameCenterMenuItem, nil];
+    gameCenterMenu.position = CGPointZero;
+    [self addChild:gameCenterMenu];
 }
 
 @end
