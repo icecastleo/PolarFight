@@ -2944,6 +2944,8 @@
 				9BBAECE816FF98D200D0BDC3 /* blood_white-hd.png in Resources */,
 				9B293EBE17170CA800C1E728 /* noise.png in Resources */,
 				2D055979171579F600F82A08 /* TapjoyResources.bundle in Resources */,
+				9B73C782172E7E69008575E5 /* background-hd.png in Resources */,
+				9B73C783172E7E69008575E5 /* background.png in Resources */,
 				37E20C37174621C90017231D /* game-center-icon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
