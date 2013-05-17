@@ -51,7 +51,7 @@
         range.rangeSprite.position = ccpAdd(range.rangeSprite.position, ccpMult(vector, speed));
     }
     
-    NSArray *effectTargets = [range getEffectTargets];
+    NSArray *effectTargets = [range getEffectEntities];
     
     if(effectTargets.count > 0) {
         if ([delegate respondsToSelector:@selector(effectTarget:atPosition:)]) {

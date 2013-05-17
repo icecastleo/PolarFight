@@ -12,13 +12,10 @@
 
 @implementation Attribute
 
-@synthesize value = _value;
 @dynamic currentValue;
 
--(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c {
+-(id)initWithQuadratic:(float)a linear:(float)b constantTerm:(float)c isFluctuant:(BOOL)isFluctuant {
     if(self = [super init]) {
-        _type = aType;
-        
         quadratic = a;
         linear = b;
         constantTerm = c;
@@ -26,56 +23,57 @@
         bonus = 0;
         multiplier = 1;
         
-        if (_type < kCharacterAttributeFluidBoundary) {
-            _dependent = [[DependentAttribute alloc] initWithAttribute:self];
+        if (isFluctuant) {
+            fluctuant = [[FluctuantAttribute alloc] initWithAttribute:self];
         }
+        
+        // Set default value
+        [self updateValueWithLevel:0];
     }
     return self;
 }
 
 -(id)initWithDictionary:(NSDictionary *)dic {
-    CharacterAttributeType attributeType = [self getAttributeTypeFromAttributeName:[dic objectForKey:@"name"]];
-    int tempQuadratic = [[dic objectForKey:@"a"] intValue];
-    int tempLinear = [[dic objectForKey:@"b"] intValue];
-    int tempConstantTerm = [[dic objectForKey:@"c"] intValue];
+    float a;
+    float b;
+    float c = [[dic objectForKey:@"c"] intValue];
     
-    // FIXME: Abstract attribute and define type by dic
-    if (attributeType < kCharacterAttributeUpdateBoundary) {
-        return [[AccumulateAttribute alloc] initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
-    }
+    NSRange range = [[dic objectForKey:@"b"] rangeOfString:@"c"];
     
-    return [self initWithType:attributeType withQuadratic:tempQuadratic withLinear:tempLinear withConstantTerm:tempConstantTerm];
-}
-
--(CharacterAttributeType)getAttributeTypeFromAttributeName:(NSString *)attributeName {
-    if([attributeName isEqualToString:@"maxHp"]) {
-        return kCharacterAttributeHp;
-    } else if ([attributeName isEqualToString:@"maxMp"]) {
-        return kCharacterAttributeMp;
-    } else if ([attributeName isEqualToString:@"attack"]) {
-        return kCharacterAttributeAttack;
-    } else if ([attributeName isEqualToString:@"defense"]) {
-        return kCharacterAttributeDefense;
-    } else if ([attributeName isEqualToString:@"agile"]) {
-        return kCharacterAttributeAgile;
-    } else if ([attributeName isEqualToString:@"speed"]) {
-        return kCharacterAttributeSpeed;
-    } else if ([attributeName isEqualToString:@"moveTime"]) {
-        return kCharacterAttributeTime;
-    } else if ([attributeName isEqualToString:@"updatePrice"]) {
-        return kCharacterAttributeUpdatePrice;
+    if (range.location != NSNotFound) {
+        float temp = [[[dic objectForKey:@"b"] substringToIndex:range.location] floatValue];
+        b = temp * c;
     } else {
-        [NSException raise:@"Invalid attribute name" format:@"Unknown attribute %@",attributeName];
-        return -1;
+        b = [[dic objectForKey:@"b"] intValue];
     }
+    
+    range = [[dic objectForKey:@"a"] rangeOfString:@"c"];
+    
+    if (range.location != NSNotFound) {
+        float temp = [[[dic objectForKey:@"a"] substringToIndex:range.location] floatValue];
+        a = temp * c;
+    } else {
+        range = [[dic objectForKey:@"a"] rangeOfString:@"b"];
+        
+        if (range.location != NSNotFound) {
+            float temp = [[[dic objectForKey:@"a"] substringToIndex:range.location] floatValue];
+            a = temp * b;
+        } else {
+            a = [[dic objectForKey:@"a"] intValue];
+        }
+    }
+    
+    BOOL isFluctuant = [[dic objectForKey:@"isFluctuant"] boolValue];
+     
+    return [self initWithQuadratic:a linear:b constantTerm:c isFluctuant:isFluctuant];
 }
 
 -(void)addBonus:(float)aBonus {
     bonus += aBonus;
     [self updateValue];
     
-    if (_dependent != nil) {
-        _dependent.value += aBonus * multiplier;
+    if (fluctuant != nil) {
+        fluctuant.value += aBonus * multiplier;
     }
 }
 
@@ -83,8 +81,8 @@
     bonus -= aBonus;
     [self updateValue];
     
-    if(_dependent != nil) {
-        _dependent.value = MAX(1, _dependent.value - aBonus * multiplier);
+    if(fluctuant != nil) {
+        fluctuant.value = MAX(1, fluctuant.value - aBonus * multiplier);
     }
 }
 
@@ -94,8 +92,8 @@
     multiplier *= aMultiplier;
     [self updateValue];
     
-    if(_dependent != nil) {
-        _dependent.value *= multiplier;
+    if(fluctuant != nil) {
+        fluctuant.value *= multiplier;
     }
 }
 
@@ -105,8 +103,8 @@
     multiplier /= aMultiplier;
     [self updateValue];
     
-    if(_dependent != nil) {
-        _dependent.value /= multiplier;
+    if(fluctuant != nil) {
+        fluctuant.value /= multiplier;
     }
 }
 
@@ -123,19 +121,19 @@
     [self updateValue];
     
     // Set to max when level change
-    _dependent.value = _value;
+    fluctuant.value = _value;
 }
 
 -(void)setCurrentValue:(int)currentValue {
-    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
+    NSAssert(fluctuant != nil, @"Try to use current value without a dependent attribute");
     
-    _dependent.value = currentValue;
+    fluctuant.value = currentValue;
 }
 
 -(int)currentValue {
-    NSAssert(_dependent != nil, @"Try to use current value without a dependent attribute");
+    NSAssert(fluctuant != nil, @"Try to use current value without a dependent attribute");
     
-    return _dependent.value;
+    return fluctuant.value;
 }
 
 @end

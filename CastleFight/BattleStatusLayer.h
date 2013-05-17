@@ -17,7 +17,7 @@
 }
 
 -(id)initWithBattleController:(BattleController *)controller;
--(void)updateFood:(int)anInt;
+-(void)updateFood:(int)foodNumber;
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 
 @end

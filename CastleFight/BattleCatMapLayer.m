@@ -13,11 +13,11 @@
 
 -(id)initWithName:(NSString *)name {
     if (self = [super initWithName:name]) {
-        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
-        _hero.player = 1;
-        [_hero.sprite addBloodSprite];
-        [self addCharacter:_hero];
-        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
+//        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
+//        _hero.player = 1;
+//        [_hero.sprite addBloodSprite];
+//        [self addCharacter:_hero];
+//        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
     }
     return self;
 }
@@ -58,47 +58,47 @@
     self.contentSize = CGSizeMake(map1.boundingBox.size.width*2, map1.boundingBox.size.height);
 }
 
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = NO;
-    return YES;
-}
-
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = YES;
-    
-    CGPoint location = [touch locationInView:touch.view];
-    location = [[CCDirector sharedDirector] convertToGL:location];
-    
-    CGPoint lastLocation = [touch previousLocationInView:touch.view];
-    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
-    
-    CGPoint diff = ccpSub(lastLocation, location);
-    
-    [self.cameraControl moveBy:ccpMult(diff, 0.5)];
-    
-    if (isFollow) {
-        isFollow = NO;
-        [self.cameraControl stopFollow];
-    }
-}
-
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    // map location
-    CGPoint location = [self convertTouchToNodeSpace:touch];
-    
-    //    // win location
-    //    location = [touch locationInView:[CCDirector sharedDirector].view];
-    //    location = [[CCDirector sharedDirector] convertToGL: location];
-    
-    if (!isMove) {
-        _hero.ai.targetPoint = location;
-        
-        if (isFollow == NO) {
-            isFollow = YES;
-            [self.cameraControl followCharacter:_hero];
-        }
-    }
-}
+//-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+//    isMove = NO;
+//    return YES;
+//}
+//
+//-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+//    isMove = YES;
+//    
+//    CGPoint location = [touch locationInView:touch.view];
+//    location = [[CCDirector sharedDirector] convertToGL:location];
+//    
+//    CGPoint lastLocation = [touch previousLocationInView:touch.view];
+//    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+//    
+//    CGPoint diff = ccpSub(lastLocation, location);
+//    
+//    [self.cameraControl moveBy:ccpMult(diff, 0.5)];
+//    
+//    if (isFollow) {
+//        isFollow = NO;
+//        [self.cameraControl stopFollow];
+//    }
+//}
+//
+//-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+//    // map location
+//    CGPoint location = [self convertTouchToNodeSpace:touch];
+//    
+//    //    // win location
+//    //    location = [touch locationInView:[CCDirector sharedDirector].view];
+//    //    location = [[CCDirector sharedDirector] convertToGL: location];
+//    
+//    if (!isMove) {
+//        _hero.ai.targetPoint = location;
+//        
+//        if (isFollow == NO) {
+//            isFollow = YES;
+//            [self.cameraControl followCharacter:_hero];
+//        }
+//    }
+//}
 
 
 @end

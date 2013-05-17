@@ -9,19 +9,41 @@
 #import "ShopUnitSprite.h"
 #import "Character.h"
 #import "FileManager.h"
+#import "CharacterComponent.h"
+#import "LevelComponent.h"
+#import "AttackerComponent.h"
+#import "DefenderComponent.h"
+#import "UpgradePriceComponent.h"
 
+// Use for status bar
 const static float hp_max = 2000.0;
 const static float attack_max = 200.0;
 
+@interface ShopUnitSprite() {
+    CharacterInitData *data;
+    
+    CharacterComponent *character;
+    LevelComponent *level;
+    AttackerComponent *attack;
+    DefenderComponent *defense;
+    UpgradePriceComponent *price;
+}
+
+@end
+
 @implementation ShopUnitSprite
 
-@synthesize character;
+//@synthesize character;
 
--(id)initWithCharacter:(Character *)aCharacter {
+-(id)initWithEntity:(Entity *)entity characterInitData:(CharacterInitData *)data {
     if (self = [super init]) {
-        character = aCharacter;
+        character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+        level = (LevelComponent *)[entity getComponentOfClass:[LevelComponent class]];
+        attack = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
+        defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+        price = (UpgradePriceComponent *)[entity getComponentOfClass:[UpgradePriceComponent class]];
         
-        CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[character.characterId intValue]]];
+        CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[character.cid intValue]]];
         sprite.anchorPoint = ccp(0, 0.5);
         sprite.position = ccp(18, self.boundingBox.size.height/2);
         [self addChild:sprite];
@@ -38,7 +60,7 @@ const static float attack_max = 200.0;
         hp.scale = 0.5;
         [self addChild:hp];
         
-        lv = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"LV: %d/20",character.level] fntFile:@"font/jungle_24_o.fnt"];
+        lv = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"LV: %d/20",level.level] fntFile:@"font/jungle_24_o.fnt"];
         lv.anchorPoint = ccp(0, 0);
         lv.position = ccp(hp.position.x, hp.position.y + hp.boundingBox.size.height + 3);
         lv.scale = 0.5;
@@ -57,10 +79,10 @@ const static float attack_max = 200.0;
         hp_bar = [CCSprite spriteWithSpriteFrameName:@"info_bar_hp.png"];
         hp_bar.anchorPoint = ccp(0, 0.5);
         hp_bar.position = ccp(1.5, hp.boundingBox.size.height/2);
-        hp_bar.scaleX = [character getAttribute:kCharacterAttributeHp].value / hp_max;
+        hp_bar.scaleX = defense.hp.value / hp_max;
         [hp_bg addChild:hp_bar];
         
-        hp_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeHp].value] fntFile:@"font/cooper_20_o.fnt"];
+        hp_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",defense.hp.value] fntFile:@"font/cooper_20_o.fnt"];
         hp_font.anchorPoint = ccp(0, 0.5);
         hp_font.position = ccp(3, hp.boundingBox.size.height/2 + 3);
         hp_font.scale = 0.5;
@@ -74,10 +96,10 @@ const static float attack_max = 200.0;
         pow_bar = [CCSprite spriteWithSpriteFrameName:@"info_bar_pow.png"];
         pow_bar.anchorPoint = ccp(0, 0.5);
         pow_bar.position = ccp(1.5, pow.boundingBox.size.height/2);
-        pow_bar.scaleX = [character getAttribute:kCharacterAttributeAttack].value / attack_max;
+        pow_bar.scaleX = attack.attack.value / attack_max;
         [pow_bg addChild:pow_bar];
         
-        pow_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeAttack].value] fntFile:@"font/cooper_20_o.fnt"];
+        pow_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",attack.attack.value] fntFile:@"font/cooper_20_o.fnt"];
         pow_font.anchorPoint = ccp(0, 0.5);
         pow_font.position = ccp(3, pow.boundingBox.size.height/2 + 3);
         pow_font.scale = 0.5;
@@ -96,10 +118,10 @@ const static float attack_max = 200.0;
         hp_next_bar = [CCSprite spriteWithSpriteFrameName:@"info_bar_hp.png"];
         hp_next_bar.anchorPoint = ccp(0, 0.5);
         hp_next_bar.position = ccp(1.5, hp.boundingBox.size.height/2);
-        hp_next_bar.scaleX = [[character getAttribute:kCharacterAttributeHp] valueWithLevel:character.level + 1] / hp_max;
+        hp_next_bar.scaleX = [defense.hp valueWithLevel:level.level + 1] / hp_max;
         [hp_next_bg addChild:hp_next_bar];
         
-        hp_next_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[[character getAttribute:kCharacterAttributeHp] valueWithLevel:character.level + 1]] fntFile:@"font/cooper_20_o.fnt"];
+        hp_next_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[defense.hp valueWithLevel:level.level + 1]] fntFile:@"font/cooper_20_o.fnt"];
         hp_next_font.anchorPoint = ccp(0, 0.5);
         hp_next_font.position = ccp(3, hp.boundingBox.size.height/2 + 3);
         hp_next_font.scale = 0.5;
@@ -113,10 +135,10 @@ const static float attack_max = 200.0;
         pow_next_bar = [CCSprite spriteWithSpriteFrameName:@"info_bar_pow.png"];
         pow_next_bar.anchorPoint = ccp(0, 0.5);
         pow_next_bar.position = ccp(1.5, pow.boundingBox.size.height/2);
-        pow_next_bar.scaleX = [[character getAttribute:kCharacterAttributeAttack] valueWithLevel:character.level + 1] / attack_max;
+        pow_next_bar.scaleX = [attack.attack valueWithLevel:level.level + 1] / attack_max;
         [pow_next_bg addChild:pow_next_bar];
         
-        pow_next_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[[character getAttribute:kCharacterAttributeAttack] valueWithLevel:character.level + 1]] fntFile:@"font/cooper_20_o.fnt"];
+        pow_next_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[attack.attack valueWithLevel:level.level + 1]] fntFile:@"font/cooper_20_o.fnt"];
         pow_next_font.anchorPoint = ccp(0, 0.5);
         pow_next_font.position = ccp(3, pow.boundingBox.size.height/2 + 3);
         pow_next_font.scale = 0.5;
@@ -139,7 +161,7 @@ const static float attack_max = 200.0;
         diamond.scale = 0.75;
         [self addChild:diamond];
         
-        diamond_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeUpdatePrice].value] fntFile:@"font/cooper_20_o.fnt"];
+        diamond_font = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",price.price.value] fntFile:@"font/cooper_20_o.fnt"];
         diamond_font.anchorPoint = ccp(0, 0);
         diamond_font.position = ccp(diamond.position.x + diamond.boundingBox.size.width + 2, diamond.position.y);
         diamond_font.scale = 0.5;
@@ -156,34 +178,33 @@ const static float attack_max = 200.0;
 }
 
 -(void)upgrade {
-    int upgradePrice = [character getAttribute:kCharacterAttributeUpdatePrice].value;
+    int upgradePrice = price.price.value;
     
     if ([FileManager sharedFileManager].userMoney >= upgradePrice) {
         [FileManager sharedFileManager].userMoney -= upgradePrice;
         
-        character.level += 1;
-        [[FileManager sharedFileManager] updatePlayerCharacter:character];
+        level.level++;
+        data.level++;
         
         [self updateUnitSprite];
     }
 }
 
 -(void)updateUnitSprite {
-    [lv setString:[NSString stringWithFormat:@"LV: %d/20",character.level]];
+    [lv setString:[NSString stringWithFormat:@"LV: %d/20",level.level]];
     
-    hp_bar.scaleX = [character getAttribute:kCharacterAttributeHp].value / hp_max;
-    [hp_font setString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeHp].value]];
-    pow_bar.scaleX = [character getAttribute:kCharacterAttributeAttack].value / attack_max;
-    [pow_font setString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeAttack].value]];
+    hp_bar.scaleX = defense.hp.value / hp_max;
+    [hp_font setString:[NSString stringWithFormat:@"%d",defense.hp.value]];
+    pow_bar.scaleX = attack.attack.value / attack_max;
+    [pow_font setString:[NSString stringWithFormat:@"%d",attack.attack.value]];
     
-    hp_next_bar.scaleX = [[character getAttribute:kCharacterAttributeHp] valueWithLevel:character.level + 1] / hp_max;
-    [hp_next_font setString:[NSString stringWithFormat:@"%d",[[character getAttribute:kCharacterAttributeHp] valueWithLevel:character.level + 1]]];
-    pow_next_bar.scaleX = [[character getAttribute:kCharacterAttributeAttack] valueWithLevel:character.level + 1] / attack_max;
-    [pow_next_font setString:[NSString stringWithFormat:@"%d",[[character getAttribute:kCharacterAttributeAttack] valueWithLevel:character.level + 1]]];
+    hp_next_bar.scaleX = [defense.hp valueWithLevel:level.level + 1] / hp_max;
+    [hp_next_font setString:[NSString stringWithFormat:@"%d",[defense.hp valueWithLevel:level.level + 1]]];
+    pow_next_bar.scaleX = [attack.attack valueWithLevel:level.level + 1] / attack_max;
+    [pow_next_font setString:[NSString stringWithFormat:@"%d",[attack.attack valueWithLevel:level.level + 1]]];
     
-    // TODO: Set visible
-//    upgrade;
-    [diamond_font setString:[NSString stringWithFormat:@"%d",[character getAttribute:kCharacterAttributeUpdatePrice].value]];
+    // TODO: Set max level to invisible
+    [diamond_font setString:[NSString stringWithFormat:@"%d",price.price.value]];
 }
 
 @end

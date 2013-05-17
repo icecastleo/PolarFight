@@ -9,7 +9,7 @@
 #import "BaseAI.h"
 #import "AIState.h"
 #import "Character.h"
-#import "AIStateWalking.h"
+#import "AIStateWalk.h"
 @implementation BaseAI;
 @synthesize character;
 //@synthesize  _currentState;

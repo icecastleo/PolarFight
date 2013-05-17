@@ -16,7 +16,6 @@
     if (self = [super init]) {
         character = aCharacter;
         _currentState = [[AIStateCastleWaiting alloc] init];
-        _mutableDictionary = [NSMutableDictionary new];
          _data = [[EnemyAIData alloc] init];
         [self initMosterData];
         _foodSupplySpeed = 3;

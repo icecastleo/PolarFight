@@ -10,7 +10,6 @@
 #import "EnemyAIData.h"
 @interface EnemyAI : BaseAI
 
-@property NSMutableDictionary *mutableDictionary;
 @property float food;
 @property float foodSupplySpeed;
 @property MonsterData *nextMonster;

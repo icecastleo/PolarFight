@@ -12,14 +12,23 @@
 
 @implementation RangeShooterNew
 
--(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate{
+-(id)initWithRange:(Range *)aRange block:(void (^)())aBlock {
     if (self = [super init]) {
         range = aRange;
-        delegate = aDelegate;
+        block = aBlock;
         [range.character.sprite.parent addChild:range.rangeSprite];
     }
     return self;
 }
+
+//-(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate{
+//    if (self = [super init]) {
+//        range = aRange;
+//        delegate = aDelegate;
+//        [range.character.sprite.parent addChild:range.rangeSprite];
+//    }
+//    return self;
+//}
 
 -(void)shoot:(CGPoint)aTargetPoint time:(float)aTime {
     //    CCLOG(@"shoot");
@@ -47,7 +56,7 @@
         return;
     }
     
-    NSArray *effectTargets = [range getEffectTargets];
+    NSArray *effectTargets = [range getEffectEntities];
     
     if(effectTargets.count > 0) {
         if ([delegate respondsToSelector:@selector(effectTarget:atPosition:)]) {

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserDataDelegate.h"
+#import "PlistDictionaryInitialing.h"
 
-@interface Property : NSObject <NSCoding,UserDataDelegate>
+@interface Property : NSObject <NSCoding, PlistDictionaryInitialing>
 
 @property int value;
 

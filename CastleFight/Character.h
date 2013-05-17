@@ -32,7 +32,7 @@
 }
 
 @property (nonatomic) int player;
-@property (readonly) CharacterType roleType;
+//@property (readonly) CharacterType roleType;
 //@property (readonly) AttackType attackType;
 @property (readonly) ArmorType armorType;
 
@@ -70,8 +70,6 @@
 
 -(void)update:(ccTime)delta;
 -(void)setMoveDirection:(CGPoint)direction;
--(void) setMovePosition:(CGPoint)point;
-
 
 -(void)useSkill;
 -(void)attackAnimateCallback;

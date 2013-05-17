@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DependentAttribute.h"
+#import "FluctuantAttribute.h"
 
 
 @class Character;
@@ -20,18 +20,15 @@
     float baseValue;
     float bonus;
     float multiplier;
-    
-    int _value;
+        
+    FluctuantAttribute *fluctuant;
 }
 
-@property (readonly) CharacterAttributeType type;
 @property (readonly) int value;
-
-@property (readonly, strong) DependentAttribute *dependent;
 @property int currentValue;
 
 // Init with a quadratic equation.
--(id)initWithType:(CharacterAttributeType)aType withQuadratic:(float)a withLinear:(float)b withConstantTerm:(float)c;
+-(id)initWithQuadratic:(float)a linear:(float)b constantTerm:(float)c isFluctuant:(BOOL)fluctuant;
 -(id)initWithDictionary:(NSDictionary *)dic;
 
 -(void)addBonus:(float)aBonus;

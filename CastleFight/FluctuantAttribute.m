@@ -6,10 +6,10 @@
 //
 //
 
-#import "DependentAttribute.h"
+#import "FluctuantAttribute.h"
 #import "Attribute.h"
 
-@implementation DependentAttribute
+@implementation FluctuantAttribute
 
 -(id)initWithAttribute:(Attribute *)anAttribute {
     if(self = [super init]) {

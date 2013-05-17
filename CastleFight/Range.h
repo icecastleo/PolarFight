@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Entity.h"
 
-
-
-@class Character;
 @interface Range : NSObject {
     NSString *name;
     
@@ -24,15 +22,18 @@
     
     int targetLimit;
 }
+
 @property NSArray *sides;
 @property NSArray *filters;
 
-@property (readonly, weak) Character *character;
+@property (weak, nonatomic) Entity *owner;
 @property (readonly) CCSprite *rangeSprite;
 @property (readonly) CGPoint effectPosition;
 
-+(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict;
--(NSArray *)getEffectTargets;
++(id)rangeWithParameters:(NSMutableDictionary *)dict;
+-(id)initWithParameters:(NSMutableDictionary *)dict;
+
+-(NSArray *)getEffectEntities;
 -(void)setDirection:(CGPoint)velocity;
 
 @end

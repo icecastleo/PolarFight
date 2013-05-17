@@ -8,9 +8,6 @@
 
 #import "EnemyAIData.h"
 
-@implementation MonsterData
-@end
-
 @implementation EnemyAIData
 
 -(id) init
@@ -42,7 +39,7 @@
     return (MonsterData*)[monsterData objectForKey:name];
 }
 
--(void) clearCurrentMonsters
+-(void)clearCurrentMonsters
 {
     for (NSString* key in monsterData) {
         MonsterData *md = [monsterData objectForKey:key];
@@ -50,20 +47,8 @@
     }
 }
 
--(int) getCurrentMonsters
-{
-    int count= 0;
-    for (NSString* key in monsterData) {
-        MonsterData *md = [monsterData objectForKey:key];
-        count+=md.currentCount;
-        
-    }
-    return count;
-}
-
--(MonsterData*) getNextMonster
-{
-    int count =[self getCurrentMonsters];
+-(MonsterData *)getNextMonster {
+    int count = [self getCurrentMonsters];
     
     MonsterData *result;
     

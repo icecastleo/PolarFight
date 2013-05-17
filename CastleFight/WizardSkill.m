@@ -18,7 +18,7 @@
 }
 
 -(void)execute {
-    for (Character *target in [range getEffectTargets]) {
+    for (Character *target in [range getEffectEntities]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeFire damageSource:kDamageSourceRanged defender:target];
         [target receiveAttackEvent:event];
     }

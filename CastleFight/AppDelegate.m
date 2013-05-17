@@ -125,6 +125,7 @@
     NSLog(@"%d", [FileManager sharedFileManager].userMoney);
     NSLog(@"%@", tapPointsStr);
 }
+
 - (void)showEarnedCurrencyAlert:(NSNotification*)notifyObj
 {
     NSNumber *tapPointsEarned = notifyObj.object;
@@ -139,6 +140,7 @@
     // This is a good place to remove this notification since it is undesirable to have a pop-up alert more than once per app run.
     [[NSNotificationCenter defaultCenter] removeObserver:self name:TJC_TAPPOINTS_EARNED_NOTIFICATION object:nil];
 }
+
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

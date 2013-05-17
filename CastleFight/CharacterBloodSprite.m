@@ -7,19 +7,27 @@
 //
 
 #import "CharacterBloodSprite.h"
-#import "Character.h"
+#import "RenderComponent.h"
+#import "TeamComponent.h"
 
 @implementation CharacterBloodSprite
 
--(id)initWithCharacter:(Character *)aCharacter {
-    if (self = [super initWithCharacter:aCharacter sprite:[CCSprite spriteWithFile:@"blood_white.png"]]) {
-        self.position = ccp(character.boundingBox.size.width / 2, character.boundingBox.size.height + self.sprite.boundingBox.size.height * 1.5);
+-(id)initWithEntity:(Entity *)entity {
+    if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithFile:@"blood_white.png"]]) {
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        NSAssert(render, @"Invalid entity!");
+        
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        NSAssert(team, @"Invalid entity!");
+        
+        CCSprite *sprite = render.sprite;
+        
+        self.position = ccp(sprite.boundingBox.size.width / 2, sprite.boundingBox.size.height + self.sprite.boundingBox.size.height * 1.5);
         self.midpoint = ccp(0, 0);
-        self.color = aCharacter.player == 1 ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
-        self.scaleX = character.boundingBox.size.width / self.sprite.boundingBox.size.width;
+        self.color = team.team == 1 ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
+        self.scaleX = sprite.boundingBox.size.width / self.sprite.boundingBox.size.width;
         self.visible = NO;
-        [self update];
-        [character.sprite addChild:self];
+        [sprite addChild:self];
         
         CCSprite *background = [CCSprite spriteWithFile:@"blood_white.png"];
         background.position = ccp(self.sprite.boundingBox.size.width / 2, self.sprite.boundingBox.size.height / 2);

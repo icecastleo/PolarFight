@@ -10,6 +10,6 @@
 #import "ActiveSkill.h"
 #import "RangeShooterNew.h"
 
-@interface TestSkill : ActiveSkill
+@interface RangeAttackSkill : ActiveSkill
 
 @end

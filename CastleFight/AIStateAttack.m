@@ -7,31 +7,33 @@
 //
 
 #import "AIStateAttack.h"
-#import "BaseAI.h"
-#import "Character.h"
-#import "HelloWorldLayer.h"
-#import "AIStateWalking.h"
+#import "AIStateWalk.h"
+#import "ActiveSkillComponent.h"
+#import "ActiveSkill.h"
+#import "Entity.h"
 
 @implementation AIStateAttack
 
-- (NSString *)name {
+-(NSString *)name {
     return @"Attack";
 }
 
-- (void)enter:(BaseAI *)ai {
-}
-
-- (void)execute:(BaseAI *)ai {
-    // Check if should change state
-    NSArray* enemies= [ai.character.skill checkTarget];
-    if (enemies.count > 0) {
-        [ai.character useSkill];
-        return;
-    } else{
-        [ai changeState:[[AIStateWalking alloc] init]];
+-(void)updateEntity:(Entity *)entity delta:(float)delta {
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+    ActiveSkill *skill = [skillCom.skills objectForKey:@"attack"];
+    
+    if (!skill) {
         return;
     }
-
+    
+    if (!skillCom.activeKey) {
+        if ([skill checkRange]) {
+            skillCom.activeKey = @"attack";
+        } else {
+            [self changeState:[[AIStateWalk alloc] init] forEntity:entity];
+            return;
+        }
+    }
 }
 
 @end

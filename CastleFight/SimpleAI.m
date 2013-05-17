@@ -11,14 +11,14 @@
 #import "ActiveSkill.h"
 #import "Character.h"
 #import "AIState.h"
-#import "AIStateWalking.h"
+#import "AIStateWalk.h"
 @implementation SimpleAI
 
 
 -(id)initWithCharacter:(Character *)aCharacter {
     if (self = [super init]) {
         character = aCharacter;
-        _currentState =[[AIStateWalking alloc] init];
+        _currentState =[[AIStateWalk alloc] init];
         
     }
     return self;

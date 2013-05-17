@@ -8,15 +8,7 @@
 
 #import "BattleDataObject.h"
 #import "Character.h"
-#import "EnemyAIData.h"
-
-@interface BattleDataObject ()
-
-@property (nonatomic,strong) NSArray *enemyArray;
-@property (nonatomic,strong) NSArray *enemyBossArray;
-@property (nonatomic,strong) NSArray *enemyCastleArray;
-
-@end
+#import "EnemyData.h"
 
 @implementation BattleDataObject
 
@@ -27,18 +19,14 @@
     return self;
 }
 
--(NSArray *)getCharacterArrayFromArray:(NSArray *)array {
-    NSMutableArray *tempCharacterArray = [NSMutableArray array];
+-(NSArray *)getCharacterDataArrayFromArray:(NSArray *)array {
+    NSMutableArray *dataArray = [NSMutableArray array];
+    
     for (NSDictionary *dic in array) {
-        MonsterData *monsterData = [[MonsterData alloc] init];
-        monsterData.characterId = [dic objectForKey:@"id"];
-        monsterData.level = [[dic objectForKey:@"level"] intValue];
-        monsterData.targetRatio = [[dic objectForKey:@"targetRatio"] floatValue];
-        Character *character = [[Character alloc] initWithId:monsterData.characterId andLevel:monsterData.level];
-        monsterData.summonCost = character.cost;
-        [tempCharacterArray addObject:monsterData];
+        EnemyData *data = [[EnemyData alloc] initWithDictionary:dic];
+        [dataArray addObject:data];
     }
-    return tempCharacterArray;
+    return dataArray;
 }
 
 -(id)initWithBattleDictionary:(NSDictionary *)dic {
@@ -47,25 +35,17 @@
         _mapName = [dic objectForKey:@"map"];
         _backgroundMusic = [dic objectForKey:@"backgroundMusic"];
         
-        _enemyArray = [self getCharacterArrayFromArray:[dic objectForKey:@"enemies"]];
-        _enemyBossArray = [self getCharacterArrayFromArray:[dic objectForKey:@"bosses"]];
-        _enemyCastleArray = [self getCharacterArrayFromArray:[dic objectForKey:@"castle"]];
+        _enemyCharacterDatas = [self getCharacterDataArrayFromArray:[dic objectForKey:@"enemies"]];
+        _enemyBossDatas = [self getCharacterDataArrayFromArray:[dic objectForKey:@"bosses"]];
+//        _enemyCastleArray = [self getCharacterDataArrayFromArray:[dic objectForKey:@"castle"]];
     }
     return self;
 }
 
--(NSArray *)getEnemyArray {
-    return self.enemyArray;
-}
-
--(NSArray *)getEnemyBoss {    
-    return self.enemyBossArray;
-}
-
--(Character *)getEnemyCastle {
-    MonsterData *data = [self.enemyCastleArray lastObject];
-    Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level];
-    return castle;
-}
+//-(Character *)getEnemyCastle {
+//    MonsterData *data = [self.enemyCastleArray lastObject];
+//    Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level];
+//    return castle;
+//}
 
 @end

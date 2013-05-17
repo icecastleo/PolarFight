@@ -13,16 +13,17 @@
 @interface BattleDataObject : NSObject
 
 @property (nonatomic,readonly) NSString *battleName;
+
 //battle info
-@property (nonatomic,readonly) NSString *mapName;
-@property (nonatomic,readonly) NSString *backgroundMusic;
+@property (readonly) NSString *mapName;
+@property (readonly) NSString *backgroundMusic;
+
+@property (readonly) NSArray *enemyCharacterDatas;
+@property (readonly) NSArray *enemyBossDatas;
 
 -(id)initWithBattleName:(NSString *)name;
-
 -(id)initWithBattleDictionary:(NSDictionary *)dic;
 
--(NSArray *)getEnemyBoss;
--(Character *)getEnemyCastle;
--(NSArray *)getEnemyArray;
+//-(Character *)getEnemyCastle;
 
 @end

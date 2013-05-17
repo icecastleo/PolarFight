@@ -8,22 +8,25 @@
 
 #import <Foundation/Foundation.h>
 #import "Damage.h"
-@class Character;
+#import "Entity.h"
 
 @interface DamageEvent : NSObject {
     float bonus;
     float multiplier;
 }
 
+@property (readonly) Entity *sender;
 @property (readonly) DamageType type;
 @property (readonly) DamageSource source;
-@property (readonly) Character *damager;
+@property (readonly) Entity *receiver;
 @property (readonly) int baseDamage;
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 
--(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter;
+@property BOOL isInvalid;
+
+-(id)initWithSender:(Entity *)sender damage:(int)damage damageType:(DamageType)type damageSource:(DamageSource)source receiver:(Entity *)receiver;
 
 -(void)addDamage:(float)aBonus;
 -(void)subtractDamage:(float)aBonus;

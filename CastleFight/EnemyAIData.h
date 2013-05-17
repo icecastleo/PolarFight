@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MonsterData:NSObject
+@interface MonsterData : NSObject
 
 @property NSString *characterId;
 @property int level;

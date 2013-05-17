@@ -11,6 +11,8 @@
 
 @interface RangeShooterNew : CCNode {
     Range *range;
+    void (^block)();
+    
     DelegateSkill *delegate;
     
     CGPoint targetPoint;
@@ -19,7 +21,8 @@
     float distance;
 }
 
--(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate;
+-(id)initWithRange:(Range *)aRange block:(void(^)())aBlock;
+//-(id)initWithRange:(Range *)aRange delegateSkill:(DelegateSkill *)aDelegate;
 -(void)shoot:(CGPoint)targetPoint time:(float)aTime;
 
 @end

@@ -7,20 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 
-@class Character;
 @interface Damage : NSObject {
     
 }
 
+@property (readonly) Entity *sender;
+@property (readonly) int damage;
 @property (readonly) DamageType type;
 @property (readonly) DamageSource source;
-@property (readonly) Character *damager;
-@property (readonly) int value;
+
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 
--(id)initWithValue:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter;
+-(id)initWithSender:(Entity *)sender damage:(int)damage damageType:(DamageType)type damageSource:(DamageSource)source;
 
 @end

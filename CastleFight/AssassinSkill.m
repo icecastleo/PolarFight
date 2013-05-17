@@ -17,7 +17,7 @@
 }
 
 -(void)character:(Character *)sender willSendAttackEvent:(AttackEvent *)event {
-    int count = [range getEffectTargets].count;
+    int count = [range getEffectEntities].count;
     
     if (count < 3) {
         [event addAttack: (3 - count) * event.attack * 0.25];
