@@ -7,27 +7,27 @@
 //
 
 #import "BloodSprite.h"
-#import "Character.h"
+#import "RenderComponent.h"
+#import "DefenderComponent.h"
 
 @implementation BloodSprite
 
--(id)initWithCharacter:(Character *)aCharacter sprite:(CCSprite *)sprite {
+-(id)initWithEntity:(Entity *)entity sprite:(CCSprite *)sprite {
     if (self = [super initWithSprite:sprite]) {
-        character = aCharacter;
-        
         self.type = kCCProgressTimerTypeBar;
         self.barChangeRate = ccp(1, 0);
+        defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+        
+        NSAssert(defense, @"Invalid entity!");
+        
+        defense.bloodSprite = self;
+        [self update];
     }
     return self;
 }
 
--(void)update {
-    Attribute *hp = [character getAttribute:kCharacterAttributeHp];
-    
-    NSAssert(hp != nil, @"Why you need a blood sprite on a character without hp?");
-    
-    float scale = (float) hp.currentValue / hp.value;
-    
+-(void)update {    
+    float scale = (float) defense.hp.currentValue / defense.hp.value;
     self.percentage = scale * 100;
 }
 

@@ -21,13 +21,15 @@
 @property NSArray *achievements;
 @property NSArray *properties;
 
+@property (readonly) NSArray *characterInitDatas;
+
 -(id)initWithPlistPath:(NSString *)path;
 
--(Character *)getPlayerHero;
--(Character *)getPlayerCastle;
--(NSArray *)getPlayerCharacterArray;
+//-(Character *)getPlayerHero;
+//-(Character *)getPlayerCastle;
+//-(NSArray *)getPlayerCharacterArray;
 
--(void)updatePlayerCharacter:(Character *)character;
+//-(void)updatePlayerCharacter:(Character *)character;
 
 //TODO:
 //-(NSArray *)getPlayerItemArray;

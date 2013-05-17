@@ -7,6 +7,8 @@
 //
 
 #import "ShopFrameSprite.h"
+#import "Entity.h"
+#import "CharacterInitData.h"
 
 @class Character;
 @interface ShopUnitSprite : ShopFrameSprite {
@@ -27,8 +29,8 @@
     
     CCMenu *menu;
 }
-@property (readonly) Character *character;
+//@property (readonly) Character *character;
 
--(id)initWithCharacter:(Character *)aCharacter;
+-(id)initWithEntity:(Entity *)entity characterInitData:(CharacterInitData *)data;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MonsterData:NSObject
+@interface MonsterData : NSObject
 
 @property NSString *characterId;
 @property int level;
@@ -18,7 +18,7 @@
 @property float subRatio;
 @end
 
-@interface MonsterDataCollection:NSObject
+@interface MonsterDataCollection : NSObject
 {
     NSDictionary *monsterData;
 }

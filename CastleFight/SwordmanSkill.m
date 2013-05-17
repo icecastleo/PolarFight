@@ -23,7 +23,7 @@
 }
 
 -(void)activeSkill:(int)count {
-    for (Character *target in [range getEffectTargets]) {
+    for (Character *target in [range getEffectEntities]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:target];
         event.knockOutPower = 25;
         event.knouckOutCollision = YES;

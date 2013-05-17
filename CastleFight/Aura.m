@@ -38,7 +38,7 @@
         return;
     }
     
-    for (Character *target in [range getEffectTargets]) {
+    for (Character *target in [range getEffectEntities]) {
         [self execute:target];
     }
 }

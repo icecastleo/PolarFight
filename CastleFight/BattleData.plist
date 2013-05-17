@@ -16,17 +16,17 @@
 				<key>id</key>
 				<string>101</string>
 				<key>level</key>
-				<string>1</string>
+				<integer>1</integer>
 				<key>targetRatio</key>
-				<string>0.25</string>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>id</key>
 				<string>102</string>
 				<key>level</key>
-				<string>1</string>
+				<integer>1</integer>
 				<key>targetRatio</key>
-				<string>0.75</string>
+				<integer>3</integer>
 			</dict>
 		</array>
 		<key>bosses</key>
@@ -35,7 +35,7 @@
 				<key>id</key>
 				<string>301</string>
 				<key>level</key>
-				<string>15</string>
+				<integer>15</integer>
 			</dict>
 		</array>
 		<key>castle</key>
@@ -44,7 +44,7 @@
 				<key>id</key>
 				<string>411</string>
 				<key>level</key>
-				<string>1</string>
+				<integer>1</integer>
 			</dict>
 		</array>
 	</dict>

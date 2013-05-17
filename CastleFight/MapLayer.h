@@ -9,25 +9,20 @@
 #import "CCLayer.h"
 #import "MapCamera.h"
 #import "Character.h"
+#import "Entity.h"
 
 @interface MapLayer : CCLayer {
-    BOOL isMove;
-    BOOL isFollow;
+
 }
 
-@property (readonly, weak) Character *hero;
-@property (readonly) NSMutableArray *characters;
-//@property (readonly) NSMutableArray *castles;
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
 
--(id)initWithFile:(NSString *)file;
+-(id)initWithName:(NSString *)name;
+-(void)setMap:(NSString *)name;
 
--(void)addCastle:(Character *)castle;
--(void)addCharacter:(Character *)character;
--(void)removeCharacter:(Character *)character;
-
--(void)moveCharacter:(Character *)character toPosition:(CGPoint)position isMove:(BOOL)move;
--(void)moveCharacter:(Character *)character byPosition:(CGPoint)position isMove:(BOOL)move;
+-(void)addEntity:(Entity *)entity;
+-(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
+-(void)moveEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
 
 @end

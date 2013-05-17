@@ -8,6 +8,6 @@
 
 #import "AIState.h"
 
-@interface AIStateWalking : AIState
+@interface AIStateWalk : AIState
 
 @end

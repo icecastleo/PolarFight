@@ -10,6 +10,6 @@
 
 @interface CharacterBloodSprite : BloodSprite
 
--(id)initWithCharacter:(Character *)aCharacter;
+-(id)initWithEntity:(Entity *)entity;
 
 @end

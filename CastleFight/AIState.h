@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class BaseAI;
+@class Entity;
 
 @interface AIState : NSObject
 
-- (void)enter:(BaseAI *)ai;
-- (void)execute:(BaseAI *)ai;
-- (void)exit:(BaseAI *)ai;
-- (NSString *)name;
+-(NSString *)name;
+
+-(void)enter:(Entity *)entity;
+-(void)exit:(Entity *)entity;
+-(void)updateEntity:(Entity *)entity delta:(float)delta;
+
+-(void)changeState:(AIState *)state forEntity:(Entity *)entity;
 
 @end

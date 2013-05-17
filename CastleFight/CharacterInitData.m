@@ -6,17 +6,17 @@
 //
 //
 
-#import "CharacterDataObject.h"
+#import "CharacterInitData.h"
 
 #define kId       @"id"
 #define kLevel      @"level"
 
-@implementation CharacterDataObject
+@implementation CharacterInitData
 
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        _characterId = [dic objectForKey:kId];
-        _level = [dic objectForKey:kLevel];
+        _cid = [dic objectForKey:kId];
+        _level = [[dic objectForKey:kLevel] intValue];
     }
     return self;
 }
@@ -24,14 +24,14 @@
 #pragma mark NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_characterId forKey:kId];
-    [encoder encodeObject:_level forKey:kLevel];
+    [encoder encodeObject:_cid forKey:kId];
+    [encoder encodeObject:[NSNumber numberWithInt:_level] forKey:kLevel];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        _characterId = [decoder decodeObjectForKey:kId];
-        _level = [decoder decodeObjectForKey:kLevel];
+        _cid = [decoder decodeObjectForKey:kId];
+        _level = [[decoder decodeObjectForKey:kLevel] intValue];
     }
     
     return self;

@@ -9,7 +9,7 @@
 #ifndef LightBugBattle_SkillKit_h
 #define LightBugBattle_SkillKit_h
 
-#import "TestSkill.h"
+#import "RangeAttackSkill.h"
 
 #import "RangeFanShape.h"
 #import "RangeCircle.h"

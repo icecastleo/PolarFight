@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserDataDelegate.h"
+#import "PlistDictionaryInitialing.h"
 
-@interface Achievement : NSObject <NSCoding,UserDataDelegate>
+@interface Achievement : NSObject <NSCoding, PlistDictionaryInitialing>
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *propertyNames;

@@ -23,7 +23,7 @@
     DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 3 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill damager:character];
     [character receiveDamageEvent:event];
     
-    for (Character *target in [range getEffectTargets]) {
+    for (Character *target in [range getEffectEntities]) {
         [target getHeal:attack];
     }
 }

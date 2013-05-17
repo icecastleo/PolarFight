@@ -23,7 +23,7 @@
 }
 
 -(void)execute {
-    for (Character *target in [range getEffectTargets]) {
+    for (Character *target in [range getEffectEntities]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:character damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:target];
         event.knockOutPower = -20;
         [target receiveAttackEvent:event];

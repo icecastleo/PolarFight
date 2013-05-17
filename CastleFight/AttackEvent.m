@@ -7,55 +7,47 @@
 //
 
 #import "AttackEvent.h"
-#import "Character.h"
 #import "Attribute.h"
+#import "RenderComponent.h"
+#import "AttackerComponent.h"
+#import "DefenderComponent.h"
 
 @implementation AttackEvent
 
--(id)initWithAttacker:(Character *)anAttacker damageType:(DamageType)aType damageSource:(DamageSource)aSource defender:(Character*)aDefender {
+-(id)initWithAttacker:(Entity *)attacker damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender {
     if(self = [super init]) {
-        _attacker = anAttacker;
-        _defender = aDefender;
-        _type = aType;
-        _source = aSource;
+        NSAssert([attacker getComponentOfClass:[AttackerComponent class]], @"Invalid attacker!");
+        NSAssert([defender getComponentOfClass:[DefenderComponent class]], @"Invalid defender!");
+        
+        _attacker = attacker;
+        _defender = defender;
+        _type = type;
+        _source = source;
         bonus = 0;
         multiplier = 1;
         
-        _position = _attacker.position;
+        RenderComponent *render = (RenderComponent *)[_attacker getComponentOfClass:[RenderComponent class]];
+        if (render) {
+            // Set dafault attack position as attack position.
+            _position = render.sprite.position;
+        }
     }
     return self;
 }
 
--(int)attack {
-    Attribute *attack = [_attacker getAttribute:kCharacterAttributeAttack];
+-(int)damage {
+    AttackerComponent *attackCom = (AttackerComponent *)[_attacker getComponentOfClass:[AttackerComponent class]];
+    DefenderComponent *defendCom = (DefenderComponent *)[_defender getComponentOfClass:[DefenderComponent class]];
     
-    NSAssert(attack != nil, @"How can you let a character without attack attribute to attack?");
-
-    return attack.value;
-}
-
--(void)addAttack:(float)aBonus {
-    bonus += aBonus;
-}
-
--(void)subtractAttack:(float)aBonus {
-    bonus -= aBonus;
-}
-
--(void)addMultiplier:(float)aMultiplier {
-    multiplier *= aMultiplier;
-}
-
--(void)subtractMultiplier:(float)aMultiplier {
-    multiplier /= aMultiplier;
-}
-
--(int)getDamage {
-    return (self.attack + bonus) * multiplier;
+    int attack = attackCom.attack.value;
+    int defense = defendCom.defense ? defendCom.defense.value : 0;
+    
+    // Attack damage formula
+    return attack - defense;
 }
 
 -(DamageEvent*)convertToDamageEvent {
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:[self getDamage] damageType:_type damageSource:_source damager:_attacker];
+    DamageEvent *event = [[DamageEvent alloc] initWithSender:_attacker damage:[self damage] damageType:_type damageSource:_source receiver:_defender];
     event.position = _position;
     event.knockOutPower = _knockOutPower;
     event.knouckOutCollision = _knouckOutCollision;

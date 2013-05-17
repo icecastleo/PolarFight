@@ -8,15 +8,16 @@
 
 #import "MapLayer.h"
 #import "BattleController.h"
-#import "HeroAI.h"
+#import "TeamComponent.h"
+#import "RenderComponent.h"
+#import "CharacterComponent.h"
+
 @implementation MapLayer
 
 static float scale;
 const static int castleDistance = 200;
 const static int pathSizeHeight = 25;
 const static int pathHeight = 70;
-
-@synthesize characters = _characters;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -26,56 +27,14 @@ const static int pathHeight = 70;
     }
 }
 
--(id)initWithFile:(NSString *)file {
+-(id)initWithName:(NSString *)name {
     if(self = [super init]) {
-        _characters = [[NSMutableArray alloc] init];
-//        _castles = [[NSMutableArray alloc] initWithCapacity:2];
-        
-        // Background image
-        CCSprite *map1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
-        map1.anchorPoint = ccp(0, 0);
-        CCSprite *map1_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_01.png"]];
-        map1_1.anchorPoint = ccp(0, 0);
-        CCSprite *map2 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
-        map2.anchorPoint = ccp(0, 0);
-        CCSprite *map2_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_02.png"]];
-        map2_1.anchorPoint = ccp(0, 0);
-        CCSprite *map3 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
-        map3.anchorPoint = ccp(0, 0);
-        CCSprite *map3_1 = [CCSprite  spriteWithFile:[file stringByAppendingString:@"_03.png"]];
-        map3_1.anchorPoint = ccp(0, 0);
-        
-        CCLayerColor *background = [CCLayerColor layerWithColor:ccc4(50, 50, 50, 255)];
-        // To fullfill the screen
-        background.contentSize = CGSizeMake(map3.contentSize.width * 2, map3.contentSize.height + 21);
-        [map3 addChild:background z:-5];
-        
-       	// Create a void Node, parent Node
-		CCParallaxNode *voidNode = [CCParallaxNode node];
-		
-		// We add our children "layers"(sprite) to void node
-        [voidNode addChild:map1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(0,0)];
-        [voidNode addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(map1.boundingBox.size.width-1, 0)];
-		[voidNode addChild:map2 z:-2 parallaxRatio:ccp(0.75f, 1.f) positionOffset:ccp(0,90)];
-        [voidNode addChild:map2_1 z:-2 parallaxRatio:ccp(0.75f, 1.0f) positionOffset:ccp(map2.boundingBox.size.width-1, 90)];
-        [voidNode addChild:map3 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(0,100)];
-        [voidNode addChild:map3_1 z:-3 parallaxRatio:ccp(0.5f, 1.0f) positionOffset:ccp(map3.boundingBox.size.width-1, 100)];
-        
-        [self addChild:voidNode];
-        
-        _boundaryX = map1.boundingBox.size.width*2;
-        _boundaryY = map1.boundingBox.size.height*2;
+        [self setMap:name];
         
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
         [self addChild:_cameraControl];
         
         self.isTouchEnabled = YES;
-        
-        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
-        _hero.player = 1;
-        [_hero.sprite addBloodSprite];
-        [self addCharacter:_hero];
-        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
         
 //        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
 //        longPress.minimumPressDuration = 0.2f;
@@ -83,6 +42,19 @@ const static int pathHeight = 70;
 //        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
     }
     return self;
+}
+
+-(void)setMap:(NSString *)name {
+    // You must set map sprite and contentSize
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])] userInfo:nil];
+}
+
+-(int)boundaryX {
+    return self.contentSize.width;
+}
+
+-(int)boundaryY {
+    return self.contentSize.height;
 }
 
 -(void)registerWithTouchDispatcher {
@@ -106,87 +78,70 @@ const static int pathHeight = 70;
 //    }
 //}
 
--(void)addCharacter:(Character *)character {
+-(void)addEntity:(Entity *)entity {
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    if (!render) {
+        return;
+    }
+    
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    
     CGPoint position;
     
-    if (character.player == 1) {
-        position = ccp(castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+    if (character) {
+        if (team.team == 1) {
+            position = ccp(castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+        } else {
+            position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+        }
     } else {
-        position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+        // castle
+        if (team.team == 1) {
+            position = ccp(castleDistance, pathHeight + pathSizeHeight/2);
+            render.sprite.anchorPoint = ccp(1, 0.5);
+        } else {
+            position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
+            render.sprite.anchorPoint = ccp(0, 0.5);
+        }
+    }
+    [self moveEntity:entity toPosition:position boundaryLimit:YES];
+    [self addChild:render.sprite];
+}
+
+-(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
+    if (limit) {
+        position = [self getPositionInBoundary:position forEntity:entity];
     }
     
-    [self setPosition:position forCharacter:character];
-    
-    [self addChild:character.sprite];
-    [_characters addObject:character];
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    renderCom.position = position;
+    [self reorderChild:renderCom.sprite z:self.boundaryY - renderCom.position.y];
 }
 
--(void)addCastle:(Character *)castle {
-    if (castle.player == 1) {
-        castle.position = ccp(castleDistance, pathHeight + pathSizeHeight / 2);
-        castle.sprite.anchorPoint = ccp(1, 0.5);
-    } else {
-        castle.position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
-        castle.sprite.anchorPoint = ccp(0, 0.5);
-    }
-    
-    [self addChild:castle.sprite];
-    [_characters addObject:castle];
-//    [_castles setObject:castle atIndexedSubscript:castle.player - 1];
-}
-
--(void)setPosition:(CGPoint)position forCharacter:(Character *)character {
-    character.position = position;
-    [self reorderChild:character.sprite z:self.boundaryY - character.position.y];
-}
-
--(void)removeCharacter:(Character *)character {
-    [_characters removeObject:character];
-}
-
--(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move{
-    //    CCLOG(@"%f %f",position.x, position.y);
-    position = [self getPositionInBoundary:position forCharacter:character];
-    [self setPosition:position forCharacter:character];
-}
-
--(CGPoint)getPositionInBoundary:(CGPoint)position forCharacter:(Character *)character {
-    return ccp(MIN( MAX(character.radius, position.x), self.boundaryX - character.radius), MIN( MAX(character.radius, position.y), self.boundaryY - character.radius));
-}
-
--(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move {
+-(void)moveEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
     if (position.x == 0 && position.y == 0) {
         return;
     }
     
-    [self moveCharacter:character toPosition:ccpAdd(character.position, position) isMove:move];
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    [self moveEntity:entity toPosition:ccpAdd(renderCom.position, position) boundaryLimit:limit];
 }
 
--(Character *)getCollisionCharacterForCharacter:(Character *)character atPosition:(CGPoint)position {
-    for(Character *other in _characters) {
-        if(other == character) {
-            continue;
-        }
-        
-        CGPoint targetPosition = other.position;
-        float targetRadius = other.radius;
-        float selfRadius = character.radius;
-        
-        if(ccpDistance(position, targetPosition) < (selfRadius + targetRadius)) {
-            return other;
-        }
-    }
-    return nil;
+-(CGPoint)getPositionInBoundary:(CGPoint)position forEntity:(Entity *)entity {
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    
+    float halfWidth = renderCom.sprite.boundingBox.size.width/kShadowWidthDivisor/2;
+    float halfHeight = renderCom.sprite.boundingBox.size.height/kShadowHeightDivisor/2;
+    
+    return ccp(MIN( MAX(halfWidth, position.x), self.boundaryX - halfWidth), MIN( MAX(halfHeight, position.y), self.boundaryY - halfHeight));
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = NO;
     return YES;
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    isMove = YES;
-    
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
@@ -196,41 +151,15 @@ const static int pathHeight = 70;
     CGPoint diff = ccpSub(lastLocation, location);
     
     [_cameraControl moveBy:ccpMult(diff, 0.5)];
-    
-    if (isFollow) {
-        isFollow = NO;
-        [_cameraControl stopFollow];
-    }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     // map location
-    CGPoint location = [self convertTouchToNodeSpace:touch];
+//    CGPoint location = [self convertTouchToNodeSpace:touch];
     
 //    // win location
 //    location = [touch locationInView:[CCDirector sharedDirector].view];
 //    location = [[CCDirector sharedDirector] convertToGL: location];
-    
-    if (!isMove) {
-        _hero.ai.targetPoint = location;
-        
-        if (isFollow == NO) {
-            isFollow = YES;
-            [_cameraControl followCharacter:_hero];
-        }
-    }
-}
-
-// By bounding box
-// FIXME: character will overlay
--(Character *)getCharacterAtLocation:(CGPoint)location {
-    for (Character *character  in _characters) {
-        if (CGRectContainsPoint(character.sprite.boundingBox, location)) {
-            CCLOG(@"Find player %d's %@ at (%f, %f)",character.player, character.name, location.x, location.y);
-            return character;
-        }
-    }
-    return nil;
 }
 
 @end

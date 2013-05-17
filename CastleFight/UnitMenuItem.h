@@ -6,22 +6,18 @@
 //
 //
 
+#import "cocos2d.h"
 #import "CCMenuItem.h"
-#import "Character.h"
+
+@class SummonComponent;
 
 @interface UnitMenuItem : CCMenuItemSprite {
-    NSString *cId;
-    int level;
-    int cost;
     
-    bool click;
-    float cooldown;
-    
-    CCSprite *mask;
-    CCProgressTimer *timer;
 }
 
--(id)initWithCharacter:(Character *)character;
--(void)updateFood:(int)food;
+@property (readonly) CCSprite *mask;
+@property (readonly) CCProgressTimer *timer;
+
+-(id)initWithSummonComponent:(SummonComponent *)summon;
 
 @end

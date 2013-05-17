@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class Attribute;
 
-@interface DependentAttribute : NSObject {
+@interface FluctuantAttribute : NSObject {
     __weak Attribute *father;
 }
 

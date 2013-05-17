@@ -35,6 +35,7 @@
 // For character move
 #define kMoveMultiplier 5
 
+#define kShadowWidthDivisor 2
 #define kShadowHeightDivisor 8
 
 //For Achievement System
@@ -42,18 +43,18 @@
 #define ACTIVE_IF_LESS_THAN @"<"
 #define ACTIVE_IF_EQUALS_TO @"=="
 
+#define kAnimationActionTag 5
+
+typedef enum {
+    kAnimationTypeUniqueCharacter,
+    kAnimationTypeNormalCharacter,
+} AnimationType;
 
 typedef enum {
     kGameStateRoundStart,
     kGameStateCharacterMove,
     kGameStateRoundEnd,
 } GameState;
-
-typedef enum {
-    Hero = 0,
-    Soldier,
-    Monster
-} CharacterType;
 
 typedef enum {
     // Fluid attributes

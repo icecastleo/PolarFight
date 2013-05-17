@@ -7,7 +7,6 @@
 //
 
 #import "FileManager.h"
-#import "Character.h"
 #import "AKHelpers.h"
 #import "SimpleAudioEngine.h"
 #import "BattleDataObject.h"
@@ -38,44 +37,48 @@
 #define kBattleDataPlistFileName @"BattleData.plist"
 
 #define kBattleDataTag @"id"
-#define kCharacterDataTag @"id"
 
 #define kVolumeMute 0
 #define kVolumeBackgroundMusicDefault 0.05
 #define kVolumeEffectDefault 0.5
 
 @dynamic userMoney;
+@dynamic characterInitDatas;
 
 static FileManager *sharedFileManager = nil;
 
-// Init
 +(FileManager *)sharedFileManager {
-	@synchronized(self)     {
+	@synchronized(self) {
 		if (!sharedFileManager)
 			sharedFileManager = [[FileManager alloc] init];
 	}
 	return sharedFileManager;
 }
 
-+(id)alloc {
-	@synchronized(self) {
-		NSAssert(sharedFileManager == nil, @"Attempted to allocate a second instance of a singleton.");
-		return [super alloc];
+-(id)init {
+	if((self=[super init])) {
+        _userDataObject =  [self loadUserDataObject];
+        //        _animationDictionary = [self loadAnimation]; //do not use temporary
+        _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
+        _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
+        // game center
+        self.currentLeaderBoard = kLeaderboardID;
+        self.gameCenterManager = [[GameCenterManager alloc] init];
+        [self.gameCenterManager authenticateLocalPlayer];
 	}
-	return nil;
+	return self;
 }
 
-- (UserDataObject *)loadUserDataObject {
+-(UserDataObject *)loadUserDataObject {
+    if (_userDataObject)
+        return _userDataObject;
     
-    if (_userDataObject != nil) return _userDataObject;
-    //When someone tries to access the data property, we’re going to check if we have it loaded into memory – and if so go ahead and return it. But if not, we’ll load it from disk!
-    
-    //get File in Documents
+    // Get save file in Documents
     NSString *dataPath = [self dataFilePath:kUserDataPlistFileName forSave:YES];
     NSData *codedData = [[NSData alloc] initWithContentsOfFile:dataPath];
     
     if (!codedData) {
-        //get file in bundle
+        // Get default plist in bundle
         dataPath = [self dataFilePath:kUserDataPlistFileName forSave:NO];
         _userDataObject = [[UserDataObject alloc] initWithPlistPath:dataPath];
     }else {
@@ -105,14 +108,15 @@ static FileManager *sharedFileManager = nil;
 -(void)setGameConfig {
     if (self.userDataObject.soundsEffectSwitch) {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:self.userDataObject.soundsEffectVolume];
-    } else
+    } else {
         [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
+    }
     
     if (self.userDataObject.backgroundMusicSwitch) {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:self.userDataObject.backgroundMusicVolume];
-    } else
+    } else {
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
-    
+    }
 }
 
 - (NSDictionary *)getDictionaryFromPlistFileName:(NSString *)fileName {
@@ -137,27 +141,6 @@ static FileManager *sharedFileManager = nil;
     return nil;
 }
 
--(id)init {
-	if((self=[super init])) {
-        _userDataObject =  [self loadUserDataObject];
-//        _animationDictionary = [self loadAnimation]; //do not use temporary
-        _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
-        _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
-        // game center
-        self.currentLeaderBoard = kLeaderboardID;
-        self.gameCenterManager = [[GameCenterManager alloc] init];
-        [self.gameCenterManager authenticateLocalPlayer];
-	}
-	return self;
-}
-
-// Memory
--(void)dealloc {
-    _userDataObject = nil;
-    _animationDictionary = nil;
-    _characterDataFile = nil;
-}
-
 -(void)setUserMoney:(int)userMoney {
     _userDataObject.money = userMoney;
 }
@@ -171,24 +154,17 @@ static FileManager *sharedFileManager = nil;
 }
 
 - (NSString *)dataFilePath:(NSString *)fileName forSave:(BOOL)save {
-    if (!fileName)
-    {
-        fileName = @"Default.xml";
-    }
+    NSAssert(fileName, @"What do you want with a nil parameter?");
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    NSArray *fileArray = [fileName componentsSeparatedByString:@"."];
-    NSString *fname = [fileArray objectAtIndex:0];
-    NSString *ftype = [fileArray lastObject];
-    
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *documentsPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    if (save ||
-        [[NSFileManager defaultManager] fileExistsAtPath:documentsPath]) {
+    
+    if (save || [[NSFileManager defaultManager] fileExistsAtPath:documentsPath]) {
         return documentsPath;
     } else {
-        return [[NSBundle mainBundle] pathForResource:fname ofType:ftype];
+        return [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
     }
 }
 
@@ -227,7 +203,8 @@ static FileManager *sharedFileManager = nil;
     [archiver encodeObject:_userDataObject forKey:kUserData];
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
-    NSLog(@"Saving xml data to %@...", dataPath);
+    
+    CCLOG(@"Saving xml data to %@...", dataPath);
 }
 
 #pragma mark Public Functions
@@ -272,25 +249,25 @@ static FileManager *sharedFileManager = nil;
     return battleDataObject;
 }
 
--(NSDictionary *)getCharacterDataWithId:(NSString *)anId {
-    return  [self getDictionaryFromPlistDictionary:self.characterDataFile tagName:kCharacterDataTag tagValue:anId];
+-(NSDictionary *)getCharacterDataWithCid:(NSString *)cid {
+    return _characterDataFile[cid];
 }
 
--(NSArray *)getChararcterArray {
-    return [self.userDataObject getPlayerCharacterArray];
+-(NSArray *)characterInitDatas {
+    return self.userDataObject.characterInitDatas;
 }
 
--(Character *)getPlayerHero {
-    return [self.userDataObject getPlayerHero];
-}
-
--(Character *)getPlayerCastle {
-    return [self.userDataObject getPlayerCastle];
-}
-
--(void)updatePlayerCharacter:(Character *)character {
-    [self.userDataObject updatePlayerCharacter:character];
-}
+//-(Character *)getPlayerHero {
+//    return [self.userDataObject getPlayerHero];
+//}
+//
+//-(Character *)getPlayerCastle {
+//    return [self.userDataObject getPlayerCastle];
+//}
+//
+//-(void)updatePlayerCharacter:(Character *)character {
+//    [self.userDataObject updatePlayerCharacter:character];
+//}
 
 -(void)switchSoundsEffect {
     if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {

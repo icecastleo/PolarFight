@@ -8,47 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Character.h"
 #import "MapLayer.h"
 #import "DPadLayer.h"
 #import "TiledMapLayer.h"
-#import "Barrier.h"
-#import "EnemyAI.h"
 #import "BattleDataObject.h"
 @class BattleStatusLayer;
 
-@interface BattleController : CCScene {    
-    BattleStatusLayer *statusLayer;
-    DPadLayer *dPadLayer;
+@interface BattleController : CCScene {
     MapLayer *mapLayer;
-//    TiledMapLayer *mapLayer;
-    
-    BOOL canMove;
-    
-    float foodRate;
-    float maxRate;
-    
-    NSMutableArray *removeCharacters;
+    BattleStatusLayer *statusLayer;
+//    DPadLayer *dPadLayer;
+
+    NSMutableArray *systems;
 }
 
-@property (readonly) Character *hero;
-@property (readonly) float food;
-@property (readonly) Character *playerCastle, *enemyCastle;
-@property (readonly) NSMutableArray *characters;
-@property (readonly) EnemyAI *enemyAi;
 @property (readonly) BattleDataObject *battleData;
+
+@property (readonly) Entity *userPlayer;
+@property (readonly) Entity *enemyPlayer;
+
+@property (readonly) Entity *userCastle;
+@property (readonly) Entity *enemyCastle;
 
 +(BattleController *)currentInstance;
 
 -(id)initWithPrefix:(int)prefix suffix:(int)suffix;
--(void)addCharacter:(Character *)character;
--(void)removeCharacter:(Character *)character;
 
--(void)moveCharacter:(Character*)character toPosition:(CGPoint)position isMove:(BOOL)move;
--(void)moveCharacter:(Character*)character byPosition:(CGPoint)position isMove:(BOOL)move;
 -(void)smoothMoveCameraTo:(CGPoint)position;
-
--(void)knockOut:(Character *)character velocity:(CGPoint)velocity power:(float)power collision:(BOOL)collision;
 
 @end
 

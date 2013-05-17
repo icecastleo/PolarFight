@@ -7,31 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EffectKit.h"
 #import "Range.h"
+#import "Entity.h"
 
 @interface ActiveSkill : NSObject {
-    __weak Character *character;
-    
-    NSMutableArray *ranges;
     Range *range;
-    
-    int count;
-    BOOL execute;
 }
 
-@property (readonly) BOOL hasNext;
+@property (weak, nonatomic) Entity *owner;
 
--(id)initWithCharacter:(Character *)aCharacter;
--(void)setRanges;
+@property float cooldown;
+@property NSString *animationKey;
+@property NSMutableDictionary *combo;
 
--(void)execute;
--(void)next;
--(void)reset;
+@property BOOL canActive;
+@property BOOL isFinish;
 
--(void)activeSkill:(int)count;
+-(void)active;
+-(void)activeEffect;
 
--(void)showAttackRange:(BOOL)visible;
--(void)setRangeDirection:(CGPoint)velocity;
--(NSArray *)checkTarget;
+-(BOOL)checkRange;
+
 @end

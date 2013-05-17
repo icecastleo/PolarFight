@@ -28,16 +28,12 @@
         
     }
     
-    
     // TODO: Food Supply
-    
     if(CACurrentMediaTime()>nextDecisionTime)
     {
-        //examine once a sec
+        // examine once a sec
         if(a.nextMonster==nil){
-
             a.nextMonster= [self examineNextMonster:ai];
-            
         }
         nextDecisionTime=CACurrentMediaTime()+1;
         a.food+=a.foodSupplySpeed;

@@ -7,24 +7,26 @@
 //
 
 #import "Range.h"
-#import "Character.h"
-#import "BattleController.h"
+#import "Entity.h"
+#import "TeamComponent.h"
+#import "RenderComponent.h"
+#import "CollisionComponent.h"
+#import "DirectionComponent.h"
 
 @implementation Range
 
 @dynamic effectPosition;
 
-+(id)rangeWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
++(id)rangeWithParameters:(NSMutableDictionary*)dict {
     NSString* rangeName = [dict objectForKey:kRangeKeyType];
     
     NSAssert(rangeName != nil, @"You must define rangeType for a range");
     
-    return [[NSClassFromString(rangeName) alloc] initWithCharacter:aCharacter parameters:dict];
+    return [[NSClassFromString(rangeName) alloc] initWithParameters:dict];
 }
 
--(id)initWithCharacter:(Character *)aCharacter parameters:(NSMutableDictionary*)dict {
+-(id)initWithParameters:(NSMutableDictionary*)dict {
     if (self = [super init]) {
-        _character = aCharacter;
         [self setParameter:dict];
     }
     return self;
@@ -93,28 +95,55 @@
     _rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
 }
 
--(NSArray *)getEffectTargets {
+-(void)setOwner:(Entity *)owner {
+    if (_rangeSprite) {
+        NSAssert(_rangeSprite.parent == nil, @"Do you set the owner twice?");
+        
+        RenderComponent *renderCom = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
+        
+        NSAssert(renderCom, @"You can't set an eitity without RenderComponent as owner!");
+        NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
+        
+        _rangeSprite.zOrder = -1;
+        _rangeSprite.visible = NO;
+        _rangeSprite.position = ccp(renderCom.sprite.boundingBox.size.width/2, renderCom.sprite.boundingBox.size.height/2);
+        [renderCom.sprite addChild:_rangeSprite];
+    }
     
-    NSMutableSet *effectTargets = [NSMutableSet set];
+    _owner = owner;
+}
+
+-(NSArray *)getEffectEntities {
+    NSAssert(_owner, @"You must set an entity as range owner!");
     
-    for(Character* temp in [BattleController currentInstance].characters)
+    // FIXME: Do this by direction system?
+    DirectionComponent *directionCom = (DirectionComponent *)[_owner getComponentOfClass:[DirectionComponent class]];
+    [self setDirection:directionCom.velocity];
+    
+    NSMutableSet *entitySet = [NSMutableSet set];
+    
+    for(Entity* entity in [_owner getAllEntitiesPosessingComponentOfClass:[CollisionComponent class]])
     {
-        if ([self containTarget:temp]) {
+        if ([self containEntity:entity]) {
             if (effectRange == nil) {
-                [effectTargets addObject:temp];
+                [entitySet addObject:entity];
             } else {
-                return [effectRange getEffectTargets];
+                return [effectRange getEffectEntities];
             }
         }
     }
     
-    if (targetLimit > 0 && effectTargets.count > targetLimit) {
-        NSArray *targets = [effectTargets allObjects];
+    if (targetLimit > 0 && entitySet.count > targetLimit) {
+        NSArray *entities = [entitySet allObjects];
         
         // Compare distance between effect position
-        NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
-            float distance1 = ccpDistance(self.effectPosition, obj1.position);
-            float distance2 = ccpDistance(self.effectPosition, obj2.position);
+        NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Entity *obj1, Entity *obj2) {
+            RenderComponent *ownerRenderCom = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
+            RenderComponent *obj1RenderCom = (RenderComponent *)[obj1 getComponentOfClass:[RenderComponent class]];
+            RenderComponent *obj2RenderCom = (RenderComponent *)[obj2 getComponentOfClass:[RenderComponent class]];
+            
+            float distance1 = ccpDistance(ownerRenderCom.sprite.position, obj1RenderCom.sprite.position);
+            float distance2 = ccpDistance(ownerRenderCom.sprite.position, obj2RenderCom.sprite.position);
             
             if (distance1 < distance2) {
                 return NSOrderedAscending;
@@ -125,57 +154,63 @@
             }
         }];
         
-        // Compare hp
-        NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Character *obj1, Character *obj2) {
-            int hp1 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
-            int hp2 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
-            
-            if (hp1 < hp2) {
-                return NSOrderedAscending;
-            } else if (hp1 > hp2) {
-                return NSOrderedDescending;
-            } else {
-                return NSOrderedSame;
-            }
-        }];
+//        // Compare hp
+//        NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Entity *obj1, Entity *obj2) {
+//            int hp1 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
+//            int hp2 = [obj1 getAttribute:kCharacterAttributeHp].currentValue;
+//            
+//            if (hp1 < hp2) {
+//                return NSOrderedAscending;
+//            } else if (hp1 > hp2) {
+//                return NSOrderedDescending;
+//            } else {
+//                return NSOrderedSame;
+//            }
+//        }];
+//        
+//        NSArray *sorts = [NSArray arrayWithObjects:distanceSort, hpSort, nil];
         
-        NSArray *sorts = [NSArray arrayWithObjects:hpSort, distanceSort, nil];
-        [targets sortedArrayUsingDescriptors:sorts];
+        NSArray *sorts = [NSArray arrayWithObjects:distanceSort, nil];
+        [entities sortedArrayUsingDescriptors:sorts];
         
         NSRange range = NSMakeRange(0, targetLimit);
         
-        return [targets subarrayWithRange:range];
+        return [entities subarrayWithRange:range];
     } else {
-        return [effectTargets allObjects];
+        return [entitySet allObjects];
     }
 }
 
--(BOOL)containTarget:(Character *)target {
+-(BOOL)containEntity:(Entity *)entity {
     
-    if (![self checkSide:target]) {
+    if (![self checkSide:entity]) {
         return NO;
     }
     
-    if ([self checkFilter:target]) {
+    if ([self checkFilter:entity]) {
         return NO;
     }
+    
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
     if (attackRange == nil) {
-        NSAssert(_rangeSprite.parent == target.sprite.parent, @"Sprites must have the same parent! Might happen when a character hold a sprite as it's attack range");
+        NSAssert(_rangeSprite.parent == renderCom.sprite.parent, @"Sprites must have the same parent! Might happen when a character hold a sprite as it's attack range");
         
-        if (CGRectIntersectsRect(_rangeSprite.boundingBox, target.boundingBox)) {
+        if (CGRectIntersectsRect(_rangeSprite.boundingBox, renderCom.sprite.boundingBox)) {
             return YES;
         } else {
             return NO;
         }
     }
     
-    NSMutableArray *points = target.pointArray;
+    CollisionComponent *collisionCom = (CollisionComponent *)[entity getComponentOfClass:[CollisionComponent class]];
+    
+    NSMutableArray *points = collisionCom.points;
     
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
-        loc = [target.sprite convertToWorldSpace:loc];
+        loc = [renderCom.sprite convertToWorldSpace:loc];
         loc = [_rangeSprite convertToNodeSpace:loc];
 
         loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* kScale + width/2;
@@ -191,28 +226,31 @@
     return NO;
 }
 
--(BOOL)checkSide:(Character *)temp {
+-(BOOL)checkSide:(Entity *)entity {
+    TeamComponent *entityTeam = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    TeamComponent *ownerTeam = (TeamComponent *)[_owner getComponentOfClass:[TeamComponent class]];
+    
     if ([_sides containsObject:kRangeSideAlly]) {
-        if (temp.player == _character.player) {
+        if (entityTeam.team == ownerTeam.team) {
             return YES;
         }
     }
     
     if ([_sides containsObject:kRangeSideEnemy]) {
-        if (temp.player != _character.player) {
+        if (entityTeam.team != ownerTeam.team) {
             return YES;
         }
     }
     return NO;
 }
 
--(BOOL)checkFilter:(Character *)temp {
+-(BOOL)checkFilter:(Entity *)entity {
     if (_filters == nil) {
         return NO;
     }
     
     if ([_filters containsObject:kRangeFilterSelf]) {
-        if (temp == _character) {
+        if (entity.eid == _owner.eid) {
             return YES;
         }
     }
@@ -222,12 +260,10 @@
 -(CGPoint)effectPosition {
     if (effectRange == nil) {
         CGPoint position = _rangeSprite.position;
-        position = [_rangeSprite.parent convertToWorldSpace:position];
-        return [_character.sprite.parent convertToNodeSpace:position];
+        return [_rangeSprite.parent convertToWorldSpace:position];
     } else {
         CGPoint position = effectRange.rangeSprite.position;
-        position = [effectRange.rangeSprite.parent convertToWorldSpace:position];
-        return [_character.sprite.parent convertToNodeSpace:position];
+        return [effectRange.rangeSprite.parent convertToWorldSpace:position];
     }
 }
 

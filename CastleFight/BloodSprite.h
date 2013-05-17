@@ -7,13 +7,15 @@
 //
 
 #import "cocos2d.h"
+#import "Entity.h"
 
-@class Character;
+@class DefenderComponent;
+
 @interface BloodSprite : CCProgressTimer {
-    __weak Character *character;
+    DefenderComponent *defense;
 }
 
--(id)initWithCharacter:(Character *)aCharacter sprite:(CCSprite *)sprite;
+-(id)initWithEntity:(Entity *)entity sprite:(CCSprite *)sprite;
 -(void)update;
 
 @end

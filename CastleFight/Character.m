@@ -28,7 +28,6 @@
 #import "TankSkill.h"
 #import "SuicideSkill.h"
 #import "BombPassiveSkill.h"
-#import "TestSkill.h"
 #import "BombSkill.h"
 #import "HeroSkill.h"
 
@@ -137,7 +136,7 @@
             skill = [[TestSkill alloc] initWithCharacter:self];
         }
     } else if ([name hasPrefix:@"hero"]) {
-        skill = [[HeroSkill alloc] initWithCharacter:self];
+        skill = [[HeroSkillnitWithCharacter:self];
     }
 }
 
@@ -275,12 +274,6 @@
     
     state = kCharacterStateMove;
 }
-
--(void) setMovePosition:(CGPoint)point
-{
-        
-}
-
 
 -(void)setDirection:(CGPoint)velocity {
     @synchronized(self) {

@@ -7,16 +7,15 @@
 //
 
 #import "Damage.h"
-#import "Character.h"
 
 @implementation Damage
 
--(id)initWithValue:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter {
+-(id)initWithSender:(Entity *)sender damage:(int)damage damageType:(DamageType)type damageSource:(DamageSource)source {
     if (self = [super init]) {
-        _value = aNumber;
-        _type = aType;
-        _source = aSource;
-        _damager = aCharacter;
+        _sender = sender;
+        _damage = damage;
+        _type = type;
+        _source = source;
     }
     return self;
 }

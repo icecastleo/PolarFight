@@ -7,14 +7,17 @@
 //
 
 #import "CastleBloodSprite.h"
-#import "Character.h"
+#import "TeamComponent.h"
+#import "DefenderComponent.h"
 
 @implementation CastleBloodSprite
 
--(id)initWithCharacter:(Character *)aCharacter {
-    if (self = [super initWithCharacter:aCharacter sprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"gauge%02d.png",aCharacter.player]]]) {
-        self.midpoint = ccp(aCharacter.player == 1 ? 1 : 0, 0);
-        [self update];
+-(id)initWithEntity:(Entity *)entity {
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    NSAssert(team, @"Invalid entity!");
+        
+    if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"gauge%02d.png", team.team]]]) {
+        self.midpoint = ccp(team.team == 1 ? 1 : 0, 0);
     }
     return self;
 }

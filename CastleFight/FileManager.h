@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class BattleDataObject,Character,AchievementManager,GameCenterManager;
+@class BattleDataObject, AchievementManager, GameCenterManager;
 
 @interface FileManager : NSObject
 
 @property int userMoney;
+@property (readonly) NSArray *characterInitDatas;
+
 @property AchievementManager *achievementManager;
 //game center
 @property (nonatomic) GameCenterManager *gameCenterManager;
@@ -29,12 +31,11 @@
 
 -(BattleDataObject *)loadBattleInfo:(NSString *)name;
 
--(NSDictionary *)getCharacterDataWithId:(NSString *)anId;
--(NSArray *)getChararcterArray;
--(Character *)getPlayerHero;
--(Character *)getPlayerCastle;
+-(NSDictionary *)getCharacterDataWithCid:(NSString *)cid;
 
--(void)updatePlayerCharacter:(Character *)character;
+//-(Character *)getPlayerHero;
+//-(Character *)getPlayerCastle;
+//-(void)updatePlayerCharacter:(Character *)character;
 
 -(void)switchSoundsEffect;
 -(void)switchBackgroundMusic;

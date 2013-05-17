@@ -7,17 +7,19 @@
 //
 
 #import "DamageEvent.h"
-#import "Character.h"
+#import "DefenderComponent.h"
 
 @implementation DamageEvent
-//@dynamic damage;
 
--(id)initWithBaseDamage:(int)aNumber damageType:(DamageType)aType damageSource:(DamageSource)aSource damager:(Character*)aCharacter {
+-(id)initWithSender:(Entity *)sender damage:(int)damage damageType:(DamageType)type damageSource:(DamageSource)source receiver:(Entity *)receiver {
     if(self = [super init]) {
-        _baseDamage = aNumber;
-        _type = aType;
-        _source = aSource;
-        _damager = aCharacter;
+        NSAssert([receiver getComponentOfClass:[DefenderComponent class]] != nil, @"Invalid defender!");
+        
+        _sender = sender;
+        _baseDamage = damage;
+        _type = type;
+        _source = source;
+        _receiver = receiver;
         bonus = 0;
         multiplier = 1;
     }
@@ -41,14 +43,11 @@
 }
 
 -(int)damage {
-    if (multiplier == 0) {
-        return 0;
-    }
     return MAX(1, _baseDamage * multiplier + bonus);
 }
 
 -(Damage *)convertToDamage {
-    Damage *damage = [[Damage alloc] initWithValue:[self damage] damageType:_type damageSource:_source damager:_damager];
+    Damage *damage = [[Damage alloc] initWithSender:_sender damage:[self damage] damageType:_type damageSource:_source];
     damage.position = _position;
     damage.knockOutPower = _knockOutPower;
     damage.knouckOutCollision = _knouckOutCollision;
