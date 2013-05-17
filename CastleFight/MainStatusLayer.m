@@ -63,6 +63,7 @@
         CCMenuItem *free = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_up.png"]
                                                    selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_tapjoy_down.png"]
                                                             block:^(id sender) {
+                                                                  [TapjoyConnect getTapPoints];
                                                                 [TapjoyConnect showOffersWithViewController:[CCDirector sharedDirector]];
                                                             }];
         free.position = ccp(background.boundingBox.size.width / 10 * 3.25, background.boundingBox.size.height / 2);
