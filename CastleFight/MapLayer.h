@@ -17,6 +17,7 @@
 
 @property (readonly) MapCamera *cameraControl;
 @property (readonly) int boundaryX, boundaryY;
+@property (readonly) int maxChildZ;
 
 -(id)initWithName:(NSString *)name;
 -(void)setMap:(NSString *)name;

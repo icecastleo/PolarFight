@@ -347,6 +347,10 @@
 		9B55BBCD1732A32B0030C9D7 /* CostComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBCC1732A32A0030C9D7 /* CostComponent.m */; };
 		9B55BBD01732A53F0030C9D7 /* LevelComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBCF1732A53D0030C9D7 /* LevelComponent.m */; };
 		9B5CD31916ED148F00C8B007 /* DelegateSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5CD31816ED148C00C8B007 /* DelegateSkill.m */; };
+		9B60DAD917477A320039A031 /* ProjectileEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAD817477A320039A031 /* ProjectileEvent.m */; };
+		9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADB174792D50039A031 /* ProjectileRange.m */; };
+		9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADE1747C6B70039A031 /* ProjectileComponent.m */; };
+		9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAE11747D4B20039A031 /* ProjectileSystem.m */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
 		9B73C782172E7E69008575E5 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C780172E7E69008575E5 /* background-hd.png */; };
@@ -1071,6 +1075,14 @@
 		9B5CD31816ED148C00C8B007 /* DelegateSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateSkill.m; sourceTree = "<group>"; };
 		9B5CD31A16ED169100C8B007 /* AttackDelegateSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackDelegateSkill.h; sourceTree = "<group>"; };
 		9B5CD31B16ED169100C8B007 /* AttackDelegateSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackDelegateSkill.m; sourceTree = "<group>"; };
+		9B60DAD717477A320039A031 /* ProjectileEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileEvent.h; sourceTree = "<group>"; };
+		9B60DAD817477A320039A031 /* ProjectileEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileEvent.m; sourceTree = "<group>"; };
+		9B60DADA174792D40039A031 /* ProjectileRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileRange.h; sourceTree = "<group>"; };
+		9B60DADB174792D50039A031 /* ProjectileRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileRange.m; sourceTree = "<group>"; };
+		9B60DADD1747C6B60039A031 /* ProjectileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileComponent.h; sourceTree = "<group>"; };
+		9B60DADE1747C6B70039A031 /* ProjectileComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileComponent.m; sourceTree = "<group>"; };
+		9B60DAE01747D4B10039A031 /* ProjectileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileSystem.h; sourceTree = "<group>"; };
+		9B60DAE11747D4B20039A031 /* ProjectileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileSystem.m; sourceTree = "<group>"; };
 		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
 		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
 		9B6EA71316F1FAED00C61AD9 /* UnitMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitMenuItem.h; sourceTree = "<group>"; };
@@ -1376,10 +1388,8 @@
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
 				2DD7058A16511724001E3155 /* RangeLine.h */,
 				2DD7058B16511724001E3155 /* RangeLine.m */,
-				9BF3254E16A6EA0200D5782B /* RangeShooter.h */,
-				9BF3254F16A6EA0300D5782B /* RangeShooter.m */,
-				2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */,
-				2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */,
+				9B60DADA174792D40039A031 /* ProjectileRange.h */,
+				9B60DADB174792D50039A031 /* ProjectileRange.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -1448,8 +1458,8 @@
 				3730815316F7578100F1F7EE /* UserDataObject.m */,
 				9BD25C0617415A1600B6FBFB /* EnemyData.h */,
 				9BD25C0717415A1800B6FBFB /* EnemyData.m */,
-				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				3730814F16F7550800F1F7EE /* BattleDataObject.h */,
+				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				37DCA5C716F1CBD90006D656 /* FileManager.h */,
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
 				37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */,
@@ -1658,7 +1668,6 @@
 				9B3E48C01675ECD1000CFFFB /* libs */,
 				9B062CF61635275000E06018 /* Resources */,
 				9B019B0F16494D7700A6976F /* Status */,
-				9BFFAE60163E9D8A00073DC5 /* Skill */,
 				9B82F794164FB36B0001A357 /* SelectLayer */,
 				9B062E691635275300E06018 /* Supporting Files */,
 				9B82F786164FB2250001A357 /* Constant.h */,
@@ -1790,6 +1799,7 @@
 				9BDC077D166E3719009559C3 /* Attack */,
 				9BDC0782166E392B009559C3 /* Armor */,
 				9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */,
+				9BFFAE60163E9D8A00073DC5 /* Skill */,
 			);
 			name = Combat;
 			sourceTree = "<group>";
@@ -2229,6 +2239,8 @@
 				9B55BB9B173254CB0030C9D7 /* AIComponent.m */,
 				9B146C811737C18400D141F1 /* ActiveSkillComponent.h */,
 				9B146C821737C18600D141F1 /* ActiveSkillComponent.m */,
+				9B60DADD1747C6B60039A031 /* ProjectileComponent.h */,
+				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2248,6 +2260,8 @@
 				9B146C8E1739381D00D141F1 /* ActiveSkillSystem.m */,
 				9B146C9C173D91E500D141F1 /* CombatSystem.h */,
 				9B146C9D173D91E700D141F1 /* CombatSystem.m */,
+				9B60DAE01747D4B10039A031 /* ProjectileSystem.h */,
+				9B60DAE11747D4B20039A031 /* ProjectileSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -2259,6 +2273,17 @@
 				9B5CD31B16ED169100C8B007 /* AttackDelegateSkill.m */,
 			);
 			name = DelegateSkill;
+			sourceTree = "<group>";
+		};
+		9B60DAD517463F400039A031 /* RangeShooter */ = {
+			isa = PBXGroup;
+			children = (
+				9BF3254E16A6EA0200D5782B /* RangeShooter.h */,
+				9BF3254F16A6EA0300D5782B /* RangeShooter.m */,
+				2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */,
+				2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */,
+			);
+			name = RangeShooter;
 			sourceTree = "<group>";
 		};
 		9B737AB0173007D70060B98B /* Action */ = {
@@ -2286,8 +2311,10 @@
 		9B82F787164FB2510001A357 /* BattleScene */ = {
 			isa = PBXGroup;
 			children = (
-				9BF467C316BA7361005B1BBE /* BattleController */,
+				9BF467CA16BA8286005B1BBE /* CharacterQueue */,
 				2B1C55D71643B08A007D6CEA /* MapLayer */,
+				9B82F788164FB2780001A357 /* BattleController.h */,
+				9B82F789164FB2780001A357 /* BattleController.m */,
 				9B82F78A164FB2780001A357 /* BattleStatusLayer.h */,
 				9B82F78B164FB2780001A357 /* BattleStatusLayer.m */,
 				9B82F78C164FB2780001A357 /* DPadLayer.h */,
@@ -2595,6 +2622,8 @@
 				9B514DEC1688541900359C2A /* Damage.m */,
 				9B92B1A91681D63D00D965AF /* DamageEvent.h */,
 				9B92B1AA1681D63D00D965AF /* DamageEvent.m */,
+				9B60DAD717477A320039A031 /* ProjectileEvent.h */,
+				9B60DAD817477A320039A031 /* ProjectileEvent.m */,
 			);
 			name = Attack;
 			sourceTree = "<group>";
@@ -2653,16 +2682,6 @@
 			name = MainScene;
 			sourceTree = "<group>";
 		};
-		9BF467C316BA7361005B1BBE /* BattleController */ = {
-			isa = PBXGroup;
-			children = (
-				9BF467CA16BA8286005B1BBE /* CharacterQueue */,
-				9B82F788164FB2780001A357 /* BattleController.h */,
-				9B82F789164FB2780001A357 /* BattleController.m */,
-			);
-			name = BattleController;
-			sourceTree = "<group>";
-		};
 		9BF467CA16BA8286005B1BBE /* CharacterQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -2685,6 +2704,7 @@
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
 				2D26FC961640111500C34AA4 /* Effect */,
 				2D4AD598163FDDC400A949C3 /* Range */,
+				9B60DAD517463F400039A031 /* RangeShooter */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
 				9B2AB06616665C0400B78136 /* ActiveSkill.h */,
 				9B2AB06716665C0500B78136 /* ActiveSkill.m */,
@@ -3073,6 +3093,10 @@
 				9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */,
 				9B93DE831744F21700DA62F2 /* Range.m in Sources */,
 				9B93DE841744F21D00DA62F2 /* TeamComponent.m in Sources */,
+				9B60DAD917477A320039A031 /* ProjectileEvent.m in Sources */,
+				9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */,
+				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
+				9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

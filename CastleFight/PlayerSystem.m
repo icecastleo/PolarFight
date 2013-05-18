@@ -31,7 +31,7 @@
         NSMutableArray *summonComponents = player.summonComponents;
         
         for (SummonComponent *summon in summonComponents) {
-            if (summon.summon) {
+            if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
                 player.food -= summon.cost;
                 
@@ -50,6 +50,8 @@
                     [summon.menuItem.timer runAction:[CCProgressFromTo actionWithDuration:summon.cooldown from:100 to:0]];
                 }
             } else {
+                summon.summon = NO;
+                
                 if (summon.currentCooldown > 0) {
                     summon.currentCooldown -= delta;
                 }

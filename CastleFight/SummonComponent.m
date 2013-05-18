@@ -43,14 +43,6 @@
     return YES;
 }
 
--(void)setSummon:(BOOL)summon {
-    if (summon && self.canSummon) {
-        _summon = YES;
-    } else {
-        _summon = NO;
-    }
-}
-
 -(BOOL)isCostSufficient {
     NSAssert(_player, @"Who will you summon for?");
     

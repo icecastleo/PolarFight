@@ -14,7 +14,7 @@
 #define kScale [[UIScreen mainScreen] scale]
 
 // For Character make collision CGPath
-#define kCollisionPointRange 16
+#define kCollisionPointRange 25
 
 // For touch dispatcher
 #define kTouchPriotiryPause -256
@@ -128,33 +128,6 @@ typedef enum {
     statusAttackBuff,
 } AuraStatusType;
 
-// RangeKey
-#define kRangeKeyType @"Type"
-#define kRangeKeySide @"Side"
-#define kRangeKeyFilter @"Filter"
-#define kRangeKeyRadius @"Radius"
-#define kRangeKeyAngle @"Angle"
-#define kRangeKeyWidth @"Width"
-#define kRangeKeyLength @"Length"
-#define kRangeKeyDistance @"Distance"
-#define kRangeKeyTargetLimit @"TargetLimit"
-#define kRangeKeySpriteFile @"SpriteFile"
-#define kRangeKeyEffectRange @"EffectRange"
-
-// RangeType
-#define kRangeTypeSprite @"Range"
-#define kRangeTypeCircle @"RangeCircle"
-#define kRangeTypeFanShape @"RangeFanShape"
-#define kRangeTypeLine @"RangeLine"
-
-// RangeSide
-#define kRangeSideAlly @"Ally"
-#define kRangeSideEnemy @"Enemy"
-
-// RangeFilter
-#define kRangeFilterSelf @"Self"
-
-#endif
 
 #import "ccTypes.h"
 
@@ -420,3 +393,5 @@ static const ccColor3B ccWHEAT={245,222,179};
 static const ccColor3B ccWHITESMOKE={245,245,245};
 //! YellowGreen color (154,205,50)
 static const ccColor3B ccYELLOWGREEN={154,205,50};
+
+#endif

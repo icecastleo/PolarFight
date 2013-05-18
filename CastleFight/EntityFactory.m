@@ -9,7 +9,6 @@
 #import "EntityFactory.h"
 #import "cocos2d.h"
 #import "FileManager.h"
-//#import "AIStateMass.h"
 #import "RenderComponent.h"
 #import "CharacterComponent.h"
 #import "LevelComponent.h"
@@ -33,6 +32,7 @@
 #import "AIStateEnemyPlayer.h"
 #import "SummonComponent.h"
 #import "CollisionComponent.h"
+#import "ProjectileComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -71,13 +71,15 @@
     
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
-        
+    
     DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"hp"]]];
     [entity addComponent:defenseCom];
     
     defenseCom.defense = [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"defense"]];
     defenseCom.armorType = kArmorNoraml;
     defenseCom.bloodSprite = [[CharacterBloodSprite alloc] initWithEntity:entity];
+    
+    [entity addComponent:[[ProjectileComponent alloc] init]];
     
     [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     

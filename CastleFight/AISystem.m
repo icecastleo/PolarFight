@@ -17,7 +17,7 @@
     NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[AIComponent class]];
     
     for (Entity *entity in entities) {
-        AIComponent * ai = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];        
+        AIComponent * ai = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
         [ai.state updateEntity:entity delta:delta];
     }
 }

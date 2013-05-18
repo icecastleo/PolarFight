@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DamageEvent.h"
 #import "Entity.h"
+#import "AttackerComponent.h"
 
 @interface AttackEvent : NSObject {
     float bonus;
@@ -16,17 +17,19 @@
 }
 
 @property (readonly) Entity *attacker;
+// Retain it for projectile event, because attacker might be dead before hit enemy!
+@property (readonly) AttackerComponent *attack;
 @property (readonly) Entity *defender;
 @property (readonly) DamageType type;
 @property (readonly) DamageSource source;
-@property (readonly) int attack;
+
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
 
 @property BOOL isInvalid;
 
--(id)initWithAttacker:(Entity *)attacker damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender;
+-(id)initWithAttacker:(Entity *)attacker attackerComponent:(AttackerComponent *)attack damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender;
 -(DamageEvent*)convertToDamageEvent;
 
 @end

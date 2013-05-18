@@ -14,6 +14,8 @@
 
 @implementation MapLayer
 
+@dynamic maxChildZ;
+
 static float scale;
 const static int castleDistance = 200;
 const static int pathSizeHeight = 25;
@@ -55,6 +57,10 @@ const static int pathHeight = 70;
 
 -(int)boundaryY {
     return self.contentSize.height;
+}
+
+-(int)maxChildZ {
+    return self.boundaryY;
 }
 
 -(void)registerWithTouchDispatcher {

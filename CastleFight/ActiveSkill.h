@@ -14,7 +14,7 @@
     Range *range;
 }
 
-@property (weak, nonatomic) Entity *owner;
+@property (nonatomic) Entity *owner;
 
 @property float cooldown;
 @property NSString *animationKey;

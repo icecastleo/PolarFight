@@ -8,74 +8,67 @@
 
 #import "RangeAttackSkill.h"
 #import "AttackEvent.h"
-#import "Character.h"
-#import "RangeShooter.h"
-#import "RangeShooterNew.h"
-#import "BattleController.h"
-#import "AttackDelegateSkill.h"
+#import "ProjectileComponent.h"
+#import "ProjectileEvent.h"
+#import "RenderComponent.h"
+#import "DirectionComponent.h"
+#import "AttackerComponent.h"
 
 @implementation RangeAttackSkill
  
 -(id)init {
     if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,@1,kRangeKeyTargetLimit,nil];
         
         range = [Range rangeWithParameters:dictionary];
+        self.cooldown = 2;
     }
     return self;
 }
 
 -(void)activeEffect {
+    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
+    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
+    DirectionComponent *direction = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     
-//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSprite,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
-//    
-//    DelegateSkill *delegate = [[AttackDelegateSkill alloc] initWithCharacter:character];
-//    
-//    Range *arrowRange = [Range rangeWithParameters:dictionary];
-//    arrowRange.owner = self.owner;
-//    
-//    RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:arrowRange delegateSkill:delegate];
-//    
-//    // TODO: 可指定攻擊地點
-//    
-//    NSArray *effectEntities = [range getEffectEntities];
-//    
-//    if(effectEntities.count > 0){
-//        Character *target = effectTargets[0];
-//        [shooter shoot:target.position time:0.75];
-//    }
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
 
+    ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
-//    for (Entity *entity in [range getEffectEntities]) {
-//        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:entity];
-//        //        event.knockOutPower = 25;
-//        //        event.knouckOutCollision = YES;
-//        
-//        AttackerComponent *attack = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
-//        [attack.attackEventQueue addObject:event];
-//    }
+    CGPoint endPosition = ccp(FLT_MIN, FLT_MIN);
+    
+    NSArray *entities = [range getEffectEntities];
+    
+    for (Entity *entity in entities) {
+        RenderComponent *enemyRender = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        
+        // Aim enemy & prevent to hit back
+        if (direction.direction == kDirectionLeft && enemyRender.sprite.position.x < render.sprite.position.x) {
+            endPosition = enemyRender.sprite.position;
+            break;
+        } else if (direction.direction == kDirectionRight && enemyRender.sprite.position.x > render.sprite.position.x) {
+            endPosition = enemyRender.sprite.position;
+            break;
+        }
+    }
+    
+//    CGPoint endPosition = ccpAdd(render.sprite.position, direction.direction == kDirectionLeft ? ccp(-150, 0) : ccp(150, 0));
+    
+    if (endPosition.x == FLT_MIN && endPosition.y == FLT_MIN) {
+        return;
+    }
+
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeParabola startPosition:render.sprite.position endPosition:endPosition time:0.75 block:^(NSArray *entities, CGPoint position) {
+        for (Entity *entity in entities) {
+            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
+            event.position = position;
+            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+            [attack.attackEventQueue addObject:event];
+        }
+    }];
+    
+    [projectile.projectileEventQueue addObject:event];
 }
-
-//-(void)activeSkill:(int)count {
-    //    NSMutableDictionary *effectDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeCircle,@"rangeType",@50,@"effectRadius",nil];
-    
-    //    Range *effectRange = [Range rangeWithCharacter:character parameters:effectDictionary];
-    
-    //    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],@"rangeSides",kRangeTypeSprite,@"rangeType",@"arrow.png",@"rangeSpriteFile",effectRange,@"rangeEffectRange",nil];
-    
-//    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSprite,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
-//    
-//    DelegateSkill *delegate = [[AttackDelegateSkill alloc] initWithCharacter:character];
-//
-//    RangeShooterNew *shooter = [[RangeShooterNew alloc] initWithRange:[Range rangeWithCharacter:character parameters:dictionary] delegateSkill:delegate];
-//    
-//    // TODO: 可指定攻擊地點
-//    NSArray *effectTargets = [range getEffectTargets];
-//    
-//    if(effectTargets.count > 0){
-//        Character *target = effectTargets[0];
-//        [shooter shoot:target.position time:0.75];
-//    }
-//}
 
 @end

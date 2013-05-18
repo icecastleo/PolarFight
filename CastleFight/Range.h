@@ -10,30 +10,61 @@
 #import "cocos2d.h"
 #import "Entity.h"
 
+// RangeType
+#define kRangeTypeCircle @"RangeCircle"
+#define kRangeTypeFanShape @"RangeFanShape"
+#define kRangeTypeLine @"RangeLine"
+#define kRangeTypeProjectile @"ProjectileRange"
+
+// TODO: Add target entities component!!
+
+// RangeKey
+#define kRangeKeyType @"Type"
+#define kRangeKeySide @"Side"
+#define kRangeKeyFilter @"Filter"
+#define kRangeKeyTargetLimit @"TargetLimit"
+#define kRangeKeySpriteFile @"SpriteFile"
+
+#define kRangeKeyRadius @"Radius"
+#define kRangeKeyAngle @"Angle"
+#define kRangeKeyWidth @"Width"
+#define kRangeKeyLength @"Length"
+#define kRangeKeyDistance @"Distance"
+
+#define kRangeKeyEffectRange @"EffectRange"
+
+// Projectile Range
+#define kRangeKeyIsPiercing @"IsPiercing"
+
+// RangeSide
+#define kRangeSideAlly @"Ally"
+#define kRangeSideEnemy @"Enemy"
+
+// RangeFilter
+#define kRangeFilterSelf @"Self"
+
 @interface Range : NSObject {
     NSString *name;
+    
+    NSArray *sides;
+    NSArray *filters;
+    
+    int targetLimit;
     
     CGMutablePathRef attackRange;
     
     int width;
     int height;
-
-    Range *effectRange;
-    
-    int targetLimit;
 }
 
-@property NSArray *sides;
-@property NSArray *filters;
-
-@property (weak, nonatomic) Entity *owner;
+@property Entity *owner;
 @property (readonly) CCSprite *rangeSprite;
 @property (readonly) CGPoint effectPosition;
 
 +(id)rangeWithParameters:(NSMutableDictionary *)dict;
 -(id)initWithParameters:(NSMutableDictionary *)dict;
 
--(NSArray *)getEffectEntities;
 -(void)setDirection:(CGPoint)velocity;
+-(NSArray *)getEffectEntities;
 
 @end

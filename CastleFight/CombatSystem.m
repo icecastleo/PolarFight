@@ -31,9 +31,10 @@
             [event.attacker sendEvent:kEventSendAttackEvent Message:event];
             [event.defender sendEvent:kEventReceiveAttackEvent Message:event];
             
-            DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
-            
-            [defense.damageEventQueue addObject:[event convertToDamageEvent]];
+            if (!event.isInvalid) {
+                DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
+                [defense.damageEventQueue addObject:[event convertToDamageEvent]];
+            }
         }
         
         [attack.attackEventQueue removeAllObjects];
@@ -47,7 +48,11 @@
             
             [event.sender sendEvent:kEventSendDamageEvent Message:event];
             [event.receiver sendEvent:kEventReceiveDamageEvent Message:event];
-                        
+            
+            if (event.isInvalid) {
+                continue;
+            }
+            
             Damage *damage = [event convertToDamage];
             [entity sendEvent:kEventReceiveDamage Message:damage];
             

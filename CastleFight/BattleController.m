@@ -21,6 +21,7 @@
 #import "PlayerSystem.h"
 #import "AISystem.h"
 #import "MoveSystem.h"
+#import "ProjectileSystem.h"
 #import "ActiveSkillSystem.h"
 #import "CombatSystem.h"
 
@@ -99,6 +100,7 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[CombatSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
+    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {
@@ -107,7 +109,9 @@ __weak static BattleController* currentInstance;
 
 -(void)update:(ccTime)delta {
     for (System *system in systems) {
+//        double time = CACurrentMediaTime();
         [system update:delta];
+//        CCLOG(@"%@ : %f", NSStringFromClass([system class]), CACurrentMediaTime() - time);
     }
     
     // FIXME: As player component delegate?

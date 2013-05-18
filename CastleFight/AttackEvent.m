@@ -14,12 +14,13 @@
 
 @implementation AttackEvent
 
--(id)initWithAttacker:(Entity *)attacker damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender {
+-(id)initWithAttacker:(Entity *)attacker attackerComponent:(AttackerComponent *)attack damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender {
     if(self = [super init]) {
-        NSAssert([attacker getComponentOfClass:[AttackerComponent class]], @"Invalid attacker!");
-        NSAssert([defender getComponentOfClass:[DefenderComponent class]], @"Invalid defender!");
+//        NSAssert([attacker getComponentOfClass:[AttackerComponent class]], @"Invalid attacker!");
+//        NSAssert([defender getComponentOfClass:[DefenderComponent class]], @"Invalid defender!");
         
         _attacker = attacker;
+        _attack = attack;
         _defender = defender;
         _type = type;
         _source = source;
@@ -36,14 +37,12 @@
 }
 
 -(int)damage {
-    AttackerComponent *attackCom = (AttackerComponent *)[_attacker getComponentOfClass:[AttackerComponent class]];
     DefenderComponent *defendCom = (DefenderComponent *)[_defender getComponentOfClass:[DefenderComponent class]];
     
-    int attack = attackCom.attack.value;
     int defense = defendCom.defense ? defendCom.defense.value : 0;
     
     // Attack damage formula
-    return attack - defense;
+    return _attack.attack.value - defense;
 }
 
 -(DamageEvent*)convertToDamageEvent {
