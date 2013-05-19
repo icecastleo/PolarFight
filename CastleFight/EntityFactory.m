@@ -44,6 +44,7 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"hero.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"PolarBear.plist"];
 }
 
 - (id)initWithEntityManager:(EntityManager *)entityManager {
@@ -188,6 +189,32 @@
 
 -(NSMutableDictionary *)animationsByCharacterName:(NSString *)name {
     NSMutableDictionary *animations = [[NSMutableDictionary alloc] init];
+    
+    // For test sprite
+    if ([name isEqualToString:@"enemy_01"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 4; i <= 5; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+        animation = [CCAnimation animation];
+        
+        for (int i = 1; i <= 3; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+        }
+        
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"move"];
+        
+        return animations;
+    }
     
     CCAnimation *animation = [CCAnimation animation];
     

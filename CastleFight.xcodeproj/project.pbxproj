@@ -352,6 +352,10 @@
 		9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADB174792D50039A031 /* ProjectileRange.m */; };
 		9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADE1747C6B70039A031 /* ProjectileComponent.m */; };
 		9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAE11747D4B20039A031 /* ProjectileSystem.m */; };
+		9B60DAE71748C2000039A031 /* PolarBear-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE31748C2000039A031 /* PolarBear-hd.plist */; };
+		9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE41748C2000039A031 /* PolarBear-hd.png */; };
+		9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE51748C2000039A031 /* PolarBear.plist */; };
+		9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE61748C2000039A031 /* PolarBear.png */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
 		9B73C782172E7E69008575E5 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C780172E7E69008575E5 /* background-hd.png */; };
@@ -1085,6 +1089,10 @@
 		9B60DADE1747C6B70039A031 /* ProjectileComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileComponent.m; sourceTree = "<group>"; };
 		9B60DAE01747D4B10039A031 /* ProjectileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileSystem.h; sourceTree = "<group>"; };
 		9B60DAE11747D4B20039A031 /* ProjectileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileSystem.m; sourceTree = "<group>"; };
+		9B60DAE31748C2000039A031 /* PolarBear-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PolarBear-hd.plist"; sourceTree = "<group>"; };
+		9B60DAE41748C2000039A031 /* PolarBear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PolarBear-hd.png"; sourceTree = "<group>"; };
+		9B60DAE51748C2000039A031 /* PolarBear.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PolarBear.plist; sourceTree = "<group>"; };
+		9B60DAE61748C2000039A031 /* PolarBear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PolarBear.png; sourceTree = "<group>"; };
 		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
 		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
 		9B6EA71316F1FAED00C61AD9 /* UnitMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitMenuItem.h; sourceTree = "<group>"; };
@@ -1688,6 +1696,10 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B60DAE31748C2000039A031 /* PolarBear-hd.plist */,
+				9B60DAE41748C2000039A031 /* PolarBear-hd.png */,
+				9B60DAE51748C2000039A031 /* PolarBear.plist */,
+				9B60DAE61748C2000039A031 /* PolarBear.png */,
 				37E20C36174621C80017231D /* game-center-icon.jpg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
 				9B98481516EDD27600D3D55D /* bg */,
@@ -2967,6 +2979,10 @@
 				9B73C782172E7E69008575E5 /* background-hd.png in Resources */,
 				9B73C783172E7E69008575E5 /* background.png in Resources */,
 				37E20C37174621C90017231D /* game-center-icon.jpg in Resources */,
+				9B60DAE71748C2000039A031 /* PolarBear-hd.plist in Resources */,
+				9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */,
+				9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */,
+				9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
