@@ -198,6 +198,8 @@
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
         }
         
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-4.png"]]];
+        
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
         
@@ -206,6 +208,10 @@
         animation = [CCAnimation animation];
         
         for (int i = 1; i <= 3; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+        }
+        
+        for (int i = 2; i >= 1 ; i--) {
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
         }
         
