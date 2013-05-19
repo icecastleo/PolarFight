@@ -36,7 +36,7 @@
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     
     CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
-    shadow.position = ccp(_sprite.boundingBox.size.width / 2, sRect.size.height / 2);
+    shadow.position = ccp(_sprite.boundingBox.size.width/2, sRect.size.height / 4);
     [_sprite addChild:shadow z:-1];
 }
 

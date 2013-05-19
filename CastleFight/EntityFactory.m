@@ -200,7 +200,7 @@
         
         [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-4.png"]]];
         
-        animation.restoreOriginalFrame = YES;
+        animation.restoreOriginalFrame = NO;
         animation.delayPerUnit = 0.1;
         
         [animations setObject:animation forKey:@"attack"];
