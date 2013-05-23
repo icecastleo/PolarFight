@@ -22,7 +22,6 @@
     NSString* className = [dict objectForKey:kRangeKeyType];
     
     NSAssert(className != nil, @"You must define rangeType for a range");
-
     return [[NSClassFromString(className) alloc] initWithParameters:dict];
 }
 

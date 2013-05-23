@@ -63,7 +63,9 @@
 
 +(id)rangeWithParameters:(NSMutableDictionary *)dict;
 -(id)initWithParameters:(NSMutableDictionary *)dict;
-
+-(BOOL)checkSide:(Entity *)entity;
+-(BOOL)checkFilter:(Entity *)entity;
+-(NSArray *)sortEntities:(NSArray *)entities;
 -(void)setDirection:(CGPoint)velocity;
 -(NSArray *)getEffectEntities;
 
