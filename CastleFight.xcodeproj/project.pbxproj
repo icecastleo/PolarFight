@@ -18,6 +18,7 @@
 		2D14424816E88EAC00969C12 /* AIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424416E88EAB00969C12 /* AIStateAttack.m */; };
 		2D14424C16E88EFD00969C12 /* AIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424B16E88EFD00969C12 /* AIState.m */; };
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
+		2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
@@ -485,6 +486,8 @@
 		2D14424B16E88EFD00969C12 /* AIState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIState.m; sourceTree = "<group>"; };
 		2D26FC981640114D00C34AA4 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		2D26FC991640114D00C34AA4 /* Effect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effect.m; sourceTree = "<group>"; };
+		2D4AA45E174D361C00275F47 /* RangeSimpleXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSimpleXY.h; sourceTree = "<group>"; };
+		2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSimpleXY.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooterNew.h; sourceTree = "<group>"; };
@@ -1400,6 +1403,8 @@
 				2DD7058B16511724001E3155 /* RangeLine.m */,
 				9B60DADA174792D40039A031 /* ProjectileRange.h */,
 				9B60DADB174792D50039A031 /* ProjectileRange.m */,
+				2D4AA45E174D361C00275F47 /* RangeSimpleXY.h */,
+				2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */,
 			);
 			name = Range;
 			sourceTree = "<group>";
@@ -3117,6 +3122,7 @@
 				9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */,
 				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
 				9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */,
+				2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
