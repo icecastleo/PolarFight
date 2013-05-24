@@ -26,6 +26,7 @@
         _source = source;
         bonus = 0;
         multiplier = 1;
+        _sideEffects = [NSMutableArray  new];
         
         RenderComponent *render = (RenderComponent *)[_attacker getComponentOfClass:[RenderComponent class]];
         if (render) {

@@ -55,24 +55,6 @@
         GameCenterManager *gkHelper = [FileManager sharedFileManager].gameCenterManager;
         gkHelper.delegate = self;
         
-        CCMenuItem *startMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_down.png"] block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[[MainScene alloc] init]];
-        }];
-        
-        float width = size.width - startMenuItem.boundingBox.size.width;
-        float height = startMenuItem.boundingBox.size.height;
-        startMenuItem.position = ccp(width, height);
-        
-        CCMenuItem *gameCenterMenuItem = [CCMenuItemImage itemWithNormalImage:@"game-center-icon.jpg" selectedImage:@"game-center-icon.jpg" target:gkHelper selector:@selector(showLeaderboard)];
-        width = size.width - gameCenterMenuItem.boundingBox.size.width;
-        height = size.height - gameCenterMenuItem.boundingBox.size.height;
-        gameCenterMenuItem.position = ccp(width, height);
-        
-        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, nil];
-        menu.position = CGPointZero;
-        
-        [self addChild:menu];
-        
         CCSprite *background = [CCSprite spriteWithFile:@"bg/main/bg_main.png"];
         background.anchorPoint = ccp(0.5, 0);
         background.position = ccp(size.width / 2, 0);
@@ -87,6 +69,37 @@
         background2.anchorPoint = ccp(0.5, 0);
         background2.position = ccp(size.width / 3, 0);
         [self addChild:background2 z:-2];
+        
+        CCMenuItem *startMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_start_down.png"] block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[[MainScene alloc] init]];
+        }];
+        
+        CCSprite *startSprite = [CCSprite spriteWithSpriteFrameName:@"bt_main_start_up.png"];
+        [startSprite setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
+        CCScaleTo *bigger = [CCScaleTo actionWithDuration:0.5 scaleX:1.05 scaleY:1.1];
+        CCScaleTo *smaller = [CCScaleTo actionWithDuration:0.5 scaleX:1.0 scaleY:1.0];
+        CCSequence *pulseSequence = [CCSequence actionOne:bigger two:smaller];
+        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
+        [startSprite runAction:repeat];
+        
+        [self addChild:startSprite];
+        
+        float width = size.width - startMenuItem.boundingBox.size.width;
+        float height = startMenuItem.boundingBox.size.height;
+        startMenuItem.position = ccp(width, height);
+        startSprite.position = CGPointMake(width, height);
+        
+        CCMenuItem *gameCenterMenuItem = [CCMenuItemImage itemWithNormalImage:@"game-center-icon.jpg" selectedImage:@"game-center-icon.jpg" target:gkHelper selector:@selector(showLeaderboard)];
+        width = background.boundingBox.size.width - gameCenterMenuItem.boundingBox.size.width;
+        height = background.boundingBox.size.height - gameCenterMenuItem.boundingBox.size.height;
+        gameCenterMenuItem.position = ccp(width, height);
+        
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, nil];
+        menu.position = CGPointZero;
+        
+        [self addChild:menu];
+        
+        
         
 	}
 	return self;

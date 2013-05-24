@@ -98,6 +98,8 @@ typedef enum {
     kDamageTypeNormal,
     kDamageTypeFire,
     kDamageTypeIce,
+    kDamageTypePoison,
+    kDamageTypeKnockOut
 } DamageType;
 
 typedef enum {

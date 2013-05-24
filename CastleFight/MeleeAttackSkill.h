@@ -8,6 +8,10 @@
 
 #import "ActiveSkill.h"
 
+@class AttackEvent;
+
 @interface MeleeAttackSkill : ActiveSkill
+
+-(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity;
 
 @end

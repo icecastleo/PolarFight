@@ -130,12 +130,17 @@
 		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
+		37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B41174F4ECE00CA7824 /* StateComponent.m */; };
+		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
 		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
+		37E42C36174E2B280010B9E9 /* PoisonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C35174E2B270010B9E9 /* PoisonComponent.m */; };
+		37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C38174E2C5F0010B9E9 /* EffectSystem.m */; };
+		37E42C3C174E49BB0010B9E9 /* SideEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C3B174E49BB0010B9E9 /* SideEffect.m */; };
 		37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C0711726872C00541F87 /* GameCenterLayer.m */; };
 		37E4F97016AE2E4B00D492E6 /* archerHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96016AE2E4B00D492E6 /* archerHead32.png */; };
 		37E4F97116AE2E4B00D492E6 /* archerHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96116AE2E4B00D492E6 /* archerHead32@2x.png */; };
@@ -645,6 +650,10 @@
 		37DDA2C41709638A0016E8CB /* AchievementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementManager.h; sourceTree = "<group>"; };
 		37DDA2C51709638A0016E8CB /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 		37DDA2C61709638A0016E8CB /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		37DF3B40174F4ECE00CA7824 /* StateComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateComponent.h; sourceTree = "<group>"; };
+		37DF3B41174F4ECE00CA7824 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
+		37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonMeleeAttackSkill.h; sourceTree = "<group>"; };
+		37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonMeleeAttackSkill.m; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -674,6 +683,12 @@
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
 		37E2B4AD16A7F41C006CB5B4 /* CharacterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterHeadView.m; sourceTree = "<group>"; };
+		37E42C34174E2B260010B9E9 /* PoisonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonComponent.h; sourceTree = "<group>"; };
+		37E42C35174E2B270010B9E9 /* PoisonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonComponent.m; sourceTree = "<group>"; };
+		37E42C37174E2C5F0010B9E9 /* EffectSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectSystem.h; sourceTree = "<group>"; };
+		37E42C38174E2C5F0010B9E9 /* EffectSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectSystem.m; sourceTree = "<group>"; };
+		37E42C3A174E49BA0010B9E9 /* SideEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideEffect.h; sourceTree = "<group>"; };
+		37E42C3B174E49BB0010B9E9 /* SideEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideEffect.m; sourceTree = "<group>"; };
 		37E4C0701726872C00541F87 /* GameCenterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterLayer.h; sourceTree = "<group>"; };
 		37E4C0711726872C00541F87 /* GameCenterLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterLayer.m; sourceTree = "<group>"; };
 		37E4F96016AE2E4B00D492E6 /* archerHead32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archerHead32.png; sourceTree = "<group>"; };
@@ -1804,6 +1819,8 @@
 				9B08F95816A3FBB0006BF34F /* RangeAttackSkill.m */,
 				9B146C841737FF7100D141F1 /* MeleeAttackSkill.h */,
 				9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */,
+				37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */,
+				37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */,
 			);
 			name = AttackSkill;
 			sourceTree = "<group>";
@@ -2256,6 +2273,10 @@
 				9B146C821737C18600D141F1 /* ActiveSkillComponent.m */,
 				9B60DADD1747C6B60039A031 /* ProjectileComponent.h */,
 				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
+				37DF3B40174F4ECE00CA7824 /* StateComponent.h */,
+				37DF3B41174F4ECE00CA7824 /* StateComponent.m */,
+				37E42C34174E2B260010B9E9 /* PoisonComponent.h */,
+				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2277,6 +2298,8 @@
 				9B146C9D173D91E700D141F1 /* CombatSystem.m */,
 				9B60DAE01747D4B10039A031 /* ProjectileSystem.h */,
 				9B60DAE11747D4B20039A031 /* ProjectileSystem.m */,
+				37E42C37174E2C5F0010B9E9 /* EffectSystem.h */,
+				37E42C38174E2C5F0010B9E9 /* EffectSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -2639,6 +2662,8 @@
 				9B92B1AA1681D63D00D965AF /* DamageEvent.m */,
 				9B60DAD717477A320039A031 /* ProjectileEvent.h */,
 				9B60DAD817477A320039A031 /* ProjectileEvent.m */,
+				37E42C3A174E49BA0010B9E9 /* SideEffect.h */,
+				37E42C3B174E49BB0010B9E9 /* SideEffect.m */,
 			);
 			name = Attack;
 			sourceTree = "<group>";
@@ -3117,6 +3142,11 @@
 				9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */,
 				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
 				9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */,
+				37E42C36174E2B280010B9E9 /* PoisonComponent.m in Sources */,
+				37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */,
+				37E42C3C174E49BB0010B9E9 /* SideEffect.m in Sources */,
+				37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */,
+				37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
