@@ -3137,6 +3137,7 @@
 				9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */,
 				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
 				9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */,
+				2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */,
 				9B6DE0A7174FDADA00A09550 /* EntityFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
