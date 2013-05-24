@@ -356,6 +356,11 @@
 		9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE41748C2000039A031 /* PolarBear-hd.png */; };
 		9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE51748C2000039A031 /* PolarBear.plist */; };
 		9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE61748C2000039A031 /* PolarBear.png */; };
+		9B6DE0A2174FD9F800A09550 /* penguin-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE09E174FD9F800A09550 /* penguin-hd.plist */; };
+		9B6DE0A3174FD9F800A09550 /* penguin-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */; };
+		9B6DE0A4174FD9F800A09550 /* penguin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE0A0174FD9F800A09550 /* penguin.plist */; };
+		9B6DE0A5174FD9F800A09550 /* penguin.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE0A1174FD9F800A09550 /* penguin.pvr.ccz */; };
+		9B6DE0A7174FDADA00A09550 /* EntityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DE0A6174FDADA00A09550 /* EntityFactory.m */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
 		9B73C782172E7E69008575E5 /* background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C780172E7E69008575E5 /* background-hd.png */; };
@@ -398,7 +403,6 @@
 		9B9848D716F09D5E00D3D55D /* font in Resources */ = {isa = PBXBuildFile; fileRef = 9B9848D616F09D5A00D3D55D /* font */; };
 		9B9FC8E4164C0C0800D11743 /* StatusFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FC8E3164C0C0800D11743 /* StatusFactory.m */; };
 		9BA147FE167BAE920012F2C0 /* FluctuantAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* FluctuantAttribute.m */; };
-		9BA1AE8B1732E79700A367B9 /* EntityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB84173254630030C9D7 /* EntityFactory.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
 		9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0017060B8500945271 /* StageMenuItem.m */; };
@@ -1048,7 +1052,6 @@
 		9B55BB81173254630030C9D7 /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
 		9B55BB82173254630030C9D7 /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
 		9B55BB83173254630030C9D7 /* EntityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityFactory.h; sourceTree = "<group>"; };
-		9B55BB84173254630030C9D7 /* EntityFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityFactory.m; sourceTree = "<group>"; };
 		9B55BB8A173254CB0030C9D7 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		9B55BB8B173254CB0030C9D7 /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
 		9B55BB8C173254CB0030C9D7 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
@@ -1093,6 +1096,11 @@
 		9B60DAE41748C2000039A031 /* PolarBear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PolarBear-hd.png"; sourceTree = "<group>"; };
 		9B60DAE51748C2000039A031 /* PolarBear.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PolarBear.plist; sourceTree = "<group>"; };
 		9B60DAE61748C2000039A031 /* PolarBear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PolarBear.png; sourceTree = "<group>"; };
+		9B6DE09E174FD9F800A09550 /* penguin-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "penguin-hd.plist"; sourceTree = "<group>"; };
+		9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "penguin-hd.pvr.ccz"; sourceTree = "<group>"; };
+		9B6DE0A0174FD9F800A09550 /* penguin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = penguin.plist; sourceTree = "<group>"; };
+		9B6DE0A1174FD9F800A09550 /* penguin.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = penguin.pvr.ccz; sourceTree = "<group>"; };
+		9B6DE0A6174FDADA00A09550 /* EntityFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityFactory.m; sourceTree = "<group>"; };
 		9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMapCamera.h; sourceTree = "<group>"; };
 		9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMapCamera.m; sourceTree = "<group>"; };
 		9B6EA71316F1FAED00C61AD9 /* UnitMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitMenuItem.h; sourceTree = "<group>"; };
@@ -1696,6 +1704,10 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B6DE09E174FD9F800A09550 /* penguin-hd.plist */,
+				9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */,
+				9B6DE0A0174FD9F800A09550 /* penguin.plist */,
+				9B6DE0A1174FD9F800A09550 /* penguin.pvr.ccz */,
 				9B60DAE31748C2000039A031 /* PolarBear-hd.plist */,
 				9B60DAE41748C2000039A031 /* PolarBear-hd.png */,
 				9B60DAE51748C2000039A031 /* PolarBear.plist */,
@@ -2212,7 +2224,7 @@
 				9B55BB81173254630030C9D7 /* EntityManager.h */,
 				9B55BB82173254630030C9D7 /* EntityManager.m */,
 				9B55BB83173254630030C9D7 /* EntityFactory.h */,
-				9B55BB84173254630030C9D7 /* EntityFactory.m */,
+				9B6DE0A6174FDADA00A09550 /* EntityFactory.m */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -2983,6 +2995,10 @@
 				9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */,
 				9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */,
 				9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */,
+				9B6DE0A2174FD9F800A09550 /* penguin-hd.plist in Resources */,
+				9B6DE0A3174FD9F800A09550 /* penguin-hd.pvr.ccz in Resources */,
+				9B6DE0A4174FD9F800A09550 /* penguin.plist in Resources */,
+				9B6DE0A5174FD9F800A09550 /* penguin.pvr.ccz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3088,7 +3104,6 @@
 				9B55BBC91732A2000030C9D7 /* EntityManager.m in Sources */,
 				9B55BBCD1732A32B0030C9D7 /* CostComponent.m in Sources */,
 				9B55BBD01732A53F0030C9D7 /* LevelComponent.m in Sources */,
-				9BA1AE8B1732E79700A367B9 /* EntityFactory.m in Sources */,
 				9B146C7117342C6C00D141F1 /* DefenderComponent.m in Sources */,
 				9B146C7817359FA700D141F1 /* AttackerComponent.m in Sources */,
 				9B146C791736BD8400D141F1 /* RenderComponent.m in Sources */,
@@ -3117,6 +3132,7 @@
 				9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */,
 				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
 				9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */,
+				9B6DE0A7174FDADA00A09550 /* EntityFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
