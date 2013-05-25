@@ -38,11 +38,8 @@
                 DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
                 
                 for (SideEffect *sideEffect in event.sideEffects) {
-                    NSLog(@"percentage ::%g",sideEffect.percentage);
-                    if( CCRANDOM_0_1() > sideEffect.percentage) {
-                        [sideEffect.component processEnity:event.defender];
-//                        [event.defender addComponent:sideEffect.component];
-                        NSLog(@"effect");
+                    if( sideEffect.percentage > (arc4random() % 100)) {
+                        [event.defender addComponent:sideEffect.component];
                     }
                 }
                 [defense.damageEventQueue addObject:[event convertToDamageEvent]];

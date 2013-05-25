@@ -11,7 +11,7 @@
 
 @implementation SideEffect
 
--(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(double)percentage {
+-(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(int)percentage {
     if (self = [super init]) {
         _component = component;
         _percentage = percentage;

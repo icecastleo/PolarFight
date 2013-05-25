@@ -10,11 +10,13 @@
 #import "StateComponent.h"
 #import "PoisonComponent.h"
 #import "DefenderComponent.h"
+#import "ParalysisComponent.h"
 
 @implementation EffectSystem
 
 -(void)update:(float)delta {
     [self processComponent:delta className:[PoisonComponent class]];
+    [self processComponent:delta className:[ParalysisComponent class]];
 }
 
 -(void)processComponent:(float)delta  className:(Class)className {
@@ -29,11 +31,13 @@
                 stateComponent.currentTime -= stateComponent.cdTime;
                 NSLog(@"stateComponent.currentTime > cdTime");
                 DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
-                [defense.damageEventQueue addObject:stateComponent.event];
+                if (stateComponent.event) {
+                    [defense.damageEventQueue addObject:stateComponent.event];
+                }
             }
         }else {
             [entity removeComponent:[stateComponent class]];
-            NSLog(@"remove poison");
+            NSLog(@"remove stateComponent");
         }
         stateComponent.totalTime -= delta;
     }

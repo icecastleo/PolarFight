@@ -12,9 +12,9 @@
 
 @interface SideEffect : NSObject
 
-@property double percentage;
+@property int percentage;
 @property StateComponent *component;
 
--(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(double)percentage;
+-(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(int)percentage;
 
 @end

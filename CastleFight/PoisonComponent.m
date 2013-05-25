@@ -7,11 +7,8 @@
 //
 
 #import "PoisonComponent.h"
+#import "DefenderComponent.h"
 
 @implementation PoisonComponent
-
--(void)processEnity:(Entity *)entity {
-    [entity addComponent:self];
-}
 
 @end

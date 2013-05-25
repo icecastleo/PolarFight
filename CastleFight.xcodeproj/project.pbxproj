@@ -132,6 +132,8 @@
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
 		37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B41174F4ECE00CA7824 /* StateComponent.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
+		37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */; };
+		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
@@ -654,6 +656,10 @@
 		37DF3B41174F4ECE00CA7824 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
 		37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonMeleeAttackSkill.h; sourceTree = "<group>"; };
 		37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonMeleeAttackSkill.m; sourceTree = "<group>"; };
+		37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisComponent.h; sourceTree = "<group>"; };
+		37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisComponent.m; sourceTree = "<group>"; };
+		37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMeleeAttackSkill.h; sourceTree = "<group>"; };
+		37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMeleeAttackSkill.m; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1821,6 +1827,8 @@
 				9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */,
 				37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */,
 				37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */,
+				37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */,
+				37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */,
 			);
 			name = AttackSkill;
 			sourceTree = "<group>";
@@ -2277,6 +2285,8 @@
 				37DF3B41174F4ECE00CA7824 /* StateComponent.m */,
 				37E42C34174E2B260010B9E9 /* PoisonComponent.h */,
 				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
+				37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */,
+				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3147,6 +3157,8 @@
 				37E42C3C174E49BB0010B9E9 /* SideEffect.m in Sources */,
 				37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */,
 				37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */,
+				37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */,
+				37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,14 @@
     for (Entity * entity in entities) {
         ActiveSkillComponent * skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
         
+        NSMutableDictionary *testDic = [NSMutableDictionary new];
+        [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsActiveSkillForbidden"];
+        [entity sendEvent:kEventIsActiveSkillForbidden Message:testDic];
+        NSNumber *result = [testDic objectForKey:@"kEventIsActiveSkillForbidden"];
+        if (result.boolValue == YES) {
+            continue;
+        }
+        
         if (skillCom.currentSkill) {
             if (skillCom.currentSkill.isFinish) {
                 skillCom.currentSkill.isFinish = NO;

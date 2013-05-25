@@ -13,10 +13,8 @@
 @interface StateComponent : Component
 
 @property float currentTime;
-@property int cdTime;
-@property int totalTime;
+@property int cdTime;   //second
+@property int totalTime;    //second
 @property DamageEvent *event;
-
--(void)processEnity:(Entity*)enity;
 
 @end

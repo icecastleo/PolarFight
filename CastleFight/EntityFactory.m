@@ -35,6 +35,7 @@
 #import "ProjectileComponent.h"
 
 #import "PoisonMeleeAttackSkill.h"
+#import "ParalysisMeleeAttackSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -95,15 +96,15 @@
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
     
-    //* // test only
+    /* // test only for stateComponent
     if ([cid intValue] == 1) {
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
-        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
     }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     }
     
-////*/  [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+//*/[skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     
     [entity addComponent:skillCom];
     
