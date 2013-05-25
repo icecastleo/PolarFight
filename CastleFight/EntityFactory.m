@@ -48,6 +48,7 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"PolarBear.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"penguin.plist"];
 }
 
 - (id)initWithEntityManager:(EntityManager *)entityManager {
@@ -234,6 +235,39 @@
         
         return animations;
     }
+    
+    // For test sprite
+    if ([name isEqualToString:@"user_01"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-1.png"]]];
+        
+        for (int i = 4; i <= 5; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+        animation = [CCAnimation animation];
+        
+        for (int i = 1; i <= 2; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%d.png", i]]];
+        }
+        
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-1.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-3.png"]]];
+        
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"move"];
+        
+        return animations;
+    }
+
+    
     
     CCAnimation *animation = [CCAnimation animation];
     

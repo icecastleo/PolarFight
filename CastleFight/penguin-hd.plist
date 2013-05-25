@@ -4,70 +4,70 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>01-1.png</key>
+            <key>penguin-01-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{104,106},{76,102}}</string>
+                <string>{{2,117},{92,113}}</string>
                 <key>offset</key>
-                <string>{14,-1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{28,2},{76,102}}</string>
+                <string>{{0,0},{92,113}}</string>
                 <key>sourceSize</key>
-                <string>{104,104}</string>
+                <string>{92,113}</string>
             </dict>
-            <key>01-2.png</key>
+            <key>penguin-01-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{76,104}}</string>
+                <string>{{121,116},{99,113}}</string>
                 <key>offset</key>
-                <string>{14,0}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{28,0},{76,104}}</string>
+                <string>{{0,0},{99,113}}</string>
                 <key>sourceSize</key>
-                <string>{104,104}</string>
+                <string>{99,113}</string>
             </dict>
-            <key>01-3.png</key>
+            <key>penguin-01-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{158,2},{76,102}}</string>
+                <string>{{96,231},{87,113}}</string>
                 <key>offset</key>
-                <string>{13,0}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{27,1},{76,102}}</string>
+                <string>{{0,0},{87,113}}</string>
                 <key>sourceSize</key>
-                <string>{104,104}</string>
+                <string>{87,113}</string>
             </dict>
-            <key>01-4.png</key>
+            <key>penguin-01-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,2},{76,102}}</string>
+                <string>{{2,2},{117,113}}</string>
                 <key>offset</key>
-                <string>{14,-1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{28,2},{76,102}}</string>
+                <string>{{0,0},{117,113}}</string>
                 <key>sourceSize</key>
-                <string>{104,104}</string>
+                <string>{117,113}</string>
             </dict>
-            <key>01-5.png</key>
+            <key>penguin-01-5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,108},{100,102}}</string>
+                <string>{{121,2},{117,112}}</string>
                 <key>offset</key>
-                <string>{-2,-1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,2},{100,102}}</string>
+                <string>{{0,0},{117,112}}</string>
                 <key>sourceSize</key>
-                <string>{104,104}</string>
+                <string>{117,112}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -75,13 +75,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>PolarBear.png</string>
+            <string>penguin-hd.pvr.ccz</string>
             <key>size</key>
-            <string>{256,256}</string>
+            <string>{256,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bfe1d5df9d60ca0bb4b4be0b20283d64$</string>
+            <string>$TexturePacker:SmartUpdate:03bc35538f7be8d66837e40c762f5ef3$</string>
             <key>textureFileName</key>
-            <string>PolarBear.png</string>
+            <string>penguin-hd.pvr.ccz</string>
         </dict>
     </dict>
 </plist>

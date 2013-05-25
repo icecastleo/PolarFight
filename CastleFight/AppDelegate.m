@@ -64,6 +64,9 @@
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    
+    // For PVR format
+    [CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 
 	// If the 1st suffix is not found and if fallback is enabled then fallback suffixes are going to searched. If none is found, it will try with the name without suffix.
 	// On iPad HD  : "-ipadhd", "-ipad",  "-hd"
@@ -103,7 +106,6 @@
     [Appirater setTimeBeforeReminding:2];
     [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
-    
     
     // Tapjoy Connect
     [TapjoyConnect requestTapjoyConnect:@"3abab290-a53d-4269-a6ee-c301e5cf740e" secretKey:@"TA72KNqMaFsc1nlAycTb"];
