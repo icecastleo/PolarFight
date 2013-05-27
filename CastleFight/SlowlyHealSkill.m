@@ -1,24 +1,25 @@
 //
-//  PoisonMeleeAttackSkill.m
+//  SlowlyHealSkill.m
 //  CastleFight
 //
-//  Created by  DAN on 13/5/24.
+//  Created by  DAN on 13/5/27.
 //
 //
 
-#import "PoisonMeleeAttackSkill.h"
+#import "SlowlyHealSkill.h"
 #import "SideEffect.h"
 #import "PoisonComponent.h"
 #import "AttackEvent.h"
 #import "DamageEvent.h"
 
-@implementation PoisonMeleeAttackSkill
+@implementation SlowlyHealSkill
 
 -(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
     PoisonComponent *component = [[PoisonComponent alloc] init];
     component.cdTime = 1;
     component.totalTime = 100;
-    DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:ceilf(event.attack.attack.value/10.0) damageType:kDamageTypePoison damageSource:kDamageSourceMelee receiver:entity];
+    DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:-10*event.attack.attack.value damageType:kDamageTypePoison damageSource:kDamageSourceMelee receiver:entity];
+    damageEvent.isCustomDamage = YES;
     component.event = damageEvent;
     SideEffect *sideEffect = [[SideEffect alloc] initWithSideEffectCommponent:component andPercentage:50];
     [event.sideEffects addObject:sideEffect];

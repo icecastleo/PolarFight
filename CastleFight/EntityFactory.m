@@ -36,6 +36,10 @@
 
 #import "PoisonMeleeAttackSkill.h"
 #import "ParalysisMeleeAttackSkill.h"
+#import "BigPillowBomb.h"
+#import "DeadBomb.h"
+#import "HealSkill.h"
+#import "SlowlyHealSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -97,10 +101,15 @@
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
     
-    /* // test only for stateComponent
+    //* // test only for stateComponent
     if ([cid intValue] == 1) {
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
-        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[DeadBomb alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
+        
     }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     }

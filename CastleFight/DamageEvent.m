@@ -22,6 +22,7 @@
         _receiver = receiver;
         bonus = 0;
         multiplier = 1;
+        _isCustomDamage = NO;
     }
     return self;
 }
@@ -43,6 +44,9 @@
 }
 
 -(int)damage {
+    if (self.isCustomDamage) {
+        return _baseDamage * multiplier + bonus;
+    }
     return MAX(1, _baseDamage * multiplier + bonus);
 }
 

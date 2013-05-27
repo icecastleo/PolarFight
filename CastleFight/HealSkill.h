@@ -7,10 +7,11 @@
 //
 
 #import "ActiveSkill.h"
-#import "Range.h"
 
-@interface HealSkill : ActiveSkill {
+@class AttackEvent;
 
-}
+@interface HealSkill : ActiveSkill
+
+-(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity;
 
 @end

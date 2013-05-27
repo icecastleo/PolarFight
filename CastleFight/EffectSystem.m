@@ -11,12 +11,14 @@
 #import "PoisonComponent.h"
 #import "DefenderComponent.h"
 #import "ParalysisComponent.h"
+#import "BombComponent.h"
 
 @implementation EffectSystem
 
 -(void)update:(float)delta {
     [self processComponent:delta className:[PoisonComponent class]];
     [self processComponent:delta className:[ParalysisComponent class]];
+    [self processComponent:delta className:[BombComponent class]];
 }
 
 -(void)processComponent:(float)delta  className:(Class)className {
@@ -26,8 +28,8 @@
         StateComponent *stateComponent = (StateComponent *)[entity getComponentOfClass:className];
         stateComponent.currentTime += delta;
         
-        if (stateComponent.totalTime > 0) {
-            if (stateComponent.currentTime > stateComponent.cdTime) {
+        if (stateComponent.totalTime >= 0) {
+            if (stateComponent.currentTime >= stateComponent.cdTime) {
                 stateComponent.currentTime -= stateComponent.cdTime;
                 NSLog(@"stateComponent.currentTime > cdTime");
                 DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];

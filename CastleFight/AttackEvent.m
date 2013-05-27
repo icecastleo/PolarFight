@@ -27,6 +27,9 @@
         bonus = 0;
         multiplier = 1;
         _sideEffects = [NSMutableArray  new];
+        _customDamage = 0;
+        _isIgnoreDefense = NO;
+        _customDamage = NO;
         
         RenderComponent *render = (RenderComponent *)[_attacker getComponentOfClass:[RenderComponent class]];
         if (render) {
@@ -42,6 +45,14 @@
     
     int defense = defendCom.defense ? defendCom.defense.value : 0;
     
+    if (self.isIgnoreDefense && self.isCustomDamage) {
+        return self.customDamage;
+    }else if (self.isIgnoreDefense) {
+        return _attack.attack.value;
+    }else if (self.isCustomDamage) {
+        return self.customDamage - defense;
+    }
+    
     // Attack damage formula
     return _attack.attack.value - defense;
 }
@@ -51,6 +62,7 @@
     event.position = _position;
     event.knockOutPower = _knockOutPower;
     event.knouckOutCollision = _knouckOutCollision;
+    event.isCustomDamage = self.isCustomDamage;
     return event;
 }
 

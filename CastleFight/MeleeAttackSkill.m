@@ -11,7 +11,6 @@
 #import "AttackerComponent.h"
 
 #import "SideEffect.h"
-#import "PoisonComponent.h"
 
 @implementation MeleeAttackSkill
 
