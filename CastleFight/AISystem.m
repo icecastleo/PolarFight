@@ -13,12 +13,19 @@
 @implementation AISystem
 
 -(void)update:(float)delta {
+    t += delta;
+    
+    if (t >= kAISystemUpdateInterval) {
+        t -= kAISystemUpdateInterval;
+    } else {
+        return;
+    }
     
     NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[AIComponent class]];
     
     for (Entity *entity in entities) {
         AIComponent * ai = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
-        [ai.state updateEntity:entity delta:delta];
+        [ai.state updateEntity:entity];
     }
 }
 

@@ -196,10 +196,10 @@
         CCAnimation *animation = [CCAnimation animation];
         
         for (int i = 4; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
         }
         
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-4.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-04.png"]]];
         
         animation.restoreOriginalFrame = NO;
         animation.delayPerUnit = 0.1;
@@ -209,16 +209,50 @@
         animation = [CCAnimation animation];
         
         for (int i = 1; i <= 3; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
         }
         
         for (int i = 2; i >= 1 ; i--) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"01-%d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
         }
         
         animation.delayPerUnit = 0.1;
         
         [animations setObject:animation forKey:@"move"];
+        
+        return animations;
+    }
+    
+    // For test sprite
+    if ([name isEqualToString:@"enemy_02"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 2; i <= 5; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        }
+        
+        animation.delayPerUnit = 0.1;
+        [animations setObject:animation forKey:@"move"];
+
+        // attack
+        animation = [CCAnimation animation];
+        
+        for (int i = 6; i <= 7; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        }
+        
+        for (int i = 6; i <= 7; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        }
+        
+        for (int i = 6; i <= 7; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"attack"];
         
         return animations;
     }

@@ -18,7 +18,7 @@
     return @"Attack";
 }
 
--(void)updateEntity:(Entity *)entity delta:(float)delta {
+-(void)updateEntity:(Entity *)entity {
     ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
     ActiveSkill *skill = [skillCom.skills objectForKey:@"attack"];
     

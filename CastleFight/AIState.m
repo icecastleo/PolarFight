@@ -24,7 +24,7 @@
     
 }
 
--(void)updateEntity:(Entity *)entity delta:(float)delta {
+-(void)updateEntity:(Entity *)entity {
     
 }
 

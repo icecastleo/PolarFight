@@ -11,6 +11,8 @@
 @class Entity;
 @class AIState;
 
-@interface AISystem : System
+@interface AISystem : System {
+    float t;
+}
 
 @end

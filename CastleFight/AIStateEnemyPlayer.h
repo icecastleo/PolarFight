@@ -29,8 +29,6 @@
     EnemyDatas *enemyDatas;
     
     EnemyData *nextEnemy;
-    
-    float t;
 }
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory;
