@@ -67,6 +67,19 @@
 
     CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
     
+    // for test
+    if ([name isEqualToString:@"enemy_01"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-01-01.png"];
+    }
+    
+    else if ([name isEqualToString:@"enemy_02"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-02-01.png"];
+    }
+    
+    else if ([name isEqualToString:@"user_01"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-1.png"];
+    }
+    
     Entity *entity = [_entityManager createEntity];    
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];

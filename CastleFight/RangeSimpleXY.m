@@ -34,7 +34,7 @@
     CGPathAddArc(attackRange, NULL, width/2, height/2, radius, 90/(-2), 90/2, NO);
     CGPathCloseSubpath(attackRange);
     
-    yInterval=[NSArray arrayWithObjects:@0,@200,@400, nil];
+    yInterval=[NSArray arrayWithObjects:@0,@500,@1000, nil];
     
 }
 -(NSArray *)getEffectEntities {
@@ -49,12 +49,6 @@
     }
     
     NSArray *entities = [self sortEntities:rawEntities];
-    
-    for (int i = 0; i < entities.count; i++) {
-        Entity *entity = entities[i];
-        DefenderComponent *defender = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
-        CCLOG(@"%d: %d", i, defender.hp.currentValue);
-    }
     
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
@@ -78,45 +72,39 @@
     RenderComponent *selfRenderCom = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
     DirectionComponent *selfDirectionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
     
-    CGPoint c0= selfDirectionCom.velocity;
+    int direction = selfDirectionCom.direction == kDirectionLeft ? -1 : 1;
     
-    int direction = c0.x>0?1:-1;
+    CGPoint c1 = selfRenderCom.position;
+    CGPoint c2 = renderCom.position;
     
-    CGPoint  c1=selfRenderCom.position;
-    CGPoint c2 =renderCom.position;
     if (![self checkInterval:c1.y another:c2.y]) {
         return NO;
     }
     
-    
-    if((c2.x-c1.x)*direction<width/2)
-    {
+    if((c2.x-c1.x)*direction <= width/2) {
         return YES;
-    }else{
-    
+    } else {
         return NO;
     }
-   
 }
 
--(BOOL) checkInterval:(int) a another:(int) b
+-(BOOL)checkInterval:(int)a another:(int)b
 {
     int region = 0;
-    for (; region<yInterval.count; region++) {
-        if([[yInterval objectAtIndex:region] intValue]>a)
+    
+    for ( ;region < yInterval.count; region++) {
+        if([[yInterval objectAtIndex:region] intValue] > a) {
             break;
-            
+        }
     }
     
-    for (int i =0; i<=region; i++) {
-        if([[yInterval objectAtIndex:region] intValue]>b)
-        {
-            if(i==region)
+    for (int i = 0; i <= region; i++) {
+        if([[yInterval objectAtIndex:i] intValue] > b) {
+            if(i == region)
                 return YES;
         }
     }
     return NO;
-
 }
 
 

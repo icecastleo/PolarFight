@@ -30,8 +30,10 @@
         if ([skill checkRange]) {
             skillCom.activeKey = @"attack";
         } else {
-            [self changeState:[[AIStateWalk alloc] init] forEntity:entity];
-            return;
+            if (!skillCom.currentSkill) {
+                [self changeState:[[AIStateWalk alloc] init] forEntity:entity];
+                return;
+            }
         }
     }
 }

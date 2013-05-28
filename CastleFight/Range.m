@@ -90,12 +90,6 @@
     
     NSArray *entities = [self sortEntities:rawEntities];
     
-    for (int i = 0; i < entities.count; i++) {
-        Entity *entity = entities[i];
-        DefenderComponent *defender = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
-        CCLOG(@"%d: %d", i, defender.hp.currentValue);
-    }
-    
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
         return [entities subarrayWithRange:range];
