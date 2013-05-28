@@ -17,6 +17,9 @@
 #import "TeamComponent.h"
 #import "SimpleAudioEngine.h"
 
+#import "SideEffect.h"
+#import "StateComponent.h"
+
 @implementation CombatSystem
 
 -(void)update:(float)delta {
@@ -33,6 +36,12 @@
             
             if (!event.isInvalid) {
                 DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
+                
+                for (SideEffect *sideEffect in event.sideEffects) {
+                    if( sideEffect.percentage > (arc4random() % 100)) {
+                        [event.defender addComponent:sideEffect.component];
+                    }
+                }
                 [defense.damageEventQueue addObject:[event convertToDamageEvent]];
             }
         }
@@ -51,6 +60,10 @@
             
             if (event.isInvalid) {
                 continue;
+            }
+            
+            if (event.type == kDamageTypePoison) {
+                NSLog(@"Poison");
             }
             
             Damage *damage = [event convertToDamage];

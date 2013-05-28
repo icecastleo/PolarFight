@@ -34,6 +34,9 @@
 #import "CollisionComponent.h"
 #import "ProjectileComponent.h"
 
+#import "PoisonMeleeAttackSkill.h"
+#import "ParalysisMeleeAttackSkill.h"
+
 @implementation EntityFactory {
     EntityManager * _entityManager;
 }
@@ -93,7 +96,17 @@
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
-    [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    
+    /* // test only for stateComponent
+    if ([cid intValue] == 1) {
+//        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
+    }else {
+        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    }
+    
+//*/[skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    
     [entity addComponent:skillCom];
     
     // TODO: Set AI for different character

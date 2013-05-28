@@ -26,6 +26,7 @@
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
+@property NSMutableArray *sideEffects;
 
 @property BOOL isInvalid;
 
