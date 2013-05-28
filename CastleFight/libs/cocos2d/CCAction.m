@@ -165,6 +165,10 @@
 	}
 }
 
+-(void) stop
+{
+	[innerAction_ stop];
+}
 
 -(BOOL) isDone
 {

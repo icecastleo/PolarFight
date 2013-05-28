@@ -70,13 +70,9 @@
     // for test
     if ([name isEqualToString:@"enemy_01"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-01-01.png"];
-    }
-    
-    else if ([name isEqualToString:@"enemy_02"]) {
+    } else if ([name isEqualToString:@"enemy_02"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-02-01.png"];
-    }
-    
-    else if ([name isEqualToString:@"user_01"]) {
+    } else if ([name isEqualToString:@"user_01"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-1.png"];
     }
     
@@ -242,8 +238,8 @@
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
         }
         
+        animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
-        
         [animations setObject:animation forKey:@"move"];
         
         return animations;
@@ -257,6 +253,7 @@
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
         }
         
+        animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
         [animations setObject:animation forKey:@"move"];
 
@@ -307,8 +304,8 @@
         [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-1.png"]]];
         [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-3.png"]]];
         
+        animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
-        
         [animations setObject:animation forKey:@"move"];
         
         return animations;

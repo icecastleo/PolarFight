@@ -371,7 +371,6 @@
 		9B73C783172E7E69008575E5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C781172E7E69008575E5 /* background.png */; };
 		9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C785172E8247008575E5 /* BattleCatMapLayer.m */; };
 		9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */; };
-		9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
 		9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F795164FB38A0001A357 /* mainRole.jpg */; };
@@ -401,6 +400,7 @@
 		9B93B1731754B5780086540C /* PolarBear-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B16F1754B5780086540C /* PolarBear-hd.pvr.ccz */; };
 		9B93B1741754B5780086540C /* PolarBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B1701754B5780086540C /* PolarBear.plist */; };
 		9B93B1751754B5780086540C /* PolarBear.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B1711754B5780086540C /* PolarBear.pvr.ccz */; };
+		9B93B17A1754E0280086540C /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B93DE7B17441F8400DA62F2 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */; };
 		9B93DE831744F21700DA62F2 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
@@ -3132,7 +3132,6 @@
 				9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */,
 				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
-				9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */,
 				37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */,
 				9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */,
 				9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */,
@@ -3297,6 +3296,7 @@
 				9BAF5C2A170D6F5900945271 /* CCScrollNode.m in Sources */,
 				9BAF5C2B170D6F5900945271 /* CCScrollView.m in Sources */,
 				9B92F36C17130CDB00DAF766 /* CCScrollLayerAdvance.m in Sources */,
+				9B93B17A1754E0280086540C /* CCMenu+RowColumnExtend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
