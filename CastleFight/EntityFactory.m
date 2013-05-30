@@ -73,7 +73,9 @@
     } else if ([name isEqualToString:@"enemy_02"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-02-01.png"];
     } else if ([name isEqualToString:@"user_01"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-1.png"];
+        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-01.png"];
+    } else if ([name isEqualToString:@"user_02"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-02-00.png"];
     }
     
     Entity *entity = [_entityManager createEntity];    
@@ -284,10 +286,10 @@
     if ([name isEqualToString:@"user_01"]) {
         CCAnimation *animation = [CCAnimation animation];
         
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-1.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-01.png"]]];
         
         for (int i = 4; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
         }
         
         animation.restoreOriginalFrame = YES;
@@ -298,11 +300,11 @@
         animation = [CCAnimation animation];
         
         for (int i = 1; i <= 2; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
         }
         
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-1.png"]]];
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-3.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-01.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-03.png"]]];
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
@@ -310,9 +312,32 @@
         
         return animations;
     }
+    
+    if ([name isEqualToString:@"user_02"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 0; i <= 5; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"move"];
+        
+        animation = [CCAnimation animation];
+        
+        for (int i = 6; i <= 7; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.5;
+        [animations setObject:animation forKey:@"attack"];
+        
+        return animations;
+    }
 
-    
-    
     CCAnimation *animation = [CCAnimation animation];
     
     for (int i = 1; i <= 4; i++) {
