@@ -7,7 +7,7 @@
             <key>penguin-01-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{115,194},{46,57}}</string>
+                <string>{{63,189},{46,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>penguin-01-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{63,194},{50,57}}</string>
+                <string>{{124,188},{50,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>penguin-01-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{118,130},{44,57}}</string>
+                <string>{{2,194},{44,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>penguin-01-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,194},{59,57}}</string>
+                <string>{{63,130},{59,57}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>penguin-01-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{124,66},{59,56}}</string>
+                <string>{{124,130},{59,56}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>penguin-02-00.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{63,66},{59,62}}</string>
+                <string>{{2,130},{59,62}}</string>
                 <key>offset</key>
                 <string>{2,-1}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>penguin-02-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{185,2},{59,62}}</string>
+                <string>{{185,66},{59,62}}</string>
                 <key>offset</key>
                 <string>{3,-1}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>penguin-02-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{124,2},{59,62}}</string>
+                <string>{{124,66},{59,62}}</string>
                 <key>offset</key>
                 <string>{4,-1}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>penguin-02-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{63,2},{59,62}}</string>
+                <string>{{63,66},{59,62}}</string>
                 <key>offset</key>
                 <string>{2,-1}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>penguin-02-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,130},{59,62}}</string>
+                <string>{{2,66},{59,62}}</string>
                 <key>offset</key>
                 <string>{3,-1}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>penguin-02-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,66},{59,62}}</string>
+                <string>{{187,2},{59,62}}</string>
                 <key>offset</key>
                 <string>{4,-1}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>penguin-02-06.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{59,62}}</string>
+                <string>{{126,2},{59,62}}</string>
                 <key>offset</key>
                 <string>{3,-1}</string>
                 <key>rotated</key>
@@ -163,7 +163,33 @@
             <key>penguin-02-07.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{63,130},{53,62}}</string>
+                <string>{{65,2},{59,62}}</string>
+                <key>offset</key>
+                <string>{4,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{9,2},{59,62}}</string>
+                <key>sourceSize</key>
+                <string>{69,64}</string>
+            </dict>
+            <key>penguin-02-08.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{61,62}}</string>
+                <key>offset</key>
+                <string>{4,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,2},{61,62}}</string>
+                <key>sourceSize</key>
+                <string>{69,64}</string>
+            </dict>
+            <key>penguin-02-09.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{185,130},{53,62}}</string>
                 <key>offset</key>
                 <string>{1,-1}</string>
                 <key>rotated</key>
@@ -183,7 +209,7 @@
             <key>size</key>
             <string>{256,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:79aa4096fd9cd84bedf358e0f6723b9c$</string>
+            <string>$TexturePacker:SmartUpdate:c1d28ca5667e9227cc036891b4ff2bc1$</string>
             <key>textureFileName</key>
             <string>penguin.pvr.ccz</string>
         </dict>

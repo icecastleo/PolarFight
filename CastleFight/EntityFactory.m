@@ -321,15 +321,18 @@
         }
         
         animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
+        animation.delayPerUnit = 0.3;
         
         [animations setObject:animation forKey:@"move"];
         
         animation = [CCAnimation animation];
         
-        for (int i = 6; i <= 7; i++) {
+        for (int i = 6; i <= 9; i++) {
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
         }
+        
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
+        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.5;
