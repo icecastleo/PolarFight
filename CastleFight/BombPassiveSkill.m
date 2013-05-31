@@ -7,20 +7,53 @@
 //
 
 #import "BombPassiveSkill.h"
-#import "Character.h"
+#import "BombComponent.h"
+#import "DamageEvent.h"
+#import "SideEffect.h"
+#import "AttackEvent.h"
+
+@interface BombPassiveSkill()
+@property (nonatomic,readonly) BOOL isActivated;
+@end
 
 @implementation BombPassiveSkill
 
--(void)characterWillRemoveDelegate:(Character *)sender {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@75,kRangeKeyRadius,nil];
-    
-    Range *range = [Range rangeWithCharacter:sender parameters:dictionary];
+-(id)init {
+    if (self = [super init]) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@75,kRangeKeyRadius,nil];
+        
+        range = [Range rangeWithParameters:dictionary];
+    }
+    return self;
+}
 
-    int damage = [sender getAttribute:kCharacterAttributeAttack].value * 3;
+-(void)checkEvent:(EventType)eventType {
+    switch (eventType) {
+        case KEventDead:
+            _isActivated = YES;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)activeEffect {
     
-    for (Character *target in [range getEffectEntities]) {
-        DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage damageType:kDamageTypeNormal damageSource:kDamageSourceRanged damager:sender];
-        [target receiveDamageEvent:event];
+    if (!self.isActivated) {
+        return;
+    }
+    
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    
+    for (Entity *entity in [range getEffectEntities]) {
+        BombComponent *component = [[BombComponent alloc] init];
+        component.cdTime = 0; // only once
+        component.totalTime = 0;
+        DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:300*attack.attack.value damageType:kDamageTypeBomb damageSource:kDamageSourceMelee receiver:entity];
+        component.event = damageEvent;
+        
+        [entity addComponent:component];
     }
 }
 
