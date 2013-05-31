@@ -12,6 +12,7 @@
 @interface EntityManager() {
     NSMutableArray * _entities;
     NSMutableDictionary * _componentsByClass;
+    NSMutableDictionary * _componentsByEntity;
     uint32_t _lowestUnassignedEid;
 }
 -(uint32_t)generateNewEid;
@@ -46,16 +47,22 @@
 -(Entity *)createEntity {
     uint32_t eid = [self generateNewEid];
     [_entities addObject:@(eid)];
+    
+    NSMutableArray *components = [NSMutableArray array];
+    _componentsByEntity[@(eid)] = components;
+    
     return [[Entity alloc] initWithEid:eid entityManager:self];
 }
 
 -(void)removeEntity:(Entity *)entity {
     for (NSMutableDictionary * components in _componentsByClass.allValues) {
-        if (components[@(entity.eid)]) {
-            [components removeObjectForKey:@(entity.eid)];
+        if (components[entity.eidNumber]) {
+            [components removeObjectForKey:entity.eidNumber];
         }
     }
-    [_entities removeObject:@(entity.eid)];
+    
+    [_componentsByEntity removeObjectForKey:entity.eidNumber];
+    [_entities removeObject:entity.eidNumber];
 }
 
 -(void)addComponent:(Component *)component toEntity:(Entity *)entity {
@@ -64,31 +71,26 @@
         components = [NSMutableDictionary dictionary];
         _componentsByClass[NSStringFromClass([component class])] = components;
     }
-    components[@(entity.eid)] = component;
+    components[entity.eidNumber] = component;
+    
+    [_componentsByEntity[entity.eidNumber] addObject:component];
 }
 
 -(void)removeComponentOfClass:(Class)class fromEntity:(Entity *)entity {
     NSMutableDictionary * components = _componentsByClass[NSStringFromClass(class)];
-    
-    if (components && components[@(entity.eid)]) {
-        [components removeObjectForKey:@(entity.eid)];
+    if (components && components[entity.eidNumber]) {
+        [components removeObjectForKey:entity.eidNumber];
     }
+    
+    [_componentsByEntity[entity.eidNumber] removeObject:entity.eidNumber];
 }
 
 -(Component *)getComponentOfClass:(Class)class fromEntity:(Entity *)entity {
-    return _componentsByClass[NSStringFromClass(class)][@(entity.eid)];
+    return _componentsByClass[NSStringFromClass(class)][entity.eidNumber];
 }
 
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {
-    NSMutableArray *ret = [[NSMutableArray alloc] init];
-    
-    for (NSMutableDictionary *components in _componentsByClass.allValues) {
-        if (components[@(entity.eid)]) {
-            [ret addObject:components[@(entity.eid)]];
-        }
-    }
-    
-    return ret;
+    return _componentsByEntity[entity.eidNumber];
 }
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)class {

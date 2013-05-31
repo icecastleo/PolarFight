@@ -16,7 +16,7 @@
 
 -(void)enter:(Entity *)entity;
 -(void)exit:(Entity *)entity;
--(void)updateEntity:(Entity *)entity delta:(float)delta;
+-(void)updateEntity:(Entity *)entity;
 
 -(void)changeState:(AIState *)state forEntity:(Entity *)entity;
 

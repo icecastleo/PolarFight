@@ -9,13 +9,6 @@
 @class Component;
 @class EntityManager;
 
-//typedef enum {
-//    kEntityStateIdel,
-//    kEntityStateMove,
-//    kEntityStateAttack,
-//    kEntityStateDead,
-//} EntityState;
-
 typedef enum {
     kEventTypeLevelChanged,
     
@@ -38,7 +31,7 @@ typedef enum {
 }
 
 @property (readonly) uint32_t eid;
-//@property EntityState state;
+@property (readonly) NSNumber *eidNumber;
 
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager;
 

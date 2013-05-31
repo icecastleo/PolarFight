@@ -18,7 +18,7 @@
     return @"Attack";
 }
 
--(void)updateEntity:(Entity *)entity delta:(float)delta {
+-(void)updateEntity:(Entity *)entity {
     ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
     ActiveSkill *skill = [skillCom.skills objectForKey:@"attack"];
     
@@ -30,8 +30,10 @@
         if ([skill checkRange]) {
             skillCom.activeKey = @"attack";
         } else {
-            [self changeState:[[AIStateWalk alloc] init] forEntity:entity];
-            return;
+            if (!skillCom.currentSkill) {
+                [self changeState:[[AIStateWalk alloc] init] forEntity:entity];
+                return;
+            }
         }
     }
 }

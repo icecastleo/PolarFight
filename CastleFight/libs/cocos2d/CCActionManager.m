@@ -241,6 +241,7 @@
 			CCAction *a = element->actions->arr[i];
 
 			if( a.tag == aTag && [a originalTarget]==target) {
+                [a stop];
 				[self removeActionAtIndex:i hashElement:element];
 				break;
 			}

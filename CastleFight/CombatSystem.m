@@ -81,14 +81,7 @@
             
             if (defense.bloodSprite) {
                 [defense.bloodSprite update];
-                
-                [defense.bloodSprite stopAllActions];
-                [defense.bloodSprite runAction:[CCSequence actions:[CCShow action],
-                                        [CCDelayTime actionWithDuration:2.0f],
-                                        [CCHide action],
-                                        nil]];
-            }
-            
+            }            
 
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             if (damage.damage > 0) {

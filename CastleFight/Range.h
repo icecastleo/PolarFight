@@ -15,6 +15,7 @@
 #define kRangeTypeFanShape @"RangeFanShape"
 #define kRangeTypeLine @"RangeLine"
 #define kRangeTypeProjectile @"ProjectileRange"
+#define kRangeTypeSimpleXY @"RangeSimpleXY"
 
 // TODO: Add target entities component!!
 

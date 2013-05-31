@@ -43,8 +43,8 @@
         NSMutableArray *ret = [[NSMutableArray alloc] init];
 
         for (Entity *entity in entities) {
-            if (![piercingEntities objectForKey:@(entity.eid)]) {
-                [piercingEntities setObject:entity forKey:@(entity.eid)];
+            if (![piercingEntities objectForKey:entity.eidNumber]) {
+                [piercingEntities setObject:entity forKey:entity.eidNumber];
                 [ret addObject:entity];
             }
         }

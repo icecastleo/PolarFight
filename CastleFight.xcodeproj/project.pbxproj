@@ -370,10 +370,6 @@
 		9B60DADC174792D60039A031 /* ProjectileRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADB174792D50039A031 /* ProjectileRange.m */; };
 		9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADE1747C6B70039A031 /* ProjectileComponent.m */; };
 		9B60DAE21747D4B30039A031 /* ProjectileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAE11747D4B20039A031 /* ProjectileSystem.m */; };
-		9B60DAE71748C2000039A031 /* PolarBear-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE31748C2000039A031 /* PolarBear-hd.plist */; };
-		9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE41748C2000039A031 /* PolarBear-hd.png */; };
-		9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE51748C2000039A031 /* PolarBear.plist */; };
-		9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B60DAE61748C2000039A031 /* PolarBear.png */; };
 		9B6DE0A2174FD9F800A09550 /* penguin-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE09E174FD9F800A09550 /* penguin-hd.plist */; };
 		9B6DE0A3174FD9F800A09550 /* penguin-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */; };
 		9B6DE0A4174FD9F800A09550 /* penguin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6DE0A0174FD9F800A09550 /* penguin.plist */; };
@@ -385,7 +381,6 @@
 		9B73C783172E7E69008575E5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B73C781172E7E69008575E5 /* background.png */; };
 		9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C785172E8247008575E5 /* BattleCatMapLayer.m */; };
 		9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */; };
-		9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B82F790164FB2780001A357 /* BattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F789164FB2780001A357 /* BattleController.m */; };
 		9B82F792164FB2780001A357 /* DPadLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78D164FB2780001A357 /* DPadLayer.m */; };
 		9B82F79B164FB38A0001A357 /* mainRole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B82F795164FB38A0001A357 /* mainRole.jpg */; };
@@ -411,6 +406,11 @@
 		9B9379A216B1677500F1A05A /* BombExploding_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93799516B1677500F1A05A /* BombExploding_04.png */; };
 		9B9379A316B1677500F1A05A /* BombExploding_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93799616B1677500F1A05A /* BombExploding_05.png */; };
 		9B9379A416B1677500F1A05A /* BombExploding_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B93799716B1677500F1A05A /* BombExploding_06.png */; };
+		9B93B1721754B5780086540C /* PolarBear-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B16E1754B5780086540C /* PolarBear-hd.plist */; };
+		9B93B1731754B5780086540C /* PolarBear-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B16F1754B5780086540C /* PolarBear-hd.pvr.ccz */; };
+		9B93B1741754B5780086540C /* PolarBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B1701754B5780086540C /* PolarBear.plist */; };
+		9B93B1751754B5780086540C /* PolarBear.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 9B93B1711754B5780086540C /* PolarBear.pvr.ccz */; };
+		9B93B17A1754E0280086540C /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
 		9B93DE7B17441F8400DA62F2 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */; };
 		9B93DE831744F21700DA62F2 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.m */; };
@@ -1140,10 +1140,6 @@
 		9B60DADE1747C6B70039A031 /* ProjectileComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileComponent.m; sourceTree = "<group>"; };
 		9B60DAE01747D4B10039A031 /* ProjectileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileSystem.h; sourceTree = "<group>"; };
 		9B60DAE11747D4B20039A031 /* ProjectileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileSystem.m; sourceTree = "<group>"; };
-		9B60DAE31748C2000039A031 /* PolarBear-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PolarBear-hd.plist"; sourceTree = "<group>"; };
-		9B60DAE41748C2000039A031 /* PolarBear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PolarBear-hd.png"; sourceTree = "<group>"; };
-		9B60DAE51748C2000039A031 /* PolarBear.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PolarBear.plist; sourceTree = "<group>"; };
-		9B60DAE61748C2000039A031 /* PolarBear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PolarBear.png; sourceTree = "<group>"; };
 		9B6DE09E174FD9F800A09550 /* penguin-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "penguin-hd.plist"; sourceTree = "<group>"; };
 		9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "penguin-hd.pvr.ccz"; sourceTree = "<group>"; };
 		9B6DE0A0174FD9F800A09550 /* penguin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = penguin.plist; sourceTree = "<group>"; };
@@ -1210,6 +1206,10 @@
 		9B93799516B1677500F1A05A /* BombExploding_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BombExploding_04.png; sourceTree = "<group>"; };
 		9B93799616B1677500F1A05A /* BombExploding_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BombExploding_05.png; sourceTree = "<group>"; };
 		9B93799716B1677500F1A05A /* BombExploding_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BombExploding_06.png; sourceTree = "<group>"; };
+		9B93B16E1754B5780086540C /* PolarBear-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PolarBear-hd.plist"; sourceTree = "<group>"; };
+		9B93B16F1754B5780086540C /* PolarBear-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PolarBear-hd.pvr.ccz"; sourceTree = "<group>"; };
+		9B93B1701754B5780086540C /* PolarBear.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PolarBear.plist; sourceTree = "<group>"; };
+		9B93B1711754B5780086540C /* PolarBear.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = PolarBear.pvr.ccz; sourceTree = "<group>"; };
 		9B93DE7C1744CCA400DA62F2 /* SummonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummonComponent.h; sourceTree = "<group>"; };
 		9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummonComponent.m; sourceTree = "<group>"; };
 		9B98481516EDD27600D3D55D /* bg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bg; sourceTree = "<group>"; };
@@ -1773,14 +1773,14 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B93B16E1754B5780086540C /* PolarBear-hd.plist */,
+				9B93B16F1754B5780086540C /* PolarBear-hd.pvr.ccz */,
+				9B93B1701754B5780086540C /* PolarBear.plist */,
+				9B93B1711754B5780086540C /* PolarBear.pvr.ccz */,
 				9B6DE09E174FD9F800A09550 /* penguin-hd.plist */,
 				9B6DE09F174FD9F800A09550 /* penguin-hd.pvr.ccz */,
 				9B6DE0A0174FD9F800A09550 /* penguin.plist */,
 				9B6DE0A1174FD9F800A09550 /* penguin.pvr.ccz */,
-				9B60DAE31748C2000039A031 /* PolarBear-hd.plist */,
-				9B60DAE41748C2000039A031 /* PolarBear-hd.png */,
-				9B60DAE51748C2000039A031 /* PolarBear.plist */,
-				9B60DAE61748C2000039A031 /* PolarBear.png */,
 				37E20C36174621C80017231D /* game-center-icon.jpg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
 				9B98481516EDD27600D3D55D /* bg */,
@@ -1895,6 +1895,7 @@
 				9BDC0782166E392B009559C3 /* Armor */,
 				9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */,
 				9BFFAE60163E9D8A00073DC5 /* Skill */,
+				2D4AD598163FDDC400A949C3 /* Range */,
 			);
 			name = Combat;
 			sourceTree = "<group>";
@@ -2816,7 +2817,6 @@
 				9B5CD31616ED00A600C8B007 /* DelegateSkill */,
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
 				2D26FC961640111500C34AA4 /* Effect */,
-				2D4AD598163FDDC400A949C3 /* Range */,
 				9B60DAD517463F400039A031 /* RangeShooter */,
 				2D4AD592163FCE1B00A949C3 /* SkillKit.h */,
 				9B2AB06616665C0400B78136 /* ActiveSkill.h */,
@@ -3077,14 +3077,14 @@
 				9B73C782172E7E69008575E5 /* background-hd.png in Resources */,
 				9B73C783172E7E69008575E5 /* background.png in Resources */,
 				37E20C37174621C90017231D /* game-center-icon.jpg in Resources */,
-				9B60DAE71748C2000039A031 /* PolarBear-hd.plist in Resources */,
-				9B60DAE81748C2000039A031 /* PolarBear-hd.png in Resources */,
-				9B60DAE91748C2000039A031 /* PolarBear.plist in Resources */,
-				9B60DAEA1748C2000039A031 /* PolarBear.png in Resources */,
 				9B6DE0A2174FD9F800A09550 /* penguin-hd.plist in Resources */,
 				9B6DE0A3174FD9F800A09550 /* penguin-hd.pvr.ccz in Resources */,
 				9B6DE0A4174FD9F800A09550 /* penguin.plist in Resources */,
 				9B6DE0A5174FD9F800A09550 /* penguin.pvr.ccz in Resources */,
+				9B93B1721754B5780086540C /* PolarBear-hd.plist in Resources */,
+				9B93B1731754B5780086540C /* PolarBear-hd.pvr.ccz in Resources */,
+				9B93B1741754B5780086540C /* PolarBear.plist in Resources */,
+				9B93B1751754B5780086540C /* PolarBear.pvr.ccz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3178,7 +3178,6 @@
 				9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */,
 				2D055969171427A200F82A08 /* InAppPurchaseManager.m in Sources */,
 				2D05597217144A3E00F82A08 /* MarketLayer.m in Sources */,
-				9B7AF54B171EF36C00CB419F /* CCMenu+RowColumnExtend.m in Sources */,
 				37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */,
 				9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */,
 				9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */,
@@ -3353,6 +3352,7 @@
 				9BAF5C2A170D6F5900945271 /* CCScrollNode.m in Sources */,
 				9BAF5C2B170D6F5900945271 /* CCScrollView.m in Sources */,
 				9B92F36C17130CDB00DAF766 /* CCScrollLayerAdvance.m in Sources */,
+				9B93B17A1754E0280086540C /* CCMenu+RowColumnExtend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,62 +4,62 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>penguin-01-1.png</key>
+            <key>penguin-01-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,117},{92,113}}</string>
+                <string>{{341,374},{92,114}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{92,113}}</string>
+                <string>{{0,0},{92,114}}</string>
                 <key>sourceSize</key>
-                <string>{92,113}</string>
+                <string>{92,114}</string>
             </dict>
-            <key>penguin-01-2.png</key>
+            <key>penguin-01-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{121,116},{99,113}}</string>
+                <string>{{240,374},{99,114}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{99,113}}</string>
+                <string>{{0,0},{99,114}}</string>
                 <key>sourceSize</key>
-                <string>{99,113}</string>
+                <string>{99,114}</string>
             </dict>
-            <key>penguin-01-3.png</key>
+            <key>penguin-01-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{96,231},{87,113}}</string>
+                <string>{{346,250},{88,114}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{87,113}}</string>
+                <string>{{0,0},{88,114}}</string>
                 <key>sourceSize</key>
-                <string>{87,113}</string>
+                <string>{88,114}</string>
             </dict>
-            <key>penguin-01-4.png</key>
+            <key>penguin-01-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{117,113}}</string>
+                <string>{{242,2},{117,114}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{117,113}}</string>
+                <string>{{0,0},{117,114}}</string>
                 <key>sourceSize</key>
-                <string>{117,113}</string>
+                <string>{117,114}</string>
             </dict>
-            <key>penguin-01-5.png</key>
+            <key>penguin-01-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{121,2},{117,112}}</string>
+                <string>{{358,118},{117,112}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -69,6 +69,136 @@
                 <key>sourceSize</key>
                 <string>{117,112}</string>
             </dict>
+            <key>penguin-02-00.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{240,126},{116,122}}</string>
+                <key>offset</key>
+                <string>{5,-3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{16,6},{116,122}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,380},{116,124}}</string>
+                <key>offset</key>
+                <string>{6,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{17,4},{116,124}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{122,2},{118,122}}</string>
+                <key>offset</key>
+                <string>{8,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{18,5},{118,122}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{228,250},{116,122}}</string>
+                <key>offset</key>
+                <string>{5,-3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{16,6},{116,122}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,254},{116,124}}</string>
+                <key>offset</key>
+                <string>{6,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{17,4},{116,124}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-05.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,128},{118,124}}</string>
+                <key>offset</key>
+                <string>{8,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{18,4},{118,124}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-06.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{122,126},{116,122}}</string>
+                <key>offset</key>
+                <string>{6,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{17,5},{116,122}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-07.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{120,380},{118,122}}</string>
+                <key>offset</key>
+                <string>{7,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{17,5},{118,122}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-08.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{118,124}}</string>
+                <key>offset</key>
+                <string>{9,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{19,4},{118,124}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
+            <key>penguin-02-09.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{120,254},{106,124}}</string>
+                <key>offset</key>
+                <string>{2,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{18,3},{106,124}}</string>
+                <key>sourceSize</key>
+                <string>{138,128}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -77,9 +207,9 @@
             <key>realTextureFileName</key>
             <string>penguin-hd.pvr.ccz</string>
             <key>size</key>
-            <string>{256,512}</string>
+            <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:03bc35538f7be8d66837e40c762f5ef3$</string>
+            <string>$TexturePacker:SmartUpdate:e3153cc2fb2e39b81aad4dc04ce06177$</string>
             <key>textureFileName</key>
             <string>penguin-hd.pvr.ccz</string>
         </dict>

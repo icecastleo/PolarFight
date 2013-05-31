@@ -37,9 +37,6 @@
 
 @end
 
-// Summon interval
-const static double interval = 1.0;
-
 @implementation AIStateEnemyPlayer
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory {
@@ -56,14 +53,7 @@ const static double interval = 1.0;
     return self;
 }
 
--(void)updateEntity:(Entity *)entity delta:(float)delta {
-    t += delta;
-    
-    if (t >= interval) {
-        t -= interval;
-    } else {
-        return;
-    }
+-(void)updateEntity:(Entity *)entity {
     
     PlayerComponent *player = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
     
