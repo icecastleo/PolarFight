@@ -170,6 +170,8 @@
 		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
 		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
 		37E68CA516F97B4900AB5FBD /* CharacterInitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterInitData.m */; };
+		37E798BC1754920600E0435E /* KnockOutComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BB1754920600E0435E /* KnockOutComponent.m */; };
+		37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BE17549F7800E0435E /* KnockOutSkill.m */; };
 		37F585C516AF723600917637 /* currentCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585BF16AF723600917637 /* currentCharacter.png */; };
 		37F585C616AF723600917637 /* currentCharacter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C016AF723600917637 /* currentCharacter@2x.png */; };
 		37F585C716AF723600917637 /* player1Character.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C116AF723600917637 /* player1Character.png */; };
@@ -738,6 +740,10 @@
 		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
 		37E68CA316F97B4800AB5FBD /* CharacterInitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInitData.h; sourceTree = "<group>"; };
 		37E68CA416F97B4800AB5FBD /* CharacterInitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInitData.m; sourceTree = "<group>"; };
+		37E798BA1754920600E0435E /* KnockOutComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutComponent.h; sourceTree = "<group>"; };
+		37E798BB1754920600E0435E /* KnockOutComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutComponent.m; sourceTree = "<group>"; };
+		37E798BD17549F7800E0435E /* KnockOutSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutSkill.h; sourceTree = "<group>"; };
+		37E798BE17549F7800E0435E /* KnockOutSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutSkill.m; sourceTree = "<group>"; };
 		37F585BF16AF723600917637 /* currentCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = currentCharacter.png; sourceTree = "<group>"; };
 		37F585C016AF723600917637 /* currentCharacter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currentCharacter@2x.png"; sourceTree = "<group>"; };
 		37F585C116AF723600917637 /* player1Character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player1Character.png; sourceTree = "<group>"; };
@@ -1591,6 +1597,8 @@
 		37DC0AA117534FA4000656A6 /* Melee */ = {
 			isa = PBXGroup;
 			children = (
+				37E798BD17549F7800E0435E /* KnockOutSkill.h */,
+				37E798BE17549F7800E0435E /* KnockOutSkill.m */,
 				9B146C841737FF7100D141F1 /* MeleeAttackSkill.h */,
 				9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */,
 				37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */,
@@ -2331,6 +2339,8 @@
 				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
 				37DC0A9B17534DC2000656A6 /* BombComponent.h */,
 				37DC0A9C17534DC2000656A6 /* BombComponent.m */,
+				37E798BA1754920600E0435E /* KnockOutComponent.h */,
+				37E798BB1754920600E0435E /* KnockOutComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3215,6 +3225,8 @@
 				37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */,
 				37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */,
 				37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */,
+				37E798BC1754920600E0435E /* KnockOutComponent.m in Sources */,
+				37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,6 +40,7 @@
 #import "DeadBomb.h"
 #import "HealSkill.h"
 #import "SlowlyHealSkill.h"
+#import "KnockOutSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -109,6 +110,7 @@
         [skillCom.skills setObject:[[DeadBomb alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
         
     }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];

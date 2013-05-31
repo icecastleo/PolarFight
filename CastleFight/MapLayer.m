@@ -11,6 +11,7 @@
 #import "TeamComponent.h"
 #import "RenderComponent.h"
 #import "CharacterComponent.h"
+#import "KnockOutComponent.h"
 
 @implementation MapLayer
 
@@ -166,6 +167,30 @@ const static int pathHeight = 70;
 //    // win location
 //    location = [touch locationInView:[CCDirector sharedDirector].view];
 //    location = [[CCDirector sharedDirector] convertToGL: location];
+}
+
+
+-(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
+    if (position.x == 0 && position.y == 0) {
+        return;
+    }
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
+    
+    CGPoint newPos = ccpAdd(renderCom.position, position);
+    if (limit) {
+        newPos = [self getPositionInBoundary:newPos forEntity:entity];
+    }
+    CGPoint spritePosition = ccpAdd(renderCom.sprite.position, ccpAdd(newPos, ccpMult(renderCom.position, -1))) ;
+    
+    CCAction *action = [CCSequence actions:
+                        [CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:knockOutCom.animationDuration position:spritePosition] rate:2.0],
+                        [CCCallBlock actionWithBlock:^{
+                            renderCom.position = newPos;
+                            [self reorderChild:renderCom.sprite z:self.boundaryY - renderCom.position.y];
+                    }], nil];
+    
+    [renderCom.sprite runAction:action];
 }
 
 @end
