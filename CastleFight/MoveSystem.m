@@ -35,7 +35,9 @@
         NSMutableDictionary *testDic = [NSMutableDictionary new];
         [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
         [entity sendEvent:kEventIsMoveForbidden Message:testDic];
+        
         NSNumber *result = [testDic objectForKey:@"kEventIsMoveForbidden"];
+        
         if (result.boolValue == YES) {
             continue;
         }

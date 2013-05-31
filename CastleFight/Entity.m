@@ -17,6 +17,7 @@
 - (id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager {
     if ((self = [super init])) {
         _eid = eid;
+        _eidNumber = @(eid);
         _entityManager = entityManager;
     }
     return self;

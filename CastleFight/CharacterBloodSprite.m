@@ -42,4 +42,14 @@
     return self;
 }
 
+-(void)update {
+    [super update];
+    
+    [self stopAllActions];
+    [self runAction:[CCSequence actions:[CCShow action],
+                                    [CCDelayTime actionWithDuration:2.0f],
+                                    [CCHide action],
+                                    nil]];
+}
+
 @end
