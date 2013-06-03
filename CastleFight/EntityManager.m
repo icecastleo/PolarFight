@@ -25,6 +25,7 @@
     if ((self = [super init])) {        
         _entities = [NSMutableArray array];
         _componentsByClass = [NSMutableDictionary dictionary];
+        _componentsByEntity = [NSMutableDictionary dictionary];
         _lowestUnassignedEid = 1;
     }
     return self;
