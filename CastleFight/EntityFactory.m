@@ -33,9 +33,16 @@
 #import "SummonComponent.h"
 #import "CollisionComponent.h"
 #import "ProjectileComponent.h"
+#import "PassiveComponent.h"
 
 #import "PoisonMeleeAttackSkill.h"
 #import "ParalysisMeleeAttackSkill.h"
+#import "BigPillowBomb.h"
+#import "DeadBomb.h"
+#import "HealSkill.h"
+#import "SlowlyHealSkill.h"
+#import "KnockOutSkill.h"
+#import "BombPassiveSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -108,10 +115,16 @@
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
     
-    /* // test only for stateComponent
+    //* // test only for stateComponent
     if ([cid intValue] == 1) {
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
-        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[DeadBomb alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
+        
     }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     }
@@ -119,6 +132,12 @@
 //*/[skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     
     [entity addComponent:skillCom];
+    
+    if ([cid intValue] == 1) {
+        PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
+        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+        [entity addComponent:passiveCom];
+    }
     
     // TODO: Set AI for different character
     [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];

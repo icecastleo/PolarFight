@@ -100,7 +100,9 @@ typedef enum {
     kDamageTypeNormal,
     kDamageTypeFire,
     kDamageTypeIce,
+    kDamageTypeBomb,
     kDamageTypePoison,
+    kDamageTypeHeal,
     kDamageTypeKnockOut
 } DamageType;
 

@@ -7,14 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ActiveSkill.h"
-#import "CharacterEventDelegate.h"
+#import "Entity.h"
+#import "Range.h"
 
-@interface PassiveSkill : NSObject<CharacterEventDelegate> {
-
+@interface PassiveSkill : NSObject {
+    Range *range;
 }
 
-@property (weak, nonatomic) Character *character;
-@property float duration;
+@property (nonatomic) Entity *owner;
+@property float totalTime;
+@property NSString *animationKey;
+//@property BOOL canActive;
+@property BOOL isAnimationFinish;
+
+-(void)active;
+-(void)activeEffect;
+
+-(void)checkEvent:(EventType)eventType;
+-(BOOL)checkRange;
 
 @end

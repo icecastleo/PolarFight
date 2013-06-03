@@ -7,25 +7,34 @@
 //
 
 #import "HealSkill.h"
-#import "Character.h"
+#import "AttackEvent.h"
+#import "AttackerComponent.h"
 
 @implementation HealSkill
 
--(void)setRanges {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,@[kRangeFilterSelf],kRangeKeyFilter,kRangeTypeCircle,kRangeKeyType,@75,kRangeKeyRadius,nil];
-    
-    [ranges addObject:[Range rangeWithCharacter:character parameters:dictionary]];
+-(id)init {
+    if (self = [super init]) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,@[kRangeFilterSelf],kRangeKeyFilter,kRangeTypeCircle,kRangeKeyType,@75,kRangeKeyRadius,nil];
+        
+        range = [Range rangeWithParameters:dictionary];
+        self.cooldown = 1.5;
+    }
+    return self;
 }
 
--(void)execute {
-    int attack = [character getAttribute:kCharacterAttributeAttack].value;
-    
-    DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:attack / 3 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill damager:character];
-    [character receiveDamageEvent:event];
-    
-    for (Character *target in [range getEffectEntities]) {
-        [target getHeal:attack];
+-(void)activeEffect {
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    for (Entity *entity in [range getEffectEntities]) {
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeHeal damageSource:kDamageSourceMelee defender:entity];
+        event.isCustomDamage = YES;
+        event.isIgnoreDefense = YES;
+        [self sideEffectWithEvent:event Entity:entity];
+        [attack.attackEventQueue addObject:event];
     }
+}
+
+-(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
+    event.customDamage = -500;
 }
 
 @end

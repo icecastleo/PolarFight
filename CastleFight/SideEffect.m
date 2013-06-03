@@ -13,7 +13,8 @@
 
 -(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(int)percentage {
     if (self = [super init]) {
-        _component = component;
+        _components = [NSMutableArray new];
+        [_components addObject:component];
         _percentage = percentage;
     }
     return self;

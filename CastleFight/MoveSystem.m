@@ -11,6 +11,8 @@
 #import "RenderComponent.h"
 #import "AnimationComponent.h"
 #import "DirectionComponent.h"
+#import "KnockOutComponent.h"
+#import "DefenderComponent.h"
 
 @implementation MoveSystem
 
@@ -28,7 +30,15 @@
         
         MoveComponent *move = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
         RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-
+        KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
+        
+        if (knockOutCom) {
+            DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+            float defense = MAX(1, defendCom.defense.value);
+            [self knockOut:knockOutCom defense:defense];
+            [entity removeComponent:[KnockOutComponent class]];
+        }
+        
         if (!move || !render)
             continue;
         
@@ -96,6 +106,20 @@
             }
         }
     }
+}
+
+-(void)knockOut:(KnockOutComponent *)component defense:(float)defense {
+    DirectionComponent *directionCom = (DirectionComponent *)[component.entity getComponentOfClass:[DirectionComponent class]];
+    
+    if (!directionCom) {
+        return;
+    }
+    int direction = -1 * directionCom.velocity.x;
+    
+    // set distance = attack/defense
+    float distance = component.attack/defense;
+    
+    [_map knockOutEntity:component.entity byPosition:ccp(direction*distance,0) boundaryLimit:YES];
 }
 
 @end

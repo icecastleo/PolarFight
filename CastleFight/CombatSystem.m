@@ -38,8 +38,10 @@
                 DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
                 
                 for (SideEffect *sideEffect in event.sideEffects) {
-                    if( sideEffect.percentage > (arc4random() % 100)) {
-                        [event.defender addComponent:sideEffect.component];
+                    if(sideEffect.percentage > (arc4random() % 100)) {
+                        for (StateComponent *component in sideEffect.components) {
+                            [event.defender addComponent:component];
+                        }
                     }
                 }
                 [defense.damageEventQueue addObject:[event convertToDamageEvent]];
@@ -62,10 +64,6 @@
                 continue;
             }
             
-            if (event.type == kDamageTypePoison) {
-                NSLog(@"Poison");
-            }
-            
             Damage *damage = [event convertToDamage];
             [entity sendEvent:kEventReceiveDamage Message:damage];
             
@@ -86,7 +84,12 @@
             }            
 
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-            [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
+            if (damage.damage > 0) {
+                [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
+            }else {
+                int absDamage = abs(damage.damage);
+                [renderCom addFlashString:[NSString stringWithFormat:@"%d", absDamage] color:ccGREEN];
+            }
                         
 //            // Knock out effect
 //            if (damage.knockOutPower != 0) {

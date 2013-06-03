@@ -23,6 +23,7 @@
 @property CGPoint position;
 @property float knockOutPower;
 @property BOOL knouckOutCollision;
+@property BOOL isCustomDamage;
 
 @property BOOL isInvalid;
 

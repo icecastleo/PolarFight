@@ -13,7 +13,7 @@
 @interface SideEffect : NSObject
 
 @property int percentage;
-@property StateComponent *component;
+@property NSMutableArray *components;
 
 -(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(int)percentage;
 

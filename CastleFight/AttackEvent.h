@@ -22,6 +22,9 @@
 @property (readonly) Entity *defender;
 @property (readonly) DamageType type;
 @property (readonly) DamageSource source;
+@property BOOL isIgnoreDefense;
+@property BOOL isCustomDamage;
+@property int customDamage;
 
 @property CGPoint position;
 @property float knockOutPower;

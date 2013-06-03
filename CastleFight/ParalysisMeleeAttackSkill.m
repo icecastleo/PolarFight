@@ -18,8 +18,6 @@
     ParalysisComponent *component = [[ParalysisComponent alloc] init];
     component.cdTime = 1;
     component.totalTime = 100;
-//    DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:0 damageType:kDamageTypePoison damageSource:kDamageSourceMelee receiver:entity];
-//    component.event = damageEvent;
     SideEffect *sideEffect = [[SideEffect alloc] initWithSideEffectCommponent:component andPercentage:100];
     [event.sideEffects addObject:sideEffect];
 }

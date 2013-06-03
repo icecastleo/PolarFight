@@ -1,14 +1,14 @@
 //
-//  ParalysisComponent.m
+//  KnockOutComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/5/24.
+//  Created by  DAN on 13/5/28.
 //
 //
 
-#import "ParalysisComponent.h"
+#import "KnockOutComponent.h"
 
-@implementation ParalysisComponent
+@implementation KnockOutComponent
 
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == kEventIsMoveForbidden){

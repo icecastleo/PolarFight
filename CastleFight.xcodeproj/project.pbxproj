@@ -125,6 +125,11 @@
 		37DB1F3316BBD08300C0368D /* AKCCSoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2D16BBD08300C0368D /* AKCCSoundEffect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2F16BBD08300C0368D /* AKHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F3C16BBD2F600C0368D /* TouchTracker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DC0A9A17534D28000656A6 /* BigPillowBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9917534D28000656A6 /* BigPillowBomb.m */; };
+		37DC0A9D17534DC2000656A6 /* BombComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9C17534DC2000656A6 /* BombComponent.m */; };
+		37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9F17534F9B000656A6 /* DeadBomb.m */; };
+		37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
+		37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */; };
 		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
@@ -140,6 +145,9 @@
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
 		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
+		37E23E7017588B4000E37D7D /* PassiveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E23E6F17588B4000E37D7D /* PassiveComponent.m */; };
+		37E23E711758A3C500E37D7D /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
+		37E23E741758B39F00E37D7D /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
 		37E2B4A116A6AD48006CB5B4 /* CharacterQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */; };
 		37E42C36174E2B280010B9E9 /* PoisonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C35174E2B270010B9E9 /* PoisonComponent.m */; };
 		37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C38174E2C5F0010B9E9 /* EffectSystem.m */; };
@@ -165,6 +173,8 @@
 		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
 		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
 		37E68CA516F97B4900AB5FBD /* CharacterInitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterInitData.m */; };
+		37E798BC1754920600E0435E /* KnockOutComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BB1754920600E0435E /* KnockOutComponent.m */; };
+		37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BE17549F7800E0435E /* KnockOutSkill.m */; };
 		37F585C516AF723600917637 /* currentCharacter.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585BF16AF723600917637 /* currentCharacter.png */; };
 		37F585C616AF723600917637 /* currentCharacter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C016AF723600917637 /* currentCharacter@2x.png */; };
 		37F585C716AF723600917637 /* player1Character.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F585C116AF723600917637 /* player1Character.png */; };
@@ -649,6 +659,14 @@
 		37DB1F3016BBD08300C0368D /* AnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationKit.h; sourceTree = "<group>"; };
 		37DB1F3B16BBD2F600C0368D /* TouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTracker.h; sourceTree = "<group>"; };
 		37DB1F3C16BBD2F600C0368D /* TouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTracker.m; sourceTree = "<group>"; };
+		37DC0A9817534D28000656A6 /* BigPillowBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigPillowBomb.h; sourceTree = "<group>"; };
+		37DC0A9917534D28000656A6 /* BigPillowBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigPillowBomb.m; sourceTree = "<group>"; };
+		37DC0A9B17534DC2000656A6 /* BombComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombComponent.h; sourceTree = "<group>"; };
+		37DC0A9C17534DC2000656A6 /* BombComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombComponent.m; sourceTree = "<group>"; };
+		37DC0A9E17534F9B000656A6 /* DeadBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeadBomb.h; sourceTree = "<group>"; };
+		37DC0A9F17534F9B000656A6 /* DeadBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeadBomb.m; sourceTree = "<group>"; };
+		37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowlyHealSkill.h; sourceTree = "<group>"; };
+		37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowlyHealSkill.m; sourceTree = "<group>"; };
 		37DCA5C716F1CBD90006D656 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
@@ -692,6 +710,8 @@
 		37E0DB8A17143C1D0039C94C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		37E0DB8C17143C280039C94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		37E20C36174621C80017231D /* game-center-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-center-icon.jpg"; sourceTree = "<group>"; };
+		37E23E6E17588B4000E37D7D /* PassiveComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveComponent.h; sourceTree = "<group>"; };
+		37E23E6F17588B4000E37D7D /* PassiveComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveComponent.m; sourceTree = "<group>"; };
 		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E2B4AC16A7F41C006CB5B4 /* CharacterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterHeadView.h; sourceTree = "<group>"; };
@@ -725,6 +745,10 @@
 		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
 		37E68CA316F97B4800AB5FBD /* CharacterInitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInitData.h; sourceTree = "<group>"; };
 		37E68CA416F97B4800AB5FBD /* CharacterInitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInitData.m; sourceTree = "<group>"; };
+		37E798BA1754920600E0435E /* KnockOutComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutComponent.h; sourceTree = "<group>"; };
+		37E798BB1754920600E0435E /* KnockOutComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutComponent.m; sourceTree = "<group>"; };
+		37E798BD17549F7800E0435E /* KnockOutSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutSkill.h; sourceTree = "<group>"; };
+		37E798BE17549F7800E0435E /* KnockOutSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutSkill.m; sourceTree = "<group>"; };
 		37F585BF16AF723600917637 /* currentCharacter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = currentCharacter.png; sourceTree = "<group>"; };
 		37F585C016AF723600917637 /* currentCharacter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currentCharacter@2x.png"; sourceTree = "<group>"; };
 		37F585C116AF723600917637 /* player1Character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player1Character.png; sourceTree = "<group>"; };
@@ -1575,6 +1599,25 @@
 			path = CCTableViewKit;
 			sourceTree = "<group>";
 		};
+		37DC0AA117534FA4000656A6 /* Melee */ = {
+			isa = PBXGroup;
+			children = (
+				37E798BD17549F7800E0435E /* KnockOutSkill.h */,
+				37E798BE17549F7800E0435E /* KnockOutSkill.m */,
+				9B146C841737FF7100D141F1 /* MeleeAttackSkill.h */,
+				9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */,
+				37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */,
+				37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */,
+				37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */,
+				37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */,
+				37DC0A9817534D28000656A6 /* BigPillowBomb.h */,
+				37DC0A9917534D28000656A6 /* BigPillowBomb.m */,
+				37DC0A9E17534F9B000656A6 /* DeadBomb.h */,
+				37DC0A9F17534F9B000656A6 /* DeadBomb.m */,
+			);
+			name = Melee;
+			sourceTree = "<group>";
+		};
 		37DDA2BF170962F30016E8CB /* Achievement */ = {
 			isa = PBXGroup;
 			children = (
@@ -1840,12 +1883,7 @@
 			children = (
 				9B08F95716A3FBB0006BF34F /* RangeAttackSkill.h */,
 				9B08F95816A3FBB0006BF34F /* RangeAttackSkill.m */,
-				9B146C841737FF7100D141F1 /* MeleeAttackSkill.h */,
-				9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */,
-				37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */,
-				37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */,
-				37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */,
-				37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */,
+				37DC0AA117534FA4000656A6 /* Melee */,
 			);
 			name = AttackSkill;
 			sourceTree = "<group>";
@@ -2305,6 +2343,12 @@
 				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
 				37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */,
 				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
+				37DC0A9B17534DC2000656A6 /* BombComponent.h */,
+				37DC0A9C17534DC2000656A6 /* BombComponent.m */,
+				37E798BA1754920600E0435E /* KnockOutComponent.h */,
+				37E798BB1754920600E0435E /* KnockOutComponent.m */,
+				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
+				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2709,10 +2753,12 @@
 			isa = PBXGroup;
 			children = (
 				9B146C871737FF7F00D141F1 /* AttackSkill */,
-				9B93798616B1655800F1A05A /* BombSkill.h */,
-				9B93798716B1655800F1A05A /* BombSkill.m */,
 				9BE01A371695E81900B9C427 /* HealSkill.h */,
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
+				37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */,
+				37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */,
+				9B93798616B1655800F1A05A /* BombSkill.h */,
+				9B93798716B1655800F1A05A /* BombSkill.m */,
 				9BC514B616FB60F700ABE811 /* HeroSkill.h */,
 				9BC514B716FB60F700ABE811 /* HeroSkill.m */,
 				9B2040CD169F2E7C000EF31F /* SuicideSkill.h */,
@@ -3180,6 +3226,16 @@
 				37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */,
 				37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */,
 				37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */,
+				37DC0A9A17534D28000656A6 /* BigPillowBomb.m in Sources */,
+				37DC0A9D17534DC2000656A6 /* BombComponent.m in Sources */,
+				37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */,
+				37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */,
+				37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */,
+				37E798BC1754920600E0435E /* KnockOutComponent.m in Sources */,
+				37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */,
+				37E23E7017588B4000E37D7D /* PassiveComponent.m in Sources */,
+				37E23E711758A3C500E37D7D /* PassiveSkill.m in Sources */,
+				37E23E741758B39F00E37D7D /* BombPassiveSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
