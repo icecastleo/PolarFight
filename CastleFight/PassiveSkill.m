@@ -61,7 +61,7 @@
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
         if (animation) {
-            [renderCom.sprite stopActionByTag:kAnimationActionTag];
+            [renderCom.sprite stopActionByTag:kAnimationAttackActionTag];
             
             _isAnimationFinish = NO;
             
@@ -74,7 +74,7 @@
                 animationCom.state = kAnimationStateNone;
             }], nil];
             
-            action.tag = kAnimationActionTag;
+            action.tag = kAnimationAttackActionTag;
             [renderCom.sprite runAction:action];
         }
     }

@@ -25,6 +25,7 @@
     if ((self = [super init])) {        
         _entities = [NSMutableArray array];
         _componentsByClass = [NSMutableDictionary dictionary];
+        _componentsByEntity = [NSMutableDictionary dictionary];
         _lowestUnassignedEid = 1;
     }
     return self;
@@ -48,7 +49,7 @@
     uint32_t eid = [self generateNewEid];
     [_entities addObject:@(eid)];
     
-    NSMutableArray *components = [NSMutableArray array];
+    NSMutableDictionary *components = [NSMutableDictionary dictionary];
     _componentsByEntity[@(eid)] = components;
     
     return [[Entity alloc] initWithEid:eid entityManager:self];
@@ -73,16 +74,16 @@
     }
     components[entity.eidNumber] = component;
     
-    [_componentsByEntity[entity.eidNumber] addObject:component];
+    [_componentsByEntity[entity.eidNumber] setObject:component forKey:NSStringFromClass([component class])];
 }
 
 -(void)removeComponentOfClass:(Class)class fromEntity:(Entity *)entity {
     NSMutableDictionary * components = _componentsByClass[NSStringFromClass(class)];
     if (components && components[entity.eidNumber]) {
         [components removeObjectForKey:entity.eidNumber];
+        
+        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(class)];
     }
-    
-    [_componentsByEntity[entity.eidNumber] removeObject:entity.eidNumber];
 }
 
 -(Component *)getComponentOfClass:(Class)class fromEntity:(Entity *)entity {
@@ -90,7 +91,7 @@
 }
 
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {
-    return _componentsByEntity[entity.eidNumber];
+    return [_componentsByEntity[entity.eidNumber] allValues];
 }
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)class {

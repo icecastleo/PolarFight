@@ -43,6 +43,7 @@
 #import "SlowlyHealSkill.h"
 #import "KnockOutSkill.h"
 #import "BombPassiveSkill.h"
+#import "PeaceSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -133,9 +134,10 @@
     
     [entity addComponent:skillCom];
     
-    if ([cid intValue] == 1) {
+    if ([cid intValue]==1) {
         PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
-        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+//        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+        [passiveCom.skills setObject:[[PeaceSkill alloc] init] forKey:@"PeaceSkill"];
         [entity addComponent:passiveCom];
     }
     
@@ -152,6 +154,8 @@
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
     }
+    
+    NSLog(@"entityCount:: %d",[entity getAllComponents].count);
     
     return entity;
 }
