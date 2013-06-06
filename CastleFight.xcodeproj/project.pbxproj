@@ -138,6 +138,7 @@
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
 		37DF1A8D17606F27009042CB /* AttackUpPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */; };
 		37DF1A9017607356009042CB /* NoiseSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8F17607356009042CB /* NoiseSkill.m */; };
+		37DF1A9317608E30009042CB /* AttributeBonusComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A9217608E2F009042CB /* AttributeBonusComponent.m */; };
 		37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B41174F4ECE00CA7824 /* StateComponent.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */; };
@@ -684,6 +685,8 @@
 		37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackUpPassiveSkill.m; sourceTree = "<group>"; };
 		37DF1A8E17607356009042CB /* NoiseSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoiseSkill.h; sourceTree = "<group>"; };
 		37DF1A8F17607356009042CB /* NoiseSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoiseSkill.m; sourceTree = "<group>"; };
+		37DF1A9117608E2F009042CB /* AttributeBonusComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeBonusComponent.h; sourceTree = "<group>"; };
+		37DF1A9217608E2F009042CB /* AttributeBonusComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeBonusComponent.m; sourceTree = "<group>"; };
 		37DF3B40174F4ECE00CA7824 /* StateComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateComponent.h; sourceTree = "<group>"; };
 		37DF3B41174F4ECE00CA7824 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
 		37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonMeleeAttackSkill.h; sourceTree = "<group>"; };
@@ -2364,6 +2367,8 @@
 				37E798BB1754920600E0435E /* KnockOutComponent.m */,
 				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
 				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
+				37DF1A9117608E2F009042CB /* AttributeBonusComponent.h */,
+				37DF1A9217608E2F009042CB /* AttributeBonusComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3254,6 +3259,7 @@
 				37E75129175CCB3B009AFEFB /* PeaceSkill.m in Sources */,
 				37DF1A8D17606F27009042CB /* AttackUpPassiveSkill.m in Sources */,
 				37DF1A9017607356009042CB /* NoiseSkill.m in Sources */,
+				37DF1A9317608E30009042CB /* AttributeBonusComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

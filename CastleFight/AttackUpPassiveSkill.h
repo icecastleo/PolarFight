@@ -2,7 +2,7 @@
 //  AttackUpPassiveSkill.h
 //  CastleFight
 //
-//  Created by  DAN on 13/6/6.
+//  Created by  浩翔 on 13/6/6.
 //
 //
 
