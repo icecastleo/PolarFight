@@ -21,7 +21,10 @@
         NSAssert(defense, @"Invalid entity!");
         
         defense.bloodSprite = self;
-        [self update];
+        
+        // update
+        float scale = (float) defense.hp.currentValue / defense.hp.value;
+        self.percentage = scale * 100;
     }
     return self;
 }
