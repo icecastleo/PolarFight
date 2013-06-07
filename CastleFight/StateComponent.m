@@ -10,4 +10,8 @@
 
 @implementation StateComponent
 
+-(void)process {
+
+}
+
 @end

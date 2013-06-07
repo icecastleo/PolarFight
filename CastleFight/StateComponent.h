@@ -17,4 +17,6 @@
 @property float totalTime;    //second
 @property DamageEvent *event;
 
+-(void)process;
+
 @end

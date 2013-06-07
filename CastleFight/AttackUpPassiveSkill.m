@@ -8,9 +8,10 @@
 
 #import "AttackUpPassiveSkill.h"
 #import "AttackerComponent.h"
+#import "AttackBonusMultiplierComponent.h"
 
 @interface AttackUpPassiveSkill()
-@property (nonatomic,readonly) BOOL isActivated;
+@property (nonatomic) BOOL isActivated;
 @end
 
 @implementation AttackUpPassiveSkill
@@ -32,7 +33,19 @@
         return;
     }
     
-    AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]]; 
+    AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[self.owner getComponentOfClass:[AttackBonusMultiplierComponent class]];
     
+    if (component) {
+        self.isActivated = NO;
+        return;
+    }
+
+    AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    
+    component = [[AttackBonusMultiplierComponent alloc] initWithAttribute:attacker.attack andBonus:2];
+    component.cdTime = 0;
+    component.totalTime = 3;
+    [self.owner addComponent:component];
 }
+
 @end

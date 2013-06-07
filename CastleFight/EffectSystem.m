@@ -12,6 +12,8 @@
 #import "DefenderComponent.h"
 #import "ParalysisComponent.h"
 #import "BombComponent.h"
+#import "AttackBonusMultiplierComponent.h"
+#import "SpeedBonusAddComponent.h"
 
 @implementation EffectSystem
 
@@ -19,6 +21,8 @@
     [self processComponent:delta className:[PoisonComponent class]];
     [self processComponent:delta className:[ParalysisComponent class]];
     [self processComponent:delta className:[BombComponent class]];
+    [self processComponent:delta className:[AttackBonusMultiplierComponent class]];
+    [self processComponent:delta className:[SpeedBonusAddComponent class]];
 }
 
 -(void)processComponent:(float)delta  className:(Class)className {
@@ -31,11 +35,12 @@
         if (stateComponent.totalTime >= 0) {
             if (stateComponent.currentTime >= stateComponent.cdTime) {
                 stateComponent.currentTime -= stateComponent.cdTime;
-                NSLog(@"stateComponent.currentTime > cdTime");
+//                NSLog(@"stateComponent.currentTime > cdTime");
                 DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
                 if (stateComponent.event) {
                     [defendCom.damageEventQueue addObject:stateComponent.event];
                 }
+            [stateComponent process];
             }
         }else {
             [entity removeComponent:[stateComponent class]];
