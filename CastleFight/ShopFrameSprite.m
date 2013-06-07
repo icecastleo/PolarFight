@@ -78,6 +78,9 @@
     // Call CCRenderTexture:begin
     [rt beginWithClear:color.r g:color.g b:color.b a:color.a];
     
+    // 3: Draw into the texture
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
+    
     CC_NODE_DRAW_SETUP();
     
     CGPoint vertices[4];
@@ -96,10 +99,22 @@
     vertices[nVertices] = CGPointMake(size.width, size.height);
     colors[nVertices++] = (ccColor4F){0, 0, 0, gradientAlpha};
     
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position  | kCCVertexAttribFlag_Color);
+    
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
-    CC_INCREMENT_GL_DRAWS(1);
+    
+    CCSprite *noise = [CCSprite spriteWithFile:@"noise.png" rect:CGRectMake(0, 0, size.width, size.height)];
+    
+    // Repeat texture
+    //    ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
+    //    [noise.texture setTexParameters:&params];
+    
+    [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ZERO}];
+    noise.position = ccp(size.width/2, size.height/2);
+    [noise visit];
     
 //    // Top highlight
 //    float borderHeight = size.height;
@@ -120,16 +135,6 @@
 //    glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
 //    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
 //    CC_INCREMENT_GL_DRAWS(1);
-    
-    CCSprite *noise = [CCSprite spriteWithFile:@"noise.png" rect:CGRectMake(0, 0, size.width, size.height)];
-    ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
-    [noise.texture setTexParameters:&params];
-    noise.position = ccp(size.width/2, size.height/2);
-    // Should be GL_NERO for the second parameter, but maybe some bug here.
-//    [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ZERO}];
-    [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA}];
-    [noise visit];
-
     
     // Call CCRenderTexture:end
     [rt end];
