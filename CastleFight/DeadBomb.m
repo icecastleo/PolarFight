@@ -2,7 +2,7 @@
 //  DeadBomb.m
 //  CastleFight
 //
-//  Created by  DAN on 13/5/27.
+//  Created by  浩翔 on 13/5/27.
 //
 //
 
@@ -15,7 +15,7 @@
 @implementation DeadBomb
 
 -(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
-    int startTime = 3;
+    int startTime = 2;
     self.cooldown = startTime;
     event.isCustomDamage = YES;
     event.isIgnoreDefense = YES;

@@ -43,6 +43,9 @@
 #import "SlowlyHealSkill.h"
 #import "KnockOutSkill.h"
 #import "BombPassiveSkill.h"
+#import "PeaceSkill.h"
+#import "AttackUpPassiveSkill.h"
+#import "SpeedUpSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -119,6 +122,7 @@
     
     // test only for stateComponent
     if ([cid intValue] == 1) {
+        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
@@ -136,9 +140,11 @@
     
     [entity addComponent:skillCom];
     
-    if ([cid intValue] == 1) {
+    if ([cid intValue]==1) {
         PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
-        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+//        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+//        [passiveCom.skills setObject:[[PeaceSkill alloc] init] forKey:@"PeaceSkill"];
+//        [passiveCom.skills setObject:[[AttackUpPassiveSkill alloc] init] forKey:@"AttackUpPassiveSkill"];
         [entity addComponent:passiveCom];
     }
     
@@ -155,6 +161,8 @@
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
     }
+    
+    NSLog(@"entityCount:: %d",[entity getAllComponents].count);
     
     return entity;
 }

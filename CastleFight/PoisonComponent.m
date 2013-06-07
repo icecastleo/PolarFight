@@ -7,7 +7,6 @@
 //
 
 #import "PoisonComponent.h"
-#import "DefenderComponent.h"
 
 @implementation PoisonComponent
 

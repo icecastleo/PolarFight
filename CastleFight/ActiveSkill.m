@@ -70,7 +70,7 @@
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
         if (animation) {
-            [renderCom.sprite stopActionByTag:kAnimationActionTag];
+            [renderCom.sprite stopActionByTag:kAnimationAttackActionTag];
             
             _isFinish = NO;
             

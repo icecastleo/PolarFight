@@ -2,7 +2,7 @@
 //  StateComponent.h
 //  CastleFight
 //
-//  Created by  DAN on 13/5/24.
+//  Created by  浩翔 on 13/5/24.
 //
 //
 
@@ -16,5 +16,7 @@
 @property float cdTime;   //second
 @property float totalTime;    //second
 @property DamageEvent *event;
+
+-(void)process;
 
 @end
