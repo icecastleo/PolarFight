@@ -42,16 +42,19 @@
         if (!move || !render)
             continue;
         
-        NSMutableDictionary *testDic = [NSMutableDictionary new];
-        [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
-        [entity sendEvent:kEventIsMoveForbidden Message:testDic];
+        NSMutableDictionary *dic = [NSMutableDictionary new];
+        [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
+        [entity sendEvent:kEventIsMoveForbidden Message:dic];
         
-        NSNumber *result = [testDic objectForKey:@"kEventIsMoveForbidden"];
+        NSNumber *result = [dic objectForKey:@"kEventIsMoveForbidden"];
         
         if (result.boolValue == YES) {
             AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
-            [render.sprite stopActionByTag:kAnimationMoveActionTag];
-            animation.state = kAnimationStateNone;
+            
+            if (animation && animation.state == kAnimationStateMove) {
+                [render.sprite stopActionByTag:kAnimationActionTag];
+                animation.state = kAnimationStateNone;
+            }
             continue;
         }
         
@@ -73,7 +76,7 @@
         
         if (move.velocity.x == 0 && move.velocity.y == 0) {
             if (animation.state == kAnimationStateMove) {
-                [render.sprite stopActionByTag:kAnimationMoveActionTag];
+                [render.sprite stopActionByTag:kAnimationActionTag];
                 animation.state = kAnimationStateNone;
             }
             
@@ -83,7 +86,7 @@
                 if (idel) {
                     CCAction *action = [CCRepeatForever actionWithAction:
                                         [CCAnimate actionWithAnimation:idel]];
-                    action.tag = kAnimationMoveActionTag;
+                    action.tag = kAnimationActionTag;
                     [render.sprite runAction:action];
                     
                     animation.state = kAnimationStateIdel;
@@ -91,7 +94,7 @@
             }
         } else {
             if (animation.state == kAnimationStateIdel) {
-                [render.sprite stopActionByTag:kAnimationMoveActionTag];
+                [render.sprite stopActionByTag:kAnimationActionTag];
                 animation.state = kAnimationStateNone;
             }
             
@@ -101,7 +104,7 @@
                 if (moveAnimation) {
                     CCAction *action = [CCRepeatForever actionWithAction:
                                         [CCAnimate actionWithAnimation:moveAnimation]];
-                    action.tag = kAnimationMoveActionTag;
+                    action.tag = kAnimationActionTag;
                     [render.sprite runAction:action];
                     
                     animation.state = kAnimationStateMove;

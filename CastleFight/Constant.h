@@ -43,8 +43,7 @@
 #define ACTIVE_IF_LESS_THAN @"<"
 #define ACTIVE_IF_EQUALS_TO @"=="
 
-#define kAnimationAttackActionTag 5
-#define kAnimationMoveActionTag 6
+#define kAnimationActionTag 5
 
 #define kAISystemUpdateInterval 0.2
 
