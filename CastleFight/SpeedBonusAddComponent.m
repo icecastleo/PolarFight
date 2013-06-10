@@ -22,9 +22,7 @@
 
 -(void)process {
     if (!self.isExecuting) {
-        NSLog(@"1.attribute:%d",self.attribute.value);
         [self.attribute addBonus:self.bonus];
-        NSLog(@"2.attribute:%d",self.attribute.value);
         _isExecuting = YES;
     }
 }

@@ -47,7 +47,7 @@
 #import "AttackUpPassiveSkill.h"
 #import "SpeedUpSkill.h"
 #import "AuraComponent.h"
-#import "Aura.h"
+#import "AttackUpAura.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -132,9 +132,9 @@
 //        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[SpeedUpSkill alloc] init] forKey:@"attack"];
         
-        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
-    } else {
+    }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     }
 
@@ -150,8 +150,8 @@
         [entity addComponent:passiveCom];
         
         AuraComponent *auraComponent = [[AuraComponent alloc] init];
-        [auraComponent.auras setObject:[[Aura alloc] init] forKey:@"Aura"];
-        auraComponent.infinite = YES;
+//        [auraComponent.auras setObject:[[AttackUpAura alloc] init] forKey:@"AttackUpAura"];
+//        auraComponent.infinite = YES;
         [entity addComponent:auraComponent];
     }
     

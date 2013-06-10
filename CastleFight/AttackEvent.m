@@ -9,7 +9,6 @@
 #import "AttackEvent.h"
 #import "Attribute.h"
 #import "RenderComponent.h"
-#import "AttackerComponent.h"
 #import "DefenderComponent.h"
 
 @implementation AttackEvent

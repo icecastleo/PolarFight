@@ -8,6 +8,6 @@
 
 #import "ActiveSkill.h"
 
-@interface Aura : ActiveSkill
+@interface AttackUpAura : ActiveSkill
 
 @end

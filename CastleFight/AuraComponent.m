@@ -7,7 +7,7 @@
 //
 
 #import "AuraComponent.h"
-#import "Aura.h"
+#import "ActiveSkill.h"
 
 @implementation AuraComponent
 
@@ -20,7 +20,7 @@
 
 -(void)setEntity:(Entity *)entity {
     [super setEntity:entity];
-    for (Aura *aura in self.auras.allValues) {
+    for (ActiveSkill *aura in self.auras.allValues) {
         aura.owner = entity;
     }
 }
@@ -29,7 +29,7 @@
     if (self.infinite) {
         self.totalTime = 1;
     }
-    for (Aura *aura in self.auras.allValues) {
+    for (ActiveSkill *aura in self.auras.allValues) {
         [aura activeEffect];
     }
 }

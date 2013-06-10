@@ -6,11 +6,11 @@
 //
 //
 
-#import "Aura.h"
+#import "AttackUpAura.h"
 #import "AttackerComponent.h"
 #import "AttackBonusMultiplierComponent.h"
 
-@implementation Aura
+@implementation AttackUpAura
 
 -(id)init {
     if (self = [super init]) {

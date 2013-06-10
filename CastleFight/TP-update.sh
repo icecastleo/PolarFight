@@ -28,7 +28,7 @@ else
 #if here the TexturePacker command line file could not be found
 echo "TexturePacker tool not installed in ${TP}"
 echo "skipping requested operation."
-exit 1
+exit 0
 fi
 fi
 exit 0

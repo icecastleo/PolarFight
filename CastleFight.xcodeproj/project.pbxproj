@@ -125,7 +125,6 @@
 		37DB1F3416BBD08300C0368D /* AKHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2F16BBD08300C0368D /* AKHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DB1F3D16BBD2F600C0368D /* TouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F3C16BBD2F600C0368D /* TouchTracker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37DC0A9A17534D28000656A6 /* BigPillowBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9917534D28000656A6 /* BigPillowBomb.m */; };
-		37DC0A9D17534DC2000656A6 /* BombComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9C17534DC2000656A6 /* BombComponent.m */; };
 		37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9F17534F9B000656A6 /* DeadBomb.m */; };
 		37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */; };
@@ -141,7 +140,7 @@
 		37DF1A9E1761EA34009042CB /* SpeedBonusAddComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */; };
 		37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */; };
 		37DF1AA517621BC4009042CB /* AuraComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA417621BC3009042CB /* AuraComponent.m */; };
-		37DF1AA617621C9E009042CB /* Aura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* Aura.m */; };
+		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B41174F4ECE00CA7824 /* StateComponent.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */; };
@@ -357,7 +356,6 @@
 		9B3E4FDF1675F139000CFFFB /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E4F781675F139000CFFFB /* vec4.c */; };
 		9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3E4D251675F004000CFFFB /* libcocos2d.a */; };
 		9B406F6A176240B8008B840F /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 9B406F69176240B8008B840F /* Assets */; };
-		9B406F6C17624154008B840F /* TP-update.sh in Resources */ = {isa = PBXBuildFile; fileRef = 9B406F6B17624154008B840F /* TP-update.sh */; };
 		9B406F74176251E3008B840F /* SpriteSheets in Resources */ = {isa = PBXBuildFile; fileRef = 9B406F73176251E2008B840F /* SpriteSheets */; };
 		9B514DED1688541A00359C2A /* Damage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B514DEC1688541900359C2A /* Damage.m */; };
 		9B55BB9E173254CB0030C9D7 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB8B173254CB0030C9D7 /* Component.m */; };
@@ -648,8 +646,6 @@
 		37DB1F3C16BBD2F600C0368D /* TouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTracker.m; sourceTree = "<group>"; };
 		37DC0A9817534D28000656A6 /* BigPillowBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigPillowBomb.h; sourceTree = "<group>"; };
 		37DC0A9917534D28000656A6 /* BigPillowBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigPillowBomb.m; sourceTree = "<group>"; };
-		37DC0A9B17534DC2000656A6 /* BombComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombComponent.h; sourceTree = "<group>"; };
-		37DC0A9C17534DC2000656A6 /* BombComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombComponent.m; sourceTree = "<group>"; };
 		37DC0A9E17534F9B000656A6 /* DeadBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeadBomb.h; sourceTree = "<group>"; };
 		37DC0A9F17534F9B000656A6 /* DeadBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeadBomb.m; sourceTree = "<group>"; };
 		37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowlyHealSkill.h; sourceTree = "<group>"; };
@@ -845,8 +841,8 @@
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
 		9B2AB06A16668F6A00B78136 /* PassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveSkill.m; sourceTree = "<group>"; };
 		9B2C785F1699E6B500CA1A1C /* blood_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_frame.png; sourceTree = "<group>"; };
-		9B2C7861169A1C2C00CA1A1C /* Aura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aura.h; sourceTree = "<group>"; };
-		9B2C7862169A1C2C00CA1A1C /* Aura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aura.m; sourceTree = "<group>"; };
+		9B2C7861169A1C2C00CA1A1C /* AttackUpAura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackUpAura.h; sourceTree = "<group>"; };
+		9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackUpAura.m; sourceTree = "<group>"; };
 		9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMovePassiveSkill.h; sourceTree = "<group>"; };
 		9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMovePassiveSkill.m; sourceTree = "<group>"; };
 		9B2C786C169ADA9300CA1A1C /* SlowMoveAura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMoveAura.h; sourceTree = "<group>"; };
@@ -2323,8 +2319,6 @@
 				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
 				37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */,
 				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
-				37DC0A9B17534DC2000656A6 /* BombComponent.h */,
-				37DC0A9C17534DC2000656A6 /* BombComponent.m */,
 				37E798BA1754920600E0435E /* KnockOutComponent.h */,
 				37E798BB1754920600E0435E /* KnockOutComponent.m */,
 				37DF1A991761E54C009042CB /* AttackBonusMultiplierComponent.h */,
@@ -2789,8 +2783,8 @@
 				9B5CD31816ED148C00C8B007 /* DelegateSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
-				9B2C7861169A1C2C00CA1A1C /* Aura.h */,
-				9B2C7862169A1C2C00CA1A1C /* Aura.m */,
+				9B2C7861169A1C2C00CA1A1C /* AttackUpAura.h */,
+				9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -3036,7 +3030,6 @@
 				9B73C783172E7E69008575E5 /* background.png in Resources */,
 				37E20C37174621C90017231D /* game-center-icon.jpg in Resources */,
 				9B406F6A176240B8008B840F /* Assets in Resources */,
-				9B406F6C17624154008B840F /* TP-update.sh in Resources */,
 				9B406F74176251E3008B840F /* SpriteSheets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3180,7 +3173,6 @@
 				37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */,
 				37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */,
 				37DC0A9A17534D28000656A6 /* BigPillowBomb.m in Sources */,
-				37DC0A9D17534DC2000656A6 /* BombComponent.m in Sources */,
 				37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */,
 				37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */,
 				37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */,
@@ -3196,7 +3188,7 @@
 				37DF1A9E1761EA34009042CB /* SpeedBonusAddComponent.m in Sources */,
 				37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */,
 				37DF1AA517621BC4009042CB /* AuraComponent.m in Sources */,
-				37DF1AA617621C9E009042CB /* Aura.m in Sources */,
+				37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3618,6 +3610,7 @@
 				9B406F7017624212008B840F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
