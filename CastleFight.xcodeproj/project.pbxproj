@@ -141,6 +141,8 @@
 		37DF1A9B1761E54C009042CB /* AttackBonusMultiplierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A9A1761E54C009042CB /* AttackBonusMultiplierComponent.m */; };
 		37DF1A9E1761EA34009042CB /* SpeedBonusAddComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */; };
 		37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */; };
+		37DF1AA517621BC4009042CB /* AuraComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA417621BC3009042CB /* AuraComponent.m */; };
+		37DF1AA617621C9E009042CB /* Aura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* Aura.m */; };
 		37DF3B42174F4ECE00CA7824 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B41174F4ECE00CA7824 /* StateComponent.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B4E174F73A000CA7824 /* ParalysisComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */; };
@@ -693,6 +695,8 @@
 		37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedBonusAddComponent.m; sourceTree = "<group>"; };
 		37DF1AA01761ECA3009042CB /* SpeedUpSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedUpSkill.h; sourceTree = "<group>"; };
 		37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedUpSkill.m; sourceTree = "<group>"; };
+		37DF1AA317621BC1009042CB /* AuraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraComponent.h; sourceTree = "<group>"; };
+		37DF1AA417621BC3009042CB /* AuraComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraComponent.m; sourceTree = "<group>"; };
 		37DF3B40174F4ECE00CA7824 /* StateComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateComponent.h; sourceTree = "<group>"; };
 		37DF3B41174F4ECE00CA7824 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
 		37DF3B43174F540A00CA7824 /* PoisonMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonMeleeAttackSkill.h; sourceTree = "<group>"; };
@@ -2387,6 +2391,8 @@
 				37DF1A9A1761E54C009042CB /* AttackBonusMultiplierComponent.m */,
 				37DF1A9C1761EA33009042CB /* SpeedBonusAddComponent.h */,
 				37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */,
+				37DF1AA317621BC1009042CB /* AuraComponent.h */,
+				37DF1AA417621BC3009042CB /* AuraComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3280,6 +3286,8 @@
 				37DF1A9B1761E54C009042CB /* AttackBonusMultiplierComponent.m in Sources */,
 				37DF1A9E1761EA34009042CB /* SpeedBonusAddComponent.m in Sources */,
 				37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */,
+				37DF1AA517621BC4009042CB /* AuraComponent.m in Sources */,
+				37DF1AA617621C9E009042CB /* Aura.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

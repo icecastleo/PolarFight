@@ -46,6 +46,8 @@
 #import "PeaceSkill.h"
 #import "AttackUpPassiveSkill.h"
 #import "SpeedUpSkill.h"
+#import "AuraComponent.h"
+#import "Aura.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -144,6 +146,11 @@
 //        [passiveCom.skills setObject:[[PeaceSkill alloc] init] forKey:@"PeaceSkill"];
 //        [passiveCom.skills setObject:[[AttackUpPassiveSkill alloc] init] forKey:@"AttackUpPassiveSkill"];
         [entity addComponent:passiveCom];
+        
+        AuraComponent *auraComponent = [[AuraComponent alloc] init];
+        [auraComponent.auras setObject:[[Aura alloc] init] forKey:@"Aura"];
+        auraComponent.infinite = YES;
+        [entity addComponent:auraComponent];
     }
     
     // TODO: Set AI for different character
