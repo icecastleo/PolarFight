@@ -112,6 +112,16 @@ const static int pathHeight = 70;
             render.sprite.anchorPoint = ccp(0, 0.5);
         }
     }
+    [self addEntityWithPosition:entity toPosition:position];
+    
+}
+
+-(void) addEntityWithPosition:(Entity *)entity toPosition:(CGPoint)position{
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    if (!render) {
+        return;
+    }
+    
     [self moveEntity:entity toPosition:position boundaryLimit:YES];
     [self addChild:render.sprite];
 }

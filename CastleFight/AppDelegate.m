@@ -18,9 +18,16 @@
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
-
+- (void)applicationDidFinishLaunching:(UIApplication *)application  
+{
+    CCLOG(@"Start Use Flurry");
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [Flurry startSession:@"YP9HHC7MV4NRFXWQY6NM"];
+    
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -120,7 +127,7 @@
     // A notification method must be set to retrieve the fullscreen ad object.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDailyRewardAd:) name:TJC_DAILY_REWARD_RESPONSE_NOTIFICATION object:nil];
     //[FileManager sharedFileManager].userMoney+=100;
-   
+       
 	return YES;
 }
 
@@ -213,6 +220,12 @@
 -(void) applicationSignificantTimeChange:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
+}
+
+// log Flurry Error
+void uncaughtExceptionHandler(NSException *exception)
+{
+    [Flurry logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 @end

@@ -20,6 +20,7 @@
 		2D26FC9A1640114D00C34AA4 /* Effect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D26FC991640114D00C34AA4 /* Effect.m */; };
 		2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
+		2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D918CEA1761D3C3002EE90C /* libFlurry.a */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
 		3725262416EF684500C79A9E /* standard-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261C16EF684500C79A9E /* standard-black-button.png */; };
@@ -513,6 +514,8 @@
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooterNew.h; sourceTree = "<group>"; };
 		2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeShooterNew.m; sourceTree = "<group>"; };
+		2D918CE91761D3C3002EE90C /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		2D918CEA1761D3C3002EE90C /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		2DA446BD16E4A59F00BDC060 /* BaseAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAI.h; sourceTree = "<group>"; };
 		2DA446BE16E4A59F00BDC060 /* BaseAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAI.m; sourceTree = "<group>"; };
 		2DA446C016E4A6E400BDC060 /* SimpleAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAI.h; sourceTree = "<group>"; };
@@ -1336,6 +1339,7 @@
 				9B062CF21635275000E06018 /* CoreGraphics.framework in Frameworks */,
 				9B062CF41635275000E06018 /* GameKit.framework in Frameworks */,
 				2D055978171579F600F82A08 /* TapjoyPublisherLibrary.a in Frameworks */,
+				2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,6 +1464,16 @@
 				2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */,
 			);
 			name = Range;
+			sourceTree = "<group>";
+		};
+		2D918CE81761D3C3002EE90C /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				2D918CE91761D3C3002EE90C /* Flurry.h */,
+				2D918CEA1761D3C3002EE90C /* libFlurry.a */,
+			);
+			name = Flurry;
+			path = CastleFight/Flurry;
 			sourceTree = "<group>";
 		};
 		2DA446BC16E4A53C00BDC060 /* AI */ = {
@@ -1698,6 +1712,7 @@
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
+				2D918CE81761D3C3002EE90C /* Flurry */,
 				2D055973171579F600F82A08 /* TapjoyPublisherLibrary */,
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9BFFB64D163592A7006ECAC0 /* Default-568h@2x.png */,
@@ -3463,6 +3478,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TapjoyPublisherLibrary\"",
+					"\"$(SRCROOT)/CastleFight/Flurry\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -3496,6 +3512,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TapjoyPublisherLibrary\"",
+					"\"$(SRCROOT)/CastleFight/Flurry\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
