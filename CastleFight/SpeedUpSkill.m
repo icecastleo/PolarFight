@@ -2,7 +2,7 @@
 //  SpeedUpSkill.m
 //  CastleFight
 //
-//  Created by  DAN on 13/6/7.
+//  Created by  浩翔 on 13/6/7.
 //
 //
 
@@ -17,7 +17,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,kRangeTypeSimpleXY,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@10,kRangeKeyTargetLimit,nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@150,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@10,kRangeKeyTargetLimit,nil];
         
         range = [Range rangeWithParameters:dictionary];
         self.cooldown = 30;

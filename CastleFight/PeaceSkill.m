@@ -10,28 +10,17 @@
 #import "ParalysisComponent.h"
 #import "MoveComponent.h"
 
-@interface PeaceSkill()
-@property (nonatomic,readonly) BOOL isActivated;
-@end
-
 @implementation PeaceSkill
 
--(void)checkEvent:(EventType)eventType {
-    switch (eventType) {
-        case KEventDead:
-            _isActivated = YES;
-            break;
-            
-        default:
-            break;
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
+    if (eventType != KEventDead) {
+        return;
     }
+    [self activeEffect];
 }
 
 -(void)activeEffect {
     
-    if (!self.isActivated) {
-        return;
-    }
     NSArray *entities = [self.owner getAllEntitiesPosessingComponentOfClass:[MoveComponent class]];
     
     for (Entity *entity in entities) {

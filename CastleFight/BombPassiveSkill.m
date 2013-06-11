@@ -12,10 +12,6 @@
 #import "SideEffect.h"
 #import "AttackEvent.h"
 
-@interface BombPassiveSkill()
-@property (nonatomic,readonly) BOOL isActivated;
-@end
-
 @implementation BombPassiveSkill
 
 -(id)init {
@@ -27,22 +23,14 @@
     return self;
 }
 
--(void)checkEvent:(EventType)eventType {
-    switch (eventType) {
-        case KEventDead:
-            _isActivated = YES;
-            break;
-            
-        default:
-            break;
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
+    if (eventType != KEventDead) {
+        return;
     }
+    [self activeEffect];
 }
 
 -(void)activeEffect {
-    
-    if (!self.isActivated) {
-        return;
-    }
     
     AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     

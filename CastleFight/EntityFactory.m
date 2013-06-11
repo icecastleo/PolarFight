@@ -48,6 +48,8 @@
 #import "SpeedUpSkill.h"
 #import "AuraComponent.h"
 #import "AttackUpAura.h"
+#import "ReflectAttackDamageSkill.h"
+#import "StealthSkill.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -124,7 +126,7 @@
     
     // test only for stateComponent
     if ([cid intValue] == 1) {
-        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
@@ -133,6 +135,7 @@
 //        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[SpeedUpSkill alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[StealthSkill alloc] init] forKey:@"attack"];
         
     }else {
         [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
@@ -142,16 +145,17 @@
     
     [entity addComponent:skillCom];
     
-    if ([cid intValue]==1) {
+    if ([cid intValue] == 1) {
         PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
 //        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
 //        [passiveCom.skills setObject:[[PeaceSkill alloc] init] forKey:@"PeaceSkill"];
 //        [passiveCom.skills setObject:[[AttackUpPassiveSkill alloc] init] forKey:@"AttackUpPassiveSkill"];
+//        [passiveCom.skills setObject:[[ReflectAttackDamageSkill alloc] initWithProbability:100 reflectPercent:200] forKey:@"ReflectAttackDamageSkill"];
         [entity addComponent:passiveCom];
         
         AuraComponent *auraComponent = [[AuraComponent alloc] init];
 //        [auraComponent.auras setObject:[[AttackUpAura alloc] init] forKey:@"AttackUpAura"];
-//        auraComponent.infinite = YES;
+        auraComponent.infinite = YES;
         [entity addComponent:auraComponent];
     }
     

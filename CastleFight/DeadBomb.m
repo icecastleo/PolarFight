@@ -13,6 +13,16 @@
 
 @implementation DeadBomb
 
+-(id)init {
+    if (self = [super init]) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@80,kRangeKeyRadius,nil];
+        
+        range = [Range rangeWithParameters:dictionary];
+        self.cooldown = 1.5;
+    }
+    return self;
+}
+
 -(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
     
     DefenderComponent *defender = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];

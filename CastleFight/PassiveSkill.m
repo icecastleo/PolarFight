@@ -94,7 +94,7 @@
                 format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
 }
 
--(void)checkEvent:(EventType)eventType {
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
     
 }
 

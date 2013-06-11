@@ -10,33 +10,20 @@
 #import "AttackerComponent.h"
 #import "AttackBonusMultiplierComponent.h"
 
-@interface AttackUpPassiveSkill()
-@property (nonatomic) BOOL isActivated;
-@end
-
 @implementation AttackUpPassiveSkill
 
--(void)checkEvent:(EventType)eventType {
-    switch (eventType) {
-        case kEventReceiveDamage:
-            _isActivated = YES;
-            break;
-            
-        default:
-            break;
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
+    if (eventType != kEventReceiveDamage) {
+        return;
     }
+    [self activeEffect];
 }
 
 -(void)activeEffect {
     
-    if (!self.isActivated) {
-        return;
-    }
-    
     AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[self.owner getComponentOfClass:[AttackBonusMultiplierComponent class]];
     
     if (component) {
-        self.isActivated = NO;
         return;
     }
 

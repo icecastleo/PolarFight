@@ -2,7 +2,7 @@
 //  SpeedUpSkill.h
 //  CastleFight
 //
-//  Created by  DAN on 13/6/7.
+//  Created by  浩翔 on 13/6/7.
 //
 //
 

@@ -17,9 +17,11 @@ typedef enum {
     kEventSendDamageEvent,
     kEventReceiveDamageEvent,
     kEventReceiveDamage,
+    kEventBeDetected,
     
     kEventIsActiveSkillForbidden,
     kEventIsMoveForbidden,
+    kEventIsDetectedForbidden,
     KEventDead,
     
     kEventFoodChanged,

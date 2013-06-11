@@ -149,6 +149,9 @@
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
+		37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */; };
+		37E1AE2B17673559003F1707 /* StealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E1AE2A17673558003F1707 /* StealthComponent.m */; };
+		37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E1AE2D1767649A003F1707 /* StealthSkill.m */; };
 		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
 		37E23E7017588B4000E37D7D /* PassiveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E23E6F17588B4000E37D7D /* PassiveComponent.m */; };
 		37E23E711758A3C500E37D7D /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
@@ -704,6 +707,10 @@
 		37E0DB8817143C110039C94C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		37E0DB8A17143C1D0039C94C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		37E0DB8C17143C280039C94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		37E1AE2917673558003F1707 /* StealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthComponent.h; sourceTree = "<group>"; };
+		37E1AE2A17673558003F1707 /* StealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthComponent.m; sourceTree = "<group>"; };
+		37E1AE2C17676498003F1707 /* StealthSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthSkill.h; sourceTree = "<group>"; };
+		37E1AE2D1767649A003F1707 /* StealthSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthSkill.m; sourceTree = "<group>"; };
 		37E20C36174621C80017231D /* game-center-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-center-icon.jpg"; sourceTree = "<group>"; };
 		37E23E6E17588B4000E37D7D /* PassiveComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveComponent.h; sourceTree = "<group>"; };
 		37E23E6F17588B4000E37D7D /* PassiveComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveComponent.m; sourceTree = "<group>"; };
@@ -1865,6 +1872,8 @@
 		9B2C786B169ADA7E00CA1A1C /* Aura */ = {
 			isa = PBXGroup;
 			children = (
+				9B2C7861169A1C2C00CA1A1C /* AttackUpAura.h */,
+				9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */,
 				9B2C786C169ADA9300CA1A1C /* SlowMoveAura.h */,
 				9B2C786D169ADA9300CA1A1C /* SlowMoveAura.m */,
 			);
@@ -1878,14 +1887,14 @@
 				9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */,
 				37E75127175CCB3B009AFEFB /* PeaceSkill.h */,
 				37E75128175CCB3B009AFEFB /* PeaceSkill.m */,
+				9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */,
+				9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */,
 				37DF1A8B17606F27009042CB /* AttackUpPassiveSkill.h */,
 				37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */,
 				9B514DEE168866A400359C2A /* AssassinSkill.h */,
 				9B514DEF168866A400359C2A /* AssassinSkill.m */,
 				9BF2DDE4168C8F0300545940 /* ContinuousAttackSkill.h */,
 				9BF2DDE5168C8F0300545940 /* ContinuousAttackSkill.m */,
-				9B92B1A51680F2F300D965AF /* ReflectAttackDamageSkill.h */,
-				9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */,
 				9B10C67C1677B1EB0026E796 /* RegenerationSkill.h */,
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
 				9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */,
@@ -2327,6 +2336,8 @@
 				37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */,
 				37DF1AA317621BC1009042CB /* AuraComponent.h */,
 				37DF1AA417621BC3009042CB /* AuraComponent.m */,
+				37E1AE2917673558003F1707 /* StealthComponent.h */,
+				37E1AE2A17673558003F1707 /* StealthComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2727,6 +2738,8 @@
 				9B2040C7169F0C84000EF31F /* TankSkill.m */,
 				9BE01A511696DA1000B9C427 /* WizardSkill.h */,
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
+				37E1AE2C17676498003F1707 /* StealthSkill.h */,
+				37E1AE2D1767649A003F1707 /* StealthSkill.m */,
 			);
 			name = ActiveSkill;
 			sourceTree = "<group>";
@@ -2783,8 +2796,6 @@
 				9B5CD31816ED148C00C8B007 /* DelegateSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
-				9B2C7861169A1C2C00CA1A1C /* AttackUpAura.h */,
-				9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -3189,6 +3200,9 @@
 				37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */,
 				37DF1AA517621BC4009042CB /* AuraComponent.m in Sources */,
 				37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */,
+				37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */,
+				37E1AE2B17673559003F1707 /* StealthComponent.m in Sources */,
+				37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

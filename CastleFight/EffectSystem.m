@@ -14,6 +14,7 @@
 #import "AttackBonusMultiplierComponent.h"
 #import "SpeedBonusAddComponent.h"
 #import "AuraComponent.h"
+#import "StealthComponent.h"
 
 @implementation EffectSystem
 
@@ -23,6 +24,7 @@
     [self processComponent:delta className:[AttackBonusMultiplierComponent class]];
     [self processComponent:delta className:[SpeedBonusAddComponent class]];
     [self processComponent:delta className:[AuraComponent class]];
+    [self processComponent:delta className:[StealthComponent class]];
 }
 
 -(void)processComponent:(float)delta  className:(Class)className {
