@@ -88,6 +88,8 @@
         sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-02-00.png"];
     } else if ([name isEqualToString:@"enemy_03"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-03-00.png"];
+    } else if ([name isEqualToString:@"enemy_04"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-04-00.png"];
     } else if ([name isEqualToString:@"user_01"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-00.png"];
     } else if ([name isEqualToString:@"user_02"]) {
@@ -126,7 +128,7 @@
     
     // test only for stateComponent
     if ([cid intValue] == 1) {
-//        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
+        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
@@ -135,10 +137,11 @@
 //        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
 //        [skillCom.skills setObject:[[SpeedUpSkill alloc] init] forKey:@"attack"];
-        [skillCom.skills setObject:[[StealthSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[[StealthSkill alloc] init] forKey:@"attack"];
         
-    }else {
-        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    } else {
+        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
+//        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
     }
 
 //    [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
@@ -319,7 +322,6 @@
         return animations;
     }
     
-    // For test sprite
     if ([name isEqualToString:@"enemy_03"]) {
         CCAnimation *animation = [CCAnimation animation];
         
@@ -340,6 +342,32 @@
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.2;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+        return animations;
+    }
+    
+    if ([name isEqualToString:@"enemy_04"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 0; i <= 4; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        [animations setObject:animation forKey:@"move"];
+        
+        // attack
+        animation = [CCAnimation animation];
+        
+        for (int i = 5; i <= 8; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
+        }
+    
+        animation.restoreOriginalFrame = NO;
+        animation.delayPerUnit = 0.05;
         
         [animations setObject:animation forKey:@"attack"];
         

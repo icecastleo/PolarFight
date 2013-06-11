@@ -7,7 +7,7 @@
 #
 
 TP=/usr/local/bin/TexturePacker
-if [ "${ACTION}" = "clean" ]
+if [ "${ACTION}" = "clean" ] && [ -f "${TP}" ]
 then
 # remove sheets - please add a matching expression here
 rm -f ../SpriteSheets/*.pvr.ccz

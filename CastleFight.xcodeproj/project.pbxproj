@@ -443,7 +443,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9B406F711762428F008B840F /* PBXContainerItemProxy */ = {
+		9B87DDD4176780FC00345DEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B062CD61635275000E06018 /* Project object */;
 			proxyType = 1;
@@ -2831,7 +2831,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				9B406F721762428F008B840F /* PBXTargetDependency */,
+				9B87DDD5176780FC00345DEB /* PBXTargetDependency */,
 			);
 			name = CastleFight;
 			productName = LightBugBattle;
@@ -3326,10 +3326,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9B406F721762428F008B840F /* PBXTargetDependency */ = {
+		9B87DDD5176780FC00345DEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9B406F6D17624212008B840F /* SpriteSheet */;
-			targetProxy = 9B406F711762428F008B840F /* PBXContainerItemProxy */;
+			targetProxy = 9B87DDD4176780FC00345DEB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

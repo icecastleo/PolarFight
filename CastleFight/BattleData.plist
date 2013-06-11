@@ -36,6 +36,14 @@
 				<key>targetRatio</key>
 				<integer>1</integer>
 			</dict>
+            <dict>
+				<key>id</key>
+				<string>104</string>
+				<key>level</key>
+				<integer>1</integer>
+				<key>targetRatio</key>
+				<integer>3</integer>
+			</dict>
 		</array>
 		<key>bosses</key>
 		<array>
