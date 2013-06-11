@@ -366,8 +366,8 @@
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
         }
     
-        animation.restoreOriginalFrame = NO;
-        animation.delayPerUnit = 0.05;
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.075;
         
         [animations setObject:animation forKey:@"attack"];
         

@@ -168,6 +168,7 @@
 -(void) stop
 {
 	[innerAction_ stop];
+    [super stop];
 }
 
 -(BOOL) isDone
