@@ -178,6 +178,7 @@
 		37E4F97E16AE2E4B00D492E6 /* wizardHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96E16AE2E4B00D492E6 /* wizardHead32.png */; };
 		37E4F97F16AE2E4B00D492E6 /* wizardHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */; };
 		37E58E0D176B07AC0094867E /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E58E0C176B07AC0094867E /* HeroComponent.m */; };
+		37E58E10176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E58E0F176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m */; };
 		37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */; };
 		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
 		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
@@ -745,6 +746,8 @@
 		37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wizardHead32@2x.png"; sourceTree = "<group>"; };
 		37E58E0B176B07AC0094867E /* HeroComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroComponent.h; sourceTree = "<group>"; };
 		37E58E0C176B07AC0094867E /* HeroComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroComponent.m; sourceTree = "<group>"; };
+		37E58E0E176B2E970094867E /* ReflectAttackWithThirtyAndDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackWithThirtyAndDouble.h; sourceTree = "<group>"; };
+		37E58E0F176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackWithThirtyAndDouble.m; sourceTree = "<group>"; };
 		37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
 		37E68C9F16F95B1700AB5FBD /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
@@ -1902,6 +1905,8 @@
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
 				9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */,
 				9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */,
+				37E58E0E176B2E970094867E /* ReflectAttackWithThirtyAndDouble.h */,
+				37E58E0F176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -3209,6 +3214,7 @@
 				37E1AE2B17673559003F1707 /* StealthComponent.m in Sources */,
 				37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */,
 				37E58E0D176B07AC0094867E /* HeroComponent.m in Sources */,
+				37E58E10176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

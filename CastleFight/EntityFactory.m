@@ -25,8 +25,6 @@
 #import "AIComponent.h"
 #import "AIStateWalk.h"
 #import "ActiveSkillComponent.h"
-#import "MeleeAttackSkill.h"
-#import "RangeAttackSkill.h"
 #import "CastleBloodSprite.h"
 #import "PlayerComponent.h"
 #import "AIStateEnemyPlayer.h"
@@ -34,23 +32,8 @@
 #import "CollisionComponent.h"
 #import "ProjectileComponent.h"
 #import "PassiveComponent.h"
-
-#import "PoisonMeleeAttackSkill.h"
-#import "ParalysisMeleeAttackSkill.h"
-#import "BigPillowBomb.h"
-#import "DeadBomb.h"
-#import "HealSkill.h"
-#import "SlowlyHealSkill.h"
-#import "KnockOutSkill.h"
-#import "BombPassiveSkill.h"
-#import "PeaceSkill.h"
-#import "AttackUpPassiveSkill.h"
-#import "SpeedUpSkill.h"
-#import "AuraComponent.h"
-#import "AttackUpAura.h"
-#import "ReflectAttackDamageSkill.h"
-#import "StealthSkill.h"
 #import "HeroComponent.h"
+#import "AuraComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -79,7 +62,10 @@
     NSString *name = [characterData objectForKey:@"name"];
     int cost = [[characterData objectForKey:@"cost"] intValue];
     NSDictionary *attributes = [characterData objectForKey:@"attributes"];
-
+    NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
+    NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
+    NSDictionary *auras = [characterData objectForKey:@"auras"];
+    
     CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
     
     // for test
@@ -126,43 +112,37 @@
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
-    
-    // test only for stateComponent
-    if ([cid intValue] == 1) {
-        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[DeadBomb alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[SpeedUpSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[StealthSkill alloc] init] forKey:@"attack"];
-        
-    } else {
-        [skillCom.skills setObject:[[MeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    for (NSString *key in activeSkills.allKeys) {
+        NSString *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
     }
-
-//    [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    if (skillCom.skills.count > 0) {
+        [entity addComponent:skillCom];
+    }
     
-    [entity addComponent:skillCom];
-    
-    if ([cid intValue] == 1) {
-        PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
-//        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
-//        [passiveCom.skills setObject:[[PeaceSkill alloc] init] forKey:@"PeaceSkill"];
-//        [passiveCom.skills setObject:[[AttackUpPassiveSkill alloc] init] forKey:@"AttackUpPassiveSkill"];
-//        [passiveCom.skills setObject:[[ReflectAttackDamageSkill alloc] initWithProbability:100 reflectPercent:200] forKey:@"ReflectAttackDamageSkill"];
+    PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
+    for (NSString *key in passiveSkills.allKeys) {
+        NSString *value = [passiveSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [passiveCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    if (passiveCom.skills.count > 0) {
         [entity addComponent:passiveCom];
-        
-        AuraComponent *auraComponent = [[AuraComponent alloc] init];
-//        [auraComponent.auras setObject:[[AttackUpAura alloc] init] forKey:@"AttackUpAura"];
+    }
+    
+    AuraComponent *auraComponent = [[AuraComponent alloc] init];
+    for (NSString *key in auras.allKeys) {
+        NSString *value = [auras valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [auraComponent.auras setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    if (auraComponent.auras.count > 0) {
         auraComponent.infinite = YES;
         [entity addComponent:auraComponent];
     }
     
+    //hero
     if ([cid intValue]/100 == 2) {
         HeroComponent *heroCom = [[HeroComponent alloc] initWithCid:cid Level:level Team:team];
         [entity addComponent:heroCom];
@@ -173,8 +153,6 @@
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
-    
-    // TODO: PassiveSkill
     
 //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     

@@ -55,7 +55,7 @@
         [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsDetectedForbidden"];
         [entity sendEvent:kEventIsDetectedForbidden Message:dic];
         NSNumber *result = [dic objectForKey:@"kEventIsDetectedForbidden"];
-        if (!result.boolValue) {
+        if (!result.boolValue || [sides containsObject:kRangeSideAlly]) {
             [detectedEntities addObject:entity];
         }
     }
