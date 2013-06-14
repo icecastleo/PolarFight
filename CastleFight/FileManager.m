@@ -257,6 +257,10 @@ static FileManager *sharedFileManager = nil;
     return self.userDataObject.characterInitDatas;
 }
 
+-(NSArray *)team {
+    return self.userDataObject.battleTeam;
+}
+
 //-(Character *)getPlayerHero {
 //    return [self.userDataObject getPlayerHero];
 //}

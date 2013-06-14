@@ -50,6 +50,7 @@
 #import "AttackUpAura.h"
 #import "ReflectAttackDamageSkill.h"
 #import "StealthSkill.h"
+#import "HeroComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -162,6 +163,11 @@
         [entity addComponent:auraComponent];
     }
     
+    if ([cid intValue]/100 == 2) {
+        HeroComponent *heroCom = [[HeroComponent alloc] initWithCid:cid Level:level Team:team];
+        [entity addComponent:heroCom];
+    }
+    
     // TODO: Set AI for different character
     [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     
@@ -175,8 +181,6 @@
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
     }
-    
-    NSLog(@"entityCount:: %d",[entity getAllComponents].count);
     
     return entity;
 }
@@ -247,6 +251,13 @@
             SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
             summon.player = player;
             [player.summonComponents addObject:summon];
+        }
+        
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].team;
+        for (CharacterInitData *data in battleTeamInitData) {
+            SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
+            summon.player = player;
+            [player.battleTeam addObject:summon];
         }
         
     } else if (team == 2) {

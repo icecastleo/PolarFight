@@ -22,5 +22,6 @@
 @property float delta;
 
 @property NSMutableArray *summonComponents;
+@property (nonatomic) NSMutableArray *battleTeam;
 
 @end

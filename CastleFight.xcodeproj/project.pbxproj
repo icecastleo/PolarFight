@@ -177,6 +177,7 @@
 		37E4F97D16AE2E4B00D492E6 /* TankHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96D16AE2E4B00D492E6 /* TankHead32@2x.png */; };
 		37E4F97E16AE2E4B00D492E6 /* wizardHead32.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96E16AE2E4B00D492E6 /* wizardHead32.png */; };
 		37E4F97F16AE2E4B00D492E6 /* wizardHead32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */; };
+		37E58E0D176B07AC0094867E /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E58E0C176B07AC0094867E /* HeroComponent.m */; };
 		37E68C9D16F9574C00AB5FBD /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */; };
 		37E68CA016F95B1700AB5FBD /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68C9F16F95B1700AB5FBD /* UserData.plist */; };
 		37E68CA216F95D3500AB5FBD /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E68CA116F95D3500AB5FBD /* BattleData.plist */; };
@@ -742,6 +743,8 @@
 		37E4F96D16AE2E4B00D492E6 /* TankHead32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TankHead32@2x.png"; sourceTree = "<group>"; };
 		37E4F96E16AE2E4B00D492E6 /* wizardHead32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wizardHead32.png; sourceTree = "<group>"; };
 		37E4F96F16AE2E4B00D492E6 /* wizardHead32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wizardHead32@2x.png"; sourceTree = "<group>"; };
+		37E58E0B176B07AC0094867E /* HeroComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroComponent.h; sourceTree = "<group>"; };
+		37E58E0C176B07AC0094867E /* HeroComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroComponent.m; sourceTree = "<group>"; };
 		37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
 		37E68C9F16F95B1700AB5FBD /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		37E68CA116F95D3500AB5FBD /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
@@ -2338,6 +2341,8 @@
 				37DF1AA417621BC3009042CB /* AuraComponent.m */,
 				37E1AE2917673558003F1707 /* StealthComponent.h */,
 				37E1AE2A17673558003F1707 /* StealthComponent.m */,
+				37E58E0B176B07AC0094867E /* HeroComponent.h */,
+				37E58E0C176B07AC0094867E /* HeroComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3203,6 +3208,7 @@
 				37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */,
 				37E1AE2B17673559003F1707 /* StealthComponent.m in Sources */,
 				37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */,
+				37E58E0D176B07AC0094867E /* HeroComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

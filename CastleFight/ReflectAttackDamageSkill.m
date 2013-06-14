@@ -35,11 +35,7 @@
         return;
     }
     
-    if (damage.source != kDamageSourceMelee) {
-        return;
-    }
-    
-    if (probability < (arc4random() % 100)) {
+    if (damage.source != kDamageSourceMelee && probability < (arc4random() % 100)) {
         return;
     }
     

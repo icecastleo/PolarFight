@@ -17,7 +17,7 @@
 
 #define kMoney @"money"
 #define kCastle @"castle"
-#define kHero @"hero"
+#define kHero @"heros"
 #define kCharacters @"characters"
 #define kItemArray @"items"
 #define kSoundsEffectVolume @"soundsEffectVolume"
@@ -26,11 +26,12 @@
 #define kBackgroundMucsicSwitch @"backgroundMusicSwitch"
 #define kAchievements @"achievements"
 #define kProperties @"properties"
+#define kTeam @"team"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
 }
-@property NSArray *playerHeroArray;
+//@property NSArray *playerHeroArray;
 @property NSArray *playerCastleArray;
 @property NSArray *items;
 
@@ -52,8 +53,9 @@
         
         //all character array keep CharacterDataObject.
         _characterInitDatas = [self convertArray:[plist objectForKey:kCharacters] className:[CharacterInitData class]];
-//        _playerHeroArray = [self convertArray:[plist objectForKey:kHero] className:[CharacterInitData class]];
+        _playerHeroArray = [self convertArray:[plist objectForKey:kHero] className:[CharacterInitData class]];
 //        _playerCastleArray = [self convertArray:[plist objectForKey:kCastle] className:[CharacterInitData class]];
+        _battleTeam = [self convertArray:[plist objectForKey:kTeam] className:[CharacterInitData class]];
         _achievements = [self convertArray:[plist objectForKey:kAchievements] className:[Achievement class]];
         _properties = [self convertArray:[plist objectForKey:kProperties] className:[Property class]];
         
@@ -126,8 +128,9 @@
 -(id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
         _characterInitDatas = [decoder decodeObjectForKey:kCharacters];
-//        _playerHeroArray = [decoder decodeObjectForKey:kHero];
+        _playerHeroArray = [decoder decodeObjectForKey:kHero];
 //        _playerCastleArray = [decoder decodeObjectForKey:kCastle];
+        _battleTeam = [decoder decodeObjectForKey:kTeam];
         moneyNumber = [decoder decodeObjectForKey:kMoney];
         _items = [decoder decodeObjectForKey:kItemArray];
         _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolume];
@@ -142,8 +145,9 @@
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_characterInitDatas forKey:kCharacters];
-//    [encoder encodeObject:_playerHeroArray forKey:kHero];
+    [encoder encodeObject:_playerHeroArray forKey:kHero];
 //    [encoder encodeObject:_playerCastleArray forKey:kCastle];
+    [encoder encodeObject:_battleTeam forKey:kTeam];
     [encoder encodeObject:moneyNumber forKey:kMoney];
     [encoder encodeObject:_items forKey:kItemArray];
     [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolume];
