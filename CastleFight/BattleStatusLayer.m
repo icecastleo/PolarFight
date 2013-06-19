@@ -115,7 +115,7 @@
     
     for (SummonComponent *summon in player.battleTeam) {
         // hero
-//        summon.summon = YES;
+        summon.summon = YES;
     }
     
     // FIXME: Delete after test

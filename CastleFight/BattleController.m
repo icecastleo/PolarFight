@@ -29,12 +29,17 @@
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
 
+#import "DrawPath.h"
+#import "SelectableComponent.h"
+#import "RenderComponent.h"
+
 @interface BattleController () {
     NSString *battleName;
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
 }
+@property (nonatomic) Entity *selectedEntity;
 @end
 
 @implementation BattleController
@@ -79,6 +84,9 @@ __weak static BattleController* currentInstance;
         [self scheduleUpdate];
         
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", prefix]];
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        [[CCDirector sharedDirector].view addGestureRecognizer:pan];
     }
     return self;
 }
@@ -167,6 +175,63 @@ __weak static BattleController* currentInstance;
 
 -(void)dealloc {
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+}
+
+#pragma mark UIPanGestureRecognizer
+
+- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+//    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
+    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    
+    touchLocation = ccpSub(touchLocation, mapLayer.position);
+    
+    //start
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
+        
+        for (Entity *entity in array) {
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            
+            if (CGRectContainsPoint(renderCom.sprite.boundingBox, touchLocation)) {
+                self.selectedEntity = entity;
+                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                [selectCom show];
+                break;
+            }else {
+                self.selectedEntity = nil;
+            }
+        }
+    }
+    
+    //move
+    if (!self.selectedEntity) {
+        recognizer.cancelsTouchesInView = NO;
+        return;
+    }else {
+        recognizer.cancelsTouchesInView = YES;
+        NSMutableArray *path = [NSMutableArray new];
+        
+        RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
+        [path addObject:NSStringFromCGPoint(renderCom.position)];
+        [path addObject:NSStringFromCGPoint(touchLocation)];
+        
+        [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
+        
+        DrawPath *line = [DrawPath node];
+        line.path = path;
+        [mapLayer addChild: line z:0 tag:kDrawPathTag];
+    }
+    
+    //end
+    if(recognizer.state == UIGestureRecognizerStateEnded) {
+        SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+        [selectCom unSelected];
+        [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
+        RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
+        [mapLayer moveEntity:self.selectedEntity byPosition:ccpSub(touchLocation, renderCom.position) boundaryLimit:YES];
+    }
 }
 
 @end

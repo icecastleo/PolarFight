@@ -35,6 +35,8 @@
 #import "HeroComponent.h"
 #import "AuraComponent.h"
 
+#import "SelectableComponent.h"
+
 @implementation EntityFactory {
     EntityManager * _entityManager;
 }
@@ -146,10 +148,15 @@
     if ([cid intValue]/100 == 2) {
         HeroComponent *heroCom = [[HeroComponent alloc] initWithCid:cid Level:level Team:team];
         [entity addComponent:heroCom];
+        
+        SelectableComponent *testSelec = [[SelectableComponent alloc] initWithCid:cid Level:level Team:team];
+        [entity addComponent:testSelec];
+    }else {
+        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
     
     // TODO: Set AI for different character
-    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
+//    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
