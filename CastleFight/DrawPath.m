@@ -22,12 +22,13 @@
     
     for(int i = 0; i < [self.path count]; i+=2)
     {
-        start = CGPointFromString([self.path objectAtIndex:i]);
-        end = CGPointFromString([self.path objectAtIndex:i+1]);
+        start = [(NSValue *)[self.path objectAtIndex:i] CGPointValue];
+        end = [(NSValue *)[self.path objectAtIndex:i+1] CGPointValue];
         
         ccDrawLine(start, end);
     }
     
+    //TODO: radius depends on range's radius
     ccDrawCircle(end, 50, 360, 30, NO);
 }
 

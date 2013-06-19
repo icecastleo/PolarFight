@@ -32,6 +32,7 @@
 #import "DrawPath.h"
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
+#import "MovePathComponent.h"
 
 @interface BattleController () {
     NSString *battleName;
@@ -204,18 +205,17 @@ __weak static BattleController* currentInstance;
             }
         }
     }
+    NSMutableArray *path = [NSMutableArray new];
+    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
+    [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
+    [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
     //move
     if (!self.selectedEntity) {
         recognizer.cancelsTouchesInView = NO;
         return;
     }else {
         recognizer.cancelsTouchesInView = YES;
-        NSMutableArray *path = [NSMutableArray new];
-        
-        RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
-        [path addObject:NSStringFromCGPoint(renderCom.position)];
-        [path addObject:NSStringFromCGPoint(touchLocation)];
         
         [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
         
@@ -229,8 +229,13 @@ __weak static BattleController* currentInstance;
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         [selectCom unSelected];
         [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
-        RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
-        [mapLayer moveEntity:self.selectedEntity byPosition:ccpSub(touchLocation, renderCom.position) boundaryLimit:YES];
+        
+        MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+        if (pathCom) {
+            [path removeObjectAtIndex:0];
+            pathCom.path = path;
+        }
+        
     }
 }
 

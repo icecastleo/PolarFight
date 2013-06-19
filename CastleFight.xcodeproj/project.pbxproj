@@ -118,6 +118,8 @@
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
 		37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D832A017130EF2001A1C3A /* GameCenterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */; };
+		37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D97D35177198F600A2A7D6 /* MovePathComponent.m */; };
 		37DA84A316FC961F007B3F72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84A516FC961F007B3F72 /* Localizable.strings */; };
 		37DA84C616FC99BB007B3F72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84C816FC99BB007B3F72 /* InfoPlist.strings */; };
 		37DB1F3116BBD08300C0368D /* AKCCRandomDelayTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DB1F2916BBD08300C0368D /* AKCCRandomDelayTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -636,6 +638,8 @@
 		37D8329E17130EF2001A1C3A /* AppSpecificValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSpecificValues.h; sourceTree = "<group>"; };
 		37D8329F17130EF2001A1C3A /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
 		37D832A017130EF2001A1C3A /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
+		37D97D34177198F600A2A7D6 /* MovePathComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePathComponent.h; sourceTree = "<group>"; };
+		37D97D35177198F600A2A7D6 /* MovePathComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovePathComponent.m; sourceTree = "<group>"; };
 		37DA84A416FC961F007B3F72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37DA84A616FC9681007B3F72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37DA84A716FC96AC007B3F72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2356,6 +2360,8 @@
 				37E58E0C176B07AC0094867E /* HeroComponent.m */,
 				37E0A308177057E900503100 /* SelectableComponent.h */,
 				37E0A309177057E900503100 /* SelectableComponent.m */,
+				37D97D34177198F600A2A7D6 /* MovePathComponent.h */,
+				37D97D35177198F600A2A7D6 /* MovePathComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3227,6 +3233,8 @@
 				37E58E10176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m in Sources */,
 				370C938A176F333900A6990D /* DrawPath.m in Sources */,
 				37E0A30A177057E900503100 /* SelectableComponent.m in Sources */,
+				37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */,
+				37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

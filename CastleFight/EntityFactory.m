@@ -24,6 +24,7 @@
 #import "CharacterBloodSprite.h"
 #import "AIComponent.h"
 #import "AIStateWalk.h"
+#import "AIStateHeroWalk.h"
 #import "ActiveSkillComponent.h"
 #import "CastleBloodSprite.h"
 #import "PlayerComponent.h"
@@ -36,6 +37,7 @@
 #import "AuraComponent.h"
 
 #import "SelectableComponent.h"
+#import "MovePathComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -151,6 +153,12 @@
         
         SelectableComponent *testSelec = [[SelectableComponent alloc] initWithCid:cid Level:level Team:team];
         [entity addComponent:testSelec];
+
+        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
+        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
+        [entity addComponent:pathCom];
+        
+        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
     }else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
