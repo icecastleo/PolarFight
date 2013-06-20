@@ -35,7 +35,7 @@
 
 - (void) setContentSize:(CGSize)s
 {
-	contentSize_ = s;
+	_contentSize = s;
 	backgroundSprite.contentSize = s;
 	joystick.joystickRadius = s.width/2;
 }

@@ -10,8 +10,6 @@
 @implementation ColoredCircleSprite
 
 @synthesize radius=radius_;
-	// Opacity and RGB color protocol
-@synthesize opacity=opacity_, color=color_;
 @synthesize blendFunc=blendFunc_;
 
 + (id) circleWithColor: (ccColor4B)color radius:(GLfloat)r
@@ -24,10 +22,8 @@
 	if( (self=[self init]) ) {
 		self.radius	= r;
 		
-		color_.r = color.r;
-		color_.g = color.g;
-		color_.b = color.b;
-		opacity_ = color.a;
+        self.color = ccc3(color.r, color.g, color.b);
+		self.opacity = color.a;
 	}
 	return self;
 }
@@ -49,10 +45,8 @@
         // default blend function
 		blendFunc_ = (ccBlendFunc) { CC_BLEND_SRC, CC_BLEND_DST };
 		
-		color_.r =
-		color_.g =
-		color_.b = 0U;
-		opacity_ = 255U;
+		self.color = ccc3(0U, 0U, 0U);
+		self.opacity = 255U;
 		
 		circleVertices_ = (CGPoint*) malloc(sizeof(CGPoint)*(numberOfSegments));
 		if(!circleVertices_){
@@ -75,8 +69,8 @@
 	for(int i=0; i<numberOfSegments; i++)
 	{
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		float j = radius_ * cosf(theta) + position_.x;
-		float k = radius_ * sinf(theta) + position_.y;
+		float j = radius_ * cosf(theta) + _position.x;
+		float k = radius_ * sinf(theta) + _position.y;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 		float j = radius_ * cosf(theta) + position_.x;
 		float k = radius_ * sinf(theta) + position_.y;
@@ -102,21 +96,7 @@
 
 - (void)draw
 {
-	ccDrawSolidPoly(circleVertices_, numberOfSegments, ccc4f(color_.r/255.0f, color_.g/255.0f, color_.b/255.0f, opacity_/255.0f));
-}
-
-#pragma mark Protocols
-	// Color Protocol
-
--(void) setColor:(ccColor3B)color
-{
-	color_ = color;
-}
-
--(void) setOpacity: (GLubyte) o
-{
-	opacity_ = o;
-	[self updateColor];
+	ccDrawSolidPoly(circleVertices_, numberOfSegments, ccc4f(self.color.r/255.0f, self.color.g/255.0f, self.color.b/255.0f, self.opacity/255.0f));
 }
 
 #pragma mark Touch
@@ -130,7 +110,7 @@
 
 - (NSString*) description
 {
-	return [NSString stringWithFormat:@"<%@ = %8@ | Tag = %i | Color = %02X%02X%02X%02X | Radius = %1.2f>", [self class], self, tag_, color_.r, color_.g, color_.b, opacity_, radius_];
+	return [NSString stringWithFormat:@"<%@ = %8@ | Tag = %i | Color = %02X%02X%02X%02X | Radius = %1.2f>", [self class], self, _tag, self.color.r, self.color.g, self.color.b, self.opacity, radius_];
 }
 
 @end

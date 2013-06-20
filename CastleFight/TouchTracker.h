@@ -11,7 +11,7 @@
 
 @protocol TouchTrackerDelegate;
 
-@interface TouchTracker : NSObject <CCTargetedTouchDelegate> {
+@interface TouchTracker : NSObject <CCTouchOneByOneDelegate> {
     id<TouchTrackerDelegate> delegate;
     CGRect rect;
     CGPoint point;

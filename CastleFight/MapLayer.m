@@ -37,7 +37,7 @@ const static int pathHeight = 70;
         _cameraControl = [[MapCamera alloc] initWithMapLayer:self];
         [self addChild:_cameraControl];
         
-        self.isTouchEnabled = YES;
+        [self setTouchEnabled:YES];
         
 //        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
 //        longPress.minimumPressDuration = 0.2f;

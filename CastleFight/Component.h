@@ -7,12 +7,12 @@
 //
 
 #import "Entity.h"
+#import "EntityEventDelegate.h"
 
-@interface Component : NSObject
+@interface Component : NSObject<EntityEventDelegate>
 
 @property Entity *entity;
 
 -(void)sendEvent:(EventType)type Message:(id)message;
--(void)receiveEvent:(EventType)type Message:(id)message;
 
 @end

@@ -43,7 +43,7 @@
         scrollView.tag = noDisableVerticalScrollTag;
         
         CCScissorLayer *layer = [[CCScissorLayer alloc] initWithRect:rect];
-        layer.isTouchEnabled = YES;
+        [layer setTouchEnabled:YES];
         [layer addChild:scrollingNode];
         [self addChild:layer];
         

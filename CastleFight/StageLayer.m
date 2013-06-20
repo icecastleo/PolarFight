@@ -10,7 +10,6 @@
 #import "StageMenuItem.h"
 #import "FileManager.h"
 #import "AchievementManager.h"
-#import "CCMenu+RowColumnExtend.h"
 
 @implementation StageLayer
 

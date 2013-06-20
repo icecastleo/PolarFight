@@ -8,7 +8,6 @@
 
 #import "MarketLayer.h"
 #import "InAppPurchaseManager.h"
-#import "CCMenu+RowColumnExtend.h"
 
 @implementation MarketLayer
 

@@ -43,12 +43,12 @@
 	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
 
 	CCMenuItem* item;
-	CCARRAY_FOREACH(children_, item){
+	CCARRAY_FOREACH(_children, item){
 		// ignore invisible and disabled items: issue #779, #866
 		if ( [item visible] && [item isEnabled] ) {
             
 			CGPoint local = [item convertToNodeSpace:touchLocation];
-			CGRect r = [item rect];
+			CGRect r = [item activeArea];
 			r.origin = CGPointZero;
             
 			if( CGRectContainsPoint( r, local ) )
@@ -116,9 +116,9 @@
     _adjustPosition = adjustPosition;
     
     if (adjustPosition) {
-        position_ = ccp(position_.x + _rect.origin.x, position_.y - uiY);
+        _position = ccp(_position.x + _rect.origin.x, _position.y - uiY);
     } else {
-        position_ = ccp(position_.x - _rect.origin.x, position_.y + uiY);
+        _position = ccp(_position.x - _rect.origin.x, _position.y + uiY);
     }
 }
 

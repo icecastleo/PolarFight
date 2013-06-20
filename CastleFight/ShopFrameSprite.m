@@ -103,7 +103,7 @@
     
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
-    glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+    ccGLBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
     
     CCSprite *noise = [CCSprite spriteWithFile:@"noise.png" rect:CGRectMake(0, 0, size.width, size.height)];
@@ -131,10 +131,11 @@
 //    colors[nVertices++] = (ccColor4F){0, 0, 0, 0};
 //    
 //    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-//	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
-//    glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+//	  glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
+//    ccGLBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
 //    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
-//    CC_INCREMENT_GL_DRAWS(1);
+    
+    CC_INCREMENT_GL_DRAWS(1);
     
     // Call CCRenderTexture:end
     [rt end];

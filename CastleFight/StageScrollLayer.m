@@ -22,20 +22,24 @@
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
-        NSMutableArray *backgrounds = [[NSMutableArray alloc] init];
+//        NSMutableArray *backgrounds = [[NSMutableArray alloc] init];
+//        
+//        for (int i = 1; i <= 5; i++) {
+//            CCLayer *layer = [[CCLayer alloc] init];
+//            CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"bg/selectstage/bg_selectstage_map_%02d.png", i]];
+//            background.position = ccp(winSize.width / 2, winSize.height / 2);
+//            [layer addChild:background];
+//            [backgrounds addObject:layer];
+//        }
+//        
+//        backgroundLayer = [[CCScrollLayer alloc] initWithLayers:backgrounds widthOffset:0];
+//        backgroundLayer.showPagesIndicator = NO;
+//        backgroundLayer.isTouchEnabled = NO;
+//        [self addChild:backgroundLayer];
         
-        for (int i = 1; i <= 5; i++) {
-            CCLayer *layer = [[CCLayer alloc] init];
-            CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"bg/selectstage/bg_selectstage_map_%02d.png", i]];
-            background.position = ccp(winSize.width / 2, winSize.height / 2);
-            [layer addChild:background];
-            [backgrounds addObject:layer];
-        }
-        
-        backgroundLayer = [[CCScrollLayer alloc] initWithLayers:backgrounds widthOffset:0];
-        backgroundLayer.showPagesIndicator = NO;
-        backgroundLayer.isTouchEnabled = NO;
-        [self addChild:backgroundLayer];
+        CCSprite *background = [CCSprite spriteWithFile:@"bg/selectstage/bg_selectstage_map_01.png"];
+        background.position = ccp(winSize.width / 2, winSize.height / 2);
+        [self addChild:background];
         
         CCLayerColor *color = [[CCLayerColor alloc] initWithColor:ccc4(50, 50, 50, 150)];
         [self addChild:color];
@@ -54,7 +58,7 @@
 }
 
 -(void)scrollLayer:(CCScrollLayer *)sender scrollToPageNumber:(int)page {
-    [backgroundLayer moveToPage:page];
+//    [backgroundLayer moveToPage:page];
 }
 
 @end

@@ -1,9 +1,7 @@
 #import "cocos2d.h"
 
-@interface ColoredSquareSprite : CCNode <CCRGBAProtocol, CCBlendProtocol> {
+@interface ColoredSquareSprite : CCNodeRGBA <CCBlendProtocol> {
 	CGSize		size_;
-	GLubyte		opacity_;
-	ccColor3B	color_;
 	
 	CGPoint		*squareVertices_;
 	
@@ -11,12 +9,6 @@
 }
 
 @property (nonatomic,readwrite) CGSize size;
-
-/** Opacity: conforms to CCRGBAProtocol protocol */
-@property (nonatomic,readonly) GLubyte opacity;
-
-/** Opacity: conforms to CCRGBAProtocol protocol */
-@property (nonatomic,readonly) ccColor3B color;
 
 /** BlendFunction. Conforms to CCBlendProtocol protocol */
 @property (nonatomic,readwrite) ccBlendFunc blendFunc;
