@@ -114,6 +114,8 @@
 		3727AEE7169D6ACA00160620 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3727AEDF169D6ACA00160620 /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815016F7550800F1F7EE /* BattleDataObject.m */; };
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
+		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
+		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
@@ -626,6 +628,8 @@
 		3730815016F7550800F1F7EE /* BattleDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleDataObject.m; sourceTree = "<group>"; };
 		3730815216F7578100F1F7EE /* UserDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataObject.h; sourceTree = "<group>"; };
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
+		3741400A1772F49F00E6365A /* AIStateHeroAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroAttack.h; sourceTree = "<group>"; };
+		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
@@ -1412,6 +1416,8 @@
 				2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */,
 				2D07E0C71702E2E80028C492 /* AIStateHeroIdle.h */,
 				2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */,
+				3741400A1772F49F00E6365A /* AIStateHeroAttack.h */,
+				3741400B1772F49F00E6365A /* AIStateHeroAttack.m */,
 			);
 			name = AIState;
 			sourceTree = "<group>";
@@ -1526,6 +1532,29 @@
 				37E68CA116F95D3500AB5FBD /* BattleData.plist */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		374140081772EBF200E6365A /* StateComponents */ = {
+			isa = PBXGroup;
+			children = (
+				37DF3B40174F4ECE00CA7824 /* StateComponent.h */,
+				37DF3B41174F4ECE00CA7824 /* StateComponent.m */,
+				37E42C34174E2B260010B9E9 /* PoisonComponent.h */,
+				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
+				37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */,
+				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
+				37E798BA1754920600E0435E /* KnockOutComponent.h */,
+				37E798BB1754920600E0435E /* KnockOutComponent.m */,
+				37DF1A991761E54C009042CB /* AttackBonusMultiplierComponent.h */,
+				37DF1A9A1761E54C009042CB /* AttackBonusMultiplierComponent.m */,
+				37DF1A9C1761EA33009042CB /* SpeedBonusAddComponent.h */,
+				37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */,
+				37DF1AA317621BC1009042CB /* AuraComponent.h */,
+				37DF1AA417621BC3009042CB /* AuraComponent.m */,
+				37E1AE2917673558003F1707 /* StealthComponent.h */,
+				37E1AE2A17673558003F1707 /* StealthComponent.m */,
+			);
+			name = StateComponents;
 			sourceTree = "<group>";
 		};
 		37D8329C17130ED9001A1C3A /* GameCenter */ = {
@@ -2340,22 +2369,7 @@
 				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
 				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
 				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
-				37DF3B40174F4ECE00CA7824 /* StateComponent.h */,
-				37DF3B41174F4ECE00CA7824 /* StateComponent.m */,
-				37E42C34174E2B260010B9E9 /* PoisonComponent.h */,
-				37E42C35174E2B270010B9E9 /* PoisonComponent.m */,
-				37DF3B4C174F739E00CA7824 /* ParalysisComponent.h */,
-				37DF3B4D174F739F00CA7824 /* ParalysisComponent.m */,
-				37E798BA1754920600E0435E /* KnockOutComponent.h */,
-				37E798BB1754920600E0435E /* KnockOutComponent.m */,
-				37DF1A991761E54C009042CB /* AttackBonusMultiplierComponent.h */,
-				37DF1A9A1761E54C009042CB /* AttackBonusMultiplierComponent.m */,
-				37DF1A9C1761EA33009042CB /* SpeedBonusAddComponent.h */,
-				37DF1A9D1761EA33009042CB /* SpeedBonusAddComponent.m */,
-				37DF1AA317621BC1009042CB /* AuraComponent.h */,
-				37DF1AA417621BC3009042CB /* AuraComponent.m */,
-				37E1AE2917673558003F1707 /* StealthComponent.h */,
-				37E1AE2A17673558003F1707 /* StealthComponent.m */,
+				374140081772EBF200E6365A /* StateComponents */,
 				37E58E0B176B07AC0094867E /* HeroComponent.h */,
 				37E58E0C176B07AC0094867E /* HeroComponent.m */,
 				37E0A308177057E900503100 /* SelectableComponent.h */,
@@ -3235,6 +3249,8 @@
 				37E0A30A177057E900503100 /* SelectableComponent.m in Sources */,
 				37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */,
 				37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */,
+				374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */,
+				3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

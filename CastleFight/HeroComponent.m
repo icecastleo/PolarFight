@@ -10,6 +10,9 @@
 #import "TeamComponent.h"
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
+#import "RenderComponent.h"
+#import "DirectionComponent.h"
+#import "DamageEvent.h"
 
 @interface HeroComponent()
 @property (nonatomic, readonly) NSString *cid;
@@ -31,6 +34,13 @@
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == KEventDead){
         [self performSelector:@selector(reSummon) withObject:nil afterDelay:5*self.level];
+    } else if (type == kEventReceiveDamageEvent) {
+        DamageEvent *event = (DamageEvent *)message;
+        RenderComponent *renderComAttacker = (RenderComponent *)[event.sender getComponentOfClass:[RenderComponent class]];
+        RenderComponent *renderComSelf = (RenderComponent *)[event.receiver getComponentOfClass:[RenderComponent class]];
+        DirectionComponent *directionComSelf = (DirectionComponent *)[event.receiver getComponentOfClass:[DirectionComponent class]];
+        CGPoint direction = ccpNormalize(ccpSub(renderComAttacker.sprite.position, renderComSelf.sprite.position));
+        directionComSelf.velocity = direction;
     }
 }
 

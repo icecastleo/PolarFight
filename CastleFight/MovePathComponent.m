@@ -17,6 +17,12 @@
     return self;
 }
 
+-(void)receiveEvent:(EventType)type Message:(id)message {
+    if (type == kEventReceiveDamage){
+        [self.path removeAllObjects];
+    }
+}
+
 -(CGPoint)nextPositionFrom:(CGPoint)currentPosition {
     
     int i = 0;

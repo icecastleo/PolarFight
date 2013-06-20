@@ -33,6 +33,12 @@
     return self;
 }
 
+-(void)receiveEvent:(EventType)type Message:(id)message {
+    if (type == KEventDead){
+        [self unSelected];
+    }
+}
+
 /*// test only
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (self.testTimes < 100 && !self.selected) {
@@ -47,7 +53,6 @@
 }
 //*/
 -(void)show {
-    NSLog(@"show");
     if (self.showed) {
         [self unSelected];
     }
@@ -59,13 +64,13 @@
     [sprite setTextureRect:render.sprite.textureRect];
     
     [sprite removeChildByTag:kStrokeTag cleanup:YES];
-//
+    
+    //TODO: change to use image instead of CCRenderTexture.
     CCRenderTexture * stroke  = [self createStroke:sprite size:3 color:ccYELLOW];
     [render.sprite addChild:stroke z:-1 tag:kStrokeTag];
 }
 
 -(void)unSelected {
-    NSLog(@"unSelected");
     self.selected = NO;
     self.showed = NO;
     RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];

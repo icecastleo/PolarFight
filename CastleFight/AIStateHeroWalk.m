@@ -7,11 +7,9 @@
 //
 
 #import "AIStateHeroWalk.h"
-//#import "HeroAI.h"
-//#import "AIStateHeroIdle.h"
-//#import "MapCamera.h"
+#import "AIStateHeroIdle.h"
+#import "AIStateHeroAttack.h"
 
-#import "AIStateAttack.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
 #import "TeamComponent.h"
@@ -22,11 +20,7 @@
 
 @implementation AIStateHeroWalk
 - (NSString *)name {
-    return @"HeroWalking";
-}
-
-- (void)enter:(Entity *)entity {
-    
+    return @"Hero Walking";
 }
 
 - (void)updateEntity:(Entity *)entity {
@@ -50,19 +44,16 @@
     }
     
     // TODO: Other condition to use skill
-    if ([skill checkRange]) {
-        [self changeState:[[AIStateAttack alloc] init] forEntity:entity];
+    if (pathCom.path.count == 0 && [skill checkRange]) {
+        [self changeState:[[AIStateHeroAttack alloc] init] forEntity:entity];
         return;
     }
     
     //TODO: change To idle
-    if (CGPointEqualToPoint(diff, ccp(0,0))) {
-        [self exit:entity];
+    if (pathCom.path.count == 0) {
+        [self changeState:[[AIStateHeroIdle alloc] init] forEntity:entity];
     }
-    
-    return;
 }
-
 
 - (void)exit:(Entity *)entity {
     MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];

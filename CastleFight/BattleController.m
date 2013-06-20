@@ -205,11 +205,13 @@ __weak static BattleController* currentInstance;
             }
         }
     }
+    
     NSMutableArray *path = [NSMutableArray new];
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
-    [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
+    [path addObject:[NSValue valueWithCGPoint:(renderCom.sprite.position)]];
     [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+    
     //move
     if (!self.selectedEntity) {
         recognizer.cancelsTouchesInView = NO;
@@ -233,9 +235,10 @@ __weak static BattleController* currentInstance;
         MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
         if (pathCom) {
             [path removeObjectAtIndex:0];
-            pathCom.path = path;
+            [pathCom.path removeAllObjects];
+            [pathCom.path addObjectsFromArray:path];
         }
-        
+        self.selectedEntity = nil;
     }
 }
 
