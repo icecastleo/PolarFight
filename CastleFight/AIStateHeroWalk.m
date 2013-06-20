@@ -28,7 +28,7 @@
     MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfClass:[MovePathComponent class]];
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    CGPoint currentPosition = renderCom.sprite.position;
+    CGPoint currentPosition = renderCom.position;
     CGPoint nextPosition = [pathCom nextPositionFrom:currentPosition];
     CGPoint diff = ccpSub(nextPosition, currentPosition);
     
@@ -52,6 +52,7 @@
     //TODO: change To idle
     if (pathCom.path.count == 0) {
         [self changeState:[[AIStateHeroIdle alloc] init] forEntity:entity];
+        return;
     }
 }
 

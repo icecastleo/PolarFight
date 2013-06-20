@@ -26,6 +26,7 @@
     MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfClass:[MovePathComponent class]];
     if (pathCom.path.count > 0) {
         [self changeState:[[AIStateHeroWalk alloc] init] forEntity:entity];
+        return;
     }
     
     ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];

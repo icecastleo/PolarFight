@@ -93,7 +93,7 @@
     //*
     for (int i = 0; i < rawEntities.count; i++) {
         Entity *entity = rawEntities[i];
-        NSMutableDictionary *dic = [NSMutableDictionary new];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsDetectedForbidden"];
         [entity sendEvent:kEventIsDetectedForbidden Message:dic];
         NSNumber *result = [dic objectForKey:@"kEventIsDetectedForbidden"];

@@ -6,8 +6,8 @@
 //
 //
 
-#import "MeleeAttackSkill.h"
+#import "ActiveSkill.h"
 
-@interface BigPillowBomb : MeleeAttackSkill
+@interface BigPillowBomb : ActiveSkill
 
 @end

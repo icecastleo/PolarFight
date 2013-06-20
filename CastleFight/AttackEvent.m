@@ -25,7 +25,7 @@
         _source = source;
         bonus = 0;
         multiplier = 1;
-        _sideEffects = [NSMutableArray  new];
+        _sideEffects = [[NSMutableArray  alloc] init];
         _customDamage = 0;
         _isIgnoreDefense = NO;
         _customDamage = NO;

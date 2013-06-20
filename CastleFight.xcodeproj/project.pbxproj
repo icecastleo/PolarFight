@@ -2764,6 +2764,8 @@
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
 				37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */,
 				37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */,
+				37E1AE2C17676498003F1707 /* StealthSkill.h */,
+				37E1AE2D1767649A003F1707 /* StealthSkill.m */,
 				9B93798616B1655800F1A05A /* BombSkill.h */,
 				9B93798716B1655800F1A05A /* BombSkill.m */,
 				9BC514B616FB60F700ABE811 /* HeroSkill.h */,
@@ -2776,8 +2778,6 @@
 				9B2040C7169F0C84000EF31F /* TankSkill.m */,
 				9BE01A511696DA1000B9C427 /* WizardSkill.h */,
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
-				37E1AE2C17676498003F1707 /* StealthSkill.h */,
-				37E1AE2D1767649A003F1707 /* StealthSkill.m */,
 			);
 			name = ActiveSkill;
 			sourceTree = "<group>";

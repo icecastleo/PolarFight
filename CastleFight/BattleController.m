@@ -206,10 +206,10 @@ __weak static BattleController* currentInstance;
         }
     }
     
-    NSMutableArray *path = [NSMutableArray new];
+    NSMutableArray *path = [[NSMutableArray alloc] init];
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
-    [path addObject:[NSValue valueWithCGPoint:(renderCom.sprite.position)]];
+    [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
     [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
     
     //move
