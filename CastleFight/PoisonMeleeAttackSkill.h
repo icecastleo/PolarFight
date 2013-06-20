@@ -6,8 +6,8 @@
 //
 //
 
-#import "MeleeAttackSkill.h"
+#import "ActiveSkill.h"
 
-@interface PoisonMeleeAttackSkill : MeleeAttackSkill
+@interface PoisonMeleeAttackSkill : ActiveSkill
 
 @end

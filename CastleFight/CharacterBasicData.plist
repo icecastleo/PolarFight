@@ -60,6 +60,28 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>PoisonMeleeAttackSkill</string>
+		</dict>
+		<key>passiveSkills</key>
+		<dict>
+			<key>ReflectAttackWithThirtyAndDouble</key>
+			<string>ReflectAttackWithThirtyAndDouble</string>
+		</dict>
+		<key>soundEffects</key>
+		<dict>
+			<key>PoisonMeleeAttackSkill</key>
+			<string>sample.caf</string>
+		</dict>
+		<key>animations</key>
+		<dict/>
+		<key>auras</key>
+		<dict>
+			<key>AttackUpAura</key>
+			<string>AttackUpAura</string>
+		</dict>
 	</dict>
 	<key>002</key>
 	<dict>
@@ -118,6 +140,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>003</key>
@@ -178,6 +205,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>004</key>
 	<dict>
@@ -236,6 +268,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>005</key>
@@ -296,6 +333,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>006</key>
 	<dict>
@@ -354,6 +396,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>007</key>
@@ -416,6 +463,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>008</key>
 	<dict>
@@ -476,6 +528,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>009</key>
@@ -538,6 +595,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>101</key>
 	<dict>
@@ -598,6 +660,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>102</key>
@@ -660,6 +727,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>103</key>
 	<dict>
@@ -720,6 +792,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>104</key>
@@ -782,6 +859,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>105</key>
 	<dict>
@@ -842,6 +924,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>106</key>
@@ -904,6 +991,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>107</key>
 	<dict>
@@ -964,6 +1056,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>108</key>
@@ -1026,6 +1123,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>109</key>
 	<dict>
@@ -1086,6 +1188,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>110</key>
@@ -1148,6 +1255,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>201</key>
 	<dict>
@@ -1208,6 +1320,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>202</key>
@@ -1270,6 +1387,11 @@
 				<string>11</string>
 			</dict>
 		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
 	</dict>
 	<key>203</key>
 	<dict>
@@ -1330,6 +1452,11 @@
 				<key>c</key>
 				<string>11</string>
 			</dict>
+		</dict>
+		<key>activeSkills</key>
+		<dict>
+			<key>attack</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>204</key>

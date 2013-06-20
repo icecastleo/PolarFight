@@ -14,7 +14,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,kRangeTypeSimpleXY,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@10,kRangeKeyTargetLimit,nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideAlly],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@10,kRangeKeyTargetLimit,nil];
         
         range = [Range rangeWithParameters:dictionary];
         self.cooldown = 1;
@@ -30,9 +30,12 @@
             continue;
         }
         AttackerComponent *receiver = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
-        component = [[AttackBonusMultiplierComponent alloc] initWithAttribute:receiver.attack andBonus:10];
+        component = [[AttackBonusMultiplierComponent alloc] initWithAttribute:receiver.attack andBonus:2];
         component.cdTime = 0;
         component.totalTime = 1;
+        if (entity.eid == self.owner.eid) {
+            component.totalTime = INT_MAX;
+        }
         [entity addComponent:component];
     }
 }

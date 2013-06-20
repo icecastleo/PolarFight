@@ -23,6 +23,18 @@
     return self;
 }
 
+-(void)activeEffect {
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    
+    for (Entity *entity in [range getEffectEntities]) {
+        AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:entity];
+        //        event.knockOutPower = 25;
+        //        event.knouckOutCollision = YES;
+        [self sideEffectWithEvent:event Entity:entity];
+        [attack.attackEventQueue addObject:event];
+    }
+}
+
 -(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
     
     DefenderComponent *defender = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];

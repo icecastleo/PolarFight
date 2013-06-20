@@ -6,8 +6,8 @@
 //
 //
 
-#import "RangeAttackSkill.h"
+#import "ActiveSkill.h"
 
-@interface NoiseSkill : RangeAttackSkill
+@interface NoiseSkill : ActiveSkill
 
 @end

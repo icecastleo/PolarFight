@@ -19,7 +19,7 @@
     for (Entity * entity in entities) {
         ActiveSkillComponent * skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
         
-        NSMutableDictionary *testDic = [NSMutableDictionary new];
+        NSMutableDictionary *testDic = [[NSMutableDictionary alloc] init];
         [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsActiveSkillForbidden"];
         [entity sendEvent:kEventIsActiveSkillForbidden Message:testDic];
         NSNumber *result = [testDic objectForKey:@"kEventIsActiveSkillForbidden"];

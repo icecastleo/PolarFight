@@ -30,6 +30,8 @@
         // Summon entity
         NSMutableArray *summonComponents = player.summonComponents;
         
+        [summonComponents addObjectsFromArray:player.battleTeam];
+        
         for (SummonComponent *summon in summonComponents) {
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;

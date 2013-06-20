@@ -58,7 +58,7 @@ static FileManager *sharedFileManager = nil;
 -(id)init {
 	if((self=[super init])) {
         _userDataObject =  [self loadUserDataObject];
-        //        _animationDictionary = [self loadAnimation]; //do not use temporary
+//        _animationDictionary = [self loadAnimation]; //do not use temporary
         _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
         _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
         // game center
@@ -255,6 +255,10 @@ static FileManager *sharedFileManager = nil;
 
 -(NSArray *)characterInitDatas {
     return self.userDataObject.characterInitDatas;
+}
+
+-(NSArray *)team {
+    return self.userDataObject.battleTeam;
 }
 
 //-(Character *)getPlayerHero {

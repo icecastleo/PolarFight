@@ -42,7 +42,7 @@
         if (!move || !render)
             continue;
         
-        NSMutableDictionary *dic = [NSMutableDictionary new];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
         [entity sendEvent:kEventIsMoveForbidden Message:dic];
         
