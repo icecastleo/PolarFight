@@ -8,7 +8,6 @@
 
 
 #import "ActiveSkill.h"
-#import "RangeShooterNew.h"
 
 @interface RangeAttackSkill : ActiveSkill
 
