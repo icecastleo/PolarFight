@@ -2,7 +2,7 @@
 //  PassiveComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/5/31.
+//  Created by  浩翔 on 13/5/31.
 //
 //
 
@@ -27,8 +27,7 @@
 
 -(void)receiveEvent:(EventType)type Message:(id)message {
     for (PassiveSkill *passiveSkill in self.skills.allValues) {
-        [passiveSkill checkEvent:type];
-        [passiveSkill activeEffect];
+        [passiveSkill checkEvent:type Message:message];
     }
 }
 

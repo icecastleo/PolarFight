@@ -42,13 +42,19 @@
         if (!move || !render)
             continue;
         
-        NSMutableDictionary *testDic = [NSMutableDictionary new];
-        [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
-        [entity sendEvent:kEventIsMoveForbidden Message:testDic];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsMoveForbidden"];
+        [entity sendEvent:kEventIsMoveForbidden Message:dic];
         
-        NSNumber *result = [testDic objectForKey:@"kEventIsMoveForbidden"];
+        NSNumber *result = [dic objectForKey:@"kEventIsMoveForbidden"];
         
         if (result.boolValue == YES) {
+            AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
+            
+            if (animation && animation.state == kAnimationStateMove) {
+                [render.sprite stopActionByTag:kAnimationActionTag];
+                animation.state = kAnimationStateNone;
+            }
             continue;
         }
         
@@ -61,7 +67,7 @@
         // FIXME: user hero == yes, other == no;
         [_map moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
         
-        // Run dead animation
+        // Run animation
         AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
        
         if (!animation) {

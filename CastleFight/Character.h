@@ -15,7 +15,7 @@
 #import "DamageEvent.h"
 #import "CharacterEventDelegate.h"
 #import "ActiveSkill.h"
-#import "Aura.h"
+#import "AttackUpAura.h"
 #import "SkillKit.h"
 #import "BaseAI.h"
 @class BattleController;

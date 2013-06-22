@@ -23,7 +23,7 @@
 -(void)active;
 -(void)activeEffect;
 
--(void)checkEvent:(EventType)eventType;
+-(void)checkEvent:(EventType)eventType  Message:(id)message;
 -(BOOL)checkRange;
 
 @end

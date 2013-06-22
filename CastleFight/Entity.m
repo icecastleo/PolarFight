@@ -48,52 +48,10 @@
     NSArray *components = [self getAllComponents];
     
     for (Component *component in components) {
-        [component receiveEvent:type Message:message];
+        if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
+            [component receiveEvent:type Message:message];
+        }
     }
 }
-
-//- (Entity *)closestEntityOnTeam:(int)team {
-//
-//    RenderComponent * ourRender = self.render;
-//    if (!ourRender) return nil;
-//    
-//    Entity * closestEntity = nil;
-//    float closestEntityDistance = -1;
-//    
-//    NSArray * allEntities = [self getAllEntitiesOnTeam:team posessingComponentOfClass:[RenderComponent class]];
-//    for (Entity * entity in allEntities) {
-//        RenderComponent * otherRender = entity.render;
-//        float distance = ccpDistance(ourRender.node.position, otherRender.node.position);
-//        if (distance < closestEntityDistance || closestEntityDistance == -1) {
-//            closestEntity = entity;
-//            closestEntityDistance = distance;
-//        }
-//    }
-//    
-//    return closestEntity;
-//}
-//
-//- (Entity *)playerForTeam:(int)team {
-//    NSArray * players = [self getAllEntitiesOnTeam:team posessingComponentOfClass:[PlayerComponent class]];
-//    return players[0];
-//}
-//
-//- (NSArray *)entitiesWithinRange:(float)range onTeam:(int)team {
-//    
-//    RenderComponent * ourRender = self.render;
-//    if (!ourRender) return nil;
-//    
-//    NSArray * allEntities = [self getAllEntitiesOnTeam:team posessingComponentOfClass:[RenderComponent class]];
-//    NSMutableArray * retval = [NSMutableArray arrayWithCapacity:allEntities.count];
-//    for (Entity * entity in allEntities) {
-//        RenderComponent * otherRender = entity.render;
-//        float distance = ccpDistance(ourRender.node.position, otherRender.node.position);
-//        if (distance < range) {
-//            [retval addObject:entity];
-//        }
-//    }
-//    
-//    return retval;
-//}
 
 @end

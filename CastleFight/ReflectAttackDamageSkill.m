@@ -7,7 +7,9 @@
 //
 
 #import "ReflectAttackDamageSkill.h"
-#import "Character.h"
+#import "DefenderComponent.h"
+#import "DamageEvent.h"
+#import "Damage.h"
 
 @implementation ReflectAttackDamageSkill
 
@@ -19,18 +21,34 @@
     return self;
 }
 
--(void)character:(Character *)sender didReceiveDamage:(Damage *)damage {
-    if (damage.source != kDamageSourceMelee) {
+
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
+    
+    if (eventType != kEventReceiveDamage) {
         return;
     }
     
-    int random = arc4random_uniform(100) + 1;
-    
-    if (probability >= random) {
-        DamageEvent *event = [[DamageEvent alloc] initWithBaseDamage:damage.value * percent / 100 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill damager:sender];
-        
-        [damage.damager receiveDamageEvent:event];
+    Damage *damage;
+    if ([message isKindOfClass:[Damage class]]) {
+        damage = (Damage*)message;
+    }else {
+        return;
     }
+    
+    if (damage.source != kDamageSourceMelee || probability <= (arc4random() % 100)) {
+        return;
+    }
+    
+    [self activeEffect:damage];
+}
+
+-(void)activeEffect:(Damage *)damage {
+    
+    DamageEvent *counterEvent = [[DamageEvent alloc] initWithSender:self.owner damage:damage.damage*percent/100 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill receiver:damage.sender];
+    
+    DefenderComponent *defender = (DefenderComponent *)[damage.sender getComponentOfClass:[DefenderComponent class]];
+    
+    [defender.damageEventQueue addObject:counterEvent];
 }
 
 @end

@@ -19,20 +19,20 @@ const static int kFollowLimit = 50;
 
 -(void) step:(ccTime) dt
 {
-	if(boundarySet)
+	if(_boundarySet)
 	{
 		// whole map fits inside a single screen, no need to modify the position - unless map boundaries are increased
-		if(boundaryFullyCovered)
+		if(_boundaryFullyCovered)
 			return;
         
-		CGPoint tempPos = ccpSub( halfScreenSize, followedNode_.position);
+		CGPoint tempPos = ccpSub(_halfScreenSize, _followedNode.position);
         
-        tempPos = ccp(clampf(tempPos.x, [target_ position].x - kFollowLimit, [target_ position].x + kFollowLimit), clampf(tempPos.y, [target_ position].y - kFollowLimit, [target_ position].y + kFollowLimit));
+        tempPos = ccp(clampf(tempPos.x, [_target position].x - kFollowLimit, [_target position].x + kFollowLimit), clampf(tempPos.y, [_target position].y - kFollowLimit, [_target position].y + kFollowLimit));
         
-		[target_ setPosition:ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary))];
+		[_target setPosition:ccp(clampf(tempPos.x,_leftBoundary,_rightBoundary), clampf(tempPos.y,_bottomBoundary,_topBoundary))];
 	}
 	else
-		[target_ setPosition:ccpSub( halfScreenSize, followedNode_.position )];
+		[_target setPosition:ccpSub( _halfScreenSize, _followedNode.position )];
 }
 
 @end

@@ -12,7 +12,6 @@
 #import "BattleController.h"
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-#import "SelectLayer.h"
 #import "StageLayer.h"
 #import "MainScene.h"
 #import "FileManager.h"

@@ -71,13 +71,13 @@
 			<integer>1</integer>
 		</dict>
 	</array>
-	<key>heroes</key>
+	<key>heros</key>
 	<array>
 		<dict>
 			<key>id</key>
 			<string>203</string>
 			<key>level</key>
-			<string>10</string>
+			<string>1</string>
 		</dict>
 	</array>
 	<key>castle</key>
@@ -87,6 +87,15 @@
 			<string>401</string>
 			<key>level</key>
 			<integer>1</integer>
+		</dict>
+	</array>
+	<key>team</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>203</string>
+			<key>level</key>
+			<string>10</string>
 		</dict>
 	</array>
 	<key>items</key>

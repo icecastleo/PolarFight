@@ -2,7 +2,7 @@
 //  SideEffect.m
 //  CastleFight
 //
-//  Created by  DAN on 13/5/23.
+//  Created by  浩翔 on 13/5/23.
 //
 //
 
@@ -13,7 +13,7 @@
 
 -(id)initWithSideEffectCommponent:(StateComponent *)component andPercentage:(int)percentage {
     if (self = [super init]) {
-        _components = [NSMutableArray new];
+        _components = [[NSMutableArray alloc] init];
         [_components addObject:component];
         _percentage = percentage;
     }

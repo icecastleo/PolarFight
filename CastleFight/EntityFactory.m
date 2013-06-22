@@ -24,9 +24,8 @@
 #import "CharacterBloodSprite.h"
 #import "AIComponent.h"
 #import "AIStateWalk.h"
+#import "AIStateHeroWalk.h"
 #import "ActiveSkillComponent.h"
-#import "MeleeAttackSkill.h"
-#import "RangeAttackSkill.h"
 #import "CastleBloodSprite.h"
 #import "PlayerComponent.h"
 #import "AIStateEnemyPlayer.h"
@@ -34,15 +33,11 @@
 #import "CollisionComponent.h"
 #import "ProjectileComponent.h"
 #import "PassiveComponent.h"
+#import "HeroComponent.h"
+#import "AuraComponent.h"
 
-#import "PoisonMeleeAttackSkill.h"
-#import "ParalysisMeleeAttackSkill.h"
-#import "BigPillowBomb.h"
-#import "DeadBomb.h"
-#import "HealSkill.h"
-#import "SlowlyHealSkill.h"
-#import "KnockOutSkill.h"
-#import "BombPassiveSkill.h"
+#import "SelectableComponent.h"
+#import "MovePathComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -54,8 +49,8 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"hero.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"PolarBear.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"penguin.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/polar-bear.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/penguin.plist"];
 }
 
 - (id)initWithEntityManager:(EntityManager *)entityManager {
@@ -71,16 +66,23 @@
     NSString *name = [characterData objectForKey:@"name"];
     int cost = [[characterData objectForKey:@"cost"] intValue];
     NSDictionary *attributes = [characterData objectForKey:@"attributes"];
-
+    NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
+    NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
+    NSDictionary *auras = [characterData objectForKey:@"auras"];
+    
     CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
     
     // for test
     if ([name isEqualToString:@"enemy_01"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-01-01.png"];
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-01-00.png"];
     } else if ([name isEqualToString:@"enemy_02"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar bear-02-01.png"];
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-02-00.png"];
+    } else if ([name isEqualToString:@"enemy_03"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-03-00.png"];
+    } else if ([name isEqualToString:@"enemy_04"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-04-00.png"];
     } else if ([name isEqualToString:@"user_01"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-01.png"];
+        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-00.png"];
     } else if ([name isEqualToString:@"user_02"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-02-00.png"];
     }
@@ -114,38 +116,58 @@
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
-    
-    //* // test only for stateComponent
-    if ([cid intValue] == 1) {
-//        [skillCom.skills setObject:[[PoisonMeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[ParalysisMeleeAttackSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[BigPillowBomb alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[DeadBomb alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[HealSkill alloc] init] forKey:@"attack"];
-//        [skillCom.skills setObject:[[SlowlyHealSkill alloc] init] forKey:@"attack"];
-        [skillCom.skills setObject:[[KnockOutSkill alloc] init] forKey:@"attack"];
-        
-    }else {
-        [skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
+    for (NSString *key in activeSkills.allKeys) {
+        NSString *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    if (skillCom.skills.count > 0) {
+        [entity addComponent:skillCom];
     }
     
-//*/[skillCom.skills setObject:[cid intValue] % 2 == 1 ? [[MeleeAttackSkill alloc] init] : [[RangeAttackSkill alloc] init] forKey:@"attack"];
-    
-    [entity addComponent:skillCom];
-    
-    if ([cid intValue] == 1) {
-        PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
-        [passiveCom.skills setObject:[[BombPassiveSkill alloc] init] forKey:@"BombPassiveSkill"];
+    PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
+    for (NSString *key in passiveSkills.allKeys) {
+        NSString *value = [passiveSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [passiveCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    if (passiveCom.skills.count > 0) {
         [entity addComponent:passiveCom];
     }
     
+    AuraComponent *auraComponent = [[AuraComponent alloc] init];
+    for (NSString *key in auras.allKeys) {
+        NSString *value = [auras valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [auraComponent.auras setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    if (auraComponent.auras.count > 0) {
+        auraComponent.infinite = YES;
+        [entity addComponent:auraComponent];
+    }
+    
+    //hero
+    if ([cid intValue]/100 == 2) {
+        HeroComponent *heroCom = [[HeroComponent alloc] initWithCid:cid Level:level Team:team];
+        [entity addComponent:heroCom];
+        
+        SelectableComponent *testSelec = [[SelectableComponent alloc] initWithCid:cid Level:level Team:team];
+        [entity addComponent:testSelec];
+
+        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
+        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
+        [entity addComponent:pathCom];
+        
+        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
+    }else {
+        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
+    }
+    
     // TODO: Set AI for different character
-    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
+//    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
-    
-    // TODO: PassiveSkill
     
 //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
@@ -224,6 +246,13 @@
             [player.summonComponents addObject:summon];
         }
         
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].team;
+        for (CharacterInitData *data in battleTeamInitData) {
+            SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
+            summon.player = player;
+            [player.battleTeam addObject:summon];
+        }
+        
     } else if (team == 2) {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self]]];
     }
@@ -238,31 +267,27 @@
     if ([name isEqualToString:@"enemy_01"]) {
         CCAnimation *animation = [CCAnimation animation];
         
-        for (int i = 4; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
-        }
-        
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-04.png"]]];
-        
-        animation.restoreOriginalFrame = NO;
-        animation.delayPerUnit = 0.1;
-        
-        [animations setObject:animation forKey:@"attack"];
-        
-        animation = [CCAnimation animation];
-        
-        for (int i = 1; i <= 3; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
-        }
-        
-        for (int i = 2; i >= 1 ; i--) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-01-%02d.png", i]]];
+        for (int i = 0; i <= 5; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-01-%02d.png", i]]];
         }
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
         [animations setObject:animation forKey:@"move"];
+
         
+        animation = [CCAnimation animation];
+        
+        for (int i = 6; i <= 6; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-01-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.2;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+                
         return animations;
     }
     
@@ -270,8 +295,8 @@
     if ([name isEqualToString:@"enemy_02"]) {
         CCAnimation *animation = [CCAnimation animation];
         
-        for (int i = 2; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        for (int i = 1; i <= 4; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
         }
         
         animation.restoreOriginalFrame = YES;
@@ -281,20 +306,72 @@
         // attack
         animation = [CCAnimation animation];
         
-        for (int i = 6; i <= 7; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        for (int i = 5; i <= 6; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
         }
         
-        for (int i = 6; i <= 7; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        for (int i = 5; i <= 6; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
         }
         
-        for (int i = 6; i <= 7; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar bear-02-%02d.png", i]]];
+        for (int i = 5; i <= 6; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
         }
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+        return animations;
+    }
+    
+    if ([name isEqualToString:@"enemy_03"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 0; i <= 2; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-03-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        [animations setObject:animation forKey:@"move"];
+        
+        // attack
+        animation = [CCAnimation animation];
+        
+        for (int i = 3; i <= 7; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-03-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.2;
+        
+        [animations setObject:animation forKey:@"attack"];
+        
+        return animations;
+    }
+    
+    if ([name isEqualToString:@"enemy_04"]) {
+        CCAnimation *animation = [CCAnimation animation];
+        
+        for (int i = 0; i <= 4; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        [animations setObject:animation forKey:@"move"];
+        
+        // attack
+        animation = [CCAnimation animation];
+        
+        for (int i = 5; i <= 8; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
+        }
+    
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.075;
         
         [animations setObject:animation forKey:@"attack"];
         
@@ -305,29 +382,24 @@
     if ([name isEqualToString:@"user_01"]) {
         CCAnimation *animation = [CCAnimation animation];
         
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-01.png"]]];
+        for (int i = 0; i <= 3; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
+        }
+        
+        animation.restoreOriginalFrame = YES;
+        animation.delayPerUnit = 0.1;
+        [animations setObject:animation forKey:@"move"];
+        
+        
+        animation = [CCAnimation animation];
         
         for (int i = 4; i <= 5; i++) {
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
         }
         
         animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        
+        animation.delayPerUnit = 0.2;
         [animations setObject:animation forKey:@"attack"];
-        
-        animation = [CCAnimation animation];
-        
-        for (int i = 1; i <= 2; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
-        }
-        
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-01.png"]]];
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-03.png"]]];
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        [animations setObject:animation forKey:@"move"];
         
         return animations;
     }
@@ -350,6 +422,7 @@
             [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
         }
         
+        // FIXME: Seperate by 2 skill?
         [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
         [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
         

@@ -2,7 +2,7 @@
 //  AKHelperObject.h
 //  LightBugBattle
 //
-//  Created by  DAN on 13/2/4.
+//  Created by  浩翔 on 13/2/4.
 //
 //
 

@@ -49,12 +49,31 @@
         }
     }
     
-    NSArray *entities = [self sortEntities:rawEntities];
+    NSMutableArray *detectedEntities = [NSMutableArray array];
+    for (int i = 0; i < rawEntities.count; i++) {
+        Entity *entity = rawEntities[i];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsDetectedForbidden"];
+        [entity sendEvent:kEventIsDetectedForbidden Message:dic];
+        NSNumber *result = [dic objectForKey:@"kEventIsDetectedForbidden"];
+        if (!result.boolValue || [sides containsObject:kRangeSideAlly]) {
+            [detectedEntities addObject:entity];
+        }
+    }
+    
+    NSArray *entities = [self sortEntities:detectedEntities];
     
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
-        return [entities subarrayWithRange:range];
+        NSArray *subArray = [detectedEntities subarrayWithRange:range];
+        for (Entity *entity in subArray) {
+            [entity sendEvent:kEventBeDetected Message:self.owner];
+        }
+        return subArray;
     } else {
+        for (Entity *entity in entities) {
+            [entity sendEvent:kEventBeDetected Message:self.owner];
+        }
         return entities;
     }
 }

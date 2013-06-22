@@ -43,7 +43,7 @@
     glDisable(GL_SCISSOR_TEST);
 }
 
--(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint point = [self convertTouchToNodeSpace:touch];
     
     if (CGRectContainsPoint(rect, point)) {

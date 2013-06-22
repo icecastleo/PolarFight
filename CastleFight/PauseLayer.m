@@ -32,7 +32,7 @@ typedef enum {
     if ((self = [super initWithColor:ccc4(50, 50, 50, 150)])) {
         [self gamePause];
         [self setOptionView];
-        self.isTouchEnabled = YES;
+        [self setTouchEnabled:YES];
     }
     return self;
 }

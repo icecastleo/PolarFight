@@ -2,12 +2,12 @@
 //  KnockOutSkill.h
 //  CastleFight
 //
-//  Created by  DAN on 13/5/28.
+//  Created by  浩翔 on 13/5/28.
 //
 //
 
-#import "MeleeAttackSkill.h"
+#import "ActiveSkill.h"
 
-@interface KnockOutSkill : MeleeAttackSkill
+@interface KnockOutSkill : ActiveSkill
 
 @end

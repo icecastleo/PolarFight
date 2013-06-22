@@ -2,12 +2,12 @@
 //  DeadBomb.h
 //  CastleFight
 //
-//  Created by  DAN on 13/5/27.
+//  Created by  浩翔 on 13/5/27.
 //
 //
 
-#import "MeleeAttackSkill.h"
+#import "ActiveSkill.h"
 
-@interface DeadBomb : MeleeAttackSkill
+@interface DeadBomb : ActiveSkill
 
 @end

@@ -9,7 +9,6 @@
 #import "AttackEvent.h"
 #import "Attribute.h"
 #import "RenderComponent.h"
-#import "AttackerComponent.h"
 #import "DefenderComponent.h"
 
 @implementation AttackEvent
@@ -26,7 +25,7 @@
         _source = source;
         bonus = 0;
         multiplier = 1;
-        _sideEffects = [NSMutableArray  new];
+        _sideEffects = [[NSMutableArray  alloc] init];
         _customDamage = 0;
         _isIgnoreDefense = NO;
         _customDamage = NO;

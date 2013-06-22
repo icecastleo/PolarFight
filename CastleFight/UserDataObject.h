@@ -22,6 +22,8 @@
 @property NSArray *properties;
 
 @property (readonly) NSArray *characterInitDatas;
+@property (readonly) NSArray *playerHeroArray;
+@property (readonly) NSArray *battleTeam;
 
 -(id)initWithPlistPath:(NSString *)path;
 

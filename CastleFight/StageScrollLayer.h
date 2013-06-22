@@ -10,8 +10,7 @@
 #import "CCScrollLayer.h"
 
 @interface StageScrollLayer : CCLayer<CCScrollLayerDelegate> {
-    CCScrollLayer *stageLayer;
-    CCScrollLayer *backgroundLayer;
+    
 }
 
 @end

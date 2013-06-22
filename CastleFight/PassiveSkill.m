@@ -49,13 +49,12 @@
     RenderComponent *renderCom = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
     NSAssert(renderCom, @"You can't active skill without render component currently!");
     
-    // TODO: Active delay and sound effect
-    [self activeEffect];
-    //    [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
-    
     //    state = kCharacterStateUseSkill;
     
-    if (_animationKey) {
+    if (!_animationKey) {
+        [self activeEffect];
+        //        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
+    } else {
         AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfClass:[AnimationComponent class]];
         
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
@@ -67,17 +66,27 @@
             
             animationCom.state = kAnimationStateAttack;
             
-            CCAction *action = [CCSequence actions:
-                                [CCAnimate actionWithAnimation:animation],
-                                [CCCallBlock actionWithBlock:^{
+            CCSequence *attack = [CCSequence actions:
+                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - 1)*animation.delayPerUnit],
+                                  [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
+                                  nil];
+            
+            CCSequence *animate = [CCSequence actions:
+                                   [CCAnimate actionWithAnimation:animation],
+                                   [CCCallBlock actionWithBlock:^{
                 _isAnimationFinish = YES;
                 animationCom.state = kAnimationStateNone;
             }], nil];
             
+            CCAction *action = [CCSpawn actions:attack, animate, nil];
+            
             action.tag = kAnimationActionTag;
             [renderCom.sprite runAction:action];
+            
+            //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
         }
     }
+
 }
 
 -(void)activeEffect {
@@ -85,7 +94,7 @@
                 format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
 }
 
--(void)checkEvent:(EventType)eventType {
+-(void)checkEvent:(EventType)eventType  Message:(id)message {
     
 }
 

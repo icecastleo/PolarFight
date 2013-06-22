@@ -113,6 +113,11 @@
         [unitItems addObject:item];
     }
     
+    for (SummonComponent *summon in player.battleTeam) {
+        // hero
+        summon.summon = YES;
+    }
+    
     // FIXME: Delete after test
     CCMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:nil];
     [unitItems addObject:item];

@@ -38,10 +38,12 @@
         moneyLabel.position = ccp(money.boundingBox.size.width - 6, money.boundingBox.size.height / 2);
         [money addChild:moneyLabel];
         
+        __weak MainScene *copy_scene = scene;
+        
         CCMenuItem *back = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_up.png"]
                                                    selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_back_down.png"]
                                                             block:^(id sender) {
-                                                                [scene back];
+                                                                [copy_scene back];
                                                             }];
         back.anchorPoint = ccp(0, 0.5);
         back.position = ccp(0, background.boundingBox.size.height / 2);
@@ -49,14 +51,16 @@
         CCMenuItem *next = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_up.png"]
                                                    selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_next_down.png"]
                                                             block:^(id sender) {
-                                                                [scene next];
+                                                                [copy_scene next];
                                                             }];
         next.anchorPoint = ccp(1, 0.5);
         next.position = ccp(background.boundingBox.size.width, background.boundingBox.size.height / 2);
         
+        __weak id self_copy = self;
+        
         CCMenuItem *market = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_get_up.png"]
                                                     selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_shop_get_down.png"]
-                                                            target:self selector:@selector(clickGet:)];
+                                                            target:self_copy selector:@selector(clickGet:)];
         
         market.position = ccp(background.boundingBox.size.width / 10 * 2.25, background.boundingBox.size.height / 2);
         

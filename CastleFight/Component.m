@@ -14,8 +14,4 @@
     [_entity sendEvent:type Message:message];
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
-
-}
-
 @end

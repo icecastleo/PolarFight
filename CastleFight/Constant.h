@@ -38,6 +38,8 @@
 #define kShadowWidthDivisor 2
 #define kShadowHeightDivisor 8
 
+#define kDrawPathTag 9876
+
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"
 #define ACTIVE_IF_LESS_THAN @"<"

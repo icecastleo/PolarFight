@@ -20,6 +20,7 @@
         _foodAddend = 0.05;
         
         _summonComponents = [[NSMutableArray alloc] init];
+        _battleTeam = [[NSMutableArray alloc] init];
     }
     return self;
 }
