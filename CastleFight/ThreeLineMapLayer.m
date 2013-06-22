@@ -17,19 +17,31 @@ const static int pathSizeHeight = 25;
 const static int pathHeight = 70;
 
 -(void)setMap:(NSString *)name {
-    CCSprite *map1 = [CCSprite spriteWithFile:@"map/ice.png"];
-    map1.anchorPoint = ccp(0, 0);
-    CCSprite *map1_1 = [CCSprite spriteWithFile:@"background.png"];
-    map1_1.anchorPoint = ccp(0, 0);
+  
     
-    CCParallaxNode *node = [CCParallaxNode node];
+     CCParallaxNode *node = [CCParallaxNode node];
+    int repeat = 3;
+    CCSprite *preloadMap = [CCSprite spriteWithFile:@"map/ice.png"];
+    int width=preloadMap.boundingBox.size.width;
+    int height = preloadMap.boundingBox.size.height;
+    for(int i = 0 ;i<repeat;i++)
+    {
+        CCSprite *map = [CCSprite spriteWithFile:@"map/ice.png"];
+        map.anchorPoint = ccp(0, 0);
+       [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(width*i-i, 0)];
     
-    [node addChild:map1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(0,0)];
-    [node addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(map1.boundingBox.size.width-1, 0)];
+    }
+    
+   
+    
+   
+    self.contentSize = CGSizeMake(width*repeat,height);
+   
+    
     
     [self addChild:node];
     
-    self.contentSize = CGSizeMake(map1.boundingBox.size.width*2, map1.boundingBox.size.height);
+    
 }
 -(void)addEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
