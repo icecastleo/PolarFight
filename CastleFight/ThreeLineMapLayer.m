@@ -18,31 +18,23 @@ const static int pathHeight = 70;
 
 -(void)setMap:(NSString *)name {
   
-    
-     CCParallaxNode *node = [CCParallaxNode node];
+    CCParallaxNode *node = [CCParallaxNode node];
     int repeat = 3;
-    CCSprite *preloadMap = [CCSprite spriteWithFile:@"map/ice.png"];
-    int width=preloadMap.boundingBox.size.width;
+    
+    CCSprite *preloadMap = [CCSprite spriteWithFile:@"ice.png"];
+    int width = preloadMap.boundingBox.size.width;
     int height = preloadMap.boundingBox.size.height;
-    for(int i = 0 ;i<repeat;i++)
-    {
-        CCSprite *map = [CCSprite spriteWithFile:@"map/ice.png"];
+    
+    for(int i = 0; i < repeat; i++) {
+        CCSprite *map = [CCSprite spriteWithFile:@"ice.png"];
         map.anchorPoint = ccp(0, 0);
-       [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(width*i-i, 0)];
-    
+        [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(width*i-i, 0)];
     }
-    
-   
-    
-   
-    self.contentSize = CGSizeMake(width*repeat,height);
-   
-    
-    
+
     [self addChild:node];
-    
-    
+    self.contentSize = CGSizeMake(width*repeat, height);
 }
+
 -(void)addEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     if (!render) {
@@ -73,6 +65,6 @@ const static int pathHeight = 70;
         }
     }
     [self addEntityWithPosition:entity toPosition:position];
-    
 }
+
 @end

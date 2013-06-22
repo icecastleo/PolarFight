@@ -398,6 +398,8 @@
 		9BD25C0A1742CA9300B6FBFB /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BEF38791774E16700FF538B /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF38781774E16700FF538B /* animations.plist */; };
+		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
+		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
 		9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF753217058047006DE945 /* StageScrollLayer.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
@@ -456,8 +458,6 @@
 		2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSimpleXY.m; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
-		2D6BFCD216E9D86200B77B7F /* RangeShooterNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeShooterNew.h; sourceTree = "<group>"; };
-		2D6BFCD316E9D86200B77B7F /* RangeShooterNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeShooterNew.m; sourceTree = "<group>"; };
 		2D918CE91761D3C3002EE90C /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		2D918CEA1761D3C3002EE90C /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		2DA446BD16E4A59F00BDC060 /* BaseAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAI.h; sourceTree = "<group>"; };
@@ -1182,6 +1182,8 @@
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
 		9BE2FCD117730ACC007ADB15 /* EntityEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityEventDelegate.h; sourceTree = "<group>"; };
 		9BEF38781774E16700FF538B /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animations.plist; sourceTree = "<group>"; };
+		9BEF387B1776196B00FF538B /* ice-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ice-hd.png"; sourceTree = "<group>"; };
+		9BEF387C1776196C00FF538B /* ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice.png; sourceTree = "<group>"; };
 		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
 		9BEF752F1705802B006DE945 /* ShopLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopLayer.m; sourceTree = "<group>"; };
 		9BEF753117058047006DE945 /* StageScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScrollLayer.h; sourceTree = "<group>"; };
@@ -1630,6 +1632,8 @@
 				9B062D091635275100E06018 /* Icon.png */,
 				9B062D0B1635275100E06018 /* Icon@2x.png */,
 				9B062D0D1635275100E06018 /* Info.plist */,
+				9BEF387B1776196B00FF538B /* ice-hd.png */,
+				9BEF387C1776196C00FF538B /* ice.png */,
 				9B062D0E1635275100E06018 /* iTunesArtwork */,
 				9B293EBD17170CA700C1E728 /* noise.png */,
 				37DD1C5B168D96560058E450 /* WhiteFont.fnt */,
@@ -2800,6 +2804,8 @@
 				9B59598017733A63004146D6 /* Default-568h@2x.png in Resources */,
 				9B59598217733A74004146D6 /* Default@2x.png in Resources */,
 				9BEF38791774E16700FF538B /* animations.plist in Resources */,
+				9BEF387D1776196C00FF538B /* ice-hd.png in Resources */,
+				9BEF387E1776196C00FF538B /* ice.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
