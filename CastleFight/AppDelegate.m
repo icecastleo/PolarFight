@@ -23,7 +23,7 @@
     CCLOG(@"Start Use Flurry");
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [Flurry startSession:@"YP9HHC7MV4NRFXWQY6NM"];
-    
+    [Flurry setCrashReportingEnabled:YES];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
