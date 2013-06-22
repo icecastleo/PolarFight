@@ -12,6 +12,7 @@
 #import "RenderComponent.h"
 #import "TeamComponent.h"
 #import "DirectionComponent.h"
+#import "CharacterComponent.h"
 @implementation RangeSimpleXY
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
@@ -34,7 +35,7 @@
     CGPathAddArc(attackRange, NULL, width/2, height/2, radius, 90/(-2), 90/2, NO);
     CGPathCloseSubpath(attackRange);
     
-    yInterval=[NSArray arrayWithObjects:@0,@500,@1000, nil];
+    yInterval=[NSArray arrayWithObjects:@50,@130,@210,@300, nil];
     
 }
 -(NSArray *)getEffectEntities {
@@ -90,17 +91,20 @@
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     RenderComponent *selfRenderCom = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
     DirectionComponent *selfDirectionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
-    
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
     int direction = selfDirectionCom.direction == kDirectionLeft ? -1 : 1;
     
     CGPoint c1 = selfRenderCom.position;
     CGPoint c2 = renderCom.position;
     
-    if (![self checkInterval:c1.y another:c2.y]) {
-        return NO;
+    if(character){
+        if (![self checkInterval:c1.y another:c2.y]) {
+            return NO;
+        }
     }
-    
-    if((c2.x-c1.x)*direction <= width/2 && (c2.x-c1.x)*direction > 0) {
+//    int attackRange = (width/2+renderCom.sprite.boundingBox.size.width/2);
+    int attackDistance = width/2;
+    if((c2.x-c1.x)*direction <= attackDistance &&(c2.x-c1.x)*direction>=0) {
         return YES;
     } else {
         return NO;
@@ -109,18 +113,20 @@
 
 -(BOOL)checkInterval:(int)a another:(int)b
 {
-    int region = 0;
+    int aLine = 0;
     
-    for ( ;region < yInterval.count; region++) {
-        if([[yInterval objectAtIndex:region] intValue] > a) {
+    for ( ;aLine < yInterval.count; aLine++) {
+        if([[yInterval objectAtIndex:aLine] intValue] > a) {
             break;
         }
     }
-    
-    for (int i = 0; i <= region; i++) {
+    aLine--;
+    for (int i = 0; i <= aLine+1; i++) {
         if([[yInterval objectAtIndex:i] intValue] > b) {
-            if(i == region)
+            if(i == aLine+1)
                 return YES;
+            else
+                return NO;
         }
     }
     return NO;

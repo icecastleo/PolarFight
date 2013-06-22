@@ -8,7 +8,7 @@
 
 #import "InAppPurchaseManager.h"
 #import "FileManager.h"
-
+#import "Flurry.h"
 @implementation SKProduct (LocalizedPrice)
 
 - (NSString *)localizedPrice
@@ -61,6 +61,7 @@ static InAppPurchaseManager *sharedInstance;
         // restarts any purchases if they were interrupted last time the app was open
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     }
+    [Flurry logEvent:@"OpenIAPView"];
     return self;
 }
 

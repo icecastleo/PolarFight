@@ -9,5 +9,7 @@
 #import "MapLayer.h"
 
 @interface ThreeLineMapLayer : MapLayer
-
+{
+        NSArray *yInterval;
+}
 @end
