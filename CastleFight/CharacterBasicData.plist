@@ -66,10 +66,7 @@
 			<string>PoisonMeleeAttackSkill</string>
 		</dict>
 		<key>passiveSkills</key>
-		<dict>
-			<key>ReflectAttackWithThirtyAndDouble</key>
-			<string>ReflectAttackWithThirtyAndDouble</string>
-		</dict>
+		<dict/>
 		<key>soundEffects</key>
 		<dict>
 			<key>PoisonMeleeAttackSkill</key>
@@ -152,7 +149,7 @@
 		<key>id</key>
 		<string>003</string>
 		<key>name</key>
-		<string>user_03</string>
+		<string>ninja_penguin</string>
 		<key>cost</key>
 		<string>25</string>
 		<key>attributes</key>

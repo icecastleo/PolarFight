@@ -51,6 +51,9 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/polar-bear.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/penguin.plist"];
+    
+    CCAnimationCache *cache = [CCAnimationCache sharedAnimationCache];
+	[cache addAnimationsWithFile:@"animations.plist"];
 }
 
 - (id)initWithEntityManager:(EntityManager *)entityManager {
@@ -69,8 +72,8 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
-    
-    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
+       
+    CCSprite *sprite = nil;
     
     // for test
     if ([name isEqualToString:@"enemy_01"]) {
@@ -85,7 +88,13 @@
         sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-00.png"];
     } else if ([name isEqualToString:@"user_02"]) {
         sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-02-00.png"];
+    } else if ([name isEqualToString:@"ninja_penguin"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_0.png", name]];
     }
+    
+    if (sprite == nil) {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
+    }    
     
     Entity *entity = [_entityManager createEntity];    
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
@@ -433,6 +442,18 @@
         return animations;
     }
 
+    if ([name isEqualToString:@"ninja_penguin"]) {
+        CCAnimationCache *cache = [CCAnimationCache sharedAnimationCache];
+        
+        CCAnimation *move = [cache animationByName:[NSString stringWithFormat:@"%@_move", name]];
+        CCAnimation *attack = [cache animationByName:[NSString stringWithFormat:@"%@_attack", name]];
+        
+        [animations setObject:move forKey:@"move"];
+        [animations setObject:attack forKey:@"attack"];
+        
+        return animations;
+    }
+    
     CCAnimation *animation = [CCAnimation animation];
     
     for (int i = 1; i <= 4; i++) {

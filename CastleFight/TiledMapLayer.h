@@ -10,8 +10,6 @@
 #import "cocos2d.h"
 #import "TiledMapCamera.h"
 #import "Helper.h"
-#import "Barrier.h"
-#import "KnockOutObject.h"
 
 @class Character, CharacterInfoView;
 @interface TiledMapLayer : CCLayer {
@@ -38,7 +36,7 @@
 -(void)addCharacter:(Character *)character;
 -(void)removeCharacter:(Character *)character;
 
--(void)addBarrier:(Barrier *)barrier;
+//-(void)addBarrier:(Barrier *)barrier;
 //-(void)removeBarrier:(Barrier *)
 
 -(void)moveCharacter:(Character *)character toPosition:(CGPoint)position isMove:(BOOL)move;

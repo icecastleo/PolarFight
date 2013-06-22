@@ -19,8 +19,10 @@
 
 static float scale;
 const static int castleDistance = 200;
-const static int pathSizeHeight = 25;
-const static int pathHeight = 70;
+//const static int pathSizeHeight = 25;
+const static int pathSizeHeight = 100;
+//const static int pathHeight = 70;
+const static int pathHeight = 60;
 
 +(void)initialize {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {

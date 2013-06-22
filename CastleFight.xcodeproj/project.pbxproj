@@ -396,6 +396,7 @@
 		9BD25C091742672300B6FBFB /* PlayerSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBB0173255090030C9D7 /* PlayerSystem.m */; };
 		9BD25C0A1742CA9300B6FBFB /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
+		9BEF38791774E16700FF538B /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF38781774E16700FF538B /* animations.plist */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
 		9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF753217058047006DE945 /* StageScrollLayer.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
@@ -426,10 +427,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2B85A7B5166357DB00D5962F /* Barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barrier.h; sourceTree = "<group>"; };
-		2B85A7B6166357DB00D5962F /* Barrier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barrier.m; sourceTree = "<group>"; };
-		2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutObject.h; sourceTree = "<group>"; };
-		2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutObject.m; sourceTree = "<group>"; };
 		2D055967171427A200F82A08 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		2D055968171427A200F82A08 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		2D05596D171443E300F82A08 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -567,8 +564,6 @@
 		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
-		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
-		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelperObject.h; sourceTree = "<group>"; };
 		37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelperObject.m; sourceTree = "<group>"; };
@@ -1060,8 +1055,8 @@
 		9B595978177337BF004146D6 /* CDXPropertyModifierAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDXPropertyModifierAction.h; sourceTree = "<group>"; };
 		9B595979177337BF004146D6 /* CDXPropertyModifierAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXPropertyModifierAction.m; sourceTree = "<group>"; };
 		9B59597A177337BF004146D6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9B59597F17733A63004146D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		9B59598117733A74004146D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		9B59597F17733A63004146D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		9B59598117733A74004146D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		9B59598317733CFA004146D6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		9B5DB0DA177360C30024DA98 /* CCRepeatForever+RepeatForeverAnimateExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CCRepeatForever+RepeatForeverAnimateExtend.h"; path = "cocos2d/Extensions/CCRepeatForever+RepeatForeverAnimateExtend.h"; sourceTree = "<group>"; };
 		9B5DB0DB177360C30024DA98 /* CCRepeatForever+RepeatForeverAnimateExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CCRepeatForever+RepeatForeverAnimateExtend.m"; path = "cocos2d/Extensions/CCRepeatForever+RepeatForeverAnimateExtend.m"; sourceTree = "<group>"; };
@@ -1181,6 +1176,7 @@
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
 		9BE2FCD117730ACC007ADB15 /* EntityEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityEventDelegate.h; sourceTree = "<group>"; };
+		9BEF38781774E16700FF538B /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animations.plist; sourceTree = "<group>"; };
 		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
 		9BEF752F1705802B006DE945 /* ShopLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopLayer.m; sourceTree = "<group>"; };
 		9BEF753117058047006DE945 /* StageScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageScrollLayer.h; sourceTree = "<group>"; };
@@ -1253,12 +1249,6 @@
 				9B82F78F164FB2780001A357 /* TiledMapLayer.m */,
 				9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */,
 				9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */,
-				37598BDC1696D2550007013B /* CharacterInfoView.h */,
-				37598BDD1696D2550007013B /* CharacterInfoView.m */,
-				2B85A7B5166357DB00D5962F /* Barrier.h */,
-				2B85A7B6166357DB00D5962F /* Barrier.m */,
-				2BF344C0168D8F0800BAA3E0 /* KnockOutObject.h */,
-				2BF344C1168D8F0800BAA3E0 /* KnockOutObject.m */,
 			);
 			name = MapLayer;
 			sourceTree = "<group>";
@@ -1366,9 +1356,6 @@
 				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				37DCA5C716F1CBD90006D656 /* FileManager.h */,
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
-				37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */,
-				37E68C9F16F95B1700AB5FBD /* UserData.plist */,
-				37E68CA116F95D3500AB5FBD /* BattleData.plist */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -1576,6 +1563,7 @@
 				9BEF752C17057F49006DE945 /* Scene */,
 				9B062E7F16353A2B00E06018 /* Character */,
 				3730814D16F7548F00F1F7EE /* Files */,
+				9BEF387A1774E51700FF538B /* GameDatas */,
 				9B3E48C01675ECD1000CFFFB /* libs */,
 				9B062CF61635275000E06018 /* Resources */,
 				9B406F6817622ACE008B840F /* Script */,
@@ -2521,6 +2509,17 @@
 			name = ActiveSkill;
 			sourceTree = "<group>";
 		};
+		9BEF387A1774E51700FF538B /* GameDatas */ = {
+			isa = PBXGroup;
+			children = (
+				9BEF38781774E16700FF538B /* animations.plist */,
+				37E68CA116F95D3500AB5FBD /* BattleData.plist */,
+				37E68C9C16F9574C00AB5FBD /* CharacterBasicData.plist */,
+				37E68C9F16F95B1700AB5FBD /* UserData.plist */,
+			);
+			name = GameDatas;
+			sourceTree = "<group>";
+		};
 		9BEF752C17057F49006DE945 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -2783,6 +2782,7 @@
 				9B406F74176251E3008B840F /* SpriteSheets in Resources */,
 				9B59598017733A63004146D6 /* Default-568h@2x.png in Resources */,
 				9B59598217733A74004146D6 /* Default@2x.png in Resources */,
+				9BEF38791774E16700FF538B /* animations.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
