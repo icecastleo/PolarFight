@@ -17,20 +17,8 @@
 
 @dynamic maxChildZ;
 
-static float scale;
-const static int castleDistance = 200;
-//const static int pathSizeHeight = 25;
-const static int pathSizeHeight = 100;
-//const static int pathHeight = 70;
-const static int pathHeight = 60;
-
-+(void)initialize {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
-    } else {
-        scale = 1.0;
-    }
-}
+//const int pathSizeHeight = 25;
+const static int pathSizeHeight = 40;
 
 -(id)initWithName:(NSString *)name {
     if(self = [super init]) {
@@ -89,9 +77,7 @@ const static int pathHeight = 60;
 
 -(void)addEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    if (!render) {
-        return;
-    }
+    NSAssert(render, @"Need render component to add on map!");
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
@@ -100,29 +86,25 @@ const static int pathHeight = 60;
     
     if (character) {
         if (team.team == 1) {
-            position = ccp(castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+            position = ccp(kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         } else {
-            position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+            position = ccp(self.boundaryX - kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         }
     } else {
         // castle
         if (team.team == 1) {
-            position = ccp(castleDistance, pathHeight + pathSizeHeight/2);
-            render.sprite.anchorPoint = ccp(1, 0.5);
+            position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
         } else {
-            position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
-            render.sprite.anchorPoint = ccp(0, 0.5);
+            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
         }
     }
     [self addEntityWithPosition:entity toPosition:position];
     
 }
 
--(void) addEntityWithPosition:(Entity *)entity toPosition:(CGPoint)position{
+-(void)addEntityWithPosition:(Entity *)entity toPosition:(CGPoint)position{
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    if (!render) {
-        return;
-    }
+    NSAssert(render, @"Need render component to add on map!");
     
     [self moveEntity:entity toPosition:position boundaryLimit:YES];
     [self addChild:render.sprite];

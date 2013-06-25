@@ -7,7 +7,7 @@
 		<key>id</key>
 		<string>001</string>
 		<key>name</key>
-		<string>user_01</string>
+		<string>baby_penguin</string>
 		<key>cost</key>
 		<string>15</string>
 		<key>attributes</key>
@@ -63,7 +63,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack</key>
-			<string>PoisonMeleeAttackSkill</string>
+			<string>MeleeAttackSkill</string>
 		</dict>
 		<key>passiveSkills</key>
 		<dict/>
@@ -85,7 +85,7 @@
 		<key>id</key>
 		<string>002</string>
 		<key>name</key>
-		<string>user_02</string>
+		<string>sleep_penguin</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>attributes</key>
@@ -205,7 +205,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack</key>
-			<string>MeleeAttackSkill</string>
+			<string>NinjaRangeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>004</key>
@@ -603,7 +603,7 @@
 		<key>id</key>
 		<string>101</string>
 		<key>name</key>
-		<string>enemy_01</string>
+		<string>boxer_bear</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>image</key>
@@ -669,7 +669,7 @@
 		<key>id</key>
 		<string>102</string>
 		<key>name</key>
-		<string>enemy_02</string>
+		<string>army_bear</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>image</key>
@@ -727,7 +727,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack</key>
-			<string>MeleeAttackSkill</string>
+			<string>ArmyBearAttackSkill</string>
 		</dict>
 	</dict>
 	<key>103</key>
@@ -735,7 +735,7 @@
 		<key>id</key>
 		<string>103</string>
 		<key>name</key>
-		<string>enemy_03</string>
+		<string>baby_bear</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>image</key>
@@ -801,7 +801,7 @@
 		<key>id</key>
 		<string>104</string>
 		<key>name</key>
-		<string>enemy_04</string>
+		<string>fat_bear</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>image</key>

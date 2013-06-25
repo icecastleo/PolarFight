@@ -18,7 +18,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>id</key>
@@ -36,7 +36,7 @@
 				<key>targetRatio</key>
 				<integer>1</integer>
 			</dict>
-            <dict>
+			<dict>
 				<key>id</key>
 				<string>104</string>
 				<key>level</key>

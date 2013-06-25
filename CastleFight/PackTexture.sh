@@ -7,22 +7,24 @@
 #
 
 TP=/usr/local/bin/TexturePacker
+cd "${PROJECT_DIR}/${PROJECT}"
+
 if [ "${ACTION}" = "clean" ] && [ -f "${TP}" ]
 then
 # remove sheets - please add a matching expression here
-rm -f ../SpriteSheets/*.pvr.ccz
-rm -f ../SpriteSheets/*.pvr
-rm -f ../SpriteSheets/*.plist
-rm -f ../SpriteSheets/*.png
+rm -f Resources/SpriteSheets/*.pvr.ccz
+rm -f Resources/SpriteSheets/*.pvr
+rm -f Resources/SpriteSheets/*.plist
+rm -f Resources/SpriteSheets/*.png
 else
 
 #ensure the file exists
 if [ -f "${TP}" ]; then
 echo "building..."
 # create directory
-mkdir -p ../SpriteSheets
+mkdir -p Resources/SpriteSheets
 # create assets
-${TP} *.tps
+${TP} Resources/Assets/*.tps
 exit 0
 else
 #if here the TexturePacker command line file could not be found

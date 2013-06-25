@@ -4,98 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>polar-bear-01-00.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{177,500},{76,102}}</string>
-                <key>offset</key>
-                <string>{14,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{28,2},{76,102}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{299,468},{76,102}}</string>
-                <key>offset</key>
-                <string>{14,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{28,2},{76,102}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-02.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{99,424},{76,104}}</string>
-                <key>offset</key>
-                <string>{14,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{28,0},{76,104}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-03.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,493},{76,102}}</string>
-                <key>offset</key>
-                <string>{13,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{27,1},{76,102}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-04.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{99,424},{76,104}}</string>
-                <key>offset</key>
-                <string>{14,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{28,0},{76,104}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-05.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{299,468},{76,102}}</string>
-                <key>offset</key>
-                <string>{14,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{28,2},{76,102}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-01-06.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{215,299},{100,102}}</string>
-                <key>offset</key>
-                <string>{-2,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{100,102}}</string>
-                <key>sourceSize</key>
-                <string>{104,104}</string>
-            </dict>
-            <key>polar-bear-02-00.png</key>
+            <key>army_bear_0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{112,228},{101,97}}</string>
@@ -108,7 +17,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-01.png</key>
+            <key>army_bear_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{204,403},{93,95}}</string>
@@ -121,7 +30,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-02.png</key>
+            <key>army_bear_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,398},{95,93}}</string>
@@ -134,7 +43,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-03.png</key>
+            <key>army_bear_3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{105,327},{97,95}}</string>
@@ -147,7 +56,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-04.png</key>
+            <key>army_bear_4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,303},{101,93}}</string>
@@ -160,7 +69,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-05.png</key>
+            <key>army_bear_5.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{326,2},{139,93}}</string>
@@ -173,7 +82,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-02-06.png</key>
+            <key>army_bear_6.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,109},{111,93}}</string>
@@ -186,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{231,99}</string>
             </dict>
-            <key>polar-bear-03-00.png</key>
+            <key>baby_bear_0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,667},{73,68}}</string>
@@ -199,7 +108,7 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-03-01.png</key>
+            <key>baby_bear_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{77,600},{73,68}}</string>
@@ -212,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-03-02.png</key>
+            <key>baby_bear_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,597},{73,68}}</string>
@@ -225,7 +134,7 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-03-03.png</key>
+            <key>baby_bear_3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{80,530},{73,68}}</string>
@@ -238,33 +147,7 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-03-04.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{80,530},{73,68}}</string>
-                <key>offset</key>
-                <string>{-4,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{24,1},{73,68}}</string>
-                <key>sourceSize</key>
-                <string>{129,70}</string>
-            </dict>
-            <key>polar-bear-03-05.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{80,530},{73,68}}</string>
-                <key>offset</key>
-                <string>{-4,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{24,1},{73,68}}</string>
-                <key>sourceSize</key>
-                <string>{129,70}</string>
-            </dict>
-            <key>polar-bear-03-06.png</key>
+            <key>baby_bear_4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{414,398},{95,68}}</string>
@@ -277,7 +160,7 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-03-07.png</key>
+            <key>baby_bear_5.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{317,398},{95,68}}</string>
@@ -290,7 +173,72 @@
                 <key>sourceSize</key>
                 <string>{129,70}</string>
             </dict>
-            <key>polar-bear-04-00.png</key>
+            <key>boxer_bear_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{177,500},{76,102}}</string>
+                <key>offset</key>
+                <string>{14,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{28,2},{76,102}}</string>
+                <key>sourceSize</key>
+                <string>{104,104}</string>
+            </dict>
+            <key>boxer_bear_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{299,468},{76,102}}</string>
+                <key>offset</key>
+                <string>{14,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{28,2},{76,102}}</string>
+                <key>sourceSize</key>
+                <string>{104,104}</string>
+            </dict>
+            <key>boxer_bear_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{99,424},{76,104}}</string>
+                <key>offset</key>
+                <string>{14,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{28,0},{76,104}}</string>
+                <key>sourceSize</key>
+                <string>{104,104}</string>
+            </dict>
+            <key>boxer_bear_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,493},{76,102}}</string>
+                <key>offset</key>
+                <string>{13,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{27,1},{76,102}}</string>
+                <key>sourceSize</key>
+                <string>{104,104}</string>
+            </dict>
+            <key>boxer_bear_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{215,299},{100,102}}</string>
+                <key>offset</key>
+                <string>{-2,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{100,102}}</string>
+                <key>sourceSize</key>
+                <string>{104,104}</string>
+            </dict>
+            <key>fat_bear_0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{388,297},{102,99}}</string>
@@ -303,7 +251,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-01.png</key>
+            <key>fat_bear_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{284,97},{104,99}}</string>
@@ -316,7 +264,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-02.png</key>
+            <key>fat_bear_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,204},{108,97}}</string>
@@ -329,7 +277,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-03.png</key>
+            <key>fat_bear_3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{390,97},{104,97}}</string>
@@ -342,7 +290,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-04.png</key>
+            <key>fat_bear_4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{284,198},{102,99}}</string>
@@ -355,7 +303,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-05.png</key>
+            <key>fat_bear_5.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{390,196},{102,99}}</string>
@@ -368,7 +316,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-06.png</key>
+            <key>fat_bear_6.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{164,95},{118,131}}</string>
@@ -381,7 +329,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-07.png</key>
+            <key>fat_bear_7.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{160,105}}</string>
@@ -394,7 +342,7 @@
                 <key>sourceSize</key>
                 <string>{218,133}</string>
             </dict>
-            <key>polar-bear-04-08.png</key>
+            <key>fat_bear_8.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{164,2},{160,91}}</string>
@@ -413,13 +361,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>polar-bear.pvr.ccz</string>
+            <string>polar_bear.pvr.ccz</string>
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7627e49aba8a6df97e3a62238711f1fa$</string>
+            <string>$TexturePacker:SmartUpdate:4a047e3536efbbec7958dc016a1f938b$</string>
             <key>textureFileName</key>
-            <string>polar-bear.pvr.ccz</string>
+            <string>polar_bear.pvr.ccz</string>
         </dict>
     </dict>
 </plist>

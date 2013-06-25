@@ -26,6 +26,8 @@
     } else {
         radius = 50;
     }
+
+    // FIXME: attack range
     
     radius *= kScale;
     width = radius*2;
@@ -35,9 +37,13 @@
     CGPathAddArc(attackRange, NULL, width/2, height/2, radius, 90/(-2), 90/2, NO);
     CGPathCloseSubpath(attackRange);
     
-    yInterval=[NSArray arrayWithObjects:@50,@130,@210,@300, nil];
+    yInterval = [[NSMutableArray alloc] init];
     
+    for (int i = 1; i <= 3; i++) {
+        [yInterval addObject:[NSNumber numberWithInt:kMapPathFloor + kMapPathHeight * i]];
+    }
 }
+
 -(NSArray *)getEffectEntities {
     NSAssert([super owner], @"You must set an entity as range owner!");
     
@@ -65,15 +71,8 @@
     
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
-        NSArray *subArray = [detectedEntities subarrayWithRange:range];
-        for (Entity *entity in subArray) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
-        return subArray;
+        return [entities subarrayWithRange:range];
     } else {
-        for (Entity *entity in entities) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
         return entities;
     }
 }
@@ -90,9 +89,8 @@
     
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     RenderComponent *selfRenderCom = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    DirectionComponent *selfDirectionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
+    DirectionComponent *directionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
-    int direction = selfDirectionCom.direction == kDirectionLeft ? -1 : 1;
     
     CGPoint c1 = selfRenderCom.position;
     CGPoint c2 = renderCom.position;
@@ -102,36 +100,43 @@
             return NO;
         }
     }
-//    int attackRange = (width/2+renderCom.sprite.boundingBox.size.width/2);
-    int attackDistance = width/2;
-    if((c2.x-c1.x)*direction <= attackDistance &&(c2.x-c1.x)*direction>=0) {
-        return YES;
+    int attackDistance = width/2/kScale + renderCom.sprite.boundingBox.size.width/2 + selfRenderCom.sprite.boundingBox.size.width/2;
+//    int attackDistance = width/2/kScale;
+    
+    if (directionCom.direction == kDirectionLeft) {
+        if (c2.x <= c1.x && (c1.x-c2.x) <= attackDistance) {
+            return YES;
+        } else {
+            return NO;
+        }
     } else {
-        return NO;
+        if (c2.x >= c1.x && (c2.x-c1.x) <= attackDistance) {
+            return YES;
+        } else {
+            return NO;
+        }
     }
 }
 
--(BOOL)checkInterval:(int)a another:(int)b
-{
-    int aLine = 0;
+-(BOOL)checkInterval:(int)a another:(int)b {
+    int region = 0;
     
-    for ( ;aLine < yInterval.count; aLine++) {
-        if([[yInterval objectAtIndex:aLine] intValue] > a) {
+    for ( ;region < yInterval.count; region++) {
+        if([[yInterval objectAtIndex:region] intValue] > a) {
             break;
         }
     }
-    aLine--;
-    for (int i = 0; i <= aLine+1; i++) {
+    
+    for (int i = 0; i <= region; i++) {
         if([[yInterval objectAtIndex:i] intValue] > b) {
-            if(i == aLine+1)
+            if(i == region) {
                 return YES;
-            else
+            } else {
                 return NO;
+            }
         }
     }
     return NO;
 }
-
-
 
 @end
