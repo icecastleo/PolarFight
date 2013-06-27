@@ -187,4 +187,9 @@ const static int pathSizeHeight = 40;
     [renderCom.sprite runAction:action];
 }
 
+-(BOOL)canExecuteMagicInThisArea:(CGPoint)position {
+    //TODO: add condition
+    return YES;
+}
+
 @end

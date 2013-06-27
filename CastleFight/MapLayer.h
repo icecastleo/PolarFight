@@ -27,5 +27,6 @@
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
 -(void)moveEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
 -(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
+-(BOOL)canExecuteMagicInThisArea:(CGPoint)position;
 
 @end

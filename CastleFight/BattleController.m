@@ -89,8 +89,10 @@ __weak static BattleController* currentInstance;
         
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", prefix]];
         
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [[CCDirector sharedDirector].view addGestureRecognizer:pan];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPress.minimumPressDuration = 0.0f;
+        
+        [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
     }
     return self;
 }
@@ -184,10 +186,10 @@ __weak static BattleController* currentInstance;
 
 #pragma mark UIPanGestureRecognizer
 
-- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+- (IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-//    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
+    //    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     CGPoint mapLocation = ccpSub(touchLocation, mapLayer.position);
@@ -240,21 +242,23 @@ __weak static BattleController* currentInstance;
         recognizer.cancelsTouchesInView = NO;
         return;
     }else {
-        recognizer.cancelsTouchesInView = YES;
-        
-        DrawPath *line = [DrawPath node];
-        line.path = path;
-        
-        GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-        
-        if (!guiCom) {
-            [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            [mapLayer addChild: line z:0 tag:kDrawPathTag];
-        }else {
-            [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            [statusLayer addChild: line z:0 tag:kDrawPathTag];
+        if (recognizer.state == UIGestureRecognizerStateChanged) {
+            recognizer.cancelsTouchesInView = YES;
+            
+            DrawPath *line = [DrawPath node];
+            line.path = path;
+            
+            GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+            
+            if (!guiCom) {
+                [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
+                [mapLayer addChild: line z:0 tag:kDrawPathTag];
+            }else {
+                [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+                [statusLayer addChild: line z:0 tag:kDrawPathTag];
+            }
+            
         }
-        
     }
     
     //end
@@ -274,12 +278,15 @@ __weak static BattleController* currentInstance;
             [pathCom.path addObjectsFromArray:path];
         }else {
             [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-            InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-            if (guiCom && infoCom) {
-                NSString *magicKey = [infoCom informationForKey:@"name"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
-                [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+            
+            if ([mapLayer canExecuteMagicInThisArea:mapLocation]) {
+                GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+                InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
+                if (guiCom && infoCom) {
+                    NSString *magicKey = [infoCom informationForKey:@"name"];
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
+                    [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+                }
             }
         }
         
