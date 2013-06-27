@@ -23,5 +23,6 @@
 
 @property NSMutableArray *summonComponents;
 @property (nonatomic) NSMutableArray *battleTeam;
+@property (nonatomic) NSMutableArray *magicTeam;
 
 @end

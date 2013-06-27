@@ -38,6 +38,9 @@
 
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
+#import "InformationComponent.h"
+#import "GUIButtonComponent.h"
+#import "MagicComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -141,11 +144,9 @@
     
     //hero
     if ([cid intValue]/100 == 2) {
-        HeroComponent *heroCom = [[HeroComponent alloc] initWithCid:cid Level:level Team:team];
-        [entity addComponent:heroCom];
         
-        SelectableComponent *testSelec = [[SelectableComponent alloc] initWithCid:cid Level:level Team:team];
-        [entity addComponent:testSelec];
+        [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
+        [entity addComponent:[[SelectableComponent alloc] init]];
 
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
@@ -239,16 +240,65 @@
             [player.summonComponents addObject:summon];
         }
         
-        NSArray *battleTeamInitData = [FileManager sharedFileManager].team;
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
         for (CharacterInitData *data in battleTeamInitData) {
             SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
             summon.player = player;
             [player.battleTeam addObject:summon];
         }
         
+        MagicComponent *magicCom = [[MagicComponent alloc] init];
+        NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
+        
+        for (CharacterInitData *data in magicTeamInitData) {
+            Entity *magicButton = [self createMagicButton:data.cid level:data.level];
+            [player.magicTeam addObject:magicButton];
+            
+            InformationComponent *infoCom = (InformationComponent *)[magicButton getComponentOfClass:[InformationComponent class]];
+            NSString *name = [infoCom informationForKey:@"name"];
+            NSAssert(NSClassFromString(name), @"you forgot to make this skill.");
+            [magicCom.magics setObject:[[NSClassFromString(name) alloc] init] forKey:name];
+        }
+        
+        [entity addComponent:magicCom];
+        
+        [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
+                              nil]];
+        
+        [entity addComponent:[[ProjectileComponent alloc] init]];
+        
     } else if (team == 2) {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self]]];
     }
+    
+    return entity;
+}
+
+-(Entity *)createMagicButton:(NSString *)cid level:(int)level {
+    
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    
+    NSString *name = [characterData objectForKey:@"name"];
+    int cost = [[characterData objectForKey:@"cost"] intValue];
+    NSDictionary *information = [characterData objectForKey:@"information"];
+    
+    //magic button image
+//    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_01.png", name]];
+
+    CCSprite *sprite = [CCSprite spriteWithFile:@"nicefire.png"];
+    
+    Entity *entity = [_entityManager createEntity];
+    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
+    
+    [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
+    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    
+    [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
+    [entity addComponent:[[SelectableComponent alloc] init]];
+    
+    [entity addComponent:[[GUIButtonComponent alloc] init]];
+    
+    [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
     return entity;
 }

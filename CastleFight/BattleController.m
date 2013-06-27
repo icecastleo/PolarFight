@@ -33,6 +33,9 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
+#import "GUIButtonComponent.h"
+#import "InformationComponent.h"
+#import "MagicSystem.h"
 
 @interface BattleController () {
     NSString *battleName;
@@ -112,6 +115,7 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
     [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+    [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {
@@ -193,6 +197,7 @@ __weak static BattleController* currentInstance;
         
         for (Entity *entity in array) {
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            GUIButtonComponent *guiCom = (GUIButtonComponent *)[entity getComponentOfClass:[GUIButtonComponent class]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
                 self.selectedEntity = entity;
@@ -206,6 +211,16 @@ __weak static BattleController* currentInstance;
     NSMutableArray *path = [[NSMutableArray alloc] init];
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
+    GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+    
+    CGPoint location;
+    
+    if (!guiCom) {
+        location = mapLocation;
+    }else {
+        location = touchLocation;
+    }
+    
     [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
     [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
     
@@ -216,25 +231,47 @@ __weak static BattleController* currentInstance;
     } else {
         recognizer.cancelsTouchesInView = YES;
         
-        [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
-        
         DrawPath *line = [DrawPath node];
         line.path = path;
-        [mapLayer addChild: line z:0 tag:kDrawPathTag];
+        
+        GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+        
+        if (!guiCom) {
+            [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
+            [mapLayer addChild: line z:0 tag:kDrawPathTag];
+        }else {
+            [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+            [statusLayer addChild: line z:0 tag:kDrawPathTag];
+        }
+        
     }
     
     // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         [selectCom unSelected];
-        [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
         
         MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+        
+        // do not need start point.
+        [path removeAllObjects];
+        [path addObject:[NSValue valueWithCGPoint:(mapLocation)]];
+        
         if (pathCom) {
-            [path removeObjectAtIndex:0];
+            [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
             [pathCom.path removeAllObjects];
             [pathCom.path addObjectsFromArray:path];
+        }else {
+            [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+            GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+            InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
+            if (guiCom && infoCom) {
+                NSString *magicKey = [infoCom informationForKey:@"name"];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
+                [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+            }
         }
+        
         self.selectedEntity = nil;
     }
 }

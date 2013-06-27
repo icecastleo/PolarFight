@@ -12,26 +12,12 @@
 #define kStrokeTag 99999
 
 @interface SelectableComponent()
-@property (nonatomic, readonly) NSString *cid;
-@property (nonatomic, readonly) int level;
-@property (nonatomic, readonly) int team;
-//*// test only
-@property (nonatomic) int testTimes;
 @property (nonatomic) BOOL selected;
 @property (nonatomic) BOOL showed;
 //*/
 @end
 
 @implementation SelectableComponent
-
--(id)initWithCid:(NSString *)cid Level:(int)level Team:(int)team {
-    if (self = [super init]) {
-        _cid = cid;
-        _level = level;
-        _team = team;
-    }
-    return self;
-}
 
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == KEventDead){

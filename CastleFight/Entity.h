@@ -25,6 +25,8 @@ typedef enum {
     
     kEventFoodChanged,
     
+    kEventSendMagicEvent,
+    
 } EventType;
 
 @interface Entity : NSObject {
