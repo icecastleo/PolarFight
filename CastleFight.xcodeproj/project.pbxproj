@@ -109,8 +109,11 @@
 		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
+		376D320B177854B700949015 /* InformationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D320A177854B700949015 /* InformationComponent.m */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37BE4F4C16BFC6CB0049C634 /* AKHelperObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */; };
+		37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563A177438ED005ACE35 /* HeroComponent.m */; };
+		37D7563E17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */; };
 		37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D832A017130EF2001A1C3A /* GameCenterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */; };
 		37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D97D35177198F600A2A7D6 /* MovePathComponent.m */; };
@@ -125,6 +128,10 @@
 		37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9F17534F9B000656A6 /* DeadBomb.m */; };
 		37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */; };
+		37DC7A3D17797DB2009E3E73 /* GUIButtonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */; };
+		37DC7A40177981FC009E3E73 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A3F177981FC009E3E73 /* MagicComponent.m */; };
+		37DC7A4317798221009E3E73 /* MagicSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A4217798221009E3E73 /* MagicSystem.m */; };
+		37DC7A4617798806009E3E73 /* testMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A4517798806009E3E73 /* testMagic.m */; };
 		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
@@ -570,9 +577,15 @@
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
 		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
+		376D3209177854B700949015 /* InformationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationComponent.h; sourceTree = "<group>"; };
+		376D320A177854B700949015 /* InformationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationComponent.m; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37BE4F4A16BFC6CB0049C634 /* AKHelperObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKHelperObject.h; sourceTree = "<group>"; };
 		37BE4F4B16BFC6CB0049C634 /* AKHelperObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKHelperObject.m; sourceTree = "<group>"; };
+		37D75639177438ED005ACE35 /* HeroComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroComponent.h; sourceTree = "<group>"; };
+		37D7563A177438ED005ACE35 /* HeroComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroComponent.m; sourceTree = "<group>"; };
+		37D7563C17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackWithThirtyAndDouble.h; sourceTree = "<group>"; };
+		37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackWithThirtyAndDouble.m; sourceTree = "<group>"; };
 		37D8329E17130EF2001A1C3A /* AppSpecificValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSpecificValues.h; sourceTree = "<group>"; };
 		37D8329F17130EF2001A1C3A /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
 		37D832A017130EF2001A1C3A /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
@@ -601,6 +614,14 @@
 		37DC0A9F17534F9B000656A6 /* DeadBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeadBomb.m; sourceTree = "<group>"; };
 		37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowlyHealSkill.h; sourceTree = "<group>"; };
 		37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowlyHealSkill.m; sourceTree = "<group>"; };
+		37DC7A3B17797DB2009E3E73 /* GUIButtonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIButtonComponent.h; sourceTree = "<group>"; };
+		37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIButtonComponent.m; sourceTree = "<group>"; };
+		37DC7A3E177981FC009E3E73 /* MagicComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicComponent.h; sourceTree = "<group>"; };
+		37DC7A3F177981FC009E3E73 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
+		37DC7A4117798221009E3E73 /* MagicSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSystem.h; sourceTree = "<group>"; };
+		37DC7A4217798221009E3E73 /* MagicSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSystem.m; sourceTree = "<group>"; };
+		37DC7A4417798806009E3E73 /* testMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testMagic.h; sourceTree = "<group>"; };
+		37DC7A4517798806009E3E73 /* testMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testMagic.m; sourceTree = "<group>"; };
 		37DCA5C716F1CBD90006D656 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
@@ -1711,6 +1732,8 @@
 		9B3881401676716D00E1FBF4 /* PassiveSkill */ = {
 			isa = PBXGroup;
 			children = (
+				37D7563C17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.h */,
+				37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */,
 				9B2040D0169F2F6D000EF31F /* BombPassiveSkill.h */,
 				9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */,
 				37E75127175CCB3B009AFEFB /* PeaceSkill.h */,
@@ -1727,8 +1750,6 @@
 				9B10C67D1677B1EB0026E796 /* RegenerationSkill.m */,
 				9B2C7865169ABA9900CA1A1C /* SlowMovePassiveSkill.h */,
 				9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */,
-				37E58E0E176B2E970094867E /* ReflectAttackWithThirtyAndDouble.h */,
-				37E58E0F176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m */,
 			);
 			name = PassiveSkill;
 			sourceTree = "<group>";
@@ -2092,13 +2113,19 @@
 				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
 				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
 				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
-				374140081772EBF200E6365A /* StateComponents */,
-				37E58E0B176B07AC0094867E /* HeroComponent.h */,
-				37E58E0C176B07AC0094867E /* HeroComponent.m */,
 				37E0A308177057E900503100 /* SelectableComponent.h */,
 				37E0A309177057E900503100 /* SelectableComponent.m */,
+				37D75639177438ED005ACE35 /* HeroComponent.h */,
+				37D7563A177438ED005ACE35 /* HeroComponent.m */,
 				37D97D34177198F600A2A7D6 /* MovePathComponent.h */,
 				37D97D35177198F600A2A7D6 /* MovePathComponent.m */,
+				374140081772EBF200E6365A /* StateComponents */,
+				376D3209177854B700949015 /* InformationComponent.h */,
+				376D320A177854B700949015 /* InformationComponent.m */,
+				37DC7A3B17797DB2009E3E73 /* GUIButtonComponent.h */,
+				37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */,
+				37DC7A3E177981FC009E3E73 /* MagicComponent.h */,
+				37DC7A3F177981FC009E3E73 /* MagicComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2122,6 +2149,8 @@
 				9B60DAE11747D4B20039A031 /* ProjectileSystem.m */,
 				37E42C37174E2C5F0010B9E9 /* EffectSystem.h */,
 				37E42C38174E2C5F0010B9E9 /* EffectSystem.m */,
+				37DC7A4117798221009E3E73 /* MagicSystem.h */,
+				37DC7A4217798221009E3E73 /* MagicSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -2597,6 +2626,8 @@
 				9B5CD31816ED148C00C8B007 /* DelegateSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
+				37DC7A4417798806009E3E73 /* testMagic.h */,
+				37DC7A4517798806009E3E73 /* testMagic.m */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -2953,14 +2984,19 @@
 				37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */,
 				37E1AE2B17673559003F1707 /* StealthComponent.m in Sources */,
 				37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */,
-				37E58E0D176B07AC0094867E /* HeroComponent.m in Sources */,
-				37E58E10176B2E970094867E /* ReflectAttackWithThirtyAndDouble.m in Sources */,
 				370C938A176F333900A6990D /* DrawPath.m in Sources */,
 				37E0A30A177057E900503100 /* SelectableComponent.m in Sources */,
 				37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */,
 				37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */,
 				374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */,
 				3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */,
+				37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */,
+				37D7563E17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m in Sources */,
+				376D320B177854B700949015 /* InformationComponent.m in Sources */,
+				37DC7A3D17797DB2009E3E73 /* GUIButtonComponent.m in Sources */,
+				37DC7A40177981FC009E3E73 /* MagicComponent.m in Sources */,
+				37DC7A4317798221009E3E73 /* MagicSystem.m in Sources */,
+				37DC7A4617798806009E3E73 /* testMagic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 #import "CharacterInitData.h"
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
+#import "RenderComponent.h"
 
 @implementation BattleStatusLayer
 
@@ -116,6 +117,12 @@
     for (SummonComponent *summon in player.battleTeam) {
         // hero
         summon.summon = YES;
+    }
+    
+    for (Entity *entity in player.magicTeam) {
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        renderCom.position = ccp(150,250);
+        [self addChild:renderCom.sprite];
     }
     
     // FIXME: Delete after test

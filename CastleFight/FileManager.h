@@ -14,7 +14,8 @@
 
 @property int userMoney;
 @property (readonly) NSArray *characterInitDatas;
-@property (nonatomic, readonly) NSArray *team;
+@property (nonatomic, readonly) NSArray *battleTeam;
+@property (nonatomic, readonly) NSArray *magicTeam;
 
 @property AchievementManager *achievementManager;
 //game center
