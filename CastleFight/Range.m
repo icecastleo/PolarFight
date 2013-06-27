@@ -127,7 +127,8 @@
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
     if (attackRange == nil) {
-        NSAssert(_rangeSprite.parent == renderCom.sprite.parent, @"Sprites must have the same parent! Might happen when a character hold a sprite as it's attack range");
+        CGRect entityBoundingBox = renderCom.sprite.boundingBox;
+        entityBoundingBox.origin = [_rangeSprite convertToNodeSpace:[renderCom.sprite.parent convertToWorldSpace:renderCom.sprite.position]];
         
         if (CGRectIntersectsRect(_rangeSprite.boundingBox, renderCom.sprite.boundingBox)) {
             return YES;
@@ -197,8 +198,8 @@
 //        RenderComponent *obj1RenderCom = (RenderComponent *)[obj1 getComponentOfClass:[RenderComponent class]];
 //        RenderComponent *obj2RenderCom = (RenderComponent *)[obj2 getComponentOfClass:[RenderComponent class]];
 //        
-//        float distance1 = ccpDistance(ownerRenderCom.sprite.position, obj1RenderCom.sprite.position);
-//        float distance2 = ccpDistance(ownerRenderCom.sprite.position, obj2RenderCom.sprite.position);
+//        float distance1 = ccpDistance(ownerRenderCom.position, obj1RenderCom.position);
+//        float distance2 = ccpDistance(ownerRenderCom.position, obj2RenderCom.position);
 //        
 //        if (distance1 < distance2) {
 //            return NSOrderedAscending;

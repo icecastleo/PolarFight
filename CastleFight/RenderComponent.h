@@ -9,9 +9,16 @@
 #import "Component.h"
 #import "cocos2d.h"
 
-@interface RenderComponent : Component
+@interface RenderComponent : Component {
+    CGPoint offset;
+    CGPoint shadowOffset;
+}
 
+// Used for position
+@property CCNode *node;
 @property CGPoint position;
+
+// Used for animation
 @property CCSprite *sprite;
 
 -(id)initWithSprite:(CCSprite *)sprite;

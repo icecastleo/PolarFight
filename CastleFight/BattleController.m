@@ -185,8 +185,7 @@ __weak static BattleController* currentInstance;
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
 //    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    
-    touchLocation = ccpSub(touchLocation, mapLayer.position);
+//    touchLocation = ccpSub(touchLocation, mapLayer.position);
     
     //start
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -195,13 +194,11 @@ __weak static BattleController* currentInstance;
         for (Entity *entity in array) {
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             
-            if (CGRectContainsPoint(renderCom.sprite.boundingBox, touchLocation)) {
+            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
                 self.selectedEntity = entity;
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
                 [selectCom show];
                 break;
-            }else {
-                self.selectedEntity = nil;
             }
         }
     }
@@ -210,13 +207,13 @@ __weak static BattleController* currentInstance;
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
     [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
-    [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
     
-    //move
+    // move
     if (!self.selectedEntity) {
         recognizer.cancelsTouchesInView = NO;
         return;
-    }else {
+    } else {
         recognizer.cancelsTouchesInView = YES;
         
         [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
@@ -226,7 +223,7 @@ __weak static BattleController* currentInstance;
         [mapLayer addChild: line z:0 tag:kDrawPathTag];
     }
     
-    //end
+    // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         [selectCom unSelected];

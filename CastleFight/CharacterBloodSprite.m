@@ -20,14 +20,12 @@
         TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
         NSAssert(team, @"Invalid entity!");
         
-        CCSprite *sprite = render.sprite;
-        
-        self.position = ccp(sprite.boundingBox.size.width/2, sprite.boundingBox.size.height + self.sprite.boundingBox.size.height*1.5);
+        self.position = ccp(0, render.sprite.boundingBox.size.height/2 + self.sprite.boundingBox.size.height*1.5);
         self.midpoint = ccp(0, 0);
         self.color = team.team == 1 ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
-        self.scaleX = sprite.boundingBox.size.width / self.sprite.boundingBox.size.width;
+        self.scaleX = render.sprite.boundingBox.size.width / self.sprite.boundingBox.size.width;
         self.visible = NO;
-        [sprite addChild:self];
+        [render.node addChild:self];
         
         CCSprite *background = [CCSprite spriteWithFile:@"blood_white.png"];
         background.position = ccp(self.sprite.boundingBox.size.width/2, self.sprite.boundingBox.size.height/2);
@@ -47,9 +45,9 @@
     
     [self stopAllActions];
     [self runAction:[CCSequence actions:[CCShow action],
-                                    [CCDelayTime actionWithDuration:2.0f],
-                                    [CCHide action],
-                                    nil]];
+                     [CCDelayTime actionWithDuration:2.0f],
+                     [CCHide action],
+                     nil]];
 }
 
 @end
