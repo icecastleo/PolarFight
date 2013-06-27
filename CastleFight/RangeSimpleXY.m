@@ -12,6 +12,7 @@
 #import "RenderComponent.h"
 #import "TeamComponent.h"
 #import "DirectionComponent.h"
+#import "CharacterComponent.h"
 @implementation RangeSimpleXY
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
@@ -25,6 +26,8 @@
     } else {
         radius = 50;
     }
+
+    // FIXME: attack range
     
     radius *= kScale;
     width = radius*2;
@@ -34,9 +37,13 @@
     CGPathAddArc(attackRange, NULL, width/2, height/2, radius, 90/(-2), 90/2, NO);
     CGPathCloseSubpath(attackRange);
     
-    yInterval=[NSArray arrayWithObjects:@0,@500,@1000, nil];
+    yInterval = [[NSMutableArray alloc] init];
     
+    for (int i = 1; i <= 3; i++) {
+        [yInterval addObject:[NSNumber numberWithInt:kMapPathFloor + kMapPathHeight * i]];
+    }
 }
+
 -(NSArray *)getEffectEntities {
     NSAssert([super owner], @"You must set an entity as range owner!");
     
@@ -64,15 +71,8 @@
     
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
-        NSArray *subArray = [detectedEntities subarrayWithRange:range];
-        for (Entity *entity in subArray) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
-        return subArray;
+        return [entities subarrayWithRange:range];
     } else {
-        for (Entity *entity in entities) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
         return entities;
     }
 }
@@ -89,26 +89,36 @@
     
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     RenderComponent *selfRenderCom = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    DirectionComponent *selfDirectionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
-    
-    int direction = selfDirectionCom.direction == kDirectionLeft ? -1 : 1;
+    DirectionComponent *directionCom = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
     
     CGPoint c1 = selfRenderCom.position;
     CGPoint c2 = renderCom.position;
     
-    if (![self checkInterval:c1.y another:c2.y]) {
-        return NO;
+    if(character){
+        if (![self checkInterval:c1.y another:c2.y]) {
+            return NO;
+        }
     }
+    int attackDistance = width/2/kScale + renderCom.sprite.boundingBox.size.width/2 + selfRenderCom.sprite.boundingBox.size.width/2;
+//    int attackDistance = width/2/kScale;
     
-    if((c2.x-c1.x)*direction <= width/2 && (c2.x-c1.x)*direction > 0) {
-        return YES;
+    if (directionCom.direction == kDirectionLeft) {
+        if (c2.x <= c1.x && (c1.x-c2.x) <= attackDistance) {
+            return YES;
+        } else {
+            return NO;
+        }
     } else {
-        return NO;
+        if (c2.x >= c1.x && (c2.x-c1.x) <= attackDistance) {
+            return YES;
+        } else {
+            return NO;
+        }
     }
 }
 
--(BOOL)checkInterval:(int)a another:(int)b
-{
+-(BOOL)checkInterval:(int)a another:(int)b {
     int region = 0;
     
     for ( ;region < yInterval.count; region++) {
@@ -119,13 +129,14 @@
     
     for (int i = 0; i <= region; i++) {
         if([[yInterval objectAtIndex:i] intValue] > b) {
-            if(i == region)
+            if(i == region) {
                 return YES;
+            } else {
+                return NO;
+            }
         }
     }
     return NO;
 }
-
-
 
 @end

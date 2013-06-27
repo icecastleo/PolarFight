@@ -82,8 +82,10 @@
                         
             animationCom.state = kAnimationStateAttack;
             
+            CCAnimationFrame *frame = [animation.frames lastObject];
+            
             CCSequence *attack = [CCSequence actions:
-                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - 1)*animation.delayPerUnit],
+                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - frame.delayUnits) * animation.delayPerUnit],
                                   [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
                                   nil];
             

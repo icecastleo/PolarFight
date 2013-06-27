@@ -87,8 +87,8 @@
             if (damage.damage > 0) {
                 [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
             }else {
-                int absDamage = abs(damage.damage);
-                [renderCom addFlashString:[NSString stringWithFormat:@"%d", absDamage] color:ccGREEN];
+                // FIXME: Move heal to else where?
+                [renderCom addFlashString:[NSString stringWithFormat:@"%d", abs(damage.damage)] color:ccGREEN];
             }
                         
 //            // Knock out effect

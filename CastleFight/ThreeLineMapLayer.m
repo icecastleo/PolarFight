@@ -7,23 +7,57 @@
 //
 
 #import "ThreeLineMapLayer.h"
+#import "RenderComponent.h"
+#import "TeamComponent.h"  
+#import "CharacterComponent.h"
 
 @implementation ThreeLineMapLayer
 
 -(void)setMap:(NSString *)name {
-    CCSprite *map1 = [CCSprite spriteWithFile:@"background.png"];
-    map1.anchorPoint = ccp(0, 0);
-    CCSprite *map1_1 = [CCSprite spriteWithFile:@"background.png"];
-    map1_1.anchorPoint = ccp(0, 0);
-    
+  
     CCParallaxNode *node = [CCParallaxNode node];
+    int repeat = 3;
     
-    [node addChild:map1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(0,0)];
-    [node addChild:map1_1 z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp(map1.boundingBox.size.width-1, 0)];
+    CCSprite *preloadMap = [CCSprite spriteWithFile:@"ice.png"];
+    int width = preloadMap.boundingBox.size.width;
+    int height = preloadMap.boundingBox.size.height;
     
+    for(int i = 0; i < repeat; i++) {
+        CCSprite *map = [CCSprite spriteWithFile:@"ice.png"];
+        map.anchorPoint = ccp(0, 0);
+        [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp((width-1)*i, 0)];
+    }
+
     [self addChild:node];
+    self.contentSize = CGSizeMake(width*repeat, height);
+}
+
+-(void)addEntity:(Entity *)entity {
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    NSAssert(render, @"Need render component to add on map!");
     
-    self.contentSize = CGSizeMake(map1.boundingBox.size.width*2, map1.boundingBox.size.height);
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    
+    CGPoint position;
+    
+    int line = arc4random_uniform(3);
+    
+    if (character) {
+        if (team.team == 1) {
+            position = ccp(kMapStartDistance, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
+        } else {
+            position = ccp(self.boundaryX - kMapStartDistance, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
+        }
+    } else {
+        // castle
+        if (team.team == 1) {
+            position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathFloor + kMapPathHeight/2);
+        } else {
+            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathFloor + kMapPathHeight/2);
+        }
+    }
+    [self addEntityWithPosition:entity toPosition:position];
 }
 
 @end

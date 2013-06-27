@@ -90,7 +90,7 @@
     
     NSMutableArray *detectedEntities = [NSMutableArray array];
     
-    //*
+    
     for (int i = 0; i < rawEntities.count; i++) {
         Entity *entity = rawEntities[i];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -102,21 +102,14 @@
         }
 //        DefenderComponent *defender = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
 //        CCLOG(@"%d: %d", i, defender.hp.currentValue);
-    }//*/
+    }
     
     NSArray *entities = [self sortEntities:detectedEntities];
     
     if (targetLimit > 0 && entities.count > targetLimit) {
         NSRange range = NSMakeRange(0, targetLimit);
-        NSArray *subArray = [entities subarrayWithRange:range];
-        for (Entity *entity in subArray) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
-        return subArray;
+        return [entities subarrayWithRange:range];
     } else {
-        for (Entity *entity in entities) {
-            [entity sendEvent:kEventBeDetected Message:self.owner];
-        }
         return entities;
     }
 }

@@ -8,10 +8,8 @@
 
 #import "Range.h"
 
-@interface RangeSimpleXY : Range
-{
-
-    NSArray *yInterval;
-    
+@interface RangeSimpleXY : Range {
+    NSMutableArray *yInterval;
 }
+
 @end

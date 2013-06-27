@@ -93,10 +93,10 @@
     }
 }
 
--(void)addBarrier:(Barrier *)barrier {
-    [barriers addObject:barrier];
-    [map addChild:barrier.sprite z:zOrder - barrier.position.y];
-}
+//-(void)addBarrier:(Barrier *)barrier {
+//    [barriers addObject:barrier];
+//    [map addChild:barrier.sprite z:zOrder - barrier.position.y];
+//}
 
 -(void)removeCharacter:(Character *)character {
     [_characters removeObject:character];

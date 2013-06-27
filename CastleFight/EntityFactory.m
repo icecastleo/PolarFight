@@ -52,8 +52,9 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"hero.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"building.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"combat.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/polar-bear.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"SpriteSheets/penguin.plist"];
+    
+    CCAnimationCache *cache = [CCAnimationCache sharedAnimationCache];
+	[cache addAnimationsWithFile:@"animations.plist"];
 }
 
 - (id)initWithEntityManager:(EntityManager *)entityManager {
@@ -72,22 +73,13 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
+       
+    CCSprite *sprite = nil;
     
-    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
-    
-    // for test
-    if ([name isEqualToString:@"enemy_01"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-01-00.png"];
-    } else if ([name isEqualToString:@"enemy_02"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-02-00.png"];
-    } else if ([name isEqualToString:@"enemy_03"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-03-00.png"];
-    } else if ([name isEqualToString:@"enemy_04"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"polar-bear-04-00.png"];
-    } else if ([name isEqualToString:@"user_01"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-01-00.png"];
-    } else if ([name isEqualToString:@"user_02"]) {
-        sprite = [CCSprite spriteWithSpriteFrameName:@"penguin-02-00.png"];
+    if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_move_01.png", name]];
+    } else {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_0.png", name]];
     }
     
     Entity *entity = [_entityManager createEntity];    
@@ -313,196 +305,36 @@
 -(NSMutableDictionary *)animationsByCharacterName:(NSString *)name {
     NSMutableDictionary *animations = [[NSMutableDictionary alloc] init];
     
-    // For test sprite
-    if ([name isEqualToString:@"enemy_01"]) {
-        CCAnimation *animation = [CCAnimation animation];
-        
-        for (int i = 0; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-01-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        [animations setObject:animation forKey:@"move"];
-
-        
-        animation = [CCAnimation animation];
-        
-        for (int i = 6; i <= 6; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-01-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.2;
-        
-        [animations setObject:animation forKey:@"attack"];
-        
-                
-        return animations;
-    }
-    
-    // For test sprite
-    if ([name isEqualToString:@"enemy_02"]) {
+    if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
         CCAnimation *animation = [CCAnimation animation];
         
         for (int i = 1; i <= 4; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_attack_%02d.png", name, i]]];
         }
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.1;
-        [animations setObject:animation forKey:@"move"];
-
-        // attack
-        animation = [CCAnimation animation];
-        
-        for (int i = 5; i <= 6; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
-        }
-        
-        for (int i = 5; i <= 6; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
-        }
-        
-        for (int i = 5; i <= 6; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-02-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        
         [animations setObject:animation forKey:@"attack"];
         
-        return animations;
-    }
-    
-    if ([name isEqualToString:@"enemy_03"]) {
-        CCAnimation *animation = [CCAnimation animation];
-        
-        for (int i = 0; i <= 2; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-03-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        [animations setObject:animation forKey:@"move"];
-        
-        // attack
         animation = [CCAnimation animation];
         
-        for (int i = 3; i <= 7; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-03-%02d.png", i]]];
+        for (int i = 1; i <= 2; i++) {
+            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_move_%02d.png", name, i]]];
         }
         
         animation.restoreOriginalFrame = YES;
         animation.delayPerUnit = 0.2;
-        
-        [animations setObject:animation forKey:@"attack"];
-        
-        return animations;
-    }
-    
-    if ([name isEqualToString:@"enemy_04"]) {
-        CCAnimation *animation = [CCAnimation animation];
-        
-        for (int i = 0; i <= 4; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
         [animations setObject:animation forKey:@"move"];
-        
-        // attack
-        animation = [CCAnimation animation];
-        
-        for (int i = 5; i <= 8; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"polar-bear-04-%02d.png", i]]];
-        }
-    
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.075;
-        
-        [animations setObject:animation forKey:@"attack"];
-        
-        return animations;
-    }
-    
-    // For test sprite
-    if ([name isEqualToString:@"user_01"]) {
-        CCAnimation *animation = [CCAnimation animation];
-        
-        for (int i = 0; i <= 3; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.1;
-        [animations setObject:animation forKey:@"move"];
-        
-        
-        animation = [CCAnimation animation];
-        
-        for (int i = 4; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-01-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.2;
-        [animations setObject:animation forKey:@"attack"];
-        
-        return animations;
-    }
-    
-    if ([name isEqualToString:@"user_02"]) {
-        CCAnimation *animation = [CCAnimation animation];
-        
-        for (int i = 0; i <= 5; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
-        }
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.3;
-        
-        [animations setObject:animation forKey:@"move"];
-        
-        animation = [CCAnimation animation];
-        
-        for (int i = 6; i <= 9; i++) {
-            [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-%02d.png", i]]];
-        }
-        
-        // FIXME: Seperate by 2 skill?
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"penguin-02-09.png"]]];
-        
-        animation.restoreOriginalFrame = YES;
-        animation.delayPerUnit = 0.5;
-        [animations setObject:animation forKey:@"attack"];
-        
-        return animations;
-    }
 
-    CCAnimation *animation = [CCAnimation animation];
-    
-    for (int i = 1; i <= 4; i++) {
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_attack_%02d.png", name, i]]];
+    } else {
+        CCAnimationCache *cache = [CCAnimationCache sharedAnimationCache];
+        
+        CCAnimation *move = [cache animationByName:[NSString stringWithFormat:@"%@_move", name]];
+        CCAnimation *attack = [cache animationByName:[NSString stringWithFormat:@"%@_attack", name]];
+        
+        [animations setObject:move forKey:@"move"];
+        [animations setObject:attack forKey:@"attack"];
     }
-    
-    animation.restoreOriginalFrame = YES;
-    animation.delayPerUnit = 0.1;
-    
-    [animations setObject:animation forKey:@"attack"];
-    
-    animation = [CCAnimation animation];
-    
-    for (int i = 1; i <= 2; i++) {
-        [animation addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"%@_move_%02d.png", name, i]]];
-    }
-    
-    animation.delayPerUnit = 0.2;
-    
-    [animations setObject:animation forKey:@"move"];
     
     return animations;
 }

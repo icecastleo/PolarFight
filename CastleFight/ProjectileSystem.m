@@ -52,13 +52,15 @@
 
 -(void)projectEvent:(ProjectileEvent *)event {
     if (event.type == kProjectileTypeLine) {
-        
+        [self lineProject:event];
     } else if (event.type == kProjectileTypeParabola) {
         [self parabolaProject:event];
     } else {
         NSAssert(NO, @"Invalid type");
     }
 }
+
+#pragma mark - Project formula
 
 -(void)lineProject:(ProjectileEvent *)event {
     event.range.rangeSprite.position = event.startPosition;

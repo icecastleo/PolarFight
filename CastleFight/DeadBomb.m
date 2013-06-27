@@ -15,7 +15,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@80,kRangeKeyRadius,nil];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@30,kRangeKeyRadius,nil];
         
         range = [Range rangeWithParameters:dictionary];
         self.cooldown = 1.5;
