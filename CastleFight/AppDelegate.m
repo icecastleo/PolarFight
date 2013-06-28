@@ -18,13 +18,7 @@
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
-- (void)applicationDidFinishLaunching:(UIApplication *)application  
-{
-    CCLOG(@"Start Use Flurry");
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [Flurry startSession:@"YP9HHC7MV4NRFXWQY6NM"];
-    [Flurry setCrashReportingEnabled:YES];
-}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -127,7 +121,12 @@
     // A notification method must be set to retrieve the fullscreen ad object.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDailyRewardAd:) name:TJC_DAILY_REWARD_RESPONSE_NOTIFICATION object:nil];
     //[FileManager sharedFileManager].userMoney+=100;
-       
+    
+    CCLOG(@"Start Use Flurry");
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [Flurry startSession:@"YP9HHC7MV4NRFXWQY6NM"];
+    [Flurry setCrashReportingEnabled:YES];
+    
 	return YES;
 }
 
