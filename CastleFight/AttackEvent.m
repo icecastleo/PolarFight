@@ -30,10 +30,12 @@
         _isIgnoreDefense = NO;
         _customDamage = NO;
         
-        RenderComponent *render = (RenderComponent *)[_attacker getComponentOfClass:[RenderComponent class]];
+        RenderComponent *render = (RenderComponent *)[_defender getComponentOfClass:[RenderComponent class]];
         if (render) {
-            // Set dafault attack position as attack position.
-            _position = render.sprite.position;
+            NSAssert(render.sprite.anchorPoint.x == 0.5 && render.sprite.anchorPoint.y == 0.5, @"It's recommended not to change the anchor point, and let the position to be the center of sprite!");
+            
+            // Set dafault event position as defender's sprite position.
+            _position = [render.node.parent convertToWorldSpace:render.node.position];
         }
     }
     return self;
@@ -46,9 +48,9 @@
     
     if (self.isIgnoreDefense && self.isCustomDamage) {
         return self.customDamage;
-    }else if (self.isIgnoreDefense) {
+    } else if (self.isIgnoreDefense) {
         return _attack.attack.value;
-    }else if (self.isCustomDamage) {
+    } else if (self.isCustomDamage) {
         return self.customDamage - defense;
     }
     

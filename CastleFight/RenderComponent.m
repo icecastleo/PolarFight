@@ -14,36 +14,51 @@
 
 -(id)initWithSprite:(CCSprite *)sprite {
     if ((self = [super init])) {
+        _node = [CCNode node];
         _sprite = sprite;
-        [self addShadow];
+        
+        // We only use y offset
+        offset = ccp(0, _sprite.offsetPosition.y);
+        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height/kShadowHeightDivisor/4);
+        
+        [_node addChild:sprite];
+        
+        if (kShadowVisible) {
+            [self addShadow];
+        }
     }
     return self;
 }
 
 -(void)addShadow {
-    CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width / kShadowWidthDivisor * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height/kShadowHeightDivisor * CC_CONTENT_SCALE_FACTOR()));
+    CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width/kShadowWidthDivisor * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height/kShadowHeightDivisor * CC_CONTENT_SCALE_FACTOR()));
     
     size_t bitsPerComponent = 8;
-    size_t bytesPerPixel    = 4;
-    size_t bytesPerRow      = (sRect.size.width * bitsPerComponent * bytesPerPixel + 7) / 8;
+    size_t bytesPerPixel = 4;
+    size_t bytesPerRow = (sRect.size.width * bitsPerComponent * bytesPerPixel + 7)/8;
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(nil, sRect.size.width, sRect.size.height, bitsPerComponent, bytesPerRow, imageColorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGContextSetRGBFillColor(context, 0.1, 0.1, 0.1, 0.6);
+    CGContextSetRGBFillColor(context, 0.35, 0.35, 0.35, 1);
     
     CGContextFillEllipseInRect(context, sRect);
     
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     
     CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
-    shadow.position = ccp(_sprite.boundingBox.size.width/2, sRect.size.height / 4);
-    [_sprite addChild:shadow z:-1];
+    shadow.position = ccpAdd(offset, shadowOffset);
+    [_node addChild:shadow z:-1];
 }
 
 -(void)setPosition:(CGPoint)position {
     @synchronized(self) {
         _position = position;
-        _sprite.position = ccp(position.x, position.y - _sprite.boundingBox.size.height/kShadowHeightDivisor/2 + _sprite.boundingBox.size.height/2);
+        
+        if (kShadowPosition) {
+            _node.position = ccpSub(ccpSub(position, offset), shadowOffset);
+        } else {
+            _node.position = ccpSub(position, offset);
+        }
     }
 }
 
@@ -56,9 +71,9 @@
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color {
     CCLabelTTF *label = [CCLabelBMFont labelWithString:string fntFile:@"WhiteFont.fnt"];
     label.color = color;
-    label.position =  ccp(self.sprite.boundingBox.size.width/2, self.sprite.boundingBox.size.height);
+    label.position =  ccp(0, _sprite.boundingBox.size.height/2);
     label.anchorPoint = CGPointMake(0.5, 0);
-    [self.sprite addChild:label];
+    [_node addChild:label];
     
     [label runAction:
      [CCSequence actions:

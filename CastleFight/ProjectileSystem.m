@@ -77,25 +77,23 @@
 -(void)parabolaProject:(ProjectileEvent *)event {
     event.range.rangeSprite.position = event.startPosition;
     
-    CGFloat startAngle = event.startPosition.x > event.endPosition.x ? 135 : 45;
-    CGFloat endAngle = event.startPosition.x > event.endPosition.x ? 225 : 315;
-    
     float sx = event.startPosition.x;
     float sy = event.startPosition.y;
     float ex = event.endPosition.x;
     float ey = event.endPosition.y;
+    
+    int height = (ex-sx)/2 + (ey-sy)/2;
+    
+    CCBezierTo *actionMove = [CCJumpTo actionWithDuration:event.time position:event.endPosition height:height jumps:1];
+    
+    CGFloat startAngle = event.startPosition.x > event.endPosition.x ? 135 : 45;
+    CGFloat endAngle = event.startPosition.x > event.endPosition.x ? 225 : 315;
     
     startAngle = 270 - startAngle;
     endAngle = 270 - endAngle;
     
     event.range.rangeSprite.rotation = startAngle;
     
-    ccBezierConfig bezier;
-    bezier.controlPoint_1 = event.startPosition; // start point
-    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5 + 125); // control point
-    bezier.endPosition = event.endPosition; // end point
-    
-    CCBezierTo *actionMove = [CCBezierTo actionWithDuration:event.time bezier:bezier];
     CCRotateTo *actionRotate =[CCRotateTo actionWithDuration:event.time angle:endAngle];
     
     CCAction *action = [CCSequence actions:

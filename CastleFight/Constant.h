@@ -13,6 +13,12 @@
 
 #define kScale [[UIScreen mainScreen] scale]
 
+// For map
+#define kMapPathFloor 60
+#define kMapPathHeight 70
+#define kMapPathRandomHeight 15
+#define kMapStartDistance 175
+
 // For Character make collision CGPath
 #define kCollisionPointRange 25
 
@@ -35,6 +41,11 @@
 // For character move
 #define kMoveMultiplier 5
 
+// Shadow
+#define kShadowPosition YES
+#define kShadowVisible YES
+
+// Divisor can't be 0
 #define kShadowWidthDivisor 2
 #define kShadowHeightDivisor 8
 

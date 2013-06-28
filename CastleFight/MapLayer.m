@@ -17,18 +17,8 @@
 
 @dynamic maxChildZ;
 
-static float scale;
-const static int castleDistance = 200;
-const static int pathSizeHeight = 25;
-const static int pathHeight = 70;
-
-+(void)initialize {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
-    } else {
-        scale = 1.0;
-    }
-}
+//const int pathSizeHeight = 25;
+const static int pathSizeHeight = 40;
 
 -(id)initWithName:(NSString *)name {
     if(self = [super init]) {
@@ -87,9 +77,7 @@ const static int pathHeight = 70;
 
 -(void)addEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    if (!render) {
-        return;
-    }
+    NSAssert(render, @"Need render component to add on map!");
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
@@ -98,32 +86,27 @@ const static int pathHeight = 70;
     
     if (character) {
         if (team.team == 1) {
-            position = ccp(castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+            position = ccp(kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         } else {
-            position = ccp(self.boundaryX - castleDistance, arc4random_uniform(pathSizeHeight) + pathHeight);
+            position = ccp(self.boundaryX - kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         }
     } else {
         // castle
         if (team.team == 1) {
-            position = ccp(castleDistance, pathHeight + pathSizeHeight/2);
-            render.sprite.anchorPoint = ccp(1, 0.5);
+            position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
         } else {
-            position = ccp(self.boundaryX - castleDistance, pathHeight + pathSizeHeight / 2);
-            render.sprite.anchorPoint = ccp(0, 0.5);
+            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
         }
     }
-    [self addEntityWithPosition:entity toPosition:position];
-    
+    [self addEntity:entity toPosition:position];
 }
 
--(void) addEntityWithPosition:(Entity *)entity toPosition:(CGPoint)position{
+-(void)addEntity:(Entity *)entity toPosition:(CGPoint)position {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    if (!render) {
-        return;
-    }
+    NSAssert(render, @"Need render component to add on map!");
     
     [self moveEntity:entity toPosition:position boundaryLimit:YES];
-    [self addChild:render.sprite];
+    [self addChild:render.node];
 }
 
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
@@ -131,9 +114,9 @@ const static int pathHeight = 70;
         position = [self getPositionInBoundary:position forEntity:entity];
     }
     
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    renderCom.position = position;
-    [self reorderChild:renderCom.sprite z:self.boundaryY - renderCom.position.y];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    render.position = position;
+    [self reorderChild:render.node z:self.boundaryY - render.position.y];
 }
 
 -(void)moveEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
@@ -141,15 +124,15 @@ const static int pathHeight = 70;
         return;
     }
     
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    [self moveEntity:entity toPosition:ccpAdd(renderCom.position, position) boundaryLimit:limit];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    [self moveEntity:entity toPosition:ccpAdd(render.position, position) boundaryLimit:limit];
 }
 
 -(CGPoint)getPositionInBoundary:(CGPoint)position forEntity:(Entity *)entity {
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    float halfWidth = renderCom.sprite.boundingBox.size.width/kShadowWidthDivisor/2;
-    float halfHeight = renderCom.sprite.boundingBox.size.height/kShadowHeightDivisor/2;
+    float halfWidth = render.sprite.boundingBox.size.width/kShadowWidthDivisor/2;
+    float halfHeight = render.sprite.boundingBox.size.height/kShadowHeightDivisor/2;
     
     return ccp(MIN( MAX(halfWidth, position.x), self.boundaryX - halfWidth), MIN( MAX(halfHeight, position.y), self.boundaryY - halfHeight));
 }
@@ -181,6 +164,8 @@ const static int pathHeight = 70;
 
 
 -(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
+    // FIXME: Replace by entity action
+    
     if (position.x == 0 && position.y == 0) {
         return;
     }
@@ -191,16 +176,16 @@ const static int pathHeight = 70;
     if (limit) {
         newPos = [self getPositionInBoundary:newPos forEntity:entity];
     }
-    CGPoint spritePosition = ccpAdd(renderCom.sprite.position, ccpAdd(newPos, ccpMult(renderCom.position, -1))) ;
+    
+    CGPoint nodePosition = ccpAdd(renderCom.node.position, ccpSub(newPos, renderCom.position)) ;
     
     CCAction *action = [CCSequence actions:
-                        [CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:knockOutCom.animationDuration position:spritePosition] rate:2.0],
+                        [CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:knockOutCom.animationDuration position:nodePosition] rate:2.0],
                         [CCCallBlock actionWithBlock:^{
-                            renderCom.position = newPos;
-                            [self reorderChild:renderCom.sprite z:self.boundaryY - renderCom.position.y];
-                    }], nil];
+                            [self moveEntity:entity toPosition:newPos boundaryLimit:NO];
+                        }], nil];
     
-    [renderCom.sprite runAction:action];
+    [renderCom.node runAction:action];
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import "ActiveSkillSystem.h"
 #import "ActiveSkillComponent.h"
-#import "RenderComponent.h"
 #import "AnimationComponent.h"
 
 @implementation ActiveSkillSystem

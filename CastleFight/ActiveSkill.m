@@ -41,30 +41,28 @@
         if (rangeSprite) {
             NSAssert(rangeSprite.parent == nil, @"Do you set the owner twice?");
             
-            RenderComponent *renderCom = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
-            NSAssert(renderCom, @"You can't set an eitity without RenderComponent as owner!");
+            RenderComponent *render = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
+            NSAssert(render, @"You can't set an eitity without RenderComponent as owner!");
             
             // Not needed for circle range
 //            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
             
-            rangeSprite.zOrder = -1;
             rangeSprite.visible = NO;
-            rangeSprite.position = ccp(renderCom.sprite.boundingBox.size.width/2, renderCom.sprite.boundingBox.size.height/2);
-            [renderCom.sprite addChild:rangeSprite];
+            [render.node addChild:rangeSprite z:-5];
         }
     }
 }
 
 -(void)active {
-    RenderComponent *renderCom = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
-    NSAssert(renderCom, @"You can't active skill without render component currently!");
+    RenderComponent *render = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
+    NSAssert(render, @"You can't active skill without render component currently!");
     
 //    state = kCharacterStateUseSkill;
     
     if (_cooldown != 0) {
         _canActive = NO;
         
-        [renderCom.sprite runAction:
+        [render.node runAction:
          [CCSequence actions:
           [CCDelayTime actionWithDuration:_cooldown],
           [CCCallBlock actionWithBlock:^{
@@ -78,12 +76,14 @@
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
         if (animation) {
-            [renderCom.sprite stopActionByTag:kAnimationActionTag];
+            [render.sprite stopActionByTag:kAnimationActionTag];
                         
             animationCom.state = kAnimationStateAttack;
             
+            CCAnimationFrame *frame = [animation.frames lastObject];
+            
             CCSequence *attack = [CCSequence actions:
-                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - 1)*animation.delayPerUnit],
+                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - frame.delayUnits) * animation.delayPerUnit],
                                   [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
                                   nil];
             
@@ -97,7 +97,7 @@
             CCAction *action = [CCSpawn actions:attack, animate, nil];
             
             action.tag = kAnimationActionTag;
-            [renderCom.sprite runAction:action];
+            [render.sprite runAction:action];
             
 //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
             return;

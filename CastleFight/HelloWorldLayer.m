@@ -97,9 +97,6 @@
         menu.position = CGPointZero;
         
         [self addChild:menu];
-        
-        
-        
 	}
 	return self;
 }

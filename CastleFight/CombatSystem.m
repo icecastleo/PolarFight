@@ -86,9 +86,9 @@
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             if (damage.damage > 0) {
                 [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
-            }else {
-                int absDamage = abs(damage.damage);
-                [renderCom addFlashString:[NSString stringWithFormat:@"%d", absDamage] color:ccGREEN];
+            } else {
+                // FIXME: Move heal to else where?
+                [renderCom addFlashString:[NSString stringWithFormat:@"%d", abs(damage.damage)] color:ccGREEN];
             }
                         
 //            // Knock out effect
@@ -123,16 +123,17 @@
 
 -(void)runDamageAnimationForEntity:(Entity *)entity withDamage:(Damage *)damage {
     RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    CCSprite *entitySprite = renderCom.sprite;
+    CCNode *node = renderCom.node;
     
     if (damage.damage > 0) {
         CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"hit_01.png"];
         
         if (damage.source == kDamageSourceRanged) {
-            sprite.position = [entitySprite convertToNodeSpace:damage.position];
-        } else {
-            sprite.position = ccp(entitySprite.boundingBox.size.width/2, entitySprite.boundingBox.size.height/2);
+            sprite.position = [node convertToNodeSpace:damage.position];
         }
+//        else {
+//            sprite.position = ccp(0, 0);
+//        }
         
         CCAction *action = [CCSequence actions:
                             [CCFadeOut actionWithDuration:0.5f],
@@ -141,9 +142,10 @@
         }], nil];
         
         [sprite runAction:action];
-        [entitySprite addChild:sprite];
+        [node addChild:sprite];
     }
     
+    // TODO: Damage sound effect
 //    if ([character.characterId hasPrefix:@"4"]) {
 //        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_building_damage.caf"];
 //    } else {
@@ -152,23 +154,27 @@
 }
 
 -(void)runDeadAnimationForEntity:(Entity *)entity {
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    CCSprite *sprite = renderCom.sprite;
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
+    CCSprite *sprite = render.sprite;
     [sprite stopAllActions];
-    [sprite removeAllChildrenWithCleanup:YES];
+    
+    for (CCNode *children in render.node.children) {
+        if (children != sprite) {
+            [children removeFromParentAndCleanup:YES];
+        }
+    }
     
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
-    emitter.position = ccp(sprite.boundingBox.size.width/2, sprite.boundingBox.size.height/2);
     emitter.positionType = kCCPositionTypeRelative;
     emitter.autoRemoveOnFinish = YES;
-    [sprite addChild:emitter];
+    [render.node addChild:emitter];
     
     [sprite runAction:
      [CCSequence actions:
       [CCFadeOut actionWithDuration:1.0f],
       [CCCallBlock actionWithBlock:^{
-         [sprite removeFromParentAndCleanup:YES];
+         [render.node removeFromParentAndCleanup:YES];
      }], nil]];
 }
 
