@@ -41,6 +41,11 @@
 // For character move
 #define kMoveMultiplier 5
 
+// Shadow
+#define kShadowPosition YES
+#define kShadowVisible YES
+
+// Divisor can't be 0
 #define kShadowWidthDivisor 2
 #define kShadowHeightDivisor 8
 

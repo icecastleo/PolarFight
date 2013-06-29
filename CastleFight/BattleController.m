@@ -192,31 +192,18 @@ __weak static BattleController* currentInstance;
     //    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-    CGPoint mapLocation = ccpSub(touchLocation, mapLayer.position);
-    
     //start
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
         
         for (Entity *entity in array) {
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-            GUIButtonComponent *guiCom = (GUIButtonComponent *)[entity getComponentOfClass:[GUIButtonComponent class]];
             
-            CGPoint location;
-            
-            if (!guiCom) {
-                location = mapLocation;
-            }else {
-                location = touchLocation;
-            }
-            
-            if (CGRectContainsPoint(renderCom.sprite.boundingBox, location)) {
+            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
                 self.selectedEntity = entity;
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
                 [selectCom show];
                 break;
-            }else {
-                self.selectedEntity = nil;
             }
         }
     }
@@ -224,20 +211,10 @@ __weak static BattleController* currentInstance;
     NSMutableArray *path = [[NSMutableArray alloc] init];
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
-    GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-    
-    CGPoint location;
-    
-    if (!guiCom) {
-        location = mapLocation;
-    }else {
-        location = touchLocation;
-    }
-    
     [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
-    [path addObject:[NSValue valueWithCGPoint:(location)]];
+    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
     
-    //move
+    // move
     if (!self.selectedEntity) {
         recognizer.cancelsTouchesInView = NO;
         return;
@@ -261,7 +238,7 @@ __weak static BattleController* currentInstance;
         }
     }
     
-    //end
+    // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         [selectCom unSelected];
@@ -270,7 +247,7 @@ __weak static BattleController* currentInstance;
         
         // do not need start point.
         [path removeAllObjects];
-        [path addObject:[NSValue valueWithCGPoint:(mapLocation)]];
+        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
             [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];

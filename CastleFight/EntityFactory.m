@@ -86,9 +86,13 @@
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
+    
     [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
+    [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
+    [entity addComponent:[[DirectionComponent alloc] initWithVelocity:ccp(team == 1 ? 1 : -1, 0)]];    
+        
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
     
@@ -102,9 +106,6 @@
     [entity addComponent:[[ProjectileComponent alloc] init]];
     
     [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
-    
-    [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
-    [entity addComponent:[[DirectionComponent alloc] initWithVelocity:ccp(team == 1 ? 1 : -1, 0)]];
     
     // FIXME: Add price to character data
     [entity addComponent:[[UpgradePriceComponent alloc]
@@ -152,7 +153,7 @@
         [entity addComponent:pathCom];
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
-    }else {
+    } else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
     
@@ -189,9 +190,10 @@
     Entity *entity = [_entityManager createEntity];
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
+    
     [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:nil]];
-    
+
 //    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
 //                          [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
     
@@ -219,7 +221,6 @@
 -(Entity *)createPlayerForTeam:(int)team {
     Entity *entity = [_entityManager createEntity];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
-    
     
     // TODO: Set by file
     PlayerComponent *player = [[PlayerComponent alloc] init];

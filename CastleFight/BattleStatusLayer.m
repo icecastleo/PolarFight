@@ -119,11 +119,11 @@
         summon.summon = YES;
     }
     
-    for (Entity *entity in player.magicTeam) {
-        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-        renderCom.position = ccp(150,250);
-        [self addChild:renderCom.sprite];
-    }
+//    for (Entity *entity in player.magicTeam) {
+//        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+//        renderCom.position = ccp(150,250);
+//        [self addChild:renderCom.sprite];
+//    }
     
     // FIXME: Delete after test
     CCMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:nil];

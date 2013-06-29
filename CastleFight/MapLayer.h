@@ -23,7 +23,7 @@
 -(void)setMap:(NSString *)name;
 
 -(void)addEntity:(Entity *)entity;
--(void)addEntityWithPosition:(Entity *)entity toPosition:(CGPoint)position;
+-(void)addEntity:(Entity *)entity toPosition:(CGPoint)position;
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
 -(void)moveEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit;
 -(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit;

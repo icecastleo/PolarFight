@@ -39,7 +39,7 @@
         RenderComponent *renderComAttacker = (RenderComponent *)[event.sender getComponentOfClass:[RenderComponent class]];
         RenderComponent *renderComSelf = (RenderComponent *)[event.receiver getComponentOfClass:[RenderComponent class]];
         DirectionComponent *directionComSelf = (DirectionComponent *)[event.receiver getComponentOfClass:[DirectionComponent class]];
-        CGPoint direction = ccpNormalize(ccpSub(renderComAttacker.sprite.position, renderComSelf.sprite.position));
+        CGPoint direction = ccpNormalize(ccpSub(renderComAttacker.position, renderComSelf.position));
         directionComSelf.velocity = direction;
     }
 }

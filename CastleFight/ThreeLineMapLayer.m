@@ -57,7 +57,7 @@
             position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathFloor + kMapPathHeight/2);
         }
     }
-    [self addEntityWithPosition:entity toPosition:position];
+    [self addEntity:entity toPosition:position];
 }
 
 @end
