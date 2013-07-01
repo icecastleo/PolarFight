@@ -89,8 +89,10 @@ __weak static BattleController* currentInstance;
         
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", prefix]];
         
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [[CCDirector sharedDirector].view addGestureRecognizer:pan];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPress.minimumPressDuration = 0.0f;
+        
+        [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
     }
     return self;
 }
@@ -180,14 +182,17 @@ __weak static BattleController* currentInstance;
 
 -(void)dealloc {
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
+        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+    }
 }
 
-#pragma mark UIPanGestureRecognizer
+#pragma mark UILongPressGestureRecognizer
 
-- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+- (IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-//    CGPoint touchLocation = [recognizer translationInView:recognizer.view];
+    
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     //start
@@ -206,57 +211,53 @@ __weak static BattleController* currentInstance;
         }
     }
     
-    NSMutableArray *path = [[NSMutableArray alloc] init];
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
-    
-    [path addObject:[NSValue valueWithCGPoint:(renderCom.position)]];
-    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
     
     // move
     if (!self.selectedEntity) {
         recognizer.cancelsTouchesInView = NO;
         return;
-    } else {
-        recognizer.cancelsTouchesInView = YES;
-        
-        DrawPath *line = [DrawPath node];
-        line.path = path;
-        
-        GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-        
-        if (!guiCom) {
-            [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            [mapLayer addChild: line z:0 tag:kDrawPathTag];
-        }else {
+    }else {
+        if (recognizer.state == UIGestureRecognizerStateChanged) {
+            recognizer.cancelsTouchesInView = YES;
+            
+            NSMutableArray *drawPath = [[NSMutableArray alloc] init];
+            [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
+            [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+            
+            DrawPath *line = [DrawPath node];
+            line.path = drawPath;
+            
             [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
             [statusLayer addChild: line z:0 tag:kDrawPathTag];
         }
-        
     }
     
     // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
+        [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+        
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         [selectCom unSelected];
         
         MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
         
         // do not need start point.
-        [path removeAllObjects];
+        NSMutableArray *path = [[NSMutableArray alloc] init];
         [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
-            [mapLayer removeChildByTag:kDrawPathTag cleanup:YES];
             [pathCom.path removeAllObjects];
             [pathCom.path addObjectsFromArray:path];
         }else {
-            [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-            InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-            if (guiCom && infoCom) {
-                NSString *magicKey = [infoCom informationForKey:@"name"];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
-                [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+            if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+                GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
+                InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
+                if (guiCom && infoCom) {
+                    NSString *magicKey = [infoCom informationForKey:@"name"];
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
+                    [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+                }
             }
         }
         

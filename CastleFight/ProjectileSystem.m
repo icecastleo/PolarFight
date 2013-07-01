@@ -105,9 +105,18 @@
 }
 
 -(CCAction *)finishAction:(ProjectileEvent *)event {
-    return [CCCallBlock actionWithBlock:^{
+    CCAction *action;
+    CCAction *callBack = [CCCallBlock actionWithBlock:^{
         [finishEvents addObject:event];
     }];
+    
+    if(event.finishAction){
+        action = [CCSequence actions:event.finishAction,callBack,nil];;
+    }else {
+        action = callBack;
+    }
+    
+    return action;
 }
 
 -(void)updateEvent:(ProjectileEvent *)event {
