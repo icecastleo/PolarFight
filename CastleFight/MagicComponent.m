@@ -2,12 +2,12 @@
 //  MagicComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/6/25.
+//  Created by  浩翔 on 13/6/25.
 //
 //
 
 #import "MagicComponent.h"
-#import "testMagic.h"
+#import "Magic.h"
 
 @implementation MagicComponent
 
@@ -22,7 +22,7 @@
 -(void)setEntity:(Entity *)entity {
     [super setEntity:entity];
     
-    for (testMagic *magic in _magics.allValues) {
+    for (Magic *magic in _magics.allValues) {
         magic.owner = entity;
     }
 }
@@ -31,9 +31,9 @@
     if (type == kEventSendMagicEvent) {
         if([message isKindOfClass:[NSDictionary class]]) {
             NSString *magicKey = [message objectForKey:@"name"];
-            testMagic *testM = [self.magics objectForKey:magicKey];
-            [testM setInformation:message];
-            [self.magicQueue addObject:testM];
+            Magic *magic = [self.magics objectForKey:magicKey];
+            [magic setInformation:message];
+            [self.magicQueue addObject:magic];
         }
     }
 }

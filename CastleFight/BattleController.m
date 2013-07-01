@@ -33,10 +33,10 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
-#import "GUIButtonComponent.h"
 #import "InformationComponent.h"
 #import "MagicSystem.h"
 #import "ThreeLineRandomLayer.h"
+
 @interface BattleController () {
     NSString *battleName;
     
@@ -251,9 +251,8 @@ __weak static BattleController* currentInstance;
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
                 InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-                if (guiCom && infoCom) {
+                if (infoCom) {
                     NSString *magicKey = [infoCom informationForKey:@"name"];
                     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
                     [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];

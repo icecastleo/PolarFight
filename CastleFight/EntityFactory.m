@@ -39,7 +39,6 @@
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "GUIButtonComponent.h"
 #import "MagicComponent.h"
 
 @implementation EntityFactory {
@@ -295,8 +294,6 @@
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
     [entity addComponent:[[SelectableComponent alloc] init]];
-    
-    [entity addComponent:[[GUIButtonComponent alloc] init]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     

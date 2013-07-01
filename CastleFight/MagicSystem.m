@@ -2,14 +2,14 @@
 //  MagicSystem.m
 //  CastleFight
 //
-//  Created by  DAN on 13/6/25.
+//  Created by  浩翔 on 13/6/25.
 //
 //
 
 #import "MagicSystem.h"
 #import "MapLayer.h"
 #import "MagicComponent.h"
-#import "testMagic.h"
+#import "Magic.h"
 
 @implementation MagicSystem
 
@@ -25,7 +25,7 @@
     
     for (Entity *entity in entities) {
         MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
-        for (testMagic *magic in magicCom.magicQueue) {
+        for (Magic *magic in magicCom.magicQueue) {
             magic.map = self.map;
             [magic active];
         }

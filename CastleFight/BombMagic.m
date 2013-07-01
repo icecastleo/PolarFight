@@ -1,19 +1,19 @@
 //
-//  testMagic.m
+//  BombMagic.m
 //  CastleFight
 //
-//  Created by  DAN on 13/6/25.
+//  Created by  浩翔 on 13/6/25.
 //
 //
 
-#import "testMagic.h"
+#import "BombMagic.h"
 #import "ProjectileEvent.h"
 #import "ProjectileRange.h"
 #import "ProjectileComponent.h"
 #import "AttackerComponent.h"
 #import "AccumulateAttribute.h"
 
-@implementation testMagic
+@implementation BombMagic
 
 -(void)active {
     if (!self.map || !self.information) {
@@ -31,6 +31,7 @@
     
     ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
+    //FIXME: get damage from information.
     NSDictionary *dic = [NSDictionary dictionaryWithObject:@"100" forKey:@"c"];
 
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
