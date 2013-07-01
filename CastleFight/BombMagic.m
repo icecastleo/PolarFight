@@ -27,15 +27,16 @@
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"nicefire.png",kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[self.information objectForKey:@"image"],kRangeKeySpriteFile,nil];
     
     ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
-    //FIXME: get damage from information.
-    NSDictionary *dic = [NSDictionary dictionaryWithObject:@"100" forKey:@"c"];
-
+    NSDictionary *damageDic = [self.information objectForKey:@"damage"];
+    Attribute *damage = [[AccumulateAttribute alloc] initWithDictionary:damageDic];
+    [damage updateValueWithLevel:[[self.information objectForKey:@"level"] intValue]];
+    
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
-                          [[AccumulateAttribute alloc] initWithDictionary:dic]];
+                          damage];
     
     ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeLine startPosition:startPoint endPosition:ccp(startPoint.x+0.1f,startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
         

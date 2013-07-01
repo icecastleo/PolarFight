@@ -10,8 +10,8 @@
 
 @interface InformationComponent : Component
 
--(id)initWithInformation:(NSDictionary *)info;
+@property (nonatomic,readonly) NSDictionary *information;
 
--(NSString *)informationForKey:(NSString *)key;
+-(id)initWithInformation:(NSDictionary *)info;
 
 @end

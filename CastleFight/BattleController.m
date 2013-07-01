@@ -253,8 +253,8 @@ __weak static BattleController* currentInstance;
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
                 InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
                 if (infoCom) {
-                    NSString *magicKey = [infoCom informationForKey:@"name"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
+                    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:infoCom.information];
+                    [dic setObject:path forKey:@"path"];
                     [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
                 }
             }

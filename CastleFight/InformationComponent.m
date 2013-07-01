@@ -8,10 +8,6 @@
 
 #import "InformationComponent.h"
 
-@interface InformationComponent()
-@property (nonatomic,readonly) NSDictionary *information;
-@end
-
 @implementation InformationComponent
 
 -(id)initWithInformation:(NSDictionary *)info {
@@ -19,10 +15,6 @@
         _information = info;
     }
     return self;
-}
-
--(NSString *)informationForKey:(NSString *)key {
-    return [self.information objectForKey:key];
 }
 
 @end

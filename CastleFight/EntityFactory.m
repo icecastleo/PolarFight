@@ -254,7 +254,7 @@
             [player.magicTeam addObject:magicButton];
             
             InformationComponent *infoCom = (InformationComponent *)[magicButton getComponentOfClass:[InformationComponent class]];
-            NSString *name = [infoCom informationForKey:@"name"];
+            NSString *name = [infoCom.information objectForKey:@"name"];
             NSAssert(NSClassFromString(name), @"you forgot to make this skill.");
             [magicCom.magics setObject:[[NSClassFromString(name) alloc] init] forKey:name];
         }
@@ -279,12 +279,12 @@
     
     NSString *name = [characterData objectForKey:@"name"];
     int cost = [[characterData objectForKey:@"cost"] intValue];
-    NSDictionary *information = [characterData objectForKey:@"information"];
+    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
     
-    //magic button image
-//    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_01.png", name]];
-
-    CCSprite *sprite = [CCSprite spriteWithFile:@"nicefire.png"];
+    [information setObject:name forKey:@"name"];
+    [information setObject:[NSNumber numberWithInt:level] forKey:@"level"];
+    
+    CCSprite *sprite = [CCSprite spriteWithFile:[information objectForKey:@"buttonImage"]];
     
     Entity *entity = [_entityManager createEntity];
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
