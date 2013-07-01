@@ -27,7 +27,7 @@
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"nicefire.png",kRangeKeySpriteFile,[NSNumber numberWithBool:YES],kRangeKeyIsPiercing,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"nicefire.png",kRangeKeySpriteFile,nil];
     
     ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
