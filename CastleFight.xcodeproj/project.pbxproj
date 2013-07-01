@@ -19,6 +19,10 @@
 		2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D918CEA1761D3C3002EE90C /* libFlurry.a */; };
+		2D9A4828177DA1BD007A3C76 /* ThreeLineRandomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */; };
+		2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */; };
+		2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482C177ECFF2007A3C76 /* rightarrow.png */; };
+		2D9A4831177ED2DF007A3C76 /* UnitStockMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A4830177ED2DE007A3C76 /* UnitStockMenuItem.m */; };
 		2DD7058C16511724001E3155 /* RangeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7058B16511724001E3155 /* RangeLine.m */; };
 		370C938A176F333900A6990D /* DrawPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 370C9389176F333900A6990D /* DrawPath.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
@@ -309,8 +313,6 @@
 		9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3E4D251675F004000CFFFB /* libcocos2d.a */; };
 		9B406F74176251E3008B840F /* SpriteSheets in Resources */ = {isa = PBXBuildFile; fileRef = 9B406F73176251E2008B840F /* SpriteSheets */; };
 		9B514DED1688541A00359C2A /* Damage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B514DEC1688541900359C2A /* Damage.m */; };
-		9B5427AB17743D97000E69BE /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5427A817743D97000E69BE /* HeroComponent.m */; };
-		9B5427AC17743D97000E69BE /* ReflectAttackWithThirtyAndDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5427AA17743D97000E69BE /* ReflectAttackWithThirtyAndDouble.m */; };
 		9B55BB9E173254CB0030C9D7 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB8B173254CB0030C9D7 /* Component.m */; };
 		9B55BBB7173255090030C9D7 /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBAA173255090030C9D7 /* System.m */; };
 		9B55BBC2173267470030C9D7 /* CharacterComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBC1173267470030C9D7 /* CharacterComponent.m */; };
@@ -471,6 +473,12 @@
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D918CE91761D3C3002EE90C /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		2D918CEA1761D3C3002EE90C /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		2D9A4826177DA1BC007A3C76 /* ThreeLineRandomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeLineRandomLayer.h; sourceTree = "<group>"; };
+		2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeLineRandomLayer.m; sourceTree = "<group>"; };
+		2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightarrow-hd.png"; sourceTree = "<group>"; };
+		2D9A482C177ECFF2007A3C76 /* rightarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow.png; sourceTree = "<group>"; };
+		2D9A482F177ED2DD007A3C76 /* UnitStockMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitStockMenuItem.h; sourceTree = "<group>"; };
+		2D9A4830177ED2DE007A3C76 /* UnitStockMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitStockMenuItem.m; sourceTree = "<group>"; };
 		2DA446BD16E4A59F00BDC060 /* BaseAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAI.h; sourceTree = "<group>"; };
 		2DA446BE16E4A59F00BDC060 /* BaseAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAI.m; sourceTree = "<group>"; };
 		2DA446C016E4A6E400BDC060 /* SimpleAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAI.h; sourceTree = "<group>"; };
@@ -580,8 +588,6 @@
 		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
-		37598BDC1696D2550007013B /* CharacterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInfoView.h; sourceTree = "<group>"; };
-		37598BDD1696D2550007013B /* CharacterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInfoView.m; sourceTree = "<group>"; };
 		376D3209177854B700949015 /* InformationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationComponent.h; sourceTree = "<group>"; };
 		376D320A177854B700949015 /* InformationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationComponent.m; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -1291,6 +1297,8 @@
 				9B82F78F164FB2780001A357 /* TiledMapLayer.m */,
 				9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */,
 				9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */,
+				2D9A4826177DA1BC007A3C76 /* ThreeLineRandomLayer.h */,
+				2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */,
 			);
 			name = MapLayer;
 			sourceTree = "<group>";
@@ -1641,6 +1649,8 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */,
+				2D9A482C177ECFF2007A3C76 /* rightarrow.png */,
 				9B406F69176240B8008B840F /* Assets */,
 				9B98481516EDD27600D3D55D /* bg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
@@ -2304,6 +2314,8 @@
 				374EEAC616A4228000374659 /* PauseLayer.m */,
 				9B6EA71316F1FAED00C61AD9 /* UnitMenuItem.h */,
 				9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */,
+				2D9A482F177ED2DD007A3C76 /* UnitStockMenuItem.h */,
+				2D9A4830177ED2DE007A3C76 /* UnitStockMenuItem.m */,
 			);
 			name = BattleScene;
 			sourceTree = "<group>";
@@ -2866,6 +2878,8 @@
 				9BFE1C3D177891E6002433E5 /* weapon-hd.png in Resources */,
 				9BFE1C3E177891E6002433E5 /* weapon-ipadhd.png in Resources */,
 				9BFE1C3F177891E6002433E5 /* weapon.png in Resources */,
+				2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */,
+				2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3023,6 +3037,8 @@
 				37DC7A40177981FC009E3E73 /* MagicComponent.m in Sources */,
 				37DC7A4317798221009E3E73 /* MagicSystem.m in Sources */,
 				37DC7A4617798806009E3E73 /* testMagic.m in Sources */,
+				2D9A4828177DA1BD007A3C76 /* ThreeLineRandomLayer.m in Sources */,
+				2D9A4831177ED2DF007A3C76 /* UnitStockMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

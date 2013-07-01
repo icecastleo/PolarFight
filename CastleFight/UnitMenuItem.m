@@ -11,8 +11,14 @@
 #import "SimpleAudioEngine.h"
 #import "FileManager.h"
 #import "SummonComponent.h"
+#import "PlayerComponent.h"
+#import "TeamComponent.h"
+#import "EntityFactory.h"
+#import "Entity.h"
+#import "PlayerSystem.h"
 
 @implementation UnitMenuItem
+
 
 -(id)initWithSummonComponent:(SummonComponent *)summon {
     if (summon == nil || summon.data.level == 0) {
@@ -25,7 +31,7 @@
     
     if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[summon.data.cid intValue]]]
                             selectedSprite:nil disabledSprite:nil block:^(id sender) {
-                                summon.summon = YES;
+                                [self SummonExecute:summon];
                             }]) {
         
         CCLabelBMFont *costLabel = [[CCLabelBMFont alloc] initWithString:[[NSNumber numberWithInt:summon.cost] stringValue] fntFile:@"font/cooper_20_o.fnt"];
@@ -57,5 +63,41 @@
     }
     return self;
 }
+-(void) updateWithoutSummon:(SummonComponent*)summon
+{
+    
+    
+    if (summon.isCostSufficient) {
+        self.isEnabled = YES;
+        self.mask.visible = NO;
+    } else {
+        self.isEnabled = NO;
+        self.mask.visible = YES;
+    }
+     CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
+    
+}
+
+-(void) updateSummon:(SummonComponent*)summon
+{
+    if(summon.isCostSufficient)
+    {
+        self.isEnabled = YES;
+        self.mask.visible = NO;
+    } else {
+        self.isEnabled = NO;
+        self.mask.visible = YES;
+    }
+    
+    CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
+    if(summon.cooldown==summon.currentCooldown)
+        [self.timer runAction:[CCProgressFromTo actionWithDuration:summon.cooldown from:100 to:0]];
+}
+
+-(void) SummonExecute:(SummonComponent*)summon
+{
+    summon.summon=YES;
+}
+
 
 @end

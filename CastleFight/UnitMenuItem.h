@@ -12,12 +12,13 @@
 @class SummonComponent;
 
 @interface UnitMenuItem : CCMenuItemSprite {
-    
+
 }
 
 @property (readonly) CCSprite *mask;
 @property (readonly) CCProgressTimer *timer;
 
 -(id)initWithSummonComponent:(SummonComponent *)summon;
-
+-(void) updateSummon:(SummonComponent *)summon;
+-(void) updateWithoutSummon:(SummonComponent *)summon;
 @end

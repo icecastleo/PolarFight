@@ -9,5 +9,7 @@
 #import "MapLayer.h"
 
 @interface ThreeLineMapLayer : MapLayer
-   
+
+-(void)addEntity:(Entity *)entity line:(int)line;
+-(void)addEntity:(Entity *)entity;
 @end

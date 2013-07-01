@@ -83,6 +83,7 @@
         
         [self addChild:startSprite];
         
+     
         float width = size.width - startMenuItem.boundingBox.size.width;
         float height = startMenuItem.boundingBox.size.height;
         startMenuItem.position = ccp(width, height);
@@ -93,7 +94,18 @@
         height = background.boundingBox.size.height - gameCenterMenuItem.boundingBox.size.height;
         gameCenterMenuItem.position = ccp(width, height);
         
-        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, nil];
+        CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_down.png"] block:^(id sender) {
+                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
+             [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:1 suffix:1]];
+        }];
+        
+      
+        
+        testMenuItem.position=ccp(testMenuItem.boundingBox.size.width,testMenuItem.boundingBox.size.height);
+        
+        
+        
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem,testMenuItem, nil];
         menu.position = CGPointZero;
         
         [self addChild:menu];

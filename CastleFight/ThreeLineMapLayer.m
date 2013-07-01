@@ -32,16 +32,18 @@
     self.contentSize = CGSizeMake(width*repeat, height);
 }
 
--(void)addEntity:(Entity *)entity {
+-(void)addEntity:(Entity *)entity line:(int)line
+{
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
+    
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
     
     CGPoint position;
     
-    int line = arc4random_uniform(3);
+    
     
     if (character) {
         if (team.team == 1) {
@@ -58,6 +60,12 @@
         }
     }
     [self addEntity:entity toPosition:position];
+}
+
+-(void)addEntity:(Entity *)entity {
+   
+    int line = arc4random_uniform(3);
+    [self addEntity:entity line:line];
 }
 
 @end

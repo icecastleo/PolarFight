@@ -36,7 +36,7 @@
 #import "GUIButtonComponent.h"
 #import "InformationComponent.h"
 #import "MagicSystem.h"
-
+#import "ThreeLineRandomLayer.h"
 @interface BattleController () {
     NSString *battleName;
     
@@ -64,7 +64,7 @@ __weak static BattleController* currentInstance;
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[ThreeLineRandomLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         entityManager = [[EntityManager alloc] init];
