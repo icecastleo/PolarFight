@@ -109,6 +109,9 @@
         menu.position = CGPointZero;
         
         [self addChild:menu];
+        
+        BOOL temp = CGRectIntersectsRect(CGRectMake(286, 171, 20, 4), CGRectMake(305, 113, 74, 102));
+        CCLOG(@"Temp : %d",temp);
 	}
 	return self;
 }

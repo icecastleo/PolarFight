@@ -74,7 +74,7 @@
         self.isEnabled = NO;
         self.mask.visible = YES;
     }
-     CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
+//     CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
     
 }
 
@@ -89,7 +89,7 @@
         self.mask.visible = YES;
     }
     
-    CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
+//    CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
     if(summon.cooldown==summon.currentCooldown)
         [self.timer runAction:[CCProgressFromTo actionWithDuration:summon.cooldown from:100 to:0]];
 }

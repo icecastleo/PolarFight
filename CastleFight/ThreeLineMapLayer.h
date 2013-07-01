@@ -10,6 +10,7 @@
 
 @interface ThreeLineMapLayer : MapLayer
 
--(void)addEntity:(Entity *)entity line:(int)line;
 -(void)addEntity:(Entity *)entity;
+-(void)addEntity:(Entity *)entity line:(int)line;
+
 @end
