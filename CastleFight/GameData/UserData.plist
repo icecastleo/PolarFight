@@ -108,6 +108,12 @@
 			<key>level</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>id</key>
+			<string>902</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>properties</key>
 	<array>

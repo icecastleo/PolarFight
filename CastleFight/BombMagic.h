@@ -6,7 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "Magic.h"
 
 @interface BombMagic : Magic
