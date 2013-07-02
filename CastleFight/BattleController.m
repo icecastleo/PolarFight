@@ -35,7 +35,6 @@
 #import "MovePathComponent.h"
 #import "MagicSystem.h"
 #import "MagicComponent.h"
-#import "ThreeLineRandomLayer.h"
 
 @interface BattleController () {
     NSString *battleName;
@@ -244,13 +243,16 @@ __weak static BattleController* currentInstance;
         
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
-        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
             [pathCom.path removeAllObjects];
+            //move uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+                // projectile event uses world location.
+                [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
                 MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
                     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", magicCom.name,@"name", magicCom,@"MagicComponent",nil];

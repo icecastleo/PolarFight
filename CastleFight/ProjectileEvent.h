@@ -30,6 +30,7 @@ typedef enum {
 @property (nonatomic) CCFiniteTimeAction *finishAction;
 @property (nonatomic) BOOL isFinish;
 
+
 -(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startWorldPosition:(CGPoint)startPosition endWorldPosition:(CGPoint)endPosition time:(float)time block:(void(^)(NSArray *entities, CGPoint position))block;
 
 @end

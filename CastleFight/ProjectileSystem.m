@@ -68,15 +68,12 @@
 #pragma mark - Project formula
 
 -(void)lineProject:(ProjectileEvent *)event {
-    event.range.rangeSprite.position = event.startPosition;
-    [event.range setDirection:ccpSub(event.endPosition, event.startPosition)];
-    
+    [event.range setDirection:ccpSub(event.endWorldPosition, event.startWorldPosition)];
+        
     CCAction *action = [CCSequence actions:
-                        [CCSpawn actions:[CCMoveTo actionWithDuration:event.time position:event.endPosition], event.middleAction, nil]
-                        ,
+                        [CCSpawn actions:[CCMoveBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition)], event.middleAction, nil],
                         [self finishAction:event],
                         nil];
-
     
     [event.range.rangeSprite runAction:action];
 }
