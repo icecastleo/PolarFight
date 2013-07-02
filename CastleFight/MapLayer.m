@@ -131,10 +131,18 @@ const static int pathSizeHeight = 40;
 -(CGPoint)getPositionInBoundary:(CGPoint)position forEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    float halfWidth = render.sprite.boundingBox.size.width/kShadowWidthDivisor/2;
-    float halfHeight = render.sprite.boundingBox.size.height/kShadowHeightDivisor/2;
+    float Width = 0;
+    float Height = 0;
     
-    return ccp(MIN( MAX(halfWidth, position.x), self.boundaryX - halfWidth), MIN( MAX(halfHeight, position.y), self.boundaryY - halfHeight));
+    if ([render hasShadow] && kShadowPositionEnable) {
+        Width = render.shadow.boundingBox.size.width/2;
+        Height = render.shadow.boundingBox.size.height/2;
+    } else {
+        Width = render.sprite.boundingBox.size.width/2;
+        Height = render.sprite.boundingBox.size.height/2;
+    }
+    
+    return ccp(MIN( MAX(Width, position.x), self.boundaryX - Width), MIN( MAX(Height, position.y), self.boundaryY - Height));
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

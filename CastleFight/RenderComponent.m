@@ -19,19 +19,15 @@
         
         // We only use y offset
         offset = ccp(0, _sprite.offsetPosition.y);
-        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height/kShadowHeightDivisor/4);
+        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
         
         [_node addChild:sprite];
-        
-        if (kShadowVisible) {
-            [self addShadow];
-        }
     }
     return self;
 }
 
 -(void)addShadow {
-    CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width/kShadowWidthDivisor * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height/kShadowHeightDivisor * CC_CONTENT_SCALE_FACTOR()));
+    CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width * kShadowWidthScale * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height *kShadowHeightScale * CC_CONTENT_SCALE_FACTOR()));
     
     size_t bitsPerComponent = 8;
     size_t bytesPerPixel = 4;
@@ -45,16 +41,20 @@
     
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     
-    CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
-    shadow.position = ccpAdd(offset, shadowOffset);
-    [_node addChild:shadow z:-1];
+    _shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
+    _shadow.position = ccpAdd(offset, shadowOffset);
+    [_node addChild:_shadow z:-1];
+}
+
+-(BOOL)hasShadow {
+    return _shadow != nil;
 }
 
 -(void)setPosition:(CGPoint)position {
     @synchronized(self) {
         _position = position;
         
-        if (kShadowPosition) {
+        if ([self hasShadow] && kShadowPositionEnable) {
             _node.position = ccpSub(ccpSub(position, offset), shadowOffset);
         } else {
             _node.position = ccpSub(position, offset);

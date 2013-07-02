@@ -2366,7 +2366,7 @@
 		<key>images</key>
 		<dict>
 			<key>projectileImage</key>
-			<string>lightning.png</string>
+			<string>LightningMagic.png</string>
 		</dict>
 		<key>information</key>
 		<dict>

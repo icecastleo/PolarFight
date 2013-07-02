@@ -20,9 +20,12 @@
 
 // Used for animation
 @property CCSprite *sprite;
+@property CCSprite *shadow;
 
 -(id)initWithSprite:(CCSprite *)sprite;
 
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color;
+-(void)addShadow;
+-(BOOL)hasShadow;
 
 @end

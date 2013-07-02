@@ -43,12 +43,12 @@
 #define kMoveMultiplier 5
 
 // Shadow
-#define kShadowPosition YES
-#define kShadowVisible YES
+#define kShadowPositionEnable YES
+//#define kShadowVisible YES
 
 // Divisor can't be 0
-#define kShadowWidthDivisor 2
-#define kShadowHeightDivisor 8
+#define kShadowWidthScale 0.75
+#define kShadowHeightScale 0.125
 
 #define kDrawPathTag 9876
 

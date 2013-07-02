@@ -87,7 +87,10 @@
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    [render addShadow];
+    [entity addComponent:render];
+    
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
     [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
@@ -191,7 +194,10 @@
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    [render addShadow];
+    [entity addComponent:render];
+    
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:nil]];
 
 //    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
