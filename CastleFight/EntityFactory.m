@@ -39,7 +39,7 @@
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "GUIButtonComponent.h"
+#import "MagicSkillComponent.h"
 #import "MagicComponent.h"
 
 @implementation EntityFactory {
@@ -247,20 +247,19 @@
             [player.battleTeam addObject:summon];
         }
         
-        MagicComponent *magicCom = [[MagicComponent alloc] init];
+        MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
         NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
         
         for (CharacterInitData *data in magicTeamInitData) {
             Entity *magicButton = [self createMagicButton:data.cid level:data.level];
             [player.magicTeam addObject:magicButton];
             
-            InformationComponent *infoCom = (InformationComponent *)[magicButton getComponentOfClass:[InformationComponent class]];
-            NSString *name = [infoCom informationForKey:@"name"];
-            NSAssert(NSClassFromString(name), @"you forgot to make this skill.");
-            [magicCom.magics setObject:[[NSClassFromString(name) alloc] init] forKey:name];
+            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfClass:[MagicComponent class]];
+            NSAssert(NSClassFromString(magicCom.name), @"you forgot to make this skill.");
+            [magicSkillCom.magics setObject:[[NSClassFromString(magicCom.name) alloc] init] forKey:magicCom.name];
         }
         
-        [entity addComponent:magicCom];
+        [entity addComponent:magicSkillCom];
         
         [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                               nil]];
@@ -277,26 +276,23 @@
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level {
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
-    
-    NSString *name = [characterData objectForKey:@"name"];
+    NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
     int cost = [[characterData objectForKey:@"cost"] intValue];
-    NSDictionary *information = [characterData objectForKey:@"information"];
+    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
     
-    //magic button image
-//    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_01.png", name]];
-
-    CCSprite *sprite = [CCSprite spriteWithFile:@"nicefire.png"];
+    //FIXME: change to correct name
+    NSString *magicButtonName = [NSString stringWithFormat:@"%@_button.png",[information objectForKey:@"name"]];
+    CCSprite *sprite = [CCSprite spriteWithFile:magicButtonName];
     
     Entity *entity = [_entityManager createEntity];
-    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
+    
+    [entity addComponent:[[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]]];
     
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
     [entity addComponent:[[SelectableComponent alloc] init]];
-    
-    [entity addComponent:[[GUIButtonComponent alloc] init]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     

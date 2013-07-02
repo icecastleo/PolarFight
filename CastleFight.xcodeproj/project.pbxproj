@@ -111,6 +111,8 @@
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
 		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
+		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
+		37486B3C1781C2880011F3DB /* LightningMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B3B1781C2880011F3DB /* LightningMagic.m */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		376D320B177854B700949015 /* InformationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D320A177854B700949015 /* InformationComponent.m */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
@@ -131,10 +133,8 @@
 		37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9F17534F9B000656A6 /* DeadBomb.m */; };
 		37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
 		37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */; };
-		37DC7A3D17797DB2009E3E73 /* GUIButtonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */; };
-		37DC7A40177981FC009E3E73 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A3F177981FC009E3E73 /* MagicComponent.m */; };
 		37DC7A4317798221009E3E73 /* MagicSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A4217798221009E3E73 /* MagicSystem.m */; };
-		37DC7A4617798806009E3E73 /* testMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A4517798806009E3E73 /* testMagic.m */; };
+		37DC7A4617798806009E3E73 /* BombMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC7A4517798806009E3E73 /* BombMagic.m */; };
 		37DCA5C916F1CBD90006D656 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DCA5C816F1CBD90006D656 /* FileManager.m */; };
 		37DD1C5D168D96560058E450 /* WhiteFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5B168D96560058E450 /* WhiteFont.fnt */; };
 		37DD1C5E168D96560058E450 /* WhiteFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DD1C5C168D96560058E450 /* WhiteFont.png */; };
@@ -147,6 +147,19 @@
 		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
+		37E0A1DB1782E2EC00A54599 /* AttackBonusMultiplierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1CA1782E2EC00A54599 /* AttackBonusMultiplierComponent.m */; };
+		37E0A1DC1782E2EC00A54599 /* AuraComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1CC1782E2EC00A54599 /* AuraComponent.m */; };
+		37E0A1DD1782E2EC00A54599 /* KnockOutComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1CE1782E2EC00A54599 /* KnockOutComponent.m */; };
+		37E0A1DE1782E2EC00A54599 /* MagicSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1D01782E2EC00A54599 /* MagicSkillComponent.m */; };
+		37E0A1DF1782E2EC00A54599 /* ParalysisComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1D21782E2EC00A54599 /* ParalysisComponent.m */; };
+		37E0A1E01782E2EC00A54599 /* PoisonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1D41782E2EC00A54599 /* PoisonComponent.m */; };
+		37E0A1E11782E2EC00A54599 /* SpeedBonusAddComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1D61782E2EC00A54599 /* SpeedBonusAddComponent.m */; };
+		37E0A1E21782E2EC00A54599 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1D81782E2EC00A54599 /* StateComponent.m */; };
+		37E0A1E31782E2EC00A54599 /* StealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1DA1782E2EC00A54599 /* StealthComponent.m */; };
+		37E0A1EA1782E38B00A54599 /* BombMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E0A1E71782E38B00A54599 /* BombMagic_button.png */; };
+		37E0A1EB1782E38B00A54599 /* LightningMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E0A1E81782E38B00A54599 /* LightningMagic_button.png */; };
+		37E0A1EC1782E38B00A54599 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E0A1E91782E38B00A54599 /* LightningMagic.png */; };
+		37E0A1EF1782E69D00A54599 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A1EE1782E69D00A54599 /* MagicComponent.m */; };
 		37E0A30A177057E900503100 /* SelectableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* SelectableComponent.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
@@ -583,6 +596,10 @@
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
 		3741400A1772F49F00E6365A /* AIStateHeroAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroAttack.h; sourceTree = "<group>"; };
 		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
+		37486B371781951D0011F3DB /* Magic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magic.h; sourceTree = "<group>"; };
+		37486B381781951D0011F3DB /* Magic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magic.m; sourceTree = "<group>"; };
+		37486B3A1781C2880011F3DB /* LightningMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightningMagic.h; sourceTree = "<group>"; };
+		37486B3B1781C2880011F3DB /* LightningMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightningMagic.m; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		376D3209177854B700949015 /* InformationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationComponent.h; sourceTree = "<group>"; };
@@ -622,14 +639,10 @@
 		37DC0A9F17534F9B000656A6 /* DeadBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeadBomb.m; sourceTree = "<group>"; };
 		37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowlyHealSkill.h; sourceTree = "<group>"; };
 		37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowlyHealSkill.m; sourceTree = "<group>"; };
-		37DC7A3B17797DB2009E3E73 /* GUIButtonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIButtonComponent.h; sourceTree = "<group>"; };
-		37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIButtonComponent.m; sourceTree = "<group>"; };
-		37DC7A3E177981FC009E3E73 /* MagicComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicComponent.h; sourceTree = "<group>"; };
-		37DC7A3F177981FC009E3E73 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
 		37DC7A4117798221009E3E73 /* MagicSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSystem.h; sourceTree = "<group>"; };
 		37DC7A4217798221009E3E73 /* MagicSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSystem.m; sourceTree = "<group>"; };
-		37DC7A4417798806009E3E73 /* testMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testMagic.h; sourceTree = "<group>"; };
-		37DC7A4517798806009E3E73 /* testMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testMagic.m; sourceTree = "<group>"; };
+		37DC7A4417798806009E3E73 /* BombMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombMagic.h; sourceTree = "<group>"; };
+		37DC7A4517798806009E3E73 /* BombMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombMagic.m; sourceTree = "<group>"; };
 		37DCA5C716F1CBD90006D656 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		37DCA5C816F1CBD90006D656 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		37DD1C5B168D96560058E450 /* WhiteFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhiteFont.fnt; sourceTree = "<group>"; };
@@ -668,6 +681,29 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
+		37E0A1C91782E2EC00A54599 /* AttackBonusMultiplierComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackBonusMultiplierComponent.h; sourceTree = "<group>"; };
+		37E0A1CA1782E2EC00A54599 /* AttackBonusMultiplierComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackBonusMultiplierComponent.m; sourceTree = "<group>"; };
+		37E0A1CB1782E2EC00A54599 /* AuraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraComponent.h; sourceTree = "<group>"; };
+		37E0A1CC1782E2EC00A54599 /* AuraComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraComponent.m; sourceTree = "<group>"; };
+		37E0A1CD1782E2EC00A54599 /* KnockOutComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutComponent.h; sourceTree = "<group>"; };
+		37E0A1CE1782E2EC00A54599 /* KnockOutComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutComponent.m; sourceTree = "<group>"; };
+		37E0A1CF1782E2EC00A54599 /* MagicSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSkillComponent.h; sourceTree = "<group>"; };
+		37E0A1D01782E2EC00A54599 /* MagicSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSkillComponent.m; sourceTree = "<group>"; };
+		37E0A1D11782E2EC00A54599 /* ParalysisComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisComponent.h; sourceTree = "<group>"; };
+		37E0A1D21782E2EC00A54599 /* ParalysisComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisComponent.m; sourceTree = "<group>"; };
+		37E0A1D31782E2EC00A54599 /* PoisonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonComponent.h; sourceTree = "<group>"; };
+		37E0A1D41782E2EC00A54599 /* PoisonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonComponent.m; sourceTree = "<group>"; };
+		37E0A1D51782E2EC00A54599 /* SpeedBonusAddComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedBonusAddComponent.h; sourceTree = "<group>"; };
+		37E0A1D61782E2EC00A54599 /* SpeedBonusAddComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedBonusAddComponent.m; sourceTree = "<group>"; };
+		37E0A1D71782E2EC00A54599 /* StateComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateComponent.h; sourceTree = "<group>"; };
+		37E0A1D81782E2EC00A54599 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
+		37E0A1D91782E2EC00A54599 /* StealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthComponent.h; sourceTree = "<group>"; };
+		37E0A1DA1782E2EC00A54599 /* StealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthComponent.m; sourceTree = "<group>"; };
+		37E0A1E71782E38B00A54599 /* BombMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BombMagic_button.png; sourceTree = "<group>"; };
+		37E0A1E81782E38B00A54599 /* LightningMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightningMagic_button.png; sourceTree = "<group>"; };
+		37E0A1E91782E38B00A54599 /* LightningMagic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightningMagic.png; sourceTree = "<group>"; };
+		37E0A1ED1782E69C00A54599 /* MagicComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicComponent.h; sourceTree = "<group>"; };
+		37E0A1EE1782E69D00A54599 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
 		37E0A308177057E900503100 /* SelectableComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableComponent.h; sourceTree = "<group>"; };
 		37E0A309177057E900503100 /* SelectableComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableComponent.m; sourceTree = "<group>"; };
 		37E0DB821714285A0039C94C /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -1526,6 +1562,29 @@
 			path = libs/SneakyJoystick;
 			sourceTree = "<group>";
 		};
+		37E0A1C81782E2A800A54599 /* StateComponent */ = {
+			isa = PBXGroup;
+			children = (
+				37E0A1C91782E2EC00A54599 /* AttackBonusMultiplierComponent.h */,
+				37E0A1CA1782E2EC00A54599 /* AttackBonusMultiplierComponent.m */,
+				37E0A1CB1782E2EC00A54599 /* AuraComponent.h */,
+				37E0A1CC1782E2EC00A54599 /* AuraComponent.m */,
+				37E0A1CD1782E2EC00A54599 /* KnockOutComponent.h */,
+				37E0A1CE1782E2EC00A54599 /* KnockOutComponent.m */,
+				37E0A1D11782E2EC00A54599 /* ParalysisComponent.h */,
+				37E0A1D21782E2EC00A54599 /* ParalysisComponent.m */,
+				37E0A1D31782E2EC00A54599 /* PoisonComponent.h */,
+				37E0A1D41782E2EC00A54599 /* PoisonComponent.m */,
+				37E0A1D51782E2EC00A54599 /* SpeedBonusAddComponent.h */,
+				37E0A1D61782E2EC00A54599 /* SpeedBonusAddComponent.m */,
+				37E0A1D71782E2EC00A54599 /* StateComponent.h */,
+				37E0A1D81782E2EC00A54599 /* StateComponent.m */,
+				37E0A1D91782E2EC00A54599 /* StealthComponent.h */,
+				37E0A1DA1782E2EC00A54599 /* StealthComponent.m */,
+			);
+			name = StateComponent;
+			sourceTree = "<group>";
+		};
 		37E0DB81171428410039C94C /* Rating */ = {
 			isa = PBXGroup;
 			children = (
@@ -2151,10 +2210,10 @@
 				37D97D35177198F600A2A7D6 /* MovePathComponent.m */,
 				376D3209177854B700949015 /* InformationComponent.h */,
 				376D320A177854B700949015 /* InformationComponent.m */,
-				37DC7A3B17797DB2009E3E73 /* GUIButtonComponent.h */,
-				37DC7A3C17797DB2009E3E73 /* GUIButtonComponent.m */,
-				37DC7A3E177981FC009E3E73 /* MagicComponent.h */,
-				37DC7A3F177981FC009E3E73 /* MagicComponent.m */,
+				37E0A1CF1782E2EC00A54599 /* MagicSkillComponent.h */,
+				37E0A1D01782E2EC00A54599 /* MagicSkillComponent.m */,
+				37E0A1ED1782E69C00A54599 /* MagicComponent.h */,
+				37E0A1EE1782E69D00A54599 /* MagicComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2315,6 +2374,9 @@
 		9B98481E16EDD87400D3D55D /* Catwar */ = {
 			isa = PBXGroup;
 			children = (
+				37E0A1E71782E38B00A54599 /* BombMagic_button.png */,
+				37E0A1E81782E38B00A54599 /* LightningMagic_button.png */,
+				37E0A1E91782E38B00A54599 /* LightningMagic.png */,
 				3725262B16EF685700C79A9E /* building-hd.plist */,
 				3725262C16EF685700C79A9E /* building-hd.pvr.ccz */,
 				3725262D16EF685700C79A9E /* building.plist */,
@@ -2644,6 +2706,7 @@
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				37486B36178195060011F3DB /* Magic */,
 				9B2C786B169ADA7E00CA1A1C /* Aura */,
 				9BE01A351695E21600B9C427 /* ActiveSkill */,
 				9B3881401676716D00E1FBF4 /* PassiveSkill */,
@@ -2652,8 +2715,8 @@
 				9B2AB06716665C0500B78136 /* ActiveSkill.m */,
 				9B2AB06916668F6A00B78136 /* PassiveSkill.h */,
 				9B2AB06A16668F6A00B78136 /* PassiveSkill.m */,
-				37DC7A4417798806009E3E73 /* testMagic.h */,
-				37DC7A4517798806009E3E73 /* testMagic.m */,
+				37486B371781951D0011F3DB /* Magic.h */,
+				37486B381781951D0011F3DB /* Magic.m */,
 			);
 			name = Skill;
 			sourceTree = "<group>";
@@ -2874,6 +2937,9 @@
 				9BFE1C3F177891E6002433E5 /* weapon.png in Resources */,
 				2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */,
 				2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */,
+				37E0A1EA1782E38B00A54599 /* BombMagic_button.png in Resources */,
+				37E0A1EB1782E38B00A54599 /* LightningMagic_button.png in Resources */,
+				37E0A1EC1782E38B00A54599 /* LightningMagic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3017,10 +3083,9 @@
 				37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */,
 				37D7563E17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m in Sources */,
 				376D320B177854B700949015 /* InformationComponent.m in Sources */,
-				37DC7A3D17797DB2009E3E73 /* GUIButtonComponent.m in Sources */,
-				37DC7A40177981FC009E3E73 /* MagicComponent.m in Sources */,
 				37DC7A4317798221009E3E73 /* MagicSystem.m in Sources */,
-				37DC7A4617798806009E3E73 /* testMagic.m in Sources */,
+				37DC7A4617798806009E3E73 /* BombMagic.m in Sources */,
+				2D9A4828177DA1BD007A3C76 /* ThreeLineRandomLayer.m in Sources */,
 				2D9A4831177ED2DF007A3C76 /* UnitStockMenuItem.m in Sources */,
 				9B27D1A61781FA060012E126 /* ParalysisComponent.m in Sources */,
 				9B27D1A71781FA060012E126 /* PoisonComponent.m in Sources */,

@@ -40,7 +40,9 @@
     }
     
     for (ProjectileEvent *event in projectingEvents) {
-        [self updateEvent:event];
+        if (!event.isFinish) {
+            [self updateEvent:event];
+        }
     }
     
     for (ProjectileEvent *event in finishEvents) {
@@ -69,7 +71,7 @@
     [event.range setDirection:ccpSub(event.endWorldPosition, event.startWorldPosition)];
         
     CCAction *action = [CCSequence actions:
-                        [CCMoveBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition)],
+                        [CCSpawn actions:[CCMoveBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition)], event.middleAction, nil],
                         [self finishAction:event],
                         nil];
     
@@ -97,7 +99,7 @@
     CCRotateTo *actionRotate =[CCRotateTo actionWithDuration:event.time angle:endAngle];
     
     CCAction *action = [CCSequence actions:
-                        [CCSpawn actions:actionMove, actionRotate, nil],
+                        [CCSpawn actions:actionMove, actionRotate, event.middleAction, nil],
                         [self finishAction:event],
                         nil];
                             
@@ -124,9 +126,10 @@
     
     if(entities.count > 0) {
         event.block(entities, event.range.effectPosition);
-        
         if (!event.isPiercing) {
-            [finishEvents addObject:event];
+            [event.range.rangeSprite stopAllActions];
+            event.isFinish = YES;
+            [event.range.rangeSprite runAction:[self finishAction:event]];
         }
     };
 }

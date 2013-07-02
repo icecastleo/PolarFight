@@ -106,7 +106,13 @@
 			<key>id</key>
 			<string>901</string>
 			<key>level</key>
-			<string>1</string>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>902</string>
+			<key>level</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>properties</key>

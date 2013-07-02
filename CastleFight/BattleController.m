@@ -33,9 +33,8 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
-#import "GUIButtonComponent.h"
-#import "InformationComponent.h"
 #import "MagicSystem.h"
+#import "MagicComponent.h"
 
 @interface BattleController () {
     NSString *battleName;
@@ -244,18 +243,20 @@ __weak static BattleController* currentInstance;
         
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
-        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
             [pathCom.path removeAllObjects];
+            //move uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-                InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-                if (guiCom && infoCom) {
-                    NSString *magicKey = [infoCom informationForKey:@"name"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
+                // projectile event uses world location.
+                [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+                MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+                if (magicCom) {
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", magicCom.name,@"name", magicCom,@"MagicComponent",nil];
+                    
                     [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
                 }
             }
