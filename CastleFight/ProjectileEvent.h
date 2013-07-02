@@ -21,8 +21,8 @@ typedef enum {
 @property (readonly) ProjectileRange *range;
 @property (readonly) BOOL isPiercing;
 @property (readonly) ProjectileType type;
-@property (readonly) CGPoint startPosition;
-@property (readonly) CGPoint endPosition;
+@property (readonly) CGPoint startWorldPosition;
+@property (readonly) CGPoint endWorldPosition;
 @property (readonly) float time;
 @property (readonly) void (^block)(NSArray *entities, CGPoint position);
 
@@ -30,6 +30,6 @@ typedef enum {
 @property (nonatomic) CCFiniteTimeAction *finishAction;
 @property (nonatomic) BOOL isFinish;
 
--(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startPosition:(CGPoint)startPosition endPosition:(CGPoint)endPosition time:(float)time block:(void(^)(NSArray *entities, CGPoint position))block;
+-(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startWorldPosition:(CGPoint)startPosition endWorldPosition:(CGPoint)endPosition time:(float)time block:(void(^)(NSArray *entities, CGPoint position))block;
 
 @end

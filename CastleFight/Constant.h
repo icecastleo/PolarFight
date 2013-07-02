@@ -14,9 +14,10 @@
 #define kScale [[UIScreen mainScreen] scale]
 
 // For map
-#define kMapPathFloor 60
-#define kMapPathHeight 70
+#define kMapPathFloor 50
+#define kMapPathHeight 65
 #define kMapPathRandomHeight 15
+#define kMapPathMaxLine 3
 #define kMapStartDistance 175
 
 // For Character make collision CGPath

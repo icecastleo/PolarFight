@@ -29,6 +29,7 @@
         
         for (ProjectileEvent *event in projectile.projectileEventQueue) {
             event.range.owner = entity;
+            // Add projectile range to map!
             [self.entityFactory.mapLayer addChild:event.range.rangeSprite z:self.entityFactory.mapLayer.maxChildZ];
 
             [self projectEvent:event];
@@ -53,6 +54,8 @@
 }
 
 -(void)projectEvent:(ProjectileEvent *)event {
+    event.range.rangeSprite.position = [event.range.rangeSprite.parent convertToNodeSpace:event.startWorldPosition];
+    
     if (event.type == kProjectileTypeLine) {
         [self lineProject:event];
     } else if (event.type == kProjectileTypeParabola) {
@@ -79,19 +82,17 @@
 }
 
 -(void)parabolaProject:(ProjectileEvent *)event {
-    event.range.rangeSprite.position = event.startPosition;
-    
-    float sx = event.startPosition.x;
-    float sy = event.startPosition.y;
-    float ex = event.endPosition.x;
-    float ey = event.endPosition.y;
+    float sx = event.startWorldPosition.x;
+    float sy = event.startWorldPosition.y;
+    float ex = event.endWorldPosition.x;
+    float ey = event.endWorldPosition.y;
     
     int height = (ex-sx)/2 + (ey-sy)/2;
     
-    CCBezierTo *actionMove = [CCJumpTo actionWithDuration:event.time position:event.endPosition height:height jumps:1];
+    CCJumpBy *actionMove = [CCJumpBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition) height:height jumps:1];
     
-    CGFloat startAngle = event.startPosition.x > event.endPosition.x ? 135 : 45;
-    CGFloat endAngle = event.startPosition.x > event.endPosition.x ? 225 : 315;
+    CGFloat startAngle = event.startWorldPosition.x > event.endWorldPosition.x ? 135 : 45;
+    CGFloat endAngle = event.startWorldPosition.x > event.endWorldPosition.x ? 225 : 315;
     
     startAngle = 270 - startAngle;
     endAngle = 270 - endAngle;

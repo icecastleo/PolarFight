@@ -32,7 +32,7 @@
     RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
     AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,@1,kRangeKeyTargetLimit,nil];
     
     ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
@@ -40,9 +40,10 @@
     
     RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
     
-    CGPoint endPosition = targetRender.sprite.position;
+    CGPoint startPosition = [render.sprite.parent convertToWorldSpace:render.sprite.position];
+    CGPoint endPosition = [targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeParabola startPosition:render.sprite.position endPosition:endPosition time:0.75 block:^(NSArray *entities, CGPoint position) {
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeParabola startWorldPosition:startPosition endWorldPosition:endPosition time:0.75 block:^(NSArray *entities, CGPoint position) {
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;

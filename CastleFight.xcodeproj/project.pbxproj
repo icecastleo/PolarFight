@@ -19,7 +19,6 @@
 		2D4AA460174D361D00275F47 /* RangeSimpleXY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AA45F174D361C00275F47 /* RangeSimpleXY.m */; };
 		2D4AD59F163FE35800A949C3 /* RangeFanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AD59E163FE35800A949C3 /* RangeFanShape.m */; };
 		2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D918CEA1761D3C3002EE90C /* libFlurry.a */; };
-		2D9A4828177DA1BD007A3C76 /* ThreeLineRandomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */; };
 		2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */; };
 		2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482C177ECFF2007A3C76 /* rightarrow.png */; };
 		2D9A4831177ED2DF007A3C76 /* UnitStockMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A4830177ED2DE007A3C76 /* UnitStockMenuItem.m */; };
@@ -478,8 +477,6 @@
 		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D918CE91761D3C3002EE90C /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		2D918CEA1761D3C3002EE90C /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
-		2D9A4826177DA1BC007A3C76 /* ThreeLineRandomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeLineRandomLayer.h; sourceTree = "<group>"; };
-		2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeLineRandomLayer.m; sourceTree = "<group>"; };
 		2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightarrow-hd.png"; sourceTree = "<group>"; };
 		2D9A482C177ECFF2007A3C76 /* rightarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow.png; sourceTree = "<group>"; };
 		2D9A482F177ED2DD007A3C76 /* UnitStockMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitStockMenuItem.h; sourceTree = "<group>"; };
@@ -1309,8 +1306,6 @@
 				9B82F78F164FB2780001A357 /* TiledMapLayer.m */,
 				9B6E290A16C3005B0041BA61 /* TiledMapCamera.h */,
 				9B6E290B16C3005B0041BA61 /* TiledMapCamera.m */,
-				2D9A4826177DA1BC007A3C76 /* ThreeLineRandomLayer.h */,
-				2D9A4827177DA1BD007A3C76 /* ThreeLineRandomLayer.m */,
 			);
 			name = MapLayer;
 			sourceTree = "<group>";
@@ -1524,8 +1519,6 @@
 				37DF1A8F17607356009042CB /* NoiseSkill.m */,
 				9B08F95716A3FBB0006BF34F /* RangeAttackSkill.h */,
 				9B08F95816A3FBB0006BF34F /* RangeAttackSkill.m */,
-				37DF1AA01761ECA3009042CB /* SpeedUpSkill.h */,
-				37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */,
 				9BFE1C3717788800002433E5 /* NinjaRangeAttackSkill.h */,
 				9BFE1C3817788800002433E5 /* NinjaRangeAttackSkill.m */,
 				9BFE1C401778B209002433E5 /* ArmyBearAttackSkill.h */,
@@ -1672,8 +1665,6 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */,
-				2D9A482C177ECFF2007A3C76 /* rightarrow.png */,
 				9B406F69176240B8008B840F /* Assets */,
 				9B98481516EDD27600D3D55D /* bg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
@@ -1707,6 +1698,8 @@
 				9BEF387C1776196C00FF538B /* ice.png */,
 				9B062D0E1635275100E06018 /* iTunesArtwork */,
 				9B293EBD17170CA700C1E728 /* noise.png */,
+				2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */,
+				2D9A482C177ECFF2007A3C76 /* rightarrow.png */,
 				9BFE1C3A177891E5002433E5 /* weapon-hd.png */,
 				9BFE1C3B177891E5002433E5 /* weapon-ipadhd.png */,
 				9BFE1C3C177891E6002433E5 /* weapon.png */,
@@ -2602,6 +2595,8 @@
 				9B146C871737FF7F00D141F1 /* AttackSkill */,
 				9BE01A371695E81900B9C427 /* HealSkill.h */,
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
+				37DF1AA01761ECA3009042CB /* SpeedUpSkill.h */,
+				37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */,
 				37DC0AA31753752D000656A6 /* SlowlyHealSkill.h */,
 				37DC0AA41753752E000656A6 /* SlowlyHealSkill.m */,
 				37E1AE2C17676498003F1707 /* StealthSkill.h */,
