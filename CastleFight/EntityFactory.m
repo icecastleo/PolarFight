@@ -39,7 +39,7 @@
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "MagicComponent.h"
+#import "MagicSkillComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -246,7 +246,7 @@
             [player.battleTeam addObject:summon];
         }
         
-        MagicComponent *magicCom = [[MagicComponent alloc] init];
+        MagicSkillComponent *magicCom = [[MagicSkillComponent alloc] init];
         NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
         
         for (CharacterInitData *data in magicTeamInitData) {
@@ -277,17 +277,16 @@
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
-    NSString *name = [characterData objectForKey:@"name"];
     int cost = [[characterData objectForKey:@"cost"] intValue];
     NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
     
-    [information setObject:name forKey:@"name"];
     [information setObject:[NSNumber numberWithInt:level] forKey:@"level"];
     
-    CCSprite *sprite = [CCSprite spriteWithFile:[information objectForKey:@"buttonImage"]];
+    //FIXME: change to correct name
+    NSString *magicButtonName = [NSString stringWithFormat:@"%@_button.png",[information objectForKey:@"name"]];
+    CCSprite *sprite = [CCSprite spriteWithFile:magicButtonName];
     
     Entity *entity = [_entityManager createEntity];
-    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
     
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];

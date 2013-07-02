@@ -8,7 +8,7 @@
 
 #import "Component.h"
 
-@interface MagicComponent : Component
+@interface MagicSkillComponent : Component
 
 @property (readonly) NSMutableDictionary *magics;
 @property (nonatomic) NSMutableArray *magicQueue;

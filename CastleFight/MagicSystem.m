@@ -8,7 +8,7 @@
 
 #import "MagicSystem.h"
 #import "MapLayer.h"
-#import "MagicComponent.h"
+#import "MagicSkillComponent.h"
 #import "Magic.h"
 
 @implementation MagicSystem
@@ -21,10 +21,10 @@
 }
 
 -(void)update:(float)delta {
-    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[MagicComponent class]];
+    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[MagicSkillComponent class]];
     
     for (Entity *entity in entities) {
-        MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
+        MagicSkillComponent *magicCom = (MagicSkillComponent *)[entity getComponentOfClass:[MagicSkillComponent class]];
         for (Magic *magic in magicCom.magicQueue) {
             magic.map = self.map;
             [magic active];

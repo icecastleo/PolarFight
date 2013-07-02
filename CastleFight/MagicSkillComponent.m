@@ -6,10 +6,10 @@
 //
 //
 
-#import "MagicComponent.h"
+#import "MagicSkillComponent.h"
 #import "Magic.h"
 
-@implementation MagicComponent
+@implementation MagicSkillComponent
 
 -(id)init {
     if (self = [super init]) {
