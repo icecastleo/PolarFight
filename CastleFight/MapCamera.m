@@ -27,7 +27,9 @@ const static int kFollowLimit = 50;
         
 		CGPoint tempPos = ccpSub(_halfScreenSize, _followedNode.position);
         
-        tempPos = ccp(clampf(tempPos.x, [_target position].x - kFollowLimit, [_target position].x + kFollowLimit), clampf(tempPos.y, [_target position].y - kFollowLimit, [_target position].y + kFollowLimit));
+        CCNode *target = _target;
+        
+        tempPos = ccp(clampf(tempPos.x, target.position.x - kFollowLimit, target.position.x + kFollowLimit), clampf(tempPos.y, target.position.y - kFollowLimit, target.position.y + kFollowLimit));
         
 		[_target setPosition:ccp(clampf(tempPos.x,_leftBoundary,_rightBoundary), clampf(tempPos.y,_bottomBoundary,_topBoundary))];
 	}
@@ -83,13 +85,13 @@ const static int kFollowLimit = 50;
     [layer runAction:[CCEaseOut actionWithAction:[CCMoveTo actionWithDuration:d position:[self convertPosition:position]] rate:5.0f]];
 }
 
--(void)followCharacter:(Character *)character {
-    if (layer.numberOfRunningActions != 0) {
-        [layer stopAllActions];
-    }
-    
-    [layer runAction:[CCSmoothFollow actionWithTarget:character.sprite worldBoundary:CGRectMake(0, 0, layer.boundaryX, [CCDirector sharedDirector].winSize.height)]];
-}
+//-(void)followCharacter:(Character *)character {
+//    if (layer.numberOfRunningActions != 0) {
+//        [layer stopAllActions];
+//    }
+//    
+//    [layer runAction:[CCSmoothFollow actionWithTarget:character.sprite worldBoundary:CGRectMake(0, 0, layer.boundaryX, [CCDirector sharedDirector].winSize.height)]];
+//}
 
 -(void)stopFollow {
     [layer stopAllActions];

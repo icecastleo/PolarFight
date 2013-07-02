@@ -26,7 +26,7 @@
     
         _currentCooldown = 0;
         _summon = NO;
-        _readyToLine=NO;
+        _readyToLine = NO;
     }
     return self;
 }

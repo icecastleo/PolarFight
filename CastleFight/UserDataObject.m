@@ -8,7 +8,6 @@
 
 #import "UserDataObject.h"
 #import "CharacterInitData.h"
-#import "Character.h"
 #import "Property.h"
 #import "Achievement.h"
 #import "PlistDictionaryInitialing.h"

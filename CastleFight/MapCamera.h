@@ -23,7 +23,7 @@
 -(void)moveTo:(CGPoint)position;
 -(void)moveBy:(CGPoint)position;
 -(void)smoothMoveTo:(CGPoint)position duration:(ccTime)d;
--(void)followCharacter:(Character *)character;
+//-(void)followCharacter:(Character *)character;
 -(void)stopFollow;
 
 @end

@@ -81,8 +81,8 @@
             
             if (defense.bloodSprite) {
                 [defense.bloodSprite update];
-            }            
-
+            }
+            
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             if (damage.damage > 0) {
                 [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];

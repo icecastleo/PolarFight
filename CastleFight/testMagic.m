@@ -12,6 +12,7 @@
 #import "ProjectileComponent.h"
 #import "AttackerComponent.h"
 #import "AccumulateAttribute.h"
+#import "AttackEvent.h"
 
 @implementation testMagic
 

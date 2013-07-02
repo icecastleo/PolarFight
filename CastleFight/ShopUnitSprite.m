@@ -7,7 +7,6 @@
 //
 
 #import "ShopUnitSprite.h"
-#import "Character.h"
 #import "FileManager.h"
 #import "CharacterComponent.h"
 #import "LevelComponent.h"
