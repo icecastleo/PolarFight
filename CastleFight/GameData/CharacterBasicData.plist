@@ -2333,6 +2333,11 @@
 			<key>c</key>
 			<string>100</string>
 		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>nicefire.png</string>
+		</dict>
 		<key>information</key>
 		<dict>
 			<key>name</key>
@@ -2357,6 +2362,11 @@
 			<string>0.02c</string>
 			<key>c</key>
 			<string>100</string>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>lightning.png</string>
 		</dict>
 		<key>information</key>
 		<dict>

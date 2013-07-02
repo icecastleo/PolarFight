@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MagicComponent.h"
 #import "Entity.h"
 #import "MapLayer.h"
 #import "Range.h"
@@ -15,7 +16,7 @@
 
 @property (nonatomic) MapLayer *map;
 @property (nonatomic) Entity *owner;
-@property (nonatomic) NSDictionary *information;
+@property (nonatomic) NSDictionary *magicInformation;
 
 -(void)active;
 

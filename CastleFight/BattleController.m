@@ -33,8 +33,8 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
-#import "InformationComponent.h"
 #import "MagicSystem.h"
+#import "MagicComponent.h"
 #import "ThreeLineRandomLayer.h"
 
 @interface BattleController () {
@@ -251,10 +251,10 @@ __weak static BattleController* currentInstance;
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-                if (infoCom) {
-                    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:infoCom.information];
-                    [dic setObject:path forKey:@"path"];
+                MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+                if (magicCom) {
+                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", magicCom.name,@"name", magicCom,@"MagicComponent",nil];
+                    
                     [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
                 }
             }

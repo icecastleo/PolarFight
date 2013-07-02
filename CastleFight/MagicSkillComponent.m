@@ -32,7 +32,7 @@
         if([message isKindOfClass:[NSDictionary class]]) {
             NSString *magicKey = [message objectForKey:@"name"];
             Magic *magic = [self.magics objectForKey:magicKey];
-            [magic setInformation:message];
+            [magic setMagicInformation:message];
             [self.magicQueue addObject:magic];
         }
     }

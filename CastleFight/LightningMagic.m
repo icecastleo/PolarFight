@@ -16,38 +16,38 @@
 @implementation LightningMagic
 
 -(void)active {
-    if (!self.map || !self.information) {
+    if (!self.map || !self.magicInformation) {
         NSLog(@"return");
         return;
     }
     
-    NSArray *path = [self.information objectForKey:@"path"];
+    NSArray *path = [self.magicInformation objectForKey:@"path"];
     NSValue *startValue = [path objectAtIndex:0];
     
+    MagicComponent *magicCom = [self.magicInformation objectForKey:@"MagicComponent"];
+    NSDictionary *images = magicCom.images;
+    
     //FIXME: image's anchor
-    UIImage *image = [UIImage imageNamed:[self.information objectForKey:@"image"]];
+    UIImage *image = [UIImage imageNamed:[images objectForKey:@"projectileImage"]];
     CGPoint startPoint = ccp(startValue.CGPointValue.x,startValue.CGPointValue.y+image.size.width/5);
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[self.information objectForKey:@"image"],kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[images objectForKey:@"projectileImage"],kRangeKeySpriteFile,nil];
     
     ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
-    NSDictionary *damageDic = [self.information objectForKey:@"damage"];
-    Attribute *damage = [[AccumulateAttribute alloc] initWithDictionary:damageDic];
-    [damage updateValueWithLevel:[[self.information objectForKey:@"level"] intValue]];
-    
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
-                                 damage];
+                                 magicCom.damage];
     
     ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeLine startPosition:startPoint endPosition:ccp(startPoint.x, startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
         
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;
-            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
-            [attack.attackEventQueue addObject:event];
+            AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+            [attacker.attackEventQueue addObject:event];
+            break;
         }
         
     }];
