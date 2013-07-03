@@ -71,16 +71,19 @@
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color {
     CCLabelTTF *label = [CCLabelBMFont labelWithString:string fntFile:@"WhiteFont.fnt"];
     label.color = color;
-    label.position =  ccp(0, _sprite.boundingBox.size.height/2);
+    label.position =  ccp(0, _sprite.boundingBox.size.height/2 + label.boundingBox.size.height/2);
     label.anchorPoint = CGPointMake(0.5, 0);
     [_node addChild:label];
-    
+        
     [label runAction:
      [CCSequence actions:
-      [CCScaleTo actionWithDuration:0.1f scale:1.3f],
+      [CCScaleTo actionWithDuration:0.0f scale:4.0f],
+      [CCScaleTo actionWithDuration:0.4f scale:1.0f],
+      [CCDelayTime actionWithDuration:0.15f],
       [CCSpawn actions:
-       [CCScaleTo actionWithDuration:0.3f scale:0.1f],
-       [CCFadeOut actionWithDuration:0.3f],nil],
+       [CCMoveBy actionWithDuration:0.15f position:ccp(0, label.boundingBox.size.height * 3)],
+//       [CCScaleTo actionWithDuration:0.2f scale:0.5f],
+       [CCFadeOut actionWithDuration:0.15f],nil],
       [CCCallBlock actionWithBlock:^{
          [label removeFromParentAndCleanup:YES];
      }], nil]];

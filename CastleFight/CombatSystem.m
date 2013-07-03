@@ -159,11 +159,11 @@
     CCSprite *sprite = render.sprite;
     [sprite stopAllActions];
     
-    for (CCNode *children in render.node.children) {
-        if (children != sprite) {
-            [children removeFromParentAndCleanup:YES];
-        }
-    }
+//    for (CCNode *children in render.node.children) {
+//        if (children != sprite) {
+//            [children removeFromParentAndCleanup:YES];
+//        }
+//    }
     
     CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
     emitter.positionType = kCCPositionTypeRelative;
