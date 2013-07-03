@@ -30,37 +30,20 @@
 -(void)activeEffect {
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    DirectionComponent *direction = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
     AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,@1,kRangeKeyTargetLimit,nil];
     
-    ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
+    ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
-    CGPoint endPosition = ccp(FLT_MIN, FLT_MIN);
+    Entity *target = [[range getEffectEntities] lastObject];
     
-    NSArray *entities = [range getEffectEntities];
+    RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
     
-    for (Entity *entity in entities) {
-        RenderComponent *enemyRender = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-        
-        // Aim enemy & prevent to hit back
-        if (direction.direction == kDirectionLeft && enemyRender.sprite.position.x < render.sprite.position.x) {
-            endPosition = enemyRender.sprite.position;
-            break;
-        } else if (direction.direction == kDirectionRight && enemyRender.sprite.position.x > render.sprite.position.x) {
-            endPosition = enemyRender.sprite.position;
-            break;
-        }
-    }
+    CGPoint startPosition = [render.sprite.parent convertToWorldSpace:render.sprite.position];
+    CGPoint endPosition = [targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position];
     
-    //    CGPoint endPosition = ccpAdd(render.sprite.position, direction.direction == kDirectionLeft ? ccp(-150, 0) : ccp(150, 0));
-    
-    if (endPosition.x == FLT_MIN && endPosition.y == FLT_MIN) {
-        return;
-    }
-    
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeParabola startPosition:render.sprite.position endPosition:endPosition time:0.75 block:^(NSArray *entities, CGPoint position) {
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeParabola startWorldPosition:startPosition endWorldPosition:endPosition time:0.75 block:^(NSArray *entities, CGPoint position) {
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;
@@ -70,6 +53,7 @@
     }];
     
     [projectile.projectileEventQueue addObject:event];
+
 }
 
 @end

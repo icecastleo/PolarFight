@@ -16,6 +16,11 @@
 #import "CharacterInitData.h"
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
+#import "RenderComponent.h"
+#import "UnitStockMenuItem.h"
+
+#define kSummonNormal 1
+#define kSummonStock 2
 
 @implementation BattleStatusLayer
 
@@ -95,11 +100,11 @@
     [self addChild:[PauseLayer node]];
 }
 
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
+-(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player unitSummonType:(int) summonType{
     // TODO: Set by user data (plist?)
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
-
+    
     CCSprite *select = [CCSprite spriteWithSpriteFrameName:@"bg_unit_board.png"];
     select.anchorPoint = ccp(0.5, 0);
     select.position = ccp(winSize.width / 2, 0);
@@ -108,7 +113,17 @@
     unitItems = [[NSMutableArray alloc] init];
     
     for (SummonComponent *summon in player.summonComponents) {
-        UnitMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:summon];
+        UnitMenuItem *item;
+        switch (summonType) {
+            case kSummonNormal:
+              item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
+                break;
+            case kSummonStock:
+                item = [[UnitStockMenuItem alloc] initWithSummonComponent:summon];
+            default:
+                break;
+        }
+        
         summon.menuItem = item;
         [unitItems addObject:item];
     }
@@ -116,6 +131,13 @@
     for (SummonComponent *summon in player.battleTeam) {
         // hero
         summon.summon = YES;
+    }
+    
+    for (Entity *entity in player.magicTeam) {
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        //FIXME: the position is not correct.
+        renderCom.position = ccp(100+70*([player.magicTeam indexOfObject:entity]+1),250);
+        [self addChild:renderCom.node];
     }
     
     // FIXME: Delete after test
@@ -126,6 +148,11 @@
     pauseMenu.position = ccp(select.boundingBox.size.width / 2, select.boundingBox.size.height / 2);
     [pauseMenu alignItemsHorizontallyWithPadding:0];
     [select addChild:pauseMenu];
+}
+
+-(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
+   
+    [self setUnitBoardWithPlayerComponent:player unitSummonType:kSummonNormal];
 }
 
 -(void)updateFood:(int)foodNumber {

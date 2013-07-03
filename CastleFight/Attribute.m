@@ -7,7 +7,6 @@
 //
 
 #import "Attribute.h"
-#import "Character.h"
 #import "AccumulateAttribute.h"
 
 @implementation Attribute

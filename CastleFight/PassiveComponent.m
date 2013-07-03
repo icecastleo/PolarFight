@@ -20,6 +20,7 @@
 
 -(void)setEntity:(Entity *)entity {
     [super setEntity:entity];
+    
     for (PassiveSkill *skill in self.skills.allValues) {
         skill.owner = entity;
     }

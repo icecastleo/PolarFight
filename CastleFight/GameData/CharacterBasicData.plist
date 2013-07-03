@@ -2318,5 +2318,65 @@
 			</dict>
 		</array>
 	</dict>
+	<key>901</key>
+	<dict>
+		<key>id</key>
+		<string>901</string>
+		<key>cost</key>
+		<string>10</string>
+		<key>damage</key>
+		<dict>
+			<key>a</key>
+			<string>0</string>
+			<key>b</key>
+			<string>0.02c</string>
+			<key>c</key>
+			<string>100</string>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>nicefire.png</string>
+		</dict>
+		<key>information</key>
+		<dict>
+			<key>name</key>
+			<string>BombMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test BombMagic</string>
+		</dict>
+	</dict>
+	<key>902</key>
+	<dict>
+		<key>id</key>
+		<string>902</string>
+		<key>cost</key>
+		<string>10</string>
+		<key>damage</key>
+		<dict>
+			<key>a</key>
+			<string>0</string>
+			<key>b</key>
+			<string>0.02c</string>
+			<key>c</key>
+			<string>100</string>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>LightningMagic.png</string>
+		</dict>
+		<key>information</key>
+		<dict>
+			<key>name</key>
+			<string>LightningMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test LightningMagic</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

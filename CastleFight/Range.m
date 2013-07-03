@@ -124,17 +124,20 @@
         return NO;
     }
     
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
     if (attackRange == nil) {
-        NSAssert(_rangeSprite.parent == renderCom.sprite.parent, @"Sprites must have the same parent! Might happen when a character hold a sprite as it's attack range");
-        
-        if (CGRectIntersectsRect(_rangeSprite.boundingBox, renderCom.sprite.boundingBox)) {
+        CGRect entityBoundingBox = render.sprite.boundingBox;
+        entityBoundingBox.origin = [_rangeSprite.parent convertToNodeSpace:[render.sprite.parent convertToWorldSpace:entityBoundingBox.origin]];
+      
+        if (CGRectIntersectsRect(_rangeSprite.boundingBox, entityBoundingBox)) {
             return YES;
         } else {
             return NO;
         }
     }
+    
+    // TODO: Check bugs because RenderComponent add an CCNode
     
     CollisionComponent *collisionCom = (CollisionComponent *)[entity getComponentOfClass:[CollisionComponent class]];
     
@@ -143,7 +146,7 @@
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
-        loc = [renderCom.sprite convertToWorldSpace:loc];
+        loc = [render.sprite convertToWorldSpace:loc];
         loc = [_rangeSprite convertToNodeSpace:loc];
 
         loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* kScale + width/2;
@@ -197,8 +200,8 @@
 //        RenderComponent *obj1RenderCom = (RenderComponent *)[obj1 getComponentOfClass:[RenderComponent class]];
 //        RenderComponent *obj2RenderCom = (RenderComponent *)[obj2 getComponentOfClass:[RenderComponent class]];
 //        
-//        float distance1 = ccpDistance(ownerRenderCom.sprite.position, obj1RenderCom.sprite.position);
-//        float distance2 = ccpDistance(ownerRenderCom.sprite.position, obj2RenderCom.sprite.position);
+//        float distance1 = ccpDistance(ownerRenderCom.position, obj1RenderCom.position);
+//        float distance2 = ccpDistance(ownerRenderCom.position, obj2RenderCom.position);
 //        
 //        if (distance1 < distance2) {
 //            return NSOrderedAscending;

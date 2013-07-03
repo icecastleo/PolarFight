@@ -32,7 +32,9 @@
         
         [summonComponents addObjectsFromArray:player.battleTeam];
         
+        
         for (SummonComponent *summon in summonComponents) {
+            
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
                 player.food -= summon.cost;
@@ -45,30 +47,16 @@
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
                 
                 summon.currentCooldown = summon.cooldown;
-                
-                if (summon.menuItem) {
-                    summon.menuItem.isEnabled = NO;
-                    summon.menuItem.mask.visible = YES;
-                    [summon.menuItem.timer runAction:[CCProgressFromTo actionWithDuration:summon.cooldown from:100 to:0]];
-                }
+            
             } else {
                 summon.summon = NO;
                 
                 if (summon.currentCooldown > 0) {
                     summon.currentCooldown -= delta;
                 }
-                
-                if (summon.menuItem) {
-                    if (summon.menuItem.timer.numberOfRunningActions == 0) {
-                        if (summon.isCostSufficient) {
-                            summon.menuItem.isEnabled = YES;
-                            summon.menuItem.mask.visible = NO;
-                        } else {
-                            summon.menuItem.isEnabled = NO;
-                            summon.menuItem.mask.visible = YES;
-                        }
-                    }
-                }
+            }
+            if (summon.menuItem) {
+                [summon.menuItem updateSummon:summon];
             }
         }
     }

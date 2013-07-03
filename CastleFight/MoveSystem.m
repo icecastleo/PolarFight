@@ -32,6 +32,7 @@
         RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
         KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
         
+        // FIXME: KnockOut can't move
         if (knockOutCom) {
             DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
             float defense = MAX(1, defendCom.defense.value);

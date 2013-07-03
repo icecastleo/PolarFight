@@ -8,7 +8,6 @@
 
 #import "UserDataObject.h"
 #import "CharacterInitData.h"
-#import "Character.h"
 #import "Property.h"
 #import "Achievement.h"
 #import "PlistDictionaryInitialing.h"
@@ -26,7 +25,8 @@
 #define kBackgroundMucsicSwitch @"backgroundMusicSwitch"
 #define kAchievements @"achievements"
 #define kProperties @"properties"
-#define kTeam @"team"
+#define kBattleTeam @"battleTeam"
+#define kMagicTeam @"magicTeam"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
@@ -55,7 +55,9 @@
         _characterInitDatas = [self convertArray:[plist objectForKey:kCharacters] className:[CharacterInitData class]];
         _playerHeroArray = [self convertArray:[plist objectForKey:kHero] className:[CharacterInitData class]];
 //        _playerCastleArray = [self convertArray:[plist objectForKey:kCastle] className:[CharacterInitData class]];
-        _battleTeam = [self convertArray:[plist objectForKey:kTeam] className:[CharacterInitData class]];
+        _battleTeam = [self convertArray:[plist objectForKey:kBattleTeam] className:[CharacterInitData class]];
+        _magicTeam = [self convertArray:[plist objectForKey:kMagicTeam] className:[CharacterInitData class]];
+        
         _achievements = [self convertArray:[plist objectForKey:kAchievements] className:[Achievement class]];
         _properties = [self convertArray:[plist objectForKey:kProperties] className:[Property class]];
         
@@ -130,7 +132,9 @@
         _characterInitDatas = [decoder decodeObjectForKey:kCharacters];
         _playerHeroArray = [decoder decodeObjectForKey:kHero];
 //        _playerCastleArray = [decoder decodeObjectForKey:kCastle];
-        _battleTeam = [decoder decodeObjectForKey:kTeam];
+        _battleTeam = [decoder decodeObjectForKey:kBattleTeam];
+        _magicTeam = [decoder decodeObjectForKey:kMagicTeam];
+        
         moneyNumber = [decoder decodeObjectForKey:kMoney];
         _items = [decoder decodeObjectForKey:kItemArray];
         _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolume];
@@ -147,7 +151,9 @@
     [encoder encodeObject:_characterInitDatas forKey:kCharacters];
     [encoder encodeObject:_playerHeroArray forKey:kHero];
 //    [encoder encodeObject:_playerCastleArray forKey:kCastle];
-    [encoder encodeObject:_battleTeam forKey:kTeam];
+    [encoder encodeObject:_battleTeam forKey:kBattleTeam];
+    [encoder encodeObject:_magicTeam forKey:kMagicTeam];
+    
     [encoder encodeObject:moneyNumber forKey:kMoney];
     [encoder encodeObject:_items forKey:kItemArray];
     [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolume];

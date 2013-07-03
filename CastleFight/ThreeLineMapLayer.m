@@ -33,6 +33,11 @@
 }
 
 -(void)addEntity:(Entity *)entity {
+    int line = arc4random_uniform(kMapPathMaxLine);
+    [self addEntity:entity line:line];
+}
+
+-(void)addEntity:(Entity *)entity line:(int)line {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
     
@@ -40,8 +45,6 @@
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
     
     CGPoint position;
-    
-    int line = arc4random_uniform(3);
     
     if (character) {
         if (team.team == 1) {
@@ -57,7 +60,7 @@
             position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathFloor + kMapPathHeight/2);
         }
     }
-    [self addEntityWithPosition:entity toPosition:position];
+    [self addEntity:entity toPosition:position];
 }
 
 @end

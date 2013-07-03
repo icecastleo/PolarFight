@@ -21,4 +21,6 @@
 -(Entity *)createCastleForTeam:(int)team;
 -(Entity *)createPlayerForTeam:(int)team;
 
+-(Entity *)createMagicButton:(NSString *)cid level:(int)level;
+
 @end

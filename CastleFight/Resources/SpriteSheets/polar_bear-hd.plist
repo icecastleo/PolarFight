@@ -15,7 +15,7 @@
                 <key>sourceColorRect</key>
                 <string>{{78,2},{200,194}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{200,194}</string>
             </dict>
             <key>army_bear_1.png</key>
             <dict>
@@ -28,7 +28,7 @@
                 <key>sourceColorRect</key>
                 <string>{{83,8},{182,188}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{182,188}</string>
             </dict>
             <key>army_bear_2.png</key>
             <dict>
@@ -41,7 +41,7 @@
                 <key>sourceColorRect</key>
                 <string>{{83,10},{188,186}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{188,186}</string>
             </dict>
             <key>army_bear_3.png</key>
             <dict>
@@ -54,7 +54,7 @@
                 <key>sourceColorRect</key>
                 <string>{{83,8},{192,188}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{192,188}</string>
             </dict>
             <key>army_bear_4.png</key>
             <dict>
@@ -67,7 +67,7 @@
                 <key>sourceColorRect</key>
                 <string>{{82,10},{202,186}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{202,186}</string>
             </dict>
             <key>army_bear_5.png</key>
             <dict>
@@ -80,7 +80,7 @@
                 <key>sourceColorRect</key>
                 <string>{{0,10},{278,186}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{278,186}</string>
             </dict>
             <key>army_bear_6.png</key>
             <dict>
@@ -93,7 +93,7 @@
                 <key>sourceColorRect</key>
                 <string>{{56,10},{222,186}}</string>
                 <key>sourceSize</key>
-                <string>{462,198}</string>
+                <string>{222,186}</string>
             </dict>
             <key>baby_bear_0.png</key>
             <dict>
@@ -106,7 +106,7 @@
                 <key>sourceColorRect</key>
                 <string>{{51,3},{144,134}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{144,134}</string>
             </dict>
             <key>baby_bear_1.png</key>
             <dict>
@@ -119,7 +119,7 @@
                 <key>sourceColorRect</key>
                 <string>{{51,3},{144,134}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{144,134}</string>
             </dict>
             <key>baby_bear_2.png</key>
             <dict>
@@ -132,7 +132,7 @@
                 <key>sourceColorRect</key>
                 <string>{{51,1},{144,136}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{144,136}</string>
             </dict>
             <key>baby_bear_3.png</key>
             <dict>
@@ -145,7 +145,7 @@
                 <key>sourceColorRect</key>
                 <string>{{50,3},{144,134}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{144,134}</string>
             </dict>
             <key>baby_bear_4.png</key>
             <dict>
@@ -158,7 +158,7 @@
                 <key>sourceColorRect</key>
                 <string>{{6,3},{188,134}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{188,134}</string>
             </dict>
             <key>baby_bear_5.png</key>
             <dict>
@@ -171,7 +171,7 @@
                 <key>sourceColorRect</key>
                 <string>{{6,3},{188,134}}</string>
                 <key>sourceSize</key>
-                <string>{258,140}</string>
+                <string>{188,134}</string>
             </dict>
             <key>boxer_bear_0.png</key>
             <dict>
@@ -184,7 +184,7 @@
                 <key>sourceColorRect</key>
                 <string>{{60,6},{149,203}}</string>
                 <key>sourceSize</key>
-                <string>{209,209}</string>
+                <string>{149,203}</string>
             </dict>
             <key>boxer_bear_1.png</key>
             <dict>
@@ -197,7 +197,7 @@
                 <key>sourceColorRect</key>
                 <string>{{60,4},{149,205}}</string>
                 <key>sourceSize</key>
-                <string>{209,209}</string>
+                <string>{149,205}</string>
             </dict>
             <key>boxer_bear_2.png</key>
             <dict>
@@ -210,7 +210,7 @@
                 <key>sourceColorRect</key>
                 <string>{{56,0},{153,209}}</string>
                 <key>sourceSize</key>
-                <string>{209,209}</string>
+                <string>{153,209}</string>
             </dict>
             <key>boxer_bear_3.png</key>
             <dict>
@@ -223,7 +223,7 @@
                 <key>sourceColorRect</key>
                 <string>{{54,3},{153,203}}</string>
                 <key>sourceSize</key>
-                <string>{209,209}</string>
+                <string>{153,203}</string>
             </dict>
             <key>boxer_bear_4.png</key>
             <dict>
@@ -236,7 +236,7 @@
                 <key>sourceColorRect</key>
                 <string>{{0,6},{201,203}}</string>
                 <key>sourceSize</key>
-                <string>{209,209}</string>
+                <string>{201,203}</string>
             </dict>
             <key>fat_bear_0.png</key>
             <dict>
@@ -249,7 +249,7 @@
                 <key>sourceColorRect</key>
                 <string>{{116,66},{204,198}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{204,198}</string>
             </dict>
             <key>fat_bear_1.png</key>
             <dict>
@@ -262,7 +262,7 @@
                 <key>sourceColorRect</key>
                 <string>{{115,68},{204,196}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{204,196}</string>
             </dict>
             <key>fat_bear_2.png</key>
             <dict>
@@ -275,7 +275,7 @@
                 <key>sourceColorRect</key>
                 <string>{{116,67},{216,194}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{216,194}</string>
             </dict>
             <key>fat_bear_3.png</key>
             <dict>
@@ -288,7 +288,7 @@
                 <key>sourceColorRect</key>
                 <string>{{115,69},{204,192}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{204,192}</string>
             </dict>
             <key>fat_bear_4.png</key>
             <dict>
@@ -301,7 +301,7 @@
                 <key>sourceColorRect</key>
                 <string>{{116,67},{204,194}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{204,194}</string>
             </dict>
             <key>fat_bear_5.png</key>
             <dict>
@@ -314,7 +314,7 @@
                 <key>sourceColorRect</key>
                 <string>{{116,66},{204,198}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{204,198}</string>
             </dict>
             <key>fat_bear_6.png</key>
             <dict>
@@ -327,7 +327,7 @@
                 <key>sourceColorRect</key>
                 <string>{{84,4},{236,260}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{236,260}</string>
             </dict>
             <key>fat_bear_7.png</key>
             <dict>
@@ -340,7 +340,7 @@
                 <key>sourceColorRect</key>
                 <string>{{2,53},{318,208}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{318,208}</string>
             </dict>
             <key>fat_bear_8.png</key>
             <dict>
@@ -353,7 +353,7 @@
                 <key>sourceColorRect</key>
                 <string>{{2,82},{318,180}}</string>
                 <key>sourceSize</key>
-                <string>{436,266}</string>
+                <string>{318,180}</string>
             </dict>
             <key>punk_bear_0.png</key>
             <dict>

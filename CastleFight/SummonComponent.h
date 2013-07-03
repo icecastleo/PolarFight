@@ -29,7 +29,7 @@
 @property (readonly) BOOL canSummon;
 
 @property (nonatomic) BOOL summon;
-
+@property (nonatomic) BOOL readyToLine;
 -(id)initWithCharacterInitData:(CharacterInitData *)initData;
 
 @end

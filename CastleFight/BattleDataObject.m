@@ -7,7 +7,6 @@
 //
 
 #import "BattleDataObject.h"
-#import "Character.h"
 #import "EnemyData.h"
 
 @implementation BattleDataObject

@@ -12,26 +12,12 @@
 #define kStrokeTag 99999
 
 @interface SelectableComponent()
-@property (nonatomic, readonly) NSString *cid;
-@property (nonatomic, readonly) int level;
-@property (nonatomic, readonly) int team;
-//*// test only
-@property (nonatomic) int testTimes;
 @property (nonatomic) BOOL selected;
 @property (nonatomic) BOOL showed;
 //*/
 @end
 
 @implementation SelectableComponent
-
--(id)initWithCid:(NSString *)cid Level:(int)level Team:(int)team {
-    if (self = [super init]) {
-        _cid = cid;
-        _level = level;
-        _team = team;
-    }
-    return self;
-}
 
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == KEventDead){
@@ -65,21 +51,20 @@
     
     [sprite removeChildByTag:kStrokeTag cleanup:YES];
     
-    //TODO: change to use image instead of CCRenderTexture.
-    CCRenderTexture * stroke  = [self createStroke:sprite size:3 color:ccYELLOW];
-    [render.sprite addChild:stroke z:-1 tag:kStrokeTag];
+    // TODO: change to use image instead of Stroke
+    [render.node addChild:[self createStroke:sprite size:3 color:ccYELLOW] z:-1 tag:kStrokeTag];
 }
 
 -(void)unSelected {
     self.selected = NO;
     self.showed = NO;
     RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
-    [render.sprite removeChildByTag:kStrokeTag cleanup:YES];
+    [render.node removeChildByTag:kStrokeTag cleanup:YES];
 }
 
--(CCRenderTexture*) createStroke: (CCSprite *)label   size:(float)size   color:(ccColor3B)cor
+-(CCSprite *)createStroke:(CCSprite *)label size:(float)size color:(ccColor3B)cor
 {
-    CCRenderTexture* rt = [CCRenderTexture renderTextureWithWidth:label.texture.contentSize.width+size*2  height:label.texture.contentSize.height+size*2];
+    CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:label.texture.contentSize.width+size*2  height:label.texture.contentSize.height+size*2];
     CGPoint originalPos = [label position];
     ccColor3B originalColor = [label color];
     BOOL originalVisibility = [label visible];
@@ -102,7 +87,7 @@
     [label setVisible:originalVisibility];
     [rt setPosition:ccp([label boundingBox].size.width/2+6,[label boundingBox].size.height/2)];
     
-    return rt;
+    return [CCSprite spriteWithTexture:rt.sprite.texture];
 }
 
 @end

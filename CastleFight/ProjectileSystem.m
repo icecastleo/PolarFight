@@ -29,6 +29,7 @@
         
         for (ProjectileEvent *event in projectile.projectileEventQueue) {
             event.range.owner = entity;
+            // Add projectile range to map!
             [self.entityFactory.mapLayer addChild:event.range.rangeSprite z:self.entityFactory.mapLayer.maxChildZ];
 
             [self projectEvent:event];
@@ -39,7 +40,9 @@
     }
     
     for (ProjectileEvent *event in projectingEvents) {
-        [self updateEvent:event];
+        if (!event.isFinish) {
+            [self updateEvent:event];
+        }
     }
     
     for (ProjectileEvent *event in finishEvents) {
@@ -51,6 +54,8 @@
 }
 
 -(void)projectEvent:(ProjectileEvent *)event {
+    event.range.rangeSprite.position = [event.range.rangeSprite.parent convertToNodeSpace:event.startWorldPosition];
+    
     if (event.type == kProjectileTypeLine) {
         [self lineProject:event];
     } else if (event.type == kProjectileTypeParabola) {
@@ -63,11 +68,10 @@
 #pragma mark - Project formula
 
 -(void)lineProject:(ProjectileEvent *)event {
-    event.range.rangeSprite.position = event.startPosition;
-    [event.range setDirection:ccpSub(event.endPosition, event.startPosition)];
+    [event.range setDirection:ccpSub(event.endWorldPosition, event.startWorldPosition)];
         
     CCAction *action = [CCSequence actions:
-                        [CCMoveTo actionWithDuration:event.time position:event.endPosition],
+                        [CCSpawn actions:[CCMoveBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition)], event.middleAction, nil],
                         [self finishAction:event],
                         nil];
     
@@ -75,31 +79,27 @@
 }
 
 -(void)parabolaProject:(ProjectileEvent *)event {
-    event.range.rangeSprite.position = event.startPosition;
+    float sx = event.startWorldPosition.x;
+    float sy = event.startWorldPosition.y;
+    float ex = event.endWorldPosition.x;
+    float ey = event.endWorldPosition.y;
     
-    CGFloat startAngle = event.startPosition.x > event.endPosition.x ? 135 : 45;
-    CGFloat endAngle = event.startPosition.x > event.endPosition.x ? 225 : 315;
+    int height = (ex-sx)/2 + (ey-sy)/2;
     
-    float sx = event.startPosition.x;
-    float sy = event.startPosition.y;
-    float ex = event.endPosition.x;
-    float ey = event.endPosition.y;
+    CCJumpBy *actionMove = [CCJumpBy actionWithDuration:event.time position:ccpSub(event.endWorldPosition, event.startWorldPosition) height:height jumps:1];
+    
+    CGFloat startAngle = event.startWorldPosition.x > event.endWorldPosition.x ? 135 : 45;
+    CGFloat endAngle = event.startWorldPosition.x > event.endWorldPosition.x ? 225 : 315;
     
     startAngle = 270 - startAngle;
     endAngle = 270 - endAngle;
     
     event.range.rangeSprite.rotation = startAngle;
     
-    ccBezierConfig bezier;
-    bezier.controlPoint_1 = event.startPosition; // start point
-    bezier.controlPoint_2 = ccp(sx+(ex-sx)*0.5, sy+(ey-sy)*0.5 + 125); // control point
-    bezier.endPosition = event.endPosition; // end point
-    
-    CCBezierTo *actionMove = [CCBezierTo actionWithDuration:event.time bezier:bezier];
     CCRotateTo *actionRotate =[CCRotateTo actionWithDuration:event.time angle:endAngle];
     
     CCAction *action = [CCSequence actions:
-                        [CCSpawn actions:actionMove, actionRotate, nil],
+                        [CCSpawn actions:actionMove, actionRotate, event.middleAction, nil],
                         [self finishAction:event],
                         nil];
                             
@@ -107,9 +107,18 @@
 }
 
 -(CCAction *)finishAction:(ProjectileEvent *)event {
-    return [CCCallBlock actionWithBlock:^{
+    CCAction *action;
+    CCAction *callBack = [CCCallBlock actionWithBlock:^{
         [finishEvents addObject:event];
     }];
+    
+    if(event.finishAction){
+        action = [CCSequence actions:event.finishAction,callBack,nil];;
+    }else {
+        action = callBack;
+    }
+    
+    return action;
 }
 
 -(void)updateEvent:(ProjectileEvent *)event {
@@ -117,9 +126,10 @@
     
     if(entities.count > 0) {
         event.block(entities, event.range.effectPosition);
-        
         if (!event.isPiercing) {
-            [finishEvents addObject:event];
+            [event.range.rangeSprite stopAllActions];
+            event.isFinish = YES;
+            [event.range.rangeSprite runAction:[self finishAction:event]];
         }
     };
 }

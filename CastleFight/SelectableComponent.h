@@ -10,7 +10,6 @@
 
 @interface SelectableComponent : Component
 
--(id)initWithCid:(NSString *)cid Level:(int)level Team:(int)team;
 -(void)show;
 -(void)unSelected;
 

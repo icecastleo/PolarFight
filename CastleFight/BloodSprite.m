@@ -7,7 +7,6 @@
 //
 
 #import "BloodSprite.h"
-#import "RenderComponent.h"
 #import "DefenderComponent.h"
 
 @implementation BloodSprite
