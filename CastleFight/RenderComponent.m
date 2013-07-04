@@ -14,6 +14,7 @@
 
 -(id)initWithSprite:(CCSprite *)sprite {
     if ((self = [super init])) {
+        // node's position is the sprite center
         _node = [CCNode node];
         _sprite = sprite;
         
@@ -26,7 +27,24 @@
     return self;
 }
 
+-(void)setEnableShadowPosition:(BOOL)enableShadowPosition {
+    _enableShadowPosition = enableShadowPosition;
+    
+    // Provide shadow for map layer to use!
+    if (!_shadow) {
+        [self addShadow];
+        _shadow.visible = NO;
+    }
+}
+
 -(void)addShadow {
+    if (_shadow) {
+        if (_shadow.visible == NO) {
+            _shadow.visible = YES;
+        }
+        return;
+    }
+    
     CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width * kShadowWidthScale * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height *kShadowHeightScale * CC_CONTENT_SCALE_FACTOR()));
     
     size_t bitsPerComponent = 8;
@@ -46,15 +64,11 @@
     [_node addChild:_shadow z:-1];
 }
 
--(BOOL)hasShadow {
-    return _shadow != nil;
-}
-
 -(void)setPosition:(CGPoint)position {
     @synchronized(self) {
         _position = position;
         
-        if ([self hasShadow] && kShadowPositionEnable) {
+        if (self.enableShadowPosition) {
             _node.position = ccpSub(ccpSub(position, offset), shadowOffset);
         } else {
             _node.position = ccpSub(position, offset);

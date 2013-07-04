@@ -134,7 +134,8 @@ const static int pathSizeHeight = 40;
     float Width = 0;
     float Height = 0;
     
-    if ([render hasShadow] && kShadowPositionEnable) {
+    if (render.enableShadowPosition) {
+        NSAssert(render.shadow, @"Need shadow sprite to calculate the right boundary!");
         Width = render.shadow.boundingBox.size.width/2;
         Height = render.shadow.boundingBox.size.height/2;
     } else {

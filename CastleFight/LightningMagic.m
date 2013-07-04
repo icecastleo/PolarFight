@@ -41,7 +41,7 @@
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
                                  magicCom.damage];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x, startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x, startPoint.y-0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
         NSLog(@"startPoint:%@, event.position:%@",NSStringFromCGPoint(startPoint),NSStringFromCGPoint(position));
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];

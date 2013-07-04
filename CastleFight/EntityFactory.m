@@ -89,6 +89,7 @@
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
     [render addShadow];
+    render.enableShadowPosition = YES;
     [entity addComponent:render];
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
@@ -196,6 +197,7 @@
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
     [render addShadow];
+    render.enableShadowPosition = YES;
     [entity addComponent:render];
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:nil]];
