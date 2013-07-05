@@ -151,8 +151,6 @@
 		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
-		37E0A1EA1782E38B00A54599 /* BombMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E0A1E71782E38B00A54599 /* BombMagic_button.png */; };
-		37E0A1EB1782E38B00A54599 /* LightningMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E0A1E81782E38B00A54599 /* LightningMagic_button.png */; };
 		37E0A30A177057E900503100 /* SelectableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* SelectableComponent.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
@@ -167,6 +165,8 @@
 		37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C38174E2C5F0010B9E9 /* EffectSystem.m */; };
 		37E42C3C174E49BB0010B9E9 /* SideEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C3B174E49BB0010B9E9 /* SideEffect.m */; };
 		37E4C0721726872C00541F87 /* GameCenterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C0711726872C00541F87 /* GameCenterLayer.m */; };
+		37E4F1421786FDBB008ED76B /* LightningMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F1411786FDBB008ED76B /* LightningMagic_button.png */; };
+		37E4F1441786FE13008ED76B /* BombMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E4F1431786FE13008ED76B /* BombMagic_button.png */; };
 		37E68CA516F97B4900AB5FBD /* CharacterInitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterInitData.m */; };
 		37E75129175CCB3B009AFEFB /* PeaceSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E75128175CCB3B009AFEFB /* PeaceSkill.m */; };
 		37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BE17549F7800E0435E /* KnockOutSkill.m */; };
@@ -681,8 +681,6 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
-		37E0A1E71782E38B00A54599 /* BombMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BombMagic_button.png; path = CatWar/BombMagic_button.png; sourceTree = "<group>"; };
-		37E0A1E81782E38B00A54599 /* LightningMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LightningMagic_button.png; path = CatWar/LightningMagic_button.png; sourceTree = "<group>"; };
 		37E0A308177057E900503100 /* SelectableComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableComponent.h; sourceTree = "<group>"; };
 		37E0A309177057E900503100 /* SelectableComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableComponent.m; sourceTree = "<group>"; };
 		37E0DB821714285A0039C94C /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -704,6 +702,8 @@
 		37E42C3B174E49BB0010B9E9 /* SideEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideEffect.m; sourceTree = "<group>"; };
 		37E4C0701726872C00541F87 /* GameCenterLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterLayer.h; sourceTree = "<group>"; };
 		37E4C0711726872C00541F87 /* GameCenterLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterLayer.m; sourceTree = "<group>"; };
+		37E4F1411786FDBB008ED76B /* LightningMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightningMagic_button.png; sourceTree = "<group>"; };
+		37E4F1431786FE13008ED76B /* BombMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BombMagic_button.png; sourceTree = "<group>"; };
 		37E68CA316F97B4800AB5FBD /* CharacterInitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInitData.h; sourceTree = "<group>"; };
 		37E68CA416F97B4800AB5FBD /* CharacterInitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInitData.m; sourceTree = "<group>"; };
 		37E75127175CCB3B009AFEFB /* PeaceSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeaceSkill.h; sourceTree = "<group>"; };
@@ -1677,8 +1677,8 @@
 				9BFE1C3C177891E6002433E5 /* weapon.png */,
 				37DD1C5B168D96560058E450 /* WhiteFont.fnt */,
 				37DD1C5C168D96560058E450 /* WhiteFont.png */,
-				37E0A1E71782E38B00A54599 /* BombMagic_button.png */,
-				37E0A1E81782E38B00A54599 /* LightningMagic_button.png */,
+				37E4F1431786FE13008ED76B /* BombMagic_button.png */,
+				37E4F1411786FDBB008ED76B /* LightningMagic_button.png */,
 				3750F4F11785A991009E2689 /* LightningMagic.png */,
 			);
 			path = Resources;
@@ -2910,9 +2910,9 @@
 				9BFE1C3F177891E6002433E5 /* weapon.png in Resources */,
 				2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */,
 				2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */,
-				37E0A1EA1782E38B00A54599 /* BombMagic_button.png in Resources */,
-				37E0A1EB1782E38B00A54599 /* LightningMagic_button.png in Resources */,
 				3750F4F21785A992009E2689 /* LightningMagic.png in Resources */,
+				37E4F1421786FDBB008ED76B /* LightningMagic_button.png in Resources */,
+				37E4F1441786FE13008ED76B /* BombMagic_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
