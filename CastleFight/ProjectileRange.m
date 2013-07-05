@@ -30,14 +30,6 @@
     }
 }
 
--(void)setOwner:(Entity *)owner {
-    [super setOwner:owner];
-    
-    if (effectRange) {
-        effectRange.owner = owner;
-    }
-}
-
 -(NSArray *)getEffectEntities {
     NSArray *entities = [super getEffectEntities];
     
