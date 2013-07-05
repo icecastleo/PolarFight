@@ -8,12 +8,6 @@
 
 #import "MagicComponent.h"
 
-@interface MagicComponent()
-@property (nonatomic) BOOL isCDOver;
-@property (nonatomic) BOOL isCostSufficient;
-
-@end
-
 @implementation MagicComponent
 
 -(id)initWithDamageAttribute:(Attribute *)damage andMagicName:(NSString*)name andNeedImages:(NSDictionary *)images {
@@ -31,13 +25,14 @@
     } 
 }
 
--(void)activeByEntity:(Entity *)entity andPath:(NSArray *)path {
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", self.name,@"name", self,@"MagicComponent",nil];
-    [entity sendEvent:kEventSendMagicEvent Message:dic];
-    
-    [self.entity sendEvent:kEventUseMask Message:@1];
-    
+-(void)activeWithPath:(NSArray *)path {
+    _canActive = YES;
+    _path = path;
+}
+
+-(void)didExecute {
+    _canActive = NO;
+    _path = nil;
 }
 
 @end

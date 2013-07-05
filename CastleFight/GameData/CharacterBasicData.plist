@@ -2322,8 +2322,17 @@
 	<dict>
 		<key>id</key>
 		<string>901</string>
-		<key>cost</key>
-		<string>10</string>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Food</string>
+			<key>food</key>
+			<integer>30</integer>
+			<key>mana</key>
+			<integer>0</integer>
+		</dict>
+		<key>cooldown</key>
+		<integer>10</integer>
 		<key>damage</key>
 		<dict>
 			<key>a</key>
@@ -2352,8 +2361,17 @@
 	<dict>
 		<key>id</key>
 		<string>902</string>
-		<key>cost</key>
-		<string>10</string>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Food</string>
+			<key>food</key>
+			<integer>10</integer>
+			<key>mana</key>
+			<integer>0</integer>
+		</dict>
+		<key>cooldown</key>
+		<integer>5</integer>
 		<key>damage</key>
 		<dict>
 			<key>a</key>

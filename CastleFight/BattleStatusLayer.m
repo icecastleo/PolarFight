@@ -18,6 +18,7 @@
 #import "SummonComponent.h"
 #import "RenderComponent.h"
 #import "UnitStockMenuItem.h"
+#import "MagicSkillComponent.h"
 
 #define kSummonNormal 1
 #define kSummonStock 2
@@ -133,10 +134,12 @@
         summon.summon = YES;
     }
     
-    for (Entity *entity in player.magicTeam) {
+    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];
+    
+    for (Entity *entity in magicSkillCom.magicTeam) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(100+70*([player.magicTeam indexOfObject:entity]+1),250);
+        renderCom.position = ccp(100+70*([magicSkillCom.magicTeam indexOfObject:entity]+1),250);
         [self addChild:renderCom.node];
     }
     

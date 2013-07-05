@@ -258,7 +258,7 @@ __weak static BattleController* currentInstance;
                 [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
                 MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
-                    [magicCom activeByEntity:self.userPlayer andPath:path];
+                    [magicCom activeWithPath:path];
                 }
             }
         }

@@ -35,14 +35,20 @@
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == kEventUseMask) {
         [self active:[message floatValue]];
+    } else if(type == kEventCancelMask) {
+        self.mask.visible = NO;
     }
 }
 
 -(void)active:(float)time {
-    _mask.visible = YES;
+    self.mask.visible = YES;
+    
+    if (time <= 0) {
+        return;
+    }
     
     CCSequence *sequence = [CCSequence actions:[CCProgressFromTo actionWithDuration:time from:100 to:0],[CCCallBlock actionWithBlock:^{
-        _mask.visible = NO;
+        self.mask.visible = NO;
     }], nil];
     
     [self.timer runAction:sequence];

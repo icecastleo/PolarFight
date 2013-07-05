@@ -1,8 +1,8 @@
 //
-//  MagicComponent.h
+//  MagicSkillComponent.h
 //  CastleFight
 //
-//  Created by  浩翔 on 13/6/25.
+//  Created by  DAN on 13/7/5.
 //
 //
 
@@ -10,7 +10,6 @@
 
 @interface MagicSkillComponent : Component
 
-@property (readonly) NSMutableDictionary *magics;
-@property (nonatomic) NSMutableArray *magicQueue;
+@property (nonatomic) NSMutableArray *magicTeam;
 
 @end

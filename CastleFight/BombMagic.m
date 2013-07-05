@@ -26,16 +26,14 @@
     NSValue *startValue = [path objectAtIndex:0];
     CGPoint startPoint = startValue.CGPointValue;
     
-    MagicComponent *magicCom = [self.magicInformation objectForKey:@"MagicComponent"];
-    
-    NSDictionary *images = magicCom.images;
+    NSDictionary *images = [self.magicInformation objectForKey:@"images"];
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[images objectForKey:@"projectileImage"],kRangeKeySpriteFile,nil];
     
     ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
-                          magicCom.damage];
+                          [self.magicInformation objectForKey:@"damage"]];
     
     ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x+0.1f,startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
         

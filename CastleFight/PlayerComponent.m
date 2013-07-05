@@ -21,7 +21,6 @@
         
         _summonComponents = [[NSMutableArray alloc] init];
         _battleTeam = [[NSMutableArray alloc] init];
-        _magicTeam = [[NSMutableArray alloc] init];
     }
     return self;
 }

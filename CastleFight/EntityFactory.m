@@ -254,16 +254,17 @@
             [player.battleTeam addObject:summon];
         }
         
-        MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
+       MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
         NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
         
         for (CharacterInitData *data in magicTeamInitData) {
             Entity *magicButton = [self createMagicButton:data.cid level:data.level];
-            [player.magicTeam addObject:magicButton];
             
             MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfClass:[MagicComponent class]];
+            magicCom.spellCaster = entity;
             NSAssert(NSClassFromString(magicCom.name), @"you forgot to make this skill.");
-            [magicSkillCom.magics setObject:[[NSClassFromString(magicCom.name) alloc] init] forKey:magicCom.name];
+            
+            [magicSkillCom.magicTeam addObject:magicButton];
         }
         
         [entity addComponent:magicSkillCom];
@@ -284,7 +285,10 @@
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
-    int cost = [[characterData objectForKey:@"cost"] intValue];
+    
+    NSDictionary *costComponentDictionary = [characterData objectForKey:@"CostComponent"];
+    
+    float cooldown = [[characterData objectForKey:@"cooldown"] floatValue];
     NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
     
     //FIXME: change to correct name
@@ -293,11 +297,17 @@
     
     Entity *entity = [_entityManager createEntity];
     
-    [entity addComponent:[[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]]];
+    
+    MagicComponent *magicCom = [[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]];
+    magicCom.cooldown = cooldown;
+    
+    [entity addComponent:magicCom];
     
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     
-    [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
+    CostComponent *costCom = [[CostComponent alloc] initWithDictionary:costComponentDictionary];
+    [entity addComponent:costCom];
+    
     [entity addComponent:renderCom];
     [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
