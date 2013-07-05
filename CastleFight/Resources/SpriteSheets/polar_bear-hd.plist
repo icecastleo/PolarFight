@@ -366,7 +366,7 @@
                 <key>sourceColorRect</key>
                 <string>{{112,8},{112,197}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{112,197}</string>
             </dict>
             <key>punk_bear_1.png</key>
             <dict>
@@ -379,7 +379,7 @@
                 <key>sourceColorRect</key>
                 <string>{{96,4},{142,201}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{142,201}</string>
             </dict>
             <key>punk_bear_2.png</key>
             <dict>
@@ -392,7 +392,7 @@
                 <key>sourceColorRect</key>
                 <string>{{84,2},{160,203}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{160,203}</string>
             </dict>
             <key>punk_bear_3.png</key>
             <dict>
@@ -405,7 +405,7 @@
                 <key>sourceColorRect</key>
                 <string>{{76,8},{188,197}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{188,197}</string>
             </dict>
             <key>punk_bear_4.png</key>
             <dict>
@@ -418,7 +418,7 @@
                 <key>sourceColorRect</key>
                 <string>{{90,6},{144,199}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{144,199}</string>
             </dict>
             <key>punk_bear_5.png</key>
             <dict>
@@ -431,7 +431,7 @@
                 <key>sourceColorRect</key>
                 <string>{{112,4},{110,201}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{110,201}</string>
             </dict>
             <key>punk_bear_6.png</key>
             <dict>
@@ -444,7 +444,7 @@
                 <key>sourceColorRect</key>
                 <string>{{111,10},{146,195}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{146,195}</string>
             </dict>
             <key>punk_bear_7.png</key>
             <dict>
@@ -457,7 +457,7 @@
                 <key>sourceColorRect</key>
                 <string>{{114,0},{138,205}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{138,205}</string>
             </dict>
             <key>punk_bear_8.png</key>
             <dict>
@@ -470,7 +470,7 @@
                 <key>sourceColorRect</key>
                 <string>{{38,28},{192,177}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{192,177}</string>
             </dict>
             <key>punk_bear_9.png</key>
             <dict>
@@ -483,7 +483,7 @@
                 <key>sourceColorRect</key>
                 <string>{{38,28},{192,177}}</string>
                 <key>sourceSize</key>
-                <string>{358,205}</string>
+                <string>{192,177}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -495,7 +495,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:54bd51ae83c34380e849defe50d79902$</string>
+            <string>$TexturePacker:SmartUpdate:c04e7dfc07ba5f1b2760ab2de4908e06$</string>
             <key>textureFileName</key>
             <string>polar_bear-hd.pvr.ccz</string>
         </dict>

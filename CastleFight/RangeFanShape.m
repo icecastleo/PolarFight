@@ -11,11 +11,9 @@
 
 @implementation RangeFanShape
 
+//NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeFanShape,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
 
-// NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@1,@"effectSides",@0,@"effectSelfOrNot",@"RangeFanShape",@"rangeName",@200,@"effectRadius",@(M_PI/2),@"effectAngle",nil];    //FanShape
-//EffectSides:0=effectSideEnemy,1=effectSideAlly,2=effectSideBoth
-//effectRadius=攻擊半徑
-//effectAngle=攻擊角度
+//kRangeKeyAngle = 攻擊角度
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
@@ -29,7 +27,6 @@
         radius = 50;
     }
     
-    radius *= kScale;
     width = radius*2;
     height = radius*2;
     
@@ -46,8 +43,8 @@
     }
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, width/2, height/2);
-    CGPathAddArc(attackRange, NULL, width/2, height/2, radius, angle/(-2), angle/2, NO);
+    CGPathMoveToPoint(attackRange, NULL, radius, radius);
+    CGPathAddArc(attackRange, NULL, radius, radius, radius, -M_PI/2 - angle/2, -M_PI/2 + angle/2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }

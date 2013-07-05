@@ -11,8 +11,6 @@
 
 #define kGameSettingFps 30
 
-#define kScale [[UIScreen mainScreen] scale]
-
 // For map
 #define kMapPathFloor 50
 #define kMapPathHeight 65
