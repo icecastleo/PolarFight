@@ -17,4 +17,6 @@
 
 -(id)initWithDamageAttribute:(Attribute *)damage andMagicName:(NSString*)name andNeedImages:(NSDictionary *)images;
 
+-(void)activeByEntity:(Entity *)entity andPath:(NSArray *)path;
+
 @end

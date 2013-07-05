@@ -26,6 +26,7 @@ typedef enum {
     kEventFoodChanged,
     
     kEventSendMagicEvent,
+    kEventUseMask,
     
 } EventType;
 

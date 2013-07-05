@@ -32,17 +32,21 @@
     UIImage *image = [UIImage imageNamed:[images objectForKey:@"projectileImage"]];
     CGPoint startPoint = ccp(startValue.CGPointValue.x,startValue.CGPointValue.y+image.size.width/5);
     
-    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
+    //FIXME: effectRange doesn't have a correct owner.
+    NSMutableDictionary *effectRangeDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@10,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
+    Range *effectRange = [Range rangeWithParameters:effectRangeDictionary];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[images objectForKey:@"projectileImage"],kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[images objectForKey:@"projectileImage"],kRangeKeySpriteFile,effectRange,kRangeKeyEffectRange,nil];
     
-    ProjectileRange *arrow = (ProjectileRange *)[Range rangeWithParameters:dictionary];
+    ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
+    
+//    effectRange.owner = projectileRange.owner;
     
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
                                  magicCom.damage];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:arrow type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x, startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
-        NSLog(@"startPoint:%@, event.position:%@",NSStringFromCGPoint(startPoint),NSStringFromCGPoint(position));
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x, startPoint.y-0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
+        
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;
@@ -56,6 +60,7 @@
     CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:0.5f], nil];
     event.finishAction = pulseSequence;
     
+    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     [projectile.projectileEventQueue addObject:event];
 }
 

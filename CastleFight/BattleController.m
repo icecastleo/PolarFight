@@ -202,8 +202,11 @@ __weak static BattleController* currentInstance;
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                self.selectedEntity = entity;
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                if (!selectCom.canSelect) {
+                    continue;
+                }
+                self.selectedEntity = entity;
                 [selectCom show];
                 break;
             }
@@ -255,9 +258,7 @@ __weak static BattleController* currentInstance;
                 [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
                 MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", magicCom.name,@"name", magicCom,@"MagicComponent",nil];
-                    
-                    [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+                    [magicCom activeByEntity:self.userPlayer andPath:path];
                 }
             }
         }

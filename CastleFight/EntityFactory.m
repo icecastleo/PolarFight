@@ -41,6 +41,7 @@
 #import "InformationComponent.h"
 #import "MagicSkillComponent.h"
 #import "MagicComponent.h"
+#import "MaskComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -294,8 +295,11 @@
     
     [entity addComponent:[[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]]];
     
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    [entity addComponent:renderCom];
+    [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
     [entity addComponent:[[SelectableComponent alloc] init]];
