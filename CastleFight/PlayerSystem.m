@@ -46,7 +46,7 @@
                 
                 CharacterInitData *data = summon.data;
                 
-                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team];
+                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team isSummon:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
                 
                 summon.currentCooldown = summon.cooldown;

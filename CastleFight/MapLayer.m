@@ -193,4 +193,12 @@ const static int pathSizeHeight = 40;
     return YES;
 }
 
+-(void) summonEntity:(Entity *)entity
+{
+    [self addEntity:entity];
+}
+
+    
+
+
 @end
