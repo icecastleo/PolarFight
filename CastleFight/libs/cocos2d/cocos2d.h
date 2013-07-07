@@ -185,6 +185,8 @@
 
 #import "CCRepeatForever+RepeatForeverAnimateExtend.h"
 #import "CCMenu+RowColumnExtend.h"
+#import "SimpleAudioEngine+VibrateExtend.h"
+#import "CCShake.h"
 
 
 #ifdef __cplusplus

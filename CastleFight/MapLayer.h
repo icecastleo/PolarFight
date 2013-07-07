@@ -8,7 +8,6 @@
 
 #import "CCLayer.h"
 #import "MapCamera.h"
-#import "Character.h"
 #import "Entity.h"
 
 @interface MapLayer : CCLayer {

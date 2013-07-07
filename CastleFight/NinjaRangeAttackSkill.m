@@ -32,16 +32,19 @@ const static int kRadius = 80;
 -(void)activeEffect {
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    DirectionComponent *direction = (DirectionComponent *)[self.owner getComponentOfClass:[DirectionComponent class]];
     AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"weapon.png",kRangeKeySpriteFile,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"weapon.png",kRangeKeySpriteFile,@1,kRangeKeyTargetLimit,nil];
     
     ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
-    CGPoint endPosition = ccpAdd(render.sprite.position, direction.direction == kDirectionLeft ? ccp(-kRadius, 0) : ccp(kRadius, 0));
+    Entity *target = [[range getEffectEntities] lastObject];
+    RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startPosition:render.sprite.position endPosition:endPosition time:0.25 block:^(NSArray *entities, CGPoint position) {
+    CGPoint startPosition = [render.sprite.parent convertToWorldSpace:render.sprite.position];
+    CGPoint endPosition = ccp([targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position].x, startPosition.y);
+    
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPosition endWorldPosition:endPosition time:0.25 block:^(NSArray *entities, CGPoint position) {
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;

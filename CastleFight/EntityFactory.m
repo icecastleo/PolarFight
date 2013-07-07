@@ -39,8 +39,9 @@
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "GUIButtonComponent.h"
+#import "MagicSkillComponent.h"
 #import "MagicComponent.h"
+#import "MaskComponent.h"
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -87,7 +88,11 @@
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    [render addShadow];
+    render.enableShadowPosition = YES;
+    [entity addComponent:render];
+    
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
     [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
@@ -198,7 +203,11 @@
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    [render addShadow];
+    render.enableShadowPosition = YES;
+    [entity addComponent:render];
+    
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:nil]];
 
 //    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
@@ -254,20 +263,20 @@
             [player.battleTeam addObject:summon];
         }
         
-        MagicComponent *magicCom = [[MagicComponent alloc] init];
+       MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
         NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
         
         for (CharacterInitData *data in magicTeamInitData) {
             Entity *magicButton = [self createMagicButton:data.cid level:data.level];
-            [player.magicTeam addObject:magicButton];
             
-            InformationComponent *infoCom = (InformationComponent *)[magicButton getComponentOfClass:[InformationComponent class]];
-            NSString *name = [infoCom informationForKey:@"name"];
-            NSAssert(NSClassFromString(name), @"you forgot to make this skill.");
-            [magicCom.magics setObject:[[NSClassFromString(name) alloc] init] forKey:name];
+            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfClass:[MagicComponent class]];
+            magicCom.spellCaster = entity;
+            NSAssert(NSClassFromString(magicCom.name), @"you forgot to make this skill.");
+            
+            [magicSkillCom.magicTeam addObject:magicButton];
         }
         
-        [entity addComponent:magicCom];
+        [entity addComponent:magicSkillCom];
         
         [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                               nil]];
@@ -284,26 +293,35 @@
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level {
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
     
-    NSString *name = [characterData objectForKey:@"name"];
-    int cost = [[characterData objectForKey:@"cost"] intValue];
-    NSDictionary *information = [characterData objectForKey:@"information"];
+    NSDictionary *costComponentDictionary = [characterData objectForKey:@"CostComponent"];
     
-    //magic button image
-//    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@_01.png", name]];
-
-    CCSprite *sprite = [CCSprite spriteWithFile:@"nicefire.png"];
+    float cooldown = [[characterData objectForKey:@"cooldown"] floatValue];
+    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
+    
+    //FIXME: change to correct name
+    NSString *magicButtonName = [NSString stringWithFormat:@"%@_button.png",[information objectForKey:@"name"]];
+    CCSprite *sprite = [CCSprite spriteWithFile:magicButtonName];
     
     Entity *entity = [_entityManager createEntity];
-    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
     
-    [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
-    [entity addComponent:[[RenderComponent alloc] initWithSprite:sprite]];
+    
+    MagicComponent *magicCom = [[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]];
+    magicCom.cooldown = cooldown;
+    
+    [entity addComponent:magicCom];
+    
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    
+    CostComponent *costCom = [[CostComponent alloc] initWithDictionary:costComponentDictionary];
+    [entity addComponent:costCom];
+    
+    [entity addComponent:renderCom];
+    [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
     [entity addComponent:[[SelectableComponent alloc] init]];
-    
-    [entity addComponent:[[GUIButtonComponent alloc] init]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     

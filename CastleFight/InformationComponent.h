@@ -2,7 +2,7 @@
 //  InformationComponent.h
 //  CastleFight
 //
-//  Created by  DAN on 13/6/24.
+//  Created by  浩翔 on 13/6/24.
 //
 //
 
@@ -10,8 +10,8 @@
 
 @interface InformationComponent : Component
 
--(id)initWithInformation:(NSDictionary *)info;
+@property (nonatomic,readonly) NSDictionary *information;
 
--(NSString *)informationForKey:(NSString *)key;
+-(id)initWithInformation:(NSDictionary *)info;
 
 @end

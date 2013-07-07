@@ -13,32 +13,9 @@
 #import "CCActionInterval.h"
 #import "CCActionManager.h"
 
-@implementation CCActionManager (RepeatForeverAnimateExtend)
-
-//-(void) removeActionByTag:(NSInteger)aTag target:(id)target
-//{
-//	NSAssert( aTag != kCCActionTagInvalid, @"Invalid tag");
-//	NSAssert( target != nil, @"Target should be ! nil");
-//    
-//	tHashElement *element = NULL;
-//	HASH_FIND_INT(targets, &target, element);
-//    
-//	if( element ) {
-//		NSUInteger limit = element->actions->num;
-//		for( NSUInteger i = 0; i < limit; i++) {
-//			CCAction *a = element->actions->arr[i];
-//            
-//			if( a.tag == aTag && [a originalTarget]==target) {
-//                [a stop];
-//				[self removeActionAtIndex:i hashElement:element];
-//				break;
-//			}
-//		}
-//        
-//	}
-//}
-
-@end
+//@implementation CCActionManager (RepeatForeverAnimateExtend)
+//
+//@end
 
 @implementation CCRepeatForever (RepeatForeverAnimateExtend)
 

@@ -35,18 +35,19 @@ int ActiveLine = 0;
     [self initLineSelect];
 }
 
--(void)addEntity:(Entity *)entity line:(int)line
-{
+-(void)addEntity:(Entity *)entity {
+    int line = arc4random_uniform(kMapPathMaxLine);
+    [self addEntity:entity line:line];
+}
+
+-(void)addEntity:(Entity *)entity line:(int)line {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
-    
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
     
     CGPoint position;
-    
-    
     
     if (character) {
         if (team.team == 1) {

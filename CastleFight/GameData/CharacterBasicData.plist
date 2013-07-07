@@ -867,7 +867,7 @@
 		<key>id</key>
 		<string>105</string>
 		<key>name</key>
-		<string>enemy_05</string>
+		<string>punk_bear</string>
 		<key>cost</key>
 		<string>20</string>
 		<key>image</key>
@@ -2322,68 +2322,78 @@
 	<dict>
 		<key>id</key>
 		<string>901</string>
-		<key>name</key>
-		<string>testMagic</string>
-		<key>cost</key>
-		<string>10</string>
-		<key>attributes</key>
+		<key>CostComponent</key>
 		<dict>
-			<key>hp</key>
-			<dict>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-				<key>isFluctuant</key>
-				<false/>
-			</dict>
-			<key>attack</key>
-			<dict>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>500</string>
-			</dict>
-			<key>defense</key>
-			<dict>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<key>agile</key>
-			<dict>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>0</string>
-			</dict>
-			<key>speed</key>
-			<dict>
-				<key>a</key>
-				<string>0</string>
-				<key>b</key>
-				<string>0</string>
-				<key>c</key>
-				<string>11</string>
-			</dict>
+			<key>costType</key>
+			<string>Food</string>
+			<key>food</key>
+			<integer>30</integer>
+			<key>mana</key>
+			<integer>0</integer>
+		</dict>
+		<key>cooldown</key>
+		<integer>10</integer>
+		<key>damage</key>
+		<dict>
+			<key>a</key>
+			<string>0</string>
+			<key>b</key>
+			<string>0.02c</string>
+			<key>c</key>
+			<string>100</string>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>nicefire.png</string>
 		</dict>
 		<key>information</key>
 		<dict>
 			<key>name</key>
-			<string>testMagic</string>
+			<string>BombMagic</string>
 			<key>type</key>
 			<string>magic</string>
 			<key>description</key>
-			<string>test test test</string>
+			<string>test test BombMagic</string>
+		</dict>
+	</dict>
+	<key>902</key>
+	<dict>
+		<key>id</key>
+		<string>902</string>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Food</string>
+			<key>food</key>
+			<integer>10</integer>
+			<key>mana</key>
+			<integer>0</integer>
+		</dict>
+		<key>cooldown</key>
+		<integer>5</integer>
+		<key>damage</key>
+		<dict>
+			<key>a</key>
+			<string>0</string>
+			<key>b</key>
+			<string>0.02c</string>
+			<key>c</key>
+			<string>100</string>
+		</dict>
+		<key>images</key>
+		<dict>
+			<key>projectileImage</key>
+			<string>LightningMagic.png</string>
+		</dict>
+		<key>information</key>
+		<dict>
+			<key>name</key>
+			<string>LightningMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test LightningMagic</string>
 		</dict>
 	</dict>
 </dict>

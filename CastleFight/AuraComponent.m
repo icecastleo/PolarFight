@@ -20,6 +20,7 @@
 
 -(void)setEntity:(Entity *)entity {
     [super setEntity:entity];
+    
     for (ActiveSkill *aura in self.auras.allValues) {
         aura.owner = entity;
     }
@@ -29,6 +30,7 @@
     if (self.infinite) {
         self.totalTime = 1;
     }
+    
     for (ActiveSkill *aura in self.auras.allValues) {
         [aura activeEffect];
     }

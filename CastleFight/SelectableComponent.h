@@ -10,6 +10,8 @@
 
 @interface SelectableComponent : Component
 
+@property (nonatomic) BOOL canSelect;
+
 -(void)show;
 -(void)unSelected;
 

@@ -10,6 +10,14 @@
 #import "TeamComponent.h"
 #import "DefenderComponent.h"
 
+@interface CastleBloodSprite() {
+    // Just for vibrate
+    BOOL vibrate;
+    double lastUpdate;
+}
+
+@end
+
 @implementation CastleBloodSprite
 
 -(id)initWithEntity:(Entity *)entity {
@@ -18,8 +26,21 @@
         
     if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"gauge%02d.png", team.team]]]) {
         self.midpoint = ccp(team.team == 1 ? 1 : 0, 0);
+        
+        vibrate = team.team == 1? YES : NO;
     }
     return self;
+}
+
+-(void)update {
+    [super update];
+    
+    if (vibrate) {
+        if (lastUpdate + 5 < CACurrentMediaTime()) {
+            [[SimpleAudioEngine sharedEngine] vibrate];
+        }
+        lastUpdate = CACurrentMediaTime();
+    }
 }
 
 @end

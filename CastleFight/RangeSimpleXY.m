@@ -17,6 +17,8 @@
 
 -(void)setSpecialParameter:(NSMutableDictionary*) dict {
     
+    // FIXME: key name
+    
     int radius;
     NSNumber *r = [dict valueForKey:kRangeKeyRadius];
     
@@ -26,15 +28,16 @@
     } else {
         radius = 50;
     }
-
-    // FIXME: attack range
     
-    radius *= kScale;
-    width = radius*2;
+    width = kMapPathHeight;
     height = radius*2;
+    
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, width/2, height/2);
-    CGPathAddArc(attackRange, NULL, width/2, height/2, radius, 90/(-2), 90/2, NO);
+    CGPathMoveToPoint(attackRange, NULL, 0, 0);
+    CGPathAddLineToPoint(attackRange, NULL, 0, radius);
+    CGPathAddLineToPoint(attackRange, NULL, width, radius);
+    CGPathAddLineToPoint(attackRange, NULL, width, 0);
+    CGPathAddLineToPoint(attackRange, NULL, 0, 0);
     CGPathCloseSubpath(attackRange);
     
     yInterval = [[NSMutableArray alloc] init];
@@ -100,8 +103,8 @@
             return NO;
         }
     }
-    int attackDistance = width/2/kScale + renderCom.sprite.boundingBox.size.width/2 + selfRenderCom.sprite.boundingBox.size.width/2;
-//    int attackDistance = width/2/kScale;
+    int attackDistance = width + renderCom.sprite.boundingBox.size.width/2 + selfRenderCom.sprite.boundingBox.size.width/2;
+//    int attackDistance = width;
     
     if (directionCom.direction == kDirectionLeft) {
         if (c2.x <= c1.x && (c1.x-c2.x) <= attackDistance) {

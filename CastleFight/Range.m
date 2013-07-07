@@ -57,10 +57,11 @@
 -(void)setRangeSprite {
     
     CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, width * 4, imageColorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextRef context = CGBitmapContextCreate(NULL, width*CC_CONTENT_SCALE_FACTOR(), height*CC_CONTENT_SCALE_FACTOR(), 8, width*CC_CONTENT_SCALE_FACTOR()*4, imageColorSpace, kCGImageAlphaPremultipliedLast);
     CGContextSetRGBFillColor(context, 1.0, 0.8, 0.8, 0.8);
-    
+    CGContextScaleCTM(context, CC_CONTENT_SCALE_FACTOR(), CC_CONTENT_SCALE_FACTOR());
     CGContextAddPath(context, attackRange);
+    
     CGContextFillPath(context);
     
     // Get CGImageRef
@@ -72,7 +73,7 @@
 -(void)setDirection:(CGPoint)velocity {
     float angleRadians = atan2f(velocity.y, velocity.x);
     float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-    float cocosAngle = -1 * angleDegrees;
+    float cocosAngle = 270 - angleDegrees;
     
     _rangeSprite.rotation = cocosAngle;
 }
@@ -124,18 +125,20 @@
         return NO;
     }
     
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
     if (attackRange == nil) {
-        CGRect entityBoundingBox = renderCom.sprite.boundingBox;
-        entityBoundingBox.origin = [_rangeSprite convertToNodeSpace:[renderCom.sprite.parent convertToWorldSpace:renderCom.sprite.position]];
-        
-        if (CGRectIntersectsRect(_rangeSprite.boundingBox, renderCom.sprite.boundingBox)) {
+        CGRect entityBoundingBox = render.sprite.boundingBox;
+        entityBoundingBox.origin = [_rangeSprite.parent convertToNodeSpace:[render.sprite.parent convertToWorldSpace:entityBoundingBox.origin]];
+      
+        if (CGRectIntersectsRect(_rangeSprite.boundingBox, entityBoundingBox)) {
             return YES;
         } else {
             return NO;
         }
     }
+    
+    // TODO: Check bugs because RenderComponent add an CCNode
     
     CollisionComponent *collisionCom = (CollisionComponent *)[entity getComponentOfClass:[CollisionComponent class]];
     
@@ -144,11 +147,11 @@
     for (int j = 0; j < [points count]; j++) {
         CGPoint loc = [[points objectAtIndex:j] CGPointValue];
         // Switch coordinate systems
-        loc = [renderCom.sprite convertToWorldSpace:loc];
+        loc = [render.sprite convertToWorldSpace:loc];
         loc = [_rangeSprite convertToNodeSpace:loc];
 
-        loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* kScale + width/2;
-        loc.y = (loc.y - _rangeSprite.boundingBox.size.height/2)* kScale + height/2;
+//        loc.x = (loc.x - _rangeSprite.boundingBox.size.width/2)* CC_CONTENT_SCALE_FACTOR() + width/2;
+//        loc.y = (loc.y - _rangeSprite.boundingBox.size.height/2)* CC_CONTENT_SCALE_FACTOR() + height/2;
         
 //        CCLOG(@"%f,%f",loc.x,loc.y);
         

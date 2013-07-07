@@ -33,10 +33,9 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
-#import "GUIButtonComponent.h"
-#import "InformationComponent.h"
 #import "MagicSystem.h"
-#import "ThreeLineRandomLayer.h"
+#import "MagicComponent.h"
+
 @interface BattleController () {
     NSString *battleName;
     
@@ -64,7 +63,7 @@ __weak static BattleController* currentInstance;
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        mapLayer = [[ThreeLineRandomLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         entityManager = [[EntityManager alloc] init];
@@ -203,8 +202,11 @@ __weak static BattleController* currentInstance;
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                self.selectedEntity = entity;
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                if (!selectCom.canSelect) {
+                    continue;
+                }
+                self.selectedEntity = entity;
                 [selectCom show];
                 break;
             }
@@ -244,19 +246,19 @@ __weak static BattleController* currentInstance;
         
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
-        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
             [pathCom.path removeAllObjects];
+            //move uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                GUIButtonComponent *guiCom = (GUIButtonComponent *)[self.selectedEntity getComponentOfClass:[GUIButtonComponent class]];
-                InformationComponent *infoCom = (InformationComponent *)[self.selectedEntity getComponentOfClass:[InformationComponent class]];
-                if (guiCom && infoCom) {
-                    NSString *magicKey = [infoCom informationForKey:@"name"];
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:magicKey,@"name",path,@"path", nil];
-                    [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+                // projectile event uses world location.
+                [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+                MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+                if (magicCom) {
+                    [magicCom activeWithPath:path];
                 }
             }
         }

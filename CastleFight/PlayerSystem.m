@@ -32,11 +32,8 @@
         
         [summonComponents addObjectsFromArray:player.battleTeam];
         
-       
         
         for (SummonComponent *summon in summonComponents) {
-            
-          
             
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
@@ -50,7 +47,6 @@
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
                 
                 summon.currentCooldown = summon.cooldown;
-                
             
             } else {
                 summon.summon = NO;
@@ -58,8 +54,6 @@
                 if (summon.currentCooldown > 0) {
                     summon.currentCooldown -= delta;
                 }
-                
-            
             }
             if (summon.menuItem) {
                 [summon.menuItem updateSummon:summon];

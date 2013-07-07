@@ -2,40 +2,37 @@
 //  MagicComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/6/25.
+//  Created by  DAN on 13/7/2.
 //
 //
 
 #import "MagicComponent.h"
-#import "testMagic.h"
 
 @implementation MagicComponent
 
--(id)init {
+-(id)initWithDamageAttribute:(Attribute *)damage andMagicName:(NSString*)name andNeedImages:(NSDictionary *)images {
     if (self = [super init]) {
-        _magicQueue = [[NSMutableArray alloc] init];
-        _magics = [[NSMutableDictionary alloc] init];
+        _damage = damage;
+        _name = name;
+        _images = images;
     }
     return self;
 }
 
--(void)setEntity:(Entity *)entity {
-    [super setEntity:entity];
-    
-    for (testMagic *magic in _magics.allValues) {
-        magic.owner = entity;
-    }
+-(void)receiveEvent:(EventType)type Message:(id)message {
+    if (type == kEventTypeLevelChanged) {
+        [_damage updateValueWithLevel:[message intValue]];
+    } 
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
-    if (type == kEventSendMagicEvent) {
-        if([message isKindOfClass:[NSDictionary class]]) {
-            NSString *magicKey = [message objectForKey:@"name"];
-            testMagic *testM = [self.magics objectForKey:magicKey];
-            [testM setInformation:message];
-            [self.magicQueue addObject:testM];
-        }
-    }
+-(void)activeWithPath:(NSArray *)path {
+    _canActive = YES;
+    _path = path;
+}
+
+-(void)didExecute {
+    _canActive = NO;
+    _path = nil;
 }
 
 @end

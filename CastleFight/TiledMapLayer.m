@@ -26,8 +26,8 @@
             [[child texture] setAntiAliasTexParameters];
         }
         
-        boundaryX = map.mapSize.width * map.tileSize.width / kScale;
-        boundaryY = map.mapSize.height * map.tileSize.height / kScale;
+        boundaryX = map.mapSize.width * map.tileSize.width / CC_CONTENT_SCALE_FACTOR();
+        boundaryY = map.mapSize.height * map.tileSize.height / CC_CONTENT_SCALE_FACTOR();
         
         zOrder = boundaryY;
         

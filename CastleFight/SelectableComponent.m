@@ -19,6 +19,13 @@
 
 @implementation SelectableComponent
 
+-(id)init {
+    if (self = [super init]) {
+        _canSelect = YES;
+    }
+    return self;
+}
+
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == KEventDead){
         [self unSelected];

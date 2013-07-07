@@ -12,15 +12,15 @@
 
 @dynamic isPiercing;
 
--(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startPosition:(CGPoint)startPosition endPosition:(CGPoint)endPosition time:(float)time block:(void (^)(NSArray *entities, CGPoint position))block {
+-(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startWorldPosition:(CGPoint)startWorldPosition endWorldPosition:(CGPoint)endWorldPosition time:(float)time block:(void (^)(NSArray *entities, CGPoint position))block {
     
     if (self = [super init]) {
-        NSAssert(startPosition.x != endPosition.x || startPosition.y != endPosition.y, @"Please set different position for start and end!");
+        NSAssert(startWorldPosition.x != endWorldPosition.x || startWorldPosition.y != endWorldPosition.y, @"Please set different position for start and end!");
         
         _range = range;
         _type = type;
-        _startPosition = startPosition;
-        _endPosition = endPosition;
+        _startWorldPosition = startWorldPosition;
+        _endWorldPosition = endWorldPosition;
         _time = time;
         _block = block;
     }

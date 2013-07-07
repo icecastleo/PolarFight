@@ -22,8 +22,6 @@
     if (type == kEventTypeLevelChanged) {
         [_hp updateValueWithLevel:[message intValue]];
         [_defense updateValueWithLevel:[message intValue]];
-    } else if (type == kEventReceiveDamage) {
-        [_bloodSprite update];
     }
 }
 

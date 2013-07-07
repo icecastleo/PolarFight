@@ -14,16 +14,6 @@ const static int kMoveSlowRatio = 30;
 
 @implementation TiledMapCamera
 
-static float scale;
-
-+(void)initialize {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        scale = [[UIScreen mainScreen] scale];
-    } else {
-        scale = 1.0;
-    }
-}
-
 -(id)initWithTiledMap:(CCTMXTiledMap *)aMap {
     if (self = [super init]) {
         map = aMap;
@@ -32,8 +22,8 @@ static float scale;
         
         center = ccp(winSize.width / 2, winSize.height / 2);
         
-        widthMax = map.mapSize.width * map.tileSize.width / scale - winSize.width;
-        heightMax = map.mapSize.height * map.tileSize.height / scale - winSize.height;
+        widthMax = map.mapSize.width * map.tileSize.width / CC_CONTENT_SCALE_FACTOR() - winSize.width;
+        heightMax = map.mapSize.height * map.tileSize.height / CC_CONTENT_SCALE_FACTOR() - winSize.height;
         
         move = NO;
     }
