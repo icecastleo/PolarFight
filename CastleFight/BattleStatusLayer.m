@@ -20,8 +20,6 @@
 #import "UnitStockMenuItem.h"
 #import "MagicSkillComponent.h"
 
-#define kSummonNormal 1
-#define kSummonStock 2
 
 @implementation BattleStatusLayer
 
@@ -101,7 +99,7 @@
     [self addChild:[PauseLayer node]];
 }
 
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player unitSummonType:(int) summonType{
+-(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
     // TODO: Set by user data (plist?)
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -115,15 +113,7 @@
     
     for (SummonComponent *summon in player.summonComponents) {
         UnitMenuItem *item;
-        switch (summonType) {
-            case kSummonNormal:
-              item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
-                break;
-            case kSummonStock:
-                item = [[UnitStockMenuItem alloc] initWithSummonComponent:summon];
-            default:
-                break;
-        }
+          item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
         
         summon.menuItem = item;
         [unitItems addObject:item];
@@ -151,11 +141,6 @@
     pauseMenu.position = ccp(select.boundingBox.size.width / 2, select.boundingBox.size.height / 2);
     [pauseMenu alignItemsHorizontallyWithPadding:0];
     [select addChild:pauseMenu];
-}
-
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
-   
-    [self setUnitBoardWithPlayerComponent:player unitSummonType:kSummonNormal];
 }
 
 -(void)updateFood:(int)foodNumber {

@@ -12,7 +12,7 @@
 #import "CharacterComponent.h"
 #import "SelectableComponent.h"
 @implementation ThreeLineMapLayer
-int repeat = 3;
+int repeat = kMapPathMaxLine;
 int ActiveLine = 0;
 -(void)setMap:(NSString *)name {
     
@@ -66,11 +66,6 @@ int ActiveLine = 0;
     [self addEntity:entity toPosition:position];
 }
 
--(void)addEntity:(Entity *)entity {
-    
-    int line = arc4random_uniform(3);
-    [self addEntity:entity line:line];
-}
 
 
 -(void) summonEntity:(Entity *)entity
@@ -108,11 +103,17 @@ CCMenu *lineSelectMenu;
         [lineSelectMenu addChild:testMenuItem];
         
     }
-    [self addChild:lineSelectMenu];
+    //[self addChild:lineSelectMenu];
     lineSelectMenu.position=CGPointZero;
 //    lineSelectMenu.visible=NO;
 //    lineSelectMenu.enabled=NO;
     lineSelectMenu.zOrder=10000;
+}
+
+-(void) setParent:(CCNode *)parent{
+
+    [super setParent:parent];
+    [parent addChild:lineSelectMenu];
 }
 
 @end
