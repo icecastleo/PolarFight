@@ -19,7 +19,7 @@
 #import "RenderComponent.h"
 #import "UnitStockMenuItem.h"
 #import "MagicSkillComponent.h"
-
+#import "CostComponent.h"
 
 @implementation BattleStatusLayer
 
@@ -139,6 +139,29 @@
         //FIXME: the position is not correct.
         renderCom.position = ccp(100+70*([magicSkillCom.magicTeam indexOfObject:entity]+1),250);
         [self addChild:renderCom.node];
+        
+        //FIXME: maybe do not need these or move to other appropriate place.
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
+        NSString *costString;
+        ccColor3B color;
+        switch (costCom.type) {
+            case kCostTypeFood:
+                costString = [NSString stringWithFormat:@"%d",costCom.food];
+                color = ccGOLD;
+                break;
+            case kCostTypeMana:
+                costString = [NSString stringWithFormat:@"%d",costCom.mana];
+                color = ccBLUEVIOLET;
+                break;
+            default:
+                break;
+        }
+        NSAssert(costString != nil, @"this costType String does not be made yet.");
+        CCLabelTTF *label = [CCLabelBMFont labelWithString:costString fntFile:@"WhiteFont.fnt"];
+        label.color = color;
+        label.position =  ccp(0, renderCom.sprite.boundingBox.size.height/2 + label.boundingBox.size.height);
+        label.anchorPoint = CGPointMake(0.5, 1);
+        [renderCom.node addChild:label];
     }
     
     // FIXME: Delete after test
