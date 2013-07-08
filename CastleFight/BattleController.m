@@ -112,11 +112,11 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[PlayerSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[AISystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+    [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
+    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[CombatSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
-    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
-    [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {
@@ -125,9 +125,7 @@ __weak static BattleController* currentInstance;
 
 -(void)update:(ccTime)delta {
     for (System *system in systems) {
-//        double time = CACurrentMediaTime();
         [system update:delta];
-//        CCLOG(@"%@ : %f", NSStringFromClass([system class]), CACurrentMediaTime() - time);
     }
     
     // FIXME: As player component delegate?

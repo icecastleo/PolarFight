@@ -18,8 +18,10 @@
         _node = [CCNode node];
         _sprite = sprite;
         
-        // We only use y offset
-        offset = ccp(0, _sprite.offsetPosition.y);
+        // Make sprite center to be the node's position
+        _sprite.position = ccpMult(_sprite.offsetPosition, -1);
+        _spriteBoundingBox = _sprite.boundingBox;
+ 
         shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
         
         [_node addChild:sprite];
@@ -29,23 +31,12 @@
 
 -(void)setEnableShadowPosition:(BOOL)enableShadowPosition {
     _enableShadowPosition = enableShadowPosition;
-    
-    // Provide shadow for map layer to use!
-    if (!_shadow) {
-        [self addShadow];
-        _shadow.visible = NO;
-    }
+    _shadowSize = CGSizeMake((int)(_sprite.boundingBox.size.width * kShadowWidthScale), (int)(_sprite.boundingBox.size.height * kShadowHeightScale));
+    [self addShadow];
 }
 
 -(void)addShadow {
-    if (_shadow) {
-        if (_shadow.visible == NO) {
-            _shadow.visible = YES;
-        }
-        return;
-    }
-    
-    CGRect sRect = CGRectMake(0, 0, (int)(_sprite.boundingBox.size.width * kShadowWidthScale * CC_CONTENT_SCALE_FACTOR()), (int)(_sprite.boundingBox.size.height *kShadowHeightScale * CC_CONTENT_SCALE_FACTOR()));
+    CGRect sRect = CGRectMake(0, 0, _shadowSize.width * CC_CONTENT_SCALE_FACTOR(), _shadowSize.height * CC_CONTENT_SCALE_FACTOR());
     
     size_t bitsPerComponent = 8;
     size_t bytesPerPixel = 4;
@@ -59,9 +50,9 @@
     
     CGImageRef imgRef = CGBitmapContextCreateImage(context);
     
-    _shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
-    _shadow.position = ccpAdd(offset, shadowOffset);
-    [_node addChild:_shadow z:-1];
+    CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
+    shadow.position = shadowOffset;
+    [_node addChild:shadow z:-1];
 }
 
 -(void)setPosition:(CGPoint)position {
@@ -69,9 +60,9 @@
         _position = position;
         
         if (self.enableShadowPosition) {
-            _node.position = ccpSub(ccpSub(position, offset), shadowOffset);
+            _node.position = ccpSub(position, shadowOffset);
         } else {
-            _node.position = ccpSub(position, offset);
+            _node.position = position;
         }
     }
 }

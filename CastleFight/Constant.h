@@ -41,8 +41,9 @@
 #define kMoveMultiplier 5
 
 // Shadow
-#define kShadowPositionEnable YES
-//#define kShadowVisible YES
+#define kShadowPositionEnable 1
+// For debug
+#define kShadowVisible 0
 
 // Divisor can't be 0
 #define kShadowWidthScale 0.75

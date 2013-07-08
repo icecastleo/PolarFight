@@ -117,7 +117,7 @@
         UnitMenuItem *item;
         switch (summonType) {
             case kSummonNormal:
-              item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
+                item = [[UnitMenuItem alloc] initWithSummonComponent:summon];
                 break;
             case kSummonStock:
                 item = [[UnitStockMenuItem alloc] initWithSummonComponent:summon];
@@ -127,11 +127,6 @@
         
         summon.menuItem = item;
         [unitItems addObject:item];
-    }
-    
-    for (SummonComponent *summon in player.battleTeam) {
-        // hero
-        summon.summon = YES;
     }
     
     MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];

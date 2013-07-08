@@ -89,7 +89,6 @@
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-    [render addShadow];
     render.enableShadowPosition = YES;
     [entity addComponent:render];
     
@@ -197,7 +196,6 @@
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-    [render addShadow];
     render.enableShadowPosition = YES;
     [entity addComponent:render];
     
@@ -253,6 +251,7 @@
         for (CharacterInitData *data in battleTeamInitData) {
             SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
             summon.player = player;
+            summon.summon = YES;
             [player.battleTeam addObject:summon];
         }
         

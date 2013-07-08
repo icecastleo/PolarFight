@@ -65,7 +65,6 @@
             direction.velocity = move.velocity;
         }
 
-        // FIXME: user hero == yes, other == no;
         [_map moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
         
         // Run animation

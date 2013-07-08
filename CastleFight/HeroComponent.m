@@ -47,18 +47,17 @@
 -(void)reSummon {
     NSArray *array = [self.entity getAllEntitiesPosessingComponentOfClass:[PlayerComponent class]];
 
-    PlayerComponent *playerCom;
     for (Entity *entity in array) {
         TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
         
         if (teamCom.team == self.team) {
-            playerCom = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
-            break;
-        }
-    }
-    for (SummonComponent *summonCom in playerCom.battleTeam) {
-        if ([summonCom.data.cid isEqualToString:self.cid]) {
-            summonCom.summon = YES;
+            PlayerComponent *playerCom = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
+            
+            for (SummonComponent *summonCom in playerCom.battleTeam) {
+                if ([summonCom.data.cid isEqualToString:self.cid]) {
+                    summonCom.summon = YES;
+                }
+            }
             break;
         }
     }

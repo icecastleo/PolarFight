@@ -116,6 +116,7 @@ const static int pathSizeHeight = 40;
     
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     render.position = position;
+    
     [self reorderChild:render.node z:self.boundaryY - render.position.y];
 }
 
@@ -135,12 +136,11 @@ const static int pathSizeHeight = 40;
     float Height = 0;
     
     if (render.enableShadowPosition) {
-        NSAssert(render.shadow, @"Need shadow sprite to calculate the right boundary!");
-        Width = render.shadow.boundingBox.size.width/2;
-        Height = render.shadow.boundingBox.size.height/2;
+        Width = render.shadowSize.width/2;
+        Height = render.shadowSize.height/2;
     } else {
-        Width = render.sprite.boundingBox.size.width/2;
-        Height = render.sprite.boundingBox.size.height/2;
+        Width = render.spriteBoundingBox.size.width/2;
+        Height = render.spriteBoundingBox.size.height/2;
     }
     
     return ccp(MIN( MAX(Width, position.x), self.boundaryX - Width), MIN( MAX(Height, position.y), self.boundaryY - Height));
