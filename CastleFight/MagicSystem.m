@@ -35,8 +35,7 @@
         
         magicCom.currentCooldown -= delta;
         
-        //FIXME: fix mana resource
-        BOOL isCostSufficient = [costCom isCostSufficientWithFood:resourceCom.food Mana:0];
+        BOOL isCostSufficient = [costCom isCostSufficientWithFood:resourceCom.food Mana:resourceCom.mana];
         
         if (isCostSufficient) {
             [entity sendEvent:kEventCancelMask Message:nil];
@@ -64,7 +63,7 @@
             
             magicCom.currentCooldown = magicCom.cooldown;
             resourceCom.food -= costCom.food;
-//            resourceCom.mana -= costCom.mana;
+            resourceCom.mana -= costCom.mana;
             
             [entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:magicCom.cooldown]];
         }

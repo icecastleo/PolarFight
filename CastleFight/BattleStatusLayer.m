@@ -74,6 +74,14 @@
         food.color = ccGOLD;
         [self addChild:food];
         
+        //mana
+        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
+        mana.anchorPoint = ccp(1, 0.5);
+        mana.scale = 0.5;
+        mana.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3-20);
+        mana.color = ccBLUEVIOLET;
+        [self addChild:mana];
+        
         [self setUnitBoardWithPlayerComponent:player];
         [self setPauseButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
@@ -160,6 +168,10 @@
 
 -(void)updateFood:(int)foodNumber {
     [food setString:[NSString stringWithFormat:@"%d", foodNumber]];
+}
+
+-(void)updateMana:(int)manaNumber {
+    [mana setString:[NSString stringWithFormat:@"%d", manaNumber]];
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {

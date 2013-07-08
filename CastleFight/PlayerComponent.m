@@ -16,6 +16,10 @@
         _foodRate = 1.0;
         _maxRate = _foodRate * 4;
         
+        _mana = 10.0;
+        _manaRate = 1.0;
+        _maxManaRate = _manaRate * 4;
+        
         _interval = 0.25;
         _foodAddend = 0.05;
         

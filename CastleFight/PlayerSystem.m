@@ -25,6 +25,7 @@
         if (player.delta >= player.interval) {
             player.delta -= player.interval;
             player.food += player.foodRate;
+            player.mana += player.manaRate;
         }
         
         // Summon entity

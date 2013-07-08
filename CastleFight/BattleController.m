@@ -133,6 +133,7 @@ __weak static BattleController* currentInstance;
     // FIXME: As player component delegate?
     PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
     [statusLayer updateFood:(int)player.food];
+    [statusLayer updateMana:(int)player.mana];
     
     [self checkBattleEnd];
 }
