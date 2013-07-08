@@ -24,12 +24,16 @@
 
 @property (weak) UnitMenuItem *menuItem;
 
+@property int summonType;
+@property int currentStock;
 @property float currentCooldown;
 @property (readonly) BOOL isCostSufficient;
 @property (readonly) BOOL canSummon;
 
-@property (nonatomic) BOOL summon;
-@property (nonatomic) BOOL readyToLine;
--(id)initWithCharacterInitData:(CharacterInitData *)initData;
 
+@property (nonatomic) BOOL summon;
+-(id)initWithCharacterInitData:(CharacterInitData *)initData;
+-(void) updateSummon;
+-(void) finishSummon;
+-(void) setWithMenuItem:(UnitMenuItem*) item;
 @end

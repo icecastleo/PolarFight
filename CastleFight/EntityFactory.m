@@ -65,7 +65,7 @@
     return self;
 }
 
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+- (Entity *)createCharacter:(NSString *)cid  level:(int)level forTeam:(int)team isSummon:(bool)summon {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -74,7 +74,7 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
-       
+    
     CCSprite *sprite = nil;
     
     if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
@@ -97,7 +97,7 @@
     
     [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
     [entity addComponent:[[DirectionComponent alloc] initWithVelocity:ccp(team == 1 ? 1 : -1, 0)]];    
-        
+    
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
     
@@ -152,7 +152,7 @@
         
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
         [entity addComponent:[[SelectableComponent alloc] init]];
-
+        
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
         [entity addComponent:pathCom];
@@ -163,18 +163,25 @@
     }
     
     // TODO: Set AI for different character
-//    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
+    //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
-//    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
+    //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
     if (self.mapLayer) {
-        [self.mapLayer addEntity:entity];
+        if(summon)
+            [self.mapLayer summonEntity:entity];
+        else
+            [self.mapLayer addEntity:entity];
     }
     
     return entity;
+}
+
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+    return [self createCharacter:cid level:level forTeam:team isSummon:NO];
 }
 
 -(Entity *)createCastleForTeam:(int)team {
