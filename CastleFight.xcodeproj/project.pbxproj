@@ -113,6 +113,8 @@
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
 		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
 		37486B3C1781C2880011F3DB /* LightningMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B3B1781C2880011F3DB /* LightningMagic.m */; };
+		374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */; };
+		374C90A4178AB33A00C8FB47 /* LightningMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		3750F4F21785A992009E2689 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3750F4F11785A991009E2689 /* LightningMagic.png */; };
 		3750F4F51785B494009E2689 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F41785B491009E2689 /* MagicComponent.m */; };
@@ -593,6 +595,8 @@
 		37486B381781951D0011F3DB /* Magic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magic.m; sourceTree = "<group>"; };
 		37486B3A1781C2880011F3DB /* LightningMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightningMagic.h; sourceTree = "<group>"; };
 		37486B3B1781C2880011F3DB /* LightningMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightningMagic.m; sourceTree = "<group>"; };
+		374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BombMagic_button@2x.png"; sourceTree = "<group>"; };
+		374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightningMagic_button@2x.png"; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		3750F4F11785A991009E2689 /* LightningMagic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightningMagic.png; sourceTree = "<group>"; };
@@ -1679,6 +1683,8 @@
 				37DD1C5C168D96560058E450 /* WhiteFont.png */,
 				37E4F1431786FE13008ED76B /* BombMagic_button.png */,
 				37E4F1411786FDBB008ED76B /* LightningMagic_button.png */,
+				374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */,
+				374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */,
 				3750F4F11785A991009E2689 /* LightningMagic.png */,
 			);
 			path = Resources;
@@ -2913,6 +2919,8 @@
 				3750F4F21785A992009E2689 /* LightningMagic.png in Resources */,
 				37E4F1421786FDBB008ED76B /* LightningMagic_button.png in Resources */,
 				37E4F1441786FE13008ED76B /* BombMagic_button.png in Resources */,
+				374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */,
+				374C90A4178AB33A00C8FB47 /* LightningMagic_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
