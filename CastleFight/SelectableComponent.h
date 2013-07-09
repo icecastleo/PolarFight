@@ -12,7 +12,9 @@
 
 @property (nonatomic) BOOL canSelect;
 
--(void)show;
+-(id)initWithDictionary:(NSDictionary *)dic;
+
+-(void)select;
 -(void)unSelected;
 
 @end

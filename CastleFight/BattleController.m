@@ -208,7 +208,7 @@ __weak static BattleController* currentInstance;
                     continue;
                 }
                 self.selectedEntity = entity;
-                [selectCom show];
+                [selectCom select];
                 break;
             }
         }

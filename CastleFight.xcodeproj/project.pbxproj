@@ -153,6 +153,10 @@
 		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
+		37E00B0F178C454D00AE7757 /* gold_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0D178C454D00AE7757 /* gold_frame.png */; };
+		37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0E178C454D00AE7757 /* gold_frame@2x.png */; };
+		37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1D178C49AB00AE7757 /* rainbowCircle.png */; };
+		37E00B20178C49AB00AE7757 /* rainbowCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */; };
 		37E0A30A177057E900503100 /* SelectableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* SelectableComponent.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
@@ -667,6 +671,10 @@
 		37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonMeleeAttackSkill.m; sourceTree = "<group>"; };
 		37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMeleeAttackSkill.h; sourceTree = "<group>"; };
 		37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMeleeAttackSkill.m; sourceTree = "<group>"; };
+		37E00B0D178C454D00AE7757 /* gold_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold_frame.png; sourceTree = "<group>"; };
+		37E00B0E178C454D00AE7757 /* gold_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gold_frame@2x.png"; sourceTree = "<group>"; };
+		37E00B1D178C49AB00AE7757 /* rainbowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbowCircle.png; sourceTree = "<group>"; };
+		37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbowCircle@2x.png"; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1686,6 +1694,10 @@
 				374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */,
 				374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */,
 				3750F4F11785A991009E2689 /* LightningMagic.png */,
+				37E00B1D178C49AB00AE7757 /* rainbowCircle.png */,
+				37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */,
+				37E00B0D178C454D00AE7757 /* gold_frame.png */,
+				37E00B0E178C454D00AE7757 /* gold_frame@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2921,6 +2933,10 @@
 				37E4F1441786FE13008ED76B /* BombMagic_button.png in Resources */,
 				374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */,
 				374C90A4178AB33A00C8FB47 /* LightningMagic_button@2x.png in Resources */,
+				37E00B0F178C454D00AE7757 /* gold_frame.png in Resources */,
+				37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */,
+				37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */,
+				37E00B20178C49AB00AE7757 /* rainbowCircle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

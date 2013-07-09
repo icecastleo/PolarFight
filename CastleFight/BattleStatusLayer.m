@@ -137,7 +137,7 @@
     for (Entity *entity in magicSkillCom.magicTeam) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(100+70*([magicSkillCom.magicTeam indexOfObject:entity]+1),250);
+        renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),265);
         [self addChild:renderCom.node];
         
         //FIXME: maybe do not need these or move to other appropriate place.
