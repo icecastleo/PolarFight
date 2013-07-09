@@ -130,6 +130,7 @@
     for (SummonComponent *summon in player.battleTeam) {
         // hero
         summon.summon = YES;
+        summon.summonType = kSummonTypeNormal;
     }
     
     MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];

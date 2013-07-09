@@ -137,8 +137,8 @@
     
     switch (_summonType) {
         case kSummonTypeNormal:
-            if (_currentCooldown > 0 || !self.isCostSufficient) {
-                return NO;
+            if (_currentCooldown <= 0 && self.isCostSufficient) {
+                return YES;
             }
             break;
         case kSummonTypeStock:
