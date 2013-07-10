@@ -133,6 +133,7 @@ __weak static BattleController* currentInstance;
     // FIXME: As player component delegate?
     PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
     [statusLayer updateFood:(int)player.food];
+    [statusLayer updateMana:(int)player.mana];
     
     [self checkBattleEnd];
 }
@@ -202,9 +203,12 @@ __weak static BattleController* currentInstance;
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                self.selectedEntity = entity;
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-                [selectCom show];
+                if (!selectCom.canSelect) {
+                    continue;
+                }
+                self.selectedEntity = entity;
+                [selectCom select];
                 break;
             }
         }
@@ -255,9 +259,7 @@ __weak static BattleController* currentInstance;
                 [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
                 MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
-                    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:path,@"path", magicCom.name,@"name", magicCom,@"MagicComponent",nil];
-                    
-                    [self.userPlayer sendEvent:kEventSendMagicEvent Message:dic];
+                    [magicCom activeWithPath:path];
                 }
             }
         }

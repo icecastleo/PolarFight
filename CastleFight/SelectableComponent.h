@@ -10,7 +10,11 @@
 
 @interface SelectableComponent : Component
 
--(void)show;
+@property (nonatomic) BOOL canSelect;
+
+-(id)initWithDictionary:(NSDictionary *)dic;
+
+-(void)select;
 -(void)unSelected;
 
 @end

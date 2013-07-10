@@ -12,9 +12,7 @@
 @implementation RangeCircle
 
 
-//NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@0,@"rangeSides",@0,@"effectSelfOrNot",@"RangeCircle",@"rangeName",@50,"@radius" nil];//Circle
-//EffectSides:0=effectSideEnemy,1=effectSideAlly,2=effectSideBoth
-//effectRadius=攻擊半徑:50
+//NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@80,kRangeKeyRadius,@80,kRangeKeyDistance,@1,kRangeKeyTargetLimit,nil];
 
 -(void)setSpecialParameter:(NSMutableDictionary*)dict {
     
@@ -38,14 +36,12 @@
         distance = 0;
     }
     
-    radius *= kScale;
-    distance *= kScale;
-    width =  distance + radius*2;
-    height = radius*2;
+    width = radius*2;
+    height = (distance + radius)*2;
     
     attackRange = CGPathCreateMutable();
-    CGPathMoveToPoint(attackRange, NULL, distance + width/2, height/2);
-    CGPathAddArc(attackRange, NULL, distance + width/2, height/2, radius, 0, M_PI*2, NO);
+    CGPathMoveToPoint(attackRange, NULL, radius, radius);
+    CGPathAddArc(attackRange, NULL, radius, radius, radius, 0, M_PI*2, NO);
     CGPathCloseSubpath(attackRange);
 //    CGPathRetain(attackRange);
 }

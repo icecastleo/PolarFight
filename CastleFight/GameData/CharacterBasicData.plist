@@ -1323,6 +1323,11 @@
 			<key>attack</key>
 			<string>MeleeAttackSkill</string>
 		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>selectedImage</key>
+			<string>rainbowCircle.png</string>
+		</dict>
 	</dict>
 	<key>202</key>
 	<dict>
@@ -1389,6 +1394,11 @@
 			<key>attack</key>
 			<string>MeleeAttackSkill</string>
 		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>selectedImage</key>
+			<string>rainbowCircle.png</string>
+		</dict>
 	</dict>
 	<key>203</key>
 	<dict>
@@ -1454,6 +1464,11 @@
 		<dict>
 			<key>attack</key>
 			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>selectedImage</key>
+			<string>rainbowCircle.png</string>
 		</dict>
 	</dict>
 	<key>204</key>
@@ -2322,8 +2337,22 @@
 	<dict>
 		<key>id</key>
 		<string>901</string>
-		<key>cost</key>
-		<string>10</string>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Mana</string>
+			<key>food</key>
+			<integer>0</integer>
+			<key>mana</key>
+			<integer>30</integer>
+		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>cooldown</key>
+		<integer>10</integer>
 		<key>damage</key>
 		<dict>
 			<key>a</key>
@@ -2352,8 +2381,22 @@
 	<dict>
 		<key>id</key>
 		<string>902</string>
-		<key>cost</key>
-		<string>10</string>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Mana</string>
+			<key>food</key>
+			<integer>0</integer>
+			<key>mana</key>
+			<integer>10</integer>
+		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>cooldown</key>
+		<integer>5</integer>
 		<key>damage</key>
 		<dict>
 			<key>a</key>

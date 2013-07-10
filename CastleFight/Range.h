@@ -32,10 +32,9 @@
 #define kRangeKeyLength @"Length"
 #define kRangeKeyDistance @"Distance"
 
-#define kRangeKeyEffectRange @"EffectRange"
-
 // Projectile Range
 #define kRangeKeyIsPiercing @"IsPiercing"
+#define kRangeKeyEffectRange @"EffectRange"
 
 // RangeSide
 #define kRangeSideAlly @"Ally"

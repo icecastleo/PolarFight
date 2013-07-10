@@ -13,11 +13,13 @@
 @interface BattleStatusLayer : CCLayer {
 //    BattleController *controller;
     CCLabelBMFont *food;
+    CCLabelBMFont *mana;
     NSMutableArray *unitItems;
 }
 
 -(id)initWithBattleController:(BattleController *)controller;
 -(void)updateFood:(int)foodNumber;
+-(void)updateMana:(int)manaNumber;
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 
 @end

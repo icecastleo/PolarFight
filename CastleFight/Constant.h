@@ -11,7 +11,11 @@
 
 #define kGameSettingFps 30
 
-#define kScale [[UIScreen mainScreen] scale]
+//For SummonType
+#define kSummonTypeNormal 1
+#define kSummonTypeStock 2
+#define kSummonTypeStockOnce 3
+
 
 // For map
 #define kMapPathFloor 50

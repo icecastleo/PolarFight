@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MagicComponent.h"
 #import "Entity.h"
 #import "MapLayer.h"
 #import "Range.h"

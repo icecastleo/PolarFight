@@ -115,7 +115,7 @@
 }
 
 -(BOOL)checkRange {
-    // Synchronize direction
+    // Synchronize range direction
     DirectionComponent *direction = (DirectionComponent *)[_owner getComponentOfClass:[DirectionComponent class]];
     
     if (direction) {

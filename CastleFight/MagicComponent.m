@@ -22,7 +22,17 @@
 -(void)receiveEvent:(EventType)type Message:(id)message {
     if (type == kEventTypeLevelChanged) {
         [_damage updateValueWithLevel:[message intValue]];
-    }
+    } 
+}
+
+-(void)activeWithPath:(NSArray *)path {
+    _canActive = YES;
+    _path = path;
+}
+
+-(void)didExecute {
+    _canActive = NO;
+    _path = nil;
 }
 
 @end

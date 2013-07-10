@@ -38,15 +38,13 @@
         lineWidth = 20;
     }
     
-    length *= kScale;
-    lineWidth *= kScale;
-    width = length;
-    height = lineWidth;
+    width = lineWidth;
+    height = length*2;
     
     attackRange = CGPathCreateMutable();
     CGPathMoveToPoint(attackRange, NULL, 0, 0);
-    CGPathAddLineToPoint(attackRange, NULL, 0, lineWidth);
-    CGPathAddLineToPoint(attackRange, NULL, width, lineWidth);
+    CGPathAddLineToPoint(attackRange, NULL, 0, length);
+    CGPathAddLineToPoint(attackRange, NULL, width, length);
     CGPathAddLineToPoint(attackRange, NULL, width, 0);
     CGPathAddLineToPoint(attackRange, NULL, 0, 0);
     

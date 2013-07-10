@@ -16,6 +16,10 @@
 @property (nonatomic) float foodRate;
 @property (readonly) float maxRate;
 
+@property float mana;
+@property (nonatomic) float manaRate;
+@property (readonly) float maxManaRate;
+
 @property (readonly) float interval;
 @property float foodAddend;
 
@@ -23,6 +27,5 @@
 
 @property NSMutableArray *summonComponents;
 @property (nonatomic) NSMutableArray *battleTeam;
-@property (nonatomic) NSMutableArray *magicTeam;
 
 @end

@@ -18,9 +18,8 @@
 #import "SummonComponent.h"
 #import "RenderComponent.h"
 #import "UnitStockMenuItem.h"
-
-#define kSummonNormal 1
-#define kSummonStock 2
+#import "MagicSkillComponent.h"
+#import "CostComponent.h"
 
 @implementation BattleStatusLayer
 
@@ -73,6 +72,14 @@
         food.color = ccGOLD;
         [self addChild:food];
         
+        //mana
+        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
+        mana.anchorPoint = ccp(1, 0.5);
+        mana.scale = 0.5;
+        mana.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3-20);
+        mana.color = ccBLUEVIOLET;
+        [self addChild:mana];
+        
         [self setUnitBoardWithPlayerComponent:player];
         [self setPauseButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
@@ -100,7 +107,7 @@
     [self addChild:[PauseLayer node]];
 }
 
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player unitSummonType:(int) summonType{
+-(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
     // TODO: Set by user data (plist?)
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -114,15 +121,7 @@
     
     for (SummonComponent *summon in player.summonComponents) {
         UnitMenuItem *item;
-        switch (summonType) {
-            case kSummonNormal:
-              item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
-                break;
-            case kSummonStock:
-                item = [[UnitStockMenuItem alloc] initWithSummonComponent:summon];
-            default:
-                break;
-        }
+          item= [[UnitMenuItem alloc] initWithSummonComponent:summon];
         
         summon.menuItem = item;
         [unitItems addObject:item];
@@ -131,13 +130,39 @@
     for (SummonComponent *summon in player.battleTeam) {
         // hero
         summon.summon = YES;
+        summon.summonType = kSummonTypeNormal;
     }
     
-    for (Entity *entity in player.magicTeam) {
+    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];
+    
+    for (Entity *entity in magicSkillCom.magicTeam) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(100+70*([player.magicTeam indexOfObject:entity]+1),250);
+        renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),265);
         [self addChild:renderCom.node];
+        
+        //FIXME: maybe do not need these or move to other appropriate place.
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
+        NSString *costString;
+        ccColor3B color;
+        switch (costCom.type) {
+            case kCostTypeFood:
+                costString = [NSString stringWithFormat:@"%d",costCom.food];
+                color = ccGOLD;
+                break;
+            case kCostTypeMana:
+                costString = [NSString stringWithFormat:@"%d",costCom.mana];
+                color = ccBLUEVIOLET;
+                break;
+            default:
+                break;
+        }
+        NSAssert(costString != nil, @"this costType String does not be made yet.");
+        CCLabelTTF *label = [CCLabelBMFont labelWithString:costString fntFile:@"WhiteFont.fnt"];
+        label.color = color;
+        label.position =  ccp(0, renderCom.sprite.boundingBox.size.height/2 + label.boundingBox.size.height);
+        label.anchorPoint = CGPointMake(0.5, 1);
+        [renderCom.node addChild:label];
     }
     
     // FIXME: Delete after test
@@ -150,13 +175,12 @@
     [select addChild:pauseMenu];
 }
 
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
-   
-    [self setUnitBoardWithPlayerComponent:player unitSummonType:kSummonNormal];
-}
-
 -(void)updateFood:(int)foodNumber {
     [food setString:[NSString stringWithFormat:@"%d", foodNumber]];
+}
+
+-(void)updateMana:(int)manaNumber {
+    [mana setString:[NSString stringWithFormat:@"%d", manaNumber]];
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {
