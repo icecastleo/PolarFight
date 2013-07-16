@@ -38,12 +38,12 @@
 	if (!self) return nil;
 
 	animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:1];
-	[animationNode setMixFrom:@"walk" to:@"jump" duration:0.2f];
-	[animationNode setMixFrom:@"jump" to:@"walk" duration:0.4f];
-	[animationNode setAnimation:@"walk" loop:NO];
-	[animationNode addAnimation:@"jump" loop:NO afterDelay:0];
-	[animationNode addAnimation:@"walk" loop:YES afterDelay:0];
-	animationNode.timeScale = 0.3f;
+//	[animationNode setMixFrom:@"walk" to:@"jump" duration:0.2f];
+//	[animationNode setMixFrom:@"jump" to:@"walk" duration:0.4f];
+//	[animationNode setAnimation:@"walk" loop:NO];
+//	[animationNode addAnimation:@"jump" loop:NO afterDelay:0];
+//	[animationNode addAnimation:@"walk" loop:YES afterDelay:0];
+//	animationNode.timeScale = 0.3f;
 //	animationNode.debugBones = true;
 
 	CGSize windowSize = [[CCDirector sharedDirector] winSize];
@@ -56,6 +56,8 @@
     CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
     CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
     [animationNode runAction:repeat];
+    
+    [animationNode updateWorldTransform];
     
     NSLog(@"layer boundingBox:%@",NSStringFromCGRect(animationNode.boundingBox));
     

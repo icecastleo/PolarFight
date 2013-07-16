@@ -24,9 +24,19 @@
 @property (nonatomic) BOOL enableShadowPosition;
 @property (readonly) CCSprite *shadow;
 
+//test spine
+@property (nonatomic) BOOL isSpineNode;
+//@property (nonatomic) CCNode *spineNode;
+//test spine
+
+
 -(id)initWithSprite:(CCSprite *)sprite;
+-(id)initWithSpineNode:(CCNode *)spineNode;
 
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color;
 -(void)addShadow;
+
+-(void)stopAnimation;
+-(void)flip;
 
 @end

@@ -43,6 +43,10 @@
 #import "MagicComponent.h"
 #import "MaskComponent.h"
 
+//test
+#import "spine-cocos2d-iphone.h"
+//test
+
 @implementation EntityFactory {
     EntityManager * _entityManager;
 }
@@ -159,6 +163,18 @@
         [entity addComponent:pathCom];
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
+        
+        //test spine
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        if (render) {
+            [entity removeComponent:[RenderComponent class]];
+            
+            CCSkeletonAnimation* animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
+            
+            RenderComponent *renderCom = [[RenderComponent alloc] initWithSpineNode:animationNode];
+            [entity addComponent:renderCom];
+        }
+        
     } else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }

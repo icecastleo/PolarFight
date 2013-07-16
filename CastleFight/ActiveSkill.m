@@ -11,6 +11,7 @@
 #import "AnimationComponent.h"
 #import "MoveComponent.h"
 #import "DirectionComponent.h"
+#import "CCSkeletonAnimation.h"
 
 @implementation ActiveSkill
 
@@ -47,7 +48,7 @@
             // Not needed for circle range
 //            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
             
-            rangeSprite.visible = NO;
+            rangeSprite.visible = YES;
             [render.node addChild:rangeSprite z:-5];
         }
     }
@@ -76,8 +77,8 @@
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
         if (animation) {
-            [render.sprite stopActionByTag:kAnimationActionTag];
-                        
+            [render stopAnimation];
+            
             animationCom.state = kAnimationStateAttack;
             
             CCAnimationFrame *frame = [animation.frames lastObject];
@@ -98,6 +99,34 @@
             
             action.tag = kAnimationActionTag;
             [render.sprite runAction:action];
+            
+            //test spine
+            if (render.isSpineNode) {
+                CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                [animationNode setAnimation:@"jump" loop:NO];
+                
+                AnimationState* state = [animationNode.states.lastObject pointerValue];
+                
+                float duration = 0;
+                if (state->animation)
+                    duration = state->animation->duration;
+                
+                CCSequence *attack = [CCSequence actions:
+                                      [CCDelayTime actionWithDuration:duration - animation.delayPerUnit],
+                                      [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
+                                      nil];
+                
+                CCSequence *animate = [CCSequence actions:[CCDelayTime actionWithDuration:duration],[CCCallBlock actionWithBlock:^{
+                    _isFinish = YES;
+                    animationCom.state = kAnimationStateNone;
+                }], nil];
+                
+                CCAction *action = [CCSpawn actions:attack, animate, nil];
+                
+                action.tag = kAnimationActionTag;
+                
+                [render.node runAction:action];
+            }
             
 //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
             return;

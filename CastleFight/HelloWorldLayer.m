@@ -93,8 +93,9 @@
         
         CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_down.png"] block:^(id sender) {
                     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
-//             [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:1 suffix:1]];
-            [[CCDirector sharedDirector] replaceScene:[ExampleLayer scene]];
+                    [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:1 suffix:1]];
+//[[CCDirector sharedDirector] replaceScene:[ExampleLayer scene]];
+            
         }];
         
         testMenuItem.position=ccp(testMenuItem.boundingBox.size.width,testMenuItem.boundingBox.size.height);

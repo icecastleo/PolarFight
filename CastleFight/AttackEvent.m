@@ -32,7 +32,8 @@
         
         RenderComponent *render = (RenderComponent *)[_defender getComponentOfClass:[RenderComponent class]];
         if (render) {
-            NSAssert(render.sprite.anchorPoint.x == 0.5 && render.sprite.anchorPoint.y == 0.5, @"It's recommended not to change the anchor point, and let the position to be the center of sprite!");
+            if (!render.isSpineNode)
+                NSAssert(render.sprite.anchorPoint.x == 0.5 && render.sprite.anchorPoint.y == 0.5, @"It's recommended not to change the anchor point, and let the position to be the center of sprite!");
             
             // Set dafault event position as defender's sprite position.
             _position = [render.node.parent convertToWorldSpace:render.node.position];

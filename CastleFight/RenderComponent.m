@@ -7,6 +7,7 @@
 //
 
 #import "RenderComponent.h"
+#import "CCSkeletonAnimation.h"
 
 @implementation RenderComponent
 
@@ -23,6 +24,19 @@
         shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
         
         [_node addChild:sprite];
+    }
+    return self;
+}
+
+-(id)initWithSpineNode:(CCNode *)spineNode {
+    if ((self = [super init])) {
+        // node's position is the sprite center
+        _node = spineNode;
+        _isSpineNode = YES;
+        
+        // We only use y offset
+        offset = ccp(0, _sprite.offsetPosition.y);
+        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
     }
     return self;
 }
@@ -101,6 +115,27 @@
       [CCCallBlock actionWithBlock:^{
          [label removeFromParentAndCleanup:YES];
      }], nil]];
+}
+
+-(void)stopAnimation {
+    //test spine
+    if (self.isSpineNode) {
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
+        [animationNode clearAnimation];
+        [self.node stopActionByTag:kAnimationActionTag];
+    }else {
+        [self.sprite stopActionByTag:kAnimationActionTag];
+    }
+}
+
+-(void)flip {
+    //test spine
+    if (self.isSpineNode) {
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
+        [animationNode setScaleX:-1];
+    }else {
+        self.sprite.flipX = TRUE;
+    }
 }
 
 @end
