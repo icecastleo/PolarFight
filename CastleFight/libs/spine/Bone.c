@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Bone.h>
+#include "Bone.h"
 #include <math.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 static int yDown;
 

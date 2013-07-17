@@ -23,8 +23,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/AtlasAttachmentLoader.h>
-#include <spine/extension.h>
+#include "AtlasAttachmentLoader.h"
+#include "extension.h"
 
 Attachment* _AtlasAttachmentLoader_newAttachment (AttachmentLoader* loader, Skin* skin, AttachmentType type, const char* name) {
 	AtlasAttachmentLoader* self = SUB_CAST(AtlasAttachmentLoader, loader);

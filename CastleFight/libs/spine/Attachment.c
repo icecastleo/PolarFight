@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Attachment.h>
-#include <spine/extension.h>
-#include <spine/Slot.h>
+#include "Attachment.h"
+#include "extension.h"
+#include "Slot.h"
 
 typedef struct _AttachmentVtable {
 	void (*dispose) (Attachment* self);

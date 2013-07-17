@@ -23,14 +23,14 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/SkeletonJson.h>
+#include "SkeletonJson.h"
 #include <math.h>
 #include <stdio.h>
 #include <math.h>
 #include "Json.h"
-#include <spine/extension.h>
-#include <spine/RegionAttachment.h>
-#include <spine/AtlasAttachmentLoader.h>
+#include "extension.h"
+#include "RegionAttachment.h"
+#include "AtlasAttachmentLoader.h"
 
 typedef struct {
 	SkeletonJson super;

@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Atlas.h>
+#include "Atlas.h"
 #include <ctype.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 AtlasPage* AtlasPage_create (const char* name) {
 	AtlasPage* self = NEW(AtlasPage);

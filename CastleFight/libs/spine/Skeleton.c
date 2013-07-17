@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Skeleton.h>
+#include "Skeleton.h"
 #include <string.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 Skeleton* Skeleton_create (SkeletonData* data) {
 	int i, ii;

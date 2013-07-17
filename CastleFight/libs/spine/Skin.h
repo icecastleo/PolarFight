@@ -26,7 +26,7 @@
 #ifndef SPINE_SKIN_H_
 #define SPINE_SKIN_H_
 
-#include <spine/Attachment.h>
+#include "Attachment.h"
 
 #ifdef __cplusplus
 extern "C" {

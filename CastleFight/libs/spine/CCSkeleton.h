@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#import <spine/spine.h>
+#import "spine.h"
 #import "cocos2d.h"
 
 /**

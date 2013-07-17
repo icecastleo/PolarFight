@@ -23,8 +23,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/SlotData.h>
-#include <spine/extension.h>
+#include "SlotData.h"
+#include "extension.h"
 
 SlotData* SlotData_create (const char* name, BoneData* boneData) {
 	SlotData* self = NEW(SlotData);

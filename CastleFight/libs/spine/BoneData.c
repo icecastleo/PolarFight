@@ -23,8 +23,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/BoneData.h>
-#include <spine/extension.h>
+#include "BoneData.h"
+#include "extension.h"
 
 BoneData* BoneData_create (const char* name, BoneData* parent) {
 	BoneData* self = NEW(BoneData);

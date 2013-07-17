@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/RegionAttachment.h>
+#include "RegionAttachment.h"
 #include <math.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 RegionAttachment* RegionAttachment_create (const char* name) {
 	RegionAttachment* self = NEW(RegionAttachment);

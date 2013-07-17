@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/AttachmentLoader.h>
+#include "AttachmentLoader.h"
 #include <stdio.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 typedef struct _AttachmentLoaderVtable {
 	Attachment* (*newAttachment) (AttachmentLoader* self, Skin* skin, AttachmentType type, const char* name);

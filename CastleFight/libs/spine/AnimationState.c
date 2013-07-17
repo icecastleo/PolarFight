@@ -23,8 +23,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/AnimationState.h>
-#include <spine/extension.h>
+#include "AnimationState.h"
+#include "extension.h"
 
 typedef struct _Entry _Entry;
 struct _Entry {

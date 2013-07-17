@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Animation.h>
+#include "Animation.h"
 #include <math.h>
-#include <spine/extension.h>
+#include "extension.h"
 
 Animation* Animation_create (const char* name, int timelineCount) {
 	Animation* self = NEW(Animation);

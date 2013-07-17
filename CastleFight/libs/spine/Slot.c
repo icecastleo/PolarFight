@@ -23,9 +23,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include <spine/Slot.h>
-#include <spine/extension.h>
-#include <spine/Skeleton.h>
+#include "Slot.h"
+#include "extension.h"
+#include "Skeleton.h"
 
 typedef struct {
 	Slot super;
