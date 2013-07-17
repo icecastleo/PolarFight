@@ -8,15 +8,16 @@
 
 #import "ThreeLineMapLayer.h"
 #import "RenderComponent.h"
-#import "TeamComponent.h"  
+#import "TeamComponent.h"
 #import "CharacterComponent.h"
-
+#import "SelectableComponent.h"
 @implementation ThreeLineMapLayer
-
+int repeat = kMapPathMaxLine;
+int ActiveLine = 0;
 -(void)setMap:(NSString *)name {
-  
+    
     CCParallaxNode *node = [CCParallaxNode node];
-    int repeat = 3;
+    
     
     CCSprite *preloadMap = [CCSprite spriteWithFile:@"ice.png"];
     int width = preloadMap.contentSize.width;
@@ -27,9 +28,11 @@
         map.anchorPoint = ccp(0, 0);
         [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp((width-1)*i, 0)];
     }
-
+    
     [self addChild:node];
     self.contentSize = CGSizeMake(width*repeat, height);
+    
+    [self initLineSelect];
 }
 
 -(void)addEntity:(Entity *)entity {
@@ -61,6 +64,56 @@
         }
     }
     [self addEntity:entity toPosition:position];
+}
+
+
+
+-(void) summonEntity:(Entity *)entity
+{
+    int line = ActiveLine;//arc4random_uniform(3);
+    [self addEntity:entity line:line];
+    
+    //TO DO: Need Something to examine if need select line
+    SelectableComponent *team = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+    
+    if(!team)
+        [self showLineSelect];
+}
+
+-(void) showLineSelect{
+    lineSelectMenu.visible=YES;
+    lineSelectMenu.enabled=YES;
+}
+
+CCMenu *lineSelectMenu;
+-(void) initLineSelect
+{
+    lineSelectMenu =[CCMenu menuWithItems: nil];
+    for(int i =0;i<repeat;i++){
+        
+        
+        CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithFile:@"rightarrow.png"] selectedSprite:[CCSprite spriteWithFile:@"rightarrow.png"] block:^(id sender) {
+//            lineSelectMenu.visible=NO;
+//            lineSelectMenu.enabled=NO;
+            ActiveLine=i;
+        }];
+        
+        
+        testMenuItem.position = ccp(50, kMapPathFloor + i*kMapPathHeight+50);
+        [lineSelectMenu addChild:testMenuItem];
+        
+    }
+    //[self addChild:lineSelectMenu];
+    lineSelectMenu.position=CGPointZero;
+//    lineSelectMenu.visible=NO;
+//    lineSelectMenu.enabled=NO;
+    lineSelectMenu.zOrder=10000;
+}
+
+-(void) setParent:(CCNode *)parent{
+
+    [super setParent:parent];
+    [parent addChild:lineSelectMenu];
 }
 
 @end

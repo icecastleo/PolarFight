@@ -70,7 +70,7 @@
     return self;
 }
 
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+- (Entity *)createCharacter:(NSString *)cid  level:(int)level forTeam:(int)team isSummon:(bool)summon {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -177,30 +177,50 @@
     if ([cid intValue]/100 == 2) {
         
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
-        [entity addComponent:[[SelectableComponent alloc] init]];
-
+        NSAssert([characterData objectForKey:@"SelectableComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+        [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
+        
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
         [entity addComponent:pathCom];
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
+        
+        //test spine
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        if (render) {
+            [entity removeComponent:[RenderComponent class]];
+            
+            CCSkeletonAnimation* animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
+            
+            RenderComponent *renderCom = [[RenderComponent alloc] initWithSpineNode:animationNode];
+            [entity addComponent:renderCom];
+        }
+        
     } else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
     
     // TODO: Set AI for different character
-//    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
+    //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
-//    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
+    //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
     if (self.mapLayer) {
-        [self.mapLayer addEntity:entity];
+        if(summon)
+            [self.mapLayer summonEntity:entity];
+        else
+            [self.mapLayer addEntity:entity];
     }
     
     return entity;
+}
+
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+    return [self createCharacter:cid level:level forTeam:team isSummon:NO];
 }
 
 -(Entity *)createCastleForTeam:(int)team {
@@ -328,8 +348,6 @@
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
     
-    NSDictionary *costComponentDictionary = [characterData objectForKey:@"CostComponent"];
-    
     float cooldown = [[characterData objectForKey:@"cooldown"] floatValue];
     NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
     
@@ -347,14 +365,15 @@
     
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     
-    CostComponent *costCom = [[CostComponent alloc] initWithDictionary:costComponentDictionary];
-    [entity addComponent:costCom];
+    NSAssert([characterData objectForKey:@"CostComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+    [entity addComponent:[[CostComponent alloc] initWithDictionary:[characterData objectForKey:@"CostComponent"]]];
     
     [entity addComponent:renderCom];
     [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
-    [entity addComponent:[[SelectableComponent alloc] init]];
+    NSAssert([characterData objectForKey:@"SelectableComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+    [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     

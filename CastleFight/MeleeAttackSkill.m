@@ -31,13 +31,8 @@
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:entity];
 //        event.knockOutPower = 25;
 //        event.knouckOutCollision = YES;
-        [self sideEffectWithEvent:event Entity:entity];
         [attack.attackEventQueue addObject:event];
     }
-}
-
--(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
-    
 }
 
 @end

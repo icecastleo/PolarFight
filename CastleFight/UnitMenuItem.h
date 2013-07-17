@@ -19,6 +19,9 @@
 @property (readonly) CCProgressTimer *timer;
 
 -(id)initWithSummonComponent:(SummonComponent *)summon;
--(void) updateSummon:(SummonComponent *)summon;
--(void) updateWithoutSummon:(SummonComponent *)summon;
+
+-(void) enableSummon;
+-(void) disableSummon;
+-(void) resetMask:(float)totalTime from:(float) from to:(float) to;
+-(void) updateLabelString:(NSString*)string;
 @end

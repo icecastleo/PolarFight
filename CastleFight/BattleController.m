@@ -149,6 +149,7 @@ __weak static BattleController* currentInstance;
     // FIXME: As player component delegate?
     PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
     [statusLayer updateFood:(int)player.food];
+    [statusLayer updateMana:(int)player.mana];
     
     [self checkBattleEnd];
 }
@@ -216,8 +217,19 @@ __weak static BattleController* currentInstance;
                     continue;
                 }
                 self.selectedEntity = entity;
-                [selectCom show];
+                [selectCom select];
                 break;
+            } //test spine
+            else if(renderCom.isSpineNode) {
+                if (CGRectContainsPoint(renderCom.node.boundingBox, [renderCom.node.parent convertToNodeSpace:touchLocation])) {
+                    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                    if (!selectCom.canSelect) {
+                        continue;
+                    }
+                    self.selectedEntity = entity;
+                    [selectCom select];
+                    break;
+                }
             }
         }
     }

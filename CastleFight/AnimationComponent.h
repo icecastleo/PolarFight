@@ -14,14 +14,14 @@ typedef enum {
     kAnimationStateMove,
     kAnimationStateAttack,
     kAnimationStateDead,
-} AnimationState;
+} CFAnimationState;
 
 @interface AnimationComponent : Component {
     
 }
 
 @property (readonly) NSMutableDictionary *animations;
-@property AnimationState state;
+@property CFAnimationState state;
 
 -(id)initWithAnimations:(NSMutableDictionary *)animations;
 

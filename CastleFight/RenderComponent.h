@@ -34,4 +34,7 @@
 -(id)initWithSprite:(CCSprite *)sprite;
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color;
 
+-(void)stopAnimation;
+-(void)flip;
+
 @end

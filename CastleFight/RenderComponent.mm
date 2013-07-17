@@ -32,6 +32,19 @@
     return self;
 }
 
+-(id)initWithSpineNode:(CCNode *)spineNode {
+    if ((self = [super init])) {
+        // node's position is the sprite center
+        _node = spineNode;
+        _isSpineNode = YES;
+        
+        // We only use y offset
+        offset = ccp(0, _sprite.offsetPosition.y);
+        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
+    }
+    return self;
+}
+
 -(void)setEnableShadowPosition:(BOOL)enableShadowPosition {
     _enableShadowPosition = enableShadowPosition;
     _shadowSize = CGSizeMake((int)(_sprite.boundingBox.size.width * kShadowWidthScale), (int)(_sprite.boundingBox.size.height * kShadowHeightScale));

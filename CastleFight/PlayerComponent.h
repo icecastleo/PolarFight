@@ -16,6 +16,10 @@
 @property (nonatomic) float foodRate;
 @property (readonly) float maxRate;
 
+@property float mana;
+@property (nonatomic) float manaRate;
+@property (readonly) float maxManaRate;
+
 @property (readonly) float interval;
 @property float foodAddend;
 

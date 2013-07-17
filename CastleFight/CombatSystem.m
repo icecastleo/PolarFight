@@ -19,6 +19,7 @@
 
 #import "SideEffect.h"
 #import "StateComponent.h"
+#import "CCSkeletonAnimation.h"
 
 @implementation CombatSystem
 
@@ -160,6 +161,13 @@
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
     CCSprite *sprite = render.sprite;
+    //test spine
+    if (render.isSpineNode) {
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+        [animationNode clearAnimation];
+        [animationNode stopAllActions];
+    }
+    
     [sprite stopAllActions];
     
 //    for (CCNode *children in render.node.children) {
@@ -173,12 +181,23 @@
     emitter.autoRemoveOnFinish = YES;
     [render.node addChild:emitter];
     
-    [sprite runAction:
-     [CCSequence actions:
-      [CCFadeOut actionWithDuration:1.0f],
-      [CCCallBlock actionWithBlock:^{
-         [render.node removeFromParentAndCleanup:YES];
-     }], nil]];
+    //test spine
+    if (render.isSpineNode) {
+        [render.node runAction:
+         [CCSequence actions:
+          [CCFadeOut actionWithDuration:1.0f],
+          [CCCallBlock actionWithBlock:^{
+             [render.node removeFromParentAndCleanup:YES];
+         }], nil]];
+    }else {
+        [sprite runAction:
+         [CCSequence actions:
+          [CCFadeOut actionWithDuration:1.0f],
+          [CCCallBlock actionWithBlock:^{
+             [render.node removeFromParentAndCleanup:YES];
+         }], nil]];
+    }
+    
 }
 
 -(void)playDeadSoundEffectForEntity:(Entity *)entity {

@@ -7,7 +7,7 @@
             <key>army_bear_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{205,634},{200,194}}</string>
+                <string>{{2,757},{200,194}}</string>
                 <key>offset</key>
                 <string>{-53,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>army_bear_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{390,955},{182,188}}</string>
+                <string>{{192,1214},{182,188}}</string>
                 <key>offset</key>
                 <string>{-57,-3}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>army_bear_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{519,767},{188,186}}</string>
+                <string>{{398,959},{188,186}}</string>
                 <key>offset</key>
                 <string>{-54,-4}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>army_bear_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,801},{192,188}}</string>
+                <string>{{204,847},{192,188}}</string>
                 <key>offset</key>
                 <string>{-52,-3}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>army_bear_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{220,446},{202,186}}</string>
+                <string>{{2,569},{202,186}}</string>
                 <key>offset</key>
                 <string>{-48,-4}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>army_bear_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,212},{222,186}}</string>
+                <string>{{2,381},{222,186}}</string>
                 <key>offset</key>
                 <string>{-64,-4}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>baby_bear_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{875,1326},{144,134}}</string>
+                <string>{{438,1872},{144,134}}</string>
                 <key>offset</key>
                 <string>{-6,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>baby_bear_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{729,1253},{144,134}}</string>
+                <string>{{438,1736},{144,134}}</string>
                 <key>offset</key>
                 <string>{-6,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>baby_bear_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{875,1052},{144,136}}</string>
+                <string>{{146,1831},{144,136}}</string>
                 <key>offset</key>
                 <string>{-6,1}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>baby_bear_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{875,1190},{144,134}}</string>
+                <string>{{292,1794},{144,134}}</string>
                 <key>offset</key>
                 <string>{-7,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>baby_bear_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{709,916},{188,134}}</string>
+                <string>{{588,1145},{188,134}}</string>
                 <key>offset</key>
                 <string>{-29,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>baby_bear_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{709,780},{188,134}}</string>
+                <string>{{2,1132},{188,134}}</string>
                 <key>offset</key>
                 <string>{-29,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>boxer_bear_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{157,1214},{149,203}}</string>
+                <string>{{531,1464},{149,203}}</string>
                 <key>offset</key>
                 <string>{30,-3}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>boxer_bear_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{354,1145},{149,205}}</string>
+                <string>{{730,1350},{149,205}}</string>
                 <key>offset</key>
                 <string>{30,-2}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>boxer_bear_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1190},{153,209}}</string>
+                <string>{{376,1328},{153,209}}</string>
                 <key>offset</key>
                 <string>{28,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>boxer_bear_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{574,1052},{153,203}}</string>
+                <string>{{174,1404},{153,203}}</string>
                 <key>offset</key>
                 <string>{26,0}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>boxer_bear_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,596},{201,203}}</string>
+                <string>{{206,642},{201,203}}</string>
                 <key>offset</key>
                 <string>{-4,-3}</string>
                 <key>rotated</key>
@@ -238,10 +238,140 @@
                 <key>sourceSize</key>
                 <string>{201,203}</string>
             </dict>
+            <key>claw_bear_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{156,1609},{146,183}}</string>
+                <key>offset</key>
+                <string>{-24,-12}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{49,27},{146,183}}</string>
+                <key>sourceSize</key>
+                <string>{146,183}</string>
+            </dict>
+            <key>claw_bear_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,1268},{170,177}}</string>
+                <key>offset</key>
+                <string>{-13,-15}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{48,33},{170,177}}</string>
+                <key>sourceSize</key>
+                <string>{170,177}</string>
+            </dict>
+            <key>claw_bear_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,1447},{152,181}}</string>
+                <key>offset</key>
+                <string>{-22,-12}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{48,28},{152,181}}</string>
+                <key>sourceSize</key>
+                <string>{152,181}</string>
+            </dict>
+            <key>claw_bear_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{156,1609},{146,183}}</string>
+                <key>offset</key>
+                <string>{-24,-12}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{49,27},{146,183}}</string>
+                <key>sourceSize</key>
+                <string>{146,183}</string>
+            </dict>
+            <key>claw_bear_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{572,1281},{156,181}}</string>
+                <key>offset</key>
+                <string>{-20,-12}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{48,28},{156,181}}</string>
+                <key>sourceSize</key>
+                <string>{156,181}</string>
+            </dict>
+            <key>claw_bear_5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{521,780},{192,177}}</string>
+                <key>offset</key>
+                <string>{-20,-14}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{30,32},{192,177}}</string>
+                <key>sourceSize</key>
+                <string>{192,177}</string>
+            </dict>
+            <key>claw_bear_6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{752,767},{192,177}}</string>
+                <key>offset</key>
+                <string>{-43,-15}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,33},{192,177}}</string>
+                <key>sourceSize</key>
+                <string>{192,177}</string>
+            </dict>
+            <key>claw_bear_7.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{386,1147},{184,179}}</string>
+                <key>offset</key>
+                <string>{-15,-12}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{39,29},{184,179}}</string>
+                <key>sourceSize</key>
+                <string>{184,179}</string>
+            </dict>
+            <key>claw_bear_8.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,212},{228,167}}</string>
+                <key>offset</key>
+                <string>{-24,-14}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,37},{228,167}}</string>
+                <key>sourceSize</key>
+                <string>{228,167}</string>
+            </dict>
+            <key>claw_bear_9.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{196,1037},{188,175}}</string>
+                <key>offset</key>
+                <string>{29,4}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{81,15},{188,175}}</string>
+                <key>sourceSize</key>
+                <string>{188,175}</string>
+            </dict>
             <key>fat_bear_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{766,190},{204,198}}</string>
+                <string>{{560,386},{204,198}}</string>
                 <key>offset</key>
                 <string>{0,-32}</string>
                 <key>rotated</key>
@@ -254,7 +384,7 @@
             <key>fat_bear_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{560,390},{204,196}}</string>
+                <string>{{766,390},{204,196}}</string>
                 <key>offset</key>
                 <string>{-1,-33}</string>
                 <key>rotated</key>
@@ -267,7 +397,7 @@
             <key>fat_bear_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,400},{216,194}}</string>
+                <string>{{560,190},{216,194}}</string>
                 <key>offset</key>
                 <string>{6,-31}</string>
                 <key>rotated</key>
@@ -280,7 +410,7 @@
             <key>fat_bear_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{766,586},{204,192}}</string>
+                <string>{{546,586},{204,192}}</string>
                 <key>offset</key>
                 <string>{-1,-32}</string>
                 <key>rotated</key>
@@ -293,7 +423,7 @@
             <key>fat_bear_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{766,390},{204,194}}</string>
+                <string>{{226,446},{204,194}}</string>
                 <key>offset</key>
                 <string>{0,-31}</string>
                 <key>rotated</key>
@@ -306,7 +436,7 @@
             <key>fat_bear_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{560,190},{204,198}}</string>
+                <string>{{778,190},{204,198}}</string>
                 <key>offset</key>
                 <string>{0,-32}</string>
                 <key>rotated</key>
@@ -358,7 +488,7 @@
             <key>punk_bear_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{424,446},{112,197}}</string>
+                <string>{{432,446},{112,197}}</string>
                 <key>offset</key>
                 <string>{-11,-4}</string>
                 <key>rotated</key>
@@ -371,7 +501,7 @@
             <key>punk_bear_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{505,1257},{142,201}}</string>
+                <string>{{2,1831},{142,201}}</string>
                 <key>offset</key>
                 <string>{-12,-2}</string>
                 <key>rotated</key>
@@ -384,7 +514,7 @@
             <key>punk_bear_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{192,1009},{160,203}}</string>
+                <string>{{778,1145},{160,203}}</string>
                 <key>offset</key>
                 <string>{-15,-1}</string>
                 <key>rotated</key>
@@ -397,7 +527,7 @@
             <key>punk_bear_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,991},{188,197}}</string>
+                <string>{{715,946},{188,197}}</string>
                 <key>offset</key>
                 <string>{-9,-4}</string>
                 <key>rotated</key>
@@ -410,7 +540,7 @@
             <key>punk_bear_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{729,1052},{144,199}}</string>
+                <string>{{2,1630},{144,199}}</string>
                 <key>offset</key>
                 <string>{-17,-3}</string>
                 <key>rotated</key>
@@ -423,7 +553,7 @@
             <key>punk_bear_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{407,645},{110,201}}</string>
+                <string>{{409,645},{110,201}}</string>
                 <key>offset</key>
                 <string>{-12,-2}</string>
                 <key>rotated</key>
@@ -436,7 +566,7 @@
             <key>punk_bear_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1401},{146,195}}</string>
+                <string>{{329,1539},{146,195}}</string>
                 <key>offset</key>
                 <string>{5,-5}</string>
                 <key>rotated</key>
@@ -449,7 +579,7 @@
             <key>punk_bear_7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{308,1352},{138,205}}</string>
+                <string>{{881,1350},{138,205}}</string>
                 <key>offset</key>
                 <string>{4,0}</string>
                 <key>rotated</key>
@@ -462,7 +592,7 @@
             <key>punk_bear_8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{196,830},{192,177}}</string>
+                <string>{{752,588},{192,177}}</string>
                 <key>offset</key>
                 <string>{-45,-14}</string>
                 <key>rotated</key>
@@ -475,7 +605,7 @@
             <key>punk_bear_9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{538,588},{192,177}}</string>
+                <string>{{2,953},{192,177}}</string>
                 <key>offset</key>
                 <string>{-45,-14}</string>
                 <key>rotated</key>

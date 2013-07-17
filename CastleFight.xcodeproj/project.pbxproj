@@ -111,11 +111,34 @@
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
 		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
 		37486B3C1781C2880011F3DB /* LightningMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B3B1781C2880011F3DB /* LightningMagic.m */; };
+		374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */; };
+		374C90A4178AB33A00C8FB47 /* LightningMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */; };
 		374EEAC716A4228000374659 /* PauseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374EEAC616A4228000374659 /* PauseLayer.m */; };
 		3750F4F21785A992009E2689 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3750F4F11785A991009E2689 /* LightningMagic.png */; };
 		3750F4F51785B494009E2689 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F41785B491009E2689 /* MagicComponent.m */; };
 		3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F71785B5A6009E2689 /* MaskComponent.m */; };
 		376D320B177854B700949015 /* InformationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D320A177854B700949015 /* InformationComponent.m */; };
+		378451F5179648FE0074F718 /* CCSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F0179648FE0074F718 /* CCSkeleton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F2179648FE0074F718 /* CCSkeletonAnimation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		378451F7179648FE0074F718 /* spine-cocos2d-iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3784525917964D220074F718 /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523417964D220074F718 /* Animation.c */; };
+		3784525A17964D220074F718 /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523617964D220074F718 /* AnimationState.c */; };
+		3784525B17964D220074F718 /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523817964D220074F718 /* AnimationStateData.c */; };
+		3784525C17964D220074F718 /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523A17964D220074F718 /* Atlas.c */; };
+		3784525D17964D220074F718 /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523C17964D220074F718 /* AtlasAttachmentLoader.c */; };
+		3784525E17964D220074F718 /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784523E17964D220074F718 /* Attachment.c */; };
+		3784525F17964D220074F718 /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524017964D220074F718 /* AttachmentLoader.c */; };
+		3784526017964D220074F718 /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524217964D220074F718 /* Bone.c */; };
+		3784526117964D220074F718 /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524417964D220074F718 /* BoneData.c */; };
+		3784526217964D220074F718 /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524617964D220074F718 /* extension.c */; };
+		3784526317964D220074F718 /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524817964D220074F718 /* Json.c */; };
+		3784526417964D220074F718 /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524A17964D220074F718 /* RegionAttachment.c */; };
+		3784526517964D220074F718 /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524C17964D220074F718 /* Skeleton.c */; };
+		3784526617964D220074F718 /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784524E17964D220074F718 /* SkeletonData.c */; };
+		3784526717964D220074F718 /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784525017964D220074F718 /* SkeletonJson.c */; };
+		3784526817964D220074F718 /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784525217964D220074F718 /* Skin.c */; };
+		3784526917964D220074F718 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784525417964D220074F718 /* Slot.c */; };
+		3784526A17964D220074F718 /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 3784525617964D220074F718 /* SlotData.c */; };
 		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37D498281786B1B100413D56 /* MagicSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D498271786B1B100413D56 /* MagicSkillComponent.m */; };
 		37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563A177438ED005ACE35 /* HeroComponent.m */; };
@@ -143,6 +166,10 @@
 		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
+		37E00B0F178C454D00AE7757 /* gold_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0D178C454D00AE7757 /* gold_frame.png */; };
+		37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0E178C454D00AE7757 /* gold_frame@2x.png */; };
+		37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1D178C49AB00AE7757 /* rainbowCircle.png */; };
+		37E00B20178C49AB00AE7757 /* rainbowCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */; };
 		37E0A30A177057E900503100 /* SelectableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* SelectableComponent.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
@@ -535,6 +562,14 @@
 		2DED399A16F08A38009802A0 /* EnemyAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAI.m; sourceTree = "<group>"; };
 		2DED399C16F08AE8009802A0 /* AIStateCastleWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateCastleWaiting.h; sourceTree = "<group>"; };
 		2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateCastleWaiting.m; sourceTree = "<group>"; };
+		370243D417903FC7008267A8 /* goblins.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = goblins.atlas; sourceTree = "<group>"; };
+		370243D517903FC7008267A8 /* goblins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = goblins.json; sourceTree = "<group>"; };
+		370243D617903FC7008267A8 /* goblins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goblins.png; sourceTree = "<group>"; };
+		370243D717903FC7008267A8 /* spineboy.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spineboy.atlas; sourceTree = "<group>"; };
+		370243D817903FC7008267A8 /* spineboy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = spineboy.json; sourceTree = "<group>"; };
+		370243D917903FC7008267A8 /* spineboy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spineboy.png; sourceTree = "<group>"; };
+		370243E017903FE1008267A8 /* ExampleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleLayer.h; sourceTree = "<group>"; };
+		370243E117903FE1008267A8 /* ExampleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleLayer.m; sourceTree = "<group>"; };
 		370C9388176F333900A6990D /* DrawPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPath.h; sourceTree = "<group>"; };
 		370C9389176F333900A6990D /* DrawPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPath.m; sourceTree = "<group>"; };
 		3725261B16EF684500C79A9E /* standard-black-button-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-black-button-1.png"; sourceTree = "<group>"; };
@@ -634,6 +669,8 @@
 		37486B381781951D0011F3DB /* Magic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magic.m; sourceTree = "<group>"; };
 		37486B3A1781C2880011F3DB /* LightningMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightningMagic.h; sourceTree = "<group>"; };
 		37486B3B1781C2880011F3DB /* LightningMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightningMagic.m; sourceTree = "<group>"; };
+		374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BombMagic_button@2x.png"; sourceTree = "<group>"; };
+		374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LightningMagic_button@2x.png"; sourceTree = "<group>"; };
 		374EEAC516A4228000374659 /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		374EEAC616A4228000374659 /* PauseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseLayer.m; sourceTree = "<group>"; };
 		3750F4F11785A991009E2689 /* LightningMagic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightningMagic.png; sourceTree = "<group>"; };
@@ -643,6 +680,49 @@
 		3750F4F71785B5A6009E2689 /* MaskComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskComponent.m; sourceTree = "<group>"; };
 		376D3209177854B700949015 /* InformationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationComponent.h; sourceTree = "<group>"; };
 		376D320A177854B700949015 /* InformationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationComponent.m; sourceTree = "<group>"; };
+		378451EF179648FE0074F718 /* CCSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSkeleton.h; sourceTree = "<group>"; };
+		378451F0179648FE0074F718 /* CCSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSkeleton.m; sourceTree = "<group>"; };
+		378451F1179648FE0074F718 /* CCSkeletonAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSkeletonAnimation.h; sourceTree = "<group>"; };
+		378451F2179648FE0074F718 /* CCSkeletonAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSkeletonAnimation.m; sourceTree = "<group>"; };
+		378451F3179648FE0074F718 /* spine-cocos2d-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spine-cocos2d-iphone.h"; sourceTree = "<group>"; };
+		378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "spine-cocos2d-iphone.m"; sourceTree = "<group>"; };
+		3784523417964D220074F718 /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Animation.c; path = CastleFight/libs/spine/Animation.c; sourceTree = "<group>"; };
+		3784523517964D220074F718 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = CastleFight/libs/spine/Animation.h; sourceTree = "<group>"; };
+		3784523617964D220074F718 /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationState.c; path = CastleFight/libs/spine/AnimationState.c; sourceTree = "<group>"; };
+		3784523717964D220074F718 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationState.h; path = CastleFight/libs/spine/AnimationState.h; sourceTree = "<group>"; };
+		3784523817964D220074F718 /* AnimationStateData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationStateData.c; path = CastleFight/libs/spine/AnimationStateData.c; sourceTree = "<group>"; };
+		3784523917964D220074F718 /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationStateData.h; path = CastleFight/libs/spine/AnimationStateData.h; sourceTree = "<group>"; };
+		3784523A17964D220074F718 /* Atlas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Atlas.c; path = CastleFight/libs/spine/Atlas.c; sourceTree = "<group>"; };
+		3784523B17964D220074F718 /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atlas.h; path = CastleFight/libs/spine/Atlas.h; sourceTree = "<group>"; };
+		3784523C17964D220074F718 /* AtlasAttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AtlasAttachmentLoader.c; path = CastleFight/libs/spine/AtlasAttachmentLoader.c; sourceTree = "<group>"; };
+		3784523D17964D220074F718 /* AtlasAttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtlasAttachmentLoader.h; path = CastleFight/libs/spine/AtlasAttachmentLoader.h; sourceTree = "<group>"; };
+		3784523E17964D220074F718 /* Attachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Attachment.c; path = CastleFight/libs/spine/Attachment.c; sourceTree = "<group>"; };
+		3784523F17964D220074F718 /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attachment.h; path = CastleFight/libs/spine/Attachment.h; sourceTree = "<group>"; };
+		3784524017964D220074F718 /* AttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AttachmentLoader.c; path = CastleFight/libs/spine/AttachmentLoader.c; sourceTree = "<group>"; };
+		3784524117964D220074F718 /* AttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachmentLoader.h; path = CastleFight/libs/spine/AttachmentLoader.h; sourceTree = "<group>"; };
+		3784524217964D220074F718 /* Bone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Bone.c; path = CastleFight/libs/spine/Bone.c; sourceTree = "<group>"; };
+		3784524317964D220074F718 /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bone.h; path = CastleFight/libs/spine/Bone.h; sourceTree = "<group>"; };
+		3784524417964D220074F718 /* BoneData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BoneData.c; path = CastleFight/libs/spine/BoneData.c; sourceTree = "<group>"; };
+		3784524517964D220074F718 /* BoneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoneData.h; path = CastleFight/libs/spine/BoneData.h; sourceTree = "<group>"; };
+		3784524617964D220074F718 /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = extension.c; path = CastleFight/libs/spine/extension.c; sourceTree = "<group>"; };
+		3784524717964D220074F718 /* extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extension.h; path = CastleFight/libs/spine/extension.h; sourceTree = "<group>"; };
+		3784524817964D220074F718 /* Json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Json.c; path = CastleFight/libs/spine/Json.c; sourceTree = "<group>"; };
+		3784524917964D220074F718 /* Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Json.h; path = CastleFight/libs/spine/Json.h; sourceTree = "<group>"; };
+		3784524A17964D220074F718 /* RegionAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RegionAttachment.c; path = CastleFight/libs/spine/RegionAttachment.c; sourceTree = "<group>"; };
+		3784524B17964D220074F718 /* RegionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegionAttachment.h; path = CastleFight/libs/spine/RegionAttachment.h; sourceTree = "<group>"; };
+		3784524C17964D220074F718 /* Skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skeleton.c; path = CastleFight/libs/spine/Skeleton.c; sourceTree = "<group>"; };
+		3784524D17964D220074F718 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skeleton.h; path = CastleFight/libs/spine/Skeleton.h; sourceTree = "<group>"; };
+		3784524E17964D220074F718 /* SkeletonData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonData.c; path = CastleFight/libs/spine/SkeletonData.c; sourceTree = "<group>"; };
+		3784524F17964D220074F718 /* SkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonData.h; path = CastleFight/libs/spine/SkeletonData.h; sourceTree = "<group>"; };
+		3784525017964D220074F718 /* SkeletonJson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonJson.c; path = CastleFight/libs/spine/SkeletonJson.c; sourceTree = "<group>"; };
+		3784525117964D220074F718 /* SkeletonJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonJson.h; path = CastleFight/libs/spine/SkeletonJson.h; sourceTree = "<group>"; };
+		3784525217964D220074F718 /* Skin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skin.c; path = CastleFight/libs/spine/Skin.c; sourceTree = "<group>"; };
+		3784525317964D220074F718 /* Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skin.h; path = CastleFight/libs/spine/Skin.h; sourceTree = "<group>"; };
+		3784525417964D220074F718 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Slot.c; path = CastleFight/libs/spine/Slot.c; sourceTree = "<group>"; };
+		3784525517964D220074F718 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slot.h; path = CastleFight/libs/spine/Slot.h; sourceTree = "<group>"; };
+		3784525617964D220074F718 /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SlotData.c; path = CastleFight/libs/spine/SlotData.c; sourceTree = "<group>"; };
+		3784525717964D220074F718 /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlotData.h; path = CastleFight/libs/spine/SlotData.h; sourceTree = "<group>"; };
+		3784525817964D220074F718 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spine.h; path = CastleFight/libs/spine/spine.h; sourceTree = "<group>"; };
 		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37D498261786B1B100413D56 /* MagicSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSkillComponent.h; sourceTree = "<group>"; };
 		37D498271786B1B100413D56 /* MagicSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSkillComponent.m; sourceTree = "<group>"; };
@@ -691,6 +771,10 @@
 		37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonMeleeAttackSkill.m; sourceTree = "<group>"; };
 		37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMeleeAttackSkill.h; sourceTree = "<group>"; };
 		37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMeleeAttackSkill.m; sourceTree = "<group>"; };
+		37E00B0D178C454D00AE7757 /* gold_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold_frame.png; sourceTree = "<group>"; };
+		37E00B0E178C454D00AE7757 /* gold_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gold_frame@2x.png"; sourceTree = "<group>"; };
+		37E00B1D178C49AB00AE7757 /* rainbowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbowCircle.png; sourceTree = "<group>"; };
+		37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbowCircle@2x.png"; sourceTree = "<group>"; };
 		37E02F1516676B8B00BAF11B /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		37E02F1716676B8B00BAF11B /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
@@ -1541,6 +1625,28 @@
 			name = AI;
 			sourceTree = "<group>";
 		};
+		3702439017903DF0008267A8 /* spine */ = {
+			isa = PBXGroup;
+			children = (
+				378451F8179649810074F718 /* spine-c */,
+				378451EE179648FE0074F718 /* spine */,
+			);
+			name = spine;
+			sourceTree = "<group>";
+		};
+		370243D317903FC7008267A8 /* spineData */ = {
+			isa = PBXGroup;
+			children = (
+				370243D417903FC7008267A8 /* goblins.atlas */,
+				370243D517903FC7008267A8 /* goblins.json */,
+				370243D617903FC7008267A8 /* goblins.png */,
+				370243D717903FC7008267A8 /* spineboy.atlas */,
+				370243D817903FC7008267A8 /* spineboy.json */,
+				370243D917903FC7008267A8 /* spineboy.png */,
+			);
+			path = spineData;
+			sourceTree = "<group>";
+		};
 		3730814D16F7548F00F1F7EE /* Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1568,6 +1674,64 @@
 				37486B3B1781C2880011F3DB /* LightningMagic.m */,
 			);
 			name = Magic;
+			sourceTree = "<group>";
+		};
+		378451EE179648FE0074F718 /* spine */ = {
+			isa = PBXGroup;
+			children = (
+				378451EF179648FE0074F718 /* CCSkeleton.h */,
+				378451F0179648FE0074F718 /* CCSkeleton.m */,
+				378451F1179648FE0074F718 /* CCSkeletonAnimation.h */,
+				378451F2179648FE0074F718 /* CCSkeletonAnimation.m */,
+				378451F3179648FE0074F718 /* spine-cocos2d-iphone.h */,
+				378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */,
+			);
+			name = spine;
+			path = CastleFight/libs/spine;
+			sourceTree = "<group>";
+		};
+		378451F8179649810074F718 /* spine-c */ = {
+			isa = PBXGroup;
+			children = (
+				3784523417964D220074F718 /* Animation.c */,
+				3784523517964D220074F718 /* Animation.h */,
+				3784523617964D220074F718 /* AnimationState.c */,
+				3784523717964D220074F718 /* AnimationState.h */,
+				3784523817964D220074F718 /* AnimationStateData.c */,
+				3784523917964D220074F718 /* AnimationStateData.h */,
+				3784523A17964D220074F718 /* Atlas.c */,
+				3784523B17964D220074F718 /* Atlas.h */,
+				3784523C17964D220074F718 /* AtlasAttachmentLoader.c */,
+				3784523D17964D220074F718 /* AtlasAttachmentLoader.h */,
+				3784523E17964D220074F718 /* Attachment.c */,
+				3784523F17964D220074F718 /* Attachment.h */,
+				3784524017964D220074F718 /* AttachmentLoader.c */,
+				3784524117964D220074F718 /* AttachmentLoader.h */,
+				3784524217964D220074F718 /* Bone.c */,
+				3784524317964D220074F718 /* Bone.h */,
+				3784524417964D220074F718 /* BoneData.c */,
+				3784524517964D220074F718 /* BoneData.h */,
+				3784524617964D220074F718 /* extension.c */,
+				3784524717964D220074F718 /* extension.h */,
+				3784524817964D220074F718 /* Json.c */,
+				3784524917964D220074F718 /* Json.h */,
+				3784524A17964D220074F718 /* RegionAttachment.c */,
+				3784524B17964D220074F718 /* RegionAttachment.h */,
+				3784524C17964D220074F718 /* Skeleton.c */,
+				3784524D17964D220074F718 /* Skeleton.h */,
+				3784524E17964D220074F718 /* SkeletonData.c */,
+				3784524F17964D220074F718 /* SkeletonData.h */,
+				3784525017964D220074F718 /* SkeletonJson.c */,
+				3784525117964D220074F718 /* SkeletonJson.h */,
+				3784525217964D220074F718 /* Skin.c */,
+				3784525317964D220074F718 /* Skin.h */,
+				3784525417964D220074F718 /* Slot.c */,
+				3784525517964D220074F718 /* Slot.h */,
+				3784525617964D220074F718 /* SlotData.c */,
+				3784525717964D220074F718 /* SlotData.h */,
+				3784525817964D220074F718 /* spine.h */,
+			);
+			name = "spine-c";
 			sourceTree = "<group>";
 		};
 		37D8329C17130ED9001A1C3A /* GameCenter */ = {
@@ -1669,6 +1833,7 @@
 		9B062CD41635275000E06018 = {
 			isa = PBXGroup;
 			children = (
+				3702439017903DF0008267A8 /* spine */,
 				9B3E4E881675F115000CFFFB /* cocos2d */,
 				9B062CE21635275000E06018 /* Frameworks */,
 				9B062CF51635275000E06018 /* CastleFight */,
@@ -1713,6 +1878,8 @@
 		9B062CF51635275000E06018 /* CastleFight */ = {
 			isa = PBXGroup;
 			children = (
+				370243E017903FE1008267A8 /* ExampleLayer.h */,
+				370243E117903FE1008267A8 /* ExampleLayer.m */,
 				9B55BB7D173254070030C9D7 /* EntitySystem */,
 				2D0559661714277B00F82A08 /* IAP */,
 				37DDA2BF170962F30016E8CB /* Achievement */,
@@ -1743,6 +1910,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				370243D317903FC7008267A8 /* spineData */,
 				9B406F69176240B8008B840F /* Assets */,
 				9B98481516EDD27600D3D55D /* bg */,
 				9B98481E16EDD87400D3D55D /* Catwar */,
@@ -1785,7 +1953,13 @@
 				37DD1C5C168D96560058E450 /* WhiteFont.png */,
 				37E4F1431786FE13008ED76B /* BombMagic_button.png */,
 				37E4F1411786FDBB008ED76B /* LightningMagic_button.png */,
+				374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */,
+				374C90A2178AB33A00C8FB47 /* LightningMagic_button@2x.png */,
 				3750F4F11785A991009E2689 /* LightningMagic.png */,
+				37E00B1D178C49AB00AE7757 /* rainbowCircle.png */,
+				37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */,
+				37E00B0D178C454D00AE7757 /* gold_frame.png */,
+				37E00B0E178C454D00AE7757 /* gold_frame@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3205,6 +3379,18 @@
 				3750F4F21785A992009E2689 /* LightningMagic.png in Resources */,
 				37E4F1421786FDBB008ED76B /* LightningMagic_button.png in Resources */,
 				37E4F1441786FE13008ED76B /* BombMagic_button.png in Resources */,
+				374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */,
+				374C90A4178AB33A00C8FB47 /* LightningMagic_button@2x.png in Resources */,
+				37E00B0F178C454D00AE7757 /* gold_frame.png in Resources */,
+				37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */,
+				37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */,
+				37E00B20178C49AB00AE7757 /* rainbowCircle@2x.png in Resources */,
+				370243DA17903FC7008267A8 /* goblins.atlas in Resources */,
+				370243DB17903FC7008267A8 /* goblins.json in Resources */,
+				370243DC17903FC7008267A8 /* goblins.png in Resources */,
+				370243DD17903FC7008267A8 /* spineboy.atlas in Resources */,
+				370243DE17903FC7008267A8 /* spineboy.json in Resources */,
+				370243DF17903FC7008267A8 /* spineboy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

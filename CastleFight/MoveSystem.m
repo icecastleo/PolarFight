@@ -13,6 +13,7 @@
 #import "DirectionComponent.h"
 #import "KnockOutComponent.h"
 #import "DefenderComponent.h"
+#import "CCSkeletonAnimation.h"
 
 @implementation MoveSystem
 
@@ -53,7 +54,7 @@
             AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
             
             if (animation && animation.state == kAnimationStateMove) {
-                [render.sprite stopActionByTag:kAnimationActionTag];
+                [render stopAnimation];
                 animation.state = kAnimationStateNone;
             }
             continue;
@@ -76,7 +77,7 @@
         
         if (move.velocity.x == 0 && move.velocity.y == 0) {
             if (animation.state == kAnimationStateMove) {
-                [render.sprite stopActionByTag:kAnimationActionTag];
+                [render stopAnimation];
                 animation.state = kAnimationStateNone;
             }
             
@@ -87,26 +88,38 @@
                     CCAction *action = [CCRepeatForever actionWithAction:
                                         [CCAnimate actionWithAnimation:idel]];
                     action.tag = kAnimationActionTag;
-                    [render.sprite runAction:action];
+                    
+                    // test spine
+                    if (render.isSpineNode) {
+                        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                        [animationNode clearAnimation];
+                    }else {
+                        [render.sprite runAction:action];
+                    }
                     
                     animation.state = kAnimationStateIdel;
                 }
             }
         } else {
             if (animation.state == kAnimationStateIdel) {
-                [render.sprite stopActionByTag:kAnimationActionTag];
+                [render stopAnimation];
                 animation.state = kAnimationStateNone;
             }
             
             if (animation.state == kAnimationStateNone) {
                 CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
                 
-                if (moveAnimation) {
+                // test spine
+                if (render.isSpineNode) {
+                    CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                    [animationNode setAnimation:@"walk" loop:YES];
+                    animation.state = kAnimationStateMove;
+                } else if (moveAnimation) {
                     CCAction *action = [CCRepeatForever actionWithAction:
                                         [CCAnimate actionWithAnimation:moveAnimation]];
                     action.tag = kAnimationActionTag;
                     [render.sprite runAction:action];
-                    
+
                     animation.state = kAnimationStateMove;
                 }
             }

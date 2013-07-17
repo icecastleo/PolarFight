@@ -30,8 +30,8 @@
 }
 
 -(void)active {
-    RenderComponent *renderCom = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
-    NSAssert(renderCom, @"You can't active skill without render component currently!");
+    RenderComponent *render = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
+    NSAssert(render, @"You can't active skill without render component currently!");
     
     //    state = kCharacterStateUseSkill;
     
@@ -44,7 +44,7 @@
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
         if (animation) {
-            [renderCom.sprite stopActionByTag:kAnimationActionTag];
+            [render stopAnimation];
             
             _isAnimationFinish = NO;
             
@@ -65,9 +65,11 @@
             CCAction *action = [CCSpawn actions:attack, animate, nil];
             
             action.tag = kAnimationActionTag;
-            [renderCom.sprite runAction:action];
+            [render.sprite runAction:action];
             
-            //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
+//            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
+            
+            //FIXME: spine animation doesnot work.
         }
     }
 
