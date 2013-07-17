@@ -31,7 +31,15 @@
 
 @property PhysicsSystem *physicsSystem;
 
+//test spine
+@property (nonatomic) BOOL isSpineNode;
+//@property (nonatomic) CCNode *spineNode;
+//test spine
+
+
 -(id)initWithSprite:(CCSprite *)sprite;
+-(id)initWithSpineNode:(CCNode *)spineNode;
+
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color;
 
 -(void)stopAnimation;

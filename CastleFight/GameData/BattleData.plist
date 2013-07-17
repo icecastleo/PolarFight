@@ -58,7 +58,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>99</integer>
+				<integer>1</integer>
 			</dict>
 		</array>
 		<key>bosses</key>

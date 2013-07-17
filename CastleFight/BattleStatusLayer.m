@@ -17,7 +17,6 @@
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
 #import "RenderComponent.h"
-#import "UnitStockMenuItem.h"
 #import "MagicSkillComponent.h"
 #import "CostComponent.h"
 
@@ -120,19 +119,16 @@
     unitItems = [[NSMutableArray alloc] init];
     
     for (SummonComponent *summon in player.summonComponents) {
-        UnitMenuItem *item;
-        switch (summonType) {
-            case kSummonNormal:
-                item = [[UnitMenuItem alloc] initWithSummonComponent:summon];
-                break;
-            case kSummonStock:
-                item = [[UnitStockMenuItem alloc] initWithSummonComponent:summon];
-            default:
-                break;
-        }
+        UnitMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:summon];
         
         summon.menuItem = item;
         [unitItems addObject:item];
+    }
+    
+    for (SummonComponent *summon in player.battleTeam) {
+        // hero
+        summon.summon = YES;
+        summon.summonType = kSummonTypeNormal;
     }
     
     MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];

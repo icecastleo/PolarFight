@@ -48,6 +48,10 @@
 #import "PhysicsNode.h"
 #import "Box2D.h"
 
+//test
+#import "spine-cocos2d-iphone.h"
+//test
+
 @implementation EntityFactory {
     EntityManager * _entityManager;
 }
@@ -177,7 +181,10 @@
     if ([cid intValue]/100 == 2) {
         
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
-        NSAssert([characterData objectForKey:@"SelectableComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+
+        NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@", cid];
+        NSAssert([characterData objectForKey:@"SelectableComponent"] != nil, assert);
+        
         [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
         
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
@@ -365,14 +372,19 @@
     
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     
-    NSAssert([characterData objectForKey:@"CostComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+    NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
+    NSAssert([characterData objectForKey:@"CostComponent"] != nil, assert);
+    
     [entity addComponent:[[CostComponent alloc] initWithDictionary:[characterData objectForKey:@"CostComponent"]]];
     
     [entity addComponent:renderCom];
     [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
     [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
-    NSAssert([characterData objectForKey:@"SelectableComponent"]!=nil, @"you forgot to make this component in CharacterBasicData.plist id:%@",cid);
+    
+    assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
+    NSAssert([characterData objectForKey:@"SelectableComponent"] != nil, assert);
+    
     [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];

@@ -35,8 +35,6 @@
 -(b2Body *)createBody {
     NSAssert(physicsSystem, @"You can not create a physics body without physics system!");
     
-    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    
     b2BodyDef spriteBodyDef;
     spriteBodyDef.type = b2_dynamicBody;
     

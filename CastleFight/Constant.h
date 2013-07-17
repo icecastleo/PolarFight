@@ -23,6 +23,11 @@
 // For debug
 #define kPhisicalDebugDraw 1
 
+//For SummonType
+#define kSummonTypeNormal 1
+#define kSummonTypeStock 2
+#define kSummonTypeStockOnce 3
+
 // For map
 #define kMapPathFloor 50
 #define kMapPathHeight 65

@@ -9,6 +9,7 @@
 #import "RenderComponent.h"
 #import "Box2D.h"
 #import "PhysicsNode.h"
+#import "CCSkeletonAnimation.h"
 
 @implementation RenderComponent
 
@@ -37,10 +38,13 @@
         // node's position is the sprite center
         _node = spineNode;
         _isSpineNode = YES;
+    
+        _physicsRoot = [[PhysicsRoot alloc] init];
+        [_node addChild:_physicsRoot];
         
-        // We only use y offset
-        offset = ccp(0, _sprite.offsetPosition.y);
-        shadowOffset = ccp(0, -_sprite.boundingBox.size.height/2 + _sprite.boundingBox.size.height * kShadowHeightScale / 4);
+        // Make sprite center to be the node's position
+        _sprite.position = ccpMult(_sprite.offsetPosition, -1);
+        _spriteBoundingBox = _sprite.boundingBox;
     }
     return self;
 }
@@ -120,6 +124,27 @@
             node.b2Body->GetWorld()->DestroyBody(node.b2Body);
             [node unscheduleUpdate];
         }
+    }
+}
+
+-(void)stopAnimation {
+    //test spine
+    if (self.isSpineNode) {
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
+        [animationNode clearAnimation];
+        [self.node stopActionByTag:kAnimationActionTag];
+    }else {
+        [self.sprite stopActionByTag:kAnimationActionTag];
+    }
+}
+
+-(void)flip {
+    //test spine
+    if (self.isSpineNode) {
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
+        [animationNode setScaleX:-1];
+    }else {
+        self.sprite.flipX = TRUE;
     }
 }
 
