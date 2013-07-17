@@ -9,7 +9,19 @@
 #ifndef LightBugBattle_Constant_h
 #define LightBugBattle_Constant_h
 
+#ifdef __cplusplus
+#define CLS_DEF(clsname) class clsname
+#else
+#define CLS_DEF(clsname) @class clsname
+#endif
+
 #define kGameSettingFps 30
+
+#define PTM_RATIO 32
+#define kPhisicsFixtureGroupEntity -1;
+#define kPhisicsFixtureGroupRange -2;
+// For debug
+#define kPhisicalDebugDraw 1
 
 // For map
 #define kMapPathFloor 50
@@ -101,13 +113,6 @@ typedef enum {
     kCharacterStateIdle,
     kCharacterStateDead
 } CharacterState;
-
-typedef enum {
-    kCharacterDirectionUp = 1,
-    kCharacterDirectionDown,
-    kCharacterDirectionLeft,
-    kCharacterDirectionRight
-} CharacterDirection;
 
 typedef enum {
     kDamageTypeNormal,

@@ -77,25 +77,25 @@
     [_componentsByEntity[entity.eidNumber] setObject:component forKey:NSStringFromClass([component class])];
 }
 
--(void)removeComponentOfClass:(Class)class fromEntity:(Entity *)entity {
-    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(class)];
+-(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
+    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
     if (components && components[entity.eidNumber]) {
         [components removeObjectForKey:entity.eidNumber];
         
-        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(class)];
+        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(aClass)];
     }
 }
 
--(Component *)getComponentOfClass:(Class)class fromEntity:(Entity *)entity {
-    return _componentsByClass[NSStringFromClass(class)][entity.eidNumber];
+-(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
+    return _componentsByClass[NSStringFromClass(aClass)][entity.eidNumber];
 }
 
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {
     return [_componentsByEntity[entity.eidNumber] allValues];
 }
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)class {
-    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(class)];
+-(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass {
+    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
     if (components) {
         NSMutableArray * retval = [NSMutableArray arrayWithCapacity:components.allKeys.count];
         for (NSNumber * eid in components.allKeys) {

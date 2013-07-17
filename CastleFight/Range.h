@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Entity.h"
+#import "PhysicsSystem.h"
+
+CLS_DEF(b2Body);
 
 // RangeType
 #define kRangeTypeCircle @"RangeCircle"
@@ -51,14 +54,20 @@
     
     int targetLimit;
     
-    CGMutablePathRef attackRange;
+    PhysicsSystem *physicsSystem;
+    b2Body *body;
     
-    int width;
-    int height;
+    // Range's distance from entity
+    int distance;
+    
+//    CGMutablePathRef attackRange;
+//    
+//    int width;
+//    int height;
 }
 
-@property Entity *owner;
-@property (readonly) CCSprite *rangeSprite;
+@property (nonatomic) Entity *owner;
+//@property (readonly) CCSprite *rangeSprite;
 @property (readonly) CGPoint effectPosition;
 
 +(id)rangeWithParameters:(NSMutableDictionary *)dict;
@@ -66,7 +75,8 @@
 -(BOOL)checkSide:(Entity *)entity;
 -(BOOL)checkFilter:(Entity *)entity;
 -(NSArray *)sortEntities:(NSArray *)entities;
--(void)setDirection:(CGPoint)velocity;
+//-(void)setDirection:(CGPoint)velocity;
 -(NSArray *)getEffectEntities;
+-(BOOL)containEntity:(Entity *)entity;
 
 @end

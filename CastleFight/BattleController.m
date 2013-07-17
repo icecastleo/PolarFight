@@ -17,17 +17,16 @@
 #import "ThreeLineMapLayer.h"
 #import "EntityManager.h"
 #import "EntityFactory.h"
-
 #import "PlayerSystem.h"
 #import "AISystem.h"
 #import "MoveSystem.h"
-#import "ProjectileSystem.h"
+//#import "ProjectileSystem.h"
 #import "ActiveSkillSystem.h"
 #import "CombatSystem.h"
 #import "EffectSystem.h"
-
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
+#import "PhysicsSystem.h"
 
 #import "DrawPath.h"
 #import "SelectableComponent.h"
@@ -41,6 +40,8 @@
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
+    
+    PhysicsSystem *physicsSystem;
 }
 @property (nonatomic) Entity *selectedEntity;
 @end
@@ -55,6 +56,8 @@ __weak static BattleController* currentInstance;
 
 -(id)initWithPrefix:(int)prefix suffix:(int)suffix {
     if(self = [super init]) {
+        physicsSystem = [[PhysicsSystem alloc] init];
+
         currentInstance = self;
         
         battleName = [NSString stringWithFormat:@"%02d_%02d",prefix,suffix];
@@ -66,8 +69,13 @@ __weak static BattleController* currentInstance;
         mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
+        #if kPhisicalDebugDraw
+        [self addChild:physicsSystem.debugLayer];
+        #endif
+        
         entityManager = [[EntityManager alloc] init];
         entityFactory = [[EntityFactory alloc] initWithEntityManager:entityManager];
+        entityFactory.physicsSystem = physicsSystem;
         entityFactory.mapLayer = mapLayer;
         
         [self setCastle];
@@ -96,6 +104,14 @@ __weak static BattleController* currentInstance;
     return self;
 }
 
+-(void)dealloc {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
+    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
+        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+    }
+}
+
 -(void)setCastle {
     _userCastle = [entityFactory createCastleForTeam:1];
     _enemyCastle = [entityFactory createCastleForTeam:2];
@@ -113,7 +129,7 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[AISystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
-    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+//    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[CombatSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
@@ -127,6 +143,8 @@ __weak static BattleController* currentInstance;
     for (System *system in systems) {
         [system update:delta];
     }
+    
+    [physicsSystem update:delta];
     
     // FIXME: As player component delegate?
     PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
@@ -175,13 +193,6 @@ __weak static BattleController* currentInstance;
 
 -(void)endBattle {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
-}
-
--(void)dealloc {
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
-        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
-    }
 }
 
 #pragma mark UILongPressGestureRecognizer

@@ -17,7 +17,7 @@
     
     if (effectRange != nil) {
         [self.rangeSprite addChild:effectRange.rangeSprite];
-        effectRange.rangeSprite.position = ccp(self.rangeSprite.boundingBox.size.width/2, 0);
+        effectRange.rangeSprite.position = ccp(self.rangeSprite.contentSize.width*self.rangeSprite.scaleX/2, 0);
         effectRange.rangeSprite.visible = YES;
     }
 }

@@ -32,7 +32,7 @@
     return self;
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
     if (type == kEventUseMask) {
         [self active:[message floatValue]];
     } else if(type == kEventCancelMask) {

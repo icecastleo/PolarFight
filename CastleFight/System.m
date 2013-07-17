@@ -18,7 +18,7 @@
     return self;
 }
 
--(void)update:(float)delta; {
+-(void)update:(float)delta {
     
 }
 

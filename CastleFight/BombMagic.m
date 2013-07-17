@@ -43,7 +43,6 @@
             AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
             [attacker.attackEventQueue addObject:event];
         }
-        
     }];
     
     CCScaleTo *bigger = [CCScaleTo actionWithDuration:0.0f scaleX:2.0f scaleY:2.0f];

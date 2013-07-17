@@ -13,6 +13,6 @@
 
 @property Entity *entity;
 
--(void)sendEvent:(EventType)type Message:(id)message;
+-(void)sendEvent:(EntityEvent)type Message:(id)message;
 
 @end

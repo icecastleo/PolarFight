@@ -42,7 +42,7 @@
         
         self.isTouchEnabled = YES;
         
-        //        CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.boundingBox.size.width, mapBody.boundingBox.size.height);
+        //        CCLOG(@"MAPSIZE X:%f Y:%f", mapBody.contentSize.width, mapBody.contentSize.height);
     }
     return self;
 }

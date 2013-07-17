@@ -19,8 +19,8 @@
     int repeat = 3;
     
     CCSprite *preloadMap = [CCSprite spriteWithFile:@"ice.png"];
-    int width = preloadMap.boundingBox.size.width;
-    int height = preloadMap.boundingBox.size.height;
+    int width = preloadMap.contentSize.width;
+    int height = preloadMap.contentSize.height;
     
     for(int i = 0; i < repeat; i++) {
         CCSprite *map = [CCSprite spriteWithFile:@"ice.png"];

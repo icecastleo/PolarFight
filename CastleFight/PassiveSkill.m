@@ -26,22 +26,6 @@
     
     if (range) {
         range.owner = owner;
-        
-        CCSprite *rangeSprite = range.rangeSprite;
-        
-        if (rangeSprite) {
-            NSAssert(rangeSprite.parent == nil, @"Do you set the owner twice?");
-            
-            RenderComponent *renderCom = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
-            NSAssert(renderCom, @"You can't set an eitity without RenderComponent as owner!");
-            
-            //            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
-            
-            rangeSprite.zOrder = -1;
-            rangeSprite.visible = NO;
-            rangeSprite.position = ccp(renderCom.sprite.boundingBox.size.width/2, renderCom.sprite.boundingBox.size.height/2);
-            [renderCom.sprite addChild:rangeSprite];
-        }
     }
 }
 
@@ -94,18 +78,11 @@
                 format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
 }
 
--(void)checkEvent:(EventType)eventType  Message:(id)message {
+-(void)checkEvent:(EntityEvent)eventType  Message:(id)message {
     
 }
 
 -(BOOL)checkRange {
-    // Synchronize direction
-    DirectionComponent *direction = (DirectionComponent *)[_owner getComponentOfClass:[DirectionComponent class]];
-    
-    if (direction) {
-        [range setDirection:direction.velocity];
-    }
-    
     return [range getEffectEntities].count > 0;
 }
 

@@ -26,7 +26,7 @@
     }
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
     for (PassiveSkill *passiveSkill in self.skills.allValues) {
         [passiveSkill checkEvent:type Message:message];
     }

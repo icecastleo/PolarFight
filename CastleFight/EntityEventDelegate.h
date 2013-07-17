@@ -11,6 +11,6 @@
 @protocol EntityEventDelegate <NSObject>
 
 @optional
--(void)receiveEvent:(EventType)type Message:(id)message;
+-(void)receiveEvent:(EntityEvent)type Message:(id)message;
 
 @end

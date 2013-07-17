@@ -31,6 +31,8 @@
         for (AttackEvent *event in attack.attackEventQueue) {
             NSAssert(entity.eid == event.attacker.eid, @"AttackEvent should be added to attacker's AttackerComponent!");
             
+            CCLOG(@"%d attack",attack.entity.eid);
+            
             [event.attacker sendEvent:kEventSendAttackEvent Message:event];
             [event.defender sendEvent:kEventReceiveAttackEvent Message:event];
             
@@ -56,6 +58,7 @@
         
         for (DamageEvent *event in defense.damageEventQueue) {
             NSAssert(entity.eid == event.receiver.eid, @"DamageEvent should be added to damager's DefenderComponent!");
+            CCLOG(@"%d damage",defense.entity.eid);
             
             [event.sender sendEvent:kEventSendDamageEvent Message:event];
             [event.receiver sendEvent:kEventReceiveDamageEvent Message:event];
@@ -110,7 +113,7 @@
             
             CCLOG(@"Entity %d is dead", entity.eid);
             
-            [entity sendEvent:KEventDead Message:nil];
+            [entity sendEvent:kEntityEventDead Message:nil];
             
             // Run dead animation, then cleanup entity sprite.
             [self runDeadAnimationForEntity:entity];

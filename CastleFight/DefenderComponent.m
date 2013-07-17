@@ -18,8 +18,8 @@
     return self;
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
-    if (type == kEventTypeLevelChanged) {
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEntityEventLevelChanged) {
         [_hp updateValueWithLevel:[message intValue]];
         [_defense updateValueWithLevel:[message intValue]];
     }

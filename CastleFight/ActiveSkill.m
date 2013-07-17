@@ -36,20 +36,20 @@
     if (range) {
         range.owner = owner;
         
-        CCSprite *rangeSprite = range.rangeSprite;
-        
-        if (rangeSprite) {
-            NSAssert(rangeSprite.parent == nil, @"Do you set the owner twice?");
-            
-            RenderComponent *render = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
-            NSAssert(render, @"You can't set an eitity without RenderComponent as owner!");
-            
-            // Not needed for circle range
-//            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
-            
-            rangeSprite.visible = NO;
-            [render.node addChild:rangeSprite z:-5];
-        }
+//        CCSprite *rangeSprite = range.rangeSprite;
+//        
+//        if (rangeSprite) {
+//            NSAssert(rangeSprite.parent == nil, @"Do you set the owner twice?");
+//            
+//            RenderComponent *render = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
+//            NSAssert(render, @"You can't set an eitity without RenderComponent as owner!");
+//            
+//            // Not needed for circle range
+////            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
+//            
+//            rangeSprite.visible = NO;
+//            [render.node addChild:rangeSprite z:-5];
+//        }
     }
 }
 
@@ -115,13 +115,6 @@
 }
 
 -(BOOL)checkRange {
-    // Synchronize range direction
-    DirectionComponent *direction = (DirectionComponent *)[_owner getComponentOfClass:[DirectionComponent class]];
-    
-    if (direction) {
-        [range setDirection:direction.velocity];
-    }
-    
     return [range getEffectEntities].count > 0;
 }
 

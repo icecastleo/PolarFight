@@ -8,12 +8,12 @@
 
 #import "EntityManager.h"
 #import "MapLayer.h"
+@class PhysicsSystem;
 
-@interface EntityFactory : NSObject {
-    
-}
+@interface EntityFactory : NSObject
 
 @property MapLayer *mapLayer;
+@property PhysicsSystem *physicsSystem;
 
 -(id)initWithEntityManager:(EntityManager *)entityManager;
 

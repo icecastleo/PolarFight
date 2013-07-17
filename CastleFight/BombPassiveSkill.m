@@ -23,8 +23,8 @@
     return self;
 }
 
--(void)checkEvent:(EventType)eventType  Message:(id)message {
-    if (eventType != KEventDead) {
+-(void)checkEvent:(EntityEvent)eventType  Message:(id)message {
+    if (eventType != kEntityEventDead) {
         return;
     }
     [self activeEffect];

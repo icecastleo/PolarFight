@@ -14,11 +14,11 @@
 -(void)removeEntity:(Entity *)entity;
 
 -(void)addComponent:(Component *)component toEntity:(Entity *)entity;
--(void)removeComponentOfClass:(Class)class fromEntity:(Entity *)entity;
+-(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
 
--(Component *)getComponentOfClass:(Class)class fromEntity:(Entity *)entity;
+-(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity;
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)class;
+-(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
 
 @end

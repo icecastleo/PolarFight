@@ -31,7 +31,7 @@
     AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,@"arrow.png",kRangeKeySpriteFile,@1,kRangeKeyTargetLimit,nil];
-
+    
     ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
     
     Entity *target = [[range getEffectEntities] lastObject];

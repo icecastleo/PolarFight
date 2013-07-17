@@ -12,7 +12,7 @@
 
 @implementation AttackUpPassiveSkill
 
--(void)checkEvent:(EventType)eventType  Message:(id)message {
+-(void)checkEvent:(EntityEvent)eventType  Message:(id)message {
     if (eventType != kEventReceiveDamage) {
         return;
     }

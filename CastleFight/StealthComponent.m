@@ -10,7 +10,7 @@
 
 @implementation StealthComponent
 
--(void)receiveEvent:(EventType)type Message:(id)message {
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
     if (type == kEventIsDetectedForbidden) {
         [message setObject:[NSNumber numberWithBool:YES] forKey:@"kEventIsDetectedForbidden"];
     }

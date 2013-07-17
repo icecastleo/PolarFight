@@ -10,7 +10,7 @@
 
 @implementation Component
 
--(void)sendEvent:(EventType)type Message:(id)message {
+-(void)sendEvent:(EntityEvent)type Message:(id)message {
     [_entity sendEvent:type Message:message];
 }
 

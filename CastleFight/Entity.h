@@ -10,7 +10,8 @@
 @class EntityManager;
 
 typedef enum {
-    kEventTypeLevelChanged,
+    kEntityEventLevelChanged,
+    kEntityEventDirectionChanged,
     
     kEventSendAttackEvent,
     kEventReceiveAttackEvent,
@@ -21,15 +22,15 @@ typedef enum {
     kEventIsActiveSkillForbidden,
     kEventIsMoveForbidden,
     kEventIsDetectedForbidden,
-    KEventDead,
+    kEntityEventDead,
     
     kEventFoodChanged,
     
     kEventSendMagicEvent,
     kEventUseMask,
-    kEventCancelMask
+    kEventCancelMask,
     
-} EventType;
+} EntityEvent;
 
 @interface Entity : NSObject {
     
@@ -41,14 +42,14 @@ typedef enum {
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager;
 
 -(void)addComponent:(Component*)component;
--(void)removeComponent:(Class)class;
+-(void)removeComponent:(Class)aClass;
 
--(Component*)getComponentOfClass:(Class)class;
+-(Component*)getComponentOfClass:(Class)aClass;
 -(NSArray *)getAllComponents;
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)class;
+-(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
 
--(void)sendEvent:(EventType)type Message:(id)message;
+-(void)sendEvent:(EntityEvent)type Message:(id)message;
 
 //- (NSArray *)getAllEntitiesOnTeam:(int)team posessingComponentOfClass:(Class)class;
 //- (Entity *)closestEntityOnTeam:(int)team;

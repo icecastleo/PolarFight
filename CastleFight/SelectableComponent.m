@@ -26,8 +26,8 @@
     return self;
 }
 
--(void)receiveEvent:(EventType)type Message:(id)message {
-    if (type == KEventDead){
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEntityEventDead){
         [self unSelected];
     }
 }

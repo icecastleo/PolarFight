@@ -7,7 +7,6 @@
 //
 
 #import "FileManager.h"
-#import "AKHelpers.h"
 #import "SimpleAudioEngine.h"
 #import "BattleDataObject.h"
 #import "UserDataObject.h"
@@ -29,7 +28,6 @@
 
 #define kUserData @"UserData"
 
-#define kAnimationDirectory @"Animation"
 #define kSoundsDirectory @"Sounds_caf"
 
 #define kUserDataPlistFileName @"UserData.plist"
@@ -89,20 +87,6 @@ static FileManager *sharedFileManager = nil;
     }
     
     return _userDataObject;
-}
-
--(NSDictionary *)loadAnimation {
-    NSMutableDictionary *tempDicionary = [NSMutableDictionary dictionary];
-    NSArray *allAnimations = [self getAllFilePathsInDirectory:kAnimationDirectory fileType:@"plist"];
-    
-    for (NSString *path in allAnimations) {
-        NSArray *fileArray = [path componentsSeparatedByString:@"/"];
-        NSString *fileName = [fileArray lastObject];
-        
-        NSDictionary *clip = [AKHelpers animationClipFromPlist:path];
-        [tempDicionary setValue:clip forKey:fileName];
-    }
-    return tempDicionary;
 }
 
 -(void)setGameConfig {

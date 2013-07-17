@@ -26,12 +26,12 @@
 -(void)setLevel:(int)level {
     _level = level;
 
-    [self sendEvent:kEventTypeLevelChanged Message:[NSNumber numberWithInt:level]];
+    [self sendEvent:kEntityEventLevelChanged Message:[NSNumber numberWithInt:level]];
 }
 
 -(void)setEntity:(Entity *)entity {
     [super setEntity:entity];
-    [self sendEvent:kEventTypeLevelChanged Message:[NSNumber numberWithInt:_level]];
+    [self sendEvent:kEntityEventLevelChanged Message:[NSNumber numberWithInt:_level]];
 }
 
 @end
