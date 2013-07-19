@@ -8,6 +8,7 @@
 
 #import "Component.h"
 #import "cocos2d.h"
+#import "DirectionComponent.h"
 
 @interface RenderComponent : Component {
     CGPoint shadowOffset;
@@ -25,7 +26,6 @@
 @property (nonatomic) BOOL enableShadowPosition;
 @property (readonly) CGSize shadowSize;
 
-//test spine
 @property (nonatomic) BOOL isSpineNode;
 
 

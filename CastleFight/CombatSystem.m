@@ -182,18 +182,7 @@
     emitter.autoRemoveOnFinish = YES;
     [render.node addChild:emitter];
     
-    //test spine
-    if (render.isSpineNode) {
-        [render.node runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:1.0f],
-         nil]];
-    } else {
-        [sprite runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:1.0f],
-         nil]];
-    }
+    [sprite runAction:[CCFadeOut actionWithDuration:1.0f]];
 }
 
 -(void)playDeadSoundEffectForEntity:(Entity *)entity {

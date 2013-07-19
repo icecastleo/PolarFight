@@ -22,18 +22,15 @@
         [_node addChild:sprite];
         
         // Make sprite center to be the node's position
-        _sprite.position = ccpMult(_sprite.offsetPosition, -1);
-        _spriteBoundingBox = _sprite.boundingBox;
-    }
-    return self;
-}
+        if ([sprite isKindOfClass:[CCSkeletonAnimation class]]) {
+            _isSpineNode = YES;
+            _sprite.position = ccp(0, -sprite.boundingBox.size.height/2);
+        } else if ([sprite isKindOfClass:[CCSprite class]]) {
+            _sprite.position = ccpMult([(CCSprite *)sprite offsetPosition], -1);
+        } else {
+            NSAssert(NO, @"Did you use a CCNode?");
+        }
 
--(id)initWithSpineNode:(CCNode *)spineNode {
-    if ((self = [super init])) {
-        // node's position is the sprite center
-        _node = spineNode;
-        _isSpineNode = YES;
-        
         _spriteBoundingBox = _sprite.boundingBox;
     }
     return self;
@@ -127,24 +124,21 @@
 }
 
 -(void)flip:(Direction)direction {
-    int value = 0;
-    switch (direction) {
-        case kDirectionLeft:
-            value = -1;
-            break;
-        case kDirectionRight:
-            value = 1;
-            break;
-        default:
-            return;
-            break;
-    }
     if (self.isSpineNode) {
-        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.sprite;
-        [animationNode setScaleX:value];
-    }else if([self.sprite isKindOfClass:[CCSprite class]]){
-        CCSprite *sprite = (CCSprite *)self.sprite;
-        sprite.flipX = TRUE;
+        switch (direction) {
+            case kDirectionLeft: {
+                CCSkeletonAnimation *animationNode = (CCSkeletonAnimation *)self.sprite;
+                [animationNode setScaleX:-1];
+                break;
+            }
+            case kDirectionRight: {
+                CCSkeletonAnimation *animationNode = (CCSkeletonAnimation *)self.sprite;
+                [animationNode setScaleX:1];
+                break;
+            }
+            default:
+                break;
+        }
     }
 }
 
