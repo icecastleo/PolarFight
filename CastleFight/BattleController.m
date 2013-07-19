@@ -211,8 +211,7 @@ __weak static BattleController* currentInstance;
                 self.selectedEntity = entity;
                 [selectCom select];
                 break;
-            } //test spine
-            else if(renderCom.isSpineNode) {
+            } else if(renderCom.isSpineNode) {
                 if (CGRectContainsPoint(renderCom.node.boundingBox, [renderCom.node.parent convertToNodeSpace:touchLocation])) {
                     SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
                     if (!selectCom.canSelect) {

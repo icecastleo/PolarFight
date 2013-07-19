@@ -81,28 +81,9 @@
             
             animationCom.state = kAnimationStateAttack;
             
-            CCAnimationFrame *frame = [animation.frames lastObject];
-            
-            CCSequence *attack = [CCSequence actions:
-                                  [CCDelayTime actionWithDuration:(animation.totalDelayUnits - frame.delayUnits) * animation.delayPerUnit],
-                                  [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
-                                  nil];
-            
-            CCSequence *animate = [CCSequence actions:
-                                   [CCAnimate actionWithAnimation:animation],
-                                   [CCCallBlock actionWithBlock:^{
-                _isFinish = YES;
-                animationCom.state = kAnimationStateNone;
-            }], nil];
-            
-            CCAction *action = [CCSpawn actions:attack, animate, nil];
-            
-            action.tag = kAnimationActionTag;
-            [render.sprite runAction:action];
-            
-            //test spine
+            //FIXME: spine node's animation.
             if (render.isSpineNode) {
-                CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
                 [animationNode setAnimation:@"jump" loop:NO];
                 
                 AnimationState* state = [animationNode.states.lastObject pointerValue];
@@ -126,6 +107,25 @@
                 action.tag = kAnimationActionTag;
                 
                 [render.node runAction:action];
+            }else {
+                CCAnimationFrame *frame = [animation.frames lastObject];
+                
+                CCSequence *attack = [CCSequence actions:
+                                      [CCDelayTime actionWithDuration:(animation.totalDelayUnits - frame.delayUnits) * animation.delayPerUnit],
+                                      [CCCallFunc actionWithTarget:self selector:@selector(activeEffect)],
+                                      nil];
+                
+                CCSequence *animate = [CCSequence actions:
+                                       [CCAnimate actionWithAnimation:animation],
+                                       [CCCallBlock actionWithBlock:^{
+                    _isFinish = YES;
+                    animationCom.state = kAnimationStateNone;
+                }], nil];
+                
+                CCAction *action = [CCSpawn actions:attack, animate, nil];
+                
+                action.tag = kAnimationActionTag;
+                [render.sprite runAction:action];
             }
             
 //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];

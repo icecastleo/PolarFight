@@ -50,7 +50,7 @@
 #import "Box2D.h"
 
 //test
-#import "spine-cocos2d-iphone.h"
+#import "CCSkeletonAnimation.h"
 //test
 
 @implementation EntityFactory {
@@ -103,11 +103,23 @@
         spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
     }
     
-    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
-    
-    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-    render.enableShadowPosition = YES;
-    [entity addComponent:render];
+    CCNode *sprite;
+    RenderComponent *render;
+    //hero spine
+    if ([cid intValue]/100 == 2) {
+        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
+        [animationNode updateWorldTransform];
+        
+        sprite = animationNode;
+        render = [[RenderComponent alloc] initWithSprite:sprite];
+        [entity addComponent:render]; 
+    }else {
+        sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+        
+        render = [[RenderComponent alloc] initWithSprite:(CCSprite *)sprite];
+        render.enableShadowPosition = YES;
+        [entity addComponent:render];
+    }
     
     if (_physicsSystem) {
         PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
@@ -123,6 +135,7 @@
         
         [physics.root addChild:physicsNode];
     }
+    
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
@@ -192,17 +205,6 @@
         [entity addComponent:pathCom];
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
-        
-        //test spine
-        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-        if (render) {
-            [entity removeComponent:[RenderComponent class]];
-            
-            CCSkeletonAnimation* animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
-            
-            RenderComponent *renderCom = [[RenderComponent alloc] initWithSpineNode:animationNode];
-            [entity addComponent:renderCom];
-        }
         
     } else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
@@ -422,7 +424,7 @@
     return animations;
 }
 
--(b2Body *)createBoxBodyWithSprite:(CCSprite *)sprite {
+-(b2Body *)createBoxBodyWithSprite:(CCNode *)sprite {
     NSAssert(_physicsSystem, @"You can not create a physics body without physics system!");
     
     b2BodyDef spriteBodyDef;
@@ -432,8 +434,10 @@
     b2Body *spriteBody = _physicsSystem.world->CreateBody(&spriteBodyDef);
     
     b2PolygonShape spriteShape;
-    spriteShape.SetAsBox(sprite.contentSize.width*sprite.scaleX/PTM_RATIO/2, sprite.contentSize.height*sprite.scaleY/PTM_RATIO/2);
-        
+    NSAssert(sprite.rotation == 0, @"You should rotate it after create a boxbody!");
+    
+    spriteShape.SetAsBox(sprite.boundingBox.size.width/PTM_RATIO/2, sprite.boundingBox.size.height/PTM_RATIO/2);
+    
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;
 //    spriteShapeDef.density = 10.0;
