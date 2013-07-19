@@ -262,6 +262,7 @@
 		9B392D0D17972140000EA7C1 /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B392CF717972140000EA7C1 /* Skin.c */; };
 		9B392D0E17972140000EA7C1 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B392CF917972140000EA7C1 /* Slot.c */; };
 		9B392D0F17972140000EA7C1 /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B392CFB17972140000EA7C1 /* SlotData.c */; };
+		9B392D1217993172000EA7C1 /* PhysicsComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B392D1117993171000EA7C1 /* PhysicsComponent.mm */; };
 		9B3E4D261675F004000CFFFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CEF1635275000E06018 /* Foundation.framework */; };
 		9B3E4F7C1675F139000CFFFB /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E4E8B1675F139000CFFFB /* CCAction.m */; };
 		9B3E4F7D1675F139000CFFFB /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E4E8D1675F139000CFFFB /* CCActionCamera.m */; };
@@ -486,7 +487,6 @@
 		9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF753217058047006DE945 /* StageScrollLayer.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
 		9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260816AC891A00D5782B /* bloodParticle.plist */; };
-		9BF46D9817907A7E0096B739 /* MyContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF46D9617907A7E0096B739 /* MyContactListener.cpp */; };
 		9BFE1C3317783802002433E5 /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C2F17783802002433E5 /* animations.plist */; };
 		9BFE1C3417783802002433E5 /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C3017783802002433E5 /* BattleData.plist */; };
 		9BFE1C3517783802002433E5 /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C3117783802002433E5 /* CharacterBasicData.plist */; };
@@ -931,6 +931,8 @@
 		9B392CFB17972140000EA7C1 /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
 		9B392CFC17972140000EA7C1 /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotData.h; sourceTree = "<group>"; };
 		9B392CFD17972140000EA7C1 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spine.h; sourceTree = "<group>"; };
+		9B392D1017993171000EA7C1 /* PhysicsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsComponent.h; sourceTree = "<group>"; };
+		9B392D1117993171000EA7C1 /* PhysicsComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsComponent.mm; sourceTree = "<group>"; };
 		9B3E4D251675F004000CFFFB /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3E4E8A1675F139000CFFFB /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		9B3E4E8B1675F139000CFFFB /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
@@ -1453,8 +1455,6 @@
 		9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterTo.m; sourceTree = "<group>"; };
 		9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMoveCharacterBy.h; sourceTree = "<group>"; };
 		9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterBy.m; sourceTree = "<group>"; };
-		9BF46D9617907A7E0096B739 /* MyContactListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyContactListener.cpp; sourceTree = "<group>"; };
-		9BF46D9717907A7E0096B739 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 		9BFE1C2F17783802002433E5 /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animations.plist; sourceTree = "<group>"; };
 		9BFE1C3017783802002433E5 /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
 		9BFE1C3117783802002433E5 /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
@@ -2112,7 +2112,6 @@
 				9B392CD71794521D000EA7C1 /* PhysicsRoot.m */,
 				9B392CD117943C7D000EA7C1 /* PhysicsSprite.h */,
 				9B392CD217943C7D000EA7C1 /* PhysicsSprite.mm */,
-				9BF46D95179078AB0096B739 /* PhysicsSystem */,
 			);
 			name = Physics;
 			sourceTree = "<group>";
@@ -2462,6 +2461,8 @@
 				9B55BBCC1732A32A0030C9D7 /* CostComponent.m */,
 				9B55BB8C173254CB0030C9D7 /* RenderComponent.h */,
 				9B55BB8D173254CB0030C9D7 /* RenderComponent.mm */,
+				9B392D1017993171000EA7C1 /* PhysicsComponent.h */,
+				9B392D1117993171000EA7C1 /* PhysicsComponent.mm */,
 				9B55BBC41732734B0030C9D7 /* AnimationComponent.h */,
 				9B55BBC51732734C0030C9D7 /* AnimationComponent.m */,
 				9B55BB90173254CB0030C9D7 /* MoveComponent.h */,
@@ -2517,6 +2518,8 @@
 				37E42C38174E2C5F0010B9E9 /* EffectSystem.m */,
 				37DC7A4117798221009E3E73 /* MagicSystem.h */,
 				37DC7A4217798221009E3E73 /* MagicSystem.m */,
+				9BC15938178C0E2F0096BC9E /* PhysicsSystem.h */,
+				9BC15939178C0E300096BC9E /* PhysicsSystem.mm */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -3133,17 +3136,6 @@
 			name = CharacterQueue;
 			sourceTree = "<group>";
 		};
-		9BF46D95179078AB0096B739 /* PhysicsSystem */ = {
-			isa = PBXGroup;
-			children = (
-				9BC15938178C0E2F0096BC9E /* PhysicsSystem.h */,
-				9BC15939178C0E300096BC9E /* PhysicsSystem.mm */,
-				9BF46D9717907A7E0096B739 /* MyContactListener.h */,
-				9BF46D9617907A7E0096B739 /* MyContactListener.cpp */,
-			);
-			name = PhysicsSystem;
-			sourceTree = "<group>";
-		};
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
@@ -3546,7 +3538,6 @@
 				378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */,
 				378451F7179648FE0074F718 /* spine-cocos2d-iphone.m in Sources */,
 				9BC1593A178C0E310096BC9E /* PhysicsSystem.mm in Sources */,
-				9BF46D9817907A7E0096B739 /* MyContactListener.cpp in Sources */,
 				9B939D681791C2FF00E73432 /* PhysicsNode.mm in Sources */,
 				9B392CD317943C7D000EA7C1 /* PhysicsSprite.mm in Sources */,
 				9B392CD81794521E000EA7C1 /* PhysicsRoot.m in Sources */,
@@ -3568,6 +3559,7 @@
 				9B392D0D17972140000EA7C1 /* Skin.c in Sources */,
 				9B392D0E17972140000EA7C1 /* Slot.c in Sources */,
 				9B392D0F17972140000EA7C1 /* SlotData.c in Sources */,
+				9B392D1217993172000EA7C1 /* PhysicsComponent.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

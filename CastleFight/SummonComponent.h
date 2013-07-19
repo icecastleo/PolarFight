@@ -29,11 +29,11 @@
 @property float currentCooldown;
 @property (readonly) BOOL isCostSufficient;
 @property (readonly) BOOL canSummon;
-
-
 @property (nonatomic) BOOL summon;
+
 -(id)initWithCharacterInitData:(CharacterInitData *)initData;
--(void) updateSummon;
--(void) finishSummon;
--(void) setWithMenuItem:(UnitMenuItem*) item;
+-(void)updateSummon;
+-(void)finishSummon;
+-(void)setWithMenuItem:(UnitMenuItem *)item;
+
 @end

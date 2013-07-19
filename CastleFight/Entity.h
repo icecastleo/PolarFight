@@ -10,6 +10,9 @@
 @class EntityManager;
 
 typedef enum {
+    // Only the removed component will receive!
+    kEntityEventRemoveComponent,
+    
     kEntityEventLevelChanged,
     kEntityEventDirectionChanged,
     
@@ -23,6 +26,7 @@ typedef enum {
     kEventIsMoveForbidden,
     kEventIsDetectedForbidden,
     kEntityEventDead,
+    kEntityEventRevive,
     
     kEventFoodChanged,
     

@@ -8,8 +8,70 @@
 
 #import "PhysicsSystem.h"
 #import "GLES-Render.h"
-#import "MyContactListener.h"
+#import "Box2D.h"
+#import <vector>
+#import "PhysicsComponent.h"
+#import "PhysicsNode.h"
 
+struct MyContact {
+    b2Fixture *fixtureA;
+    b2Fixture *fixtureB;
+    b2WorldManifold *manifold;
+    bool operator==(const MyContact& other) const
+    {
+        return (fixtureA == other.fixtureA) && (fixtureB == other.fixtureB);
+    }
+    
+    MyContact(b2Contact *contact) {
+        fixtureA = contact->GetFixtureA();
+        fixtureB = contact->GetFixtureB();
+        
+        manifold = new b2WorldManifold();
+        contact->GetWorldManifold(manifold);
+    }
+};
+    
+class MyContactListener : public b2ContactListener {
+        
+    public:
+        std::vector<MyContact>contacts;
+        
+        MyContactListener();
+        ~MyContactListener();
+        
+        virtual void BeginContact(b2Contact* contact);
+        virtual void EndContact(b2Contact* contact);
+        virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
+        virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
+};
+    
+MyContactListener::MyContactListener() : contacts() {
+}
+    
+MyContactListener::~MyContactListener() {
+}
+    
+void MyContactListener::BeginContact(b2Contact* contact) {
+    // We need to copy out the data because the b2Contact passed in is reused.
+    MyContact myContact = MyContact(contact);
+    contacts.push_back(myContact);
+}
+    
+void MyContactListener::EndContact(b2Contact* contact) {
+    MyContact myContact = MyContact(contact);
+    std::vector<MyContact>::iterator pos;
+    pos = std::find(contacts.begin(), contacts.end(), myContact);
+    if (pos != contacts.end()) {
+        contacts.erase(pos);
+    }
+}
+    
+void MyContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
+}
+    
+void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
+}
+    
 @implementation PhysicsDebugDrawLayer
 
 -(id)initWithPhysicsWorld:(b2World *)aWorld {
@@ -31,18 +93,20 @@
 
 @interface PhysicsSystem() {
     GLESDebugDraw *debugDraw;
+    MyContactListener *contactListener;
 }
 
 @end
-
 
 @implementation PhysicsSystem
 
 const static int kVelocityIterations = 8;
 const static int kPositionIterations = 3;
 
--(id)init {
-    if (self = [super init]) {
+-(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
+    if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
+        NSAssert(entityFactory.mapLayer, @"Please provide a map layer for entity and physics!");
+        
         // Set default gravity
         b2Vec2 gravity = b2Vec2(0.0f, 0.0f);
         
@@ -51,8 +115,8 @@ const static int kPositionIterations = 3;
         _world->SetAllowSleeping(false);
         
         // Create contact listener
-        _contactListener = new MyContactListener();
-        _world->SetContactListener(_contactListener);
+        contactListener = new MyContactListener();
+        _world->SetContactListener(contactListener);
         
         debugDraw = new GLESDebugDraw(PTM_RATIO);
         _world->SetDebugDraw(debugDraw);
@@ -65,17 +129,20 @@ const static int kPositionIterations = 3;
         //		flags += b2Draw::e_centerOfMassBit;
         
         debugDraw->SetFlags(flags);
-        _debugLayer = [[PhysicsDebugDrawLayer alloc] initWithPhysicsWorld:_world];
-        
+        PhysicsDebugDrawLayer *debugLayer = [[PhysicsDebugDrawLayer alloc] initWithPhysicsWorld:_world];
+    
 //        [self addGroundBody];
+        
+#if kPhisicalDebugDraw
+        [entityFactory.mapLayer addChild:debugLayer];
+#endif
     }
     return self;
 }
 
 -(void)dealloc {
-    [_debugLayer removeFromParentAndCleanup:YES];
     delete _world;
-    delete _contactListener;
+    delete contactListener;
     delete debugDraw;
 }
 
@@ -112,6 +179,32 @@ const static int kPositionIterations = 3;
 }
 
 -(void)update:(float)delta {
+    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[PhysicsComponent class]];
+    
+    for (Entity * entity in entities) {
+        PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfClass:[PhysicsComponent class]];
+        DirectionComponent *direction = physics.direction;
+        
+        // Rotate root
+        if (direction) {
+            physics.root.rotation = physics.direction.cocosDegrees;
+        }
+        
+        for (PhysicsNode *node in physics.root.children) {
+            
+            CGPoint position = [node.parent convertToWorldSpace:node.position];
+            position = [self.entityFactory.mapLayer convertToNodeSpace:position];
+            
+            if (direction) {
+                // Phycics body's radians control by direction
+                float radians = direction.radians;
+                node.b2Body->SetTransform(b2Vec2(position.x / PTM_RATIO, position.y / PTM_RATIO), radians);
+            } else {
+                node.b2Body->SetTransform(b2Vec2(position.x / PTM_RATIO, position.y / PTM_RATIO), node.b2Body->GetAngle());
+            }
+        }
+    }
+    
     _world->Step(delta, kVelocityIterations, kPositionIterations);
 }
 
@@ -119,7 +212,7 @@ const static int kPositionIterations = 3;
     NSMutableArray *ret = [[NSMutableArray alloc] init];
     
     std::vector<MyContact>::iterator pos;
-    for(pos = _contactListener->contacts.begin(); pos != _contactListener->contacts.end(); ++pos) {
+    for(pos = contactListener->contacts.begin(); pos != contactListener->contacts.end(); ++pos) {
         MyContact contact = *pos;
         
         // Get the box2d bodies for each object

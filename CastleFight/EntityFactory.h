@@ -18,7 +18,6 @@
 -(id)initWithEntityManager:(EntityManager *)entityManager;
 
 -(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team;
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team  isSummon:(bool)summon;
 -(Entity *)createCastleForTeam:(int)team;
 -(Entity *)createPlayerForTeam:(int)team;
 

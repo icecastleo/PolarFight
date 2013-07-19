@@ -22,44 +22,17 @@
         NSDictionary *dic = [[FileManager sharedFileManager] getCharacterDataWithCid:_data.cid];
         _cost = [[dic objectForKey:@"cost"] intValue];
         
+        _summonType = kSummonTypeStockOnce;
         
-    
         _currentCooldown = 0;
-        _currentStock=0;
+        _currentStock = 0;
         _summon = NO;
-        _summonType=kSummonTypeStockOnce;
+        
         [self setCooldown];
-        
-        
-        
-        
     }
     return self;
 }
--(void) setWithMenuItem:(UnitMenuItem*) item{
-    
-      _currentCooldown=_cooldown;
-    [item resetMask:self.currentCooldown from:self.currentCooldown/self.cooldown*100 to:0];
-    switch (_summonType) {
-        case kSummonTypeNormal:
-            break;
-        case kSummonTypeStock:
-        {
-            NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-            [item updateLabelString:s];
-        }
-            break;
-        case kSummonTypeStockOnce:
-        {
-            NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-            [item updateLabelString:s];
-        }
-            break;
-        default:
-            break;
-    }
-    
-}
+
 -(void)setCooldown {
     // Assume min cost of monster -> 15
     switch (_summonType) {
@@ -73,87 +46,57 @@
             _cooldown = _cost/3;
              break;
         default:
+            NSAssert(NO, @"You have a wrong type!");
             break;
     }
-    
-    
 }
 
--(void) updateSummon{
-
-    if(self.menuItem)
-    {
-        if([self canSummon])
-        {
-            [self.menuItem enableSummon];
-           
-        } else {
-             [self.menuItem disableSummon];
-        }
-        
-        //    CCLOG(@"cooldown is %f,current cooldown is %f",summon.cooldown,summon.currentCooldown);
-        
-        switch (_summonType) {
-            case kSummonTypeNormal:
-                if(_cooldown==_currentCooldown)
-                    [self.menuItem resetMask:_cooldown from:100 to:0];
-                
-                
-                
-                
-                break;
-            case kSummonTypeStock:
-                if(_currentCooldown<=0)
-                {
-                    _currentStock++;
-                    _currentCooldown=_cooldown;
-                    NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-                    [self.menuItem updateLabelString:s];
-                    
-                }
-                 break;
-            case kSummonTypeStockOnce:
-                if(_currentCooldown<=0&&_currentStock==0)
-                {
-                    _currentStock++;
-                    _currentCooldown=_cooldown;
-                    NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-                    [self.menuItem updateLabelString:s];
-                    
-                }
-                 break;
-            default:
-                break;
-        }
-        
-      
-        
-    }
-}
-
-
-
--(BOOL)canSummon {
-    
+-(void)setWithMenuItem:(UnitMenuItem *)item {
     switch (_summonType) {
         case kSummonTypeNormal:
-            if (_currentCooldown <= 0 && self.isCostSufficient) {
-                return YES;
-            }
             break;
-        case kSummonTypeStock:
-            if(_currentStock>0)
-                return YES;
-        case kSummonTypeStockOnce:
-            if(_currentStock>0)
-                return YES;
+        case kSummonTypeStock: {
+            _currentCooldown = _cooldown;
+            [item resetMask:_cooldown from:100 to:0];
+            
+            NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
+            [item updateLabelString:s];
+            break;
+        }
+        case kSummonTypeStockOnce: {
+            _currentCooldown = _cooldown;
+            [item resetMask:_cooldown from:100 to:0];
+            [item updateLabelString:@""];
+            break;
+        }
         default:
             break;
     }
+}
+
+-(BOOL)canSummon {
+    switch (_summonType) {
+        case kSummonTypeNormal:
+            if (_currentCooldown > 0 || !self.isCostSufficient) {
+                return NO;
+            }
+            break;
+        case kSummonTypeStock:
+            if(_currentStock <= 0) {
+                return NO;
+            }
+            break;
+        case kSummonTypeStockOnce:
+            if(_currentStock <= 0) {
+                return NO;
+            }
+            break;
+        default:
+            NSAssert(NO, @"Your type is wrong!");
+            break;
+    }
     
-   
-    
-    return NO;
+    return YES;
 }
 
 -(BOOL)isCostSufficient {
@@ -164,49 +107,84 @@
     } else {
         return NO;
     }
-   
-   
 }
 
--(void) finishSummon{
+-(void)updateSummon {
     
     switch (_summonType) {
         case kSummonTypeNormal:
-           _currentCooldown = _cooldown;
             break;
+        case kSummonTypeStock:
+            if(_currentCooldown <= 0) {
+                _currentStock++;
+                _currentCooldown += _cooldown;
+                
+                if(self.menuItem) {
+                    NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
+                    [self.menuItem updateLabelString:s];
+                }
+            }
+            break;
+        case kSummonTypeStockOnce:
+            if(_currentCooldown <= 0 && _currentStock == 0) {
+                _currentStock++;
+                _currentCooldown = _cooldown;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    if(self.menuItem) {
+        if([self canSummon]) {
+            [self.menuItem enableSummon];
+        } else {
+            [self.menuItem disableSummon];
+        }
+    }
+}
+
+-(void)finishSummon {
+    switch (_summonType) {
+        case kSummonTypeNormal: {
+            _currentCooldown = _cooldown;
+            
+            PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfClass:[PlayerComponent class]];
+            player.food -= _cost;
+            
+            if (self.menuItem) {
+                [self.menuItem disableSummon];
+                [self.menuItem resetMask:_cooldown from:100 to:0];
+            }
+            break;
+        }
         case kSummonTypeStock:
             _currentStock--;
             
-            if(self.menuItem)
-            {
-                if(_currentStock==0)
-                 {
-                    
-                         [self.menuItem resetMask:_currentCooldown from:_currentCooldown/_cooldown*100 to:0];
-                     
-                 }
+            if(self.menuItem) {
+                if(_currentStock == 0) {
+                    [self.menuItem disableSummon];
+                    [self.menuItem resetMask:_currentCooldown from:_currentCooldown/_cooldown*100 to:0];
+                }
+                
                 NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
                 [self.menuItem updateLabelString:s];
             }
              break;
         case kSummonTypeStockOnce:
             _currentStock--;
-            if(self.menuItem)
-            {
-                if(_currentStock==0)
-                {
-                    _currentCooldown=_cooldown;
-                    [self.menuItem resetMask:_currentCooldown from:_currentCooldown/_cooldown*100 to:0];
-                    
+            _currentCooldown = _cooldown;
+            
+            if(self.menuItem) {
+                if (self.menuItem) {
+                    [self.menuItem disableSummon];
+                    [self.menuItem resetMask:_cooldown from:100 to:0];
                 }
-                NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-                [self.menuItem updateLabelString:s];
             }
              break;
         default:
             break;
     }
-   
 }
 
 @end

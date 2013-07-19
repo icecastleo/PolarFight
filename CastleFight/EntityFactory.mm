@@ -43,6 +43,7 @@
 #import "MagicComponent.h"
 #import "MaskComponent.h"
 
+#import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
 #import "PhysicsRoot.h"
 #import "PhysicsNode.h"
@@ -74,7 +75,7 @@
     return self;
 }
 
-- (Entity *)createCharacter:(NSString *)cid  level:(int)level forTeam:(int)team isSummon:(bool)summon {
+- (Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -109,8 +110,9 @@
     [entity addComponent:render];
     
     if (_physicsSystem) {
-        render.physicsSystem = _physicsSystem;
-        render.physicsRoot.direction = direction;
+        PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
+        physics.direction = direction;
+        [entity addComponent:physics];
         
         // Add Physics body
         b2Body *body = [self createBoxBodyWithSprite:sprite];
@@ -118,10 +120,8 @@
         
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
         physicsNode.b2Body = body;
-        physicsNode.PTMRatio = PTM_RATIO;
-        physicsNode.direction = direction;
         
-        [render.physicsRoot addChild:physicsNode];
+        [physics.root addChild:physicsNode];
     }
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
@@ -217,17 +217,10 @@
     //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
     if (self.mapLayer) {
-        if(summon)
-            [self.mapLayer summonEntity:entity];
-        else
-            [self.mapLayer addEntity:entity];
+        [self.mapLayer addEntity:entity];
     }
     
     return entity;
-}
-
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
-    return [self createCharacter:cid level:level forTeam:team isSummon:NO];
 }
 
 -(Entity *)createCastleForTeam:(int)team {
@@ -254,7 +247,8 @@
     [entity addComponent:render];
     
     if (_physicsSystem) {
-        render.physicsSystem = _physicsSystem;
+        PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
+        [entity addComponent:physics];
         
         // Add Physics body
         b2Body *body = [self createBoxBodyWithSprite:sprite];
@@ -262,9 +256,8 @@
         
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
         physicsNode.b2Body = body;
-        physicsNode.PTMRatio = PTM_RATIO;
         
-        [render.physicsRoot addChild:physicsNode];
+        [physics.root addChild:physicsNode];
     }
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:nil]];

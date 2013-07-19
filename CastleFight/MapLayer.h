@@ -21,7 +21,6 @@
 -(id)initWithName:(NSString *)name;
 -(void)setMap:(NSString *)name;
 
--(void)summonEntity:(Entity *)entity;
 -(void)addEntity:(Entity *)entity;
 -(void)addEntity:(Entity *)entity toPosition:(CGPoint)position;
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit;

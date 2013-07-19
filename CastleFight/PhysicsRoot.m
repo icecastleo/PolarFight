@@ -10,13 +10,4 @@
 
 @implementation PhysicsRoot
 
--(void)setDirection:(DirectionComponent *)direction {
-    _direction = direction;
-    [self scheduleUpdate];
-}
-
--(void)update:(ccTime)delta {
-    self.rotation = _direction.cocosDegrees;
-}
-
 @end

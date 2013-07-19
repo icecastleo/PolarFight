@@ -316,17 +316,7 @@
 				</dict>
 				<dict>
 					<key>spriteframe</key>
-					<string>boxer_bear_2.png
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quot;&gt;
-&lt;dict&gt;
-	&lt;key&gt;spriteframe&lt;/key&gt;
-	&lt;string&gt;ninja_penguin_4.png&lt;/string&gt;
-	&lt;key&gt;delayUnits&lt;/key&gt;
-	&lt;integer&gt;1&lt;/integer&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;
-4.png</string>
+					<string>boxer_bear_2.png</string>
 					<key>delayUnits</key>
 					<integer>1</integer>
 				</dict>

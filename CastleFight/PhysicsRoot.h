@@ -11,6 +11,4 @@
 
 @interface PhysicsRoot : CCNode
 
-@property (nonatomic) DirectionComponent *direction;
-
 @end

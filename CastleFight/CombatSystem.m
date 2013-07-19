@@ -186,18 +186,13 @@
         [render.node runAction:
          [CCSequence actions:
           [CCFadeOut actionWithDuration:1.0f],
-          [CCCallBlock actionWithBlock:^{
-             [render.node removeFromParentAndCleanup:YES];
-         }], nil]];
-    }else {
+         nil]];
+    } else {
         [sprite runAction:
          [CCSequence actions:
           [CCFadeOut actionWithDuration:1.0f],
-          [CCCallBlock actionWithBlock:^{
-             [render.node removeFromParentAndCleanup:YES];
-         }], nil]];
+         nil]];
     }
-    
 }
 
 -(void)playDeadSoundEffectForEntity:(Entity *)entity {

@@ -40,8 +40,6 @@
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
-    
-    PhysicsSystem *physicsSystem;
 }
 @property (nonatomic) Entity *selectedEntity;
 @end
@@ -56,8 +54,6 @@ __weak static BattleController* currentInstance;
 
 -(id)initWithPrefix:(int)prefix suffix:(int)suffix {
     if(self = [super init]) {
-        physicsSystem = [[PhysicsSystem alloc] init];
-
         currentInstance = self;
         
         battleName = [NSString stringWithFormat:@"%02d_%02d",prefix,suffix];
@@ -69,20 +65,20 @@ __weak static BattleController* currentInstance;
         mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
-        #if kPhisicalDebugDraw
-        [self addChild:physicsSystem.debugLayer];
-        #endif
-        
         entityManager = [[EntityManager alloc] init];
         entityFactory = [[EntityFactory alloc] initWithEntityManager:entityManager];
-        entityFactory.physicsSystem = physicsSystem;
         entityFactory.mapLayer = mapLayer;
+        
+        PhysicsSystem *physicsSystem = [[PhysicsSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
+        entityFactory.physicsSystem = physicsSystem;
         
         [self setCastle];
         
         _userPlayer = [entityFactory createPlayerForTeam:1];
         _enemyPlayer = [entityFactory createPlayerForTeam:2];
         
+        systems = [[NSMutableArray alloc] init];
+        [systems addObject:physicsSystem];
         [self setSystem];
         
         // init Dpad
@@ -123,8 +119,6 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)setSystem {
-    systems = [[NSMutableArray alloc] init];
-    
     [systems addObject:[[PlayerSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[AISystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
@@ -143,8 +137,6 @@ __weak static BattleController* currentInstance;
     for (System *system in systems) {
         [system update:delta];
     }
-    
-    [physicsSystem update:delta];
     
     // FIXME: As player component delegate?
     PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];

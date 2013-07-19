@@ -8,8 +8,6 @@
 
 #import "Component.h"
 #import "cocos2d.h"
-#import "PhysicsSystem.h"
-#import "PhysicsRoot.h"
 
 @interface RenderComponent : Component {
     CGPoint shadowOffset;
@@ -24,12 +22,8 @@
 // Fix boundingbox for map to calculate boundary, can be remove if box2d enable
 @property (readonly) CGRect spriteBoundingBox;
 
-@property (readonly) PhysicsRoot *physicsRoot;
-
 @property (nonatomic) BOOL enableShadowPosition;
 @property (readonly) CGSize shadowSize;
-
-@property PhysicsSystem *physicsSystem;
 
 //test spine
 @property (nonatomic) BOOL isSpineNode;

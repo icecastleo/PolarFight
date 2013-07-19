@@ -12,7 +12,7 @@ CLS_DEF(b2World);
 CLS_DEF(b2Body);
 CLS_DEF(MyContactListener);
 
-@interface PhysicsDebugDrawLayer:CCLayer {
+@interface PhysicsDebugDrawLayer : CCLayer {
     b2World *world;
 }
 
@@ -20,13 +20,13 @@ CLS_DEF(MyContactListener);
 
 @end
 
-@interface PhysicsSystem : NSObject
+@interface PhysicsSystem : System
 
 @property (readonly) b2World *world;
-@property (readonly) MyContactListener *contactListener;
-@property (readonly) PhysicsDebugDrawLayer *debugLayer;
+//@property (readonly) PhysicsDebugDrawLayer *debugLayer;
 
--(void)update:(float)delta;
+-(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory;
+
 -(NSArray *)getCollisionEntitiesWithBody:(b2Body *)body;
 
 @end

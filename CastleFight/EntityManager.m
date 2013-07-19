@@ -58,6 +58,11 @@
 -(void)removeEntity:(Entity *)entity {
     for (NSMutableDictionary * components in _componentsByClass.allValues) {
         if (components[entity.eidNumber]) {
+            Component *component = components[entity.eidNumber];
+            if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
+                [component receiveEvent:kEntityEventRemoveComponent Message:component];
+            }
+            
             [components removeObjectForKey:entity.eidNumber];
         }
     }
@@ -73,15 +78,18 @@
         _componentsByClass[NSStringFromClass([component class])] = components;
     }
     components[entity.eidNumber] = component;
-    
     [_componentsByEntity[entity.eidNumber] setObject:component forKey:NSStringFromClass([component class])];
 }
 
 -(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
     NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
     if (components && components[entity.eidNumber]) {
+        Component *component = components[entity.eidNumber];
+        if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
+            [component receiveEvent:kEntityEventRemoveComponent Message:component];
+        }
+
         [components removeObjectForKey:entity.eidNumber];
-        
         [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(aClass)];
     }
 }

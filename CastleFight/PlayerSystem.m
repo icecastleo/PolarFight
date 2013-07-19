@@ -31,23 +31,20 @@
         // Summon entity
         NSMutableArray *summonComponents = player.summonComponents;
         
+        // Heros
         [summonComponents addObjectsFromArray:player.battleTeam];
-        
         
         for (SummonComponent *summon in summonComponents) {
             
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
-                player.food -= summon.cost;
                 
                 TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
                 
                 CharacterInitData *data = summon.data;
                 
-                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team isSummon:YES];
+                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
-                
-                
                 
                 [summon finishSummon];
             
@@ -57,8 +54,9 @@
                 if (summon.currentCooldown > 0) {
                     summon.currentCooldown -= delta;
                 }
+                
+                [summon updateSummon];
             }
-            [summon updateSummon];
         }
     }
 }

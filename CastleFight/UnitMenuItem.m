@@ -31,7 +31,7 @@
     
     if (self = [super initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[summon.data.cid intValue]]]
                             selectedSprite:nil disabledSprite:nil block:^(id sender){
-                                [self SummonExecute:summon];
+                                summon.summon = YES;
                             }])
     {
         CCLabelBMFont *costLabel = [[CCLabelBMFont alloc] initWithString:[[NSNumber numberWithInt:summon.cost] stringValue] fntFile:@"font/cooper_20_o.fnt"];
@@ -65,7 +65,7 @@
     return self;
 }
 
--(void)updateLabelString:(NSString *)string{
+-(void)updateLabelString:(NSString *)string {
     CCLabelBMFont* label= (CCLabelBMFont*)[self getChildByTag:1234];
     [label setString:string];
 }
@@ -83,10 +83,6 @@
 -(void)resetMask:(float)totalTime from:(float)from to:(float)to {
     [self.timer stopAllActions];
     [self.timer runAction:[CCProgressFromTo actionWithDuration:totalTime from:from to:to]];
-}
-
--(void)SummonExecute:(SummonComponent*)summon {
-    summon.summon=YES;
 }
 
 @end

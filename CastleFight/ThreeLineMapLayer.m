@@ -11,17 +11,44 @@
 #import "TeamComponent.h"
 #import "CharacterComponent.h"
 #import "SelectableComponent.h"
+
+@interface ThreeLineMapLayer() {
+    CCMenu *lineSelectMenu;
+    int userLine;
+}
+
+@end
+
 @implementation ThreeLineMapLayer
-int repeat = kMapPathMaxLine;
-int ActiveLine = 0;
+
+-(id)initWithName:(NSString *)name {
+    if (self = [super initWithName:name]) {
+        NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < kMapPathMaxLine; i++) {
+            CCMenuItem *lineItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"rightarrow.png"] selectedSprite:[CCSprite spriteWithFile:@"rightarrow.png"] block:^(id sender) {
+                userLine = i;
+            }];
+            
+            lineItem.position = ccp(kMapStartDistance/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
+            [menuItems addObject:lineItem];
+        }
+
+        lineSelectMenu = [[CCMenu alloc] initWithArray:menuItems];
+        lineSelectMenu.position = ccp(0, 0);
+        [self addChild:lineSelectMenu z:INT16_MAX];
+    }
+    return self;
+}
+
 -(void)setMap:(NSString *)name {
-    
     CCParallaxNode *node = [CCParallaxNode node];
     
+    CCSprite *temp = [CCSprite spriteWithFile:@"ice.png"];
+    int width = temp.contentSize.width;
+    int height = temp.contentSize.height;
     
-    CCSprite *preloadMap = [CCSprite spriteWithFile:@"ice.png"];
-    int width = preloadMap.contentSize.width;
-    int height = preloadMap.contentSize.height;
+    int repeat = 3;
     
     for(int i = 0; i < repeat; i++) {
         CCSprite *map = [CCSprite spriteWithFile:@"ice.png"];
@@ -31,13 +58,16 @@ int ActiveLine = 0;
     
     [self addChild:node];
     self.contentSize = CGSizeMake(width*repeat, height);
-    
-    [self initLineSelect];
 }
 
 -(void)addEntity:(Entity *)entity {
-    int line = arc4random_uniform(kMapPathMaxLine);
-    [self addEntity:entity line:line];
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    
+    if (team.team == 1) {
+        [self addEntity:entity line:userLine];
+    } else {
+        [self addEntity:entity line:arc4random_uniform(kMapPathMaxLine)];
+    }
 }
 
 -(void)addEntity:(Entity *)entity line:(int)line {
@@ -64,56 +94,6 @@ int ActiveLine = 0;
         }
     }
     [self addEntity:entity toPosition:position];
-}
-
-
-
--(void) summonEntity:(Entity *)entity
-{
-    int line = ActiveLine;//arc4random_uniform(3);
-    [self addEntity:entity line:line];
-    
-    //TO DO: Need Something to examine if need select line
-    SelectableComponent *team = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-    
-    if(!team)
-        [self showLineSelect];
-}
-
--(void) showLineSelect{
-    lineSelectMenu.visible=YES;
-    lineSelectMenu.enabled=YES;
-}
-
-CCMenu *lineSelectMenu;
--(void) initLineSelect
-{
-    lineSelectMenu =[CCMenu menuWithItems: nil];
-    for(int i =0;i<repeat;i++){
-        
-        
-        CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithFile:@"rightarrow.png"] selectedSprite:[CCSprite spriteWithFile:@"rightarrow.png"] block:^(id sender) {
-//            lineSelectMenu.visible=NO;
-//            lineSelectMenu.enabled=NO;
-            ActiveLine=i;
-        }];
-        
-        
-        testMenuItem.position = ccp(50, kMapPathFloor + i*kMapPathHeight+50);
-        [lineSelectMenu addChild:testMenuItem];
-        
-    }
-    //[self addChild:lineSelectMenu];
-    lineSelectMenu.position=CGPointZero;
-//    lineSelectMenu.visible=NO;
-//    lineSelectMenu.enabled=NO;
-    lineSelectMenu.zOrder=10000;
-}
-
--(void) setParent:(CCNode *)parent{
-
-    [super setParent:parent];
-    [parent addChild:lineSelectMenu];
 }
 
 @end

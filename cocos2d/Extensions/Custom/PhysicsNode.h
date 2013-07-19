@@ -19,7 +19,4 @@ CLS_DEF(b2Body);
 @property (weak) b2Body *b2Body;
 #endif
 
-@property float PTMRatio;
-@property DirectionComponent *direction;
-
 @end

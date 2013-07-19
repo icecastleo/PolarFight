@@ -7,8 +7,6 @@
 //
 
 #import "RenderComponent.h"
-#import "Box2D.h"
-#import "PhysicsNode.h"
 #import "CCSkeletonAnimation.h"
 
 @implementation RenderComponent
@@ -23,9 +21,6 @@
         _sprite = sprite;
         [_node addChild:sprite];
         
-        _physicsRoot = [[PhysicsRoot alloc] init];
-        [_node addChild:_physicsRoot];
-        
         // Make sprite center to be the node's position
         _sprite.position = ccpMult(_sprite.offsetPosition, -1);
         _spriteBoundingBox = _sprite.boundingBox;
@@ -38,9 +33,6 @@
         // node's position is the sprite center
         _node = spineNode;
         _isSpineNode = YES;
-    
-        _physicsRoot = [[PhysicsRoot alloc] init];
-        [_node addChild:_physicsRoot];
         
         // Make sprite center to be the node's position
         _sprite.position = ccpMult(_sprite.offsetPosition, -1);
@@ -77,6 +69,14 @@
     CCSprite *shadow = [CCSprite spriteWithCGImage:imgRef key:nil];
     shadow.position = shadowOffset;
     [_node addChild:shadow z:-1];
+}
+
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEntityEventRemoveComponent) {
+        [_node removeFromParentAndCleanup:YES];
+    }
+    
+    // TODO: Revive event
 }
 
 -(void)setPosition:(CGPoint)position {
@@ -116,15 +116,6 @@
       [CCCallBlock actionWithBlock:^{
          [label removeFromParentAndCleanup:YES];
      }], nil]];
-}
-
--(void)receiveEvent:(EntityEvent)type Message:(id)message {
-    if (type == kEntityEventDead) {
-        for (PhysicsNode *node in _physicsRoot.children) {
-            node.b2Body->GetWorld()->DestroyBody(node.b2Body);
-            [node unscheduleUpdate];
-        }
-    }
 }
 
 -(void)stopAnimation {

@@ -15,6 +15,7 @@
 #import "DefenderComponent.h"
 #import "Box2D.h"
 #import "PhysicsNode.h"
+#import "PhysicsComponent.h"
 
 @implementation Range
 
@@ -72,26 +73,25 @@
 -(void)setOwner:(Entity *)entity {
     _owner = entity;
     
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    physicsSystem = render.physicsSystem;
+    PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfClass:[PhysicsComponent class]];
+    // Entity will not have a physcis component in scene like menu!
+//    NSAssert(physics, @"Range can only be apply on entity who has physics component!");
+    
+    if (physics) {
+        physicsSystem = physics.system;
         
-    if (physicsSystem) {
         body = [self createBody];
         
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
         physicsNode.b2Body = body;
-        physicsNode.PTMRatio = PTM_RATIO;
         
-        DirectionComponent *direction = (DirectionComponent *)[entity getComponentOfClass:[DirectionComponent class]];
-        physicsNode.direction = direction;
-        
-        float cocosRadians = CC_DEGREES_TO_RADIANS(direction.spriteDirection);
+        float cocosRadians = CC_DEGREES_TO_RADIANS(physics.direction.spriteDirection);
         
         if (distance != 0) {
             physicsNode.position = ccpMult(ccpForAngle(cocosRadians), distance);
         }
         
-        [render.physicsRoot addChild:physicsNode];
+        [physics.root addChild:physicsNode];
     }
 }
 
@@ -124,10 +124,7 @@
     
     NSMutableArray *rawEntities = [[NSMutableArray alloc] init];
     
-    RenderComponent *renderCom = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    PhysicsSystem *system = renderCom.physicsSystem;
-    
-    for(Entity* entity in [system getCollisionEntitiesWithBody:body]) {
+    for(Entity* entity in [physicsSystem getCollisionEntitiesWithBody:body]) {
         if ([self containEntity:entity]) {
             [rawEntities addObject:entity];
         }
