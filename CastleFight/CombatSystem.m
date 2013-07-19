@@ -160,12 +160,13 @@
 -(void)runDeadAnimationForEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    CCSprite *sprite = render.sprite;
-    //test spine
+    CCNode *sprite;
     if (render.isSpineNode) {
-        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
         [animationNode clearAnimation];
-        [animationNode stopAllActions];
+        sprite = render.sprite;
+    }else {
+        sprite = (CCSprite *)render.sprite;
     }
     
     [sprite stopAllActions];
@@ -181,22 +182,12 @@
     emitter.autoRemoveOnFinish = YES;
     [render.node addChild:emitter];
     
-    //test spine
-    if (render.isSpineNode) {
-        [render.node runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:1.0f],
-          [CCCallBlock actionWithBlock:^{
-             [render.node removeFromParentAndCleanup:YES];
-         }], nil]];
-    }else {
-        [sprite runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:1.0f],
-          [CCCallBlock actionWithBlock:^{
-             [render.node removeFromParentAndCleanup:YES];
-         }], nil]];
-    }
+    [sprite runAction:
+     [CCSequence actions:
+      [CCFadeOut actionWithDuration:1.0f],
+      [CCCallBlock actionWithBlock:^{
+         [render.node removeFromParentAndCleanup:YES];
+     }], nil]];
     
 }
 

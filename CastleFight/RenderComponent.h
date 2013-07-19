@@ -20,7 +20,7 @@
 @property CGPoint position;
 
 // Used for animation
-@property (readonly) CCSprite *sprite;
+@property (readonly) CCNode *sprite;
 // Fix boundingbox for map to calculate boundary, can be remove if box2d enable
 @property (readonly) CGRect spriteBoundingBox;
 
@@ -31,18 +31,14 @@
 
 @property PhysicsSystem *physicsSystem;
 
-//test spine
 @property (nonatomic) BOOL isSpineNode;
-//@property (nonatomic) CCNode *spineNode;
-//test spine
 
 
--(id)initWithSprite:(CCSprite *)sprite;
--(id)initWithSpineNode:(CCNode *)spineNode;
+-(id)initWithSprite:(CCNode *)sprite;
 
 -(void)addFlashString:(NSString *)string color:(ccColor3B)color;
 
 -(void)stopAnimation;
--(void)flip;
+-(void)flip:(Direction)direction;
 
 @end

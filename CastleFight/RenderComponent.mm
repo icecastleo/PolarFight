@@ -15,7 +15,7 @@
 
 @synthesize position = _position;
 
--(id)initWithSprite:(CCSprite *)sprite {
+-(id)initWithSprite:(CCNode *)sprite {
     if ((self = [super init])) {
         // node's position is the sprite center
         _node = [CCNode node];
@@ -27,23 +27,14 @@
         [_node addChild:_physicsRoot];
         
         // Make sprite center to be the node's position
-        _sprite.position = ccpMult(_sprite.offsetPosition, -1);
-        _spriteBoundingBox = _sprite.boundingBox;
-    }
-    return self;
-}
-
--(id)initWithSpineNode:(CCNode *)spineNode {
-    if ((self = [super init])) {
-        // node's position is the sprite center
-        _node = spineNode;
-        _isSpineNode = YES;
-    
-        _physicsRoot = [[PhysicsRoot alloc] init];
-        [_node addChild:_physicsRoot];
+        if ([sprite isKindOfClass:[CCSprite class]]) {
+            _isSpineNode = NO;
+            _sprite.position = ccpMult([(CCSprite *)sprite offsetPosition], -1);
+        }else {
+            _isSpineNode = YES;
+            _sprite.position = ccp(0,-sprite.boundingBox.size.height/2);
+        }
         
-        // Make sprite center to be the node's position
-        _sprite.position = ccpMult(_sprite.offsetPosition, -1);
         _spriteBoundingBox = _sprite.boundingBox;
     }
     return self;
@@ -128,23 +119,34 @@
 }
 
 -(void)stopAnimation {
-    //test spine
     if (self.isSpineNode) {
-        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.sprite;
         [animationNode clearAnimation];
-        [self.node stopActionByTag:kAnimationActionTag];
+        [self.sprite stopActionByTag:kAnimationActionTag];
     }else {
         [self.sprite stopActionByTag:kAnimationActionTag];
     }
 }
 
--(void)flip {
-    //test spine
+-(void)flip:(Direction)direction {
+    int value = 0;
+    switch (direction) {
+        case kDirectionLeft:
+            value = -1;
+            break;
+        case kDirectionRight:
+            value = 1;
+            break;
+        default:
+            return;
+            break;
+    }
     if (self.isSpineNode) {
-        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.node;
-        [animationNode setScaleX:-1];
-    }else {
-        self.sprite.flipX = TRUE;
+        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.sprite;
+        [animationNode setScaleX:value];
+    }else if([self.sprite isKindOfClass:[CCSprite class]]){
+        CCSprite *sprite = (CCSprite *)self.sprite;
+        sprite.flipX = TRUE;
     }
 }
 

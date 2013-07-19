@@ -2,7 +2,7 @@
 //  MagicComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/7/2.
+//  Created by  浩翔 on 13/7/2.
 //
 //
 

@@ -63,9 +63,15 @@
         DirectionComponent *direction = (DirectionComponent *)[entity getComponentOfClass:[DirectionComponent class]];
         
         if (direction) {
+            Direction oldDirection = direction.direction;
             direction.velocity = move.velocity;
+            Direction newDirection = direction.direction;
+            
+            if (oldDirection != newDirection) {
+                [render flip:newDirection];
+            }
         }
-
+        
         [_map moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
         
         // Run animation
@@ -89,9 +95,8 @@
                                         [CCAnimate actionWithAnimation:idel]];
                     action.tag = kAnimationActionTag;
                     
-                    // test spine
                     if (render.isSpineNode) {
-                        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
                         [animationNode clearAnimation];
                     }else {
                         [render.sprite runAction:action];
@@ -109,9 +114,8 @@
             if (animation.state == kAnimationStateNone) {
                 CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
                 
-                // test spine
                 if (render.isSpineNode) {
-                    CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.node;
+                    CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
                     [animationNode setAnimation:@"walk" loop:YES];
                     animation.state = kAnimationStateMove;
                 } else if (moveAnimation) {
