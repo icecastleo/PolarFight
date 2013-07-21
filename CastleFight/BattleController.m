@@ -20,7 +20,7 @@
 #import "PlayerSystem.h"
 #import "AISystem.h"
 #import "MoveSystem.h"
-//#import "ProjectileSystem.h"
+#import "ProjectileSystem.h"
 #import "ActiveSkillSystem.h"
 #import "CombatSystem.h"
 #import "EffectSystem.h"
@@ -123,10 +123,10 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[AISystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
-//    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[CombatSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+    [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {

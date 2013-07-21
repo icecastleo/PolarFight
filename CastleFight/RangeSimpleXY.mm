@@ -55,8 +55,6 @@ static NSMutableArray *yInterval;
 }
 
 -(b2Body *)createBody {
-    NSAssert(physicsSystem, @"You can not create a physics body without physics system!");
-    
     RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
     
     b2BodyDef spriteBodyDef;
@@ -69,7 +67,6 @@ static NSMutableArray *yInterval;
     
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;
-//    spriteShapeDef.density = 10.0;
     spriteShapeDef.isSensor = true;
     spriteShapeDef.filter.groupIndex = kPhisicsFixtureGroupRange;
     

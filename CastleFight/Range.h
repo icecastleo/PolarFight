@@ -16,7 +16,7 @@ CLS_DEF(b2Body);
 // RangeType
 #define kRangeTypeCircle @"RangeCircle"
 #define kRangeTypeFanShape @"RangeFanShape"
-#define kRangeTypeLine @"RangeLine"
+#define kRangeTypeSquare @"SquareRange"
 #define kRangeTypeProjectile @"ProjectileRange"
 #define kRangeTypeSimpleXY @"RangeSimpleXY"
 
@@ -32,7 +32,7 @@ CLS_DEF(b2Body);
 #define kRangeKeyRadius @"Radius"
 #define kRangeKeyAngle @"Angle"
 #define kRangeKeyWidth @"Width"
-#define kRangeKeyLength @"Length"
+#define kRangeKeyHeight @"Height"
 #define kRangeKeyDistance @"Distance"
 
 // Projectile Range

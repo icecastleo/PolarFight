@@ -8,6 +8,8 @@
 
 #import "EntityManager.h"
 #import "MapLayer.h"
+
+@class ProjectileEvent;
 @class PhysicsSystem;
 
 @interface EntityFactory : NSObject
@@ -22,5 +24,7 @@
 -(Entity *)createPlayerForTeam:(int)team;
 
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level;
+
+-(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
 
 @end

@@ -35,6 +35,8 @@
 #import "PassiveComponent.h"
 #import "HeroComponent.h"
 #import "AuraComponent.h"
+#import "ProjectileEvent.h"
+#import "AIStateProjectile.h"
 
 #import "SelectableComponent.h"
 #import "MovePathComponent.h"
@@ -68,14 +70,14 @@
 	[cache addAnimationsWithFile:@"animations.plist"];
 }
 
-- (id)initWithEntityManager:(EntityManager *)entityManager {
+-(id)initWithEntityManager:(EntityManager *)entityManager {
     if ((self = [super init])) {
         _entityManager = entityManager;
     }
     return self;
 }
 
-- (Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -104,22 +106,20 @@
     }
     
     CCNode *sprite;
-    RenderComponent *render;
+
     //hero spine
     if ([cid intValue]/100 == 2) {
         CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
         [animationNode updateWorldTransform];
         
         sprite = animationNode;
-        render = [[RenderComponent alloc] initWithSprite:sprite];
-        [entity addComponent:render]; 
-    }else {
+    } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
-        
-        render = [[RenderComponent alloc] initWithSprite:(CCSprite *)sprite];
-        render.enableShadowPosition = YES;
-        [entity addComponent:render];
     }
+    
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    render.enableShadowPosition = YES;
+    [entity addComponent:render];
     
     if (_physicsSystem) {
         PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
@@ -383,6 +383,39 @@
     [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
+    
+    return entity;
+}
+
+-(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team {
+    Entity *entity = [_entityManager createEntity];
+    [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
+
+    CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(event.spriteDirection));
+    
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithVelocity:velocity];
+    direction.spriteDirection = event.spriteDirection;
+    [entity addComponent:direction];
+    
+    
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:event.sprite];
+    [entity addComponent:render];
+    
+    if (_physicsSystem) {
+        PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
+        physics.direction = direction;
+        [entity addComponent:physics];
+        
+        event.range.owner = entity;
+    }
+    
+    AIState *state = [[AIStateProjectile alloc] initWithProjectEvent:event];
+    AIComponent *ai = [[AIComponent alloc] initWithState:state];
+    [entity addComponent:ai];
+     
+    if (self.mapLayer) {
+        [self.mapLayer addEntity:entity toPosition:event.startPosition];
+    }
     
     return entity;
 }

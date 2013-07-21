@@ -36,10 +36,8 @@ typedef enum {
     
 } EntityEvent;
 
-@interface Entity : NSObject {
+@interface Entity : NSObject
     
-}
-
 @property (readonly) uint32_t eid;
 @property (readonly) NSNumber *eidNumber;
 
@@ -53,11 +51,8 @@ typedef enum {
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
 
--(void)sendEvent:(EntityEvent)type Message:(id)message;
+-(void)removeSelf;
 
-//- (NSArray *)getAllEntitiesOnTeam:(int)team posessingComponentOfClass:(Class)class;
-//- (Entity *)closestEntityOnTeam:(int)team;
-//- (Entity *)playerForTeam:(int)team;
-//- (NSArray *)entitiesWithinRange:(float)range onTeam:(int)team;
+-(void)sendEvent:(EntityEvent)type Message:(id)message;
 
 @end

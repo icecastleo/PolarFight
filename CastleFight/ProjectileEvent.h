@@ -8,29 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "ProjectileRange.h"
+#import "DirectionComponent.h"
 
 typedef enum {
+    kProjectileTypeInstant,
     kProjectileTypeLine,
     kProjectileTypeParabola,
 } ProjectileType;
 
-@class CCFiniteTimeAction;
-
 @interface ProjectileEvent : NSObject
 
-@property (readonly) ProjectileRange *range;
-@property (readonly) BOOL isPiercing;
-@property (readonly) ProjectileType type;
-@property (readonly) CGPoint startWorldPosition;
-@property (readonly) CGPoint endWorldPosition;
-@property (readonly) float time;
-@property (readonly) void (^block)(NSArray *entities, CGPoint position);
+@property CCSprite *sprite;
+@property SpriteDirection spriteDirection;
 
-@property (nonatomic) CCFiniteTimeAction *middleAction;
-@property (nonatomic) CCFiniteTimeAction *finishAction;
-@property (nonatomic) BOOL isFinish;
+@property ProjectileType type;
 
+@property CGPoint startPosition;
+@property CGPoint finishPosition;
+@property ccTime duration;
 
--(id)initWithProjectileRange:(ProjectileRange *)range type:(ProjectileType)type startWorldPosition:(CGPoint)startPosition endWorldPosition:(CGPoint)endPosition time:(float)time block:(void(^)(NSArray *entities, CGPoint position))block;
+@property CCAnimate *startAnimate;
+@property CCAnimate *finishAnimate;
+
+@property Range *range;
+@property (strong) void (^block)(NSArray *entities, CGPoint position);
+
+@property BOOL isPiercing;
+
+-(CCAction *)createProjectileAction;
 
 @end

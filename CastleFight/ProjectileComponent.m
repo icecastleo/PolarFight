@@ -12,7 +12,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        _projectileEventQueue = [[NSMutableArray alloc] init];
+        _projectileEvents = [[NSMutableArray alloc] init];
     }
     return self;
 }

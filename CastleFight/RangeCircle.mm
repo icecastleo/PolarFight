@@ -33,8 +33,6 @@
 }
 
 -(b2Body *)createBody {
-    NSAssert(physicsSystem, @"You can not create a physics body without physics system!");
-    
     b2BodyDef spriteBodyDef;
     spriteBodyDef.type = b2_dynamicBody;
     
@@ -45,7 +43,6 @@
    
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;
-    //    spriteShapeDef.density = 10.0;
     spriteShapeDef.isSensor = true;
     spriteShapeDef.filter.groupIndex = kPhisicsFixtureGroupRange;
     

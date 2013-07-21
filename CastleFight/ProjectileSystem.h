@@ -8,9 +8,6 @@
 
 #import "System.h"
 
-@interface ProjectileSystem : System {
-    NSMutableArray *projectingEvents;
-    NSMutableArray *finishEvents;
-}
+@interface ProjectileSystem : System
 
 @end

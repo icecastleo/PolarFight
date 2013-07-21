@@ -10,6 +10,6 @@
 
 @interface ProjectileComponent : Component
 
-@property (readonly) NSMutableArray *projectileEventQueue;
+@property (readonly) NSMutableArray *projectileEvents;
 
 @end

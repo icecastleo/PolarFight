@@ -35,22 +35,22 @@
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
                           [self.magicInformation objectForKey:@"damage"]];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x+0.1f,startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
-        
-        for (Entity *entity in entities) {
-            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
-            event.position = position;
-            AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
-            [attacker.attackEventQueue addObject:event];
-        }
-    }];
-    
-    CCScaleTo *bigger = [CCScaleTo actionWithDuration:0.0f scaleX:2.0f scaleY:2.0f];
-    CCSequence *pulseSequence = [CCSequence actions:bigger,[CCFadeOut actionWithDuration:0.5f], nil];
-    event.finishAction = pulseSequence;
-    
-    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
-    [projectile.projectileEventQueue addObject:event];
+//    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x+0.1f,startPoint.y+0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
+//        
+//        for (Entity *entity in entities) {
+//            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
+//            event.position = position;
+//            AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+//            [attacker.attackEventQueue addObject:event];
+//        }
+//    }];
+//    
+//    CCScaleTo *bigger = [CCScaleTo actionWithDuration:0.0f scaleX:2.0f scaleY:2.0f];
+//    CCSequence *pulseSequence = [CCSequence actions:bigger,[CCFadeOut actionWithDuration:0.5f], nil];
+//    event.finishAction = pulseSequence;
+//    
+//    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
+//    [projectile.projectileEventQueue addObject:event];
 }
 
 @end

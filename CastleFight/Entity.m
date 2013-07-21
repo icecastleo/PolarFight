@@ -10,11 +10,15 @@
 #import "Entity.h"
 #import "EntityManager.h"
 
-@implementation Entity {
-    EntityManager * _entityManager;
+@interface Entity() {
+    EntityManager *_entityManager;
 }
 
-- (id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager {
+@end
+
+@implementation Entity
+
+-(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager {
     if ((self = [super init])) {
         _eid = eid;
         _eidNumber = @(eid);
@@ -42,6 +46,10 @@
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass {
     return [_entityManager getAllEntitiesPosessingComponentOfClass:aClass];
+}
+
+-(void)removeSelf {
+    [_entityManager removeEntity:self];
 }
 
 -(void)sendEvent:(EntityEvent)type Message:(id)message {

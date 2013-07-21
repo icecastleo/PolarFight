@@ -11,7 +11,7 @@
 
 @implementation RenderComponent
 
-@synthesize position = _position;
+@dynamic position;
 
 -(id)initWithSprite:(CCNode *)sprite {
     if ((self = [super init])) {
@@ -66,18 +66,16 @@
     [_node addChild:shadow z:-1];
 }
 
--(void)receiveEvent:(EntityEvent)type Message:(id)message {
-    if (type == kEntityEventRemoveComponent) {
-        [_node removeFromParentAndCleanup:YES];
-    }
-    
-    // TODO: Revive event
-}
+//-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+//    if (type == kEntityEventRemoveComponent) {
+//        [_node removeFromParentAndCleanup:YES];
+//    }
+//
+//    // TODO: Revive event
+//}
 
 -(void)setPosition:(CGPoint)position {
     @synchronized(self) {
-        _position = position;
-        
         if (self.enableShadowPosition) {
             _node.position = ccpSub(position, shadowOffset);
         } else {
@@ -88,7 +86,11 @@
 
 -(CGPoint)position {
     @synchronized(self) {
-        return _position;
+        if (self.enableShadowPosition) {
+            return ccpAdd(_node.position, shadowOffset);
+        } else {
+            return _node.position;
+        }
     }
 }
 

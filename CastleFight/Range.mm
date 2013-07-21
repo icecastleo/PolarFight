@@ -49,25 +49,19 @@
             distance = [d intValue];
         }
 
-        NSString *file = [dict objectForKey:kRangeKeySpriteFile];
-        
-        if (file) {
-            // TODO: Maybe each range can set its special parameter based on the sprite.
+//        NSString *file = [dict objectForKey:kRangeKeySpriteFile];
+//        
+//        if (file) {
+//            // TODO: Maybe each range can set its special parameter based on the sprite.
 //            _rangeSprite = [CCSprite spriteWithFile:file];
 //            [self setSpecialParameter:dict];
-        } else {
-            NSAssert(![[dict objectForKey:kRangeKeyType] isEqualToString:kRangeTypeProjectile], @"You must define a spriteFile for a ProjectileRange!");
+//        } else {
+//            NSAssert(![[dict objectForKey:kRangeKeyType] isEqualToString:kRangeTypeProjectile], @"You must define a spriteFile for a ProjectileRange!");
 //            [self setSpecialParameter:dict];
 //            [self setRangeSprite];
-        }
+//        }
     }
     return self;
-}
-
--(b2Body *)createBody {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
-    return nil;
 }
 
 -(void)setOwner:(Entity *)entity {
@@ -95,6 +89,12 @@
     }
 }
 
+-(b2Body *)createBody {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a Range subclass", NSStringFromSelector(_cmd)];
+    return nil;
+}
+
 //-(void)setRangeSprite {
 //    
 //    CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
@@ -120,7 +120,7 @@
 //}
 
 -(NSArray *)getEffectEntities {
-    NSAssert(self.owner, @"You must set an entity as range owner!");
+    NSAssert(physicsSystem, @"You must set an entity as range owner, and it should have a physics component!");
     
     NSMutableArray *rawEntities = [[NSMutableArray alloc] init];
     

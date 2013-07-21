@@ -105,8 +105,8 @@ const static int pathSizeHeight = 40;
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
     
-    [self moveEntity:entity toPosition:position boundaryLimit:YES];
     [self addChild:render.node];
+    [self moveEntity:entity toPosition:position boundaryLimit:YES];
 }
 
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
@@ -132,18 +132,18 @@ const static int pathSizeHeight = 40;
 -(CGPoint)getPositionInBoundary:(CGPoint)position forEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    float Width = 0;
-    float Height = 0;
+    float width = 0;
+    float height = 0;
     
     if (render.enableShadowPosition) {
-        Width = render.shadowSize.width/2;
-        Height = render.shadowSize.height/2;
+        width = render.shadowSize.width/2;
+        height = render.shadowSize.height/2;
     } else {
-        Width = render.spriteBoundingBox.size.width/2;
-        Height = render.spriteBoundingBox.size.height/2;
+        width = render.spriteBoundingBox.size.width/2;
+        height = render.spriteBoundingBox.size.height/2;
     }
     
-    return ccp(MIN( MAX(Width, position.x), self.boundaryX - Width), MIN( MAX(Height, position.y), self.boundaryY - Height));
+    return ccp(MIN( MAX(width, position.x), self.boundaryX - width), MIN( MAX(height, position.y), self.boundaryY - height));
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

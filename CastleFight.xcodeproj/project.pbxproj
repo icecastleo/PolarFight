@@ -233,6 +233,7 @@
 		9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B293EC01718730E00C1E728 /* AccumulateAttribute.m */; };
 		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
 		9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2C785F1699E6B500CA1A1C /* blood_frame.png */; };
+		9B32207F179AAE9B00BB7EC8 /* SquareRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B32207E179AAE9B00BB7EC8 /* SquareRange.mm */; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1816676B8B00BAF11B /* ColoredSquareSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1A16676B8B00BAF11B /* HelloWorldScene.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -408,6 +409,8 @@
 		9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */; };
 		9B93DE831744F21700DA62F2 /* Range.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.mm */; };
 		9B93DE841744F21D00DA62F2 /* TeamComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB95173254CB0030C9D7 /* TeamComponent.m */; };
+		9B953FE5179C26B20069CF89 /* AIStateProjectile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B953FE4179C26B20069CF89 /* AIStateProjectile.m */; };
+		9B953FE6179C5DED0069CF89 /* ProjectileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAE11747D4B20039A031 /* ProjectileSystem.m */; };
 		9B9848CC16EF37DA00D3D55D /* BloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848CB16EF37D900D3D55D /* BloodSprite.m */; };
 		9B9848D016EF3B8200D3D55D /* CharacterBloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848CF16EF3B8200D3D55D /* CharacterBloodSprite.m */; };
 		9B9848D316EF46E900D3D55D /* CastleBloodSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9848D216EF46E900D3D55D /* CastleBloodSprite.m */; };
@@ -558,8 +561,6 @@
 		2DA446BE16E4A59F00BDC060 /* BaseAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAI.m; sourceTree = "<group>"; };
 		2DA446C016E4A6E400BDC060 /* SimpleAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAI.h; sourceTree = "<group>"; };
 		2DA446C116E4A6E400BDC060 /* SimpleAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAI.m; sourceTree = "<group>"; };
-		2DD7058A16511724001E3155 /* RangeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeLine.h; sourceTree = "<group>"; };
-		2DD7058B16511724001E3155 /* RangeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeLine.m; sourceTree = "<group>"; };
 		2DDDD14516FB050A00CBA47F /* EnemyAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAIData.h; sourceTree = "<group>"; };
 		2DDDD14616FB050A00CBA47F /* EnemyAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAIData.m; sourceTree = "<group>"; };
 		2DED399916F08A38009802A0 /* EnemyAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAI.h; sourceTree = "<group>"; };
@@ -889,6 +890,8 @@
 		9B2C7866169ABA9900CA1A1C /* SlowMovePassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMovePassiveSkill.m; sourceTree = "<group>"; };
 		9B2C786C169ADA9300CA1A1C /* SlowMoveAura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowMoveAura.h; sourceTree = "<group>"; };
 		9B2C786D169ADA9300CA1A1C /* SlowMoveAura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowMoveAura.m; sourceTree = "<group>"; };
+		9B32207D179AAE9B00BB7EC8 /* SquareRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareRange.h; sourceTree = "<group>"; };
+		9B32207E179AAE9B00BB7EC8 /* SquareRange.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SquareRange.mm; sourceTree = "<group>"; };
 		9B38813F16766F7500E1FBF4 /* CharacterEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterEventDelegate.h; sourceTree = "<group>"; };
 		9B392CD117943C7D000EA7C1 /* PhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		9B392CD217943C7D000EA7C1 /* PhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
@@ -1277,6 +1280,8 @@
 		9B93798716B1655800F1A05A /* BombSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombSkill.m; sourceTree = "<group>"; };
 		9B93DE7C1744CCA400DA62F2 /* SummonComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummonComponent.h; sourceTree = "<group>"; };
 		9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummonComponent.m; sourceTree = "<group>"; };
+		9B953FE3179C26B20069CF89 /* AIStateProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateProjectile.h; sourceTree = "<group>"; };
+		9B953FE4179C26B20069CF89 /* AIStateProjectile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateProjectile.m; sourceTree = "<group>"; };
 		9B98481516EDD27600D3D55D /* bg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bg; sourceTree = "<group>"; };
 		9B98481616EDD27600D3D55D /* map */ = {isa = PBXFileReference; lastKnownFileType = folder; path = map; sourceTree = "<group>"; };
 		9B98481716EDD27600D3D55D /* sound_caf */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound_caf; sourceTree = "<group>"; };
@@ -1579,6 +1584,8 @@
 				2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */,
 				3741400A1772F49F00E6365A /* AIStateHeroAttack.h */,
 				3741400B1772F49F00E6365A /* AIStateHeroAttack.m */,
+				9B953FE3179C26B20069CF89 /* AIStateProjectile.h */,
+				9B953FE4179C26B20069CF89 /* AIStateProjectile.m */,
 			);
 			name = AIState;
 			sourceTree = "<group>";
@@ -1588,12 +1595,12 @@
 			children = (
 				9BFFAE61163E9DBB00073DC5 /* Range.h */,
 				9BFFAE62163E9DBB00073DC5 /* Range.mm */,
+				9B32207D179AAE9B00BB7EC8 /* SquareRange.h */,
+				9B32207E179AAE9B00BB7EC8 /* SquareRange.mm */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
 				9BFFAE64163E9DBB00073DC5 /* RangeCircle.mm */,
 				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
 				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
-				2DD7058A16511724001E3155 /* RangeLine.h */,
-				2DD7058B16511724001E3155 /* RangeLine.m */,
 				9B60DADA174792D40039A031 /* ProjectileRange.h */,
 				9B60DADB174792D50039A031 /* ProjectileRange.m */,
 				2D4AA45E174D361C00275F47 /* RangeSimpleXY.h */,
@@ -3560,6 +3567,9 @@
 				9B392D0E17972140000EA7C1 /* Slot.c in Sources */,
 				9B392D0F17972140000EA7C1 /* SlotData.c in Sources */,
 				9B392D1217993172000EA7C1 /* PhysicsComponent.mm in Sources */,
+				9B32207F179AAE9B00BB7EC8 /* SquareRange.mm in Sources */,
+				9B953FE5179C26B20069CF89 /* AIStateProjectile.m in Sources */,
+				9B953FE6179C5DED0069CF89 /* ProjectileSystem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

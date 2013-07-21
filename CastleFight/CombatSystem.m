@@ -120,24 +120,26 @@
             [self runDeadAnimationForEntity:entity];
             [self playDeadSoundEffectForEntity:entity];
             
+            // TODO: Revive
             [self.entityManager removeEntity:entity];
         }
     }
 }
 
 -(void)runDamageAnimationForEntity:(Entity *)entity withDamage:(Damage *)damage {
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    CCNode *node = renderCom.node;
-    
     if (damage.damage > 0) {
+        NSAssert(self.entityFactory.mapLayer, @"Damage effect sprite should be added on the map");
+        
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        
         CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"hit_01.png"];
         
         if (damage.source == kDamageSourceRanged) {
-            sprite.position = [node convertToNodeSpace:damage.position];
+            sprite.position = damage.position;
+        } else {
+            CGPoint position = [render.sprite.parent convertToWorldSpace:render.sprite.position];
+            sprite.position = [self.entityFactory.mapLayer convertToNodeSpace:position];
         }
-//        else {
-//            sprite.position = ccp(0, 0);
-//        }
         
         CCAction *action = [CCSequence actions:
                             [CCFadeOut actionWithDuration:0.5f],
@@ -146,7 +148,7 @@
         }], nil];
         
         [sprite runAction:action];
-        [node addChild:sprite];
+        [self.entityFactory.mapLayer addChild:sprite];
     }
     
     // TODO: Damage sound effect
@@ -166,7 +168,7 @@
         [animationNode clearAnimation];
         sprite = render.sprite;
     }else {
-        sprite = (CCSprite *)render.sprite;
+        sprite = render.sprite;
     }
     
     [sprite stopAllActions];
@@ -182,7 +184,12 @@
     emitter.autoRemoveOnFinish = YES;
     [render.node addChild:emitter];
     
-    [sprite runAction:[CCFadeOut actionWithDuration:1.0f]];
+    [sprite runAction:
+     [CCSequence actions:
+      [CCFadeOut actionWithDuration:1.0f],
+      [CCCallBlock actionWithBlock:^{
+         [render.node removeFromParentAndCleanup:YES];
+     }], nil]];
 }
 
 -(void)playDeadSoundEffectForEntity:(Entity *)entity {
