@@ -39,7 +39,7 @@
     b2Body *spriteBody = physicsSystem.world->CreateBody(&spriteBodyDef);
     
     b2PolygonShape spriteShape;
-    spriteShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
+    spriteShape.SetAsBox((float)width/PTM_RATIO/2, (float)height/PTM_RATIO/2);
     
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;

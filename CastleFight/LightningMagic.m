@@ -28,15 +28,17 @@
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
     
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] init];
-    event.spriteDirection = kSpriteDirectionDown;
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:[images objectForKey:@"projectileImage"] direction:kSpriteDirectionDown];
     event.type = kProjectileTypeInstant;
-    event.startPosition = startPoint;
     
     CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
-    event.sprite = sprite;
+    event.startPosition = ccp(startPoint.x,startPoint.y+sprite.boundingBox.size.height/2);
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:sprite.boundingBox.size.height/2],kRangeKeyDistance,nil];
+    int width = sprite.boundingBox.size.width/10;
+    int height = sprite.boundingBox.size.height/2;
+    int distance = sprite.boundingBox.size.height/2 - width;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:distance],kRangeKeyDistance,nil];
     event.range = [Range rangeWithParameters:dictionary];
     
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
@@ -53,7 +55,7 @@
     event.block = block;
     
     CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:5.5f], nil];
-    event.finishAnimate = pulseSequence;
+    event.finishAction = pulseSequence;
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     [projectile.projectileEvents addObject:event];

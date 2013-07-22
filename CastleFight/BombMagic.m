@@ -28,15 +28,13 @@
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
 
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] init];
-    event.spriteDirection = kSpriteDirectionDown;
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:[images objectForKey:@"projectileImage"] direction:kSpriteDirectionDown];
     event.type = kProjectileTypeInstant;
     event.startPosition = startPoint;
     
     CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
-    event.sprite = sprite;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width*3],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height*3],kRangeKeyHeight,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width*2],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height*2],kRangeKeyHeight,nil];
     event.range = [Range rangeWithParameters:dictionary];
     
     
@@ -55,7 +53,7 @@
     
     CCScaleTo *bigger = [CCScaleTo actionWithDuration:0.0f scaleX:2.0f scaleY:2.0f];
     CCSequence *pulseSequence = [CCSequence actions:bigger,[CCFadeOut actionWithDuration:0.5f], nil];
-    event.finishAnimate = pulseSequence;
+    event.finishAction = pulseSequence;
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
     [projectile.projectileEvents addObject:event];

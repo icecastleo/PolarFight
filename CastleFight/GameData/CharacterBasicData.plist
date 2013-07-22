@@ -141,7 +141,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack</key>
-			<string>MeleeAttackSkill</string>
+			<string>RangeAttackSkill</string>
 		</dict>
 	</dict>
 	<key>003</key>
