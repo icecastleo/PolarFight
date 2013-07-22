@@ -8,48 +8,7 @@
 
 #import "ProjectileEvent.h"
 
-@implementation ProjectileSprite
-
--(void)setRotation:(float)rotation {
-    [super setRotation:rotation];
-    
-    NSAssert(_direction, @"You should have a direction component!");
-    
-    int directionDegrees = _direction.spriteDirection - rotation;
-    int radians = CC_DEGREES_TO_RADIANS(directionDegrees);
-    
-    [_direction setVelocity:ccpForAngle(radians)];
-}
-
-@end
-
 @implementation ProjectileEvent
-
--(id)initWithSpriteFile:(NSString *)filename direction:(SpriteDirection)spriteDirection {
-    if (self = [super init]) {
-        CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(spriteDirection));
-        
-        _direction = [[DirectionComponent alloc] initWithType:kDirectionTypeAllSides velocity:velocity];
-        _direction.spriteDirection = spriteDirection;
-        
-        _sprite = [ProjectileSprite spriteWithFile:filename];
-        _sprite.direction = _direction;
-    }
-    return self;
-}
-
--(id)initWithSpriteFrameName:(NSString *)spriteFrameName direction:(SpriteDirection)spriteDirection {
-    if (self = [super init]) {
-        CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(spriteDirection));
-        
-        _direction = [[DirectionComponent alloc] initWithType:kDirectionTypeAllSides velocity:velocity];
-        _direction.spriteDirection = spriteDirection;
-        
-        _sprite = [ProjectileSprite spriteWithSpriteFrameName:spriteFrameName];
-        _sprite.direction = _direction;
-    }
-    return self;
-}
 
 -(CCAction *)createProjectileAction {
     if (_type == kProjectileTypeLine) {
@@ -61,14 +20,12 @@
 }
 
 -(CCAction *)lineAction {
-    
-    void(^block)() = ^{
-        _direction.velocity = ccpSub(_finishPosition, _startPosition);
-        _sprite.rotation = _direction.cocosDegrees;
-    };
+    float radians = ccpToAngle(ccpSub(_finishPosition, _startPosition));
+    int degrees = CC_RADIANS_TO_DEGREES(radians);
+    int cocosDegrees = _spriteDirection - degrees;
     
     CCAction *action = [CCSequence actions:
-                        [CCCallBlock actionWithBlock:block],
+                        [CCRotateTo actionWithDuration:0.0 angle:cocosDegrees],
                         [CCMoveBy actionWithDuration:_duration position:ccpSub(_finishPosition, _startPosition)],
                         nil];
     
@@ -82,24 +39,25 @@
     float fy = _finishPosition.y;
     
     int height = (fx-sx)/2 + (fy-sy)/2;
+    // Limit parabola path
+    height = MIN(height, kMapPathHeight - kMapPathRandomHeight);
     
     CCJumpBy *moveAction = [CCJumpBy actionWithDuration:_duration position:ccpSub(_finishPosition, _startPosition) height:height jumps:1];
     
     CGFloat startDegrees = _startPosition.x > _finishPosition.x ? 135 : 45;
-    CGFloat finishDegrees = _startPosition.x > _finishPosition.x ? 225 : 315;
-    
     // To cocos2d degrees
-    startDegrees = _direction.spriteDirection - startDegrees;
-    finishDegrees = _direction.spriteDirection - finishDegrees;
+    startDegrees = _spriteDirection - startDegrees;
     
-    void(^block)() = ^{
-        _sprite.rotation = startDegrees;
-    };
+    CGFloat byDegrees = _startPosition.x > _finishPosition.x ? -90 : 90;
     
-    CCRotateTo *rotateAction =[CCRotateTo actionWithDuration:_duration angle:finishDegrees];
+//    void(^block)() = ^{
+//        _sprite.rotation = startDegrees;
+//    };
+    
+    CCRotateBy *rotateAction =[CCRotateBy actionWithDuration:_duration angle:byDegrees];
     
     CCAction *action = [CCSequence actions:
-                        [CCCallBlock actionWithBlock:block],
+                        [CCRotateTo actionWithDuration:0.0 angle:startDegrees],
                         [CCSpawn actions:rotateAction, moveAction, nil],
                         nil];
     

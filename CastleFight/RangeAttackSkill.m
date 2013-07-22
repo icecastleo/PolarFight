@@ -35,16 +35,21 @@
     
     CGPoint startPosition = [render.sprite.parent convertToWorldSpace:render.sprite.position];
     startPosition = [render.node.parent convertToNodeSpace:startPosition];
-    CGPoint endPosition = [targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position];
-    endPosition = [targetRender.node.parent convertToNodeSpace:endPosition];
+    CGPoint finishPosition = [targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position];
+    finishPosition = [targetRender.node.parent convertToNodeSpace:finishPosition];
 
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:@"arrow.png" direction:kSpriteDirectionDown];
+    ProjectileEvent *event = [[ProjectileEvent alloc] init];
+    
+    CCSprite *sprite = [CCSprite spriteWithFile:@"arrow.png"];
+    event.sprite = sprite;
+    event.spriteDirection = kSpriteDirectionDown;
+    
     event.startPosition = startPosition;
-    event.finishPosition = endPosition;
+    event.finishPosition = ccp(finishPosition.x, startPosition.y);
     event.type = kProjectileTypeParabola;
     event.duration = 1.5;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:event.sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:event.sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:event.sprite.boundingBox.size.height],kRangeKeyWidth,[NSNumber numberWithInt:event.sprite.boundingBox.size.width],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
     
     event.range = [Range rangeWithParameters:dictionary];
     

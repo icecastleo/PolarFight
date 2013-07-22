@@ -38,7 +38,11 @@ const static int kRadius = 80;
     Entity *target = [[range getEffectEntities] lastObject];
     RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:@"weapon.png" direction:kSpriteDirectionDown];
+    ProjectileEvent *event = [[ProjectileEvent alloc] init];
+    
+    CCSprite *sprite = [CCSprite spriteWithFile:@"weapon.png"];
+    event.sprite = sprite;
+    event.spriteDirection = kSpriteDirectionDown;
     
     event.type = kProjectileTypeLine;
     

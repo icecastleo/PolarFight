@@ -27,13 +27,15 @@
     CGPoint startPoint = startValue.CGPointValue;    
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
 
-    
-    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:[images objectForKey:@"projectileImage"] direction:kSpriteDirectionDown];
-    event.type = kProjectileTypeInstant;
-    event.startPosition = startPoint;
+    ProjectileEvent *event = [[ProjectileEvent alloc] init];
     
     CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
+    event.sprite = sprite;
+    event.spriteDirection = kSpriteDirectionDown;
     
+    event.type = kProjectileTypeInstant;
+    event.startPosition = startPoint;
+        
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width*2],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height*2],kRangeKeyHeight,nil];
     event.range = [Range rangeWithParameters:dictionary];
     

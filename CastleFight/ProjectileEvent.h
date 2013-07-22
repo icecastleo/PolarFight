@@ -16,16 +16,10 @@ typedef enum {
     kProjectileTypeParabola,
 } ProjectileType;
 
-@interface ProjectileSprite : CCSprite
-
-@property DirectionComponent *direction;
-
-@end
-
 @interface ProjectileEvent : NSObject
 
-@property (readonly) ProjectileSprite *sprite;
-@property (readonly) DirectionComponent *direction;
+@property CCSprite *sprite;
+@property SpriteDirection spriteDirection;
 
 @property ProjectileType type;
 
@@ -40,9 +34,6 @@ typedef enum {
 @property (strong) void (^block)(NSArray *entities, CGPoint position);
 
 @property BOOL isPiercing;
-
--(id)initWithSpriteFile:(NSString*)filename direction:(SpriteDirection)spriteDirection;
--(id)initWithSpriteFrameName:(NSString*)spriteFrameName direction:(SpriteDirection)spriteDirection;
 
 -(CCAction *)createProjectileAction;
 

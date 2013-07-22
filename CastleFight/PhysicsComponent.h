@@ -18,6 +18,8 @@
 @property (readonly) PhysicsRoot *root;
 
 @property DirectionComponent *direction;
+// Direction's velocity will sync with node rotation
+@property CCNode *directionNode;
 
 -(id)initWithPhysicsSystem:(PhysicsSystem *)system renderComponent:(RenderComponent *)render;
 

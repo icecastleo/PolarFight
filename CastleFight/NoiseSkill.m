@@ -9,7 +9,6 @@
 #import "NoiseSkill.h"
 #import "AttackEvent.h"
 #import "ProjectileComponent.h"
-#import "ProjectileEvent.h"
 #import "RenderComponent.h"
 #import "DirectionComponent.h"
 #import "AttackerComponent.h"

@@ -63,7 +63,7 @@ static NSMutableArray *yInterval;
     b2Body *spriteBody = physicsSystem.world->CreateBody(&spriteBodyDef);
     
     b2PolygonShape spriteShape;
-    spriteShape.SetAsBox((float)(radius + render.sprite.boundingBox.size.width/2)/PTM_RATIO/2, kMapPathHeight/PTM_RATIO);
+    spriteShape.SetAsBox((float)(radius + render.sprite.boundingBox.size.width/2)/PTM_RATIO/2, (float)kMapPathHeight/PTM_RATIO);
     
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;

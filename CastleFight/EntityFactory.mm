@@ -389,14 +389,20 @@
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team {
     Entity *entity = [_entityManager createEntity];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
-    [entity addComponent:event.direction];
+    
+    CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(event.spriteDirection));
+    
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeAllSides velocity:velocity];
+    direction.spriteDirection = event.spriteDirection;
+    [entity addComponent:direction];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:event.sprite];
     [entity addComponent:render];
     
     if (_physicsSystem) {
         PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
-        physics.direction = event.direction;
+        physics.direction = direction;
+        physics.directionNode = render.node;
         [entity addComponent:physics];
         
         event.range.owner = entity;

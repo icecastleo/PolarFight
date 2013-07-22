@@ -77,11 +77,11 @@
                     event.block(temp, event.range.effectPosition);
                 };
             }
-            
-            if ([projectileAction isDone]) {
-                // finish
-                [self finishWithEntity:entity];
-            }
+        }
+        
+        if ([projectileAction isDone]) {
+            // finish
+            [self finishWithEntity:entity];
         }
     } else if (event.startAction) {
         if ([event.startAction isDone]) {

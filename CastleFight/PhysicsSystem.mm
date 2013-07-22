@@ -187,7 +187,15 @@ const static int kPositionIterations = 3;
         
         // Rotate root
         if (direction) {
-            physics.root.rotation = physics.direction.cocosDegrees;
+            CCNode *directionNode = physics.directionNode;
+            
+            if (directionNode) {
+                int degrees = direction.spriteDirection - directionNode.rotation;
+                float radians = CC_DEGREES_TO_RADIANS(degrees);
+                direction.velocity = ccpForAngle(radians);
+            }
+            
+            physics.root.rotation = direction.cocosDegrees;
         }
         
         for (PhysicsNode *node in physics.root.children) {

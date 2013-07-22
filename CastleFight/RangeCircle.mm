@@ -39,7 +39,7 @@
     b2Body *spriteBody = physicsSystem.world->CreateBody(&spriteBodyDef);
     
     b2CircleShape spriteShape;
-    spriteShape.m_radius = radius/PTM_RATIO;
+    spriteShape.m_radius = (float)radius/PTM_RATIO;
    
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;
