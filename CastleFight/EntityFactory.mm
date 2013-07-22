@@ -92,7 +92,7 @@
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
-    DirectionComponent *direction = [[DirectionComponent alloc] initWithVelocity:ccp(team == 1 ? 1 : -1, 0)];
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)];
     // FIXME: Change all character asset to right
     direction.spriteDirection = (team == 1 ? kSpriteDirectionRight : kSpriteDirectionLeft);
     [entity addComponent:direction];
@@ -107,7 +107,7 @@
     
     CCNode *sprite;
 
-    //hero spine
+    // hero spine
     if ([cid intValue]/100 == 2) {
         CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
         [animationNode updateWorldTransform];
@@ -190,7 +190,7 @@
         [entity addComponent:auraComponent];
     }
     
-    //hero
+    // hero
     if ([cid intValue]/100 == 2) {
         
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
@@ -205,7 +205,6 @@
         [entity addComponent:pathCom];
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
-        
     } else {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
@@ -279,7 +278,7 @@
     
     [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     
-    [entity addComponent:[[DirectionComponent alloc] initWithVelocity:ccp(team == 1 ? 1 : -1, 0)]];
+    [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)]];
     
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
@@ -390,20 +389,14 @@
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team {
     Entity *entity = [_entityManager createEntity];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
-
-    CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(event.spriteDirection));
-    
-    DirectionComponent *direction = [[DirectionComponent alloc] initWithVelocity:velocity];
-    direction.spriteDirection = event.spriteDirection;
-    [entity addComponent:direction];
-    
+    [entity addComponent:event.direction];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:event.sprite];
     [entity addComponent:render];
     
     if (_physicsSystem) {
         PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
-        physics.direction = direction;
+        physics.direction = event.direction;
         [entity addComponent:physics];
         
         event.range.owner = entity;

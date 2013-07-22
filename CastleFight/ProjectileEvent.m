@@ -8,7 +8,48 @@
 
 #import "ProjectileEvent.h"
 
+@implementation ProjectileSprite
+
+-(void)setRotation:(float)rotation {
+    [super setRotation:rotation];
+    
+    NSAssert(_direction, @"You should have a direction component!");
+    
+    int directionDegrees = _direction.spriteDirection - rotation;
+    int radians = CC_DEGREES_TO_RADIANS(directionDegrees);
+    
+    [_direction setVelocity:ccpForAngle(radians)];
+}
+
+@end
+
 @implementation ProjectileEvent
+
+-(id)initWithSpriteFile:(NSString *)filename direction:(SpriteDirection)spriteDirection {
+    if (self = [super init]) {
+        CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(spriteDirection));
+        
+        _direction = [[DirectionComponent alloc] initWithType:kDirectionTypeAllSides velocity:velocity];
+        _direction.spriteDirection = spriteDirection;
+        
+        _sprite = [ProjectileSprite spriteWithFile:filename];
+        _sprite.direction = _direction;
+    }
+    return self;
+}
+
+-(id)initWithSpriteFrameName:(NSString *)spriteFrameName direction:(SpriteDirection)spriteDirection {
+    if (self = [super init]) {
+        CGPoint velocity = ccpForAngle(CC_DEGREES_TO_RADIANS(spriteDirection));
+        
+        _direction = [[DirectionComponent alloc] initWithType:kDirectionTypeAllSides velocity:velocity];
+        _direction.spriteDirection = spriteDirection;
+        
+        _sprite = [ProjectileSprite spriteWithSpriteFrameName:spriteFrameName];
+        _sprite.direction = _direction;
+    }
+    return self;
+}
 
 -(CCAction *)createProjectileAction {
     if (_type == kProjectileTypeLine) {
@@ -22,10 +63,8 @@
 -(CCAction *)lineAction {
     
     void(^block)() = ^{
-        // FIXME: Better structure?
-        DirectionComponent *direction = [[DirectionComponent alloc] initWithVelocity:ccpSub(_finishPosition, _startPosition)];
-        direction.spriteDirection = _spriteDirection;
-        _sprite.rotation = direction.cocosDegrees;
+        _direction.velocity = ccpSub(_finishPosition, _startPosition);
+        _sprite.rotation = _direction.cocosDegrees;
     };
     
     CCAction *action = [CCSequence actions:
@@ -49,9 +88,9 @@
     CGFloat startDegrees = _startPosition.x > _finishPosition.x ? 135 : 45;
     CGFloat finishDegrees = _startPosition.x > _finishPosition.x ? 225 : 315;
     
-    // To cocos degrees
-    startDegrees = _spriteDirection - startDegrees;
-    finishDegrees = _spriteDirection - finishDegrees;
+    // To cocos2d degrees
+    startDegrees = _direction.spriteDirection - startDegrees;
+    finishDegrees = _direction.spriteDirection - finishDegrees;
     
     void(^block)() = ^{
         _sprite.rotation = startDegrees;

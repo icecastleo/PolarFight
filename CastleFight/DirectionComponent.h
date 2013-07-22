@@ -34,12 +34,12 @@ typedef enum {
 
 @interface DirectionComponent : Component
 
--(id)initWithVelocity:(CGPoint)velocity;
+-(id)initWithType:(DirectionType)type velocity:(CGPoint)velocity;
 
 // Default face or attack degree
 @property int spriteDirection;
 
-@property DirectionType type;
+@property (readonly) DirectionType type;
 @property (nonatomic) CGPoint velocity;
 @property (readonly) Direction direction;
 

@@ -134,7 +134,7 @@ const static int kPositionIterations = 3;
 //        [self addGroundBody];
         
 #if kPhisicalDebugDraw
-        [entityFactory.mapLayer addChild:debugLayer];
+        [entityFactory.mapLayer addChild:debugLayer z:NSIntegerMax];
 #endif
     }
     return self;

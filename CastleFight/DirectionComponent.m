@@ -12,14 +12,20 @@
 
 @implementation DirectionComponent
 
--(id)initWithVelocity:(CGPoint)velocity {
+-(id)initWithType:(DirectionType)type velocity:(CGPoint)velocity {
     if (self = [super init]) {
-        _spriteDirection = kSpriteDirectionNone;
+        if (type == kDirectionTypeLeftRight) {
+            NSAssert(velocity.x != 0, @"Wrong velocity!");
+        } else if (type == kDirectionTypeUpDown) {
+            NSAssert(velocity.y != 0, @"Wrong velocity!");
+        } else if (type == kDirectionTypeFourSides) {
+            NSAssert(velocity.x != 0 || velocity.y != 0, @"Wrong velocity");
+        }
         
-        _type = kDirectionTypeLeftRight;
-        
-        NSAssert(velocity.x != 0 || velocity.y != 0, @"This is not a legal direction velocity!");
+        _type = type;
         self.velocity = velocity;
+        
+        _spriteDirection = kSpriteDirectionNone;
     }
     return self;
 }
@@ -31,20 +37,24 @@
     
     switch (_type) {
         case kDirectionTypeLeftRight:
-            _velocity = ccp(velocity.x, 0);
+            if (velocity.x != 0) {
+               _velocity = ccp(velocity.x, 0);
+            }
             break;
         case kDirectionTypeUpDown:
-            _velocity = ccp(0, velocity.y);
+            if (velocity.y != 0) {
+                _velocity = ccp(0, velocity.y);
+            }
             break;
         case kDirectionTypeFourSides:
-            if(fabsf(_velocity.x) >= fabsf(_velocity.y)) {
-                if(_velocity.x > 0) {
+            if(fabsf(velocity.x) >= fabsf(velocity.y)) {
+                if(velocity.x > 0) {
                     _velocity = ccp(1, 0);
                 } else {
                     _velocity = ccp(-1, 0);
                 }
             } else {
-                if(_velocity.y > 0) {
+                if(velocity.y > 0) {
                     _velocity = ccp(0, 1);
                 } else {
                     _velocity = ccp(0, -1);
