@@ -38,11 +38,7 @@ const static int kRadius = 80;
     Entity *target = [[range getEffectEntities] lastObject];
     RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
     
-    ProjectileEvent *event = [[ProjectileEvent alloc] init];
-    
-    CCSprite *sprite = [CCSprite spriteWithFile:@"weapon.png"];
-    event.sprite = sprite;
-    event.spriteDirection = kSpriteDirectionDown;
+    ProjectileEvent *event = [[ProjectileEvent alloc] initWithSpriteFile:@"weapon.png" direction:kSpriteDirectionDown];
     
     event.type = kProjectileTypeLine;
     
@@ -56,7 +52,7 @@ const static int kRadius = 80;
     
     event.duration = 0.25;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:event.sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:event.sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
     
     event.range = [Range rangeWithParameters:dictionary];
     

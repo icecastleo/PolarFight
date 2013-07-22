@@ -38,11 +38,12 @@
     if (projectileAction) {
         [render.node runAction:projectileAction];
         
-        if (event.startAnimate) {
-            [render.sprite runAction:[CCRepeatForever actionWithAction:event.startAnimate]];
+        if (event.startAction) {
+            [render.sprite runAction:event.startAction];
         }
-    } else if (event.startAnimate) {
-        [render.sprite runAction:event.startAnimate];
+    } else if (event.startAction) {
+        NSAssert([event.startAction isKindOfClass:[CCFiniteTimeAction class]], @"Illegal action type!");
+        [render.sprite runAction:event.startAction];
     }
 }
 
@@ -82,8 +83,8 @@
                 [self finishWithEntity:entity];
             }
         }
-    } else if (event.startAnimate) {
-        if ([event.startAnimate isDone]) {
+    } else if (event.startAction) {
+        if ([event.startAction isDone]) {
             // finish
             if(event.block) {
                 event.block([event.range getEffectEntities], event.range.effectPosition);
@@ -107,10 +108,10 @@
     
     [entity removeSelf];
     
-    if (event.finishAnimate) {
+    if (event.finishAction) {
         [render.sprite runAction:
          [CCSequence actions:
-          event.finishAnimate,
+          event.finishAction,
           [CCCallBlock actionWithBlock:^{
              [render.node removeFromParentAndCleanup:YES];
          }], nil]];
