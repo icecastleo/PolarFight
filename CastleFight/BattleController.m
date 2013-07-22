@@ -258,16 +258,16 @@ __weak static BattleController* currentInstance;
         
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
+        //move and projectile event uses maplayer location
+        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {
             [pathCom.path removeAllObjects];
             //move uses maplayer location
-            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                // projectile event uses world location.
-                [path addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+                // projectile event uses maplayer location.
                 MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
                     [magicCom activeWithPath:path];

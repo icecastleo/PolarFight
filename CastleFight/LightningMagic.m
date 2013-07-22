@@ -24,43 +24,39 @@
     
     NSArray *path = [self.magicInformation objectForKey:@"path"];
     NSValue *startValue = [path objectAtIndex:0];
-    
+    CGPoint startPoint = startValue.CGPointValue;
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
     
-    //FIXME: image's anchor
-    UIImage *image = [UIImage imageNamed:[images objectForKey:@"projectileImage"]];
-    CGPoint startPoint = ccp(startValue.CGPointValue.x,startValue.CGPointValue.y+image.size.width/5);
     
-    //FIXME: effectRange doesn't have a correct owner.
-    NSMutableDictionary *effectRangeDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeCircle,kRangeKeyType,@10,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
-    Range *effectRange = [Range rangeWithParameters:effectRangeDictionary];
+    ProjectileEvent *event = [[ProjectileEvent alloc] init];
+    event.spriteDirection = kSpriteDirectionDown;
+    event.type = kProjectileTypeInstant;
+    event.startPosition = startPoint;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeProjectile,kRangeKeyType,[images objectForKey:@"projectileImage"],kRangeKeySpriteFile,effectRange,kRangeKeyEffectRange,nil];
+    CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
+    event.sprite = sprite;
     
-    ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
-    
-//    effectRange.owner = projectileRange.owner;
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:sprite.boundingBox.size.height/2],kRangeKeyDistance,nil];
+    event.range = [Range rangeWithParameters:dictionary];
     
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
                                  [self.magicInformation objectForKey:@"damage"]];
     
-//    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPoint endWorldPosition:ccp(startPoint.x, startPoint.y-0.1f) time:0.0f block:^(NSArray *entities, CGPoint position) {
-//        
-//        for (Entity *entity in entities) {
-//            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
-//            event.position = position;
-//            AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
-//            [attacker.attackEventQueue addObject:event];
-//            break;
-//        }
-//        
-//    }];
-//    
-//    CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:0.5f], nil];
-//    event.finishAction = pulseSequence;
-//    
-//    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
-//    [projectile.projectileEventQueue addObject:event];
+    void(^block)(NSArray *entities, CGPoint position) = ^(NSArray *entities, CGPoint position) {
+        for (Entity *entity in entities) {
+            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
+            event.position = position;
+            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+            [attack.attackEventQueue addObject:event];
+        }
+    };
+    event.block = block;
+    
+    CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:5.5f], nil];
+    event.finishAnimate = pulseSequence;
+    
+    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
+    [projectile.projectileEvents addObject:event];
 }
 
 @end

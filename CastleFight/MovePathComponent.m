@@ -56,8 +56,8 @@
         return NO;
     }
     
-    /*/ //another only compare x.
-    if (fabs(aPosition.x - bPosition.x) < 10) {
+    /*/ //another only compare x and y limit.
+    if (fabs(aPosition.x - bPosition.x) < 10 && fabs(aPosition.y - bPosition.y) < 10) {
         return YES;
     }else {
         return NO;
