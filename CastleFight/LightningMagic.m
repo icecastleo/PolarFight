@@ -37,9 +37,9 @@
     
     event.startPosition = ccp(startPoint.x,startPoint.y+sprite.boundingBox.size.height/2);
     
-    int width = sprite.boundingBox.size.width/10;
-    int height = sprite.boundingBox.size.height/2;
-    int distance = sprite.boundingBox.size.height/2 - width;
+    int width = sprite.boundingBox.size.width/2;
+    int height = sprite.boundingBox.size.height/8;
+    int distance = sprite.boundingBox.size.height/2 - height/2;
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:distance],kRangeKeyDistance,nil];
     event.range = [Range rangeWithParameters:dictionary];

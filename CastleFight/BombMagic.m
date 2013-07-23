@@ -35,8 +35,11 @@
     
     event.type = kProjectileTypeInstant;
     event.startPosition = startPoint;
-        
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width*2],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height*2],kRangeKeyHeight,nil];
+    
+    int width = sprite.boundingBox.size.width*2;
+    int height = sprite.boundingBox.size.height*2;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,nil];
     event.range = [Range rangeWithParameters:dictionary];
     
     
