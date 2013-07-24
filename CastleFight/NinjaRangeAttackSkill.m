@@ -56,7 +56,10 @@ const static int kRadius = 80;
     
     event.duration = 0.25;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:event.sprite.boundingBox.size.width],kRangeKeyWidth,[NSNumber numberWithInt:event.sprite.boundingBox.size.height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    int width = sprite.boundingBox.size.width;
+    int height = sprite.boundingBox.size.height;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
     
     event.range = [Range rangeWithParameters:dictionary];
     

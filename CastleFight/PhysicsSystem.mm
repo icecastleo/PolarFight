@@ -13,6 +13,8 @@
 #import "PhysicsComponent.h"
 #import "PhysicsNode.h"
 
+#pragma mark ContactObject
+
 struct MyContact {
     b2Fixture *fixtureA;
     b2Fixture *fixtureB;
@@ -30,6 +32,9 @@ struct MyContact {
         contact->GetWorldManifold(manifold);
     }
 };
+ 
+#pragma mark -
+#pragma mark ContactLinsener
     
 class MyContactListener : public b2ContactListener {
         
@@ -72,6 +77,9 @@ void MyContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
 }
     
+#pragma mark -
+#pragma mark DebugDrawLayer
+    
 @implementation PhysicsDebugDrawLayer
 
 -(id)initWithPhysicsWorld:(b2World *)aWorld {
@@ -98,6 +106,9 @@ void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* im
 
 @end
 
+#pragma mark -
+#pragma mark PhysicsSystem
+    
 @implementation PhysicsSystem
 
 const static int kVelocityIterations = 8;
@@ -178,6 +189,8 @@ const static int kPositionIterations = 3;
 	groundBody->CreateFixture(&groundBox,0);
 }
 
+#pragma mark system update
+
 -(void)update:(float)delta {
     NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[PhysicsComponent class]];
     
@@ -198,15 +211,15 @@ const static int kPositionIterations = 3;
             physics.root.rotation = direction.cocosDegrees;
         }
         
+        // Update physics body
         for (PhysicsNode *node in physics.root.children) {
-            
             CGPoint position = [node.parent convertToWorldSpace:node.position];
             position = [self.entityFactory.mapLayer convertToNodeSpace:position];
             
+            int degrees = -direction.cocosDegrees;
+            
             if (direction) {
-                // Phycics body's radians control by direction
-                float radians = direction.radians;
-                node.b2Body->SetTransform(b2Vec2(position.x / PTM_RATIO, position.y / PTM_RATIO), radians);
+                node.b2Body->SetTransform(b2Vec2(position.x / PTM_RATIO, position.y / PTM_RATIO), CC_DEGREES_TO_RADIANS(degrees));
             } else {
                 node.b2Body->SetTransform(b2Vec2(position.x / PTM_RATIO, position.y / PTM_RATIO), node.b2Body->GetAngle());
             }
