@@ -2367,7 +2367,7 @@
 			<key>projectileImage</key>
 			<string>nicefire.png</string>
 		</dict>
-		<key>information</key>
+		<key>InformationComponent</key>
 		<dict>
 			<key>name</key>
 			<string>BombMagic</string>
@@ -2411,7 +2411,7 @@
 			<key>projectileImage</key>
 			<string>LightningMagic.png</string>
 		</dict>
-		<key>information</key>
+		<key>InformationComponent</key>
 		<dict>
 			<key>name</key>
 			<string>LightningMagic</string>

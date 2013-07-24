@@ -67,6 +67,7 @@
 #define kShadowHeightScale 0.125
 
 #define kDrawPathTag 9876
+#define kDrawPathRangeSprite 9877
 
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"

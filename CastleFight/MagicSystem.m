@@ -51,11 +51,10 @@
         }
         
         if (magicCom.canActive && magicCom.currentCooldown <=0 && isCostSufficient) {
-            Magic* magic = [[NSClassFromString(magicCom.name) alloc] init];
             NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:magicCom.path,@"path", magicCom.damage,@"damage",magicCom.images,@"images",nil];
             
+            Magic* magic = [[NSClassFromString(magicCom.name) alloc] initWithMagicInformation:magicInfo];
             magic.owner = magicCom.spellCaster;
-            [magic setMagicInformation:magicInfo];
             magic.map = self.map;
             [magic active];
             

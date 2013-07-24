@@ -16,9 +16,21 @@
 
 @implementation LightningMagic
 
+-(id)initWithMagicInformation:(NSDictionary *)magicInfo {
+    if (self = [super init]) {
+        self.magicInformation = magicInfo;
+        NSDictionary *images = [self.magicInformation objectForKey:@"images"];
+        CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
+        
+        int width = sprite.boundingBox.size.height/2;
+        int height = sprite.boundingBox.size.width/10;
+        self.rangeSize = CGSizeMake(width, height);
+    }
+    return self;
+}
+
 -(void)active {
     if (!self.map || !self.magicInformation) {
-        NSLog(@"return");
         return;
     }
     
@@ -37,11 +49,9 @@
     
     event.startPosition = ccp(startPoint.x,startPoint.y+sprite.boundingBox.size.height/2);
     
-    int width = sprite.boundingBox.size.width/10;
-    int height = sprite.boundingBox.size.height/2;
-    int distance = sprite.boundingBox.size.height/2 - width;
+    int distance = self.rangeSize.width - self.rangeSize.height/2;
     
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:distance],kRangeKeyDistance,nil];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:self.rangeSize.height],kRangeKeyWidth,[NSNumber numberWithInt:self.rangeSize.width],kRangeKeyHeight,@1,kRangeKeyTargetLimit,[NSNumber numberWithInt:distance],kRangeKeyDistance,nil];
     event.range = [Range rangeWithParameters:dictionary];
     
     AttackerComponent *attack = [[AttackerComponent alloc] initWithAttackAttribute:
@@ -57,7 +67,7 @@
     };
     event.block = block;
     
-    CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:5.5f], nil];
+    CCSequence *pulseSequence = [CCSequence actions:[CCFadeOut actionWithDuration:0.5f], nil];
     event.finishAction = pulseSequence;
     
     ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];

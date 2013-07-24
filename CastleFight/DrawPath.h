@@ -14,6 +14,7 @@
     CGPoint end;
 }
 
-@property NSMutableArray *path;
+@property (nonatomic) NSMutableArray *path;
+@property (nonatomic) CGSize drawSize;
 
 @end

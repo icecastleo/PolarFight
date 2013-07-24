@@ -350,7 +350,7 @@
     NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
     
     float cooldown = [[characterData objectForKey:@"cooldown"] floatValue];
-    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"information"]];
+    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"InformationComponent"]];
     
     //FIXME: change to correct name
     NSString *magicButtonName = [NSString stringWithFormat:@"%@_button.png",[information objectForKey:@"name"]];

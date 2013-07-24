@@ -7,6 +7,8 @@
 //
 
 #import "MagicComponent.h"
+#import "Attribute.h"
+#import "Magic.h"
 
 @implementation MagicComponent
 
@@ -15,6 +17,10 @@
         _damage = damage;
         _name = name;
         _images = images;
+        
+        NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys: damage,@"damage",images,@"images",nil];
+        Magic* magic = [[NSClassFromString(name) alloc] initWithMagicInformation:magicInfo];
+        _rangeSize = magic.rangeSize;
     }
     return self;
 }

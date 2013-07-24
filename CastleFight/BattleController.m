@@ -211,21 +211,9 @@ __weak static BattleController* currentInstance;
                 self.selectedEntity = entity;
                 [selectCom select];
                 break;
-            } else if(renderCom.isSpineNode) {
-                if (CGRectContainsPoint(renderCom.node.boundingBox, [renderCom.node.parent convertToNodeSpace:touchLocation])) {
-                    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-                    if (!selectCom.canSelect) {
-                        continue;
-                    }
-                    self.selectedEntity = entity;
-                    [selectCom select];
-                    break;
-                }
             }
         }
     }
-    
-    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
     // move
     if (!self.selectedEntity) {
@@ -234,27 +222,26 @@ __weak static BattleController* currentInstance;
     }else {
         if (recognizer.state == UIGestureRecognizerStateChanged) {
             recognizer.cancelsTouchesInView = YES;
-            
-            NSMutableArray *drawPath = [[NSMutableArray alloc] init];
-            [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
-            [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
-            
-            DrawPath *line = [DrawPath node];
-            line.path = drawPath;
-            
-            [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-            [statusLayer addChild: line z:0 tag:kDrawPathTag];
+            [self drawSelectedRange:touchLocation];
         }
     }
     
     // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
+        [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
         [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
         
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
-        [selectCom unSelected];
-        
         MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+        MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+        
+//        if (magicCom) { // Hero hold this until next one is selected.
+//            [selectCom unSelected];
+//            self.selectedEntity = nil;
+//        }
+
+        [selectCom unSelected];
+        self.selectedEntity = nil;
         
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
@@ -263,20 +250,60 @@ __weak static BattleController* currentInstance;
         
         if (pathCom) {
             [pathCom.path removeAllObjects];
-            //move uses maplayer location
             [pathCom.path addObjectsFromArray:path];
         }else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                // projectile event uses maplayer location.
-                MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
                 if (magicCom) {
                     [magicCom activeWithPath:path];
                 }
             }
         }
-        
         self.selectedEntity = nil;
     }
+}
+
+-(void)drawSelectedRange:(CGPoint)touchLocation {
+    
+    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
+    
+    NSMutableArray *drawPath = [[NSMutableArray alloc] init];
+    [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
+    [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+    
+    DrawPath *line = [DrawPath node];
+    line.path = drawPath;
+    
+    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+    
+    if (magicCom) {
+        line.drawSize = magicCom.rangeSize;
+    }else { //FIXME: fix correct size.
+        line.drawSize = CGSizeMake(30, 30);
+    }
+    
+    // draw range frame
+    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:@"rangeFrame_1.png"];
+    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:@"rangeFrame_2.png"];
+    
+    rangeFrame1.scaleX = line.drawSize.width / rangeFrame1.contentSize.width;
+    rangeFrame1.scaleY = line.drawSize.height / rangeFrame1.contentSize.height;
+    rangeFrame1.position = touchLocation;
+    rangeFrame2.anchorPoint = ccp(0,0);
+    
+    [rangeFrame1 addChild:rangeFrame2];
+    
+    [rangeFrame2 setOpacity:1.0];
+    CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
+    CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
+    CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
+    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
+    [rangeFrame2 runAction:repeat];
+    
+    
+    [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
+    [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+    [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
+    [statusLayer addChild:line z:0 tag:kDrawPathTag];
 }
 
 @end

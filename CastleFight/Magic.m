@@ -10,6 +10,12 @@
 
 @implementation Magic
 
+-(id)initWithMagicInformation:(NSDictionary *)magicInfo {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
+    return nil;
+}
+
 -(void)active {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];

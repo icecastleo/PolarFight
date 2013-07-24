@@ -17,6 +17,9 @@
 @property (nonatomic) Entity *owner;
 @property (nonatomic) NSDictionary *magicInformation;
 
+@property (nonatomic) CGSize rangeSize;
+
+-(id)initWithMagicInformation:(NSDictionary *)magicInfo;
 -(void)active;
 
 @end

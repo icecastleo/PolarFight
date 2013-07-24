@@ -16,9 +16,18 @@
 
 @implementation BombMagic
 
+-(id)initWithMagicInformation:(NSDictionary *)magicInfo {
+    if (self = [super init]) {
+        self.magicInformation = magicInfo;
+        NSDictionary *images = [self.magicInformation objectForKey:@"images"];
+        CCSprite *sprite = [CCSprite spriteWithFile:[images objectForKey:@"projectileImage"]];
+        self.rangeSize = CGSizeMake(sprite.boundingBox.size.width*2, sprite.boundingBox.size.width*2);
+    }
+    return self;
+}
+
 -(void)active {
     if (!self.map || !self.magicInformation) {
-        NSLog(@"return");
         return;
     }
     
@@ -35,8 +44,8 @@
     
     event.type = kProjectileTypeInstant;
     event.startPosition = startPoint;
-        
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:sprite.boundingBox.size.width*2],kRangeKeyWidth,[NSNumber numberWithInt:sprite.boundingBox.size.height*2],kRangeKeyHeight,nil];
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:self.rangeSize.width],kRangeKeyWidth,[NSNumber numberWithInt:self.rangeSize.height],kRangeKeyHeight,nil];
     event.range = [Range rangeWithParameters:dictionary];
     
     
