@@ -96,4 +96,17 @@
     [self addEntity:entity toPosition:position];
 }
 
+-(BOOL)canExecuteMagicInThisArea:(CGPoint)position {
+    int boundaryTop = kMapPathFloor + kMapPathHeight * kMapPathMaxLine;
+    int boundaryBottom = kMapPathFloor;
+    int boundaryLeft = 0;
+    int boundaryRight = self.boundaryX;
+    
+    if (position.x > boundaryLeft && position.x < boundaryRight   && position.y > boundaryBottom && position.y < boundaryTop) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end

@@ -285,8 +285,16 @@ __weak static BattleController* currentInstance;
         line.drawSize = CGSizeMake(30, 30);
     }
     
+    NSString *spriteName;
+    
+    if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+        spriteName = @"rangeFrame_1.png";
+    }else {
+        spriteName = @"forbidden_sign.png";
+    }
+    
     // draw range frame
-    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:@"rangeFrame_1.png"];
+    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:spriteName];
     CCSprite *rangeFrame2 = [CCSprite spriteWithFile:@"rangeFrame_2.png"];
     
     rangeFrame1.scaleX = line.drawSize.width / rangeFrame1.contentSize.width;
@@ -333,7 +341,7 @@ __weak static BattleController* currentInstance;
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    if (touch.tapCount == 1 && [mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && fingerOneHash == [touch hash]){
+    if (touch.tapCount == 1 && fingerOneHash == [touch hash]){
         
         if (self.selectedEntity) {
             [self drawSelectedRange:touchLocation];

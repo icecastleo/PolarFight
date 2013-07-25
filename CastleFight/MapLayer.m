@@ -198,8 +198,9 @@ const static int pathSizeHeight = 40;
 }
 
 -(BOOL)canExecuteMagicInThisArea:(CGPoint)position {
-    //TODO: add condition
-    return YES;
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
+    return NO;
 }
 
 @end
