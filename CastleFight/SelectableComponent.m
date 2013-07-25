@@ -33,9 +33,9 @@
 }
 
 -(void)select {
-    if (self.selected) {
-        [self unSelected];
-    }
+    if (self.selected)
+        return;
+    
     self.selected = YES;
     RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
     
@@ -45,6 +45,9 @@
 }
 
 -(void)unSelected {
+    if (!self.selected)
+        return;
+
     self.selected = NO;
     RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
     [render.node removeChildByTag:kSelectedImageTag cleanup:YES];

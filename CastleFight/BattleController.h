@@ -14,7 +14,7 @@
 #import "BattleDataObject.h"
 @class BattleStatusLayer;
 
-@interface BattleController : CCScene {
+@interface BattleController : CCScene <CCTouchOneByOneDelegate> {
     MapLayer *mapLayer;
     BattleStatusLayer *statusLayer;
 //    DPadLayer *dPadLayer;

@@ -37,11 +37,13 @@
 
 @interface BattleController () {
     NSString *battleName;
+    NSUInteger fingerOneHash;
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
 }
 @property (nonatomic) Entity *selectedEntity;
+@property (nonatomic) BOOL isEntitySelected;
 @end
 
 @implementation BattleController
@@ -96,6 +98,9 @@ __weak static BattleController* currentInstance;
         longPress.minimumPressDuration = 0.0f;
         
         [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
+        
+        fingerOneHash = 0;
+        [self registerWithTouchDispatcher];
     }
     return self;
 }
@@ -193,7 +198,6 @@ __weak static BattleController* currentInstance;
 - (IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-    
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     //start
@@ -204,45 +208,46 @@ __weak static BattleController* currentInstance;
             RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
+                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
                 SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-                if (!selectCom.canSelect) {
-                    continue;
+                if (selectCom.canSelect) {
+                    [preSelectCom unSelected];
+                    self.isEntitySelected = YES;
+                    self.selectedEntity = entity;
+                    [selectCom select];
+                    break;
                 }
-                self.selectedEntity = entity;
-                [selectCom select];
-                break;
             }
         }
     }
     
     // move
-    if (!self.selectedEntity) {
+    if (!self.isEntitySelected) {
         recognizer.cancelsTouchesInView = NO;
         return;
     }else {
         if (recognizer.state == UIGestureRecognizerStateChanged) {
             recognizer.cancelsTouchesInView = YES;
+            [self removeStatusLayerChild];
             [self drawSelectedRange:touchLocation];
         }
     }
     
     // end
     if(recognizer.state == UIGestureRecognizerStateEnded) {
-        [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
-        [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+        self.isEntitySelected = NO;
+        fingerOneHash = 0;
+        [self removeStatusLayerChild];
         
         SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
         MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
         MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
         
-//        if (magicCom) { // Hero hold this until next one is selected.
-//            [selectCom unSelected];
-//            self.selectedEntity = nil;
-//        }
+        if (magicCom) { // Hero hold this until next one is selected.
+            [selectCom unSelected];
+            self.selectedEntity = nil;
+        }
 
-        [selectCom unSelected];
-        self.selectedEntity = nil;
-        
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
         //move and projectile event uses maplayer location
@@ -258,7 +263,6 @@ __weak static BattleController* currentInstance;
                 }
             }
         }
-        self.selectedEntity = nil;
     }
 }
 
@@ -299,11 +303,55 @@ __weak static BattleController* currentInstance;
     CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
     [rangeFrame2 runAction:repeat];
     
-    
-    [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
-    [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
     [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
     [statusLayer addChild:line z:0 tag:kDrawPathTag];
+}
+
+-(void)removeStatusLayerChild {
+    [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
+    [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+}
+
+#pragma mark CCTouchDelegate
+-(void)registerWithTouchDispatcher
+{
+	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:NO];
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if (touch.tapCount == 1 && fingerOneHash == 0){
+        fingerOneHash=[touch hash];
+        return YES;
+    }
+    return NO;
+}
+
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    fingerOneHash = 0;
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint touchLocation = [touch locationInView:[touch view]];
+    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    if (touch.tapCount == 1 && [mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && fingerOneHash == [touch hash]){
+        
+        if (self.selectedEntity) {
+            [self drawSelectedRange:touchLocation];
+            [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
+            
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+            // do not need start point.
+            NSMutableArray *path = [[NSMutableArray alloc] init];
+            //move and projectile event uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+            
+            if (pathCom) {
+                [pathCom.path removeAllObjects];
+                [pathCom.path addObjectsFromArray:path];
+            }
+        }
+        fingerOneHash = 0;
+    }
 }
 
 @end

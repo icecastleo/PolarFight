@@ -55,7 +55,7 @@ const static int pathSizeHeight = 40;
 }
 
 -(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:NO];
 }
 
 //-(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
