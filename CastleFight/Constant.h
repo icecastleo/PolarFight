@@ -21,7 +21,7 @@
 #define kPhisicsFixtureGroupEntity -1;
 #define kPhisicsFixtureGroupRange -2;
 // For debug
-#define kPhisicalDebugDraw 1
+#define kPhisicalDebugDraw 0
 
 //For SummonType
 #define kSummonTypeNormal 1
@@ -56,7 +56,7 @@
 #define kKnoutOutRatio 0.9
 
 // For character move
-#define kMoveMultiplier 5
+#define kMoveMultiplier 2
 
 // Shadow
 #define kShadowPositionEnable 1

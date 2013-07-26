@@ -279,23 +279,37 @@ __weak static BattleController* currentInstance;
     
     MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
     
+    NSString *rangeSpriteName1,*rangeSpriteName2;
+    float rotation = 0;
     if (magicCom) {
         line.drawSize = magicCom.rangeSize;
-    }else { //FIXME: fix correct size.
+        rangeSpriteName1 = @"rangeFrame_1.png";
+        rangeSpriteName2 = @"rangeFrame_2.png";
+        
+    }else {
         line.drawSize = CGSizeMake(30, 30);
+        rangeSpriteName1 = @"yellow_arrow.png";
+        rangeSpriteName2 = @"yellow_arrow.png";
+        // Determine angle to Hero
+        CGPoint position = [renderCom.node.parent convertToWorldSpace:renderCom.position];
+        float offRealY = touchLocation.y - position.y;
+        float offRealX = touchLocation.x - position.x;
+        float angleRadians = atanf((float)offRealY / (float)offRealX);
+        float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+        rotation = -1 * angleDegrees;
+        if (offRealX <= 0) {
+            rotation -= 180;
+        }
     }
     
-    NSString *spriteName;
-    
-    if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-        spriteName = @"rangeFrame_1.png";
-    }else {
-        spriteName = @"forbidden_sign.png";
+    if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+        rangeSpriteName2 = @"forbidden_sign.png";
     }
     
     // draw range frame
-    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:spriteName];
-    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:@"rangeFrame_2.png"];
+    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:rangeSpriteName1];
+    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:rangeSpriteName2];
+    rangeFrame1.rotation = rotation;
     
     rangeFrame1.scaleX = line.drawSize.width / rangeFrame1.contentSize.width;
     rangeFrame1.scaleY = line.drawSize.height / rangeFrame1.contentSize.height;
@@ -304,7 +318,7 @@ __weak static BattleController* currentInstance;
     
     [rangeFrame1 addChild:rangeFrame2];
     
-    [rangeFrame2 setOpacity:1.0];
+    [rangeFrame2 setOpacity:255];
     CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
     CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
     CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];

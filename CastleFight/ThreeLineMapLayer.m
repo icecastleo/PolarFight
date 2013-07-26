@@ -13,9 +13,9 @@
 #import "SelectableComponent.h"
 
 @interface ThreeLineMapLayer() {
-    CCMenu *lineSelectMenu;
     int userLine;
 }
+@property (nonatomic) CCLayer *statusLayer;
 
 @end
 
@@ -23,20 +23,7 @@
 
 -(id)initWithName:(NSString *)name {
     if (self = [super initWithName:name]) {
-        NSMutableArray *menuItems = [[NSMutableArray alloc] init];
-        
-        for(int i = 0; i < kMapPathMaxLine; i++) {
-            CCMenuItem *lineItem = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"rightarrow.png"] selectedSprite:[CCSprite spriteWithFile:@"rightarrow.png"] block:^(id sender) {
-                userLine = i;
-            }];
-            
-            lineItem.position = ccp(kMapStartDistance/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
-            [menuItems addObject:lineItem];
-        }
-
-        lineSelectMenu = [[CCMenu alloc] initWithArray:menuItems];
-        lineSelectMenu.position = ccp(0, 0);
-        [self addChild:lineSelectMenu z:INT16_MAX];
+        userLine = 0;
     }
     return self;
 }
@@ -71,6 +58,10 @@
 }
 
 -(void)addEntity:(Entity *)entity line:(int)line {
+    if (!self.statusLayer) {
+        [self createStatusLayer];
+    }
+    
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
     
@@ -102,11 +93,50 @@
     int boundaryLeft = 0;
     int boundaryRight = self.boundaryX;
     
-    if (position.x > boundaryLeft && position.x < boundaryRight   && position.y > boundaryBottom && position.y < boundaryTop) {
+    if (position.x > boundaryLeft && position.x < boundaryRight && position.y > boundaryBottom && position.y < boundaryTop) {
         return YES;
     }
     
     return NO;
+}
+
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super ccTouchMoved:touch withEvent:event];
+    
+    CGPoint location = [touch locationInView:touch.view];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    
+    int line = (location.y - kMapPathFloor)/kMapPathHeight;
+    
+    if (line >= kMapPathMaxLine) {
+        line = kMapPathMaxLine - 1;
+    } else if (line < 0) {
+        line = 0;
+    }
+    CCSprite *preLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
+    [preLineArrow setOpacity:128];
+    
+    userLine = line;
+    
+    CCSprite *lineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
+    [lineArrow setOpacity:255];
+}
+
+-(void)createStatusLayer {
+    
+    _statusLayer = [[CCLayer alloc] init];
+    
+    for(int i = 0; i < kMapPathMaxLine; i++) {
+        CCSprite *lineArrow = [CCSprite spriteWithFile:@"black_arrow.png"];
+        lineArrow.position = ccp(lineArrow.boundingBox.size.width/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
+        [lineArrow setOpacity:128];
+        [_statusLayer addChild:lineArrow z:INT16_MAX tag:i];
+    }
+    
+    CCSprite *currentLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
+    [currentLineArrow setOpacity:255];
+    
+    [self.parent addChild:_statusLayer z:INT16_MAX tag:90124];
 }
 
 @end
