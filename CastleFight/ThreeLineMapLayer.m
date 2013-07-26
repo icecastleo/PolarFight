@@ -12,6 +12,8 @@
 #import "CharacterComponent.h"
 #import "SelectableComponent.h"
 
+#define kStatusLayerTag 9999
+
 @interface ThreeLineMapLayer() {
     int userLine;
 }
@@ -136,7 +138,7 @@
     CCSprite *currentLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
     [currentLineArrow setOpacity:255];
     
-    [self.parent addChild:_statusLayer z:INT16_MAX tag:90124];
+    [self.parent addChild:_statusLayer z:INT16_MAX tag:kStatusLayerTag];
 }
 
 @end
