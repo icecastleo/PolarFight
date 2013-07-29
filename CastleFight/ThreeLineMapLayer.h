@@ -10,4 +10,6 @@
 
 @interface ThreeLineMapLayer : MapLayer
 
+-(void)moveEntity:(Entity *)entity toLine:(int)line;
+
 @end

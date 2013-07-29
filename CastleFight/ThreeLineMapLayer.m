@@ -11,6 +11,7 @@
 #import "TeamComponent.h"
 #import "CharacterComponent.h"
 #import "SelectableComponent.h"
+#import "LineComponent.h"
 
 #define kStatusLayerTag 9999
 
@@ -49,6 +50,23 @@
     self.contentSize = CGSizeMake(width*repeat, height);
 }
 
+-(void)createStatusLayer {
+    
+    _statusLayer = [[CCLayer alloc] init];
+    
+    for(int i = 0; i < kMapPathMaxLine; i++) {
+        CCSprite *lineArrow = [CCSprite spriteWithFile:@"black_arrow.png"];
+        lineArrow.position = ccp(lineArrow.boundingBox.size.width/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
+        [lineArrow setOpacity:128];
+        [_statusLayer addChild:lineArrow z:INT16_MAX tag:i];
+    }
+    
+    CCSprite *currentLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
+    [currentLineArrow setOpacity:255];
+    
+    [self.parent addChild:_statusLayer z:INT16_MAX tag:kStatusLayerTag];
+}
+
 -(void)addEntity:(Entity *)entity {
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     
@@ -69,6 +87,8 @@
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    LineComponent *lineComponent = (LineComponent *)[entity getComponentOfClass:[LineComponent class]];
+    [lineComponent instantlyChangeLine:line];
     
     CGPoint position;
     
@@ -102,6 +122,7 @@
     return NO;
 }
 
+#pragma mark Touch methods
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     [super ccTouchMoved:touch withEvent:event];
     
@@ -124,21 +145,12 @@
     [lineArrow setOpacity:255];
 }
 
--(void)createStatusLayer {
+-(void)moveEntity:(Entity *)entity toLine:(int)line {
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     
-    _statusLayer = [[CCLayer alloc] init];
+    CGPoint position = ccp(render.position.x, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
     
-    for(int i = 0; i < kMapPathMaxLine; i++) {
-        CCSprite *lineArrow = [CCSprite spriteWithFile:@"black_arrow.png"];
-        lineArrow.position = ccp(lineArrow.boundingBox.size.width/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
-        [lineArrow setOpacity:128];
-        [_statusLayer addChild:lineArrow z:INT16_MAX tag:i];
-    }
-    
-    CCSprite *currentLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
-    [currentLineArrow setOpacity:255];
-    
-    [self.parent addChild:_statusLayer z:INT16_MAX tag:kStatusLayerTag];
+    [self moveEntity:entity toPosition:position boundaryLimit:YES];
 }
 
 @end

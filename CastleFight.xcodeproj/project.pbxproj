@@ -113,6 +113,10 @@
 		372526C016EF68D800C79A9E /* shopbutton.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 372526B816EF68D800C79A9E /* shopbutton.pvr.ccz */; };
 		3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815016F7550800F1F7EE /* BattleDataObject.m */; };
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
+		3733983117A6793F00077931 /* ActiveSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3733982C17A6793F00077931 /* ActiveSkillComponent.m */; };
+		3733983217A6793F00077931 /* AuraComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3733982E17A6793F00077931 /* AuraComponent.m */; };
+		3733983317A6793F00077931 /* PassiveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3733983017A6793F00077931 /* PassiveComponent.m */; };
+		3733983617A679C600077931 /* ProjectileComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3733983517A679C600077931 /* ProjectileComponent.m */; };
 		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
 		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
@@ -154,6 +158,8 @@
 		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
+		37DE292D17A657A2002D0377 /* LineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292C17A657A2002D0377 /* LineComponent.m */; };
+		37DE293017A66BF0002D0377 /* ChangeLineSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292F17A66BF0002D0377 /* ChangeLineSkill.m */; };
 		37DF1A8D17606F27009042CB /* AttackUpPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */; };
 		37DF1A9017607356009042CB /* NoiseSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8F17607356009042CB /* NoiseSkill.m */; };
 		37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */; };
@@ -172,7 +178,6 @@
 		37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */; };
 		37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E1AE2D1767649A003F1707 /* StealthSkill.m */; };
 		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
-		37E23E7017588B4000E37D7D /* PassiveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E23E6F17588B4000E37D7D /* PassiveComponent.m */; };
 		37E23E711758A3C500E37D7D /* PassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06A16668F6A00B78136 /* PassiveSkill.m */; };
 		37E23E741758B39F00E37D7D /* BombPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2040D1169F2F6D000EF31F /* BombPassiveSkill.m */; };
 		37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E42C38174E2C5F0010B9E9 /* EffectSystem.m */; };
@@ -217,7 +222,6 @@
 		9B146C7C1736D3F700D141F1 /* UpgradePriceComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C7B1736D3F400D141F1 /* UpgradePriceComponent.m */; };
 		9B146C7F1736D7AD00D141F1 /* CollisionComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C7E1736D7AB00D141F1 /* CollisionComponent.m */; };
 		9B146C801736FD1900D141F1 /* MoveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB91173254CB0030C9D7 /* MoveComponent.m */; };
-		9B146C831737C18A00D141F1 /* ActiveSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C821737C18600D141F1 /* ActiveSkillComponent.m */; };
 		9B146C861737FF7300D141F1 /* MeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */; };
 		9B146C881738117800D141F1 /* AISystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBB6173255090030C9D7 /* AISystem.m */; };
 		9B146C891738133C00D141F1 /* AIComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB9B173254CB0030C9D7 /* AIComponent.m */; };
@@ -234,7 +238,6 @@
 		9B27D6A217832E160012E126 /* SpeedBonusAddComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D48817832E160012E126 /* SpeedBonusAddComponent.m */; };
 		9B27D6A317832E160012E126 /* StateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D48A17832E160012E126 /* StateComponent.m */; };
 		9B27D6A417832E160012E126 /* StealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D48C17832E160012E126 /* StealthComponent.m */; };
-		9B27D6AD17832F020012E126 /* AuraComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D6AA17832F020012E126 /* AuraComponent.m */; };
 		9B27D6AE17832F020012E126 /* KnockOutComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D6AC17832F020012E126 /* KnockOutComponent.m */; };
 		9B28820A166FA76D0041604F /* Armor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B288209166FA76D0041604F /* Armor.m */; };
 		9B293EB91715723600C1E728 /* ShopFrameSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B293EB81715723600C1E728 /* ShopFrameSprite.m */; };
@@ -400,7 +403,6 @@
 		9B5DB0D917734DC60024DA98 /* CCScissorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B15170B661000945271 /* CCScissorLayer.m */; };
 		9B5DB0DC177360C40024DA98 /* CCRepeatForever+RepeatForeverAnimateExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5DB0DB177360C30024DA98 /* CCRepeatForever+RepeatForeverAnimateExtend.m */; };
 		9B60DAD917477A320039A031 /* ProjectileEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DAD817477A320039A031 /* ProjectileEvent.m */; };
-		9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B60DADE1747C6B70039A031 /* ProjectileComponent.m */; };
 		9B6DE0A7174FDADA00A09550 /* EntityFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DE0A6174FDADA00A09550 /* EntityFactory.mm */; };
 		9B6EA71916F220BC00C61AD9 /* arrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71816F220BB00C61AD9 /* arrow-hd.png */; };
 		9B6EA71B16F270BD00C61AD9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6EA71A16F270BB00C61AD9 /* arrow.png */; };
@@ -678,6 +680,14 @@
 		3730815016F7550800F1F7EE /* BattleDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleDataObject.m; sourceTree = "<group>"; };
 		3730815216F7578100F1F7EE /* UserDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataObject.h; sourceTree = "<group>"; };
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
+		3733982B17A6793F00077931 /* ActiveSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSkillComponent.h; sourceTree = "<group>"; };
+		3733982C17A6793F00077931 /* ActiveSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveSkillComponent.m; sourceTree = "<group>"; };
+		3733982D17A6793F00077931 /* AuraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraComponent.h; sourceTree = "<group>"; };
+		3733982E17A6793F00077931 /* AuraComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraComponent.m; sourceTree = "<group>"; };
+		3733982F17A6793F00077931 /* PassiveComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveComponent.h; sourceTree = "<group>"; };
+		3733983017A6793F00077931 /* PassiveComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveComponent.m; sourceTree = "<group>"; };
+		3733983417A679C600077931 /* ProjectileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileComponent.h; sourceTree = "<group>"; };
+		3733983517A679C600077931 /* ProjectileComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileComponent.m; sourceTree = "<group>"; };
 		3741400A1772F49F00E6365A /* AIStateHeroAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroAttack.h; sourceTree = "<group>"; };
 		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
 		37486B371781951D0011F3DB /* Magic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magic.h; sourceTree = "<group>"; };
@@ -745,6 +755,10 @@
 		37DDA2C41709638A0016E8CB /* AchievementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementManager.h; sourceTree = "<group>"; };
 		37DDA2C51709638A0016E8CB /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 		37DDA2C61709638A0016E8CB /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		37DE292B17A657A1002D0377 /* LineComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineComponent.h; sourceTree = "<group>"; };
+		37DE292C17A657A2002D0377 /* LineComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineComponent.m; sourceTree = "<group>"; };
+		37DE292E17A66BF0002D0377 /* ChangeLineSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLineSkill.h; sourceTree = "<group>"; };
+		37DE292F17A66BF0002D0377 /* ChangeLineSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLineSkill.m; sourceTree = "<group>"; };
 		37DF1A8B17606F27009042CB /* AttackUpPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackUpPassiveSkill.h; sourceTree = "<group>"; };
 		37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackUpPassiveSkill.m; sourceTree = "<group>"; };
 		37DF1A8E17607356009042CB /* NoiseSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoiseSkill.h; sourceTree = "<group>"; };
@@ -788,8 +802,6 @@
 		37E1AE2C17676498003F1707 /* StealthSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthSkill.h; sourceTree = "<group>"; };
 		37E1AE2D1767649A003F1707 /* StealthSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthSkill.m; sourceTree = "<group>"; };
 		37E20C36174621C80017231D /* game-center-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-center-icon.jpg"; sourceTree = "<group>"; };
-		37E23E6E17588B4000E37D7D /* PassiveComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveComponent.h; sourceTree = "<group>"; };
-		37E23E6F17588B4000E37D7D /* PassiveComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveComponent.m; sourceTree = "<group>"; };
 		37E2B49F16A6AD48006CB5B4 /* CharacterQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterQueue.h; sourceTree = "<group>"; };
 		37E2B4A016A6AD48006CB5B4 /* CharacterQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterQueue.m; sourceTree = "<group>"; };
 		37E42C37174E2C5F0010B9E9 /* EffectSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectSystem.h; sourceTree = "<group>"; };
@@ -854,8 +866,6 @@
 		9B146C7B1736D3F400D141F1 /* UpgradePriceComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradePriceComponent.m; sourceTree = "<group>"; };
 		9B146C7D1736D7A800D141F1 /* CollisionComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionComponent.h; sourceTree = "<group>"; };
 		9B146C7E1736D7AB00D141F1 /* CollisionComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionComponent.m; sourceTree = "<group>"; };
-		9B146C811737C18400D141F1 /* ActiveSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSkillComponent.h; sourceTree = "<group>"; };
-		9B146C821737C18600D141F1 /* ActiveSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveSkillComponent.m; sourceTree = "<group>"; };
 		9B146C841737FF7100D141F1 /* MeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeleeAttackSkill.h; sourceTree = "<group>"; };
 		9B146C851737FF7200D141F1 /* MeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeleeAttackSkill.m; sourceTree = "<group>"; };
 		9B146C8D1739381B00D141F1 /* ActiveSkillSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSkillSystem.h; sourceTree = "<group>"; };
@@ -886,8 +896,6 @@
 		9B27D48A17832E160012E126 /* StateComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateComponent.m; sourceTree = "<group>"; };
 		9B27D48B17832E160012E126 /* StealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthComponent.h; sourceTree = "<group>"; };
 		9B27D48C17832E160012E126 /* StealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthComponent.m; sourceTree = "<group>"; };
-		9B27D6A917832F020012E126 /* AuraComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuraComponent.h; sourceTree = "<group>"; };
-		9B27D6AA17832F020012E126 /* AuraComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuraComponent.m; sourceTree = "<group>"; };
 		9B27D6AB17832F020012E126 /* KnockOutComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutComponent.h; sourceTree = "<group>"; };
 		9B27D6AC17832F020012E126 /* KnockOutComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutComponent.m; sourceTree = "<group>"; };
 		9B288208166FA76D0041604F /* Armor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Armor.h; sourceTree = "<group>"; };
@@ -1258,8 +1266,6 @@
 		9B60DAD817477A320039A031 /* ProjectileEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileEvent.m; sourceTree = "<group>"; };
 		9B60DADA174792D40039A031 /* ProjectileRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileRange.h; sourceTree = "<group>"; };
 		9B60DADB174792D50039A031 /* ProjectileRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileRange.m; sourceTree = "<group>"; };
-		9B60DADD1747C6B60039A031 /* ProjectileComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileComponent.h; sourceTree = "<group>"; };
-		9B60DADE1747C6B70039A031 /* ProjectileComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileComponent.m; sourceTree = "<group>"; };
 		9B60DAE01747D4B10039A031 /* ProjectileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileSystem.h; sourceTree = "<group>"; };
 		9B60DAE11747D4B20039A031 /* ProjectileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileSystem.m; sourceTree = "<group>"; };
 		9B6DE0A6174FDADA00A09550 /* EntityFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EntityFactory.mm; sourceTree = "<group>"; };
@@ -2076,16 +2082,16 @@
 				9B146C7017342C6C00D141F1 /* DefenderComponent.m */,
 				9B146C7D1736D7A800D141F1 /* CollisionComponent.h */,
 				9B146C7E1736D7AB00D141F1 /* CollisionComponent.m */,
-				9B146C811737C18400D141F1 /* ActiveSkillComponent.h */,
-				9B146C821737C18600D141F1 /* ActiveSkillComponent.m */,
-				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
-				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
-				9B27D6A917832F020012E126 /* AuraComponent.h */,
-				9B27D6AA17832F020012E126 /* AuraComponent.m */,
 				9B27D6AB17832F020012E126 /* KnockOutComponent.h */,
 				9B27D6AC17832F020012E126 /* KnockOutComponent.m */,
-				9B60DADD1747C6B60039A031 /* ProjectileComponent.h */,
-				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
+				3733982B17A6793F00077931 /* ActiveSkillComponent.h */,
+				3733982C17A6793F00077931 /* ActiveSkillComponent.m */,
+				3733982F17A6793F00077931 /* PassiveComponent.h */,
+				3733983017A6793F00077931 /* PassiveComponent.m */,
+				3733983417A679C600077931 /* ProjectileComponent.h */,
+				3733983517A679C600077931 /* ProjectileComponent.m */,
+				3733982D17A6793F00077931 /* AuraComponent.h */,
+				3733982E17A6793F00077931 /* AuraComponent.m */,
 			);
 			name = CombatComponents;
 			sourceTree = "<group>";
@@ -2510,12 +2516,6 @@
 				9B146C7B1736D3F400D141F1 /* UpgradePriceComponent.m */,
 				9B55BB9A173254CB0030C9D7 /* AIComponent.h */,
 				9B55BB9B173254CB0030C9D7 /* AIComponent.m */,
-				9B146C811737C18400D141F1 /* ActiveSkillComponent.h */,
-				9B146C821737C18600D141F1 /* ActiveSkillComponent.m */,
-				9B60DADD1747C6B60039A031 /* ProjectileComponent.h */,
-				9B60DADE1747C6B70039A031 /* ProjectileComponent.m */,
-				37E23E6E17588B4000E37D7D /* PassiveComponent.h */,
-				37E23E6F17588B4000E37D7D /* PassiveComponent.m */,
 				37E0A308177057E900503100 /* SelectableComponent.h */,
 				37E0A309177057E900503100 /* SelectableComponent.m */,
 				37D75639177438ED005ACE35 /* HeroComponent.h */,
@@ -2530,6 +2530,8 @@
 				3750F4F41785B491009E2689 /* MagicComponent.m */,
 				3750F4F61785B5A4009E2689 /* MaskComponent.h */,
 				3750F4F71785B5A6009E2689 /* MaskComponent.m */,
+				37DE292B17A657A1002D0377 /* LineComponent.h */,
+				37DE292C17A657A2002D0377 /* LineComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3099,6 +3101,8 @@
 			isa = PBXGroup;
 			children = (
 				9B146C871737FF7F00D141F1 /* AttackSkill */,
+				37DE292E17A66BF0002D0377 /* ChangeLineSkill.h */,
+				37DE292F17A66BF0002D0377 /* ChangeLineSkill.m */,
 				9BE01A371695E81900B9C427 /* HealSkill.h */,
 				9BE01A381695E81900B9C427 /* HealSkill.m */,
 				37DF1AA01761ECA3009042CB /* SpeedUpSkill.h */,
@@ -3513,7 +3517,6 @@
 				9B146C7C1736D3F700D141F1 /* UpgradePriceComponent.m in Sources */,
 				9B146C7F1736D7AD00D141F1 /* CollisionComponent.m in Sources */,
 				9B146C801736FD1900D141F1 /* MoveComponent.m in Sources */,
-				9B146C831737C18A00D141F1 /* ActiveSkillComponent.m in Sources */,
 				9B146C861737FF7300D141F1 /* MeleeAttackSkill.m in Sources */,
 				9B146C881738117800D141F1 /* AISystem.m in Sources */,
 				9B146C891738133C00D141F1 /* AIComponent.m in Sources */,
@@ -3532,7 +3535,6 @@
 				9B93DE831744F21700DA62F2 /* Range.mm in Sources */,
 				9B93DE841744F21D00DA62F2 /* TeamComponent.m in Sources */,
 				9B60DAD917477A320039A031 /* ProjectileEvent.m in Sources */,
-				9B60DADF1747C6B90039A031 /* ProjectileComponent.m in Sources */,
 				2D4AA460174D361D00275F47 /* RangeSimpleXY.mm in Sources */,
 				9B6DE0A7174FDADA00A09550 /* EntityFactory.mm in Sources */,
 				37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */,
@@ -3544,7 +3546,6 @@
 				37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */,
 				37DC0AA517537530000656A6 /* SlowlyHealSkill.m in Sources */,
 				37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */,
-				37E23E7017588B4000E37D7D /* PassiveComponent.m in Sources */,
 				37E23E711758A3C500E37D7D /* PassiveSkill.m in Sources */,
 				37E23E741758B39F00E37D7D /* BombPassiveSkill.m in Sources */,
 				37E75129175CCB3B009AFEFB /* PeaceSkill.m in Sources */,
@@ -3575,7 +3576,6 @@
 				9B27D6A217832E160012E126 /* SpeedBonusAddComponent.m in Sources */,
 				9B27D6A317832E160012E126 /* StateComponent.m in Sources */,
 				9B27D6A417832E160012E126 /* StealthComponent.m in Sources */,
-				9B27D6AD17832F020012E126 /* AuraComponent.m in Sources */,
 				9B27D6AE17832F020012E126 /* KnockOutComponent.m in Sources */,
 				3750F4F51785B494009E2689 /* MagicComponent.m in Sources */,
 				3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */,
@@ -3610,6 +3610,12 @@
 				9B32207F179AAE9B00BB7EC8 /* SquareRange.mm in Sources */,
 				9B953FE5179C26B20069CF89 /* AIStateProjectile.m in Sources */,
 				9B953FE6179C5DED0069CF89 /* ProjectileSystem.m in Sources */,
+				37DE292D17A657A2002D0377 /* LineComponent.m in Sources */,
+				37DE293017A66BF0002D0377 /* ChangeLineSkill.m in Sources */,
+				3733983117A6793F00077931 /* ActiveSkillComponent.m in Sources */,
+				3733983217A6793F00077931 /* AuraComponent.m in Sources */,
+				3733983317A6793F00077931 /* PassiveComponent.m in Sources */,
+				3733983617A679C600077931 /* ProjectileComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
