@@ -14,6 +14,9 @@
     if (self = [super init]) {
         rect = aRect;
         pixelRect = CC_RECT_POINTS_TO_PIXELS(rect);
+        
+        // You will touch unseen layer without it!
+        [self setTouchEnabled:YES];
     }
     return self;
 }
@@ -51,6 +54,10 @@
     }
     
     return YES;
+}
+
+-(void)dealloc {
+    return [super dealloc];
 }
 
 @end

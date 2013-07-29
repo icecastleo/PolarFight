@@ -7,6 +7,7 @@
 //
 
 #import "CCScrollView.h"
+#import "Constant.h"
 
 @implementation UIImageView (ForScrollView)
 
@@ -92,8 +93,9 @@
     [super touchesEnded:touches withEvent:event];
 //    [self.nextResponder touchesEnded:touches withEvent:event];
     
+    // Delay the end event for 2 frame, so that cocos2d will not miss the touch.  
     TouchTimerObject *object = [[TouchTimerObject alloc] initWithTouches:touches event:event];
-    [NSTimer scheduledTimerWithTimeInterval:0.075f target:self selector:@selector(timerFireMethod:) userInfo:object repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0/kGameSettingFps*2 target:self selector:@selector(timerFireMethod:) userInfo:object repeats:NO];
 }
 
 -(void)timerFireMethod:(NSTimer *)timer {

@@ -37,13 +37,13 @@ typedef enum {
     return self;
 }
 
+-(void)registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
+}
+
 -(void)onEnter {
     [super onEnter];
     [menu setHandlerPriority:kTouchPriotiryPause - 1];
-}
-
--(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

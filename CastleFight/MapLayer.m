@@ -37,6 +37,10 @@ const static int pathSizeHeight = 40;
     return self;
 }
 
+-(void)registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:NO];
+}
+
 -(void)setMap:(NSString *)name {
     // You must set map sprite and contentSize
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:[NSString stringWithFormat:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])] userInfo:nil];
@@ -52,10 +56,6 @@ const static int pathSizeHeight = 40;
 
 -(int)maxChildZ {
     return self.boundaryY;
-}
-
--(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMap swallowsTouches:NO];
 }
 
 //-(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {

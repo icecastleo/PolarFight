@@ -80,9 +80,9 @@
 }
 
 -(void)onEnter {
+    [super onEnter];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMoneyLabel:) name:@"MoneyChangedNotify" object:nil];
     [self updateMoneyLabel:nil];
-    [super onEnter];
 }
 
 -(void)onExit {

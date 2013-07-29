@@ -36,14 +36,18 @@
 #import "MagicComponent.h"
 
 @interface BattleController () {
+    int _prefix;
+    
     NSString *battleName;
     NSUInteger fingerOneHash;
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
 }
+
 @property (nonatomic) Entity *selectedEntity;
 @property (nonatomic) BOOL isEntitySelected;
+
 @end
 
 @implementation BattleController
@@ -57,8 +61,10 @@ __weak static BattleController* currentInstance;
 -(id)initWithPrefix:(int)prefix suffix:(int)suffix {
     if(self = [super init]) {
         currentInstance = self;
+
+        _prefix = prefix;
         
-        battleName = [NSString stringWithFormat:@"%02d_%02d",prefix,suffix];
+        battleName = [NSString stringWithFormat:@"%02d_%02d", prefix, suffix];
         
         _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
@@ -91,25 +97,74 @@ __weak static BattleController* currentInstance;
         [self addChild:statusLayer];
 
         [self scheduleUpdate];
-        
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", prefix]];
-        
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-        longPress.minimumPressDuration = 0.0f;
-        
-        [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
-        
+                
         fingerOneHash = 0;
-        [self registerWithTouchDispatcher];
     }
     return self;
 }
 
--(void)dealloc {
+-(void)onEnter {
+    [super onEnter];
+    
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
+    
+    [self registerWithTouchDispatcher];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPress.minimumPressDuration = 0.0f;
+    longPress.cancelsTouchesInView = NO;
+    
+    [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
+}
+
+-(void)onExit {
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
         [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+    }
+
+    [super onExit];
+}
+
+#pragma mark CCTouchDelegate
+-(void)registerWithTouchDispatcher {
+	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:NO];
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if (touch.tapCount == 1 && fingerOneHash == 0){
+        fingerOneHash = [touch hash];
+        return YES;
+    }
+    return NO;
+}
+
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    fingerOneHash = 0;
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint touchLocation = [touch locationInView:[touch view]];
+    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    if (touch.tapCount == 1 && fingerOneHash == [touch hash]){
+        
+        if (self.selectedEntity) {
+            [self drawSelectedRange:touchLocation];
+            [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
+            
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+            // do not need start point.
+            NSMutableArray *path = [[NSMutableArray alloc] init];
+            //move and projectile event uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+            
+            if (pathCom) {
+                [pathCom.path removeAllObjects];
+                [pathCom.path addObjectsFromArray:path];
+            }
+        }
+        fingerOneHash = 0;
     }
 }
 
@@ -168,7 +223,7 @@ __weak static BattleController* currentInstance;
         [[FileManager sharedFileManager].achievementManager resetPropertiesWithTags:@[battleName,@"star"]];
         if (oldStars < stars) {
             [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:stars];
-        }else {
+        } else {
             [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:oldStars];
         }
         
@@ -195,12 +250,11 @@ __weak static BattleController* currentInstance;
 
 #pragma mark UILongPressGestureRecognizer
 
-- (IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
+-(IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
     
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-    //start
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
         
@@ -213,29 +267,21 @@ __weak static BattleController* currentInstance;
                 if (selectCom.canSelect) {
                     [preSelectCom unSelected];
                     self.isEntitySelected = YES;
+                    recognizer.cancelsTouchesInView = YES;
                     self.selectedEntity = entity;
                     [selectCom select];
                     break;
                 }
             }
         }
-    }
-    
-    // move
-    if (!self.isEntitySelected) {
-        recognizer.cancelsTouchesInView = NO;
-        return;
-    }else {
-        if (recognizer.state == UIGestureRecognizerStateChanged) {
-            recognizer.cancelsTouchesInView = YES;
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        if (self.isEntitySelected) {
             [self removeStatusLayerChild];
             [self drawSelectedRange:touchLocation];
         }
-    }
-    
-    // end
-    if(recognizer.state == UIGestureRecognizerStateEnded) {
+    } else if(recognizer.state == UIGestureRecognizerStateEnded) {
         self.isEntitySelected = NO;
+        recognizer.cancelsTouchesInView = NO;
         fingerOneHash = 0;
         [self removeStatusLayerChild];
         
@@ -256,7 +302,7 @@ __weak static BattleController* currentInstance;
         if (pathCom) {
             [pathCom.path removeAllObjects];
             [pathCom.path addObjectsFromArray:path];
-        }else {
+        } else {
             if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
                 if (magicCom) {
                     [magicCom activeWithPath:path];
@@ -332,48 +378,6 @@ __weak static BattleController* currentInstance;
 -(void)removeStatusLayerChild {
     [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
     [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-}
-
-#pragma mark CCTouchDelegate
--(void)registerWithTouchDispatcher
-{
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:NO];
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (touch.tapCount == 1 && fingerOneHash == 0){
-        fingerOneHash=[touch hash];
-        return YES;
-    }
-    return NO;
-}
-
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    fingerOneHash = 0;
-}
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [touch locationInView:[touch view]];
-    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    if (touch.tapCount == 1 && fingerOneHash == [touch hash]){
-        
-        if (self.selectedEntity) {
-            [self drawSelectedRange:touchLocation];
-            [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
-            
-            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
-            // do not need start point.
-            NSMutableArray *path = [[NSMutableArray alloc] init];
-            //move and projectile event uses maplayer location
-            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
-            
-            if (pathCom) {
-                [pathCom.path removeAllObjects];
-                [pathCom.path addObjectsFromArray:path];
-            }
-        }
-        fingerOneHash = 0;
-    }
 }
 
 @end
