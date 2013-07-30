@@ -25,9 +25,11 @@ typedef enum {
     kEventIsActiveSkillForbidden,
     kEventIsMoveForbidden,
     kEventIsDetectedForbidden,
+    kEntityEventPrepare,
+    kEntityEventReady,
     kEntityEventDead,
     kEntityEventRevive,
-    
+
     kEventFoodChanged,
     
     kEventSendMagicEvent,

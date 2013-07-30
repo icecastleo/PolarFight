@@ -11,13 +11,21 @@
 #import "SummonComponent.h"
 #import "TeamComponent.h"
 #import "SimpleAudioEngine.h"
+#import "ThreeLineMapLayer.h"
 
 @implementation PlayerSystem
+
+-(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
+    if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
+        NSAssert(entityFactory.mapLayer, @"This system need a map layer!");
+    }
+    return self;
+}
 
 -(void)update:(float)delta {
     NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[PlayerComponent class]];
     
-    for (Entity * entity in entities) {
+    for (Entity *entity in entities) {
         PlayerComponent * player = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
         
         player.delta += delta;
@@ -28,16 +36,25 @@
             player.mana += player.manaRate;
         }
         
-        // Summon entity
+        // Summon entities
         NSMutableArray *summonComponents = player.summonComponents;
         
-        // Heros
+        // Summon heros
         [summonComponents addObjectsFromArray:player.battleTeam];
         
         for (SummonComponent *summon in summonComponents) {
             
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
+                
+                // TODO: Maybe another solution!
+                if ([self.entityFactory.mapLayer isKindOfClass:[ThreeLineMapLayer class]]) {
+                    ThreeLineMapLayer *map = (ThreeLineMapLayer *)self.entityFactory.mapLayer;
+                    
+                    if (map.isSelectLineOccupied) {
+                        return;
+                    }
+                }
                 
                 TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
                 

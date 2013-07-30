@@ -10,4 +10,6 @@
 
 @interface ThreeLineMapLayer : MapLayer
 
+@property (readonly) BOOL isSelectLineOccupied;
+
 @end

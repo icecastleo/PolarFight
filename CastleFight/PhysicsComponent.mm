@@ -36,6 +36,14 @@
         for (PhysicsNode *node in _root.children) {
             node.b2Body->GetWorld()->DestroyBody(node.b2Body);
         }
+    } else if (type == kEntityEventPrepare) {
+        for (PhysicsNode *node in _root.children) {
+            node.b2Body->SetActive(false);
+        }
+    } else if (type == kEntityEventReady) {
+        for (PhysicsNode *node in _root.children) {
+            node.b2Body->SetActive(true);
+        }
     }
 }
 

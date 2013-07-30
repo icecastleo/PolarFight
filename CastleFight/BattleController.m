@@ -181,9 +181,9 @@ __weak static BattleController* currentInstance;
 -(void)setSystem {
     [systems addObject:[[AISystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ActiveSkillSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
-    [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
+    [systems addObject:[[MagicSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[CombatSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
-    [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory mapLayer:mapLayer]];
+    [systems addObject:[[MoveSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[PlayerSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
@@ -296,7 +296,7 @@ __weak static BattleController* currentInstance;
 
         // do not need start point.
         NSMutableArray *path = [[NSMutableArray alloc] init];
-        //move and projectile event uses maplayer location
+        // move and projectile event uses maplayer location
         [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
         
         if (pathCom) {

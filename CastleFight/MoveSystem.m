@@ -17,9 +17,9 @@
 
 @implementation MoveSystem
 
--(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory mapLayer:(MapLayer *)map {
+-(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
     if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
-        _map = map;
+        NSAssert(entityFactory.mapLayer, @"This system need a map layer!");
     }
     return self;
 }
@@ -72,7 +72,7 @@
             }
         }
         
-        [_map moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
+        [self.entityFactory.mapLayer moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
         
         // Run animation
         AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
@@ -98,7 +98,7 @@
                     if (render.isSpineNode) {
                         CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
                         [animationNode clearAnimation];
-                    }else {
+                    } else {
                         [render.sprite runAction:action];
                     }
                     
@@ -142,7 +142,7 @@
     // set distance = attack/defense
     float distance = component.attack/defense;
     
-    [_map knockOutEntity:component.entity byPosition:ccp(direction*distance,0) boundaryLimit:YES];
+    [self.entityFactory.mapLayer knockOutEntity:component.entity byPosition:ccp(direction*distance,0) boundaryLimit:YES];
 }
 
 @end
