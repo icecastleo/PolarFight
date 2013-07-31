@@ -92,7 +92,11 @@
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
-    [entity addComponent:[[LineComponent alloc] init]];
+    
+    if ([cid intValue]/100 != 2) {
+        //hero doesn't need to change line.
+        [entity addComponent:[[LineComponent alloc] init]];
+    }
     
     DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)];
     // FIXME: Change all character asset to right
@@ -161,28 +165,15 @@
     [entity addComponent:[[UpgradePriceComponent alloc]
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
-    if ([cid isEqualToString:@"003"]) {
-        //test
-        ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
-        for (NSString *key in activeSkills.allKeys) {
-            NSString *value = [activeSkills valueForKey:key];
-            NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
-            [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
-        }
-        if (skillCom.skills.count > 0) {
-            [entity addComponent:skillCom];
-        }
-        //test
-    }else {
-        ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
-        for (NSString *key in activeSkills.allKeys) {
-            NSString *value = [activeSkills valueForKey:key];
-            NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
-            [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
-        }
-        if (skillCom.skills.count > 0) {
-            [entity addComponent:skillCom];
-        }
+    ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
+    for (NSString *key in activeSkills.allKeys) {
+        NSNumber *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(key), @"you forgot to make this skill.");
+        // value is probability, key is skillName
+        [skillCom addSkillName:key andProbability:value.intValue];
+    }
+    if (skillCom.skills.count > 0) {
+        [entity addComponent:skillCom];
     }
     
     PassiveComponent *passiveCom = [[PassiveComponent alloc] init];
