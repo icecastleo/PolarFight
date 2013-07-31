@@ -16,6 +16,8 @@
 -(id)initWithSprite:(CCNode *)sprite {
     if ((self = [super init])) {
         // node's position is the sprite center
+        
+        // FIXME: Does node need to be a RGBANode? (For some entity event...)
         _node = [CCNode node];
         
         _sprite = sprite;
@@ -34,6 +36,16 @@
         _spriteBoundingBox = _sprite.boundingBox;
     }
     return self;
+}
+
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEntityEventPrepare) {
+        CCSprite *sprite = (CCSprite *)_sprite;
+        sprite.opacity = 127;
+    } else if (type == kEntityEventReady) {
+        CCSprite *sprite = (CCSprite *)_sprite;
+        sprite.opacity = 255;
+    }
 }
 
 -(void)setEnableShadowPosition:(BOOL)enableShadowPosition {

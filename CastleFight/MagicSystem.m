@@ -16,9 +16,9 @@
 
 @implementation MagicSystem
 
--(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory mapLayer:(MapLayer *)map {
+-(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
     if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
-        _map = map;
+        NSAssert(entityFactory.mapLayer, @"This system need a map layer!");
     }
     return self;
 }
@@ -40,22 +40,22 @@
         if (isCostSufficient) {
             [entity sendEvent:kEventCancelMask Message:nil];
             
-            if (magicCom.currentCooldown <=0) {
+            if (magicCom.currentCooldown <= 0) {
                 selectableCom.canSelect = YES;
-            }else {
+            } else {
                 selectableCom.canSelect = NO;
             }
-        }else {
+        } else {
             [entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:0]];
             selectableCom.canSelect = NO;
         }
         
-        if (magicCom.canActive && magicCom.currentCooldown <=0 && isCostSufficient) {
-            NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:magicCom.path,@"path", magicCom.damage,@"damage",magicCom.images,@"images",nil];
+        if (magicCom.canActive && magicCom.currentCooldown <= 0 && isCostSufficient) {
+            NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:magicCom.path,@"path", magicCom.damage,@"damage", magicCom.images,@"images", nil];
             
             Magic* magic = [[NSClassFromString(magicCom.name) alloc] initWithMagicInformation:magicInfo];
             magic.owner = magicCom.spellCaster;
-            magic.map = self.map;
+            magic.map = self.entityFactory.mapLayer;
             [magic active];
             
             [magicCom didExecute];

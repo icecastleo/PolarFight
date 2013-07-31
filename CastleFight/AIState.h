@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EntityEventDelegate.h"
+#import "Entity.h"
 
-@class Entity;
-
-@interface AIState : NSObject
+@interface AIState : NSObject<EntityEventDelegate>
 
 -(NSString *)name;
 

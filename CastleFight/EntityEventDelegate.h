@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 
 @protocol EntityEventDelegate <NSObject>
 

@@ -8,7 +8,6 @@
 
 #import "StageScrollLayer.h"
 #import "StageLayer.h"
-#import "CCScissorLayer.h"
 #import "CCScrollLayerAdvance.h"
 
 @implementation StageScrollLayer

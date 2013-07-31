@@ -13,35 +13,81 @@
 #import "SelectableComponent.h"
 #import "LineComponent.h"
 
-#define kStatusLayerTag 9999
+typedef enum {
+    kMoveTypeZone,
+    kMoveTypeMap,
+    kMoveTypeLine,
+} MoveType;
 
 @interface ThreeLineMapLayer() {
-    int userLine;
+    int selectLine;
+    CCLayer *lineLayer;
+    
+    MoveType mType;
+    
+    NSMutableDictionary *prepareEntities;
 }
-@property (nonatomic) CCLayer *statusLayer;
-
 @end
 
 @implementation ThreeLineMapLayer
 
 -(id)initWithName:(NSString *)name {
     if (self = [super initWithName:name]) {
-        userLine = 0;
+        selectLine = 0;
+        [self initLineLayer];
+        prepareEntities = [[NSMutableDictionary alloc] initWithCapacity:kMapPathMaxLine];
+        
+        [self schedule:@selector(sendPrepareEntities) interval:3.0];
     }
     return self;
+}
+
+-(void)initLineLayer {
+    lineLayer = [[CCLayer alloc] init];
+    
+    for(int i = 0; i < kMapPathMaxLine; i++) {
+        CCSprite *lineArrow = [CCSprite spriteWithFile:@"black_arrow.png"];
+        lineArrow.position = ccp(lineArrow.boundingBox.size.width/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
+        [lineArrow setOpacity:128];
+        [lineLayer addChild:lineArrow z:0 tag:i];
+    }
+    
+    CCSprite *selectLineArrow = (CCSprite *)[lineLayer getChildByTag:selectLine];
+    [selectLineArrow setOpacity:255];
+}
+
+-(BOOL)isSelectLineOccupied {
+    if ([prepareEntities objectForKey:[NSNumber numberWithInt:selectLine]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(void)sendPrepareEntities {
+    for (Entity *entity in prepareEntities.allValues) {
+        [entity sendEvent:kEntityEventReady Message:nil];
+    }
+    
+    [prepareEntities removeAllObjects];
+}
+
+-(void)setParent:(CCNode *)parent {
+    [super setParent:parent];
+    [parent addChild:lineLayer z:_zOrder+1];
 }
 
 -(void)setMap:(NSString *)name {
     CCParallaxNode *node = [CCParallaxNode node];
     
-    CCSprite *temp = [CCSprite spriteWithFile:@"ice.png"];
+    CCSprite *temp = [CCSprite spriteWithFile:@"christmas1.png"];
     int width = temp.contentSize.width;
     int height = temp.contentSize.height;
     
-    int repeat = 3;
+    int repeat = 1;
     
     for(int i = 0; i < repeat; i++) {
-        CCSprite *map = [CCSprite spriteWithFile:@"ice.png"];
+        CCSprite *map = [CCSprite spriteWithFile:@"christmas1.png"];
         map.anchorPoint = ccp(0, 0);
         [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp((width-1)*i, 0)];
     }
@@ -71,16 +117,13 @@
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     
     if (team.team == 1) {
-        [self addEntity:entity line:userLine];
+        [self addEntity:entity line:selectLine];
     } else {
         [self addEntity:entity line:arc4random_uniform(kMapPathMaxLine)];
     }
 }
 
 -(void)addEntity:(Entity *)entity line:(int)line {
-    if (!self.statusLayer) {
-        [self createStatusLayer];
-    }
     
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
     NSAssert(render, @"Need render component to add on map!");
@@ -95,6 +138,8 @@
     if (character) {
         if (team.team == 1) {
             position = ccp(kMapStartDistance, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
+            [prepareEntities setObject:entity forKey:[NSNumber numberWithInt:selectLine]];
+            [entity sendEvent:kEntityEventPrepare Message:nil];
         } else {
             position = ccp(self.boundaryX - kMapStartDistance, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
         }
@@ -124,25 +169,46 @@
 
 #pragma mark Touch methods
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    [super ccTouchMoved:touch withEvent:event];
-    
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
-    int line = (location.y - kMapPathFloor)/kMapPathHeight;
-    
-    if (line >= kMapPathMaxLine) {
-        line = kMapPathMaxLine - 1;
-    } else if (line < 0) {
-        line = 0;
+    if (mType == kMoveTypeZone) {
+        CGPoint lastLocation = [touch previousLocationInView:touch.view];
+        lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+        
+        CGPoint diff = ccpSub(lastLocation, location);
+        
+        if (abs(diff.x) > abs(diff.y)) {
+            mType = kMoveTypeMap;
+        } else {
+            mType = kMoveTypeLine;
+        }
     }
-    CCSprite *preLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
-    [preLineArrow setOpacity:128];
     
-    userLine = line;
-    
-    CCSprite *lineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
-    [lineArrow setOpacity:255];
+    if (mType == kMoveTypeMap) {
+        CGPoint lastLocation = [touch previousLocationInView:touch.view];
+        lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+        
+        CGPoint diff = ccpSub(lastLocation, location);
+        
+        [self.cameraControl moveBy:ccpMult(diff, 0.5)];
+    } else if (mType == kMoveTypeLine) {
+        int line = (location.y - kMapPathFloor)/kMapPathHeight;
+        
+        if (line >= kMapPathMaxLine) {
+            line = kMapPathMaxLine - 1;
+        } else if (line < 0) {
+            line = 0;
+        }
+        
+        CCSprite *previousLineArrow = (CCSprite *)[lineLayer getChildByTag:selectLine];
+        [previousLineArrow setOpacity:128];
+        
+        selectLine = line;
+        
+        CCSprite *selectLineArrow = (CCSprite *)[lineLayer getChildByTag:selectLine];
+        [selectLineArrow setOpacity:255];
+    }
 }
 
 -(void)moveEntity:(Entity *)entity toLine:(int)line {

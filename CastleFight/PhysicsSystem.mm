@@ -128,7 +128,10 @@ const static int kPositionIterations = 3;
         // Create contact listener
         contactListener = new MyContactListener();
         _world->SetContactListener(contactListener);
+
+//        [self addGroundBody];
         
+#if kPhisicalDebugDraw
         debugDraw = new GLESDebugDraw(PTM_RATIO);
         _world->SetDebugDraw(debugDraw);
         
@@ -140,11 +143,8 @@ const static int kPositionIterations = 3;
         //		flags += b2Draw::e_centerOfMassBit;
         
         debugDraw->SetFlags(flags);
-        PhysicsDebugDrawLayer *debugLayer = [[PhysicsDebugDrawLayer alloc] initWithPhysicsWorld:_world];
-    
-//        [self addGroundBody];
         
-#if kPhisicalDebugDraw
+        PhysicsDebugDrawLayer *debugLayer = [[PhysicsDebugDrawLayer alloc] initWithPhysicsWorld:_world];
         [entityFactory.mapLayer addChild:debugLayer z:NSIntegerMax];
 #endif
     }

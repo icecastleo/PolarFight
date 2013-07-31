@@ -36,10 +36,18 @@
         pageControl.currentPage = 0;
         pageControl.numberOfPages = layers.count;
         pageControl.userInteractionEnabled = NO;
-        
-        [[CCDirector sharedDirector].view addSubview:pageControl];
     }
     return self;
+}
+
+-(void)onEnter {
+    [super onEnter];
+    [[CCDirector sharedDirector].view addSubview:pageControl];
+}
+
+-(void)onExit {
+    [pageControl removeFromSuperview];
+    [super onExit];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -51,7 +59,6 @@
 }
 
 -(void)dealloc {
-    [pageControl removeFromSuperview];
     [pageControl release];
     [super dealloc];
 }

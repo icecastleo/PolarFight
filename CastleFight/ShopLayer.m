@@ -8,7 +8,6 @@
 
 #import "ShopLayer.h"
 #import "CCScrollNode.h"
-#import "CCScissorLayer.h"
 #import "ShopUnitLayer.h"
 
 @implementation ShopLayer

@@ -213,12 +213,10 @@
         
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
     } else {
+        // TODO: Set AI for different character
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
-    
-    // TODO: Set AI for different character
-    //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
-    
+        
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
@@ -245,6 +243,8 @@
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
     }
+    
+    sprite.scale = 0.1;
     
     Entity *entity = [_entityManager createEntity];
 

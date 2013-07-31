@@ -70,29 +70,14 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint contentOffset = [scrollView contentOffset];
     [self setPosition:contentOffset];
 }
 
-- (void)onEnter
-{
-    [super onEnter];
-    [[CCDirector sharedDirector].view addSubview:scrollView_];
-    [scrollView_ flashScrollIndicators];
-}
-
-- (void)onExit
-{
-    [scrollView_ removeFromSuperview];
-    [super onExit];
-}
-
 #pragma mark - Initialization
 
-- (id)initWithRect:(CGRect)aRect
-{
+-(id)initWithRect:(CGRect)aRect {
     if(self = [super init]) {
         _rect = aRect;
         uiY = [CCDirector sharedDirector].winSize.height - _rect.size.height - _rect.origin.y;
@@ -102,6 +87,22 @@
         self.position = ccp(0, 0);
     }
     return self;
+}
+
+-(void)onEnter {
+    [super onEnter];
+    [[CCDirector sharedDirector].view addSubview:scrollView_];
+    [scrollView_ flashScrollIndicators];
+}
+
+-(void)onExit {
+    [scrollView_ removeFromSuperview];
+    [super onExit];
+}
+
+-(void)dealloc {
+    [scrollView_ release];
+    [super dealloc];
 }
 
 -(void)setPosition:(CGPoint)position {
@@ -120,12 +121,6 @@
     } else {
         _position = ccp(_position.x - _rect.origin.x, _position.y + uiY);
     }
-}
-
-- (void)dealloc
-{
-    [scrollView_ release];
-    [super dealloc];
 }
 
 @end
