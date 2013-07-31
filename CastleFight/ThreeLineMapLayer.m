@@ -96,23 +96,6 @@ typedef enum {
     self.contentSize = CGSizeMake(width*repeat, height);
 }
 
--(void)createStatusLayer {
-    
-    _statusLayer = [[CCLayer alloc] init];
-    
-    for(int i = 0; i < kMapPathMaxLine; i++) {
-        CCSprite *lineArrow = [CCSprite spriteWithFile:@"black_arrow.png"];
-        lineArrow.position = ccp(lineArrow.boundingBox.size.width/2, kMapPathFloor + i*kMapPathHeight + kMapPathHeight/2);
-        [lineArrow setOpacity:128];
-        [_statusLayer addChild:lineArrow z:INT16_MAX tag:i];
-    }
-    
-    CCSprite *currentLineArrow = (CCSprite *)[self.statusLayer getChildByTag:userLine];
-    [currentLineArrow setOpacity:255];
-    
-    [self.parent addChild:_statusLayer z:INT16_MAX tag:kStatusLayerTag];
-}
-
 -(void)addEntity:(Entity *)entity {
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     
@@ -209,6 +192,10 @@ typedef enum {
         CCSprite *selectLineArrow = (CCSprite *)[lineLayer getChildByTag:selectLine];
         [selectLineArrow setOpacity:255];
     }
+}
+
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    mType = kMoveTypeZone;
 }
 
 -(void)moveEntity:(Entity *)entity toLine:(int)line {
