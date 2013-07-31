@@ -510,7 +510,7 @@
 		9BFE1C3F177891E6002433E5 /* weapon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C3C177891E6002433E5 /* weapon.png */; };
 		9BFE1C421778B20A002433E5 /* ArmyBearAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE1C411778B20A002433E5 /* ArmyBearAttackSkill.m */; };
 		9BFFAE68163E9DBB00073DC5 /* RangeCircle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE64163E9DBB00073DC5 /* RangeCircle.mm */; };
-		B614E32217A93D7F00C358AA /* christmas1.png in Resources */ = {isa = PBXBuildFile; fileRef = B614E32117A93D7F00C358AA /* christmas1.png */; };
+		B614E32617A94CBE00C358AA /* christmas1.png in Resources */ = {isa = PBXBuildFile; fileRef = B614E32517A94CBE00C358AA /* christmas1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1497,7 +1497,7 @@
 		9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCircle.h; sourceTree = "<group>"; };
 		9BFFAE64163E9DBB00073DC5 /* RangeCircle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RangeCircle.mm; sourceTree = "<group>"; };
 		9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFanShape.h; sourceTree = "<group>"; };
-		B614E32117A93D7F00C358AA /* christmas1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = christmas1.png; sourceTree = "<group>"; };
+		B614E32517A94CBE00C358AA /* christmas1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = christmas1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1942,7 +1942,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B614E32117A93D7F00C358AA /* christmas1.png */,
+				B614E32517A94CBE00C358AA /* christmas1.png */,
 				370243D317903FC7008267A8 /* spineData */,
 				9B406F69176240B8008B840F /* Assets */,
 				9B98481516EDD27600D3D55D /* bg */,
@@ -3435,7 +3435,7 @@
 				37DD0F5717A15999004595BD /* black_arrow@2x.png in Resources */,
 				374ECEA117A26CB300F02F26 /* yellow_arrow@2x.png in Resources */,
 				374ECEA217A26CB300F02F26 /* yellow_arrow.png in Resources */,
-				B614E32217A93D7F00C358AA /* christmas1.png in Resources */,
+				B614E32617A94CBE00C358AA /* christmas1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
