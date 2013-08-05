@@ -19,7 +19,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        _skills = [[NSDictionary alloc] init];
+        _skills = [[NSMutableDictionary alloc] init];
         _skillNames = [[NSDictionary alloc] init];
         _sumOfProbability = 0;
         sumOfZeroProbabilitySkill = 0;

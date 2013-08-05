@@ -2107,6 +2107,14 @@
 				9B27D6AA17832F020012E126 /* AuraComponent.m */,
 				9B27D6AB17832F020012E126 /* KnockOutComponent.h */,
 				9B27D6AC17832F020012E126 /* KnockOutComponent.m */,
+				3733982B17A6793F00077931 /* ActiveSkillComponent.h */,
+				3733982C17A6793F00077931 /* ActiveSkillComponent.m */,
+				3733982F17A6793F00077931 /* PassiveComponent.h */,
+				3733983017A6793F00077931 /* PassiveComponent.m */,
+				3733983417A679C600077931 /* ProjectileComponent.h */,
+				3733983517A679C600077931 /* ProjectileComponent.m */,
+				3733982D17A6793F00077931 /* AuraComponent.h */,
+				3733982E17A6793F00077931 /* AuraComponent.m */,
 			);
 			name = CombatComponents;
 			sourceTree = "<group>";
@@ -3627,6 +3635,8 @@
 				9B32207F179AAE9B00BB7EC8 /* SquareRange.mm in Sources */,
 				9B953FE5179C26B20069CF89 /* AIStateProjectile.m in Sources */,
 				9B953FE6179C5DED0069CF89 /* ProjectileSystem.m in Sources */,
+				37DE292D17A657A2002D0377 /* LineComponent.m in Sources */,
+				37DE293017A66BF0002D0377 /* ChangeLineSkill.m in Sources */,
 				9BD48F1317AFE7DC00DBFDE9 /* ActiveSkillComponent.m in Sources */,
 				9BD48F1417AFE7DC00DBFDE9 /* PassiveComponent.m in Sources */,
 				9BD48F1517AFE7DC00DBFDE9 /* ProjectileComponent.m in Sources */,
