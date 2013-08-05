@@ -8,8 +8,11 @@
 
 #import "Component.h"
 #import "ActiveSkill.h"
+#import "Attribute.h"
 
 @interface ActiveSkillComponent : Component
+
+@property Attribute *agile;
 
 @property (readonly) NSMutableDictionary *skills;
 @property ActiveSkill *currentSkill;

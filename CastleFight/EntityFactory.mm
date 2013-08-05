@@ -115,6 +115,12 @@
         sprite = animationNode;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+        
+        if ([cid intValue]/100 == 0) {
+            sprite.scale = 0.8;
+        } else if ([cid intValue]/100 == 1) {
+            sprite.scale = 0.7;
+        }
     }
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
@@ -160,12 +166,19 @@
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
+    
     for (NSString *key in activeSkills.allKeys) {
         NSString *value = [activeSkills valueForKey:key];
         NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
         [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
     }
+    
     if (skillCom.skills.count > 0) {
+        // Some entity might not have agile attribute
+        if ([attributes objectForKey:@"agile"]) {
+            Attribute *agile = [[Attribute alloc] initWithDictionary:[attributes objectForKey:@"agile"]];
+            skillCom.agile = agile;
+        }
         [entity addComponent:skillCom];
     }
     
