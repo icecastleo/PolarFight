@@ -14,6 +14,8 @@
 #import "KnockOutComponent.h"
 #import "DefenderComponent.h"
 #import "CCSkeletonAnimation.h"
+#import "LineComponent.h"
+#import "ThreeLineMapLayer.h"
 
 @implementation MoveSystem
 
@@ -31,6 +33,12 @@
         
         MoveComponent *move = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
         RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        LineComponent *lineCom = (LineComponent *)[entity getComponentOfClass:[LineComponent class]];
+        if (lineCom.doesChangeLine && [self.entityFactory.mapLayer isKindOfClass:[ThreeLineMapLayer class]]) {
+            [(ThreeLineMapLayer *)self.entityFactory.mapLayer moveEntity:entity toLine:lineCom.nextLine];
+            [lineCom didChange];
+        }
+        
         KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
         
         // FIXME: KnockOut can't move

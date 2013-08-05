@@ -12,4 +12,6 @@
 
 @property (readonly) BOOL isSelectLineOccupied;
 
+-(void)moveEntity:(Entity *)entity toLine:(int)line;
+
 @end

@@ -11,6 +11,7 @@
 #import "TeamComponent.h"
 #import "CharacterComponent.h"
 #import "SelectableComponent.h"
+#import "LineComponent.h"
 
 typedef enum {
     kMoveTypeZone,
@@ -112,6 +113,8 @@ typedef enum {
     
     TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    LineComponent *lineComponent = (LineComponent *)[entity getComponentOfClass:[LineComponent class]];
+    [lineComponent instantlyChangeLine:line];
     
     CGPoint position;
     
@@ -147,6 +150,7 @@ typedef enum {
     return NO;
 }
 
+#pragma mark Touch methods
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [touch locationInView:touch.view];
     location = [[CCDirector sharedDirector] convertToGL:location];
@@ -192,6 +196,14 @@ typedef enum {
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     mType = kMoveTypeZone;
+}
+
+-(void)moveEntity:(Entity *)entity toLine:(int)line {
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    
+    CGPoint position = ccp(render.position.x, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
+    
+    [self moveEntity:entity toPosition:position boundaryLimit:YES];
 }
 
 @end
