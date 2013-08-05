@@ -21,7 +21,7 @@
 -(id)initWithNSDictionary:(NSDictionary *)dic {
     if ((self = [super init])) {
         _state = [[NSClassFromString([dic objectForKey:@"state"]) alloc] init];
-        [self produceSkillTable:[dic objectForKey:@"skillProbability"]];
+        [self setSkillTable:[dic objectForKey:@"skillProbability"]];
         sumOfZeroProbabilitySkill = 0;
     }
     return self;
@@ -59,7 +59,7 @@
     [_state exit:self.entity];
 }
 
--(void)produceSkillTable:(NSDictionary *)dic {
+-(void)setSkillTable:(NSDictionary *)dic {
     NSMutableDictionary *adjustDic = [[NSMutableDictionary alloc] initWithCapacity:dic.count];
     
     for(NSString *skillName in dic.allKeys) {
