@@ -11,11 +11,21 @@
 
 @interface AIComponent() {
     AIState *tempState;
+    int sumOfZeroProbabilitySkill;
 }
 
 @end
 
 @implementation AIComponent
+
+-(id)initWithNSDictionary:(NSDictionary *)dic {
+    if ((self = [super init])) {
+        _state = [[NSClassFromString([dic objectForKey:@"state"]) alloc] init];
+        [self produceSkillTable:[dic objectForKey:@"skillProbability"]];
+        sumOfZeroProbabilitySkill = 0;
+    }
+    return self;
+}
 
 -(id)initWithState:(AIState *)state {
     if ((self = [super init])) {
@@ -47,6 +57,42 @@
 
 -(void)dealloc {
     [_state exit:self.entity];
+}
+
+-(void)produceSkillTable:(NSDictionary *)dic {
+    NSMutableDictionary *adjustDic = [[NSMutableDictionary alloc] initWithCapacity:dic.count];
+    
+    for(NSString *skillName in dic.allKeys) {
+        NSNumber *value = [dic objectForKey:skillName];
+        int probability = value.intValue;
+        if (probability > 0) {
+            _sumOfProbability += probability;
+            [adjustDic setObject:skillName forKey:[NSString stringWithFormat:@"%d",self.sumOfProbability]];
+        }else {
+            sumOfZeroProbabilitySkill += 1;
+            [adjustDic setObject:skillName forKey:[NSString stringWithFormat:@"%d",sumOfZeroProbabilitySkill*-1]];
+        }
+    }
+
+    _sortSkillProbabilities = [adjustDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
+        return [str1 compare:str2 options:NSNumericSearch];
+    }];
+    
+    _skillProbability = adjustDic;
+}
+
+-(NSString *)getSkillNameFromNumber:(int)number {
+    NSAssert(number < self.sumOfProbability, @"Skill only happens if the number is smaller than sum of probability.");
+    
+    int count = self.sortSkillProbabilities.count - 1;
+    for (int i = 0; i < count ; i++) {
+        NSString *value = [self.sortSkillProbabilities objectAtIndex:i];
+        NSString *nextValue = [self.sortSkillProbabilities objectAtIndex:i+1];
+        if (number >= value.intValue && number < nextValue.intValue) {
+            return [self.skillProbability objectForKey:nextValue];
+        }
+    }
+    return nil;
 }
 
 @end

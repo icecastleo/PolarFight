@@ -14,6 +14,13 @@
 
 @property AIState *state;
 
+@property (nonatomic) NSDictionary *skillProbability;
+@property (readonly) NSArray *sortSkillProbabilities;
+@property (nonatomic, readonly) int sumOfProbability;
+
 -(id)initWithState:(AIState *)state;
+-(id)initWithNSDictionary:(NSDictionary *)dic;
+
+-(NSString *)getSkillNameFromNumber:(int)number;
 
 @end

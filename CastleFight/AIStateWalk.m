@@ -14,7 +14,7 @@
 #import "ActiveSkill.h"
 #import "Entity.h"
 
-#import "CharacterComponent.h"
+#import "AIComponent.h"
 
 @implementation AIStateWalk
 
@@ -37,17 +37,19 @@
     ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
     
     //test skill
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    
     ActiveSkill *skill;
     NSString *skillName = nil;
     
     if (skillCom.skills.count > 1) {
-        NSMutableArray *sortSkillKey = [NSMutableArray arrayWithArray:skillCom.sortSkillProbabilities];
+        NSMutableArray *sortSkillKey = [NSMutableArray arrayWithArray:aiCom.sortSkillProbabilities];
         
         int count = sortSkillKey.count;
         int count2 = count;
         
         for (int i=0; i<count; i++) {
-            int random = arc4random_uniform(skillCom.sumOfProbability);
+            int random = arc4random_uniform([[sortSkillKey lastObject] intValue]);
             //FIXME: edit it to skill.
             int removeIndex = -1;
             
@@ -55,14 +57,14 @@
                 NSString *preValue = [sortSkillKey objectAtIndex:j-1];
                 NSString *value = [sortSkillKey objectAtIndex:j];
                 if (random >= preValue.intValue && random < value.intValue) {
-                    skillName = [skillCom.skillNames objectForKey:value];
+                    skillName = [aiCom.skillProbability objectForKey:value];
                     removeIndex = j;
                     break;
                 }
             }
             
             if (!skillName) {
-                skillName = [skillCom.skillNames objectForKey:[sortSkillKey objectAtIndex:0]];
+                skillName = [aiCom.skillProbability objectForKey:[sortSkillKey objectAtIndex:0]];
             }
             
             skill = [skillCom.skills objectForKey:skillName];
@@ -80,7 +82,7 @@
             
         }
     }else {
-        skillName = [skillCom.skillNames objectForKey:[skillCom.sortSkillProbabilities objectAtIndex:0]];
+        skillName = [aiCom.skillProbability objectForKey:[aiCom.sortSkillProbabilities objectAtIndex:0]];
         skill = [skillCom.skills objectForKey:skillName];
     }
     NSAssert(skill != nil, @"you forgot to make this skill.");
@@ -90,7 +92,6 @@
         [self changeState:[[AIStateAttack alloc] init] forEntity:entity];
         return;
     }
-    
 }
 
 -(void)exit:(Entity *)entity {

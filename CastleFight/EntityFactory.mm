@@ -87,6 +87,7 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
+    NSDictionary *aiDictionary = [characterData objectForKey:@"AIComponent"];
     
     Entity *entity = [_entityManager createEntity];    
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
@@ -167,10 +168,9 @@
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
     for (NSString *key in activeSkills.allKeys) {
-        NSNumber *value = [activeSkills valueForKey:key];
-        NSAssert(NSClassFromString(key), @"you forgot to make this skill.");
-        // value is probability, key is skillName
-        [skillCom addSkillName:key andProbability:value.intValue];
+        NSString *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
     }
     if (skillCom.skills.count > 0) {
         [entity addComponent:skillCom];
@@ -210,13 +210,11 @@
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
         [entity addComponent:pathCom];
-        
-        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
-    } else {
-        // TODO: Set AI for different character
-        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
-        
+    
+    // TODO: Set AI for different character
+    [entity addComponent:[[AIComponent alloc] initWithNSDictionary:aiDictionary]];
+    
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     

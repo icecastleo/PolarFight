@@ -62,8 +62,8 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 		<key>passiveSkills</key>
 		<dict/>
@@ -78,6 +78,16 @@
 		<dict>
 			<key>AttackUpAura</key>
 			<string>AttackUpAura</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>002</key>
@@ -140,8 +150,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>RangeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>003</key>
@@ -204,10 +224,22 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>DeadBomb</key>
-			<integer>0</integer>
-			<key>ChangeLineSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>ChangeLineSkill</string>
+			<key>attack2</key>
+			<string>DeadBomb</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+				<key>attack2</key>
+				<integer>0</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>004</key>
@@ -270,8 +302,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>005</key>
@@ -334,8 +376,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>006</key>
@@ -398,8 +450,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>007</key>
@@ -464,8 +526,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>008</key>
@@ -530,8 +602,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>009</key>
@@ -596,8 +678,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>101</key>
@@ -662,8 +754,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>102</key>
@@ -728,8 +830,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>ArmyBearAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>103</key>
@@ -794,8 +906,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>104</key>
@@ -860,8 +982,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>105</key>
@@ -926,8 +1058,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>106</key>
@@ -992,8 +1134,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>107</key>
@@ -1058,8 +1210,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>108</key>
@@ -1124,8 +1286,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>109</key>
@@ -1190,8 +1362,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>110</key>
@@ -1256,8 +1438,18 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>201</key>
@@ -1322,13 +1514,23 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateHeroWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>202</key>
@@ -1393,13 +1595,23 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateHeroWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>203</key>
@@ -1464,13 +1676,23 @@
 		</dict>
 		<key>activeSkills</key>
 		<dict>
-			<key>MeleeAttackSkill</key>
-			<integer>1</integer>
+			<key>attack1</key>
+			<string>MeleeAttackSkill</string>
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
+		</dict>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateHeroWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>204</key>
