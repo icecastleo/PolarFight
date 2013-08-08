@@ -8,6 +8,7 @@
 
 #import "Component.h"
 #import "ActiveSkill.h"
+#import "Attribute.h"
 
 @interface ActiveSkillComponent : Component
 

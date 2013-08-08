@@ -80,14 +80,14 @@ typedef enum {
 -(void)setMap:(NSString *)name {
     CCParallaxNode *node = [CCParallaxNode node];
     
-    CCSprite *temp = [CCSprite spriteWithFile:@"christmas1.png"];
+    CCSprite *temp = [CCSprite spriteWithFile:@"christmas.png"];
     int width = temp.contentSize.width;
     int height = temp.contentSize.height;
     
     int repeat = 1;
     
     for(int i = 0; i < repeat; i++) {
-        CCSprite *map = [CCSprite spriteWithFile:@"christmas1.png"];
+        CCSprite *map = [CCSprite spriteWithFile:@"christmas.png"];
         map.anchorPoint = ccp(0, 0);
         [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp((width-1)*i, 0)];
     }
