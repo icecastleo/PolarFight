@@ -19,7 +19,7 @@
 @property (nonatomic, readonly) int sumOfProbability;
 
 -(id)initWithState:(AIState *)state;
--(id)initWithNSDictionary:(NSDictionary *)dic;
+-(id)initWithDictionary:(NSDictionary *)dic;
 
 -(NSString *)getSkillNameFromNumber:(int)number;
 

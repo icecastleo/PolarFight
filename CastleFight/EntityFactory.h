@@ -19,11 +19,11 @@
 
 -(id)initWithEntityManager:(EntityManager *)entityManager;
 
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team;
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team addToMap:(BOOL)add;
 -(Entity *)createCastleForTeam:(int)team;
 -(Entity *)createPlayerForTeam:(int)team;
 
--(Entity *)createMagicButton:(NSString *)cid level:(int)level;
+-(Entity *)createMagicButton:(NSString *)cid level:(int)level team:(int)team;
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
 

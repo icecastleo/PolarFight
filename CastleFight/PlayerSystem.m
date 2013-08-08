@@ -36,8 +36,9 @@
             player.mana += player.manaRate;
         }
         
+        NSMutableArray *summonComponents = [[NSMutableArray alloc] init];
         // Summon entities
-        NSMutableArray *summonComponents = player.summonComponents;
+//        NSMutableArray *summonComponents = player.summonComponents;
         
         // Summon heros
         [summonComponents addObjectsFromArray:player.battleTeam];
@@ -60,7 +61,7 @@
                 
                 CharacterInitData *data = summon.data;
                 
-                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team];
+                [self.entityFactory createCharacter:data.cid level:data.level forTeam:team.team addToMap:YES];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_unit_click.caf"];
                 
                 [summon finishSummon];

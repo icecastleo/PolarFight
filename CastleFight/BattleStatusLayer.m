@@ -19,6 +19,7 @@
 #import "RenderComponent.h"
 #import "MagicSkillComponent.h"
 #import "CostComponent.h"
+#import "LevelComponent.h"
 
 @implementation BattleStatusLayer
 
@@ -118,11 +119,27 @@
     
     unitItems = [[NSMutableArray alloc] init];
     
-    for (SummonComponent *summon in player.summonComponents) {
-        UnitMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:summon];
+    for (Entity *entity in player.summonComponents) {
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
+        LevelComponent *levelCom = (LevelComponent *)[entity getComponentOfClass:[LevelComponent class]];
         
-        summon.menuItem = item;
-        [unitItems addObject:item];
+        //FIXME: the position is not correct.
+        renderCom.position = ccp(25+renderCom.sprite.boundingBox.size.width*([player.summonComponents indexOfObject:entity]+1),select.boundingBox.size.height/2);
+        [select addChild:renderCom.node];
+        
+        CCLabelBMFont *costLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",costCom.food] fntFile:@"font/cooper_20_o.fnt"];
+        costLabel.anchorPoint = ccp(0.5, 1);
+        costLabel.scale = 0.5;
+        costLabel.position = ccp(0, 0 - costLabel.boundingBox.size.height);
+        costLabel.color = ccGOLD;
+        [renderCom.node addChild:costLabel z:0 tag:1234];
+        
+        CCLabelBMFont *levelLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"Lv.%d",levelCom.level] fntFile:@"font/cooper_20_o.fnt"];
+        levelLabel.anchorPoint = ccp(0.5, 1);
+        levelLabel.scale = 0.5;
+        levelLabel.position = ccp(0, renderCom.sprite.boundingBox.size.height - costLabel.boundingBox.size.height);
+        [renderCom.node addChild:levelLabel];
     }
     
     for (SummonComponent *summon in player.battleTeam) {
@@ -164,13 +181,13 @@
     }
     
     // FIXME: Delete after test
-    CCMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:nil];
-    [unitItems addObject:item];
-    
-    CCMenu *pauseMenu = [CCMenu menuWithArray:unitItems];
-    pauseMenu.position = ccp(select.boundingBox.size.width / 2, select.boundingBox.size.height / 2);
-    [pauseMenu alignItemsHorizontallyWithPadding:0];
-    [select addChild:pauseMenu];
+//    CCMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:nil];
+//    [unitItems addObject:item];
+//    
+//    CCMenu *pauseMenu = [CCMenu menuWithArray:unitItems];
+//    pauseMenu.position = ccp(select.boundingBox.size.width / 2, select.boundingBox.size.height / 2);
+//    [pauseMenu alignItemsHorizontallyWithPadding:0];
+//    [select addChild:pauseMenu];
 }
 
 -(void)updateFood:(int)foodNumber {

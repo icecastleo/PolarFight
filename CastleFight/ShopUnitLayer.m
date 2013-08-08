@@ -50,7 +50,7 @@
         
         for (int i = 0; i < characterInitDatas.count; i++) {
             CharacterInitData *data = characterInitDatas[i];
-            Entity *entity = [entityFactory createCharacter:data.cid level:data.level forTeam:1];
+            Entity *entity = [entityFactory createCharacter:data.cid level:data.level forTeam:1 addToMap:NO];
             
             CCSprite *temp = [[ShopUnitSprite alloc] initWithEntity:entity characterInitData:data];
             temp.anchorPoint = ccp(0, 1);

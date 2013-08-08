@@ -18,7 +18,7 @@
 
 @implementation AIComponent
 
--(id)initWithNSDictionary:(NSDictionary *)dic {
+-(id)initWithDictionary:(NSDictionary *)dic {
     if ((self = [super init])) {
         _state = [[NSClassFromString([dic objectForKey:@"state"]) alloc] init];
         [self setSkillTable:[dic objectForKey:@"skillProbability"]];

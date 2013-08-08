@@ -10,7 +10,7 @@
 
 @implementation InformationComponent
 
--(id)initWithInformation:(NSDictionary *)info {
+-(id)initWithDictionary:(NSDictionary *)info {
     if (self = [super init]) {
         _information = info;
     }

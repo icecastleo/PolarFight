@@ -9,17 +9,21 @@
 #import "MagicComponent.h"
 #import "Attribute.h"
 #import "Magic.h"
+#import "AccumulateAttribute.h"
 
 @implementation MagicComponent
 
--(id)initWithDamageAttribute:(Attribute *)damage andMagicName:(NSString*)name andNeedImages:(NSDictionary *)images {
+-(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        _damage = damage;
-        _name = name;
-        _images = images;
+        NSDictionary *damageAttribute = [dic objectForKey:@"damage"];
         
-        NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys: damage,@"damage",images,@"images",nil];
-        Magic* magic = [[NSClassFromString(name) alloc] initWithMagicInformation:magicInfo];
+        _cooldown = [[dic objectForKey:@"cooldown"] floatValue];
+        _damage = [[AccumulateAttribute alloc] initWithDictionary:damageAttribute];
+        _name = [dic objectForKey:@"magicName"];
+        _images = [dic objectForKey:@"magicImages"];
+        
+        NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys: _damage,@"damage",_images,@"images",nil];
+        Magic* magic = [[NSClassFromString(_name) alloc] initWithMagicInformation:magicInfo];
         _rangeSize = magic.rangeSize;
     }
     return self;

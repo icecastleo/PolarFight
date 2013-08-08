@@ -1681,6 +1681,12 @@
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>yellow_arrow.png</string>
+			<key>dragImage2</key>
+			<string>yellow_arrow.png</string>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
@@ -2559,8 +2565,6 @@
 	</dict>
 	<key>901</key>
 	<dict>
-		<key>id</key>
-		<string>901</string>
 		<key>CostComponent</key>
 		<dict>
 			<key>costType</key>
@@ -2572,24 +2576,19 @@
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
 			<key>selectedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
-		<key>cooldown</key>
-		<integer>10</integer>
-		<key>damage</key>
+		<key>RenderComponent</key>
 		<dict>
-			<key>a</key>
-			<string>0</string>
-			<key>b</key>
-			<string>0.02c</string>
-			<key>c</key>
-			<string>500</string>
-		</dict>
-		<key>images</key>
-		<dict>
-			<key>projectileImage</key>
-			<string>nicefire.png</string>
+			<key>sprite</key>
+			<string>BombMagic_button.png</string>
 		</dict>
 		<key>InformationComponent</key>
 		<dict>
@@ -2600,11 +2599,30 @@
 			<key>description</key>
 			<string>test test BombMagic</string>
 		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>500</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>10</integer>
+			<key>magicName</key>
+			<string>BombMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>nicefire.png</string>
+			</dict>
+		</dict>
 	</dict>
 	<key>902</key>
 	<dict>
-		<key>id</key>
-		<string>902</string>
 		<key>CostComponent</key>
 		<dict>
 			<key>costType</key>
@@ -2616,24 +2634,19 @@
 		</dict>
 		<key>SelectableComponent</key>
 		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
 			<key>selectedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
-		<key>cooldown</key>
-		<integer>5</integer>
-		<key>damage</key>
+		<key>RenderComponent</key>
 		<dict>
-			<key>a</key>
-			<string>0</string>
-			<key>b</key>
-			<string>0.02c</string>
-			<key>c</key>
-			<string>100</string>
-		</dict>
-		<key>images</key>
-		<dict>
-			<key>projectileImage</key>
-			<string>LightningMagic.png</string>
+			<key>sprite</key>
+			<string>LightningMagic_button.png</string>
 		</dict>
 		<key>InformationComponent</key>
 		<dict>
@@ -2643,6 +2656,129 @@
 			<string>magic</string>
 			<key>description</key>
 			<string>test test LightningMagic</string>
+		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>100</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>5</integer>
+			<key>magicName</key>
+			<string>LightningMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>LightningMagic.png</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>903</key>
+	<dict>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Food</string>
+			<key>food</key>
+			<integer>0</integer>
+			<key>mana</key>
+			<integer>0</integer>
+		</dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>SummonMagic_button.png</string>
+		</dict>
+		<key>InformationComponent</key>
+		<dict>
+			<key>name</key>
+			<string>SummonMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test SummonMagic</string>
+		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>100</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>1</integer>
+			<key>magicName</key>
+			<string>SummonToLineMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>nicefire.png</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>999</key>
+	<dict>
+		<key>SelectableComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>InformationComponent</key>
+		<dict>
+			<key>name</key>
+			<string>SummonMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test SummonMagic</string>
+		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>100</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>1</integer>
+			<key>magicName</key>
+			<string>SummonToLineMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>nicefire.png</string>
+			</dict>
 		</dict>
 	</dict>
 </dict>

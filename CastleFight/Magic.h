@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
-#import "MapLayer.h"
+#import "EntityFactory.h"
 #import "Range.h"
 
 @interface Magic : NSObject
 
-@property (nonatomic) MapLayer *map;
+@property (nonatomic) EntityFactory *entityFactory;
 @property (nonatomic) Entity *owner;
 @property (nonatomic) NSDictionary *magicInformation;
 
