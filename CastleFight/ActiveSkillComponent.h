@@ -12,6 +12,8 @@
 
 @interface ActiveSkillComponent : Component
 
+@property Attribute *agile;
+
 @property (readonly) NSMutableDictionary *skills;
 @property ActiveSkill *currentSkill;
 @property (nonatomic) NSString *activeKey;
