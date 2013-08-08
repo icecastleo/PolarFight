@@ -78,7 +78,7 @@
     return self;
 }
 
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team addToMap:(BOOL)add {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -87,6 +87,7 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
+    NSDictionary *aiDictionary = [characterData objectForKey:@"AIComponent"];
     
     Entity *entity = [_entityManager createEntity];    
     [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
@@ -121,6 +122,12 @@
         sprite = animationNode;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+        
+        if ([cid intValue]/100 == 0) {
+            sprite.scale = 0.8;
+        } else if ([cid intValue]/100 == 1) {
+            sprite.scale = 0.7;
+        }
     }
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
@@ -166,13 +173,19 @@
                           initWithPriceComponent:[[Attribute alloc] initWithQuadratic:3 linear:30 constantTerm:0 isFluctuant:NO]]];
     
     ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
+    
     for (NSString *key in activeSkills.allKeys) {
-        NSNumber *value = [activeSkills valueForKey:key];
-        NSAssert(NSClassFromString(key), @"you forgot to make this skill.");
-        // value is probability, key is skillName
-        [skillCom addSkillName:key andProbability:value.intValue];
+        NSString *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
     }
+    
     if (skillCom.skills.count > 0) {
+        // Some entity might not have agile attribute
+        if ([attributes objectForKey:@"agile"]) {
+            Attribute *agile = [[Attribute alloc] initWithDictionary:[attributes objectForKey:@"agile"]];
+            skillCom.agile = agile;
+        }
         [entity addComponent:skillCom];
     }
     
@@ -210,19 +223,17 @@
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
         [entity addComponent:pathCom];
-        
-        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateHeroWalk alloc] init]]];
-    } else {
-        // TODO: Set AI for different character
-        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]]];
     }
-        
+    
+    // TODO: Set AI for different character
+    [entity addComponent:[[AIComponent alloc] initWithDictionary:aiDictionary]];
+    
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
     //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
-    if (self.mapLayer) {
+    if (self.mapLayer && add) {
         [self.mapLayer addEntity:entity];
     }
     
@@ -311,9 +322,12 @@
         NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
         
         for (CharacterInitData *data in characterInitDatas) {
-            SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
-            summon.player = player;
-            [player.summonComponents addObject:summon];
+            Entity *summonButton = [self createSummonButton:data];
+            MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfClass:[MagicComponent class]];
+            magicCom.spellCaster = entity;
+            [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
+            
+            [player.summonComponents addObject:summonButton];
         }
         
         NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
@@ -328,7 +342,7 @@
         NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
         
         for (CharacterInitData *data in magicTeamInitData) {
-            Entity *magicButton = [self createMagicButton:data.cid level:data.level];
+            Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
             
             MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfClass:[MagicComponent class]];
             magicCom.spellCaster = entity;
@@ -351,44 +365,70 @@
     return entity;
 }
 
--(Entity *)createMagicButton:(NSString *)cid level:(int)level {
+-(Entity *)createMagicButton:(NSString *)cid level:(int)level team:(int)team {
     
+    Entity *entity = [_entityManager createEntity];
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
-    NSDictionary *damageAttribute = [characterData objectForKey:@"damage"];
+    NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
     
-    float cooldown = [[characterData objectForKey:@"cooldown"] floatValue];
-    NSMutableDictionary *information = [NSMutableDictionary dictionaryWithDictionary:[characterData objectForKey:@"InformationComponent"]];
+    for (NSString *key in characterData) {
+        NSDictionary *dic = [characterData objectForKey:key];
+        if ([key isEqualToString:@"RenderComponent"]) {
+            CCSprite *sprite = [CCSprite spriteWithFile:[dic objectForKey:@"sprite"]];
+            RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+            [entity addComponent:renderCom];
+            [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
+        }else {
+            NSAssert(NSClassFromString(key), assert);
+            [entity addComponent:[[NSClassFromString(key) alloc] initWithDictionary:dic]];
+        }
+    }
     
-    //FIXME: change to correct name
-    NSString *magicButtonName = [NSString stringWithFormat:@"%@_button.png",[information objectForKey:@"name"]];
-    CCSprite *sprite = [CCSprite spriteWithFile:magicButtonName];
+    [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
+    [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
+    
+    return entity;
+}
+
+-(Entity *)createSummonButton:(CharacterInitData *)data {
     
     Entity *entity = [_entityManager createEntity];
     
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:data.cid];
     
-    MagicComponent *magicCom = [[MagicComponent alloc] initWithDamageAttribute:[[AccumulateAttribute alloc] initWithDictionary:damageAttribute] andMagicName:[information objectForKey:@"name"] andNeedImages:[characterData objectForKey:@"images"]];
-    magicCom.cooldown = cooldown;
+    // add SummonComponent
+    SummonComponent *summonCom = [[SummonComponent alloc] initWithCharacterInitData:data];
+    [entity addComponent:summonCom];
     
+    // add CostComponent
+    NSDictionary *costDic = [[NSDictionary alloc] initWithObjectsAndKeys:[characterData objectForKey:@"cost"],@"food", @"Food",@"costType", nil];
+    CostComponent *costCom = [[CostComponent alloc] initWithDictionary:costDic];
+    [entity addComponent:costCom];
+    
+    // add MagicComponent
+    NSDictionary *magicDic = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:summonCom.cooldown], @"cooldown", @"SummonToLineMagic",@"magicName", nil];
+    MagicComponent *magicCom = [[MagicComponent alloc] initWithDictionary:magicDic];
     [entity addComponent:magicCom];
     
+    // add button icon in Render Component 
+    CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[data.cid intValue]]];
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
-    
-    NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
-    NSAssert([characterData objectForKey:@"CostComponent"] != nil, assert);
-    
-    [entity addComponent:[[CostComponent alloc] initWithDictionary:[characterData objectForKey:@"CostComponent"]]];
-    
     [entity addComponent:renderCom];
     [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
     
-    [entity addComponent:[[InformationComponent alloc] initWithInformation:information]];
+    // add show range Image in Selectable component
+    NSString *name = [characterData objectForKey:@"name"];
+    NSString *spriteFrameName;
+    if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
+        spriteFrameName = [NSString stringWithFormat:@"%@_move_01.png", name];
+    } else {
+        spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
+    }
+    NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
+    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+    [entity addComponent:selectCom];
     
-    assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
-    NSAssert([characterData objectForKey:@"SelectableComponent"] != nil, assert);
-    
-    [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
-    
-    [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
+    [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];
     
     return entity;
 }

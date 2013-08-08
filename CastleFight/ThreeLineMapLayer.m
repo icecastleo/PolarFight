@@ -80,14 +80,14 @@ typedef enum {
 -(void)setMap:(NSString *)name {
     CCParallaxNode *node = [CCParallaxNode node];
     
-    CCSprite *temp = [CCSprite spriteWithFile:@"christmas1.png"];
+    CCSprite *temp = [CCSprite spriteWithFile:@"christmas.png"];
     int width = temp.contentSize.width;
     int height = temp.contentSize.height;
     
     int repeat = 1;
     
     for(int i = 0; i < repeat; i++) {
-        CCSprite *map = [CCSprite spriteWithFile:@"christmas1.png"];
+        CCSprite *map = [CCSprite spriteWithFile:@"christmas.png"];
         map.anchorPoint = ccp(0, 0);
         [node addChild:map z:-1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:ccp((width-1)*i, 0)];
     }
@@ -150,6 +150,30 @@ typedef enum {
     return NO;
 }
 
+-(BOOL)canSummonCharacterInThisArea:(CGPoint)position {
+    int boundaryTop = kMapPathFloor + kMapPathHeight * kMapPathMaxLine;
+    int boundaryBottom = kMapPathFloor;
+    int boundaryLeft = kMapStartDistance;
+    int boundaryRight = kMapStartDistance + 50;
+    
+    if (position.x > boundaryLeft && position.x < boundaryRight && position.y > boundaryBottom && position.y < boundaryTop) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(int)positionConvertToLine:(CGPoint)position {
+    int line = (position.y - kMapPathFloor)/kMapPathHeight;
+    
+    if (line >= kMapPathMaxLine) {
+        line = kMapPathMaxLine - 1;
+    } else if (line < 0) {
+        line = 0;
+    }
+    return line;
+}
+
 #pragma mark Touch methods
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [touch locationInView:touch.view];
@@ -176,13 +200,7 @@ typedef enum {
         
         [self.cameraControl moveBy:ccpMult(diff, 0.5)];
     } else if (mType == kMoveTypeLine) {
-        int line = (location.y - kMapPathFloor)/kMapPathHeight;
-        
-        if (line >= kMapPathMaxLine) {
-            line = kMapPathMaxLine - 1;
-        } else if (line < 0) {
-            line = 0;
-        }
+        int line = [self positionConvertToLine:location];
         
         CCSprite *previousLineArrow = (CCSprite *)[lineLayer getChildByTag:selectLine];
         [previousLineArrow setOpacity:128];

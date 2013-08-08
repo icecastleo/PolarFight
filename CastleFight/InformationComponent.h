@@ -12,6 +12,6 @@
 
 @property (nonatomic,readonly) NSDictionary *information;
 
--(id)initWithInformation:(NSDictionary *)info;
+-(id)initWithDictionary:(NSDictionary *)info;
 
 @end
