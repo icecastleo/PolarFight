@@ -147,8 +147,8 @@ __weak static BattleController* currentInstance;
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    if (touch.tapCount == 1 && fingerOneHash == [touch hash]){
-        
+    
+    if (touch.tapCount == 1 && fingerOneHash == [touch hash]) {
         if (self.selectedEntity) {
             [self drawSelectedRange:touchLocation];
             [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
@@ -198,10 +198,7 @@ __weak static BattleController* currentInstance;
         [system update:delta];
     }
     
-    // FIXME: As player component delegate?
-    PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
-    [statusLayer updateFood:(int)player.food];
-    [statusLayer updateMana:(int)player.mana];
+    [statusLayer update:delta];
     
     [self checkBattleEnd];
 }
@@ -270,7 +267,7 @@ __weak static BattleController* currentInstance;
                     recognizer.cancelsTouchesInView = YES;
                     self.selectedEntity = entity;
                     [selectCom select];
-                    break;
+                    return;
                 }
             }
         }
@@ -280,32 +277,33 @@ __weak static BattleController* currentInstance;
             [self drawSelectedRange:touchLocation];
         }
     } else if(recognizer.state == UIGestureRecognizerStateEnded) {
-        self.isEntitySelected = NO;
-        recognizer.cancelsTouchesInView = NO;
-        fingerOneHash = 0;
-        [self removeStatusLayerChild];
-        
-        SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
-        MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
-        MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
-        
-        if (magicCom) { // Hero hold this until next one is selected.
-            [selectCom unSelected];
-            self.selectedEntity = nil;
-        }
-
-        // do not need start point.
-        NSMutableArray *path = [[NSMutableArray alloc] init];
-        // move and projectile event uses maplayer location
-        [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
-        
-        if (pathCom) {
-            [pathCom.path removeAllObjects];
-            [pathCom.path addObjectsFromArray:path];
-        } else {
-            if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                if (magicCom) {
-                    [magicCom activeWithPath:path];
+        if (self.isEntitySelected) {
+            self.isEntitySelected = NO;
+            recognizer.cancelsTouchesInView = NO;
+            [self removeStatusLayerChild];
+            
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+            MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+            
+            if (magicCom) { // Hero hold this until next one is selected.
+                [selectCom unSelected];
+                self.selectedEntity = nil;
+            }
+            
+            // do not need start point.
+            NSMutableArray *path = [[NSMutableArray alloc] init];
+            // move and projectile event uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+            
+            if (pathCom) {
+                [pathCom.path removeAllObjects];
+                [pathCom.path addObjectsFromArray:path];
+            } else {
+                if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+                    if (magicCom) {
+                        [magicCom activeWithPath:path];
+                    }
                 }
             }
         }

@@ -33,7 +33,7 @@
 #define kMapPathHeight 65
 #define kMapPathRandomHeight 15
 #define kMapPathMaxLine 3
-#define kMapStartDistance 175
+#define kMapStartDistance 50
 
 // For Character make collision CGPath
 #define kCollisionPointRange 25

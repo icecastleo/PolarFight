@@ -6,14 +6,14 @@
 	<string>001</string>
 	<key>money</key>
 	<integer>1500</integer>
-	<key>soundsEffectSwitch</key>
+	<key>backgroundMusicEnable</key>
 	<true/>
-	<key>backgroundMusicSwitch</key>
+	<key>soundsEffectEnable</key>
 	<true/>
-	<key>soundsEffectVolume</key>
-	<real>0.5</real>
 	<key>backgroundMusicVolume</key>
 	<real>0.05</real>
+	<key>soundsEffectVolume</key>
+	<real>0.5</real>
 	<key>characters</key>
 	<array>
 		<dict>

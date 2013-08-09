@@ -12,145 +12,147 @@
 #import "UserDataObject.h"
 #import "AchievementManager.h"
 #import "GameCenterManager.h"
-#import "AppSpecificValues.h"
 
-@interface FileManager ()
+#define kSoundsDirectory @"Sounds_caf"
 
-@property (nonatomic, strong) NSDictionary *animationDictionary;
-@property (nonatomic, readonly) NSDictionary *characterDataFile;
-@property (nonatomic, strong) NSArray *sceneSounds;
-@property (nonatomic, strong) UserDataObject *userDataObject;
-@property (nonatomic) NSString* currentLeaderBoard;
+#define kUserDataFile @"UserData.plist"
+#define kCharacterDatasFile @"CharacterBasicData.plist"
+#define kMapDatasFile @"BattleData.plist"
 
+#define kUserDataArchiveKey @"UserData"
+
+#define kBattleDataTag @"id"
+
+@interface FileManager () {
+    NSDictionary *characterDatas;
+    NSArray *sceneSounds;
+    UserDataObject *userData;
+}
 @end
 
 @implementation FileManager
 
-#define kUserData @"UserData"
-
-#define kSoundsDirectory @"Sounds_caf"
-
-#define kUserDataPlistFileName @"UserData.plist"
-#define kCharacterDataPlistFileName @"CharacterBasicData.plist"
-#define kBattleDataPlistFileName @"BattleData.plist"
-
-#define kBattleDataTag @"id"
-
-#define kVolumeMute 0
-#define kVolumeBackgroundMusicDefault 0.05
-#define kVolumeEffectDefault 0.5
-
 @dynamic userMoney;
 @dynamic characterInitDatas;
 
-static FileManager *sharedFileManager = nil;
-
 +(FileManager *)sharedFileManager {
-	@synchronized(self) {
-		if (!sharedFileManager)
-			sharedFileManager = [[FileManager alloc] init];
-	}
-	return sharedFileManager;
+	static dispatch_once_t onceToken;
+    static FileManager *sharedManager = nil;
+    
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[FileManager alloc] init];
+    });
+                  
+    return sharedManager;
 }
 
 -(id)init {
-	if((self=[super init])) {
-        _userDataObject =  [self loadUserDataObject];
-//        _animationDictionary = [self loadAnimation]; //do not use temporary
-        _characterDataFile = [self getDictionaryFromPlistFileName:kCharacterDataPlistFileName];
-        _achievementManager = [[AchievementManager alloc] initWithAchievements:self.userDataObject.achievements AndProperties:self.userDataObject.properties];
+	if((self = [super init])) {
+        userData = [self loadUserData];
+        characterDatas = [self getDictionaryFromPlistFile:kCharacterDatasFile];
+        _achievementManager = [[AchievementManager alloc] initWithAchievements:userData.achievements AndProperties:userData.properties];
+        
         // game center
-        self.currentLeaderBoard = kLeaderboardID;
         self.gameCenterManager = [[GameCenterManager alloc] init];
         [self.gameCenterManager authenticateLocalPlayer];
 	}
 	return self;
 }
 
--(UserDataObject *)loadUserDataObject {
-    if (_userDataObject)
-        return _userDataObject;
-    
+-(UserDataObject *)loadUserData {
     // Get save file in Documents
-    NSString *dataPath = [self dataFilePath:kUserDataPlistFileName forSave:YES];
+    NSString *dataPath = [self filePath:kUserDataFile forSave:YES];
     NSData *codedData = [[NSData alloc] initWithContentsOfFile:dataPath];
     
     if (!codedData) {
         // Get default plist in bundle
-        dataPath = [self dataFilePath:kUserDataPlistFileName forSave:NO];
-        _userDataObject = [[UserDataObject alloc] initWithPlistPath:dataPath];
-    }else {
+        dataPath = [self filePath:kUserDataFile forSave:NO];
+        userData = [[UserDataObject alloc] initWithPlistPath:dataPath];
+    } else {
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
-        
-        _userDataObject = [unarchiver decodeObjectForKey:kUserData];
+        userData = [unarchiver decodeObjectForKey:kUserDataArchiveKey];
         [unarchiver finishDecoding];
     }
     
-    return _userDataObject;
+    return userData;
 }
 
 -(void)setGameConfig {
-    if (self.userDataObject.soundsEffectSwitch) {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:self.userDataObject.soundsEffectVolume];
+    if (userData.soundsEffectSwitch) {
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:userData.soundsEffectVolume];
     } else {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:0];
     }
     
-    if (self.userDataObject.backgroundMusicSwitch) {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:self.userDataObject.backgroundMusicVolume];
+    if (userData.backgroundMusicSwitch) {
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:userData.backgroundMusicVolume];
     } else {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0];
     }
 }
 
-- (NSDictionary *)getDictionaryFromPlistFileName:(NSString *)fileName {
-    
-    NSString *path = [self dataFilePath:fileName forSave:NO];
-    NSDictionary *plistDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-    
-    return plistDic;
+-(void)switchBackgroundMusic {
+    if (userData.backgroundMusicSwitch) {
+        userData.backgroundMusicSwitch = NO;
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0];
+    } else {
+        userData.backgroundMusicSwitch = YES;
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:userData.backgroundMusicVolume];
+    }
+    //    [self saveUserData];
 }
 
-- (NSDictionary *)getDictionaryFromPlistDictionary:(NSDictionary *)plistDic tagName:(NSString *)tagName tagValue:(NSString *)tagValue {
-    
-    for (NSString *key in plistDic) {
-        id object = [plistDic objectForKey:key];
-        if ([object isKindOfClass:[NSDictionary class]]) {
-            if ([tagValue isEqualToString:[object objectForKey:tagName]]) {
-                return object;
-            }
-        }
+-(void)switchSoundsEffect {
+    if (userData.soundsEffectSwitch) {
+        userData.soundsEffectSwitch = NO;
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:0];
+    } else {
+        userData.soundsEffectSwitch = YES;
+        [[SimpleAudioEngine sharedEngine] setEffectsVolume:userData.soundsEffectVolume];
     }
-    
-    return nil;
+    //    [self saveUserData];
 }
 
 -(void)setUserMoney:(int)userMoney {
-    _userDataObject.money = userMoney;
+    userData.money = userMoney;
 }
 
 -(int)userMoney {
-    return _userDataObject.money;
+    return userData.money;
 }
 
-+(void)end {
-	sharedFileManager = nil;
+
+-(NSDictionary *)getDictionaryFromPlistFile:(NSString *)fileName {
+    NSString *path = [self filePath:fileName forSave:NO];
+    
+    return [[NSDictionary alloc] initWithContentsOfFile:path];
 }
 
-- (NSString *)dataFilePath:(NSString *)fileName forSave:(BOOL)save {
+- (NSString *)filePath:(NSString *)fileName forSave:(BOOL)save {
     NSAssert(fileName, @"What do you want with a nil parameter?");
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *documentsPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    
-    if (save || [[NSFileManager defaultManager] fileExistsAtPath:documentsPath]) {
+    if (save) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *documentsPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+        
         return documentsPath;
     } else {
         return [[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]];
     }
 }
+
+//-(NSDictionary *)getDictionaryFromPlistDictionary:(NSDictionary *)plistDic tagName:(NSString *)tagName tagValue:(NSString *)tagValue {
+//    for (NSString *key in plistDic) {
+//        id object = [plistDic objectForKey:key];
+//        if ([object isKindOfClass:[NSDictionary class]]) {
+//            if ([tagValue isEqualToString:[object objectForKey:tagName]]) {
+//                return object;
+//            }
+//        }
+//    }
+//    return nil;
+//}
 
 -(NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName fileType:(NSString *)type {
     // you can put path in directoryName ex: test/test2
@@ -159,7 +161,7 @@ static FileManager *sharedFileManager = nil;
     return directoryAndFileNames;
 }
 
-- (NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName withPrefix:(NSString *)prefix fileType:(NSString *)type {
+-(NSArray *)getAllFilePathsInDirectory:(NSString *)directoryName withPrefix:(NSString *)prefix fileType:(NSString *)type {
     
     NSArray *directoryAndFileNames = [[NSBundle mainBundle] pathsForResourcesOfType:type inDirectory:directoryName];
     
@@ -177,54 +179,41 @@ static FileManager *sharedFileManager = nil;
 }
 
 -(void)saveUserData {
-    
-    if (_userDataObject == nil) return;
-    
-    NSString *dataPath = [self dataFilePath:kUserDataPlistFileName forSave:YES];
+    NSString *dataPath = [self filePath:kUserDataFile forSave:YES];
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:_userDataObject forKey:kUserData];
+    [archiver encodeObject:userData forKey:kUserDataArchiveKey];
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
     
     CCLOG(@"Saving xml data to %@...", dataPath);
 }
 
-#pragma mark Public Functions
-
--(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName {
-    // ex: animationName = Animation_Swordsman_walking_Down.plist
-    return [self.animationDictionary objectForKey:animationName];
-}
-
--(void)unloadSoundsEffect {
-    for (NSString *fileName in self.sceneSounds) {
-        [[SimpleAudioEngine sharedEngine] unloadEffect:fileName];
-    }
-    self.sceneSounds = nil;
-}
-
 -(void)preloadSoundsEffect:(NSString *)sceneName {
-    
-    if (self.sceneSounds) {
+    if (sceneSounds) {
         [self unloadSoundsEffect];
     }
     
     NSString *path = [kSoundsDirectory stringByAppendingFormat:@"/%@",sceneName];
     
-    self.sceneSounds = [self getAllFilePathsInDirectory:path fileType:@"caf"];
-    for (NSString *fileName in self.sceneSounds) {
+    sceneSounds = [self getAllFilePathsInDirectory:path fileType:@"caf"];
+    
+    for (NSString *fileName in sceneSounds) {
         [[SimpleAudioEngine sharedEngine] preloadEffect:fileName];
     }
-    
+}
+
+-(void)unloadSoundsEffect {
+    for (NSString *fileName in sceneSounds) {
+        [[SimpleAudioEngine sharedEngine] unloadEffect:fileName];
+    }
+    sceneSounds = nil;
 }
 
 -(BattleDataObject *)loadBattleInfo:(NSString *)name {
-    
-    NSDictionary *plistDic = [self getDictionaryFromPlistFileName:kBattleDataPlistFileName];
-    
-    NSDictionary *battleDic = [self getDictionaryFromPlistDictionary:plistDic tagName:kBattleDataTag tagValue:name];
+    NSDictionary *plistDic = [self getDictionaryFromPlistFile:kMapDatasFile];
+    NSDictionary *battleDic = [plistDic objectForKey:name];
     
     NSAssert(battleDic != nil, @"Loading battle %@'s data failed.", name);
     
@@ -234,19 +223,19 @@ static FileManager *sharedFileManager = nil;
 }
 
 -(NSDictionary *)getCharacterDataWithCid:(NSString *)cid {
-    return _characterDataFile[cid];
+    return characterDatas[cid];
 }
 
 -(NSArray *)characterInitDatas {
-    return self.userDataObject.characterInitDatas;
+    return userData.characterInitDatas;
 }
 
 -(NSArray *)battleTeam {
-    return self.userDataObject.battleTeam;
+    return userData.battleTeam;
 }
 
 -(NSArray *)magicTeam {
-    return self.userDataObject.magicTeam;
+    return userData.magicTeam;
 }
 
 //-(Character *)getPlayerHero {
@@ -256,35 +245,5 @@ static FileManager *sharedFileManager = nil;
 //-(Character *)getPlayerCastle {
 //    return [self.userDataObject getPlayerCastle];
 //}
-//
-//-(void)updatePlayerCharacter:(Character *)character {
-//    [self.userDataObject updatePlayerCharacter:character];
-//}
-
--(void)switchSoundsEffect {
-    if ([SimpleAudioEngine sharedEngine].effectsVolume != kVolumeMute) {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeMute];
-        self.userDataObject.soundsEffectVolume = kVolumeMute;
-        self.userDataObject.soundsEffectSwitch = FALSE;
-    }else {
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:kVolumeEffectDefault];
-        self.userDataObject.soundsEffectVolume = kVolumeEffectDefault;
-        self.userDataObject.soundsEffectSwitch = TRUE;
-    }
-//    [self saveUserData];
-}
-
--(void)switchBackgroundMusic {
-    if ([SimpleAudioEngine sharedEngine].backgroundMusicVolume != kVolumeMute) {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeMute];
-        self.userDataObject.backgroundMusicVolume = kVolumeMute;
-        self.userDataObject.backgroundMusicSwitch = FALSE;
-    }else {
-        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:kVolumeBackgroundMusicDefault];
-        self.userDataObject.backgroundMusicVolume = kVolumeBackgroundMusicDefault;
-        self.userDataObject.backgroundMusicSwitch = TRUE;
-    }
-//    [self saveUserData];
-}
 
 @end

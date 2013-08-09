@@ -32,7 +32,7 @@
     Attribute *agile = component.agile;
     
     if (agile) {
-        self.cooldown = self.cooldown / (agile.value/15);
+        self.cooldown = self.cooldown / ((float)agile.value/15);
     }
 }
 

@@ -21,8 +21,8 @@
 #define kItemArray @"items"
 #define kSoundsEffectVolume @"soundsEffectVolume"
 #define kBackgroundMucsicVolume @"backgroundMusicVolume"
-#define kSoundsEffectSwitch @"soundsEffectSwitch"
-#define kBackgroundMucsicSwitch @"backgroundMusicSwitch"
+#define kSoundsEffectEnable @"soundsEffectEnable"
+#define kBackgroundMucsicEnable @"backgroundMusicEnable"
 #define kAchievements @"achievements"
 #define kProperties @"properties"
 #define kBattleTeam @"battleTeam"
@@ -48,8 +48,8 @@
         moneyNumber = [plist objectForKey:kMoney];
         _soundsEffectVolume = [[plist objectForKey:kSoundsEffectVolume] floatValue];
         _backgroundMusicVolume = [[plist objectForKey:kBackgroundMucsicVolume] floatValue];
-        _soundsEffectSwitch = [[plist objectForKey:kSoundsEffectSwitch] boolValue];
-        _backgroundMusicSwitch = [[plist objectForKey:kBackgroundMucsicSwitch] boolValue];
+        _soundsEffectSwitch = [[plist objectForKey:kSoundsEffectEnable] boolValue];
+        _backgroundMusicSwitch = [[plist objectForKey:kBackgroundMucsicEnable] boolValue];
         
         //all character array keep CharacterDataObject.
         _characterInitDatas = [self convertArray:[plist objectForKey:kCharacters] className:[CharacterInitData class]];
@@ -97,34 +97,7 @@
 //    Character *castle = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
 //    return castle;
 //}
-//
-//-(NSArray *)getPlayerCharacterArray {
-//    
-//    NSMutableArray *characterArray = [NSMutableArray array];
-//    
-//    for (CharacterInitData *data in self.playerCharacterArray) {
-//        Character *character = [[Character alloc] initWithId:data.characterId andLevel:data.level.intValue];
-//        [characterArray addObject:character];
-//    }
-//    
-//    return characterArray;
-//}
-//
-//-(void)updatePlayerCharacter:(Character *)character inArray:(NSArray *)array {
-//    for (CharacterInitData *data in array) {
-//        if ([data.cid isEqualToString:character.characterId]) {
-//            data.level = [NSString stringWithFormat:@"%d",character.level];
-//            return;
-//        }
-//    }
-//}
-//
-//-(void)updatePlayerCharacter:(Character *)character {
-//    [self updatePlayerCharacter:character inArray:self.playerCharacterArray];
-//    [self updatePlayerCharacter:character inArray:self.playerHeroArray];
-//    [self updatePlayerCharacter:character inArray:self.playerCastleArray];
-//}
-
+ 
 #pragma mark NSCoding    
     
 -(id)initWithCoder:(NSCoder *)decoder {
@@ -139,8 +112,8 @@
         _items = [decoder decodeObjectForKey:kItemArray];
         _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolume];
         _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolume];
-        _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectSwitch];
-        _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicSwitch];
+        _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectEnable];
+        _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicEnable];
         _achievements = [decoder decodeObjectForKey:kAchievements];
         _properties = [decoder decodeObjectForKey:kProperties];
     }
@@ -158,8 +131,8 @@
     [encoder encodeObject:_items forKey:kItemArray];
     [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolume];
     [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolume];
-    [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectSwitch];
-    [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicSwitch];
+    [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectEnable];
+    [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicEnable];
     [encoder encodeObject:_achievements forKey:kAchievements];
     [encoder encodeObject:_properties forKey:kProperties];
 }

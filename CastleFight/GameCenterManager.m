@@ -7,6 +7,7 @@
 
 #import "GameCenterManager.h"
 #import "AppDelegate.h"
+#import "GameCenterConstant.h"
 
 @interface GameCenterManager (Private)
 -(void)registerForLocalPlayerAuthChange;
@@ -59,36 +60,31 @@
 
 #pragma mark setLastError
 
--(void) setLastError:(NSError*)error
-{
+-(void)setLastError:(NSError*)error {
 	lastError = error.copy;
-	if (lastError != nil)
-	{
+    
+	if (lastError != nil) {
 		NSLog(@"GameCenterManager ERROR: %@", lastError.userInfo.description);
 	}
 }
 
 #pragma mark Player Authentication
 
--(void) authenticateLocalPlayer
-{
+-(void)authenticateLocalPlayer {
 	if ([self isGameCenterAvailable] == NO)
 		return;
     
 	GKLocalPlayer* localPlayer = GKLocalPlayer.localPlayer;
-	if (localPlayer.authenticated == NO)
-	{
+	if (localPlayer.authenticated == NO) {
 		// Authenticate player, using a block object. See Apple's Block Programming guide for more info about Block Objects:
 		// http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html
-		[localPlayer authenticateWithCompletionHandler:^(NSError* error)
-         {
-             [self setLastError:error];
-             
-             if (error == nil)
-             {
-                 [self loadAchievements];
-             }
-         }];
+		[localPlayer authenticateWithCompletionHandler:^(NSError* error) {
+            [self setLastError:error];
+            
+            if (error == nil) {
+                [self loadAchievements];
+            }
+        }];
 	}
 }
 
@@ -106,7 +102,7 @@
 		return;
 	
 	// Register to receive notifications when local player authentication status changes
-	NSNotificationCenter* nc = NSNotificationCenter.defaultCenter;
+	NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
 	[nc addObserver:self
 		   selector:@selector(onLocalPlayerAuthenticationChanged)
 			   name:GKPlayerAuthenticationDidChangeNotificationName
@@ -513,14 +509,14 @@
 
 // Leaderboards
 
--(void) showLeaderboard
-{
+-(void)showLeaderboard {
 	if ([self isGameCenterAvailable] == NO)
 		return;
 	
-	GKLeaderboardViewController* leaderboardVC = [[GKLeaderboardViewController alloc] init];
-	if (leaderboardVC != nil)
-	{
+	GKLeaderboardViewController *leaderboardVC = [[GKLeaderboardViewController alloc] init];
+    
+	if (leaderboardVC != nil) {
+        leaderboardVC.category = kLeaderboardID;
 		leaderboardVC.leaderboardDelegate = (id<GKLeaderboardViewControllerDelegate>)self;
 		[self presentViewController:leaderboardVC];
 	}

@@ -22,12 +22,15 @@
 }
 
 -(void)activeEffect {
-    LineComponent *lineCom = (LineComponent *)[self.owner getComponentOfClass:[LineComponent class]];
-    int line = 0;
+    LineComponent *line = (LineComponent *)[self.owner getComponentOfClass:[LineComponent class]];
+    
+    int nextLine = 0;
+    
     do {
-        line = arc4random_uniform(kMapPathMaxLine);
-    } while (lineCom.currentLine == line);
-    [lineCom changeLine:line];
+        nextLine = arc4random_uniform(kMapPathMaxLine);
+    } while (line.line == nextLine);
+    
+    line.line = nextLine;
 }
 
 @end

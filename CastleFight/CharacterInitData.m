@@ -8,8 +8,8 @@
 
 #import "CharacterInitData.h"
 
-#define kId       @"id"
-#define kLevel      @"level"
+#define kId     @"id"
+#define kLevel  @"level"
 
 @implementation CharacterInitData
 

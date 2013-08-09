@@ -28,11 +28,6 @@ const static int pathSizeHeight = 40;
         [self addChild:_cameraControl];
         
         [self setTouchEnabled:YES];
-        
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelLongPress:)];
-//        longPress.minimumPressDuration = 0.2f;
-//        
-//        [[[CCDirector sharedDirector] view] addGestureRecognizer:longPress];
     }
     return self;
 }
@@ -57,23 +52,6 @@ const static int pathSizeHeight = 40;
 -(int)maxChildZ {
     return self.boundaryY;
 }
-
-//-(void)handelLongPress:(UIGestureRecognizer *)gestureRecognizer {
-//    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//        [hero setMoveDirection:ccp(0, 0)];
-//        return;
-//    }
-//    
-//    CGPoint location = [gestureRecognizer locationInView:[CCDirector sharedDirector].view];
-//    
-//    int halfWidth = [CCDirector sharedDirector].winSize.width / 2;
-//    
-//    if (location.x < halfWidth) {
-//        [hero setMoveDirection:ccp(-1, 0)];
-//    } else {
-//        [hero setMoveDirection:ccp(1, 0)];
-//    }
-//}
 
 -(void)addEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];

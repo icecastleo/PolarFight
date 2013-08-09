@@ -19,7 +19,7 @@ const static float hp_max = 2000.0;
 const static float attack_max = 200.0;
 
 @interface ShopUnitSprite() {
-    CharacterInitData *data;
+    CharacterInitData *_data;
     
     CharacterComponent *character;
     LevelComponent *level;
@@ -36,6 +36,8 @@ const static float attack_max = 200.0;
 
 -(id)initWithEntity:(Entity *)entity characterInitData:(CharacterInitData *)data {
     if (self = [super init]) {
+        _data = data;
+        
         character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
         level = (LevelComponent *)[entity getComponentOfClass:[LevelComponent class]];
         attack = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
@@ -183,7 +185,7 @@ const static float attack_max = 200.0;
         [FileManager sharedFileManager].userMoney -= upgradePrice;
         
         level.level++;
-        data.level++;
+        _data.level++;
         
         [self updateUnitSprite];
     }
