@@ -166,6 +166,30 @@
     return NO;
 }
 
+-(BOOL)canSummonCharacterInThisArea:(CGPoint)position {
+    int boundaryTop = kMapPathFloor + kMapPathHeight * kMapPathMaxLine;
+    int boundaryBottom = kMapPathFloor;
+    int boundaryLeft = kMapStartDistance/2;
+    int boundaryRight = kMapStartDistance/2 + kMapStartDistance;
+    
+    if (position.x > boundaryLeft && position.x < boundaryRight && position.y > boundaryBottom && position.y < boundaryTop) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(int)positionConvertToLine:(CGPoint)position {
+    int line = (position.y - kMapPathFloor)/kMapPathHeight;
+    
+    if (line >= kMapPathMaxLine) {
+        line = kMapPathMaxLine - 1;
+    } else if (line < 0) {
+        line = 0;
+    }
+    return line;
+}
+
 //#pragma mark Touch methods
 //-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
 //    CGPoint location = [touch locationInView:touch.view];

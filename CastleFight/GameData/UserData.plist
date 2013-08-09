@@ -5,7 +5,7 @@
 	<key>id</key>
 	<string>001</string>
 	<key>money</key>
-	<integer>1500</integer>
+	<integer>15000</integer>
 	<key>backgroundMusicEnable</key>
 	<true/>
 	<key>soundsEffectEnable</key>

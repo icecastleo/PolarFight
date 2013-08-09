@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>01_01</key>
+	<key>01 - 01</key>
 	<dict>
 		<key>enemies</key>
 		<array>
@@ -76,12 +76,6 @@
 	</dict>
 	<key>01 - 02</key>
 	<dict>
-		<key>id</key>
-		<string>01_02</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -154,12 +148,6 @@
 	</dict>
 	<key>01 - 03</key>
 	<dict>
-		<key>id</key>
-		<string>01_03</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -232,12 +220,6 @@
 	</dict>
 	<key>01 - 04</key>
 	<dict>
-		<key>id</key>
-		<string>01_04</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -310,12 +292,6 @@
 	</dict>
 	<key>01 - 05</key>
 	<dict>
-		<key>id</key>
-		<string>01_05</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -388,12 +364,6 @@
 	</dict>
 	<key>01 - 06</key>
 	<dict>
-		<key>id</key>
-		<string>01_06</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -466,12 +436,6 @@
 	</dict>
 	<key>01 - 07</key>
 	<dict>
-		<key>id</key>
-		<string>01_7</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -544,12 +508,6 @@
 	</dict>
 	<key>01 - 08</key>
 	<dict>
-		<key>id</key>
-		<string>01_08</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -622,12 +580,6 @@
 	</dict>
 	<key>01 - 09</key>
 	<dict>
-		<key>id</key>
-		<string>01_09</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -700,12 +652,6 @@
 	</dict>
 	<key>01 - 10</key>
 	<dict>
-		<key>id</key>
-		<string>01_10</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -778,12 +724,6 @@
 	</dict>
 	<key>01 - 11</key>
 	<dict>
-		<key>id</key>
-		<string>01_11</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -856,12 +796,6 @@
 	</dict>
 	<key>01 - 12</key>
 	<dict>
-		<key>id</key>
-		<string>01_12</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -934,12 +868,6 @@
 	</dict>
 	<key>01 - 13</key>
 	<dict>
-		<key>id</key>
-		<string>01_13</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -1012,12 +940,6 @@
 	</dict>
 	<key>01 - 14</key>
 	<dict>
-		<key>id</key>
-		<string>01_14</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>
@@ -1090,12 +1012,6 @@
 	</dict>
 	<key>01 - 15</key>
 	<dict>
-		<key>id</key>
-		<string>01_15</string>
-		<key>map</key>
-		<string></string>
-		<key>backgroundMusic</key>
-		<string></string>
 		<key>enemies</key>
 		<array>
 			<dict>

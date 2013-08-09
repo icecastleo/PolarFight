@@ -192,6 +192,9 @@
 		37E68CA516F97B4900AB5FBD /* CharacterInitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterInitData.m */; };
 		37E75129175CCB3B009AFEFB /* PeaceSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E75128175CCB3B009AFEFB /* PeaceSkill.m */; };
 		37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BE17549F7800E0435E /* KnockOutSkill.m */; };
+		37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37EC99A517B107CA00B8F4DE /* SummonMagic_button.png */; };
+		37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */; };
+		37EC99AB17B13ACE00B8F4DE /* SummonToLineMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */; };
 		9B00120217B4D01300DB7D5A /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B00120117B4D01300DB7D5A /* wall.png */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
@@ -826,6 +829,10 @@
 		37E75128175CCB3B009AFEFB /* PeaceSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeaceSkill.m; sourceTree = "<group>"; };
 		37E798BD17549F7800E0435E /* KnockOutSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KnockOutSkill.h; sourceTree = "<group>"; };
 		37E798BE17549F7800E0435E /* KnockOutSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KnockOutSkill.m; sourceTree = "<group>"; };
+		37EC99A517B107CA00B8F4DE /* SummonMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SummonMagic_button.png; sourceTree = "<group>"; };
+		37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SummonMagic_button@2x.png"; sourceTree = "<group>"; };
+		37EC99A917B13ACD00B8F4DE /* SummonToLineMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummonToLineMagic.h; sourceTree = "<group>"; };
+		37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummonToLineMagic.m; sourceTree = "<group>"; };
 		9B00120117B4D01300DB7D5A /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* CastleFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastleFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -3454,6 +3461,8 @@
 				374ECEA217A26CB300F02F26 /* yellow_arrow.png in Resources */,
 				B614E32817A9509A00C358AA /* christmas.png in Resources */,
 				9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */,
+				37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */,
+				37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */,
 				9B00120217B4D01300DB7D5A /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

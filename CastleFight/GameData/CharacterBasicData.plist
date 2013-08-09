@@ -72,8 +72,16 @@
 			<key>PoisonMeleeAttackSkill</key>
 			<string>sample.caf</string>
 		</dict>
-		<key>animations</key>
-		<dict/>
+		<key>AIComponent</key>
+		<dict>
+			<key>state</key>
+			<string>AIStateWalk</string>
+			<key>skillProbability</key>
+			<dict>
+				<key>attack1</key>
+				<integer>1</integer>
+			</dict>
+		</dict>
 	</dict>
 	<key>002</key>
 	<dict>

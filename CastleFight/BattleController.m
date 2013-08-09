@@ -67,7 +67,7 @@ __weak static BattleController* currentInstance;
         
         battleName = [NSString stringWithFormat:@"%02d_%02d", prefix, suffix];
         
-        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d - %02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
@@ -290,6 +290,7 @@ __weak static BattleController* currentInstance;
             SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
             MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
             MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+            SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
             
             if (magicCom) { // Hero hold this until next one is selected.
                 [selectCom unSelected];
@@ -305,10 +306,12 @@ __weak static BattleController* currentInstance;
                 [pathCom.path removeAllObjects];
                 [pathCom.path addObjectsFromArray:path];
             } else {
-                if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                    if (magicCom) {
+                if (summonCom && magicCom) {
+                    if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
                         [magicCom activeWithPath:path];
                     }
+                } else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
+                    [magicCom activeWithPath:path];
                 }
             }
         }
