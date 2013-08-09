@@ -43,8 +43,8 @@
 
 // It is not used since 'SneakyJoystick' is a library
 #define kTouchPriotiryDpad 1
+#define kTouchPriorityBattleController 2
 #define kTouchPriorityMap 3
-#define kTouchPriorityBattleController 5
 
 // For Aura and PassiveSkill
 #define kAuraInterval 0.4
