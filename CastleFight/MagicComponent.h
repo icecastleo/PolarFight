@@ -26,7 +26,7 @@
 @property (nonatomic) float cooldown;
 @property (nonatomic) float currentCooldown;
 
--(id)initWithDamageAttribute:(Attribute *)damage andMagicName:(NSString*)name andNeedImages:(NSDictionary *)images;
+-(id)initWithDictionary:(NSDictionary *)dic;
 
 -(void)activeWithPath:(NSArray *)path;
 -(void)didExecute;

@@ -30,7 +30,7 @@
 }
 
 -(void)active {
-    if (!self.map || !self.magicInformation) {
+    if (!self.entityFactory.mapLayer || !self.magicInformation) {
         return;
     }
     

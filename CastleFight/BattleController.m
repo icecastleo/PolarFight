@@ -34,6 +34,7 @@
 #import "MovePathComponent.h"
 #import "MagicSystem.h"
 #import "MagicComponent.h"
+#import "SummonComponent.h"
 
 @interface BattleController () {
     int _prefix;
@@ -166,6 +167,10 @@ __weak static BattleController* currentInstance;
         }
         fingerOneHash = 0;
     }
+}
+
+-(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
+    fingerOneHash = 0;
 }
 
 -(void)setCastle {
@@ -314,26 +319,26 @@ __weak static BattleController* currentInstance;
     
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
     
-    NSMutableArray *drawPath = [[NSMutableArray alloc] init];
-    [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
-    [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+    SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
     
-    DrawPath *line = [DrawPath node];
-    line.path = drawPath;
+    if (selectCom.hasDragLine) {
+        NSMutableArray *drawPath = [[NSMutableArray alloc] init];
+        [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
+        [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+        DrawPath *line = [DrawPath node];
+        line.path = drawPath;
+        [statusLayer addChild:line z:0 tag:kDrawPathTag];
+    }
     
     MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
     
-    NSString *rangeSpriteName1,*rangeSpriteName2;
     float rotation = 0;
+    CGSize drawSize;
+    
     if (magicCom) {
-        line.drawSize = magicCom.rangeSize;
-        rangeSpriteName1 = @"rangeFrame_1.png";
-        rangeSpriteName2 = @"rangeFrame_2.png";
-        
+        drawSize = magicCom.rangeSize;
     }else {
-        line.drawSize = CGSizeMake(30, 30);
-        rangeSpriteName1 = @"yellow_arrow.png";
-        rangeSpriteName2 = @"yellow_arrow.png";
+        drawSize = CGSizeMake(30, 30);
         // Determine angle to Hero
         CGPoint position = [renderCom.node.parent convertToWorldSpace:renderCom.position];
         float offRealY = touchLocation.y - position.y;
@@ -346,31 +351,38 @@ __weak static BattleController* currentInstance;
         }
     }
     
-    if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-        rangeSpriteName2 = @"forbidden_sign.png";
+    // draw range frame
+    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
+    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
+    
+    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+    if (summonCom) {
+        rangeFrame1 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage1];
+        rangeFrame2 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage2];
+        [rangeFrame1 setOpacity:128];
+        [rangeFrame2 setOpacity:0];
+    }else {
+        rangeFrame1.scaleX = drawSize.width / rangeFrame1.contentSize.width;
+        rangeFrame1.scaleY = drawSize.height / rangeFrame1.contentSize.height;
+        
+        if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+            rangeFrame2 = [CCSprite spriteWithFile:@"forbidden_sign.png"];
+        }
+        [rangeFrame2 setOpacity:255];
+        CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
+        CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
+        CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
+        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
+        [rangeFrame2 runAction:repeat];
     }
     
-    // draw range frame
-    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:rangeSpriteName1];
-    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:rangeSpriteName2];
     rangeFrame1.rotation = rotation;
-    
-    rangeFrame1.scaleX = line.drawSize.width / rangeFrame1.contentSize.width;
-    rangeFrame1.scaleY = line.drawSize.height / rangeFrame1.contentSize.height;
     rangeFrame1.position = touchLocation;
     rangeFrame2.anchorPoint = ccp(0,0);
-    
     [rangeFrame1 addChild:rangeFrame2];
     
-    [rangeFrame2 setOpacity:255];
-    CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
-    CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
-    CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
-    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
-    [rangeFrame2 runAction:repeat];
-    
     [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
-    [statusLayer addChild:line z:0 tag:kDrawPathTag];
+    
 }
 
 -(void)removeStatusLayerChild {

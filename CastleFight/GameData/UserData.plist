@@ -90,14 +90,7 @@
 		</dict>
 	</array>
 	<key>battleTeam</key>
-	<array>
-		<dict>
-			<key>id</key>
-			<string>203</string>
-			<key>level</key>
-			<string>10</string>
-		</dict>
-	</array>
+	<array/>
 	<key>items</key>
 	<array/>
 	<key>magicTeam</key>

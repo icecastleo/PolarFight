@@ -75,7 +75,7 @@
         player.foodRate += player.foodAddend;
         
         // Auto add to map
-        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2];
+        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2 addToMap:YES];
 
         // Add count
         nextEnemy.currentCount++;

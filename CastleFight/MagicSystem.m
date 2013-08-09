@@ -13,6 +13,7 @@
 #import "CostComponent.h"
 #import "PlayerComponent.h"
 #import "SelectableComponent.h"
+#import "SummonComponent.h"
 
 @implementation MagicSystem
 
@@ -54,8 +55,15 @@
             NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:magicCom.path,@"path", magicCom.damage,@"damage", magicCom.images,@"images", nil];
             
             Magic* magic = [[NSClassFromString(magicCom.name) alloc] initWithMagicInformation:magicInfo];
-            magic.owner = magicCom.spellCaster;
-            magic.map = self.entityFactory.mapLayer;
+            
+            SummonComponent *summonCom = (SummonComponent *)[magicCom.entity getComponentOfClass:[SummonComponent class]];
+            if(summonCom) {
+               magic.owner = magicCom.entity;
+            }else {
+               magic.owner = magicCom.spellCaster; 
+            }
+            
+            magic.entityFactory = self.entityFactory;
             [magic active];
             
             [magicCom didExecute];

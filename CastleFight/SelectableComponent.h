@@ -11,6 +11,9 @@
 @interface SelectableComponent : Component
 
 @property (nonatomic) BOOL canSelect;
+@property (nonatomic) BOOL hasDragLine;
+@property (nonatomic) NSString *dragImage1;
+@property (nonatomic) NSString *dragImage2;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
 
