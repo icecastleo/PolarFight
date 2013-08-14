@@ -384,6 +384,10 @@
         }
     }
     
+    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+    MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
+    selectCom.dragDelegate = magicCom;
+    
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
@@ -426,6 +430,7 @@
     }
     NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
     SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+    selectCom.dragDelegate = magicCom;
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];

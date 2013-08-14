@@ -11,7 +11,7 @@
 
 @class Attribute;
 
-@interface MagicComponent : Component
+@interface MagicComponent : Component <SelectableComponentDelegate>
 
 @property (nonatomic,readonly) Attribute *damage;
 @property (nonatomic,readonly) NSString *name;

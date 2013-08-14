@@ -225,10 +225,12 @@ __weak static BattleController* currentInstance;
                     } else {
                         if (summonCom && magicCom) {
                             if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                                [magicCom activeWithPath:path];
+//                                [magicCom activeWithPath:path];
+                                [selectCom handleDrag:path];
                             }
                         }else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
-                            [magicCom activeWithPath:path];
+                            [selectCom handleDrag:path];
+//                            [magicCom activeWithPath:path];
                         }
                     }
                     break;

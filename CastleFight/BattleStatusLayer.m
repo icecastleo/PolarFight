@@ -133,13 +133,13 @@
         costLabel.scale = 0.5;
         costLabel.position = ccp(0, 0 - costLabel.boundingBox.size.height);
         costLabel.color = ccGOLD;
-        [renderCom.node addChild:costLabel z:0 tag:1234];
+        [renderCom.node addChild:costLabel z:0 tag:kCostLabelTag];
         
         CCLabelBMFont *levelLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"Lv.%d",levelCom.level] fntFile:@"font/cooper_20_o.fnt"];
         levelLabel.anchorPoint = ccp(0.5, 1);
         levelLabel.scale = 0.5;
         levelLabel.position = ccp(0, renderCom.sprite.boundingBox.size.height - costLabel.boundingBox.size.height);
-        [renderCom.node addChild:levelLabel];
+        [renderCom.node addChild:levelLabel z:0 tag:kLevelLabelTag];
     }
     
     for (SummonComponent *summon in player.battleTeam) {
@@ -177,7 +177,7 @@
         label.color = color;
         label.position =  ccp(0, renderCom.sprite.boundingBox.size.height/2 + label.boundingBox.size.height);
         label.anchorPoint = CGPointMake(0.5, 1);
-        [renderCom.node addChild:label];
+        [renderCom.node addChild:label z:0 tag:kCostLabelTag];
     }
     
     // FIXME: Delete after test

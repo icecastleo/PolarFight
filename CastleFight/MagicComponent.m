@@ -45,4 +45,12 @@
     _path = nil;
 }
 
+-(void)handleDrag:(NSArray *)path {
+    [self activeWithPath:path];
+}
+
+-(void)handleTap:(NSArray *)path {
+    [self activeWithPath:path];
+}
+
 @end

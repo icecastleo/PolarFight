@@ -9,8 +9,6 @@
 #import "SelectableComponent.h"
 #import "RenderComponent.h"
 
-#define kSelectedImageTag 99999
-
 @interface SelectableComponent()
 {
     BOOL selected;
@@ -35,6 +33,9 @@
     if (type == kEntityEventDead){
         [self unSelected];
     }
+    if (type == kEventSelectable) {
+        _canSelect = [message boolValue];
+    }
 }
 
 -(void)select {
@@ -56,6 +57,14 @@
     selected = NO;
     RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
     [render.node removeChildByTag:kSelectedImageTag cleanup:YES];
+}
+
+-(void)handleTap:(NSArray *)path {
+    [self.tapDelegate handleTap:path];
+}
+
+-(void)handleDrag:(NSArray *)path {
+    [self.dragDelegate handleDrag:path];
 }
 
 @end

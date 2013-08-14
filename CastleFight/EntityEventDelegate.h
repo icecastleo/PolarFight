@@ -15,3 +15,11 @@
 -(void)receiveEvent:(EntityEvent)type Message:(id)message;
 
 @end
+
+@protocol SelectableComponentDelegate <NSObject>
+
+@optional
+-(void)handleTap:(NSArray *)path;
+-(void)handleDrag:(NSArray *)path;
+
+@end

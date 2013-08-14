@@ -39,7 +39,7 @@
         costLabel.scale = 0.5;
         costLabel.position = ccp(self.boundingBox.size.width / 2, 0);
         costLabel.color = ccGOLD;
-        [self addChild:costLabel z:0 tag:1234];
+        [self addChild:costLabel z:0 tag:kCostLabelTag];
         
         CCLabelBMFont *levelLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"Lv.%d",summon.data.level] fntFile:@"font/cooper_20_o.fnt"];
         levelLabel.anchorPoint = ccp(0.5, 1);
@@ -66,7 +66,7 @@
 }
 
 -(void)updateLabelString:(NSString *)string {
-    CCLabelBMFont* label= (CCLabelBMFont*)[self getChildByTag:1234];
+    CCLabelBMFont* label= (CCLabelBMFont*)[self getChildByTag:kCostLabelTag];
     [label setString:string];
 }
 

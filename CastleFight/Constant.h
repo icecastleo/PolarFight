@@ -67,8 +67,12 @@
 #define kShadowWidthScale 0.75
 #define kShadowHeightScale 0.125
 
+// For CCNode child's tag
 #define kDrawPathTag 9876
 #define kDrawPathRangeSprite 9877
+#define kCostLabelTag 9878
+#define kLevelLabelTag 9879
+#define kSelectedImageTag 9880
 
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"
