@@ -83,6 +83,17 @@
 
 #define kAISystemUpdateInterval 0.1
 
+//For Orbs
+#define kOrbBoardRows 3
+#define kOrbBoardColumns 6
+#define kOrbBoardWidth 320
+#define kOrbBoardHeight 250
+#define kOrb_XPad 4
+#define kOrb_YPad 1
+#define kOrb_XSIZE 50 //pixels
+#define kOrb_YSIZE 50 //pixels
+#define kOrbBoardMinBorder 0
+
 typedef enum {
     kAnimationTypeUniqueCharacter,
     kAnimationTypeNormalCharacter,
@@ -163,6 +174,16 @@ typedef enum {
     statusAttackBuff,
 } AuraStatusType;
 
+typedef enum {
+    OrbNull = 0,
+    OrbRed,
+    OrbBlue,
+    OrbGreen,
+    OrbYellow,
+    OrbPurple,
+    OrbPink,
+    OrbBottom
+} OrbType;
 
 #import "ccTypes.h"
 

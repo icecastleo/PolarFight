@@ -45,6 +45,8 @@
 #import "MagicSkillComponent.h"
 #import "MagicComponent.h"
 #import "MaskComponent.h"
+#import "OrbComponent.h"
+#import "OrbBoardComponent.h"
 
 #import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
@@ -434,6 +436,43 @@
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];
+    
+    return entity;
+}
+
+-(Entity *)createOrbForType:(OrbType)type {
+    Entity *entity = [_entityManager createEntity];
+    
+    NSString *cid = [NSString stringWithFormat:@"100%d",type];
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
+    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    [entity addComponent:renderCom];
+    
+    OrbComponent *orbCom = [[OrbComponent alloc] init];
+    orbCom.type = type;
+    [entity addComponent:orbCom];
+    
+    NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
+    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+    selectCom.dragDelegate = orbCom;
+    [entity addComponent:selectCom];
+    
+    return entity;
+}
+
+-(Entity *)createOrbBoard {
+    Entity *entity = [_entityManager createEntity];
+    
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
+    NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
+    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    [entity addComponent:renderCom];
+    
+    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
+    [entity addComponent:orbBoardCom];
     
     return entity;
 }

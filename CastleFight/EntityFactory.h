@@ -24,6 +24,8 @@
 -(Entity *)createPlayerForTeam:(int)team;
 
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level team:(int)team;
+-(Entity *)createOrbForType:(OrbType)type;
+-(Entity *)createOrbBoard;
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
 

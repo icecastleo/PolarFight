@@ -97,6 +97,12 @@ __weak static BattleController* currentInstance;
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
 
+        Entity *board = [entityFactory createOrbBoard];
+        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfClass:[RenderComponent class]];
+        boardRenderCom.node.position = ccp(240,160);
+//        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+        [statusLayer addChild:boardRenderCom.node];
+        
         [self scheduleUpdate];
                 
         fingerOneHash = 0;
@@ -231,6 +237,8 @@ __weak static BattleController* currentInstance;
                         }else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
                             [selectCom handleDrag:path];
 //                            [magicCom activeWithPath:path];
+                        }else {
+                            [selectCom handleDrag:path];
                         }
                     }
                     break;
