@@ -148,7 +148,6 @@
 		378451F5179648FE0074F718 /* CCSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F0179648FE0074F718 /* CCSkeleton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F2179648FE0074F718 /* CCSkeletonAnimation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F7179648FE0074F718 /* spine-cocos2d-iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3799B71D1650E06D00A9A394 /* libxml2.dylib */; };
 		37D498281786B1B100413D56 /* MagicSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D498271786B1B100413D56 /* MagicSkillComponent.m */; };
 		37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563A177438ED005ACE35 /* HeroComponent.m */; };
 		37D7563E17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */; };
@@ -215,6 +214,7 @@
 		37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 37EC99A517B107CA00B8F4DE /* SummonMagic_button.png */; };
 		37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */; };
 		37EC99AB17B13ACE00B8F4DE /* SummonToLineMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */; };
+		9B00120217B4D01300DB7D5A /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B00120117B4D01300DB7D5A /* wall.png */; };
 		9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE31635275000E06018 /* QuartzCore.framework */; };
 		9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE51635275000E06018 /* OpenGLES.framework */; };
 		9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B062CE71635275000E06018 /* OpenAL.framework */; };
@@ -752,14 +752,13 @@
 		378451F2179648FE0074F718 /* CCSkeletonAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSkeletonAnimation.m; sourceTree = "<group>"; };
 		378451F3179648FE0074F718 /* spine-cocos2d-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spine-cocos2d-iphone.h"; sourceTree = "<group>"; };
 		378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "spine-cocos2d-iphone.m"; sourceTree = "<group>"; };
-		3799B71D1650E06D00A9A394 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		37D498261786B1B100413D56 /* MagicSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSkillComponent.h; sourceTree = "<group>"; };
 		37D498271786B1B100413D56 /* MagicSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSkillComponent.m; sourceTree = "<group>"; };
 		37D75639177438ED005ACE35 /* HeroComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroComponent.h; sourceTree = "<group>"; };
 		37D7563A177438ED005ACE35 /* HeroComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroComponent.m; sourceTree = "<group>"; };
 		37D7563C17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackWithThirtyAndDouble.h; sourceTree = "<group>"; };
 		37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectAttackWithThirtyAndDouble.m; sourceTree = "<group>"; };
-		37D8329E17130EF2001A1C3A /* AppSpecificValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSpecificValues.h; sourceTree = "<group>"; };
+		37D8329E17130EF2001A1C3A /* GameCenterConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterConstant.h; sourceTree = "<group>"; };
 		37D8329F17130EF2001A1C3A /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
 		37D832A017130EF2001A1C3A /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
 		37D97D34177198F600A2A7D6 /* MovePathComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePathComponent.h; sourceTree = "<group>"; };
@@ -875,6 +874,7 @@
 		37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SummonMagic_button@2x.png"; sourceTree = "<group>"; };
 		37EC99A917B13ACD00B8F4DE /* SummonToLineMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummonToLineMagic.h; sourceTree = "<group>"; };
 		37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummonToLineMagic.m; sourceTree = "<group>"; };
+		9B00120117B4D01300DB7D5A /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 		9B062CDF1635275000E06018 /* CastleFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastleFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B062CE31635275000E06018 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9B062CE51635275000E06018 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1573,7 +1573,6 @@
 				37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */,
 				37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */,
 				9B3E4FE01675F14D000CFFFB /* libcocos2d.a in Frameworks */,
-				3799B71E1650E06D00A9A394 /* libxml2.dylib in Frameworks */,
 				9B062CE41635275000E06018 /* QuartzCore.framework in Frameworks */,
 				9B062CE61635275000E06018 /* OpenGLES.framework in Frameworks */,
 				9B062CE81635275000E06018 /* OpenAL.framework in Frameworks */,
@@ -1856,7 +1855,7 @@
 		37D8329C17130ED9001A1C3A /* GameCenter */ = {
 			isa = PBXGroup;
 			children = (
-				37D8329E17130EF2001A1C3A /* AppSpecificValues.h */,
+				37D8329E17130EF2001A1C3A /* GameCenterConstant.h */,
 				37D8329F17130EF2001A1C3A /* GameCenterManager.h */,
 				37D832A017130EF2001A1C3A /* GameCenterManager.m */,
 				37E4C0701726872C00541F87 /* GameCenterLayer.h */,
@@ -1980,7 +1979,6 @@
 				9B59598317733CFA004146D6 /* CoreText.framework */,
 				9B062CEF1635275000E06018 /* Foundation.framework */,
 				9B062CF31635275000E06018 /* GameKit.framework */,
-				3799B71D1650E06D00A9A394 /* libxml2.dylib */,
 				2D05597C17157A5100F82A08 /* MediaPlayer.framework */,
 				9B062CE71635275000E06018 /* OpenAL.framework */,
 				9B062CE51635275000E06018 /* OpenGLES.framework */,
@@ -2179,6 +2177,8 @@
 				9B146C7E1736D7AB00D141F1 /* CollisionComponent.m */,
 				9B27D6AB17832F020012E126 /* KnockOutComponent.h */,
 				9B27D6AC17832F020012E126 /* KnockOutComponent.m */,
+				9BD48F1617AFEDBB00DBFDE9 /* AuraComponent.h */,
+				9BD48F1717AFEDBB00DBFDE9 /* AuraComponent.m */,
 			);
 			name = CombatComponents;
 			sourceTree = "<group>";
@@ -3531,7 +3531,6 @@
 				374ECEA217A26CB300F02F26 /* yellow_arrow.png in Resources */,
 				B614E32817A9509A00C358AA /* christmas.png in Resources */,
 				9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */,
-				B614E32817A9509A00C358AA /* christmas.png in Resources */,
 				37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */,
 				37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */,
 				37020ED017BBB53F0063A4BB /* board.png in Resources */,

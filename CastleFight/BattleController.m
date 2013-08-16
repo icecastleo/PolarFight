@@ -68,7 +68,7 @@ __weak static BattleController* currentInstance;
         
         battleName = [NSString stringWithFormat:@"%02d_%02d", prefix, suffix];
         
-        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d_%02d", prefix, suffix]];
+        _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d - %02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
@@ -291,10 +291,7 @@ __weak static BattleController* currentInstance;
         [system update:delta];
     }
     
-    // FIXME: As player component delegate?
-    PlayerComponent *player = (PlayerComponent *)[_userPlayer getComponentOfClass:[PlayerComponent class]];
-    [statusLayer updateFood:(int)player.food];
-    [statusLayer updateMana:(int)player.mana];
+    [statusLayer update:delta];
     
     [self checkBattleEnd];
 }

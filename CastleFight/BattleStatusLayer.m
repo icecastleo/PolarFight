@@ -13,13 +13,26 @@
 #import "UnitMenuItem.h"
 #import "FileManager.h"
 #import "AchievementManager.h"
-#import "CharacterInitData.h"
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
 #import "RenderComponent.h"
 #import "MagicSkillComponent.h"
 #import "CostComponent.h"
 #import "LevelComponent.h"
+
+@interface BattleStatusLayer() {
+    PlayerComponent *player;
+    
+    float playTime;
+    
+    CCLabelBMFont *food;
+    CCLabelBMFont *mana;
+    
+    CCLabelBMFont *timeLabel;
+    NSMutableArray *unitItems;
+}
+
+@end
 
 @implementation BattleStatusLayer
 
@@ -29,9 +42,10 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ingame.plist"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
         
-        CGSize winSize = [CCDirector sharedDirector].winSize;
+        player = (PlayerComponent *)[battleController.userPlayer getComponentOfClass:[PlayerComponent class]];;
+        playTime = 0;
         
-        PlayerComponent *player = (PlayerComponent *)[battleController.userPlayer getComponentOfClass:[PlayerComponent class]];
+        CGSize winSize = [CCDirector sharedDirector].winSize;
         
         CCSprite *miniMap = [CCSprite spriteWithSpriteFrameName:@"bg_minimap.png"];
         miniMap.position = ccp(winSize.width / 2 + 25, winSize.height - miniMap.boundingBox.size.height / 2);
@@ -53,6 +67,12 @@
         bloodFrame.position = bloodBackground.position;
         [self addChild:bloodFrame];
 
+        timeLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%2d:%02d", (int)playTime/60, (int)playTime%60] fntFile:@"font/jungle_24_o.fnt"];
+        timeLabel.anchorPoint = ccp(0, 0.5);
+        timeLabel.scale = 0.5;
+        timeLabel.position = ccp(bloodBackground.position.x - timeLabel.boundingBox.size.width/2, bloodBackground.position.y);
+        timeLabel.color = ccWHITE;
+        [self addChild:timeLabel];
         
         CCSprite *resource = [CCSprite spriteWithSpriteFrameName:@"bg_diafish.png"];
         resource.anchorPoint = ccp(0, 1);
@@ -80,36 +100,14 @@
         mana.color = ccBLUEVIOLET;
         [self addChild:mana];
         
-        [self setUnitBoardWithPlayerComponent:player];
+        [self setUnitBoard];
         [self setPauseButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
     }
     return self;
 }
 
--(void)setPauseButton {
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
-                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
-                                 target:self selector:@selector(pauseButtonTapped:)];
-    
-    float width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
-    float height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
-    pauseMenuItem.position = ccp(width, height);
-    
-    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
-    pauseMenu.position = CGPointZero;
-    [self addChild:pauseMenu];
-}
-
--(void)pauseButtonTapped:(id)sender {
-    [self addChild:[PauseLayer node]];
-}
-
--(void)setUnitBoardWithPlayerComponent:(PlayerComponent *)player {
-    // TODO: Set by user data (plist?)
-    
+-(void)setUnitBoard {
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
     CCSprite *select = [CCSprite spriteWithSpriteFrameName:@"bg_unit_board.png"];
@@ -190,12 +188,33 @@
 //    [select addChild:pauseMenu];
 }
 
--(void)updateFood:(int)foodNumber {
-    [food setString:[NSString stringWithFormat:@"%d", foodNumber]];
+-(void)setPauseButton {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CCMenuItem *pauseMenuItem = [CCMenuItemImage
+                                 itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_up.png"]
+                                 selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_option_01_down.png"]
+                                 target:self selector:@selector(pauseButtonTapped:)];
+    
+    float width = winSize.width - pauseMenuItem.boundingBox.size.width/2;
+    float height = winSize.height - pauseMenuItem.boundingBox.size.height/2;
+    pauseMenuItem.position = ccp(width, height);
+    
+    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
+    pauseMenu.position = CGPointZero;
+    [self addChild:pauseMenu];
 }
 
--(void)updateMana:(int)manaNumber {
-    [mana setString:[NSString stringWithFormat:@"%d", manaNumber]];
+-(void)pauseButtonTapped:(id)sender {
+    [self addChild:[PauseLayer node]];
+}
+
+-(void)update:(ccTime)delta {
+    playTime += delta;
+    
+    [timeLabel setString:[NSString stringWithFormat:@"%2d:%02d", (int)playTime/60, (int)playTime%60]];
+    
+    [food setString:[NSString stringWithFormat:@"%d", (int)player.food]];
+    [mana setString:[NSString stringWithFormat:@"%d", (int)player.mana]];
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {

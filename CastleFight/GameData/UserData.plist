@@ -5,15 +5,15 @@
 	<key>id</key>
 	<string>001</string>
 	<key>money</key>
-	<integer>1500</integer>
-	<key>soundsEffectSwitch</key>
+	<integer>15000</integer>
+	<key>backgroundMusicEnable</key>
 	<true/>
-	<key>backgroundMusicSwitch</key>
+	<key>soundsEffectEnable</key>
 	<true/>
-	<key>soundsEffectVolume</key>
-	<real>0.5</real>
 	<key>backgroundMusicVolume</key>
 	<real>0.05</real>
+	<key>soundsEffectVolume</key>
+	<real>0.5</real>
 	<key>characters</key>
 	<array>
 		<dict>
@@ -90,14 +90,7 @@
 		</dict>
 	</array>
 	<key>battleTeam</key>
-	<array>
-		<dict>
-			<key>id</key>
-			<string>203</string>
-			<key>level</key>
-			<string>10</string>
-		</dict>
-	</array>
+	<array/>
 	<key>items</key>
 	<array/>
 	<key>magicTeam</key>

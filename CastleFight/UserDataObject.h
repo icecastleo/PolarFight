@@ -14,10 +14,11 @@
 
 @property int money;
 
-@property (nonatomic) BOOL soundsEffectSwitch;
 @property (nonatomic) BOOL backgroundMusicSwitch;
-@property (nonatomic) float soundsEffectVolume;
+@property (nonatomic) BOOL soundsEffectSwitch;
 @property (nonatomic) float backgroundMusicVolume;
+@property (nonatomic) float soundsEffectVolume;
+
 @property NSArray *achievements;
 @property NSArray *properties;
 
@@ -30,9 +31,6 @@
 
 //-(Character *)getPlayerHero;
 //-(Character *)getPlayerCastle;
-//-(NSArray *)getPlayerCharacterArray;
-
-//-(void)updatePlayerCharacter:(Character *)character;
 
 //TODO:
 //-(NSArray *)getPlayerItemArray;

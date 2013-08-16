@@ -6,20 +6,14 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "BattleController.h"
+#import "PlayerComponent.h"
 
-@interface BattleStatusLayer : CCLayer {
-//    BattleController *controller;
-    CCLabelBMFont *food;
-    CCLabelBMFont *mana;
-    NSMutableArray *unitItems;
-}
+@interface BattleStatusLayer : CCLayer
 
 -(id)initWithBattleController:(BattleController *)controller;
--(void)updateFood:(int)foodNumber;
--(void)updateMana:(int)manaNumber;
+-(void)update:(ccTime)delta;
+
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color;
 
 @end

@@ -21,7 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -101,10 +100,10 @@
     
     //FIXME: AppID should change.
     [Appirater setAppId:@"633931508"];
-    [Appirater setDaysUntilPrompt:1];
-    [Appirater setUsesUntilPrompt:10];
+    [Appirater setDaysUntilPrompt:0];
+    [Appirater setUsesUntilPrompt:5];
     [Appirater setSignificantEventsUntilPrompt:-1];
-    [Appirater setTimeBeforeReminding:2];
+    [Appirater setTimeBeforeReminding:3];
     [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
     

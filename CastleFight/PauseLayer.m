@@ -92,9 +92,12 @@ typedef enum {
     
     continueMenuItem.position = ccp(width, height);
     
+    // Backgound music is mute
     if([SimpleAudioEngine sharedEngine].backgroundMusicVolume == 0){
         [bgmToggleItem setSelectedIndex:bgmToggleItem.subItems.count - 1];
     }
+    
+    // Sound effect is mute
     if([SimpleAudioEngine sharedEngine].effectsVolume == 0){
         [effectToggleItem setSelectedIndex:effectToggleItem.subItems.count - 1];
     }

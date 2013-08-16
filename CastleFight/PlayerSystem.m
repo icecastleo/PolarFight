@@ -48,14 +48,14 @@
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
                 
-                // TODO: Maybe another solution!
-                if ([self.entityFactory.mapLayer isKindOfClass:[ThreeLineMapLayer class]]) {
-                    ThreeLineMapLayer *map = (ThreeLineMapLayer *)self.entityFactory.mapLayer;
-                    
-                    if (map.isSelectLineOccupied) {
-                        return;
-                    }
-                }
+//                // TODO: Maybe another solution!
+//                if ([self.entityFactory.mapLayer isKindOfClass:[ThreeLineMapLayer class]]) {
+//                    ThreeLineMapLayer *map = (ThreeLineMapLayer *)self.entityFactory.mapLayer;
+//
+//                    if (map.isSelectLineOccupied) {
+//                        return;
+//                    }
+//                }
                 
                 TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
                 

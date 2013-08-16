@@ -10,14 +10,6 @@
 
 @interface LineComponent : Component
 
-@property (nonatomic,readonly) int currentLine;
-@property (nonatomic,readonly) int nextLine;
-@property (nonatomic,readonly) BOOL doesChangeLine;
-
--(void)didChange;
--(void)changeLine:(int)line;
-
-// only for map when it adds a character.
--(void)instantlyChangeLine:(int)line;
+@property (nonatomic) int line;
 
 @end

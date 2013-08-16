@@ -251,20 +251,23 @@
     
     CCSprite *sprite;
 
-    if (team == 1) {
-        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
-    } else {
-        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
-    }
+//    if (team == 1) {
+//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
+//    } else {
+//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
+//    }
     
-    sprite.scale = 0.1;
+    sprite = [CCSprite spriteWithFile:@"wall.png"];
+    
+    sprite.scaleX = kMapStartDistance/2/sprite.contentSize.width;
+    sprite.scaleY = [CCDirector sharedDirector].winSize.height/sprite.contentSize.height;
     
     Entity *entity = [_entityManager createEntity];
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-    render.enableShadowPosition = YES;
+//    render.enableShadowPosition = YES;
     [entity addComponent:render];
     
     if (_physicsSystem) {

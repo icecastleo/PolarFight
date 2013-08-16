@@ -10,7 +10,7 @@
 
 @interface ThreeLineMapLayer : MapLayer
 
-@property (readonly) BOOL isSelectLineOccupied;
+//@property (readonly) BOOL isSelectLineOccupied;
 
 -(void)addEntity:(Entity *)entity line:(int)line;
 -(void)moveEntity:(Entity *)entity toLine:(int)line;

@@ -7,32 +7,25 @@
 //
 
 #import "LineComponent.h"
+#import "RenderComponent.h"
 
 @implementation LineComponent
 
 -(id)init {
     if (self = [super init]) {
-        _currentLine = 0;
-        _nextLine = 0;
-        _doesChangeLine = NO;
+        _line = 0;
     }
     return self;
 }
 
--(void)didChange {
-    _currentLine = _nextLine;
-    _nextLine = 0;
-    _doesChangeLine = NO;
+-(void)setLine:(int)line {
+    NSString *assert = [NSString stringWithFormat:@"Line value is between 0 & %d", kMapPathMaxLine];
+    NSAssert(_line >= 0 && _line < kMapPathMaxLine, assert);
+    
+    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    render.position = ccp(render.position.x, render.position.y + (line - _line) * kMapPathHeight);
+    
+    _line = line;
 }
 
--(void)changeLine:(int)line {
-    _nextLine = line;
-    _doesChangeLine = YES;
-}
-
--(void)instantlyChangeLine:(int)line {
-    _currentLine = line;
-    _nextLine = 0;
-    _doesChangeLine = NO;
-}
 @end

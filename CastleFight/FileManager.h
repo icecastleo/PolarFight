@@ -23,12 +23,11 @@
 
 +(FileManager *)sharedFileManager;
 
--(NSDictionary *)getAnimationDictionaryByName:(NSString *)animationName;
-
 -(void)setGameConfig;
+-(void)switchSoundsEffect;
+-(void)switchBackgroundMusic;
 
 -(void)preloadSoundsEffect:(NSString *)sceneName;
-
 -(void)saveUserData;
 
 -(BattleDataObject *)loadBattleInfo:(NSString *)name;
@@ -37,9 +36,5 @@
 
 //-(Character *)getPlayerHero;
 //-(Character *)getPlayerCastle;
-//-(void)updatePlayerCharacter:(Character *)character;
-
--(void)switchSoundsEffect;
--(void)switchBackgroundMusic;
 
 @end

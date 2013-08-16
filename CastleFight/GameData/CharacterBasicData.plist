@@ -9,7 +9,7 @@
 		<key>name</key>
 		<string>baby_penguin</string>
 		<key>cost</key>
-		<string>15</string>
+		<string>9</string>
 		<key>attributes</key>
 		<dict>
 			<key>hp</key>
@@ -17,9 +17,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>3</string>
 				<key>c</key>
-				<string>250</string>
+				<string>150</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
@@ -28,9 +28,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2</string>
 				<key>c</key>
-				<string>25</string>
+				<string>20</string>
 			</dict>
 			<key>defense</key>
 			<dict>
@@ -72,13 +72,6 @@
 			<key>PoisonMeleeAttackSkill</key>
 			<string>sample.caf</string>
 		</dict>
-		<key>animations</key>
-		<dict/>
-		<key>auras</key>
-		<dict>
-			<key>AttackUpAura</key>
-			<string>AttackUpAura</string>
-		</dict>
 		<key>AIComponent</key>
 		<dict>
 			<key>state</key>
@@ -105,9 +98,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2</string>
 				<key>c</key>
-				<string>250</string>
+				<string>120</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
@@ -116,9 +109,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>3</string>
 				<key>c</key>
-				<string>25</string>
+				<string>20</string>
 			</dict>
 			<key>defense</key>
 			<dict>
@@ -136,7 +129,7 @@
 				<key>b</key>
 				<string>0</string>
 				<key>c</key>
-				<string>15</string>
+				<string>10</string>
 			</dict>
 			<key>speed</key>
 			<dict>
@@ -249,28 +242,28 @@
 		<key>name</key>
 		<string>jiager_penguin</string>
 		<key>cost</key>
-		<string>30</string>
+		<string>15</string>
 		<key>attributes</key>
 		<dict>
 			<key>hp</key>
 			<dict>
 				<key>a</key>
-				<string>0</string>
+				<string>0.1</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>1.25</string>
 				<key>c</key>
-				<string>250</string>
+				<string>300</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
 			<key>attack</key>
 			<dict>
 				<key>a</key>
-				<string>0</string>
+				<string>0.05</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>0.2</string>
 				<key>c</key>
-				<string>25</string>
+				<string>30</string>
 			</dict>
 			<key>defense</key>
 			<dict>
@@ -709,9 +702,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2.5</string>
 				<key>c</key>
-				<string>250</string>
+				<string>100</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
@@ -720,9 +713,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2.5</string>
 				<key>c</key>
-				<string>25</string>
+				<string>15</string>
 			</dict>
 			<key>defense</key>
 			<dict>
@@ -785,9 +778,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2</string>
 				<key>c</key>
-				<string>250</string>
+				<string>80</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
@@ -796,7 +789,7 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>3</string>
 				<key>c</key>
 				<string>25</string>
 			</dict>
@@ -861,9 +854,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>3</string>
 				<key>c</key>
-				<string>250</string>
+				<string>150</string>
 				<key>isFluctuant</key>
 				<true/>
 			</dict>
@@ -872,9 +865,9 @@
 				<key>a</key>
 				<string>0</string>
 				<key>b</key>
-				<string>0.02c</string>
+				<string>2</string>
 				<key>c</key>
-				<string>25</string>
+				<string>15</string>
 			</dict>
 			<key>defense</key>
 			<dict>
