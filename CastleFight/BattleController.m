@@ -27,6 +27,7 @@
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
 #import "PhysicsSystem.h"
+#import "OrbSystem.h"
 
 #import "DrawPath.h"
 #import "SelectableComponent.h"
@@ -99,8 +100,10 @@ __weak static BattleController* currentInstance;
 
         Entity *board = [entityFactory createOrbBoard];
         RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfClass:[RenderComponent class]];
-        boardRenderCom.node.position = ccp(240,160);
-//        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+        boardRenderCom.node.position = ccp(100,20);
+        boardRenderCom.node.anchorPoint = ccp(0,0);
+        boardRenderCom.sprite.anchorPoint = ccp(0,0);
+        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
         [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
@@ -276,6 +279,7 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[PlayerSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+    [systems addObject:[[OrbSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {

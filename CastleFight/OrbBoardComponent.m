@@ -17,6 +17,7 @@
     int _columns;
     float _width;
     float _height;
+    int _currentColumn;
     EntityFactory *_entityFactory;
 }
 
@@ -31,45 +32,45 @@
         _columns = kOrbBoardColumns;
         _width = kOrbBoardWidth;
         _height = kOrbBoardHeight;
+        _currentColumn = -1;
         
         _board = [NSMutableArray arrayWithCapacity:_columns]; // x axis
-        for (int i=0; i<_columns; i++) {
-            NSMutableArray *boardColumn = [NSMutableArray arrayWithCapacity:_rows];// y axis
-            [_board addObject:boardColumn];
-        }
-        
         //TODO: create lots of Orb.
     }
     return self;
 }
 
--(void)setEntity:(Entity *)entity {
-    [super setEntity:entity];
-    [self produceOrbs];
+-(void)produceOrbs {
+    _currentColumn = ++_currentColumn%_columns;
+    
+    RenderComponent *boardRenderCom = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    NSMutableArray *newColumn = [[NSMutableArray alloc] init];
+    for (int j = 0; j<_rows; j++) {
+        
+        int randomExist = arc4random_uniform(2);
+        if (randomExist == 0) {
+            continue;
+        }
+        
+        int randomOrb = OrbRed + arc4random_uniform(OrbBottom-1);
+        Entity *orb = [_entityFactory createOrbForType:randomOrb];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfClass:[OrbComponent class]];
+        orbCom.board = self.entity;
+        orbCom.position = CGPointMake(_currentColumn, j);
+        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfClass:[RenderComponent class]];
+        
+        CGPoint position = [boardRenderCom.sprite convertToNodeSpace:CGPointMake(boardRenderCom.sprite.boundingBox.size.width+kOrb_XSIZE,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j)];
+        position = [boardRenderCom.node convertToWorldSpace:position];
+        orbRenderCom.node.position = position;
+        [boardRenderCom.node addChild:orbRenderCom.node];
+        
+        [newColumn addObject:orb];
+    }
+    [_board addObject:newColumn];
 }
 
--(void)produceOrbs {
-    RenderComponent *boardRenderCom = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
-    
-    for (int i=0; i<_columns; i++) {
-        NSMutableArray *oldColumn = [_board objectAtIndex:i];
-        for (int j = 0; j<_rows; j++) {
-            int randomOrb = OrbRed + arc4random_uniform(OrbBottom-1);
-            Entity *orb = [_entityFactory createOrbForType:randomOrb];
-            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfClass:[OrbComponent class]];
-            orbCom.board = self.entity;
-            orbCom.position = CGPointMake(i, j);
-            RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfClass:[RenderComponent class]];
-            
-//            orbRenderCom.node.position = [boardRenderCom.sprite convertToWorldSpace:CGPointMake(_width+kOrb_XSIZE/2+(kOrb_XSIZE+kOrb_XPad)*i,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j)];
-            
-            orbRenderCom.node.position = [boardRenderCom.sprite convertToWorldSpace:CGPointMake(kOrb_XSIZE/2+(kOrb_XSIZE+kOrb_XPad)*i,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j+_height)];
-            [orbRenderCom.node runAction:[CCMoveTo actionWithDuration:1.0 position:[boardRenderCom.sprite convertToWorldSpace:CGPointMake(kOrb_XSIZE/2+(kOrb_XSIZE+kOrb_XPad)*i,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j)]]];
-            
-            [boardRenderCom.node addChild:orbRenderCom.node];
-            [oldColumn addObject:orb];
-        }
-    }
+-(void)removeColumn:(int)index {
+    [_board removeObjectAtIndex:index];
 }
 
 -(BOOL)isMovable:(CGPoint)targetPosition {
@@ -90,7 +91,7 @@
     CGPoint target = [self getPositionInTheBoardFromRealPosition:targetPosition floor:YES];
     if([self isMovable:target]) {
         Entity *targetOrb = [self getOrbInPosition:target];
-        [self exchangeOrb:startOrb targetOrb:targetOrb];
+//        [self exchangeOrb:startOrb targetOrb:targetOrb];
         NSLog(@"exchange success");
     }
 }

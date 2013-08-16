@@ -448,6 +448,8 @@
     NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
     CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    renderCom.sprite.scale = kOrb_XSIZE/renderCom.sprite.boundingBox.size.width;
+    
     [entity addComponent:renderCom];
     
     OrbComponent *orbCom = [[OrbComponent alloc] init];

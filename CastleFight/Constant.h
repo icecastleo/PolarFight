@@ -90,8 +90,8 @@
 #define kOrbBoardHeight 250
 #define kOrb_XPad 4
 #define kOrb_YPad 1
-#define kOrb_XSIZE 50 //pixels
-#define kOrb_YSIZE 50 //pixels
+#define kOrb_XSIZE 40 //pixels
+#define kOrb_YSIZE 40 //pixels
 #define kOrbBoardMinBorder 0
 
 typedef enum {
