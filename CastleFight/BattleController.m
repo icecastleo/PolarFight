@@ -185,6 +185,7 @@ __weak static BattleController* currentInstance;
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    
     if (fingerOneHash == [touch hash]){
         
         if (self.selectedEntity) {
@@ -336,6 +337,74 @@ __weak static BattleController* currentInstance;
 
 -(void)endBattle {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
+}
+
+#pragma mark UILongPressGestureRecognizer
+
+-(IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
+    
+    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
+        
+        for (Entity *entity in array) {
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            
+            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
+                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                if (selectCom.canSelect) {
+                    [preSelectCom unSelected];
+                    self.isEntitySelected = YES;
+                    recognizer.cancelsTouchesInView = YES;
+                    self.selectedEntity = entity;
+                    [selectCom select];
+                    return;
+                }
+            }
+        }
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        if (self.isEntitySelected) {
+            [self removeStatusLayerChild];
+            [self drawSelectedRange:touchLocation];
+        }
+    } else if(recognizer.state == UIGestureRecognizerStateEnded) {
+        if (self.isEntitySelected) {
+            self.isEntitySelected = NO;
+            recognizer.cancelsTouchesInView = NO;
+            [self removeStatusLayerChild];
+            
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+            MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+            SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+            
+            if (magicCom) { // Hero hold this until next one is selected.
+                [selectCom unSelected];
+                self.selectedEntity = nil;
+            }
+            
+            // do not need start point.
+            NSMutableArray *path = [[NSMutableArray alloc] init];
+            // move and projectile event uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+            
+            if (pathCom) {
+                [pathCom.path removeAllObjects];
+                [pathCom.path addObjectsFromArray:path];
+            } else {
+                if (summonCom && magicCom) {
+                    if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+                        [magicCom activeWithPath:path];
+                    }
+                } else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
+                    [magicCom activeWithPath:path];
+                }
+            }
+        }
+    }
 }
 
 -(void)drawSelectedRange:(CGPoint)touchLocation {

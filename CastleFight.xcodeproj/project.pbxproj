@@ -2026,6 +2026,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B00120117B4D01300DB7D5A /* wall.png */,
 				37020EBF17BBB53F0063A4BB /* orbs */,
 				9BD48F0B17AFD26D00DBFDE9 /* plants.png */,
 				370243D317903FC7008267A8 /* spineData */,
@@ -3533,6 +3534,7 @@
 				9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */,
 				37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */,
 				37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */,
+				9B00120217B4D01300DB7D5A /* wall.png in Resources */,
 				37020ED017BBB53F0063A4BB /* board.png in Resources */,
 				37020ED117BBB53F0063A4BB /* board@2x.png in Resources */,
 				37020EEE17BBB6290063A4BB /* blue.png in Resources */,
