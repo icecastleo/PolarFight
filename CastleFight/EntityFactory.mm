@@ -140,7 +140,7 @@
         [entity addComponent:physics];
         
         // Add Physics body
-        b2Body *body = [self createBoxBodyWithSprite:sprite];
+        b2Body *body = [self createBoxBodyWithEntity:entity];
         body->SetUserData((__bridge void*)entity);
         
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
@@ -273,7 +273,7 @@
         [entity addComponent:physics];
         
         // Add Physics body
-        b2Body *body = [self createBoxBodyWithSprite:sprite];
+        b2Body *body = [self createBoxBodyWithEntity:entity];
         body->SetUserData((__bridge void*)entity);
         
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
@@ -287,7 +287,8 @@
 //    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
 //                          [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
     
-    DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithQuadratic:0 linear:0 constantTerm:3000 isFluctuant:YES]];
+    // TODO: Link with map data?
+    DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithQuadratic:0 linear:0 constantTerm:5000 isFluctuant:YES]];
     [entity addComponent:defenseCom];
     
     // TODO: Init by file
@@ -506,8 +507,11 @@
     return animations;
 }
 
--(b2Body *)createBoxBodyWithSprite:(CCNode *)sprite {
+-(b2Body *)createBoxBodyWithEntity:(Entity *)entity {
     NSAssert(_physicsSystem, @"You can not create a physics body without physics system!");
+    
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    CCNode *sprite = render.sprite;
     
     b2BodyDef spriteBodyDef;
     spriteBodyDef.type = b2_dynamicBody;
@@ -525,6 +529,11 @@
 //    spriteShapeDef.density = 10.0;
     spriteShapeDef.isSensor = true;
     spriteShapeDef.filter.groupIndex = kPhisicsFixtureGroupEntity;
+    
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    if (team) {
+        spriteShapeDef.filter.categoryBits = pow(2, team.team);
+    }
     
     spriteBody->CreateFixture(&spriteShapeDef);
 

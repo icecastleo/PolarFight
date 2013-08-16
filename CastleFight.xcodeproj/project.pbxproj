@@ -2113,8 +2113,6 @@
 				9B146C7E1736D7AB00D141F1 /* CollisionComponent.m */,
 				9B27D6AB17832F020012E126 /* KnockOutComponent.h */,
 				9B27D6AC17832F020012E126 /* KnockOutComponent.m */,
-				9BD48F1617AFEDBB00DBFDE9 /* AuraComponent.h */,
-				9BD48F1717AFEDBB00DBFDE9 /* AuraComponent.m */,
 			);
 			name = CombatComponents;
 			sourceTree = "<group>";
@@ -3919,6 +3917,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3938,6 +3937,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = CastleFight;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"CastleFight/libs\"";
@@ -3950,6 +3950,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shih-Kuang Chu";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shih-Kuang Chu";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3968,6 +3970,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = CastleFight;
+				PROVISIONING_PROFILE = "B75B3A96-8175-405F-AF15-D6C2EA224AC8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B75B3A96-8175-405F-AF15-D6C2EA224AC8";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"CastleFight/libs\"";

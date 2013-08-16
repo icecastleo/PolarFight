@@ -115,8 +115,6 @@
     select.position = ccp(winSize.width / 2, 0);
     [self addChild:select];
     
-    unitItems = [[NSMutableArray alloc] init];
-    
     for (Entity *entity in player.summonComponents) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
         CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
@@ -177,15 +175,6 @@
         label.anchorPoint = CGPointMake(0.5, 1);
         [renderCom.node addChild:label];
     }
-    
-    // FIXME: Delete after test
-//    CCMenuItem *item = [[UnitMenuItem alloc] initWithSummonComponent:nil];
-//    [unitItems addObject:item];
-//    
-//    CCMenu *pauseMenu = [CCMenu menuWithArray:unitItems];
-//    pauseMenu.position = ccp(select.boundingBox.size.width / 2, select.boundingBox.size.height / 2);
-//    [pauseMenu alignItemsHorizontallyWithPadding:0];
-//    [select addChild:pauseMenu];
 }
 
 -(void)setPauseButton {

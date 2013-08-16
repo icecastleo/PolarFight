@@ -68,7 +68,6 @@ static NSMutableArray *yInterval;
     b2FixtureDef spriteShapeDef;
     spriteShapeDef.shape = &spriteShape;
     spriteShapeDef.isSensor = true;
-    spriteShapeDef.filter.groupIndex = kPhisicsFixtureGroupRange;
     
     spriteBody->CreateFixture(&spriteShapeDef);
     

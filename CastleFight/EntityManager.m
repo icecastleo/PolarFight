@@ -10,9 +10,9 @@
 #import "Component.h"
 
 @interface EntityManager() {
-    NSMutableArray * _entities;
-    NSMutableDictionary * _componentsByClass;
-    NSMutableDictionary * _componentsByEntity;
+    NSMutableArray *_entities;
+    NSMutableDictionary *_componentsByClass;
+    NSMutableDictionary *_componentsByEntity;
     uint32_t _lowestUnassignedEid;
 }
 -(uint32_t)generateNewEid;
@@ -96,6 +96,10 @@
 
 -(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
     return _componentsByClass[NSStringFromClass(aClass)][entity.eidNumber];
+}
+
+-(Component *)getComponentOfType:(NSString *)type fromEntity:(Entity *)entity {
+    return _componentsByClass[type][entity.eidNumber];
 }
 
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {

@@ -76,6 +76,25 @@
         
         body = [self createBody];
         
+        // Set filter for fixture
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    
+        for (b2Fixture *f = body->GetFixtureList(); f; f = f->GetNext()) {
+            b2Filter filter = b2Filter();
+            filter.groupIndex = kPhisicsFixtureGroupRange;
+            filter.maskBits = INT16_MIN;
+            
+            if ([sides containsObject:kRangeSideEnemy]) {
+                filter.maskBits += INT16_MAX - pow(2, team.team);
+            }
+            
+            if ([sides containsObject:kRangeSideAlly]) {
+                filter.maskBits += pow(2, team.team);
+            }
+            
+            f->SetFilterData(filter);
+        }
+        
         PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
         physicsNode.b2Body = body;
         
@@ -154,33 +173,11 @@
 
 -(BOOL)containEntity:(Entity *)entity {
     
-    if (![self checkSide:entity]) {
-        return NO;
-    }
-    
     if ([self checkFilter:entity]) {
         return NO;
     }
     
     return YES;
-}
-
--(BOOL)checkSide:(Entity *)entity {
-    TeamComponent *entityTeam = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
-    TeamComponent *ownerTeam = (TeamComponent *)[_owner getComponentOfClass:[TeamComponent class]];
-    
-    if ([sides containsObject:kRangeSideAlly]) {
-        if (entityTeam.team == ownerTeam.team) {
-            return YES;
-        }
-    }
-    
-    if ([sides containsObject:kRangeSideEnemy]) {
-        if (entityTeam.team != ownerTeam.team) {
-            return YES;
-        }
-    }
-    return NO;
 }
 
 -(BOOL)checkFilter:(Entity *)entity {

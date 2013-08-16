@@ -77,7 +77,7 @@
 
 #define kAnimationActionTag 5
 
-#define kAISystemUpdateInterval 0.1
+#define kAISystemUpdateInterval 0.5
 
 typedef enum {
     kAnimationTypeUniqueCharacter,

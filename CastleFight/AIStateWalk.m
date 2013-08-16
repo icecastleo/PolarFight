@@ -16,6 +16,13 @@
 
 #import "AIComponent.h"
 
+// FIXME: Refactoring entity manager
+
+static NSString *t = @"TeamComponent";
+static NSString *m = @"MoveComponent";
+static NSString *ac = @"ActiveSkillComponent";
+static NSString *ai = @"AIComponent";
+
 @implementation AIStateWalk
 
 -(NSString *)name {
@@ -23,9 +30,12 @@
 }
 
 -(void)enter:(Entity *)entity {
-    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
-        
+//    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfType:[TeamComponent type]];
+//    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:[MoveComponent type]];
+    
+    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfType:t];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:m];
+    
     if (teamCom.team == 1) {
         moveCom.velocity = ccp(1, 0);
     } else {
@@ -34,10 +44,11 @@
 }
 
 -(void)updateEntity:(Entity *)entity {    
-    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+//    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfType:[ActiveSkillComponent type]];
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfType:ac];
     
     //test skill
-    AIComponent *aiCom = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfType:ai];
     
     ActiveSkill *skill;
     NSString *skillName = nil;
@@ -95,7 +106,7 @@
 }
 
 -(void)exit:(Entity *)entity {
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:@"MoveComponent"];
     moveCom.velocity = ccp(0, 0);
 }
 

@@ -17,6 +17,7 @@
 -(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
 
 -(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
+-(Component *)getComponentOfType:(NSString *)type fromEntity:(Entity *)entity;
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity;
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;

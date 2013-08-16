@@ -40,6 +40,10 @@
     return [_entityManager getComponentOfClass:aClass fromEntity:self];
 }
 
+-(Component *)getComponentOfType:(NSString *)type {
+    return [_entityManager getComponentOfType:type fromEntity:self];
+}
+
 -(NSArray *)getAllComponents {
     return [_entityManager getAllComponentsOfEntity:self];
 }

@@ -17,7 +17,6 @@
 
 -(id)init {
     if (self = [super init]) {
-//        [self setSkill];
         _combo = [[NSMutableDictionary alloc] initWithCapacity:0];
         _canActive = YES;
         _animationKey = @"attack";
@@ -26,31 +25,11 @@
     return self;
 }
 
-//-(void)setSkill {
-//    [NSException raise:NSInternalInconsistencyException
-//                format:@"You must override %@ in a %@ subclass", NSStringFromSelector(_cmd), NSStringFromClass([self class])];
-//}
-
 -(void)setOwner:(Entity *)owner {
     _owner = owner;
     
     if (range) {
         range.owner = owner;
-        
-//        CCSprite *rangeSprite = range.rangeSprite;
-//        
-//        if (rangeSprite) {
-//            NSAssert(rangeSprite.parent == nil, @"Do you set the owner twice?");
-//            
-//            RenderComponent *render = (RenderComponent *)[owner getComponentOfClass:[RenderComponent class]];
-//            NSAssert(render, @"You can't set an eitity without RenderComponent as owner!");
-//            
-//            // Not needed for circle range
-////            NSAssert([owner getComponentOfClass:[DirectionComponent class]], @"You can't set an eitity without DirectionComponent as owner!");
-//            
-//            rangeSprite.visible = NO;
-//            [render.node addChild:rangeSprite z:-5];
-//        }
     }
 }
 
@@ -107,7 +86,7 @@
                 action.tag = kAnimationActionTag;
                 
                 [render.node runAction:action];
-            }else {
+            } else {
                 CCAnimationFrame *frame = [animation.frames lastObject];
                 
                 CCSequence *attack = [CCSequence actions:

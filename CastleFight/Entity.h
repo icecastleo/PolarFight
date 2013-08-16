@@ -49,6 +49,7 @@ typedef enum {
 -(void)removeComponent:(Class)aClass;
 
 -(Component*)getComponentOfClass:(Class)aClass;
+-(Component*)getComponentOfType:(NSString *)type;
 -(NSArray *)getAllComponents;
 
 -(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
