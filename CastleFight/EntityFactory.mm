@@ -455,7 +455,8 @@
     
     [entity addComponent:renderCom];
     
-    OrbComponent *orbCom = [[OrbComponent alloc] init];
+    NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
+    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
     orbCom.type = type;
     [entity addComponent:orbCom];
     

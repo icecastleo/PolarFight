@@ -2,7 +2,7 @@
 //  OrbBoardComponent.m
 //  CastleFight
 //
-//  Created by  DAN on 13/8/14.
+//  Created by  浩翔 on 13/8/14.
 //
 //
 
@@ -150,5 +150,159 @@
     Entity *orb = [column objectAtIndex:position.y];
     return orb;
 }
+
+/*
+-(NSArray *)findCombos {
+    int cols = self.columns;
+    int rows = self.rows;
+    
+    NSMutableArray *combos = [NSMutableArray new];
+    
+    NSMutableArray *xCombos = [NSMutableArray new];
+    NSMutableArray *yCombos = [NSMutableArray new];
+    NSMutableArray *combinCombos = [NSMutableArray new];
+    
+    // scan x way
+    for (int j = 0; j < rows; j++) {
+        int xCount = 1;
+        for (int i = 1; i < cols; i++) {
+            NSNumber *currentNumber = [self getNumberFromBoard:CGPointMake(i, j)];
+            NSNumber *preNumber = [self getNumberFromBoard:CGPointMake(i-1, j)];
+            
+            if (currentNumber.intValue == preNumber.intValue) {
+                xCount +=1;
+                if (xCount == minSingleAttackCount) {
+
+                    PadCombo *xCombo = [[PadCombo alloc] init];
+                    xCombo.way = kXWay;
+                    xCombo.color = currentNumber.intValue;
+                    for (int k = 0; k < xCount; k++) {
+                        [xCombo addOrb:CGPointMake(i-k, j)];
+                    }
+                    [xCombos addObject:xCombo];
+                }else if(xCount > minSingleAttackCount) {
+                    PadCombo *xCombo = [self getComboByPosition:CGPointMake(i-1, j) InArray:xCombos];
+                    [xCombo addOrb:CGPointMake(i, j)];
+                }
+                
+            }else {
+                xCount = 1;
+            }
+        }
+    }
+    
+    // scan y way
+    for (int i = 0; i < cols; i++) {
+        int yCount = 1;
+        for (int j = 1; j < rows; j++) {
+            NSNumber *currentNumber = [self getNumberFromBoard:CGPointMake(i, j)];
+            NSNumber *preNumber = [self getNumberFromBoard:CGPointMake(i, j-1)];
+            if (currentNumber.intValue == preNumber.intValue) {
+                yCount +=1;
+                if (yCount == minSingleAttackCount) {
+                    
+                    PadCombo *yCombo = [[PadCombo alloc] init];
+                    yCombo.way = kYWay;
+                    yCombo.color = currentNumber.intValue;
+                    for (int k = 0; k < yCount; k++) {
+                        [yCombo addOrb:CGPointMake(i, j-k)];
+                    }
+                    [yCombos addObject:yCombo];
+                }else if(yCount > minSingleAttackCount) {
+                    PadCombo *yCombo = [self getComboByPosition:CGPointMake(i, j-1) InArray:yCombos];
+                    [yCombo addOrb:CGPointMake(i, j)];
+                }
+                
+            }else {
+                yCount = 1;
+            }
+        }
+    }
+    
+    // integrate x Way
+    for (int j = 1; j < rows; j++) {
+        for (int i = 0; i < cols; i++) {
+            NSNumber *preNumber = [self getNumberFromBoard:CGPointMake(i, j-1)]; //up orb
+            NSNumber *currentNumber = [self getNumberFromBoard:CGPointMake(i, j)];
+            if (currentNumber.intValue == preNumber.intValue) {
+                PadCombo *preXCombo = [self getComboByPosition:CGPointMake(i, j-1) InArray:xCombos];
+                PadCombo *xCombo = [self getComboByPosition:CGPointMake(i, j) InArray:xCombos];
+                if (preXCombo && xCombo) {
+                    [preXCombo combineCombo:xCombo];
+                }
+            }else
+                continue;
+        }
+    }
+    
+    // integrate y Way
+    for (int i = 1; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            NSNumber *preNumber = [self getNumberFromBoard:CGPointMake(i-1, j)]; //left orb
+            NSNumber *currentNumber = [self getNumberFromBoard:CGPointMake(i, j)];
+            if (currentNumber.intValue == preNumber.intValue) {
+                PadCombo *preYCombo = [self getComboByPosition:CGPointMake(i-1, j) InArray:yCombos];
+                PadCombo *yCombo = [self getComboByPosition:CGPointMake(i, j) InArray:yCombos];
+                if (preYCombo && yCombo) {
+                    [preYCombo combineCombo:yCombo];
+                }
+            }else
+                continue;
+        }
+    }
+    
+    //integrate x y
+    for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < cols; i++) {
+            PadCombo *xCombo = [self getComboByPosition:CGPointMake(i, j) InArray:xCombos];
+            PadCombo *yCombo = [self getComboByPosition:CGPointMake(i, j) InArray:yCombos];
+            if (xCombo && yCombo) {
+                PadCombo *combo = [self combineACombo:xCombo andBCombo:yCombo];
+                PadCombo *oldCombo = [self getComboByPosition:CGPointMake(i, j) InArray:combinCombos];
+                if (oldCombo) {
+                    [oldCombo combineCombo:combo];
+                }else {
+                    [combinCombos addObject:combo];
+                }
+            }
+        }
+    }
+    
+    //delete the duplicated combo
+    for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < cols; i++) {
+            PadCombo *xCombo = [self getComboByPosition:CGPointMake(i, j) InArray:xCombos];
+            PadCombo *yCombo = [self getComboByPosition:CGPointMake(i, j) InArray:yCombos];
+            PadCombo *combo = [self getComboByPosition:CGPointMake(i, j) InArray:combinCombos];
+            if (xCombo && combo) {
+                [xCombos removeObject:xCombo];
+                [xCombo deleteSelf];
+            }
+            if (yCombo && combo) {
+                [yCombos removeObject:yCombo];
+                [yCombo deleteSelf];
+            }
+        }
+    }
+    
+    [combos addObjectsFromArray:combinCombos];
+    
+    //Final
+    for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < cols; i++) {
+            PadCombo *xCombo = [self getComboByPosition:CGPointMake(i, j) InArray:xCombos];
+            PadCombo *yCombo = [self getComboByPosition:CGPointMake(i, j) InArray:yCombos];
+            if (![combos containsObject:xCombo] && xCombo != nil) {
+                [combos addObject:xCombo];
+            }
+            if (![combos containsObject:yCombo] && yCombo != nil) {
+                [combos addObject:yCombo];
+            }
+        }
+    }
+    
+    return combos;
+}
+//*/
 
 @end
