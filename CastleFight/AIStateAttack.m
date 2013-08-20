@@ -22,10 +22,10 @@
 
 -(void)updateEntity:(Entity *)entity {
     
-    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
     
     //test skill
-    AIComponent *aiCom = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
     ActiveSkill *skill;
     NSString *skillName = nil;
@@ -36,12 +36,12 @@
         int count = sortSkillKey.count;
         int count2 = count;
         
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             int random = arc4random_uniform([[sortSkillKey lastObject] intValue]);
             //FIXME: edit it to skill.
             int removeIndex = -1;
             
-            for (int j=1; j<count2; j++) {
+            for (int j = 1; j < count2; j++) {
                 NSString *preValue = [sortSkillKey objectAtIndex:j-1];
                 NSString *value = [sortSkillKey objectAtIndex:j];
                 if (random >= preValue.intValue && random < value.intValue) {

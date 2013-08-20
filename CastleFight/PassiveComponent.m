@@ -11,6 +11,11 @@
 
 @implementation PassiveComponent
 
++(NSString *)name {
+    static NSString *name = @"PassiveComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _skills = [NSMutableDictionary dictionary];

@@ -12,6 +12,11 @@
 
 @implementation DirectionComponent
 
++(NSString *)name {
+    static NSString *name = @"DirectionComponent";
+    return name;
+}
+
 -(id)initWithType:(DirectionType)type velocity:(CGPoint)velocity {
     if (self = [super init]) {
         if (type == kDirectionTypeLeftRight) {

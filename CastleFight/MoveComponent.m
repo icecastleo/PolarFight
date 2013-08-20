@@ -10,6 +10,11 @@
 
 @implementation MoveComponent
 
++(NSString *)name {
+    static NSString *name = @"MoveComponent";
+    return name;
+}
+
 -(id)initWithSpeedAttribute:(Attribute *)speed {
     if ((self = [super init])) {
         _speed = speed;

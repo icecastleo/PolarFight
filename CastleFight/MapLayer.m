@@ -54,11 +54,11 @@ const static int pathSizeHeight = 40;
 }
 
 -(void)addEntity:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     NSAssert(render, @"Need render component to add on map!");
     
-    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
-    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
     
     CGPoint position;
     
@@ -80,7 +80,7 @@ const static int pathSizeHeight = 40;
 }
 
 -(void)addEntity:(Entity *)entity toPosition:(CGPoint)position {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     NSAssert(render, @"Need render component to add on map!");
     
     [self addChild:render.node];
@@ -92,7 +92,7 @@ const static int pathSizeHeight = 40;
         position = [self getPositionInBoundary:position forEntity:entity];
     }
     
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     render.position = position;
     
     [self reorderChild:render.node z:self.boundaryY - render.position.y];
@@ -103,12 +103,12 @@ const static int pathSizeHeight = 40;
         return;
     }
     
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     [self moveEntity:entity toPosition:ccpAdd(render.position, position) boundaryLimit:limit];
 }
 
 -(CGPoint)getPositionInBoundary:(CGPoint)position forEntity:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
     float width = 0;
     float height = 0;
@@ -156,8 +156,8 @@ const static int pathSizeHeight = 40;
     if (position.x == 0 && position.y == 0) {
         return;
     }
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+    KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfName:[KnockOutComponent name]];
     
     CGPoint newPos = ccpAdd(renderCom.position, position);
     if (limit) {

@@ -15,6 +15,11 @@
 @dynamic canSummon;
 @dynamic isCostSufficient;
 
++(NSString *)name {
+    static NSString *name = @"SummonComponent";
+    return name;
+}
+
 -(id)initWithCharacterInitData:(CharacterInitData *)initData {
     if (self = [super init]) {
         _data = initData;
@@ -149,7 +154,7 @@
         case kSummonTypeNormal: {
             _currentCooldown = _cooldown;
             
-            PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfClass:[PlayerComponent class]];
+            PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfName:[PlayerComponent name]];
             player.food -= _cost;
             
             if (self.menuItem) {

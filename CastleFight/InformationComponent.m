@@ -10,6 +10,11 @@
 
 @implementation InformationComponent
 
++(NSString *)name {
+    static NSString *name = @"InformationComponent";
+    return name;
+}
+
 -(id)initWithDictionary:(NSDictionary *)info {
     if (self = [super init]) {
         _information = info;

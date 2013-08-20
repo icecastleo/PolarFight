@@ -21,7 +21,7 @@
 
 -(void)activeEffect {
     
-    NSArray *entities = [self.owner getAllEntitiesPosessingComponentOfClass:[MoveComponent class]];
+    NSArray *entities = [self.owner getAllEntitiesPosessingComponentOfName:[MoveComponent name]];
     
     for (Entity *entity in entities) {
         if (entity.eid == self.owner.eid) {

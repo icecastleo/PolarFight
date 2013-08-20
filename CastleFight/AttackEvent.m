@@ -15,8 +15,8 @@
 
 -(id)initWithAttacker:(Entity *)attacker attackerComponent:(AttackerComponent *)attack damageType:(DamageType)type damageSource:(DamageSource)source defender:(Entity *)defender {
     if(self = [super init]) {
-//        NSAssert([attacker getComponentOfClass:[AttackerComponent class]], @"Invalid attacker!");
-//        NSAssert([defender getComponentOfClass:[DefenderComponent class]], @"Invalid defender!");
+//        NSAssert([attacker getComponentOfName:[AttackerComponent name]], @"Invalid attacker!");
+//        NSAssert([defender getComponentOfName:[DefenderComponent name]], @"Invalid defender!");
         
         _attacker = attacker;
         _attack = attack;
@@ -30,7 +30,7 @@
         _isIgnoreDefense = NO;
         _customDamage = NO;
         
-        RenderComponent *render = (RenderComponent *)[_defender getComponentOfClass:[RenderComponent class]];
+        RenderComponent *render = (RenderComponent *)[_defender getComponentOfName:[RenderComponent name]];
         if (render) {
             if (!render.isSpineNode)
                 NSAssert(render.sprite.anchorPoint.x == 0.5 && render.sprite.anchorPoint.y == 0.5, @"It's recommended not to change the anchor point, and let the position to be the center of sprite!");
@@ -43,7 +43,7 @@
 }
 
 -(int)damage {
-    DefenderComponent *defendCom = (DefenderComponent *)[_defender getComponentOfClass:[DefenderComponent class]];
+    DefenderComponent *defendCom = (DefenderComponent *)[_defender getComponentOfName:[DefenderComponent name]];
     
     int defense = defendCom.defense ? defendCom.defense.value : 0;
     

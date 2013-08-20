@@ -32,24 +32,20 @@
     component.entity = self;
 }
 
--(void)removeComponent:(Class)aClass {
-    [_entityManager removeComponentOfClass:aClass fromEntity:self];
+-(void)removeComponent:(NSString *)name {
+    [_entityManager removeComponentOfName:name fromEntity:self];
 }
 
--(Component *)getComponentOfClass:(Class)aClass {
-    return [_entityManager getComponentOfClass:aClass fromEntity:self];
-}
-
--(Component *)getComponentOfType:(NSString *)type {
-    return [_entityManager getComponentOfType:type fromEntity:self];
+-(Component *)getComponentOfName:(NSString *)name {
+    return [_entityManager getComponentOfName:name fromEntity:self];
 }
 
 -(NSArray *)getAllComponents {
     return [_entityManager getAllComponentsOfEntity:self];
 }
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass {
-    return [_entityManager getAllEntitiesPosessingComponentOfClass:aClass];
+-(NSArray *)getAllEntitiesPosessingComponentOfName:(NSString *)name {
+    return [_entityManager getAllEntitiesPosessingComponentOfName:name];
 }
 
 -(void)removeSelf {

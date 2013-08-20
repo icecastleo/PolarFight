@@ -48,14 +48,14 @@ static NSMutableArray *yInterval;
 }
 
 -(void)setOwner:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     distance = (render.sprite.boundingBox.size.width/2 + radius)/2;
     
     [super setOwner:entity];
 }
 
 -(b2Body *)createBody {
-    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfName:[RenderComponent name]];
     
     b2BodyDef spriteBodyDef;
     spriteBodyDef.type = b2_dynamicBody;
@@ -76,9 +76,9 @@ static NSMutableArray *yInterval;
 
 -(BOOL)containEntity:(Entity *)entity {
 
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    RenderComponent *ownerRender = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+    RenderComponent *ownerRender = (RenderComponent *)[self.owner getComponentOfName:[RenderComponent name]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
     
     CGPoint c1 = ownerRender.position;
     CGPoint c2 = render.position;

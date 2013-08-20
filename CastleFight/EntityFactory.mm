@@ -152,7 +152,8 @@
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
-    [entity addComponent:[[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]]];
+    MoveComponent *move = [[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]];
+    [entity addComponent:move];
         
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
@@ -288,7 +289,7 @@
 //                          [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
     
     // TODO: Link with map data?
-    DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithQuadratic:0 linear:0 constantTerm:5000 isFluctuant:YES]];
+    DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithQuadratic:0 linear:0 constantTerm:5000000 isFluctuant:YES]];
     [entity addComponent:defenseCom];
     
     // TODO: Init by file
@@ -327,7 +328,7 @@
         
         for (CharacterInitData *data in characterInitDatas) {
             Entity *summonButton = [self createSummonButton:data];
-            MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfClass:[MagicComponent class]];
+            MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
             magicCom.spellCaster = entity;
             [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
             
@@ -348,7 +349,7 @@
         for (CharacterInitData *data in magicTeamInitData) {
             Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
             
-            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfClass:[MagicComponent class]];
+            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
             magicCom.spellCaster = entity;
             NSAssert(NSClassFromString(magicCom.name), @"you forgot to make this skill.");
             
@@ -510,7 +511,7 @@
 -(b2Body *)createBoxBodyWithEntity:(Entity *)entity {
     NSAssert(_physicsSystem, @"You can not create a physics body without physics system!");
     
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     CCNode *sprite = render.sprite;
     
     b2BodyDef spriteBodyDef;
@@ -530,7 +531,7 @@
     spriteShapeDef.isSensor = true;
     spriteShapeDef.filter.groupIndex = kPhisicsFixtureGroupEntity;
     
-    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
     if (team) {
         spriteShapeDef.filter.categoryBits = pow(2, team.team);
     }

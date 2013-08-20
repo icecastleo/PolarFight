@@ -30,7 +30,7 @@
 }
 
 -(void)active {
-    RenderComponent *render = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[_owner getComponentOfName:[RenderComponent name]];
     NSAssert(render, @"You can't active skill without render component currently!");
     
     //    state = kCharacterStateUseSkill;
@@ -39,7 +39,7 @@
         [self activeEffect];
         //        [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
     } else {
-        AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfClass:[AnimationComponent class]];
+        AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfName:[AnimationComponent name]];
         
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         

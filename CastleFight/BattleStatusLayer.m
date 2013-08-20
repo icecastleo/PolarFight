@@ -42,7 +42,7 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ingame.plist"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
         
-        player = (PlayerComponent *)[battleController.userPlayer getComponentOfClass:[PlayerComponent class]];;
+        player = (PlayerComponent *)[battleController.userPlayer getComponentOfName:[PlayerComponent name]];;
         playTime = 0;
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -116,9 +116,9 @@
     [self addChild:select];
     
     for (Entity *entity in player.summonComponents) {
-        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
-        LevelComponent *levelCom = (LevelComponent *)[entity getComponentOfClass:[LevelComponent class]];
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
+        LevelComponent *levelCom = (LevelComponent *)[entity getComponentOfName:[LevelComponent name]];
         
         //FIXME: the position is not correct.
         renderCom.position = ccp(25+renderCom.sprite.boundingBox.size.width*([player.summonComponents indexOfObject:entity]+1),select.boundingBox.size.height/2);
@@ -144,16 +144,16 @@
         summon.summonType = kSummonTypeNormal;
     }
     
-    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfClass:[MagicSkillComponent class]];
+    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
     
     for (Entity *entity in magicSkillCom.magicTeam) {
-        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         //FIXME: the position is not correct.
         renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),265);
         [self addChild:renderCom.node];
         
         //FIXME: maybe do not need these or move to other appropriate place.
-        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
         NSString *costString;
         ccColor3B color;
         switch (costCom.type) {

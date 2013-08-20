@@ -56,7 +56,7 @@
 }
 
 -(void)removeEntity:(Entity *)entity {
-    for (NSMutableDictionary * components in _componentsByClass.allValues) {
+    for (NSMutableDictionary *components in _componentsByClass.allValues) {
         if (components[entity.eidNumber]) {
             Component *component = components[entity.eidNumber];
             if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
@@ -72,45 +72,76 @@
 }
 
 -(void)addComponent:(Component *)component toEntity:(Entity *)entity {
-    NSMutableDictionary * components = _componentsByClass[NSStringFromClass([component class])];
+    NSMutableDictionary *components = _componentsByClass[[[component class] name]];
+    
     if (!components) {
         components = [NSMutableDictionary dictionary];
         _componentsByClass[NSStringFromClass([component class])] = components;
     }
+    
     components[entity.eidNumber] = component;
     [_componentsByEntity[entity.eidNumber] setObject:component forKey:NSStringFromClass([component class])];
 }
 
--(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
-    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
+//-(void)removeComponentOfName:(Class)aClass fromEntity:(Entity *)entity {
+//    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
+//    if (components && components[entity.eidNumber]) {
+//        Component *component = components[entity.eidNumber];
+//        if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
+//            [component receiveEvent:kEntityEventRemoveComponent Message:component];
+//        }
+//
+//        [components removeObjectForKey:entity.eidNumber];
+//        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(aClass)];
+//    }
+//}
+
+-(void)removeComponentOfName:(NSString *)name fromEntity:(Entity *)entity {
+    NSMutableDictionary *components = _componentsByClass[name];
+    
     if (components && components[entity.eidNumber]) {
         Component *component = components[entity.eidNumber];
+        
         if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
             [component receiveEvent:kEntityEventRemoveComponent Message:component];
         }
-
+        
         [components removeObjectForKey:entity.eidNumber];
-        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(aClass)];
+        [_componentsByEntity[entity.eidNumber] removeObjectForKey:name];
     }
 }
 
--(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity {
-    return _componentsByClass[NSStringFromClass(aClass)][entity.eidNumber];
-}
+//-(Component *)getComponentOfName:(Class)aClass fromEntity:(Entity *)entity {
+//    return _componentsByClass[NSStringFromClass(aClass)][entity.eidNumber];
+//}
 
--(Component *)getComponentOfType:(NSString *)type fromEntity:(Entity *)entity {
-    return _componentsByClass[type][entity.eidNumber];
+-(Component *)getComponentOfName:(NSString *)name fromEntity:(Entity *)entity {
+    return _componentsByClass[name][entity.eidNumber];
 }
 
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {
     return [_componentsByEntity[entity.eidNumber] allValues];
 }
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass {
-    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
+//-(NSArray *)getAllEntitiesPosessingComponentOfName:(Class)aClass {
+//    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
+//    if (components) {
+//        NSMutableArray * retval = [NSMutableArray arrayWithCapacity:components.allKeys.count];
+//        for (NSNumber * eid in components.allKeys) {
+//            [retval addObject:[[Entity alloc] initWithEid:eid.integerValue entityManager:self]];
+//        }
+//        return retval;
+//    } else {
+//        return [NSArray array];
+//    }
+//}
+
+-(NSArray *)getAllEntitiesPosessingComponentOfName:(NSString *)name {
+    NSMutableDictionary *components = _componentsByClass[name];
+    
     if (components) {
-        NSMutableArray * retval = [NSMutableArray arrayWithCapacity:components.allKeys.count];
-        for (NSNumber * eid in components.allKeys) {
+        NSMutableArray *retval = [NSMutableArray arrayWithCapacity:components.allKeys.count];
+        for (NSNumber *eid in components.allKeys) {
             [retval addObject:[[Entity alloc] initWithEid:eid.integerValue entityManager:self]];
         }
         return retval;

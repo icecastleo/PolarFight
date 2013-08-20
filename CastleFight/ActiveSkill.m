@@ -34,7 +34,7 @@
 }
 
 -(void)active {
-    RenderComponent *render = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[_owner getComponentOfName:[RenderComponent name]];
     NSAssert(render, @"You can't active skill without render component currently!");
     
 //    state = kCharacterStateUseSkill;
@@ -51,7 +51,7 @@
     }
     
     if (_animationKey) {
-        AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfClass:[AnimationComponent class]];
+        AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfName:[AnimationComponent name]];
         
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         

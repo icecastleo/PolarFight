@@ -13,7 +13,6 @@
 //@property (readonly) BOOL isSelectLineOccupied;
 
 -(void)addEntity:(Entity *)entity line:(int)line;
--(void)moveEntity:(Entity *)entity toLine:(int)line;
 -(BOOL)canSummonCharacterInThisArea:(CGPoint)position;
 -(int)positionConvertToLine:(CGPoint)position ;
 

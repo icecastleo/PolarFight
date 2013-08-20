@@ -46,13 +46,12 @@ typedef enum {
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager;
 
 -(void)addComponent:(Component*)component;
--(void)removeComponent:(Class)aClass;
+-(void)removeComponent:(NSString *)name;
 
--(Component*)getComponentOfClass:(Class)aClass;
--(Component*)getComponentOfType:(NSString *)type;
--(NSArray *)getAllComponents;
+-(Component*)getComponentOfName:(NSString *)name;
+//-(NSArray *)getAllComponents;
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
+-(NSArray *)getAllEntitiesPosessingComponentOfName:(NSString *)name;
 
 -(void)removeSelf;
 

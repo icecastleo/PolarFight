@@ -23,10 +23,10 @@
 }
 
 -(void)update:(float)delta {
-    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[PlayerComponent class]];
+    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[PlayerComponent name]];
     
     for (Entity *entity in entities) {
-        PlayerComponent * player = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
+        PlayerComponent * player = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
         
         player.delta += delta;
         
@@ -57,7 +57,7 @@
 //                    }
 //                }
                 
-                TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+                TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
                 
                 CharacterInitData *data = summon.data;
                 

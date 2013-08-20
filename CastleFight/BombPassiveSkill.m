@@ -32,10 +32,10 @@
 
 -(void)activeEffect {
     
-    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
     
     for (Entity *entity in [range getEffectEntities]) {
-        DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+        DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
         DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:300*attack.attack.value damageType:kDamageTypeBomb damageSource:kDamageSourceMelee receiver:entity];
         
         [defense.damageEventQueue addObject:damageEvent];

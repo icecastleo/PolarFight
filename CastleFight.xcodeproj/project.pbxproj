@@ -501,6 +501,7 @@
 		9BD25C0A1742CA9300B6FBFB /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD48F0B17AFD26D00DBFDE9 /* plants.png */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
+		9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC4CD717C1DAC7004E13D6 /* music_1.caf */; };
 		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
 		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
@@ -1478,6 +1479,7 @@
 		9BD48F0B17AFD26D00DBFDE9 /* plants.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plants.png; sourceTree = "<group>"; };
 		9BDC077F166E3913009559C3 /* AttackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEvent.h; sourceTree = "<group>"; };
 		9BDC0780166E3913009559C3 /* AttackEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEvent.m; sourceTree = "<group>"; };
+		9BDC4CD717C1DAC7004E13D6 /* music_1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = music_1.caf; sourceTree = "<group>"; };
 		9BE01A371695E81900B9C427 /* HealSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealSkill.h; sourceTree = "<group>"; };
 		9BE01A381695E81900B9C427 /* HealSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealSkill.m; sourceTree = "<group>"; };
 		9BE01A4A16960E9E00B9C427 /* SwordmanSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwordmanSkill.h; sourceTree = "<group>"; };
@@ -1962,6 +1964,7 @@
 		9B062CF61635275000E06018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BDC4CD717C1DAC7004E13D6 /* music_1.caf */,
 				9B00120117B4D01300DB7D5A /* wall.png */,
 				9BD48F0B17AFD26D00DBFDE9 /* plants.png */,
 				370243D317903FC7008267A8 /* spineData */,
@@ -3462,6 +3465,7 @@
 				37EC99A717B107CB00B8F4DE /* SummonMagic_button.png in Resources */,
 				37EC99A817B107CB00B8F4DE /* SummonMagic_button@2x.png in Resources */,
 				9B00120217B4D01300DB7D5A /* wall.png in Resources */,
+				9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

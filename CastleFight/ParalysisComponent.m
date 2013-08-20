@@ -10,6 +10,11 @@
 
 @implementation ParalysisComponent
 
++(NSString *)name {
+    static NSString *name = @"ParalysisComponent";
+    return name;
+}
+
 -(void)receiveEvent:(EntityEvent)type Message:(id)message {
     if (type == kEventIsMoveForbidden){
         [message setObject:[NSNumber numberWithBool:YES] forKey:@"kEventIsMoveForbidden"];

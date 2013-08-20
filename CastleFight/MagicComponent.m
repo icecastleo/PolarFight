@@ -13,6 +13,11 @@
 
 @implementation MagicComponent
 
++(NSString *)name {
+    static NSString *name = @"MagicComponent";
+    return name;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         NSDictionary *damageAttribute = [dic objectForKey:@"damage"];

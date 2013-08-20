@@ -11,7 +11,7 @@
 	<key>soundsEffectEnable</key>
 	<true/>
 	<key>backgroundMusicVolume</key>
-	<real>0.05</real>
+	<real>0.1</real>
 	<key>soundsEffectVolume</key>
 	<real>0.5</real>
 	<key>characters</key>

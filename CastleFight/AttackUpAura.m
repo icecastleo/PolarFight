@@ -25,11 +25,11 @@
 -(void)activeEffect {
     
     for (Entity *entity in [range getEffectEntities]) {
-        AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[entity getComponentOfClass:[AttackBonusMultiplierComponent class]];
+        AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[entity getComponentOfName:[AttackBonusMultiplierComponent name]];
         if (component) {
             continue;
         }
-        AttackerComponent *receiver = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
+        AttackerComponent *receiver = (AttackerComponent *)[entity getComponentOfName:[AttackerComponent name]];
         component = [[AttackBonusMultiplierComponent alloc] initWithAttribute:receiver.attack andBonus:2];
         component.cdTime = 0;
         component.totalTime = 1;

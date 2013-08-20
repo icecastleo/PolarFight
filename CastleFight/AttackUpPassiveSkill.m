@@ -21,13 +21,13 @@
 
 -(void)activeEffect {
     
-    AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[self.owner getComponentOfClass:[AttackBonusMultiplierComponent class]];
+    AttackBonusMultiplierComponent *component = (AttackBonusMultiplierComponent *)[self.owner getComponentOfName:[AttackBonusMultiplierComponent name]];
     
     if (component) {
         return;
     }
 
-    AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    AttackerComponent *attacker = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
     
     component = [[AttackBonusMultiplierComponent alloc] initWithAttribute:attacker.attack andBonus:2];
     component.cdTime = 0;

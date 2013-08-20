@@ -55,9 +55,9 @@
 
 -(void)updateEntity:(Entity *)entity {
     
-    PlayerComponent *player = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
+    PlayerComponent *player = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
     
-    NSArray *entities = [entity getAllEntitiesPosessingComponentOfClass:[TeamComponent class]];
+    NSArray *entities = [entity getAllEntitiesPosessingComponentOfName:[TeamComponent name]];
     
     // Calculate current enemy count
     [self updateEnemyDatasWithEntities:entities];
@@ -70,6 +70,11 @@
         if (player.food < nextEnemy.cost) {
             break;
         }
+        
+        static int count = 0;
+        count++;
+        
+        CCLOG(@"%d",count);
         
         player.food -= nextEnemy.cost;
         
@@ -125,13 +130,13 @@
     [enemyDatas zeroCount];
     
     for (Entity *entity in entities) {
-        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         
         if (team.team == 1) {
             continue;
         }
         
-        CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+        CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
         
         if (character) {
             EnemyData *data = [enemyDatas getEnemyDataWithCid:character.cid];

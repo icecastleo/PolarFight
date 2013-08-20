@@ -11,6 +11,11 @@
 
 @implementation AttackBonusMultiplierComponent
 
++(NSString *)name {
+    static NSString *name = @"AttackBonusMultiplierComponent";
+    return name;
+}
+
 -(id)initWithAttribute:(Attribute *)attribute andBonus:(float)bonus {
     if (self = [super init]) {
         _attribute = attribute;

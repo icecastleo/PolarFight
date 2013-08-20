@@ -96,7 +96,7 @@
 }
 
 -(void)addEntity:(Entity *)entity {
-//    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+//    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
 //    
 //    if (team.team == 1) {
 //        [self addEntity:entity line:selectLine];
@@ -104,15 +104,15 @@
 //        [self addEntity:entity line:arc4random_uniform(kMapPathMaxLine)];
 //    }
     
-    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
     
     if (character) {
         [self addEntity:entity line:arc4random_uniform(kMapPathMaxLine)];
     } else {
-        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         NSAssert(render, @"Need render component to add on map!");
         
-        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
@@ -129,10 +129,10 @@
 }
 
 -(void)addEntity:(Entity *)entity line:(int)line {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     NSAssert(render, @"Need render component to add on map!");
     
-    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
     
     CGPoint position;
     
@@ -146,7 +146,7 @@
 
     [self addEntity:entity toPosition:position];
 
-    LineComponent *lineComponent = (LineComponent *)[entity getComponentOfClass:[LineComponent class]];
+    LineComponent *lineComponent = (LineComponent *)[entity getComponentOfName:[LineComponent name]];
     
     if (lineComponent) {
         lineComponent.line = line;
@@ -238,12 +238,5 @@
 //    mType = kMoveTypeZone;
 //}
 
--(void)moveEntity:(Entity *)entity toLine:(int)line {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
-    
-    CGPoint position = ccp(render.position.x, kMapPathFloor + line*kMapPathHeight + arc4random_uniform(kMapPathRandomHeight));
-    
-    [self moveEntity:entity toPosition:position boundaryLimit:YES];
-}
 
 @end

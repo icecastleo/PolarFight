@@ -192,10 +192,10 @@ const static int kPositionIterations = 3;
 #pragma mark system update
 
 -(void)update:(float)delta {
-    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[PhysicsComponent class]];
+    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[PhysicsComponent name]];
     
     for (Entity * entity in entities) {
-        PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfClass:[PhysicsComponent class]];
+        PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfName:[PhysicsComponent name]];
         DirectionComponent *direction = physics.direction;
         
         // Rotate root

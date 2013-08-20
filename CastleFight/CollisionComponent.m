@@ -11,6 +11,11 @@
 
 @implementation CollisionComponent
 
++(NSString *)name {
+    static NSString *name = @"CollisionComponent";
+    return name;
+}
+
 -(id)initWithBoundingBox:(CGRect)boundingBox {
     if (self = [super init]) {
         _points = [NSMutableArray arrayWithObjects:

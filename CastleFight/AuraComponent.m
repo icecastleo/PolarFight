@@ -11,6 +11,11 @@
 
 @implementation AuraComponent
 
++(NSString *)name {
+    static NSString *name = @"AuraComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _auras = [NSMutableDictionary dictionary];

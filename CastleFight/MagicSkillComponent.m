@@ -10,6 +10,11 @@
 
 @implementation MagicSkillComponent
 
++(NSString *)name {
+    static NSString *name = @"MagicSkillComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _magicTeam = [[NSMutableArray alloc] init];

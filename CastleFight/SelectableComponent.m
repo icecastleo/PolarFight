@@ -20,6 +20,11 @@
 
 @implementation SelectableComponent
 
++(NSString *)name {
+    static NSString *name = @"SelectableComponent";
+    return name;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         selectedSprite = [CCSprite spriteWithFile:[dic objectForKey:@"selectedImage"]];
@@ -42,7 +47,7 @@
         return;
     
     selected = YES;
-    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     
     selectedSprite.position = ccp(render.node.boundingBox.size.width/2,render.node.boundingBox.size.height/2);
     [render.node addChild:selectedSprite z:-1 tag:kSelectedImageTag];
@@ -54,7 +59,7 @@
         return;
 
     selected = NO;
-    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     [render.node removeChildByTag:kSelectedImageTag cleanup:YES];
 }
 

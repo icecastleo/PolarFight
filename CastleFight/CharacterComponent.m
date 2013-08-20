@@ -10,6 +10,11 @@
 
 @implementation CharacterComponent
 
++(NSString *)name {
+    static NSString *name = @"CharacterComponent";
+    return name;
+}
+
 -(id)initWithCid:(NSString *)cid type:(CharacterType)type name:(NSString *)name {
     if (self = [super init]) {
         _cid = cid;

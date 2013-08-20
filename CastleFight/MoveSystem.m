@@ -27,20 +27,21 @@
 }
 
 -(void)update:(float)delta {
-    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[MoveComponent class]];
+    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[MoveComponent name]];
     
     for (Entity *entity in entities) {
         
-        MoveComponent *move = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
-        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];        
-        KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfClass:[KnockOutComponent class]];
+        MoveComponent *move = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+        
+        KnockOutComponent *knockOutCom = (KnockOutComponent *)[entity getComponentOfName:[KnockOutComponent name]];
         
         // FIXME: KnockOut can't move
         if (knockOutCom) {
-            DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+            DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
             float defense = MAX(1, defendCom.defense.value);
             [self knockOut:knockOutCom defense:defense];
-            [entity removeComponent:[KnockOutComponent class]];
+            [entity removeComponent:[KnockOutComponent name]];
         }
         
         if (!move || !render)
@@ -53,7 +54,7 @@
         NSNumber *result = [dic objectForKey:@"kEventIsMoveForbidden"];
         
         if (result.boolValue == YES) {
-            AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
+            AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfName:[AnimationComponent name]];
             
             if (animation && animation.state == kAnimationStateMove) {
                 [render stopAnimation];
@@ -62,7 +63,7 @@
             continue;
         }
         
-        DirectionComponent *direction = (DirectionComponent *)[entity getComponentOfClass:[DirectionComponent class]];
+        DirectionComponent *direction = (DirectionComponent *)[entity getComponentOfName:[DirectionComponent name]];
         
         if (direction) {
             Direction oldDirection = direction.direction;
@@ -77,7 +78,7 @@
         [self.entityFactory.mapLayer moveEntity:entity byPosition:ccpMult(move.velocity, move.speed.value * kMoveMultiplier * delta) boundaryLimit:YES];
         
         // Run animation
-        AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfClass:[AnimationComponent class]];
+        AnimationComponent *animation = (AnimationComponent *)[entity getComponentOfName:[AnimationComponent name]];
        
         if (!animation) {
             continue;
@@ -134,7 +135,7 @@
 }
 
 -(void)knockOut:(KnockOutComponent *)component defense:(float)defense {
-    DirectionComponent *directionCom = (DirectionComponent *)[component.entity getComponentOfClass:[DirectionComponent class]];
+    DirectionComponent *directionCom = (DirectionComponent *)[component.entity getComponentOfName:[DirectionComponent name]];
     
     if (!directionCom) {
         return;

@@ -31,12 +31,12 @@ const static int kRadius = 80;
 }
 
 -(void)activeEffect {
-    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfClass:[ProjectileComponent class]];
-    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfClass:[RenderComponent class]];
-    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    ProjectileComponent *projectile = (ProjectileComponent *)[self.owner getComponentOfName:[ProjectileComponent name]];
+    RenderComponent *render = (RenderComponent *)[self.owner getComponentOfName:[RenderComponent name]];
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
     
     Entity *target = [[range getEffectEntities] lastObject];
-    RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
+    RenderComponent *targetRender = (RenderComponent *)[target getComponentOfName:[RenderComponent name]];
     
     ProjectileEvent *event = [[ProjectileEvent alloc] init];
     
@@ -67,32 +67,13 @@ const static int kRadius = 80;
         for (Entity *entity in entities) {
             AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
             event.position = position;
-            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
             [attack.attackEventQueue addObject:event];
         }
     };
     event.block = block;
     
     [projectile.projectileEvents addObject:event];
-    
-//    ProjectileRange *projectileRange = (ProjectileRange *)[Range rangeWithParameters:dictionary];
-//    
-//    Entity *target = [[range getEffectEntities] lastObject];
-//    RenderComponent *targetRender = (RenderComponent *)[target getComponentOfClass:[RenderComponent class]];
-//    
-//    CGPoint startPosition = [render.sprite.parent convertToWorldSpace:render.sprite.position];
-//    CGPoint endPosition = ccp([targetRender.sprite.parent convertToWorldSpace:targetRender.sprite.position].x, startPosition.y);
-//    
-//    ProjectileEvent *event = [[ProjectileEvent alloc] initWithProjectileRange:projectileRange type:kProjectileTypeLine startWorldPosition:startPosition endWorldPosition:endPosition time:0.25 block:^(NSArray *entities, CGPoint position) {
-//        for (Entity *entity in entities) {
-//            AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceRanged defender:entity];
-//            event.position = position;
-//            AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
-//            [attack.attackEventQueue addObject:event];
-//        }
-//    }];
-//    
-//    [projectile.projectileEventQueue addObject:event];
 }
 
 

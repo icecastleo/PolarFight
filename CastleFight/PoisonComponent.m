@@ -10,4 +10,9 @@
 
 @implementation PoisonComponent
 
++(NSString *)name {
+    static NSString *name = @"PoisonComponent";
+    return name;
+}
+
 @end

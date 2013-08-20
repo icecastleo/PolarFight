@@ -10,6 +10,11 @@
 
 @implementation TeamComponent
 
++(NSString *)name {
+    static NSString *name = @"TeamComponent";
+    return name;
+}
+
 -(id)initWithTeam:(int)team {
     if ((self = [super init])) {
         _team = team;

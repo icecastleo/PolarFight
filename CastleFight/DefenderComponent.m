@@ -10,6 +10,11 @@
 
 @implementation DefenderComponent
 
++(NSString *)name {
+    static NSString *name = @"DefenderComponent";
+    return name;
+}
+
 -(id)initWithHpAttribute:(Attribute *)hp {
     if (self = [super init]) {
         _hp = hp;

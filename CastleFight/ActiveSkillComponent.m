@@ -10,6 +10,11 @@
 
 @implementation ActiveSkillComponent
 
++(NSString *)name {
+    static NSString *name = @"ActiveSkillComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _skills = [[NSMutableDictionary alloc] init];

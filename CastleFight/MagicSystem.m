@@ -25,14 +25,14 @@
 }
 
 -(void)update:(float)delta {
-    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[MagicComponent class]];
+    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[MagicComponent name]];
     
     for (Entity *entity in entities) {
-        MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
-        SelectableComponent *selectableCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-        CostComponent *costCom = (CostComponent *)[entity getComponentOfClass:[CostComponent class]];
+        MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
+        SelectableComponent *selectableCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
         
-        PlayerComponent *resourceCom = (PlayerComponent *)[magicCom.spellCaster getComponentOfClass:[PlayerComponent class]];
+        PlayerComponent *resourceCom = (PlayerComponent *)[magicCom.spellCaster getComponentOfName:[PlayerComponent name]];
         
         magicCom.currentCooldown -= delta;
         
@@ -56,7 +56,7 @@
             
             Magic* magic = [[NSClassFromString(magicCom.name) alloc] initWithMagicInformation:magicInfo];
             
-            SummonComponent *summonCom = (SummonComponent *)[magicCom.entity getComponentOfClass:[SummonComponent class]];
+            SummonComponent *summonCom = (SummonComponent *)[magicCom.entity getComponentOfName:[SummonComponent name]];
             if(summonCom) {
                magic.owner = magicCom.entity;
             }else {

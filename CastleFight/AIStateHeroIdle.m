@@ -24,16 +24,16 @@
 
 -(void)updateEntity:(Entity *)entity {
     
-    MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfClass:[MovePathComponent class]];
+    MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfName:[MovePathComponent name]];
     if (pathCom.path.count > 0) {
         [self changeState:[[AIStateHeroWalk alloc] init] forEntity:entity];
         return;
     }
     
-    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
     
     //test skill
-    AIComponent *aiCom = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
     ActiveSkill *skill;
     NSString *skillName = nil;

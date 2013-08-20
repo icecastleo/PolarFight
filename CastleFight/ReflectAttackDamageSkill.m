@@ -46,7 +46,7 @@
     
     DamageEvent *counterEvent = [[DamageEvent alloc] initWithSender:self.owner damage:damage.damage*percent/100 damageType:kDamageTypeNormal damageSource:kDamageSourcePassiveSkill receiver:damage.sender];
     
-    DefenderComponent *defender = (DefenderComponent *)[damage.sender getComponentOfClass:[DefenderComponent class]];
+    DefenderComponent *defender = (DefenderComponent *)[damage.sender getComponentOfName:[DefenderComponent name]];
     
     [defender.damageEventQueue addObject:counterEvent];
 }

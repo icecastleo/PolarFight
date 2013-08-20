@@ -9,9 +9,15 @@
 #import "RenderComponent.h"
 #import "CCSkeletonAnimation.h"
 
+
 @implementation RenderComponent
 
 @dynamic position;
+
++(NSString *)name {
+    static NSString *name = @"RenderComponent";
+    return name;
+}
 
 -(id)initWithSprite:(CCNode *)sprite {
     if ((self = [super init])) {
@@ -132,7 +138,7 @@
         CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )self.sprite;
         [animationNode clearAnimation];
         [self.sprite stopActionByTag:kAnimationActionTag];
-    }else {
+    } else {
         [self.sprite stopActionByTag:kAnimationActionTag];
     }
 }

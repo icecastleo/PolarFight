@@ -10,6 +10,11 @@
 
 @implementation MovePathComponent
 
++(NSString *)name {
+    static NSString *name = @"MovePathComponent";
+    return name;
+}
+
 -(id)initWithMovePath:(NSArray *)path {
     if (self = [super init]) {
         _path = [NSMutableArray arrayWithArray:path];

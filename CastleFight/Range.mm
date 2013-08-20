@@ -67,7 +67,7 @@
 -(void)setOwner:(Entity *)entity {
     _owner = entity;
     
-    PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfClass:[PhysicsComponent class]];
+    PhysicsComponent *physics = (PhysicsComponent *)[entity getComponentOfName:[PhysicsComponent name]];
     // Entity will not have a physcis component in scene like menu!
 //    NSAssert(physics, @"Range can only be apply on entity who has physics component!");
     
@@ -77,7 +77,7 @@
         body = [self createBody];
         
         // Set filter for fixture
-        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
     
         for (b2Fixture *f = body->GetFixtureList(); f; f = f->GetNext()) {
             b2Filter filter = b2Filter();
@@ -196,9 +196,9 @@
 -(NSArray *)sortEntities:(NSArray *)entities {
 //    // Compare distance between effect position
 //    NSSortDescriptor *distanceSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Entity *obj1, Entity *obj2) {
-//        RenderComponent *ownerRenderCom = (RenderComponent *)[_owner getComponentOfClass:[RenderComponent class]];
-//        RenderComponent *obj1RenderCom = (RenderComponent *)[obj1 getComponentOfClass:[RenderComponent class]];
-//        RenderComponent *obj2RenderCom = (RenderComponent *)[obj2 getComponentOfClass:[RenderComponent class]];
+//        RenderComponent *ownerRenderCom = (RenderComponent *)[_owner getComponentOfName:[RenderComponent name]];
+//        RenderComponent *obj1RenderCom = (RenderComponent *)[obj1 getComponentOfName:[RenderComponent name]];
+//        RenderComponent *obj2RenderCom = (RenderComponent *)[obj2 getComponentOfName:[RenderComponent name]];
 //        
 //        float distance1 = ccpDistance(ownerRenderCom.position, obj1RenderCom.position);
 //        float distance2 = ccpDistance(ownerRenderCom.position, obj2RenderCom.position);
@@ -214,8 +214,8 @@
     
     // Compare hp
     NSSortDescriptor *hpSort = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES comparator:^NSComparisonResult(Entity *obj1, Entity *obj2) {
-        DefenderComponent *defender1 = (DefenderComponent *)[obj1 getComponentOfClass:[DefenderComponent class]];
-        DefenderComponent *defender2 = (DefenderComponent *)[obj2 getComponentOfClass:[DefenderComponent class]];
+        DefenderComponent *defender1 = (DefenderComponent *)[obj1 getComponentOfName:[DefenderComponent name]];
+        DefenderComponent *defender2 = (DefenderComponent *)[obj2 getComponentOfName:[DefenderComponent name]];
         
         if (defender1 && defender2) {
             if (defender1.hp.currentValue < defender2.hp.currentValue) {

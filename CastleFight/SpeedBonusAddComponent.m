@@ -11,6 +11,11 @@
 
 @implementation SpeedBonusAddComponent
 
++(NSString *)name {
+    static NSString *name = @"SpeedBonusAddComponent";
+    return name;
+}
+
 -(id)initWithAttribute:(Attribute *)attribute andBonus:(float)bonus {
     if (self = [super init]) {
         _attribute = attribute;

@@ -21,7 +21,7 @@
 @implementation CastleBloodSprite
 
 -(id)initWithEntity:(Entity *)entity {
-    TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
     NSAssert(team, @"Invalid entity!");
         
     if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"gauge%02d.png", team.team]]]) {

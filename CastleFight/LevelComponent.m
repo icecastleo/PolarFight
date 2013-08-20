@@ -16,6 +16,11 @@
 
 @implementation LevelComponent
 
++(NSString *)name {
+    static NSString *name = @"LevelComponent";
+    return name;
+}
+
 -(id)initWithLevel:(int)level {
     if (self = [super init]) {
         self.level = level;

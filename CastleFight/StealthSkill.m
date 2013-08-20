@@ -20,7 +20,7 @@
 
 -(void)activeEffect {
     
-    StealthComponent *stealthComponent = (StealthComponent *)[self.owner getComponentOfClass:[StealthComponent class]];
+    StealthComponent *stealthComponent = (StealthComponent *)[self.owner getComponentOfName:[StealthComponent name]];
     
     if (stealthComponent) {
         return;

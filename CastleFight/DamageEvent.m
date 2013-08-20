@@ -13,7 +13,7 @@
 
 -(id)initWithSender:(Entity *)sender damage:(int)damage damageType:(DamageType)type damageSource:(DamageSource)source receiver:(Entity *)receiver {
     if(self = [super init]) {
-        NSAssert([receiver getComponentOfClass:[DefenderComponent class]] != nil, @"Invalid defender!");
+        NSAssert([receiver getComponentOfName:[DefenderComponent name]] != nil, @"Invalid defender!");
         
         _sender = sender;
         _baseDamage = damage;

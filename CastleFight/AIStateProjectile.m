@@ -33,7 +33,7 @@
 }
 
 -(void)enter:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
     if (projectileAction) {
         [render.node runAction:projectileAction];
@@ -103,7 +103,7 @@
 }
 
 -(void)finishWithEntity:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     [render.sprite stopAllActions];
     
     [entity removeSelf];

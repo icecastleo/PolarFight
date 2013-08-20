@@ -10,6 +10,11 @@
 
 @implementation CostComponent
 
++(NSString *)name {
+    static NSString *name = @"CostComponent";
+    return name;
+}
+
 //-(id)init {
 //    if (self = [super init]) {
 //        _resources = [[NSMutableDictionary alloc] init];

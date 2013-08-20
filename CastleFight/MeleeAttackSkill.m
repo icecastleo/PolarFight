@@ -27,7 +27,7 @@
 -(void)setOwner:(Entity *)owner {
     [super setOwner:owner];
     
-    ActiveSkillComponent *component = (ActiveSkillComponent *)[owner getComponentOfClass:[ActiveSkillComponent class]];
+    ActiveSkillComponent *component = (ActiveSkillComponent *)[owner getComponentOfName:[ActiveSkillComponent name]];
     
     Attribute *agile = component.agile;
     
@@ -37,7 +37,7 @@
 }
 
 -(void)activeEffect {
-    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
     
     for (Entity *entity in [range getEffectEntities]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:entity];

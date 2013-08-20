@@ -17,6 +17,11 @@
 
 @implementation MaskComponent
 
++(NSString *)name {
+    static NSString *name = @"MaskComponent";
+    return name;
+}
+
 -(id)initWithRenderComponent:(RenderComponent *)renderCom {
     if (self = [super init]) {
         _mask = [CCSprite spriteWithSpriteFrameName:@"bg_user_button.png"];

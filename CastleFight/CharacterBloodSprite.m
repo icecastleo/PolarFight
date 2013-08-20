@@ -14,10 +14,10 @@
 
 -(id)initWithEntity:(Entity *)entity {
     if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithFile:@"blood_white.png"]]) {
-        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         NSAssert(render, @"Invalid entity!");
         
-        TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         NSAssert(team, @"Invalid entity!");
         
         self.position = ccp(0, render.sprite.boundingBox.size.height/2 + self.sprite.boundingBox.size.height*1.5);

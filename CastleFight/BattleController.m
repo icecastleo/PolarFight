@@ -107,7 +107,8 @@ __weak static BattleController* currentInstance;
 -(void)onEnter {
     [super onEnter];
     
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
+//    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
     
     [self registerWithTouchDispatcher];
     
@@ -154,7 +155,7 @@ __weak static BattleController* currentInstance;
             [self drawSelectedRange:touchLocation];
             [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
             
-            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
             // do not need start point.
             NSMutableArray *path = [[NSMutableArray alloc] init];
             //move and projectile event uses maplayer location
@@ -237,7 +238,7 @@ __weak static BattleController* currentInstance;
 }
 
 -(BOOL)isEntityDead:(Entity *)entity {
-    DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+    DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
     
     if (defense.hp.currentValue == 0) {
         return YES;
@@ -258,14 +259,14 @@ __weak static BattleController* currentInstance;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
+        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfName:[SelectableComponent name]];
         
         for (Entity *entity in array) {
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
-                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
+                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
                 if (selectCom.canSelect) {
                     [preSelectCom unSelected];
                     self.isEntitySelected = YES;
@@ -287,10 +288,10 @@ __weak static BattleController* currentInstance;
             recognizer.cancelsTouchesInView = NO;
             [self removeStatusLayerChild];
             
-            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
-            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfClass:[MovePathComponent class]];
-            MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
-            SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
+            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
+            MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
+            SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
             
             if (magicCom) { // Hero hold this until next one is selected.
                 [selectCom unSelected];
@@ -320,9 +321,9 @@ __weak static BattleController* currentInstance;
 
 -(void)drawSelectedRange:(CGPoint)touchLocation {
     
-    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfName:[RenderComponent name]];
     
-    SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+    SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
     
     if (selectCom.hasDragLine) {
         NSMutableArray *drawPath = [[NSMutableArray alloc] init];
@@ -333,7 +334,7 @@ __weak static BattleController* currentInstance;
         [statusLayer addChild:line z:0 tag:kDrawPathTag];
     }
     
-    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
     
     float rotation = 0;
     CGSize drawSize;
@@ -358,7 +359,7 @@ __weak static BattleController* currentInstance;
     CCSprite *rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
     CCSprite *rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
     
-    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
     if (summonCom) {
         rangeFrame1 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage1];
         rangeFrame2 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage2];

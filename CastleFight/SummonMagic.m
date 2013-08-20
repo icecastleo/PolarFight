@@ -28,8 +28,8 @@
     NSValue *startValue = [path objectAtIndex:0];
     CGPoint startPoint = startValue.CGPointValue;
     
-    TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfClass:[TeamComponent class]];
-    SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfClass:[SummonComponent class]];
+    TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
+    SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfName:[SummonComponent name]];
     Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level forTeam:teamCom.team addToMap:NO];
     
     [self.entityFactory.mapLayer addEntity:summonEntity toPosition:startPoint];

@@ -11,6 +11,11 @@
 
 @implementation AttackerComponent
 
++(NSString *)name {
+    static NSString *name = @"AttackerComponent";
+    return name;
+}
+
 -(id)initWithAttackAttribute:(Attribute *)attack {
     if (self = [super init]) {
         _attack = attack;

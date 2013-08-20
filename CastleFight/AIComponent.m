@@ -18,6 +18,11 @@
 
 @implementation AIComponent
 
++(NSString *)name {
+    static NSString *name = @"AIComponent";
+    return name;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dic {
     if ((self = [super init])) {
         _state = [[NSClassFromString([dic objectForKey:@"state"]) alloc] init];

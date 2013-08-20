@@ -10,6 +10,11 @@
 
 @implementation AnimationComponent
 
++(NSString *)name {
+    static NSString *name = @"AnimationComponent";
+    return name;
+}
+
 -(id)initWithAnimations:(NSMutableDictionary *)animations {
     if (self = [super init]) {
         _animations = animations;

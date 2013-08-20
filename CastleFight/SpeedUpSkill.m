@@ -28,11 +28,11 @@
 -(void)activeEffect {
     
     for (Entity *entity in [range getEffectEntities]) {
-        SpeedBonusAddComponent *component = (SpeedBonusAddComponent *)[entity getComponentOfClass:[SpeedBonusAddComponent class]];
+        SpeedBonusAddComponent *component = (SpeedBonusAddComponent *)[entity getComponentOfName:[SpeedBonusAddComponent name]];
         if (component) {
             continue;
         }
-        MoveComponent *receiver = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
+        MoveComponent *receiver = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
         component = [[SpeedBonusAddComponent alloc] initWithAttribute:receiver.speed andBonus:30];
         component.cdTime = 0;
         component.totalTime = 15;

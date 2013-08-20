@@ -19,33 +19,33 @@
 @implementation EffectSystem
 
 -(void)update:(float)delta {
-    [self processComponent:delta className:[PoisonComponent class]];
-    [self processComponent:delta className:[ParalysisComponent class]];
-    [self processComponent:delta className:[AttackBonusMultiplierComponent class]];
-    [self processComponent:delta className:[SpeedBonusAddComponent class]];
-    [self processComponent:delta className:[AuraComponent class]];
-    [self processComponent:delta className:[StealthComponent class]];
+    [self processComponent:delta className:[PoisonComponent name]];
+    [self processComponent:delta className:[ParalysisComponent name]];
+    [self processComponent:delta className:[AttackBonusMultiplierComponent name]];
+    [self processComponent:delta className:[SpeedBonusAddComponent name]];
+    [self processComponent:delta className:[AuraComponent name]];
+    [self processComponent:delta className:[StealthComponent name]];
 }
 
--(void)processComponent:(float)delta  className:(Class)className {
-    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:className];
+-(void)processComponent:(float)delta className:(NSString *)className {
+    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfName:className];
     
     for (Entity *entity in entities) {
-        StateComponent *stateComponent = (StateComponent *)[entity getComponentOfClass:className];
+        StateComponent *stateComponent = (StateComponent *)[entity getComponentOfName:className];
         stateComponent.currentTime += delta;
         
         if (stateComponent.totalTime >= 0) {
             if (stateComponent.currentTime >= stateComponent.cdTime) {
                 stateComponent.currentTime -= stateComponent.cdTime;
 //                NSLog(@"stateComponent.currentTime > cdTime");
-                DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+                DefenderComponent *defendCom = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
                 if (stateComponent.event) {
                     [defendCom.damageEventQueue addObject:stateComponent.event];
                 }
             [stateComponent process];
             }
-        }else {
-            [entity removeComponent:[stateComponent class]];
+        } else {
+            [entity removeComponent:[[stateComponent class] name]];
             NSLog(@"remove stateComponent");
         }
         stateComponent.totalTime -= delta;

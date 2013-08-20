@@ -16,13 +16,6 @@
 
 #import "AIComponent.h"
 
-// FIXME: Refactoring entity manager
-
-static NSString *t = @"TeamComponent";
-static NSString *m = @"MoveComponent";
-static NSString *ac = @"ActiveSkillComponent";
-static NSString *ai = @"AIComponent";
-
 @implementation AIStateWalk
 
 -(NSString *)name {
@@ -30,11 +23,8 @@ static NSString *ai = @"AIComponent";
 }
 
 -(void)enter:(Entity *)entity {
-//    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfType:[TeamComponent type]];
-//    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:[MoveComponent type]];
-    
-    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfType:t];
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:m];
+    TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
     
     if (teamCom.team == 1) {
         moveCom.velocity = ccp(1, 0);
@@ -44,11 +34,10 @@ static NSString *ai = @"AIComponent";
 }
 
 -(void)updateEntity:(Entity *)entity {    
-//    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfType:[ActiveSkillComponent type]];
-    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfType:ac];
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
     
     //test skill
-    AIComponent *aiCom = (AIComponent *)[entity getComponentOfType:ai];
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
     ActiveSkill *skill;
     NSString *skillName = nil;
@@ -81,10 +70,10 @@ static NSString *ai = @"AIComponent";
             skill = [skillCom.skills objectForKey:skillName];
             if (skill.canActive) {
                 break;
-            }else if(removeIndex < 0){
+            } else if(removeIndex < 0){
                 // not found
                 break;
-            }else {
+            } else {
                 [sortSkillKey removeObjectAtIndex:removeIndex];
                 count2 = sortSkillKey.count;
                 skill = nil;
@@ -92,7 +81,7 @@ static NSString *ai = @"AIComponent";
             }
             
         }
-    }else {
+    } else {
         skillName = [aiCom.skillProbability objectForKey:[aiCom.sortSkillProbabilities objectAtIndex:0]];
         skill = [skillCom.skills objectForKey:skillName];
     }
@@ -106,7 +95,7 @@ static NSString *ai = @"AIComponent";
 }
 
 -(void)exit:(Entity *)entity {
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfType:@"MoveComponent"];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
     moveCom.velocity = ccp(0, 0);
 }
 

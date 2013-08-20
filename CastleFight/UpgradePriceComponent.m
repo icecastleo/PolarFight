@@ -10,6 +10,11 @@
 
 @implementation UpgradePriceComponent
 
++(NSString *)name {
+    static NSString *name = @"UpgradePriceComponent";
+    return name;
+}
+
 -(id)initWithPriceComponent:(Attribute *)price {
     if (self = [super init]) {
         _price = price;

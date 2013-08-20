@@ -21,10 +21,10 @@
         return;
     }
     
-    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[AIComponent class]];
+    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[AIComponent name]];
     
     for (Entity *entity in entities) {
-        AIComponent * ai = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+        AIComponent * ai = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
         [ai.state updateEntity:entity];
     }
 }

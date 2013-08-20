@@ -22,6 +22,11 @@
 
 @implementation HeroComponent
 
++(NSString *)name {
+    static NSString *name = @"HeroComponent";
+    return name;
+}
+
 -(id)initWithCid:(NSString *)cid Level:(int)level Team:(int)team {
     if (self = [super init]) {
         _cid = cid;
@@ -36,9 +41,9 @@
         [self performSelector:@selector(reSummon) withObject:nil afterDelay:5*self.level];
     } else if (type == kEventReceiveDamageEvent) {
         DamageEvent *event = (DamageEvent *)message;
-        RenderComponent *renderComAttacker = (RenderComponent *)[event.sender getComponentOfClass:[RenderComponent class]];
-        RenderComponent *renderComSelf = (RenderComponent *)[event.receiver getComponentOfClass:[RenderComponent class]];
-        DirectionComponent *directionComSelf = (DirectionComponent *)[event.receiver getComponentOfClass:[DirectionComponent class]];
+        RenderComponent *renderComAttacker = (RenderComponent *)[event.sender getComponentOfName:[RenderComponent name]];
+        RenderComponent *renderComSelf = (RenderComponent *)[event.receiver getComponentOfName:[RenderComponent name]];
+        DirectionComponent *directionComSelf = (DirectionComponent *)[event.receiver getComponentOfName:[DirectionComponent name]];
         
         CGPoint direction = ccpNormalize(ccpSub(renderComAttacker.position, renderComSelf.position));
         
@@ -55,13 +60,13 @@
 }
 
 -(void)reSummon {
-    NSArray *array = [self.entity getAllEntitiesPosessingComponentOfClass:[PlayerComponent class]];
+    NSArray *array = [self.entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]];
 
     for (Entity *entity in array) {
-        TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+        TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         
         if (teamCom.team == self.team) {
-            PlayerComponent *playerCom = (PlayerComponent *)[entity getComponentOfClass:[PlayerComponent class]];
+            PlayerComponent *playerCom = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
             
             for (SummonComponent *summonCom in playerCom.battleTeam) {
                 if ([summonCom.data.cid isEqualToString:self.cid]) {

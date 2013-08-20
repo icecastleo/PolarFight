@@ -29,7 +29,7 @@
 }
 
 -(void)changeState:(AIState *)state forEntity:(Entity *)entity {
-    AIComponent *ai = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    AIComponent *ai = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
     NSAssert(ai.state == self, @"Why??");
     

@@ -14,12 +14,14 @@
 -(void)removeEntity:(Entity *)entity;
 
 -(void)addComponent:(Component *)component toEntity:(Entity *)entity;
--(void)removeComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
+//-(void)removeComponentOfName:(Class)aClass fromEntity:(Entity *)entity;
+-(void)removeComponentOfName:(NSString *)name fromEntity:(Entity *)entity;
 
--(Component *)getComponentOfClass:(Class)aClass fromEntity:(Entity *)entity;
--(Component *)getComponentOfType:(NSString *)type fromEntity:(Entity *)entity;
+//-(Component *)getComponentOfName:(Class)aClass fromEntity:(Entity *)entity;
+-(Component *)getComponentOfName:(NSString *)name fromEntity:(Entity *)entity;
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity;
 
--(NSArray *)getAllEntitiesPosessingComponentOfClass:(Class)aClass;
+//-(NSArray *)getAllEntitiesPosessingComponentOfName:(Class)aClass;
+-(NSArray *)getAllEntitiesPosessingComponentOfName:(NSString *)name;
 
 @end

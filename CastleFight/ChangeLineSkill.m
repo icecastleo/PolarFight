@@ -22,7 +22,7 @@
 }
 
 -(void)activeEffect {
-    LineComponent *line = (LineComponent *)[self.owner getComponentOfClass:[LineComponent class]];
+    LineComponent *line = (LineComponent *)[self.owner getComponentOfName:[LineComponent name]];
     
     int nextLine = 0;
     

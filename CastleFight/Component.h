@@ -13,6 +13,9 @@
 
 @property Entity *entity;
 
+//+(NSNumber *)type;
++(NSString *)name;
+
 -(void)sendEvent:(EntityEvent)type Message:(id)message;
 
 @end

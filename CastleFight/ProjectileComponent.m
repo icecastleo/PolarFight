@@ -10,6 +10,11 @@
 
 @implementation ProjectileComponent
 
++(NSString *)name {
+    static NSString *name = @"ProjectileComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _projectileEvents = [[NSMutableArray alloc] init];

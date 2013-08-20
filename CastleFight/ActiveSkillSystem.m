@@ -13,10 +13,10 @@
 @implementation ActiveSkillSystem
 
 -(void)update:(float)delta {
-    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfClass:[ActiveSkillComponent class]];
+    NSArray * entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[ActiveSkillComponent name]];
     
     for (Entity * entity in entities) {
-        ActiveSkillComponent * skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+        ActiveSkillComponent * skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
         
         NSMutableDictionary *testDic = [[NSMutableDictionary alloc] init];
         [testDic setObject:[NSNumber numberWithBool:NO] forKey:@"kEventIsActiveSkillForbidden"];

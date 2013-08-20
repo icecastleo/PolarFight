@@ -23,11 +23,16 @@
 
 @implementation CombatSystem
 
++(void)initialize {
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"sound_caf/effect_die_cat.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"sound_caf/effect_die_dog.caf"];
+}
+
 -(void)update:(float)delta {
     
     // TODO: Heal
-    for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfClass:[AttackerComponent class]]) {
-        AttackerComponent *attack = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
+    for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfName:[AttackerComponent name]]) {
+        AttackerComponent *attack = (AttackerComponent *)[entity getComponentOfName:[AttackerComponent name]];
         
         for (AttackEvent *event in attack.attackEventQueue) {
             NSAssert(entity.eid == event.attacker.eid, @"AttackEvent should be added to attacker's AttackerComponent!");
@@ -38,7 +43,7 @@
             [event.defender sendEvent:kEventReceiveAttackEvent Message:event];
             
             if (!event.isInvalid) {
-                DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
+                DefenderComponent *defense = (DefenderComponent *)[event.defender getComponentOfName:[DefenderComponent name]];
                 
                 for (SideEffect *sideEffect in event.sideEffects) {
                     if(sideEffect.percentage > (arc4random() % 100)) {
@@ -54,8 +59,8 @@
         [attack.attackEventQueue removeAllObjects];
     }
     
-    for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfClass:[DefenderComponent class]]) {
-        DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+    for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfName:[DefenderComponent name]]) {
+        DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
         
         for (DamageEvent *event in defense.damageEventQueue) {
             NSAssert(entity.eid == event.receiver.eid, @"DamageEvent should be added to damager's DefenderComponent!");
@@ -87,7 +92,7 @@
                 [defense.bloodSprite update];
             }
             
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
             if (damage.damage > 0) {
                 [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
             } else {
@@ -130,7 +135,7 @@
     if (damage.damage > 0) {
         NSAssert(self.entityFactory.mapLayer, @"Damage effect sprite should be added on the map");
         
-        RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         
         CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:@"hit_01.png"];
         
@@ -160,7 +165,7 @@
 }
 
 -(void)runDeadAnimationForEntity:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
     CCNode *sprite;
     if (render.isSpineNode) {
@@ -193,13 +198,13 @@
 }
 
 -(void)playDeadSoundEffectForEntity:(Entity *)entity {
-    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
     
     if (character) {
         if ([character.cid hasPrefix:@"4"]) {
             [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_building_remove.caf"];
         } else {
-            TeamComponent *team = (TeamComponent *)[entity getComponentOfClass:[TeamComponent class]];
+            TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
             
             if (team.team == 1) {
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];

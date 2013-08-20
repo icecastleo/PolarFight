@@ -38,11 +38,11 @@ const static float attack_max = 200.0;
     if (self = [super init]) {
         _data = data;
         
-        character = (CharacterComponent *)[entity getComponentOfClass:[CharacterComponent class]];
-        level = (LevelComponent *)[entity getComponentOfClass:[LevelComponent class]];
-        attack = (AttackerComponent *)[entity getComponentOfClass:[AttackerComponent class]];
-        defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
-        price = (UpgradePriceComponent *)[entity getComponentOfClass:[UpgradePriceComponent class]];
+        character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
+        level = (LevelComponent *)[entity getComponentOfName:[LevelComponent name]];
+        attack = (AttackerComponent *)[entity getComponentOfName:[AttackerComponent name]];
+        defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
+        price = (UpgradePriceComponent *)[entity getComponentOfName:[UpgradePriceComponent name]];
         
         CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[character.cid intValue]]];
         sprite.anchorPoint = ccp(0, 0.5);

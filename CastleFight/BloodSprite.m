@@ -15,7 +15,7 @@
     if (self = [super initWithSprite:sprite]) {
         self.type = kCCProgressTimerTypeBar;
         self.barChangeRate = ccp(1, 0);
-        defense = (DefenderComponent *)[entity getComponentOfClass:[DefenderComponent class]];
+        defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
         
         NSAssert(defense, @"Invalid entity!");
         

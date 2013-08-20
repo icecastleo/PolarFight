@@ -8,6 +8,7 @@
 
 #import "Component.h"
 #import "Attribute.h"
+@class RenderComponent;
 
 @interface MoveComponent : Component
 

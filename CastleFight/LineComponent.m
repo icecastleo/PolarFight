@@ -11,6 +11,11 @@
 
 @implementation LineComponent
 
++(NSString *)name {
+    static NSString *name = @"LineComponent";
+    return name;
+}
+
 -(id)init {
     if (self = [super init]) {
         _line = 0;
@@ -22,7 +27,7 @@
     NSString *assert = [NSString stringWithFormat:@"Line value is between 0 & %d", kMapPathMaxLine];
     NSAssert(_line >= 0 && _line < kMapPathMaxLine, assert);
     
-    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     render.position = ccp(render.position.x, render.position.y + (line - _line) * kMapPathHeight);
     
     _line = line;

@@ -13,6 +13,11 @@
 
 @implementation PhysicsComponent
 
++(NSString *)name {
+    static NSString *name = @"PhysicsComponent";
+    return name;
+}
+
 -(id)initWithPhysicsSystem:(PhysicsSystem *)system renderComponent:(RenderComponent *)render {
     if (self = [super init]) {
         _system = system;

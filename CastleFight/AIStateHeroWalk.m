@@ -26,21 +26,21 @@
 
 - (void)updateEntity:(Entity *)entity {
     
-    MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfClass:[MovePathComponent class]];
-    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+    MovePathComponent *pathCom = (MovePathComponent *)[entity getComponentOfName:[MovePathComponent name]];
+    RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
     CGPoint currentPosition = renderCom.position;
     CGPoint nextPosition = [pathCom nextPositionFrom:currentPosition];
     CGPoint diff = ccpSub(nextPosition, currentPosition);
     
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
     
     moveCom.velocity = ccpNormalize(diff);
     
-    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfClass:[ActiveSkillComponent class]];
+    ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
     
     //test skill
-    AIComponent *aiCom = (AIComponent *)[entity getComponentOfClass:[AIComponent class]];
+    AIComponent *aiCom = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
     ActiveSkill *skill;
     NSString *skillName = nil;
@@ -104,7 +104,7 @@
 }
 
 - (void)exit:(Entity *)entity {
-    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfClass:[MoveComponent class]];
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
     moveCom.velocity = ccp(0, 0);
 }
 

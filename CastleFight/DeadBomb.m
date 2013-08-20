@@ -24,7 +24,7 @@
 }
 
 -(void)activeEffect {
-    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfClass:[AttackerComponent class]];
+    AttackerComponent *attack = (AttackerComponent *)[self.owner getComponentOfName:[AttackerComponent name]];
     
     for (Entity *entity in [range getEffectEntities]) {
         AttackEvent *event = [[AttackEvent alloc] initWithAttacker:self.owner attackerComponent:attack damageType:kDamageTypeNormal damageSource:kDamageSourceMelee defender:entity];
@@ -37,11 +37,11 @@
 
 -(void)sideEffectWithEvent:(AttackEvent *)event Entity:(Entity *)entity {
     
-    DefenderComponent *defender = (DefenderComponent *)[event.defender getComponentOfClass:[DefenderComponent class]];
+    DefenderComponent *defender = (DefenderComponent *)[event.defender getComponentOfName:[DefenderComponent name]];
     DamageEvent *damageEvent = [[DamageEvent alloc] initWithSender:self.owner damage:1000*event.attack.attack.value damageType:kDamageTypeBomb damageSource:kDamageSourceMelee receiver:entity];
     [defender.damageEventQueue addObject:damageEvent];
     
-    DefenderComponent *selfDefender = (DefenderComponent *)[event.attacker getComponentOfClass:[DefenderComponent class]];
+    DefenderComponent *selfDefender = (DefenderComponent *)[event.attacker getComponentOfName:[DefenderComponent name]];
     DamageEvent *damageEvent2 = [[DamageEvent alloc] initWithSender:self.owner damage:1000*event.attack.attack.value damageType:kDamageTypeBomb damageSource:kDamageSourceMelee receiver:self.owner];
     [selfDefender.damageEventQueue addObject:damageEvent2];
 }
