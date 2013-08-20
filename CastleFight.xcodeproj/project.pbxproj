@@ -20,6 +20,24 @@
 		2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D918CEA1761D3C3002EE90C /* libFlurry.a */; };
 		2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */; };
 		2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482C177ECFF2007A3C76 /* rightarrow.png */; };
+		37020EBB17BBA7A60063A4BB /* OrbBoardComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37020EBA17BBA7A60063A4BB /* OrbBoardComponent.m */; };
+		37020EBE17BBAFE20063A4BB /* OrbComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37020EBD17BBAFE20063A4BB /* OrbComponent.m */; };
+		37020ED017BBB53F0063A4BB /* board.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EC017BBB53F0063A4BB /* board.png */; };
+		37020ED117BBB53F0063A4BB /* board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EC117BBB53F0063A4BB /* board@2x.png */; };
+		37020EEE17BBB6290063A4BB /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE017BBB6290063A4BB /* blue.png */; };
+		37020EEF17BBB6290063A4BB /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE117BBB6290063A4BB /* blue@2x.png */; };
+		37020EF017BBB6290063A4BB /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE217BBB6290063A4BB /* green.png */; };
+		37020EF117BBB6290063A4BB /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE317BBB6290063A4BB /* green@2x.png */; };
+		37020EF217BBB6290063A4BB /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE417BBB6290063A4BB /* pink.png */; };
+		37020EF317BBB6290063A4BB /* pink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE517BBB6290063A4BB /* pink@2x.png */; };
+		37020EF417BBB6290063A4BB /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE617BBB6290063A4BB /* purple.png */; };
+		37020EF517BBB6290063A4BB /* purple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE717BBB6290063A4BB /* purple@2x.png */; };
+		37020EF617BBB6290063A4BB /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE817BBB6290063A4BB /* red.png */; };
+		37020EF717BBB6290063A4BB /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EE917BBB6290063A4BB /* red@2x.png */; };
+		37020EF817BBB6290063A4BB /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EEA17BBB6290063A4BB /* white.png */; };
+		37020EF917BBB6290063A4BB /* white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EEB17BBB6290063A4BB /* white@2x.png */; };
+		37020EFA17BBB6290063A4BB /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EEC17BBB6290063A4BB /* yellow.png */; };
+		37020EFB17BBB6290063A4BB /* yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37020EED17BBB6290063A4BB /* yellow@2x.png */; };
 		370243DA17903FC7008267A8 /* goblins.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 370243D417903FC7008267A8 /* goblins.atlas */; };
 		370243DB17903FC7008267A8 /* goblins.json in Resources */ = {isa = PBXBuildFile; fileRef = 370243D517903FC7008267A8 /* goblins.json */; };
 		370243DC17903FC7008267A8 /* goblins.png in Resources */ = {isa = PBXBuildFile; fileRef = 370243D617903FC7008267A8 /* goblins.png */; };
@@ -175,6 +193,7 @@
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
 		37E0DB8D17143C290039C94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8C17143C280039C94C /* SystemConfiguration.framework */; };
+		37E16AF317BCA82A0092B8EC /* OrbSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E16AF217BCA82A0092B8EC /* OrbSystem.m */; };
 		37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92B1A61680F2F300D965AF /* ReflectAttackDamageSkill.m */; };
 		37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E1AE2D1767649A003F1707 /* StealthSkill.m */; };
 		37E20C37174621C90017231D /* game-center-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E20C36174621C80017231D /* game-center-icon.jpg */; };
@@ -586,6 +605,26 @@
 		2DED399A16F08A38009802A0 /* EnemyAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAI.m; sourceTree = "<group>"; };
 		2DED399C16F08AE8009802A0 /* AIStateCastleWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateCastleWaiting.h; sourceTree = "<group>"; };
 		2DED399D16F08AE8009802A0 /* AIStateCastleWaiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateCastleWaiting.m; sourceTree = "<group>"; };
+		37020EB917BBA7A60063A4BB /* OrbBoardComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbBoardComponent.h; sourceTree = "<group>"; };
+		37020EBA17BBA7A60063A4BB /* OrbBoardComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbBoardComponent.m; sourceTree = "<group>"; };
+		37020EBC17BBAFE20063A4BB /* OrbComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbComponent.h; sourceTree = "<group>"; };
+		37020EBD17BBAFE20063A4BB /* OrbComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbComponent.m; sourceTree = "<group>"; };
+		37020EC017BBB53F0063A4BB /* board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board.png; sourceTree = "<group>"; };
+		37020EC117BBB53F0063A4BB /* board@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "board@2x.png"; sourceTree = "<group>"; };
+		37020EE017BBB6290063A4BB /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		37020EE117BBB6290063A4BB /* blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue@2x.png"; sourceTree = "<group>"; };
+		37020EE217BBB6290063A4BB /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		37020EE317BBB6290063A4BB /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
+		37020EE417BBB6290063A4BB /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
+		37020EE517BBB6290063A4BB /* pink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pink@2x.png"; sourceTree = "<group>"; };
+		37020EE617BBB6290063A4BB /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
+		37020EE717BBB6290063A4BB /* purple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purple@2x.png"; sourceTree = "<group>"; };
+		37020EE817BBB6290063A4BB /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		37020EE917BBB6290063A4BB /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
+		37020EEA17BBB6290063A4BB /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
+		37020EEB17BBB6290063A4BB /* white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white@2x.png"; sourceTree = "<group>"; };
+		37020EEC17BBB6290063A4BB /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
+		37020EED17BBB6290063A4BB /* yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow@2x.png"; sourceTree = "<group>"; };
 		370243D417903FC7008267A8 /* goblins.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = goblins.atlas; sourceTree = "<group>"; };
 		370243D517903FC7008267A8 /* goblins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = goblins.json; sourceTree = "<group>"; };
 		370243D617903FC7008267A8 /* goblins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goblins.png; sourceTree = "<group>"; };
@@ -807,6 +846,8 @@
 		37E0DB8817143C110039C94C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		37E0DB8A17143C1D0039C94C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		37E0DB8C17143C280039C94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		37E16AF117BCA82A0092B8EC /* OrbSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbSystem.h; sourceTree = "<group>"; };
+		37E16AF217BCA82A0092B8EC /* OrbSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbSystem.m; sourceTree = "<group>"; };
 		37E1AE2C17676498003F1707 /* StealthSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StealthSkill.h; sourceTree = "<group>"; };
 		37E1AE2D1767649A003F1707 /* StealthSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StealthSkill.m; sourceTree = "<group>"; };
 		37E20C36174621C80017231D /* game-center-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "game-center-icon.jpg"; sourceTree = "<group>"; };
@@ -1677,6 +1718,29 @@
 			name = AI;
 			sourceTree = "<group>";
 		};
+		37020EBF17BBB53F0063A4BB /* orbs */ = {
+			isa = PBXGroup;
+			children = (
+				37020EE017BBB6290063A4BB /* blue.png */,
+				37020EE117BBB6290063A4BB /* blue@2x.png */,
+				37020EE217BBB6290063A4BB /* green.png */,
+				37020EE317BBB6290063A4BB /* green@2x.png */,
+				37020EE417BBB6290063A4BB /* pink.png */,
+				37020EE517BBB6290063A4BB /* pink@2x.png */,
+				37020EE617BBB6290063A4BB /* purple.png */,
+				37020EE717BBB6290063A4BB /* purple@2x.png */,
+				37020EE817BBB6290063A4BB /* red.png */,
+				37020EE917BBB6290063A4BB /* red@2x.png */,
+				37020EEA17BBB6290063A4BB /* white.png */,
+				37020EEB17BBB6290063A4BB /* white@2x.png */,
+				37020EEC17BBB6290063A4BB /* yellow.png */,
+				37020EED17BBB6290063A4BB /* yellow@2x.png */,
+				37020EC017BBB53F0063A4BB /* board.png */,
+				37020EC117BBB53F0063A4BB /* board@2x.png */,
+			);
+			path = orbs;
+			sourceTree = "<group>";
+		};
 		3702439017903DF0008267A8 /* spine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1966,6 +2030,7 @@
 			children = (
 				9BDC4CD717C1DAC7004E13D6 /* music_1.caf */,
 				9B00120117B4D01300DB7D5A /* wall.png */,
+				37020EBF17BBB53F0063A4BB /* orbs */,
 				9BD48F0B17AFD26D00DBFDE9 /* plants.png */,
 				370243D317903FC7008267A8 /* spineData */,
 				9B406F69176240B8008B840F /* Assets */,
@@ -2556,6 +2621,10 @@
 				3750F4F71785B5A6009E2689 /* MaskComponent.m */,
 				37DE292B17A657A1002D0377 /* LineComponent.h */,
 				37DE292C17A657A2002D0377 /* LineComponent.m */,
+				37020EB917BBA7A60063A4BB /* OrbBoardComponent.h */,
+				37020EBA17BBA7A60063A4BB /* OrbBoardComponent.m */,
+				37020EBC17BBAFE20063A4BB /* OrbComponent.h */,
+				37020EBD17BBAFE20063A4BB /* OrbComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -2583,6 +2652,8 @@
 				37DC7A4217798221009E3E73 /* MagicSystem.m */,
 				9BC15938178C0E2F0096BC9E /* PhysicsSystem.h */,
 				9BC15939178C0E300096BC9E /* PhysicsSystem.mm */,
+				37E16AF117BCA82A0092B8EC /* OrbSystem.h */,
+				37E16AF217BCA82A0092B8EC /* OrbSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -3648,6 +3719,9 @@
 				37DD362A17B39B0000B8E199 /* PassiveComponent.m in Sources */,
 				37DD362B17B39B0000B8E199 /* ProjectileComponent.m in Sources */,
 				37DD362E17B39BE600B8E199 /* AuraComponent.m in Sources */,
+				37020EBB17BBA7A60063A4BB /* OrbBoardComponent.m in Sources */,
+				37020EBE17BBAFE20063A4BB /* OrbComponent.m in Sources */,
+				37E16AF317BCA82A0092B8EC /* OrbSystem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

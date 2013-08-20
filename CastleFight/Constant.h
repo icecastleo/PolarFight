@@ -43,8 +43,8 @@
 
 // It is not used since 'SneakyJoystick' is a library
 #define kTouchPriotiryDpad 1
+#define kTouchPriorityBattleController 2
 #define kTouchPriorityMap 3
-#define kTouchPriorityBattleController 5
 
 // For Aura and PassiveSkill
 #define kAuraInterval 0.4
@@ -67,8 +67,12 @@
 #define kShadowWidthScale 0.75
 #define kShadowHeightScale 0.125
 
+// For CCNode child's tag
 #define kDrawPathTag 9876
 #define kDrawPathRangeSprite 9877
+#define kCostLabelTag 9878
+#define kLevelLabelTag 9879
+#define kSelectedImageTag 9880
 
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"
@@ -78,6 +82,17 @@
 #define kAnimationActionTag 5
 
 #define kAISystemUpdateInterval 0.5
+
+//For Orbs
+#define kOrbBoardRows 3
+#define kOrbBoardColumns 6
+#define kOrbBoardWidth 320
+#define kOrbBoardHeight 250
+#define kOrb_XPad 4
+#define kOrb_YPad 1
+#define kOrb_XSIZE 40 //pixels
+#define kOrb_YSIZE 40 //pixels
+#define kOrbBoardMinBorder 0
 
 typedef enum {
     kAnimationTypeUniqueCharacter,
@@ -159,6 +174,16 @@ typedef enum {
     statusAttackBuff,
 } AuraStatusType;
 
+typedef enum {
+    OrbNull = 0,
+    OrbRed,
+    OrbBlue,
+    OrbGreen,
+    OrbYellow,
+    OrbPurple,
+    OrbPink,
+    OrbBottom
+} OrbType;
 
 #import "ccTypes.h"
 

@@ -9,7 +9,8 @@
 #import "SummonComponent.h"
 #import "FileManager.h"
 #import "PlayerComponent.h"
-#import "Constant.h"
+#import "RenderComponent.h"
+
 @implementation SummonComponent
 
 @dynamic canSummon;
@@ -124,10 +125,7 @@
                 _currentStock++;
                 _currentCooldown += _cooldown;
                 
-                if(self.menuItem) {
-                    NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-                    [self.menuItem updateLabelString:s];
-                }
+                [self updateStockLabel:[NSString stringWithFormat:@"%d",_currentStock]];
             }
             break;
         case kSummonTypeStockOnce:
@@ -140,12 +138,13 @@
             break;
     }
     
-    if(self.menuItem) {
-        if([self canSummon]) {
-            [self.menuItem enableSummon];
-        } else {
-            [self.menuItem disableSummon];
-        }
+    if([self canSummon]) {
+        [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:YES]];
+        [self.entity sendEvent:kEventCancelMask Message:nil];
+        
+    } else {
+        [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:NO]];
+        [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:0]];
     }
 }
 
@@ -157,39 +156,71 @@
             PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfName:[PlayerComponent name]];
             player.food -= _cost;
             
-            if (self.menuItem) {
-                [self.menuItem disableSummon];
-                [self.menuItem resetMask:_cooldown from:100 to:0];
-            }
+            
+            [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
             break;
         }
-        case kSummonTypeStock:
+        case kSummonTypeStock: {
             _currentStock--;
-            
-            if(self.menuItem) {
-                if(_currentStock == 0) {
-                    [self.menuItem disableSummon];
-                    [self.menuItem resetMask:_currentCooldown from:_currentCooldown/_cooldown*100 to:0];
-                }
-                
-                NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
-                [self.menuItem updateLabelString:s];
+            if(_currentStock == 0) {
+                [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:NO]];
+              //FIXME: [from:_currentCooldown/_cooldown*100 to:0] mask percentage.
+                [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
+//                [self.menuItem disableSummon];
+//                [self.menuItem resetMask:_currentCooldown from:_currentCooldown/_cooldown*100 to:0];
             }
-             break;
+            
+            NSString *s = [[NSNumber numberWithFloat:_currentStock] stringValue];
+            [self.menuItem updateLabelString:s];
+            break;
+        }
         case kSummonTypeStockOnce:
             _currentStock--;
             _currentCooldown = _cooldown;
-            
-            if(self.menuItem) {
-                if (self.menuItem) {
-                    [self.menuItem disableSummon];
-                    [self.menuItem resetMask:_cooldown from:100 to:0];
-                }
-            }
+            [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:NO]];
+            [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
+//            if(self.menuItem) {
+//                if (self.menuItem) {
+//                    [self.menuItem disableSummon];
+//                    [self.menuItem resetMask:_cooldown from:100 to:0];
+//                }
+//            }
              break;
         default:
             break;
     }
+}
+
+-(void)setEntity:(Entity *)entity {
+    [super setEntity:entity];
+    [self initStockLabel];
+}
+
+-(void)initStockLabel {
+    switch (_summonType) {
+        case kSummonTypeNormal:
+            break;
+        case kSummonTypeStock: {
+            _currentCooldown = _cooldown;
+            [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
+            [self updateStockLabel:[NSString stringWithFormat:@"%d",_currentStock]];
+            break;
+        }
+        case kSummonTypeStockOnce: {
+            _currentCooldown = _cooldown;
+            [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
+            [self updateStockLabel:@""];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+-(void)updateStockLabel:(NSString *)string {
+    RenderComponent *renderCom = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    CCLabelBMFont* label = (CCLabelBMFont*)[renderCom.node getChildByTag:kCostLabelTag];
+    [label setString:string];
 }
 
 @end

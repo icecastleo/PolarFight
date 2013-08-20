@@ -27,6 +27,7 @@
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
 #import "PhysicsSystem.h"
+#import "OrbSystem.h"
 
 #import "DrawPath.h"
 #import "SelectableComponent.h"
@@ -97,6 +98,14 @@ __weak static BattleController* currentInstance;
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
 
+        Entity *board = [entityFactory createOrbBoard];
+        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfClass:[RenderComponent class]];
+        boardRenderCom.node.position = ccp(100,20);
+        boardRenderCom.node.anchorPoint = ccp(0,0);
+        boardRenderCom.sprite.anchorPoint = ccp(0,0);
+        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+        [statusLayer addChild:boardRenderCom.node];
+        
         [self scheduleUpdate];
                 
         fingerOneHash = 0;
@@ -111,12 +120,6 @@ __weak static BattleController* currentInstance;
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
     
     [self registerWithTouchDispatcher];
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 0.0f;
-    longPress.cancelsTouchesInView = NO;
-    
-    [[CCDirector sharedDirector].view addGestureRecognizer:longPress];
 }
 
 -(void)onExit {
@@ -125,32 +128,67 @@ __weak static BattleController* currentInstance;
     for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
         [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
     }
-
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    
     [super onExit];
 }
 
 #pragma mark CCTouchDelegate
 -(void)registerWithTouchDispatcher {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:NO];
+	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:YES];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     if (touch.tapCount == 1 && fingerOneHash == 0){
         fingerOneHash = [touch hash];
+        CGPoint touchLocation = [touch locationInView:[touch view]];
+        touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
+        
+        for (Entity *entity in array) {
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            
+            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
+                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                if (selectCom.canSelect) {
+                    [preSelectCom unSelected];
+                    self.isEntitySelected = YES;
+                    self.selectedEntity = entity;
+                    selectCom.touchType = kTapType;
+                    [selectCom select];
+                    break;
+                }
+            }
+        }
+        
         return YES;
     }
     return NO;
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    fingerOneHash = 0;
+    CGPoint touchLocation = [touch locationInView:[touch view]];
+    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    if (fingerOneHash == [touch hash]) {
+        if (self.isEntitySelected) {
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+            selectCom.touchType = kDragType;
+            [self removeStatusLayerChild];
+            [self drawSelectedRange:touchLocation];
+        }else {
+            // might give the touch to map
+            fingerOneHash = 0;
+        }
+    }
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-    if (touch.tapCount == 1 && fingerOneHash == [touch hash]) {
+    if (fingerOneHash == [touch hash]){
+        
         if (self.selectedEntity) {
             [self drawSelectedRange:touchLocation];
             [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
@@ -161,11 +199,67 @@ __weak static BattleController* currentInstance;
             //move and projectile event uses maplayer location
             [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             
-            if (pathCom) {
-                [pathCom.path removeAllObjects];
-                [pathCom.path addObjectsFromArray:path];
+            switch (selectCom.touchType) {
+                case kNoTouchType: {
+                    [self drawSelectedRange:touchLocation];
+                    [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
+                    
+                    // do not need start point.
+                    NSMutableArray *path = [[NSMutableArray alloc] init];
+                    //move and projectile event uses maplayer location
+                    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+                    
+                    if (pathCom) {
+                        [pathCom.path removeAllObjects];
+                        [pathCom.path addObjectsFromArray:path];
+                    }
+                    break;
+                }
+                case kTapType: {
+                    
+                    break;
+                }
+                case kDragType: {
+                    self.isEntitySelected = NO;
+                    [self removeStatusLayerChild];
+                    
+                    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
+                    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+                    
+                    if (magicCom) { // Hero hold this until next one is selected.
+                        [selectCom unSelected];
+                        self.selectedEntity = nil;
+                    }
+                    
+                    // do not need start point.
+                    NSMutableArray *path = [[NSMutableArray alloc] init];
+                    // move and projectile event uses maplayer location
+                    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+                    
+                    if (pathCom) {
+                        [pathCom.path removeAllObjects];
+                        [pathCom.path addObjectsFromArray:path];
+                    } else {
+                        if (summonCom && magicCom) {
+                            if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+//                                [magicCom activeWithPath:path];
+                                [selectCom handleDrag:path];
+                            }
+                        }else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
+                            [selectCom handleDrag:path];
+//                            [magicCom activeWithPath:path];
+                        }else {
+                            [selectCom handleDrag:path];
+                        }
+                    }
+                    break;
+                }
+                default:
+                    break;
             }
+            selectCom.touchType = kNoTouchType;
         }
+        
         fingerOneHash = 0;
     }
 }
@@ -193,6 +287,7 @@ __weak static BattleController* currentInstance;
     [systems addObject:[[EffectSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[ProjectileSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
     [systems addObject:[[PlayerSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
+    [systems addObject:[[OrbSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory]];
 }
 
 -(void)smoothMoveCameraTo:(CGPoint)position {
@@ -356,8 +451,8 @@ __weak static BattleController* currentInstance;
     }
     
     // draw range frame
-    CCSprite *rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
-    CCSprite *rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
+    CCSprite *rangeFrame1;
+    CCSprite *rangeFrame2;
     
     SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
     if (summonCom) {
@@ -366,12 +461,17 @@ __weak static BattleController* currentInstance;
         [rangeFrame1 setOpacity:128];
         [rangeFrame2 setOpacity:0];
     }else {
+        rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
+        
         rangeFrame1.scaleX = drawSize.width / rangeFrame1.contentSize.width;
         rangeFrame1.scaleY = drawSize.height / rangeFrame1.contentSize.height;
         
         if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
             rangeFrame2 = [CCSprite spriteWithFile:@"forbidden_sign.png"];
+        }else {
+            rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
         }
+        
         [rangeFrame2 setOpacity:255];
         CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
         CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
@@ -390,8 +490,12 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)removeStatusLayerChild {
-    [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
-    [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+    if ([statusLayer getChildByTag:kDrawPathRangeSprite]) {
+        [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
+    }
+    if ([statusLayer getChildByTag:kDrawPathTag]) {
+        [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+    }
 }
 
 @end

@@ -36,6 +36,8 @@ typedef enum {
     kEventUseMask,
     kEventCancelMask,
     
+    kEventSelectable,
+    
 } EntityEvent;
 
 @interface Entity : NSObject

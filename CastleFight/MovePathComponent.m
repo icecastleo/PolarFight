@@ -70,4 +70,9 @@
     //*/
 }
 
+-(void)handleDrag:(NSArray *)path {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:path];
+    _path = array;
+}
+
 @end

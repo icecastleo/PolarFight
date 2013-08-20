@@ -45,6 +45,8 @@
 #import "MagicSkillComponent.h"
 #import "MagicComponent.h"
 #import "MaskComponent.h"
+#import "OrbComponent.h"
+#import "OrbBoardComponent.h"
 
 #import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
@@ -389,6 +391,10 @@
         }
     }
     
+    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+    MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
+    selectCom.dragDelegate = magicCom;
+    
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
     
@@ -431,9 +437,50 @@
     }
     NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
     SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+    selectCom.dragDelegate = magicCom;
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];
+    
+    return entity;
+}
+
+-(Entity *)createOrbForType:(OrbType)type {
+    Entity *entity = [_entityManager createEntity];
+    
+    NSString *cid = [NSString stringWithFormat:@"100%d",type];
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
+    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    renderCom.sprite.scale = kOrb_XSIZE/renderCom.sprite.boundingBox.size.width;
+    
+    [entity addComponent:renderCom];
+    
+    NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
+    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
+    orbCom.type = type;
+    [entity addComponent:orbCom];
+    
+    NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
+    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+    selectCom.dragDelegate = orbCom;
+    [entity addComponent:selectCom];
+    
+    return entity;
+}
+
+-(Entity *)createOrbBoard {
+    Entity *entity = [_entityManager createEntity];
+    
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
+    NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
+    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+    [entity addComponent:renderCom];
+    
+    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
+    [entity addComponent:orbBoardCom];
     
     return entity;
 }
