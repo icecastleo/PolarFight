@@ -13,6 +13,11 @@
 
 @implementation OrbComponent
 
++(NSString *)name {
+    static NSString *name = @"OrbComponent";
+    return name;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         _matchInfo = dic;
@@ -22,11 +27,11 @@
 
 -(void)handleDrag:(NSArray *)path {
     CGPoint position = [[path lastObject] CGPointValue];
-    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfClass:[RenderComponent class]];
+    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
     
     CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
     
-    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfClass:[OrbBoardComponent class]];
+    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
     [boardCom moveOrb:self.entity ToPosition:position2];
 }
 

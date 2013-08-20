@@ -99,7 +99,7 @@ __weak static BattleController* currentInstance;
         [self addChild:statusLayer];
 
         Entity *board = [entityFactory createOrbBoard];
-        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfClass:[RenderComponent class]];
+        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
         boardRenderCom.node.position = ccp(100,20);
         boardRenderCom.node.anchorPoint = ccp(0,0);
         boardRenderCom.sprite.anchorPoint = ccp(0,0);
@@ -143,14 +143,14 @@ __weak static BattleController* currentInstance;
         fingerOneHash = [touch hash];
         CGPoint touchLocation = [touch locationInView:[touch view]];
         touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfClass:[SelectableComponent class]];
+        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfName:[SelectableComponent name]];
         
         for (Entity *entity in array) {
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfClass:[RenderComponent class]];
+            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
             
             if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
-                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
+                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
+                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
                 if (selectCom.canSelect) {
                     [preSelectCom unSelected];
                     self.isEntitySelected = YES;
@@ -172,7 +172,7 @@ __weak static BattleController* currentInstance;
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     if (fingerOneHash == [touch hash]) {
         if (self.isEntitySelected) {
-            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfClass:[SelectableComponent class]];
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
             selectCom.touchType = kDragType;
             [self removeStatusLayerChild];
             [self drawSelectedRange:touchLocation];
@@ -190,14 +190,8 @@ __weak static BattleController* currentInstance;
     if (fingerOneHash == [touch hash]){
         
         if (self.selectedEntity) {
-            [self drawSelectedRange:touchLocation];
-            [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
-            
+            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
             MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
-            // do not need start point.
-            NSMutableArray *path = [[NSMutableArray alloc] init];
-            //move and projectile event uses maplayer location
-            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
             
             switch (selectCom.touchType) {
                 case kNoTouchType: {
@@ -223,8 +217,8 @@ __weak static BattleController* currentInstance;
                     self.isEntitySelected = NO;
                     [self removeStatusLayerChild];
                     
-                    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfClass:[MagicComponent class]];
-                    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfClass:[SummonComponent class]];
+                    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
+                    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
                     
                     if (magicCom) { // Hero hold this until next one is selected.
                         [selectCom unSelected];

@@ -25,6 +25,11 @@
 
 @implementation OrbBoardComponent
 
++(NSString *)name {
+    static NSString *name = @"OrbBoardComponent";
+    return name;
+}
+
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory {
     if (self = [super init]) {
         _entityFactory = entityFactory;
@@ -43,7 +48,7 @@
 -(void)produceOrbs {
     _currentColumn = ++_currentColumn%_columns;
     
-    RenderComponent *boardRenderCom = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *boardRenderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     NSMutableArray *newColumn = [[NSMutableArray alloc] init];
     for (int j = 0; j<_rows; j++) {
         
@@ -54,10 +59,10 @@
         
         int randomOrb = OrbRed + arc4random_uniform(OrbBottom-1);
         Entity *orb = [_entityFactory createOrbForType:randomOrb];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfClass:[OrbComponent class]];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
         orbCom.board = self.entity;
         orbCom.position = CGPointMake(_currentColumn, j);
-        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfClass:[RenderComponent class]];
+        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
         
         CGPoint position = [boardRenderCom.sprite convertToNodeSpace:CGPointMake(boardRenderCom.sprite.boundingBox.size.width+kOrb_XSIZE,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j)];
         position = [boardRenderCom.node convertToWorldSpace:position];
@@ -90,9 +95,9 @@
 -(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition {
     CGPoint target = [self getPositionInTheBoardFromRealPosition:targetPosition floor:YES];
     if([self isMovable:target]) {
-        Entity *targetOrb = [self getOrbInPosition:target];
+//        Entity *targetOrb = [self getOrbInPosition:target];
 //        [self exchangeOrb:startOrb targetOrb:targetOrb];
-        NSLog(@"exchange success");
+//        NSLog(@"exchange success");
     }
 }
 
@@ -124,11 +129,11 @@
 
 -(void)exchangeOrb:(Entity *)startOrb targetOrb:(Entity *)targetOrb {
     
-    OrbComponent *startOrbCom = (OrbComponent *)[startOrb getComponentOfClass:[OrbComponent class]];
-    OrbComponent *targetOrbCom = (OrbComponent *)[targetOrb getComponentOfClass:[OrbComponent class]];
+    OrbComponent *startOrbCom = (OrbComponent *)[startOrb getComponentOfName:[OrbComponent name]];
+    OrbComponent *targetOrbCom = (OrbComponent *)[targetOrb getComponentOfName:[OrbComponent name]];
     
-    RenderComponent *startRenderCom = (RenderComponent *)[startOrb getComponentOfClass:[RenderComponent class]];
-    RenderComponent *targetRenderCom = (RenderComponent *)[targetOrb getComponentOfClass:[RenderComponent class]];
+    RenderComponent *startRenderCom = (RenderComponent *)[startOrb getComponentOfName:[RenderComponent name]];
+    RenderComponent *targetRenderCom = (RenderComponent *)[targetOrb getComponentOfName:[RenderComponent name]];
     
     NSMutableArray *startColumn = [self.board objectAtIndex:startOrbCom.position.x];
     NSMutableArray *targetColumn = [self.board objectAtIndex:targetOrbCom.position.x];

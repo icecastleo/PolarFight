@@ -218,7 +218,7 @@
 }
 
 -(void)updateStockLabel:(NSString *)string {
-    RenderComponent *renderCom = (RenderComponent *)[self.entity getComponentOfClass:[RenderComponent class]];
+    RenderComponent *renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     CCLabelBMFont* label = (CCLabelBMFont*)[renderCom.node getChildByTag:kCostLabelTag];
     [label setString:string];
 }

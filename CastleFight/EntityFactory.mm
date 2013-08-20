@@ -391,8 +391,8 @@
         }
     }
     
-    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfClass:[SelectableComponent class]];
-    MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfClass:[MagicComponent class]];
+    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
+    MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
     selectCom.dragDelegate = magicCom;
     
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
