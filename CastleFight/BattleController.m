@@ -98,7 +98,7 @@ __weak static BattleController* currentInstance;
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
 
-        Entity *board = [entityFactory createOrbBoard];
+        Entity *board = [entityFactory createOrbBoardWithOwner:_userPlayer];
         RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
         boardRenderCom.node.position = ccp(100,20);
         boardRenderCom.node.anchorPoint = ccp(0,0);
@@ -210,7 +210,8 @@ __weak static BattleController* currentInstance;
                     break;
                 }
                 case kTapType: {
-                    
+                    [selectCom handleTap:nil];
+                    [selectCom unSelected];
                     break;
                 }
                 case kDragType: {

@@ -18,7 +18,6 @@
     float _width;
     float _height;
     int _currentColumn;
-    EntityFactory *_entityFactory;
 }
 
 @end

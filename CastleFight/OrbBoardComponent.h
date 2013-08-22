@@ -14,6 +14,8 @@
 
 @property (nonatomic,readonly) NSMutableArray *board;
 @property (nonatomic,readonly) int currentColumn;
+@property (nonatomic) Entity *owner; //player
+@property (nonatomic,readonly) EntityFactory *entityFactory;
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory;
 -(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;

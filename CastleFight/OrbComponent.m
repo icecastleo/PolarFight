@@ -9,7 +9,10 @@
 #import "OrbComponent.h"
 #import "OrbBoardComponent.h"
 #import "RenderComponent.h"
+#import "PlayerComponent.h"
 #import "Magic.h"
+
+#import "SummonToLineMagic.h"
 
 @implementation OrbComponent
 
@@ -36,27 +39,68 @@
 }
 
 -(void)handleTap:(NSArray *)path {
-    
+    [self executeMatch:self.type];
 }
 
 -(void)executeMatch:(int)number {
     
-    NSAssert(number >= 3, @"should not call this function when it is less than 3.");
+//    NSAssert(number >= 3, @"should not call this function when it is less than 3.");
     
-    if (number > 5) {
-        number = 5;
-    }
+//    if (number > 5) {
+//        number = 5;
+//    }
     
-    NSDictionary *dic = [self.matchInfo objectForKey:[NSString stringWithFormat:@"%d",number]];
+//    NSDictionary *dic = [self.matchInfo objectForKey:[NSString stringWithFormat:@"%d",number]];
     
     //execute a magic method
-    NSString *magicName = [dic objectForKey:@"magicName"];
-    Magic *magic = [[NSClassFromString(magicName) alloc] init];
+//    NSString *magicName = [dic objectForKey:@"magicName"];
+//    Magic *magic = [[NSClassFromString(magicName) alloc] init];
+    Magic *magic = [[SummonToLineMagic alloc] init];
     
     //FIXME: give summon data to magic
 //    NSDictionary *summonDic = [dic objectForKey:@"summonData"];
 //    SummonComponent
     
+    NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
+    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
+    magic.entityFactory = boardCom.entityFactory;
+    PlayerComponent *playerCom = (PlayerComponent *)[boardCom.owner getComponentOfName:[PlayerComponent name]];
+    
+    //test
+//    int type = OrbRed + arc4random_uniform(OrbBottom-1);
+    int type = 0;
+    NSString *summonData = @"SummonData";
+    switch (type) {
+        case OrbRed:
+            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:0] forKey:summonData];
+            break;
+        case OrbBlue:
+            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:1] forKey:summonData];
+            break;
+        case OrbGreen:
+            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:2] forKey:summonData];
+            break;
+        default:
+            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:number] forKey:summonData];
+            break;
+    }
+    
+    int testNumber = 3;
+    testNumber = 3 + arc4random_uniform(3);
+    int addLevel = 0;
+    switch (testNumber) {
+        case 4:
+            addLevel += 1;
+            break;
+        case 5:
+            addLevel += 2;
+            break;
+        default:
+            break;
+    }
+    [magicInfo setValue:[NSNumber numberWithInt:addLevel] forKey:@"addLevel"];
+    //test
+    magic.magicInformation = magicInfo;
     [magic active];
 }
 

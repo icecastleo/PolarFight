@@ -90,7 +90,50 @@
 		</dict>
 	</array>
 	<key>battleTeam</key>
-	<array/>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>001</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>002</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>003</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>004</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>005</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>006</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>007</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+	</array>
 	<key>items</key>
 	<array/>
 	<key>magicTeam</key>

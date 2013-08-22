@@ -341,7 +341,7 @@
         for (CharacterInitData *data in battleTeamInitData) {
             SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
             summon.player = player;
-            summon.summon = YES;
+//            summon.summon = YES;
             [player.battleTeam addObject:summon];
         }
         
@@ -465,12 +465,13 @@
     NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
     SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
     selectCom.dragDelegate = orbCom;
+    selectCom.tapDelegate = orbCom;
     [entity addComponent:selectCom];
     
     return entity;
 }
 
--(Entity *)createOrbBoard {
+-(Entity *)createOrbBoardWithOwner:(Entity *)owner {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
@@ -480,6 +481,7 @@
     [entity addComponent:renderCom];
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
+    orbBoardCom.owner = owner;
     [entity addComponent:orbBoardCom];
     
     return entity;

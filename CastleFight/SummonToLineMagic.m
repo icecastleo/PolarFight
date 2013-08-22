@@ -25,16 +25,24 @@
         return;
     }
     
-    NSArray *path = [self.magicInformation objectForKey:@"path"];
-    NSValue *startValue = [path objectAtIndex:0];
-    CGPoint startPoint = startValue.CGPointValue;
+//    NSArray *path = [self.magicInformation objectForKey:@"path"];
+//    NSValue *startValue = [path objectAtIndex:0];
+//    CGPoint startPoint = startValue.CGPointValue;
     
-    TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
-    SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfName:[SummonComponent name]];
+//    TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
     
-    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level forTeam:teamCom.team addToMap:NO];
+    SummonComponent *summonCom = [self.magicInformation objectForKey:@"SummonData"];
     
-    int line = [(ThreeLineMapLayer*)self.entityFactory.mapLayer positionConvertToLine:startPoint];
+    NSNumber *addLevel = [self.magicInformation objectForKey:@"addLevel"];
+    
+//    SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfName:[SummonComponent name]];
+    
+    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:1 addToMap:NO];
+    
+    NSLog(@"summondata:: cid: %@, level: %d",summonCom.data.cid,summonCom.data.level + addLevel.intValue);
+    
+//    int line = [(ThreeLineMapLayer*)self.entityFactory.mapLayer positionConvertToLine:startPoint];
+    int line = arc4random_uniform(kMapPathMaxLine);
     [(ThreeLineMapLayer*)self.entityFactory.mapLayer addEntity:summonEntity line:line];
     
 }

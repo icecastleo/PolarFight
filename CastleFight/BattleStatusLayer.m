@@ -138,11 +138,11 @@
         [renderCom.node addChild:levelLabel z:0 tag:kLevelLabelTag];
     }
     
-    for (SummonComponent *summon in player.battleTeam) {
-        // hero
-        summon.summon = YES;
-        summon.summonType = kSummonTypeNormal;
-    }
+//    for (SummonComponent *summon in player.battleTeam) {
+//        // hero
+//        summon.summon = YES;
+//        summon.summonType = kSummonTypeNormal;
+//    }
     
     MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
     

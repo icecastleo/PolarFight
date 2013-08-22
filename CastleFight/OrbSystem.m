@@ -40,6 +40,11 @@
         }
         
         NSArray *startColumn = [orbBoardCom.board objectAtIndex:0];
+        if (startColumn.count == 0) {
+            [orbBoardCom removeColumn:[orbBoardCom.board indexOfObject:startColumn]];
+            return;
+        }
+        
         Entity *startOrb = [startColumn lastObject];
         RenderComponent *startOrbRenderCom = (RenderComponent *)[startOrb getComponentOfName:[RenderComponent name]];
         
