@@ -35,8 +35,8 @@
     }
     
     NSArray *path = [self.magicInformation objectForKey:@"path"];
-    NSValue *startValue = [path objectAtIndex:0];
-    CGPoint startPoint = startValue.CGPointValue;
+    NSValue *endValue = [path lastObject];
+    CGPoint endPosition = endValue.CGPointValue;
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
     
     ProjectileEvent *event = [[ProjectileEvent alloc] init];
@@ -47,7 +47,7 @@
     
     event.type = kProjectileTypeInstant;
     
-    event.startPosition = ccp(startPoint.x,startPoint.y+sprite.boundingBox.size.height/2);
+    event.startPosition = ccp(endPosition.x, endPosition.y+sprite.boundingBox.size.height/2);
     
     int distance = self.rangeSize.width - self.rangeSize.height/2;
     

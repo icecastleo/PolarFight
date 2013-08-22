@@ -10,7 +10,7 @@
 #import "RenderComponent.h"
 #import "TeamComponent.h"
 #import "CharacterComponent.h"
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "LineComponent.h"
 
 //typedef enum {

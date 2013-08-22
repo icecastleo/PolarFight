@@ -29,25 +29,16 @@ typedef enum {
 @implementation PauseLayer
 
 -(id)init {
-    if ((self = [super initWithColor:ccc4(50, 50, 50, 150)])) {
+    if (self = [super init]) {
         [self gamePause];
         [self setOptionView];
-        [self setTouchEnabled:YES];
     }
     return self;
 }
 
--(void)registerWithTouchDispatcher {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriotiryPause swallowsTouches:YES];
-}
-
 -(void)onEnter {
     [super onEnter];
-    [menu setHandlerPriority:kTouchPriotiryPause - 1];
-}
-
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
+    [menu setHandlerPriority:kTouchPriotiryUntouchable - 1];
 }
 
 -(void)setOptionView {

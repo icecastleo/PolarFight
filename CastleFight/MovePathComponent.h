@@ -7,8 +7,9 @@
 //
 
 #import "Component.h"
+#import "TouchComponent.h"
 
-@interface MovePathComponent : Component <SelectableComponentDelegate>
+@interface MovePathComponent : Component <TouchComponentDelegate>
 
 @property (nonatomic) NSMutableArray *path;
 

@@ -25,7 +25,7 @@
     return self;
 }
 
--(void)handleDrag:(NSArray *)path {
+-(void)handlePan:(NSArray *)path {
     CGPoint position = [[path lastObject] CGPointValue];
     RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
     

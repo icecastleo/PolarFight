@@ -7,7 +7,6 @@
 //
 
 #import "Entity.h"
-#import "EntityEventDelegate.h"
 
 @interface Component : NSObject<EntityEventDelegate>
 

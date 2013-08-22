@@ -26,15 +26,15 @@
     }
     
     NSArray *path = [self.magicInformation objectForKey:@"path"];
-    NSValue *startValue = [path objectAtIndex:0];
-    CGPoint startPoint = startValue.CGPointValue;
+    NSValue *endValue = [path lastObject];
+    CGPoint endPosition = endValue.CGPointValue;
     
     TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
     SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfName:[SummonComponent name]];
     
     Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level forTeam:teamCom.team addToMap:NO];
     
-    int line = [(ThreeLineMapLayer*)self.entityFactory.mapLayer positionConvertToLine:startPoint];
+    int line = [(ThreeLineMapLayer*)self.entityFactory.mapLayer positionConvertToLine:endPosition];
     [(ThreeLineMapLayer*)self.entityFactory.mapLayer addEntity:summonEntity line:line];
     
 }

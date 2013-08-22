@@ -1510,7 +1510,7 @@
 			<key>attack1</key>
 			<string>MeleeAttackSkill</string>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
@@ -1591,7 +1591,7 @@
 			<key>attack1</key>
 			<string>MeleeAttackSkill</string>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>selectedImage</key>
 			<string>rainbowCircle.png</string>
@@ -1672,7 +1672,7 @@
 			<key>attack1</key>
 			<string>MeleeAttackSkill</string>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<true/>
@@ -2567,7 +2567,7 @@
 			<key>mana</key>
 			<integer>30</integer>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<true/>
@@ -2625,7 +2625,7 @@
 			<key>mana</key>
 			<integer>10</integer>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<true/>
@@ -2683,7 +2683,7 @@
 			<key>mana</key>
 			<integer>0</integer>
 		</dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<true/>
@@ -2732,7 +2732,7 @@
 	</dict>
 	<key>999</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2776,7 +2776,7 @@
 	</dict>
 	<key>1001</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2822,7 +2822,7 @@
 	</dict>
 	<key>1002</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2841,7 +2841,7 @@
 	</dict>
 	<key>1003</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2860,7 +2860,7 @@
 	</dict>
 	<key>1004</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2879,7 +2879,7 @@
 	</dict>
 	<key>1005</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>
@@ -2898,7 +2898,7 @@
 	</dict>
 	<key>1006</key>
 	<dict>
-		<key>SelectableComponent</key>
+		<key>TouchComponent</key>
 		<dict>
 			<key>hasDragLine</key>
 			<false/>

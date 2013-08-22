@@ -39,7 +39,7 @@
 #import "AIStateProjectile.h"
 #import "LineComponent.h"
 
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
 #import "MagicSkillComponent.h"
@@ -219,9 +219,9 @@
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
 
         NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@", cid];
-        NSAssert([characterData objectForKey:@"SelectableComponent"] != nil, assert);
+        NSAssert([characterData objectForKey:@"TouchComponent"] != nil, assert);
         
-        [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
+        [entity addComponent:[[TouchComponent alloc] initWithDictionary:[characterData objectForKey:@"TouchComponent"]]];
         
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
@@ -391,9 +391,9 @@
         }
     }
     
-    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
+    TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
     MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
-    selectCom.dragDelegate = magicCom;
+    selectCom.delegate = magicCom;
     
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
@@ -436,8 +436,8 @@
         spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
     }
     NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
-    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
-    selectCom.dragDelegate = magicCom;
+    TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
+    selectCom.delegate = magicCom;
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];
@@ -462,9 +462,9 @@
     orbCom.type = type;
     [entity addComponent:orbCom];
     
-    NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
-    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
-    selectCom.dragDelegate = orbCom;
+    NSDictionary *selectDic = [characterData objectForKey:@"TouchComponent"];
+    TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
+    selectCom.delegate = orbCom;
     [entity addComponent:selectCom];
     
     return entity;

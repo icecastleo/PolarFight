@@ -141,7 +141,6 @@
     if([self canSummon]) {
         [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:YES]];
         [self.entity sendEvent:kEventCancelMask Message:nil];
-        
     } else {
         [self.entity sendEvent:kEventSelectable Message:[NSNumber numberWithBool:NO]];
         [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:0]];

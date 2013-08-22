@@ -32,8 +32,8 @@
     }
     
     NSArray *path = [self.magicInformation objectForKey:@"path"];
-    NSValue *startValue = [path objectAtIndex:0];
-    CGPoint startPoint = startValue.CGPointValue;    
+    NSValue *endValue = [path lastObject];
+    CGPoint endPosition = endValue.CGPointValue;
     NSDictionary *images = [self.magicInformation objectForKey:@"images"];
 
     ProjectileEvent *event = [[ProjectileEvent alloc] init];
@@ -43,7 +43,7 @@
     event.spriteDirection = kSpriteDirectionDown;
     
     event.type = kProjectileTypeInstant;
-    event.startPosition = startPoint;
+    event.startPosition = endPosition;
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:self.rangeSize.width],kRangeKeyWidth,[NSNumber numberWithInt:self.rangeSize.height],kRangeKeyHeight,nil];
     event.range = [Range rangeWithParameters:dictionary];

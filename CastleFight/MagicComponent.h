@@ -7,11 +7,11 @@
 //
 
 #import "Component.h"
-//#import "Attribute.h"
+#import "TouchComponent.h"
 
 @class Attribute;
 
-@interface MagicComponent : Component <SelectableComponentDelegate>
+@interface MagicComponent : Component <TouchComponentDelegate>
 
 @property (nonatomic,readonly) Attribute *damage;
 @property (nonatomic,readonly) NSString *name;

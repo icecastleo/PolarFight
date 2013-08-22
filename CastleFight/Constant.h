@@ -38,12 +38,10 @@
 // For Character make collision CGPath
 #define kCollisionPointRange 25
 
-// For touch dispatcher
-#define kTouchPriotiryPause -256
-
+// The lower the value the higher the priority
 // It is not used since 'SneakyJoystick' is a library
 #define kTouchPriotiryDpad 1
-#define kTouchPriorityBattleController 2
+#define kTouchPriorityTouchSystem 2
 #define kTouchPriorityMap 3
 
 // For Aura and PassiveSkill
@@ -81,7 +79,7 @@
 
 #define kAnimationActionTag 5
 
-#define kAISystemUpdateInterval 0.5
+#define kAISystemUpdateInterval 0.1
 
 //For Orbs
 #define kOrbBoardRows 3

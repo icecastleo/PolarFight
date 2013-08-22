@@ -8,6 +8,6 @@
 
 #import "cocos2d.h"
 
-@interface PauseLayer : CCLayerColor
+@interface PauseLayer : CCUntouchableLayer
 
 @end

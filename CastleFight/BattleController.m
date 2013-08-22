@@ -27,10 +27,11 @@
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
 #import "PhysicsSystem.h"
+#import "TouchSystem.h"
 #import "OrbSystem.h"
 
 #import "DrawPath.h"
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
 #import "MagicSystem.h"
@@ -41,14 +42,12 @@
     int _prefix;
     
     NSString *battleName;
-    NSUInteger fingerOneHash;
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
+    
+    TouchSystem *touchSystem;
 }
-
-@property (nonatomic) Entity *selectedEntity;
-@property (nonatomic) BOOL isEntitySelected;
 
 @end
 
@@ -107,8 +106,6 @@ __weak static BattleController* currentInstance;
         [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
-                
-        fingerOneHash = 0;
     }
     return self;
 }
@@ -116,150 +113,23 @@ __weak static BattleController* currentInstance;
 -(void)onEnter {
     [super onEnter];
     
+    touchSystem = [[TouchSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
+    
 //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
-    
-    [self registerWithTouchDispatcher];
 }
 
 -(void)onExit {
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:touchSystem];
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
-    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
-        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
-    }
-    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-    
+//    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
+//        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+//    }
+//    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+
     [super onExit];
-}
-
-#pragma mark CCTouchDelegate
--(void)registerWithTouchDispatcher {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityBattleController swallowsTouches:YES];
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (touch.tapCount == 1 && fingerOneHash == 0){
-        fingerOneHash = [touch hash];
-        CGPoint touchLocation = [touch locationInView:[touch view]];
-        touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfName:[SelectableComponent name]];
-        
-        for (Entity *entity in array) {
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-            
-            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
-                if (selectCom.canSelect) {
-                    [preSelectCom unSelected];
-                    self.isEntitySelected = YES;
-                    self.selectedEntity = entity;
-                    selectCom.touchType = kTapType;
-                    [selectCom select];
-                    break;
-                }
-            }
-        }
-        
-        return YES;
-    }
-    return NO;
-}
-
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [touch locationInView:[touch view]];
-    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    if (fingerOneHash == [touch hash]) {
-        if (self.isEntitySelected) {
-            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-            selectCom.touchType = kDragType;
-            [self removeStatusLayerChild];
-            [self drawSelectedRange:touchLocation];
-        }else {
-            // might give the touch to map
-            fingerOneHash = 0;
-        }
-    }
-}
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [touch locationInView:[touch view]];
-    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    
-    if (fingerOneHash == [touch hash]){
-        
-        if (self.selectedEntity) {
-            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
-            
-            switch (selectCom.touchType) {
-                case kNoTouchType: {
-                    [self drawSelectedRange:touchLocation];
-                    [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
-                    
-                    // do not need start point.
-                    NSMutableArray *path = [[NSMutableArray alloc] init];
-                    //move and projectile event uses maplayer location
-                    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
-                    
-                    if (pathCom) {
-                        [pathCom.path removeAllObjects];
-                        [pathCom.path addObjectsFromArray:path];
-                    }
-                    break;
-                }
-                case kTapType: {
-                    
-                    break;
-                }
-                case kDragType: {
-                    self.isEntitySelected = NO;
-                    [self removeStatusLayerChild];
-                    
-                    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
-                    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
-                    
-                    if (magicCom) { // Hero hold this until next one is selected.
-                        [selectCom unSelected];
-                        self.selectedEntity = nil;
-                    }
-                    
-                    // do not need start point.
-                    NSMutableArray *path = [[NSMutableArray alloc] init];
-                    // move and projectile event uses maplayer location
-                    [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
-                    
-                    if (pathCom) {
-                        [pathCom.path removeAllObjects];
-                        [pathCom.path addObjectsFromArray:path];
-                    } else {
-                        if (summonCom && magicCom) {
-                            if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-//                                [magicCom activeWithPath:path];
-                                [selectCom handleDrag:path];
-                            }
-                        }else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
-                            [selectCom handleDrag:path];
-//                            [magicCom activeWithPath:path];
-                        }else {
-                            [selectCom handleDrag:path];
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
-            selectCom.touchType = kNoTouchType;
-        }
-        
-        fingerOneHash = 0;
-    }
-}
-
--(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    fingerOneHash = 0;
 }
 
 -(void)setCastle {
@@ -340,156 +210,88 @@ __weak static BattleController* currentInstance;
     [[CCDirector sharedDirector] replaceScene:[CCTransitionZoomFlipX transitionWithDuration:0.5 scene:[HelloWorldLayer scene]]];
 }
 
-#pragma mark UILongPressGestureRecognizer
-
--(IBAction)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
-    
-    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-    touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSArray *array = [entityManager getAllEntitiesPosessingComponentOfName:[SelectableComponent name]];
-        
-        for (Entity *entity in array) {
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-            
-            if (CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:touchLocation])) {
-                SelectableComponent *preSelectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-                SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
-                if (selectCom.canSelect) {
-                    [preSelectCom unSelected];
-                    self.isEntitySelected = YES;
-                    recognizer.cancelsTouchesInView = YES;
-                    self.selectedEntity = entity;
-                    [selectCom select];
-                    return;
-                }
-            }
-        }
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        if (self.isEntitySelected) {
-            [self removeStatusLayerChild];
-            [self drawSelectedRange:touchLocation];
-        }
-    } else if(recognizer.state == UIGestureRecognizerStateEnded) {
-        if (self.isEntitySelected) {
-            self.isEntitySelected = NO;
-            recognizer.cancelsTouchesInView = NO;
-            [self removeStatusLayerChild];
-            
-            SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-            MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
-            MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
-            SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
-            
-            if (magicCom) { // Hero hold this until next one is selected.
-                [selectCom unSelected];
-                self.selectedEntity = nil;
-            }
-            
-            // do not need start point.
-            NSMutableArray *path = [[NSMutableArray alloc] init];
-            // move and projectile event uses maplayer location
-            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
-            
-            if (pathCom) {
-                [pathCom.path removeAllObjects];
-                [pathCom.path addObjectsFromArray:path];
-            } else {
-                if (summonCom && magicCom) {
-                    if ([(ThreeLineMapLayer *)mapLayer canSummonCharacterInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-                        [magicCom activeWithPath:path];
-                    }
-                } else if ([mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]] && magicCom) {
-                    [magicCom activeWithPath:path];
-                }
-            }
-        }
-    }
-}
-
--(void)drawSelectedRange:(CGPoint)touchLocation {
-    
-    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfName:[RenderComponent name]];
-    
-    SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
-    
-    if (selectCom.hasDragLine) {
-        NSMutableArray *drawPath = [[NSMutableArray alloc] init];
-        [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
-        [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
-        DrawPath *line = [DrawPath node];
-        line.path = drawPath;
-        [statusLayer addChild:line z:0 tag:kDrawPathTag];
-    }
-    
-    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
-    
-    float rotation = 0;
-    CGSize drawSize;
-    
-    if (magicCom) {
-        drawSize = magicCom.rangeSize;
-    }else {
-        drawSize = CGSizeMake(30, 30);
-        // Determine angle to Hero
-        CGPoint position = [renderCom.node.parent convertToWorldSpace:renderCom.position];
-        float offRealY = touchLocation.y - position.y;
-        float offRealX = touchLocation.x - position.x;
-        float angleRadians = atanf((float)offRealY / (float)offRealX);
-        float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-        rotation = -1 * angleDegrees;
-        if (offRealX <= 0) {
-            rotation -= 180;
-        }
-    }
-    
-    // draw range frame
-    CCSprite *rangeFrame1;
-    CCSprite *rangeFrame2;
-    
-    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
-    if (summonCom) {
-        rangeFrame1 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage1];
-        rangeFrame2 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage2];
-        [rangeFrame1 setOpacity:128];
-        [rangeFrame2 setOpacity:0];
-    }else {
-        rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
-        
-        rangeFrame1.scaleX = drawSize.width / rangeFrame1.contentSize.width;
-        rangeFrame1.scaleY = drawSize.height / rangeFrame1.contentSize.height;
-        
-        if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
-            rangeFrame2 = [CCSprite spriteWithFile:@"forbidden_sign.png"];
-        }else {
-            rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
-        }
-        
-        [rangeFrame2 setOpacity:255];
-        CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
-        CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
-        CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
-        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
-        [rangeFrame2 runAction:repeat];
-    }
-    
-    rangeFrame1.rotation = rotation;
-    rangeFrame1.position = touchLocation;
-    rangeFrame2.anchorPoint = ccp(0,0);
-    [rangeFrame1 addChild:rangeFrame2];
-    
-    [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
-    
-}
-
--(void)removeStatusLayerChild {
-    if ([statusLayer getChildByTag:kDrawPathRangeSprite]) {
-        [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
-    }
-    if ([statusLayer getChildByTag:kDrawPathTag]) {
-        [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
-    }
-}
+//-(void)drawSelectedRange:(CGPoint)touchLocation {
+//    
+//    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfName:[RenderComponent name]];
+//    
+//    TouchComponent *selectCom = (TouchComponent *)[self.selectedEntity getComponentOfName:[TouchComponent name]];
+//    
+//    if (selectCom.hasDragLine) {
+//        NSMutableArray *drawPath = [[NSMutableArray alloc] init];
+//        [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
+//        [drawPath addObject:[NSValue valueWithCGPoint:(touchLocation)]];
+//        DrawPath *line = [DrawPath node];
+//        line.path = drawPath;
+//        [statusLayer addChild:line z:0 tag:kDrawPathTag];
+//    }
+//    
+//    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
+//    
+//    float rotation = 0;
+//    CGSize drawSize;
+//    
+//    if (magicCom) {
+//        drawSize = magicCom.rangeSize;
+//    } else {
+//        drawSize = CGSizeMake(30, 30);
+//        // Determine angle to Hero
+//        CGPoint position = [renderCom.node.parent convertToWorldSpace:renderCom.position];
+//        float offRealY = touchLocation.y - position.y;
+//        float offRealX = touchLocation.x - position.x;
+//        float angleRadians = atanf((float)offRealY / (float)offRealX);
+//        float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+//        rotation = -1 * angleDegrees;
+//        if (offRealX <= 0) {
+//            rotation -= 180;
+//        }
+//    }
+//    
+//    // draw range frame
+//    CCSprite *rangeFrame1;
+//    CCSprite *rangeFrame2;
+//    
+//    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
+//    if (summonCom) {
+//        rangeFrame1 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage1];
+//        rangeFrame2 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage2];
+//        [rangeFrame1 setOpacity:128];
+//        [rangeFrame2 setOpacity:0];
+//    }else {
+//        rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
+//        
+//        rangeFrame1.scaleX = drawSize.width / rangeFrame1.contentSize.width;
+//        rangeFrame1.scaleY = drawSize.height / rangeFrame1.contentSize.height;
+//        
+//        if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
+//            rangeFrame2 = [CCSprite spriteWithFile:@"forbidden_sign.png"];
+//        }else {
+//            rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
+//        }
+//        
+//        [rangeFrame2 setOpacity:255];
+//        CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
+//        CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
+//        CCSequence *pulseSequence = [CCSequence actionOne:fadeIn two:fadeOut];
+//        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
+//        [rangeFrame2 runAction:repeat];
+//    }
+//    
+//    rangeFrame1.rotation = rotation;
+//    rangeFrame1.position = touchLocation;
+//    rangeFrame2.anchorPoint = ccp(0,0);
+//    [rangeFrame1 addChild:rangeFrame2];
+//    
+//    [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
+//    
+//}
+//
+//-(void)removeStatusLayerChild {
+//    if ([statusLayer getChildByTag:kDrawPathRangeSprite]) {
+//        [statusLayer removeChildByTag:kDrawPathRangeSprite cleanup:YES];
+//    }
+//    if ([statusLayer getChildByTag:kDrawPathTag]) {
+//        [statusLayer removeChildByTag:kDrawPathTag cleanup:YES];
+//    }
+//}
 
 @end
