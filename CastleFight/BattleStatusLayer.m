@@ -100,7 +100,7 @@
         mana.color = ccBLUEVIOLET;
         [self addChild:mana];
         
-        [self setUnitBoard];
+//        [self setUnitBoard];
         [self setPauseButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
     }

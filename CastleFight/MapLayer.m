@@ -84,7 +84,7 @@ const static int pathSizeHeight = 40;
     NSAssert(render, @"Need render component to add on map!");
     
     [self addChild:render.node];
-    [self moveEntity:entity toPosition:position boundaryLimit:YES];
+    [self moveEntity:entity toPosition:position boundaryLimit:NO];
 }
 
 -(void)moveEntity:(Entity *)entity toPosition:(CGPoint)position boundaryLimit:(BOOL)limit {

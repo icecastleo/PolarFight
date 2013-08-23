@@ -95,15 +95,7 @@
     self.contentSize = CGSizeMake(width*repeat, height);
 }
 
--(void)addEntity:(Entity *)entity {
-//    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
-//    
-//    if (team.team == 1) {
-//        [self addEntity:entity line:selectLine];
-//    } else {
-//        [self addEntity:entity line:arc4random_uniform(kMapPathMaxLine)];
-//    }
-    
+-(void)addEntity:(Entity *)entity {    
     CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
     
     if (character) {
@@ -120,11 +112,10 @@
         if (team.team == 1) {
             render.position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/2, winSize.height/2);
         } else {
-            //            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
             render.position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/2, winSize.height/2);
         }
         
-        [self addChild:render.node z:-3];
+        [self addChild:render.node];
     }
 }
 

@@ -166,17 +166,13 @@
 
 -(void)runDeadAnimationForEntity:(Entity *)entity {
     RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-    
-    CCNode *sprite;
+
     if (render.isSpineNode) {
-        CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
+        CCSkeletonAnimation *animationNode = (CCSkeletonAnimation *)render.sprite;
         [animationNode clearAnimation];
-        sprite = render.sprite;
-    }else {
-        sprite = render.sprite;
+    } else {
+       [render.sprite stopAllActions];
     }
-    
-    [sprite stopAllActions];
     
 //    for (CCNode *children in render.node.children) {
 //        if (children != sprite) {
@@ -189,7 +185,7 @@
     emitter.autoRemoveOnFinish = YES;
     [render.node addChild:emitter];
     
-    [sprite runAction:
+    [render.sprite runAction:
      [CCSequence actions:
       [CCFadeOut actionWithDuration:1.0f],
       [CCCallBlock actionWithBlock:^{

@@ -12,13 +12,13 @@
 
 @interface OrbBoardComponent : Component
 
-@property (nonatomic,readonly) NSMutableArray *board;
-@property (nonatomic,readonly) int currentColumn;
+@property (nonatomic,readonly) NSMutableArray *columns;
+//@property (nonatomic,readonly) int currentColumn;
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory;
--(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;
-
--(void)produceOrbs;
--(void)removeColumn:(int)index;
+//-(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;
+//
+//-(void)produceOrbs;
+//-(void)removeColumn:(int)index;
 
 @end

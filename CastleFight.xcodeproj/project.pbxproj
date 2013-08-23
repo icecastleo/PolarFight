@@ -523,6 +523,7 @@
 		9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD48F0B17AFD26D00DBFDE9 /* plants.png */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC4CD717C1DAC7004E13D6 /* music_1.caf */; };
+		9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */; };
 		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
 		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
@@ -1533,6 +1534,8 @@
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
+		9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLineMapLayer.h; sourceTree = "<group>"; };
+		9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLineMapLayer.m; sourceTree = "<group>"; };
 		9BEF387B1776196B00FF538B /* ice-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ice-hd.png"; sourceTree = "<group>"; };
 		9BEF387C1776196C00FF538B /* ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice.png; sourceTree = "<group>"; };
 		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
@@ -1613,6 +1616,8 @@
 				9B73C785172E8247008575E5 /* BattleCatMapLayer.m */,
 				9B73C787172E82E4008575E5 /* ThreeLineMapLayer.h */,
 				9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */,
+				9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */,
+				9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */,
 				9BA4E41216E09F0700D5FA07 /* MapCamera.h */,
 				9BA4E41316E09F0700D5FA07 /* MapCamera.m */,
 				9B82F78E164FB2780001A357 /* TiledMapLayer.h */,
@@ -3747,6 +3752,7 @@
 				37020EBE17BBAFE20063A4BB /* OrbComponent.m in Sources */,
 				37E16AF317BCA82A0092B8EC /* OrbSystem.m in Sources */,
 				9B08435717C5B3F600AC9049 /* TouchSystem.m in Sources */,
+				9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

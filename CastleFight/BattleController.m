@@ -13,8 +13,6 @@
 #import "FileManager.h"
 #import "SimpleAudioEngine.h"
 #import "AchievementManager.h"
-#import "BattleCatMapLayer.h"
-#import "ThreeLineMapLayer.h"
 #import "EntityManager.h"
 #import "EntityFactory.h"
 #import "PlayerSystem.h"
@@ -37,6 +35,10 @@
 #import "MagicSystem.h"
 #import "MagicComponent.h"
 #import "SummonComponent.h"
+
+#import "TopLineMapLayer.h"
+#import "BattleCatMapLayer.h"
+#import "ThreeLineMapLayer.h"
 
 @interface BattleController () {
     int _prefix;
@@ -71,7 +73,8 @@ __weak static BattleController* currentInstance;
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+//        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[TopLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         entityManager = [[EntityManager alloc] init];
@@ -98,12 +101,12 @@ __weak static BattleController* currentInstance;
         [self addChild:statusLayer];
 
         Entity *board = [entityFactory createOrbBoard];
-        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
-        boardRenderCom.node.position = ccp(100,20);
-        boardRenderCom.node.anchorPoint = ccp(0,0);
-        boardRenderCom.sprite.anchorPoint = ccp(0,0);
-        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
-        [statusLayer addChild:boardRenderCom.node];
+//        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
+//        boardRenderCom.node.position = ccp(100,20);
+//        boardRenderCom.node.anchorPoint = ccp(0,0);
+//        boardRenderCom.sprite.anchorPoint = ccp(0,0);
+//        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+//        [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
     }

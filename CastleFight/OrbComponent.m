@@ -25,22 +25,22 @@
     return self;
 }
 
--(void)handlePan:(NSArray *)path {
-    CGPoint position = [[path lastObject] CGPointValue];
-    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
-    
-    CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
-    
-    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
-    [boardCom moveOrb:self.entity ToPosition:position2];
-}
-
--(void)handleTap:(NSArray *)path {
-    
-}
+//-(void)handlePan:(NSArray *)path {
+//    CGPoint position = [[path lastObject] CGPointValue];
+//    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
+//    
+//    CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
+//    
+//    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
+//    [boardCom moveOrb:self.entity ToPosition:position2];
+//}
+//
+//-(void)handleTap {
+//    
+//}
 
 -(void)executeMatch:(int)number {
-    
+
     NSAssert(number >= 3, @"should not call this function when it is less than 3.");
     
     if (number > 5) {

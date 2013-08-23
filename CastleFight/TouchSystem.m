@@ -113,7 +113,7 @@
         TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
 
         if (touchCom.canSelect) {
-            // Select entity
+            // Cancle previous select
             if (selectedEntity != nil) {
                 TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
                 
@@ -122,10 +122,15 @@
                 }
             }
             
-            selectedEntity = touchedEntity;
-            
-            if ([touchCom.delegate respondsToSelector:@selector(handleSelect:)]) {
-                [touchCom.delegate handleSelect];
+            if (touchedEntity == selectedEntity) {
+                selectedEntity = nil;
+            } else {
+                // Select new entity! 
+                selectedEntity = touchedEntity;
+                
+                if ([touchCom.delegate respondsToSelector:@selector(handleSelect:)]) {
+                    [touchCom.delegate handleSelect];
+                }
             }
         } else {
             // Tap entity

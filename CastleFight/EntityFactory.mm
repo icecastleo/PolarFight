@@ -252,23 +252,26 @@
     
     CCSprite *sprite;
 
-//    if (team == 1) {
-//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
-//    } else {
-//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
-//    }
+    if (team == 1) {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
+    } else {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
+    }
+
+    sprite.scale = 0.5;
     
-    sprite = [CCSprite spriteWithFile:@"wall.png"];
+//    sprite = [CCSprite spriteWithFile:@"wall.png"];
     
-    sprite.scaleX = kMapStartDistance/2/sprite.contentSize.width;
-    sprite.scaleY = [CCDirector sharedDirector].winSize.height/sprite.contentSize.height;
+//    sprite.scaleX = kMapStartDistance/2/sprite.contentSize.width;
+//    sprite.scaleY = [CCDirector sharedDirector].winSize.height/sprite.contentSize.height;
+    
     
     Entity *entity = [_entityManager createEntity];
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-//    render.enableShadowPosition = YES;
+    render.enableShadowPosition = YES;
     [entity addComponent:render];
     
     if (_physicsSystem) {
@@ -445,27 +448,35 @@
     return entity;
 }
 
--(Entity *)createOrbForType:(OrbType)type {
+-(Entity *)createOrb:(OrbType)type row:(int)row {
     Entity *entity = [_entityManager createEntity];
     
     NSString *cid = [NSString stringWithFormat:@"100%d",type];
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
     CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
-    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
-    renderCom.sprite.scale = kOrb_XSIZE/renderCom.sprite.boundingBox.size.width;
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+        
+    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
+    render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
+    render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
     
-    [entity addComponent:renderCom];
+    [entity addComponent:render];
     
     NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
     OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
     orbCom.type = type;
     [entity addComponent:orbCom];
     
-    NSDictionary *selectDic = [characterData objectForKey:@"TouchComponent"];
-    TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
-    selectCom.delegate = orbCom;
-    [entity addComponent:selectCom];
+    NSDictionary *touchDic = [characterData objectForKey:@"TouchComponent"];
+    TouchComponent *touchCom = [[TouchComponent alloc] initWithDictionary:touchDic];
+    touchCom.delegate = orbCom;
+    [entity addComponent:touchCom];
+    
+    // TODO: Use CCSpriteBatchNode to put orb!
+    if (self.mapLayer) {
+        [self.mapLayer addChild:render.node];
+    }
     
     return entity;
 }
@@ -478,6 +489,8 @@
     CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     [entity addComponent:renderCom];
+    
+    sprite.opacity = 0;
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
     [entity addComponent:orbBoardCom];

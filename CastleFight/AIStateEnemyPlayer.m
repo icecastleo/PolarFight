@@ -74,8 +74,6 @@
         static int count = 0;
         count++;
         
-        CCLOG(@"%d",count);
-        
         player.food -= nextEnemy.cost;
         
         // Auto add to map
