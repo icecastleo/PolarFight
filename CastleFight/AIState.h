@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EntityEventDelegate.h"
 #import "Entity.h"
 
 @interface AIState : NSObject<EntityEventDelegate>

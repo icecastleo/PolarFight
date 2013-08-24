@@ -15,6 +15,8 @@
 -(void)update:(float)delta {
     t += delta;
     
+    // FIXME: Let AIState has its own interval!
+    
     if (t >= kAISystemUpdateInterval) {
         t -= kAISystemUpdateInterval;
     } else {

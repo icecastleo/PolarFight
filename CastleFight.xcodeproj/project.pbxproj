@@ -188,7 +188,7 @@
 		37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0E178C454D00AE7757 /* gold_frame@2x.png */; };
 		37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1D178C49AB00AE7757 /* rainbowCircle.png */; };
 		37E00B20178C49AB00AE7757 /* rainbowCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1E178C49AB00AE7757 /* rainbowCircle@2x.png */; };
-		37E0A30A177057E900503100 /* SelectableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* SelectableComponent.m */; };
+		37E0A30A177057E900503100 /* TouchComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0A309177057E900503100 /* TouchComponent.m */; };
 		37E0DB851714285A0039C94C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E0DB831714285A0039C94C /* Appirater.m */; };
 		37E0DB8917143C110039C94C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8817143C110039C94C /* CFNetwork.framework */; };
 		37E0DB8B17143C1D0039C94C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E0DB8A17143C1D0039C94C /* StoreKit.framework */; };
@@ -238,6 +238,8 @@
 		9B062E721635275300E06018 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B062E711635275300E06018 /* HelloWorldLayer.m */; };
 		9B062E751635275300E06018 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B062E741635275300E06018 /* IntroLayer.m */; };
 		9B06F84016787F3800E1B09D /* Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B06F83F16787F3800E1B09D /* Attribute.m */; };
+		9B08435717C5B3F600AC9049 /* TouchSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B08435617C5B3F600AC9049 /* TouchSystem.m */; };
+		9B08435A17C5BE5800AC9049 /* CCUntouchableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B08435917C5BE5700AC9049 /* CCUntouchableLayer.m */; };
 		9B08F95916A3FBB1006BF34F /* RangeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B08F95816A3FBB0006BF34F /* RangeAttackSkill.m */; };
 		9B146C7117342C6C00D141F1 /* DefenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C7017342C6C00D141F1 /* DefenderComponent.m */; };
 		9B146C7817359FA700D141F1 /* AttackerComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C7717359FA600D141F1 /* AttackerComponent.m */; };
@@ -521,6 +523,7 @@
 		9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD48F0B17AFD26D00DBFDE9 /* plants.png */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC4CD717C1DAC7004E13D6 /* music_1.caf */; };
+		9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */; };
 		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
 		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
@@ -838,8 +841,8 @@
 		37E02F2416676B8B00BAF11B /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
 		37E02F2516676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
 		37E02F2616676B8B00BAF11B /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
-		37E0A308177057E900503100 /* SelectableComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableComponent.h; sourceTree = "<group>"; };
-		37E0A309177057E900503100 /* SelectableComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableComponent.m; sourceTree = "<group>"; };
+		37E0A308177057E900503100 /* TouchComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchComponent.h; sourceTree = "<group>"; };
+		37E0A309177057E900503100 /* TouchComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchComponent.m; sourceTree = "<group>"; };
 		37E0DB821714285A0039C94C /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		37E0DB831714285A0039C94C /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		37E0DB841714285A0039C94C /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
@@ -906,6 +909,10 @@
 		9B062E741635275300E06018 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		9B06F83E16787F3800E1B09D /* Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		9B06F83F16787F3800E1B09D /* Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attribute.m; sourceTree = "<group>"; };
+		9B08435517C5B3F600AC9049 /* TouchSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSystem.h; sourceTree = "<group>"; };
+		9B08435617C5B3F600AC9049 /* TouchSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchSystem.m; sourceTree = "<group>"; };
+		9B08435817C5BE5700AC9049 /* CCUntouchableLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCUntouchableLayer.h; path = cocos2d/Extensions/CCUntouchableLayer.h; sourceTree = "<group>"; };
+		9B08435917C5BE5700AC9049 /* CCUntouchableLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCUntouchableLayer.m; path = cocos2d/Extensions/CCUntouchableLayer.m; sourceTree = "<group>"; };
 		9B08F95716A3FBB0006BF34F /* RangeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeAttackSkill.h; sourceTree = "<group>"; };
 		9B08F95816A3FBB0006BF34F /* RangeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeAttackSkill.m; sourceTree = "<group>"; };
 		9B10BFC9178FF1CF00C1290B /* PhysicsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsNode.h; path = ../cocos2d/Extensions/Custom/PhysicsNode.h; sourceTree = "<group>"; };
@@ -1527,7 +1534,8 @@
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
-		9BE2FCD117730ACC007ADB15 /* EntityEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityEventDelegate.h; sourceTree = "<group>"; };
+		9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLineMapLayer.h; sourceTree = "<group>"; };
+		9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLineMapLayer.m; sourceTree = "<group>"; };
 		9BEF387B1776196B00FF538B /* ice-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ice-hd.png"; sourceTree = "<group>"; };
 		9BEF387C1776196C00FF538B /* ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice.png; sourceTree = "<group>"; };
 		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
@@ -1608,6 +1616,8 @@
 				9B73C785172E8247008575E5 /* BattleCatMapLayer.m */,
 				9B73C787172E82E4008575E5 /* ThreeLineMapLayer.h */,
 				9B73C788172E82E4008575E5 /* ThreeLineMapLayer.m */,
+				9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */,
+				9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */,
 				9BA4E41216E09F0700D5FA07 /* MapCamera.h */,
 				9BA4E41316E09F0700D5FA07 /* MapCamera.m */,
 				9B82F78E164FB2780001A357 /* TiledMapLayer.h */,
@@ -2578,7 +2588,6 @@
 				9B27D19B1781F9970012E126 /* StateComponents */,
 				9B55BB8A173254CB0030C9D7 /* Component.h */,
 				9B55BB8B173254CB0030C9D7 /* Component.m */,
-				9BE2FCD117730ACC007ADB15 /* EntityEventDelegate.h */,
 				9B55BB92173254CB0030C9D7 /* PlayerComponent.h */,
 				9B55BB93173254CB0030C9D7 /* PlayerComponent.m */,
 				9B93DE7C1744CCA400DA62F2 /* SummonComponent.h */,
@@ -2605,8 +2614,8 @@
 				9B146C7B1736D3F400D141F1 /* UpgradePriceComponent.m */,
 				9B55BB9A173254CB0030C9D7 /* AIComponent.h */,
 				9B55BB9B173254CB0030C9D7 /* AIComponent.m */,
-				37E0A308177057E900503100 /* SelectableComponent.h */,
-				37E0A309177057E900503100 /* SelectableComponent.m */,
+				37E0A308177057E900503100 /* TouchComponent.h */,
+				37E0A309177057E900503100 /* TouchComponent.m */,
 				37D75639177438ED005ACE35 /* HeroComponent.h */,
 				37D7563A177438ED005ACE35 /* HeroComponent.m */,
 				37D97D34177198F600A2A7D6 /* MovePathComponent.h */,
@@ -2654,6 +2663,8 @@
 				9BC15939178C0E300096BC9E /* PhysicsSystem.mm */,
 				37E16AF117BCA82A0092B8EC /* OrbSystem.h */,
 				37E16AF217BCA82A0092B8EC /* OrbSystem.m */,
+				9B08435517C5B3F600AC9049 /* TouchSystem.h */,
+				9B08435617C5B3F600AC9049 /* TouchSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -2936,6 +2947,8 @@
 				9BAF5B27170B66DB00945271 /* CCSlider */,
 				9BAF5B14170B661000945271 /* CCScissorLayer.h */,
 				9BAF5B15170B661000945271 /* CCScissorLayer.m */,
+				9B08435817C5BE5700AC9049 /* CCUntouchableLayer.h */,
+				9B08435917C5BE5700AC9049 /* CCUntouchableLayer.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -3673,7 +3686,7 @@
 				37E1AE281767184C003F1707 /* ReflectAttackDamageSkill.m in Sources */,
 				37E1AE2E1767649C003F1707 /* StealthSkill.m in Sources */,
 				370C938A176F333900A6990D /* DrawPath.m in Sources */,
-				37E0A30A177057E900503100 /* SelectableComponent.m in Sources */,
+				37E0A30A177057E900503100 /* TouchComponent.m in Sources */,
 				37D97D33177195BE00A2A7D6 /* AIStateHeroWalk.m in Sources */,
 				37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */,
 				374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */,
@@ -3738,6 +3751,8 @@
 				37020EBB17BBA7A60063A4BB /* OrbBoardComponent.m in Sources */,
 				37020EBE17BBAFE20063A4BB /* OrbComponent.m in Sources */,
 				37E16AF317BCA82A0092B8EC /* OrbSystem.m in Sources */,
+				9B08435717C5B3F600AC9049 /* TouchSystem.m in Sources */,
+				9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3907,6 +3922,7 @@
 				9BC15930178AC5B70096BC9E /* b2WheelJoint.cpp in Sources */,
 				9BC15931178AC5B70096BC9E /* b2Rope.cpp in Sources */,
 				9BC15936178AC7280096BC9E /* GLES-Render.mm in Sources */,
+				9B08435A17C5BE5800AC9049 /* CCUntouchableLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

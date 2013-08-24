@@ -97,7 +97,7 @@
         [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0];
     } else {
         userData.backgroundMusicSwitch = YES;
-        [[SimpleAudioEngine sharedEngine] setEffectsVolume:userData.backgroundMusicVolume];
+        [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:userData.backgroundMusicVolume];
     }
     //    [self saveUserData];
 }

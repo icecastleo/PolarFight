@@ -13,8 +13,6 @@
 #import "FileManager.h"
 #import "SimpleAudioEngine.h"
 #import "AchievementManager.h"
-#import "BattleCatMapLayer.h"
-#import "ThreeLineMapLayer.h"
 #import "EntityManager.h"
 #import "EntityFactory.h"
 #import "PlayerSystem.h"
@@ -27,28 +25,31 @@
 #import "DefenderComponent.h"
 #import "PlayerComponent.h"
 #import "PhysicsSystem.h"
+#import "TouchSystem.h"
 #import "OrbSystem.h"
 
 #import "DrawPath.h"
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "RenderComponent.h"
 #import "MovePathComponent.h"
 #import "MagicSystem.h"
 #import "MagicComponent.h"
 #import "SummonComponent.h"
 
+#import "TopLineMapLayer.h"
+#import "BattleCatMapLayer.h"
+#import "ThreeLineMapLayer.h"
+
 @interface BattleController () {
     int _prefix;
     
     NSString *battleName;
-    NSUInteger fingerOneHash;
     
     EntityManager *entityManager;
     EntityFactory *entityFactory;
+    
+    TouchSystem *touchSystem;
 }
-
-@property (nonatomic) Entity *selectedEntity;
-@property (nonatomic) BOOL isEntitySelected;
 
 @end
 
@@ -72,7 +73,8 @@ __weak static BattleController* currentInstance;
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
 //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+//        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[TopLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         entityManager = [[EntityManager alloc] init];
@@ -107,8 +109,6 @@ __weak static BattleController* currentInstance;
         [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
-                
-        fingerOneHash = 0;
     }
     return self;
 }
@@ -116,22 +116,21 @@ __weak static BattleController* currentInstance;
 -(void)onEnter {
     [super onEnter];
     
+    touchSystem = [[TouchSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
+    
 //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
-    
-    [self registerWithTouchDispatcher];
 }
 
 -(void)onExit {
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:touchSystem];
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
-    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
-        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
-    }
-    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-    
-    [super onExit];
-}
+//    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
+//        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+//    }
+//    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
 
 #pragma mark CCTouchDelegate
 -(void)registerWithTouchDispatcher {

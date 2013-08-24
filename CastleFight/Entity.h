@@ -9,6 +9,8 @@
 @class Component;
 @class EntityManager;
 
+#pragma mark - EntityEvent
+
 typedef enum {
     // Only the removed component will receive!
     kEntityEventRemoveComponent,
@@ -39,6 +41,18 @@ typedef enum {
     kEventSelectable,
     
 } EntityEvent;
+
+
+#pragma mark - EntityEventDelegate
+
+@protocol EntityEventDelegate <NSObject>
+
+@optional
+-(void)receiveEvent:(EntityEvent)type Message:(id)message;
+
+@end
+
+#pragma mark - Entity
 
 @interface Entity : NSObject
     

@@ -187,6 +187,7 @@
 #import "CCMenu+RowColumnExtend.h"
 #import "SimpleAudioEngine+VibrateExtend.h"
 #import "CCShake.h"
+#import "CCUntouchableLayer.h"
 
 
 #ifdef __cplusplus

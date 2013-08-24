@@ -39,7 +39,7 @@
 #import "AIStateProjectile.h"
 #import "LineComponent.h"
 
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
 #import "MagicSkillComponent.h"
@@ -219,9 +219,9 @@
         [entity addComponent:[[HeroComponent alloc] initWithCid:cid Level:level Team:team]];
 
         NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@", cid];
-        NSAssert([characterData objectForKey:@"SelectableComponent"] != nil, assert);
+        NSAssert([characterData objectForKey:@"TouchComponent"] != nil, assert);
         
-        [entity addComponent:[[SelectableComponent alloc] initWithDictionary:[characterData objectForKey:@"SelectableComponent"]]];
+        [entity addComponent:[[TouchComponent alloc] initWithDictionary:[characterData objectForKey:@"TouchComponent"]]];
         
         NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
         MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
@@ -252,23 +252,26 @@
     
     CCSprite *sprite;
 
-//    if (team == 1) {
-//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
-//    } else {
-//        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
-//    }
+    if (team == 1) {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
+    } else {
+        sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
+    }
+
+    sprite.scale = 0.5;
     
-    sprite = [CCSprite spriteWithFile:@"wall.png"];
+//    sprite = [CCSprite spriteWithFile:@"wall.png"];
     
-    sprite.scaleX = kMapStartDistance/2/sprite.contentSize.width;
-    sprite.scaleY = [CCDirector sharedDirector].winSize.height/sprite.contentSize.height;
+//    sprite.scaleX = kMapStartDistance/2/sprite.contentSize.width;
+//    sprite.scaleY = [CCDirector sharedDirector].winSize.height/sprite.contentSize.height;
+    
     
     Entity *entity = [_entityManager createEntity];
 
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-//    render.enableShadowPosition = YES;
+    render.enableShadowPosition = YES;
     [entity addComponent:render];
     
     if (_physicsSystem) {
@@ -391,9 +394,9 @@
         }
     }
     
-    SelectableComponent *selectCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
+    TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
     MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
-    selectCom.dragDelegate = magicCom;
+    selectCom.delegate = magicCom;
     
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
@@ -436,8 +439,8 @@
         spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
     }
     NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
-    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
-    selectCom.dragDelegate = magicCom;
+    TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
+    selectCom.delegate = magicCom;
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];
@@ -445,17 +448,20 @@
     return entity;
 }
 
--(Entity *)createOrbForType:(OrbType)type {
+-(Entity *)createOrb:(OrbType)type row:(int)row {
     Entity *entity = [_entityManager createEntity];
     
     NSString *cid = [NSString stringWithFormat:@"100%d",type];
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
     CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
-    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
-    renderCom.sprite.scale = kOrb_XSIZE/renderCom.sprite.boundingBox.size.width;
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+        
+    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
+    render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
+    render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
     
-    [entity addComponent:renderCom];
+    [entity addComponent:render];
     
     NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
     OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
@@ -482,6 +488,8 @@
     CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     [entity addComponent:renderCom];
+    
+    sprite.opacity = 0;
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
     orbBoardCom.owner = owner;

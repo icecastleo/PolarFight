@@ -11,9 +11,9 @@
 	<key>soundsEffectEnable</key>
 	<true/>
 	<key>backgroundMusicVolume</key>
-	<real>0.1</real>
+	<integer>0</integer>
 	<key>soundsEffectVolume</key>
-	<real>0.5</real>
+	<integer>0</integer>
 	<key>characters</key>
 	<array>
 		<dict>

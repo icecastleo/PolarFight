@@ -50,11 +50,7 @@
     _path = nil;
 }
 
--(void)handleDrag:(NSArray *)path {
-    [self activeWithPath:path];
-}
-
--(void)handleTap:(NSArray *)path {
+-(void)handlePan:(NSArray *)path {
     [self activeWithPath:path];
 }
 

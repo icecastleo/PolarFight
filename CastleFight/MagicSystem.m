@@ -12,7 +12,7 @@
 #import "MagicComponent.h"
 #import "CostComponent.h"
 #import "PlayerComponent.h"
-#import "SelectableComponent.h"
+#import "TouchComponent.h"
 #import "SummonComponent.h"
 
 @implementation MagicSystem
@@ -29,7 +29,7 @@
     
     for (Entity *entity in entities) {
         MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
-        SelectableComponent *selectableCom = (SelectableComponent *)[entity getComponentOfName:[SelectableComponent name]];
+        TouchComponent *selectableCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
         CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
         
         PlayerComponent *resourceCom = (PlayerComponent *)[magicCom.spellCaster getComponentOfName:[PlayerComponent name]];
@@ -42,13 +42,13 @@
             [entity sendEvent:kEventCancelMask Message:nil];
             
             if (magicCom.currentCooldown <= 0) {
-                selectableCom.canSelect = YES;
+                selectableCom.touchable = YES;
             } else {
-                selectableCom.canSelect = NO;
+                selectableCom.touchable = NO;
             }
         } else {
             [entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:0]];
-            selectableCom.canSelect = NO;
+            selectableCom.touchable = NO;
         }
         
         if (magicCom.canActive && magicCom.currentCooldown <= 0 && isCostSufficient) {
@@ -59,7 +59,7 @@
             SummonComponent *summonCom = (SummonComponent *)[magicCom.entity getComponentOfName:[SummonComponent name]];
             if(summonCom) {
                magic.owner = magicCom.entity;
-            }else {
+            } else {
                magic.owner = magicCom.spellCaster; 
             }
             
