@@ -113,9 +113,10 @@
     CCSprite *select = [CCSprite spriteWithSpriteFrameName:@"bg_unit_board.png"];
     select.anchorPoint = ccp(0.5, 0);
     select.position = ccp(winSize.width / 2, 0);
-    [self addChild:select];
+//    [self addChild:select];
     
     for (Entity *entity in player.summonComponents) {
+        break;
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
         LevelComponent *levelCom = (LevelComponent *)[entity getComponentOfName:[LevelComponent name]];

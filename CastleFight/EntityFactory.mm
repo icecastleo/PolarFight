@@ -462,11 +462,14 @@
     orbCom.type = type;
     [entity addComponent:orbCom];
     
-    NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
-    SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
-    selectCom.dragDelegate = orbCom;
-    selectCom.tapDelegate = orbCom;
-    [entity addComponent:selectCom];
+    if(type != OrbPink) {
+        NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
+        SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
+        selectCom.dragDelegate = orbCom;
+        selectCom.tapDelegate = orbCom;
+        [entity addComponent:selectCom];
+        
+    }
     
     return entity;
 }

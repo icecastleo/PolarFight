@@ -173,9 +173,18 @@ __weak static BattleController* currentInstance;
     if (fingerOneHash == [touch hash]) {
         if (self.isEntitySelected) {
             SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
+            if (!selectCom) {
+                self.isEntitySelected = NO;
+                return;
+            }
             selectCom.touchType = kDragType;
-            [self removeStatusLayerChild];
-            [self drawSelectedRange:touchLocation];
+//            [self removeStatusLayerChild];
+//            [self drawSelectedRange:touchLocation];
+            // do not need start point.
+            NSMutableArray *path = [[NSMutableArray alloc] init];
+            // move and projectile event uses maplayer location
+            [path addObject:[NSValue valueWithCGPoint:([mapLayer convertToNodeSpace:touchLocation])]];
+            [selectCom handleDrag:path];
         }else {
             // might give the touch to map
             fingerOneHash = 0;
@@ -195,8 +204,12 @@ __weak static BattleController* currentInstance;
             
             switch (selectCom.touchType) {
                 case kNoTouchType: {
-                    [self drawSelectedRange:touchLocation];
-                    [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
+                    if (!self.selectedEntity) {
+                        [self removeStatusLayerChild];
+                        return;
+                    }
+//                    [self drawSelectedRange:touchLocation];
+//                    [self performSelector:@selector(removeStatusLayerChild) withObject:nil afterDelay:0.1];
                     
                     // do not need start point.
                     NSMutableArray *path = [[NSMutableArray alloc] init];
@@ -369,14 +382,14 @@ __weak static BattleController* currentInstance;
         }
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         if (self.isEntitySelected) {
-            [self removeStatusLayerChild];
-            [self drawSelectedRange:touchLocation];
+//            [self removeStatusLayerChild];
+//            [self drawSelectedRange:touchLocation];
         }
     } else if(recognizer.state == UIGestureRecognizerStateEnded) {
         if (self.isEntitySelected) {
             self.isEntitySelected = NO;
             recognizer.cancelsTouchesInView = NO;
-            [self removeStatusLayerChild];
+//            [self removeStatusLayerChild];
             
             SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
             MovePathComponent *pathCom = (MovePathComponent *)[self.selectedEntity getComponentOfName:[MovePathComponent name]];
@@ -414,6 +427,10 @@ __weak static BattleController* currentInstance;
     RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfName:[RenderComponent name]];
     
     SelectableComponent *selectCom = (SelectableComponent *)[self.selectedEntity getComponentOfName:[SelectableComponent name]];
+    
+    if (!selectCom) {
+        return;
+    }
     
     if (selectCom.hasDragLine) {
         NSMutableArray *drawPath = [[NSMutableArray alloc] init];

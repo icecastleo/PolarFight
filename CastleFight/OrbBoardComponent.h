@@ -13,7 +13,6 @@
 @interface OrbBoardComponent : Component
 
 @property (nonatomic,readonly) NSMutableArray *board;
-@property (nonatomic,readonly) int currentColumn;
 @property (nonatomic) Entity *owner; //player
 @property (nonatomic,readonly) EntityFactory *entityFactory;
 
@@ -21,6 +20,10 @@
 -(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;
 
 -(void)produceOrbs;
--(void)removeColumn:(int)index;
+-(void)adjustOrbPosition:(Entity *)orb realPosition:(CGPoint)realPosition;
+-(void)clean;
+
+-(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb;
+-(void)matchClean:(NSArray *)matchArray;
 
 @end

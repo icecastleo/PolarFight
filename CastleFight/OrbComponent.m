@@ -39,7 +39,12 @@
 }
 
 -(void)handleTap:(NSArray *)path {
-    [self executeMatch:self.type];
+    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
+    NSArray *matchArray = [boardCom findMatchFromPosition:self.position CurrentOrb:self.entity];
+    if (matchArray.count >= 3) {
+        [self executeMatch:self.type];
+        [boardCom matchClean:matchArray];
+    }
 }
 
 -(void)executeMatch:(int)number {

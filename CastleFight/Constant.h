@@ -84,14 +84,14 @@
 #define kAISystemUpdateInterval 0.5
 
 //For Orbs
-#define kOrbBoardRows 3
-#define kOrbBoardColumns 6
+#define kOrbBoardRows 4
+#define kOrbBoardColumns 20
 #define kOrbBoardWidth 320
 #define kOrbBoardHeight 250
 #define kOrb_XPad 4
 #define kOrb_YPad 1
-#define kOrb_XSIZE 40 //pixels
-#define kOrb_YSIZE 40 //pixels
+#define kOrb_XSIZE 30 //pixels
+#define kOrb_YSIZE 30 //pixels
 #define kOrbBoardMinBorder 0
 
 typedef enum {
