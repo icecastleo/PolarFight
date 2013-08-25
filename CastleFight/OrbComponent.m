@@ -24,76 +24,53 @@
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         _matchInfo = dic;
+        _position = CGPointMake(0, 0);
     }
     return self;
 }
 
--(void)handleDrag:(NSArray *)path {
+//-(void)handlePan:(NSArray *)path {
+//    CGPoint position = [[path lastObject] CGPointValue];
+//    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
+//    
+//    CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
+//    
+//    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
+//    [boardCom moveOrb:self.entity ToPosition:position2];
+//}
+//
+//-(void)handleTap {
+//    
+//}
+
+
+
+
+//*
+-(void)handlePan:(NSArray *)path {
     CGPoint position = [[path lastObject] CGPointValue];
-    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
-    
-    CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
-    
-    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
-    [boardCom moveOrb:self.entity ToPosition:position2];
+    [self.board moveOrb:self.entity ToPosition:position];
 }
 
--(void)handleTap:(NSArray *)path {
-    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
-    NSArray *matchArray = [boardCom findMatchFromPosition:self.position CurrentOrb:self.entity];
+-(void)handleTap {
+    NSArray *matchArray = [self.board findMatchFromPosition:self.position CurrentOrb:self.entity];
     if (matchArray.count >= 3) {
-        [self executeMatch:self.type];
-        [boardCom matchClean:matchArray];
+        [self executeMatch:matchArray.count];
+        [self.board matchClean:matchArray];
     }
 }
 
 -(void)executeMatch:(int)number {
     
-//    NSAssert(number >= 3, @"should not call this function when it is less than 3.");
     
-//    if (number > 5) {
-//        number = 5;
-//    }
-    
-//    NSDictionary *dic = [self.matchInfo objectForKey:[NSString stringWithFormat:@"%d",number]];
-    
-    //execute a magic method
-//    NSString *magicName = [dic objectForKey:@"magicName"];
-//    Magic *magic = [[NSClassFromString(magicName) alloc] init];
-    Magic *magic = [[SummonToLineMagic alloc] init];
-    
-    //FIXME: give summon data to magic
-//    NSDictionary *summonDic = [dic objectForKey:@"summonData"];
-//    SummonComponent
+    PlayerComponent *playerCom = (PlayerComponent *)[self.board.owner getComponentOfName:[PlayerComponent name]];
     
     NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
-    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
-    magic.entityFactory = boardCom.entityFactory;
-    PlayerComponent *playerCom = (PlayerComponent *)[boardCom.owner getComponentOfName:[PlayerComponent name]];
-    
-    //test
-//    int type = OrbRed + arc4random_uniform(OrbBottom-1);
-    int type = 0;
     NSString *summonData = @"SummonData";
-    switch (type) {
-        case OrbRed:
-            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:0] forKey:summonData];
-            break;
-        case OrbBlue:
-            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:1] forKey:summonData];
-            break;
-        case OrbGreen:
-            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:2] forKey:summonData];
-            break;
-        default:
-            [magicInfo setValue:[playerCom.battleTeam objectAtIndex:number] forKey:summonData];
-            break;
-    }
+    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:summonData];
     
-    int testNumber = 3;
-    testNumber = 3 + arc4random_uniform(3);
     int addLevel = 0;
-    switch (testNumber) {
+    switch (number) {
         case 4:
             addLevel += 1;
             break;
@@ -105,8 +82,10 @@
     }
     [magicInfo setValue:[NSNumber numberWithInt:addLevel] forKey:@"addLevel"];
     //test
-    magic.magicInformation = magicInfo;
+    Magic *magic = [[SummonToLineMagic alloc] initWithMagicInformation:magicInfo];
+    magic.entityFactory = self.board.entityFactory;
     [magic active];
 }
+//*/
 
 @end

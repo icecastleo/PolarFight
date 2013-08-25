@@ -460,21 +460,27 @@
     render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
     render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
     render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
-    
+    if(type == OrbNull){
+        [render.node setVisible:NO];
+    }
+        
     [entity addComponent:render];
     
-    NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
-    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
+    NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
+    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
     orbCom.type = type;
     [entity addComponent:orbCom];
     
-    if(type != OrbPink) {
-        NSDictionary *selectDic = [characterData objectForKey:@"SelectableComponent"];
-        SelectableComponent *selectCom = [[SelectableComponent alloc] initWithDictionary:selectDic];
-        selectCom.dragDelegate = orbCom;
-        selectCom.tapDelegate = orbCom;
-        [entity addComponent:selectCom];
-        
+    NSDictionary *touchDic = [characterData objectForKey:@"TouchComponent"];
+    if (touchDic) {
+        TouchComponent *touchCom = [[TouchComponent alloc] initWithDictionary:touchDic];
+        touchCom.delegate = orbCom;
+        [entity addComponent:touchCom];
+    }
+    
+    // TODO: Use CCSpriteBatchNode to put orb!
+    if (self.mapLayer) {
+        [self.mapLayer addChild:render.node];
     }
     
     return entity;

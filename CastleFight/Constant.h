@@ -83,15 +83,15 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
+#define kOrbWidth 30
+#define kOrbHeight 30
+#define kOrbSpeed 30
+
 #define kOrbBoardRows 4
-#define kOrbBoardColumns 20
-#define kOrbBoardWidth 320
-#define kOrbBoardHeight 250
-#define kOrb_XPad 4
-#define kOrb_YPad 1
-#define kOrb_XSIZE 30 //pixels
-#define kOrb_YSIZE 30 //pixels
-#define kOrbBoardMinBorder 0
+#define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)
+
+#define kOrbBoradLeftMargin 60
+#define kOrbBoradDownMargin 20
 
 typedef enum {
     kAnimationTypeUniqueCharacter,
