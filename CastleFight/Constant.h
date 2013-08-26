@@ -72,6 +72,7 @@
 #define kCostLabelTag 9878
 #define kLevelLabelTag 9879
 #define kSelectedImageTag 9880
+#define kCombosLabelTag 9881
 
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"
@@ -90,7 +91,7 @@
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)
 
-#define kOrbBoradLeftMargin 60
+#define kOrbBoradLeftMargin 30
 #define kOrbBoradDownMargin 20
 
 typedef enum {
