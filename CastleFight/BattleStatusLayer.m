@@ -47,58 +47,59 @@
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
-        CCSprite *miniMap = [CCSprite spriteWithSpriteFrameName:@"bg_minimap.png"];
-        miniMap.position = ccp(winSize.width / 2 + 25, winSize.height - miniMap.boundingBox.size.height / 2);
-        [self addChild:miniMap];
-        
-        CCSprite *bloodBackground = [CCSprite spriteWithSpriteFrameName:@"bg_gauge.png"];
-        bloodBackground.position = ccp(miniMap.position.x, miniMap.position.y - 20);
-        [self addChild:bloodBackground];
-        
-        CastleBloodSprite *playerBlood = [[CastleBloodSprite alloc] initWithEntity:battleController.userCastle];
-        playerBlood.position = ccp(miniMap.position.x - 91, bloodBackground.position.y);
-        [self addChild:playerBlood];
-        
-        CastleBloodSprite *enemyBlood = [[CastleBloodSprite alloc] initWithEntity:battleController.enemyCastle];
-        enemyBlood.position = ccp(miniMap.position.x + 91, bloodBackground.position.y);
-        [self addChild:enemyBlood];
-
-        CCSprite *bloodFrame = [CCSprite spriteWithSpriteFrameName:@"bg_gauge01.png"];
-        bloodFrame.position = bloodBackground.position;
-        [self addChild:bloodFrame];
+//        CCSprite *miniMap = [CCSprite spriteWithSpriteFrameName:@"bg_minimap.png"];
+//        miniMap.position = ccp(winSize.width / 2 + 25, winSize.height - miniMap.boundingBox.size.height / 2);
+//        [self addChild:miniMap];
+//        
+//        CCSprite *bloodBackground = [CCSprite spriteWithSpriteFrameName:@"bg_gauge.png"];
+//        bloodBackground.position = ccp(miniMap.position.x, miniMap.position.y - 20);
+//        [self addChild:bloodBackground];
+//        
+//        CastleBloodSprite *playerBlood = [[CastleBloodSprite alloc] initWithEntity:battleController.userCastle];
+//        playerBlood.position = ccp(miniMap.position.x - 91, bloodBackground.position.y);
+//        [self addChild:playerBlood];
+//        
+//        CastleBloodSprite *enemyBlood = [[CastleBloodSprite alloc] initWithEntity:battleController.enemyCastle];
+//        enemyBlood.position = ccp(miniMap.position.x + 91, bloodBackground.position.y);
+//        [self addChild:enemyBlood];
+//
+//        CCSprite *bloodFrame = [CCSprite spriteWithSpriteFrameName:@"bg_gauge01.png"];
+//        bloodFrame.position = bloodBackground.position;
+//        [self addChild:bloodFrame];
 
         timeLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%2d:%02d", (int)playTime/60, (int)playTime%60] fntFile:@"font/jungle_24_o.fnt"];
-        timeLabel.anchorPoint = ccp(0, 0.5);
+//        timeLabel.anchorPoint = ccp(0, 0.5);
         timeLabel.scale = 0.5;
-        timeLabel.position = ccp(bloodBackground.position.x - timeLabel.boundingBox.size.width/2, bloodBackground.position.y);
+//        timeLabel.position = ccp(bloodBackground.position.x - timeLabel.boundingBox.size.width/2, bloodBackground.position.y);
+        timeLabel.position = ccp(winSize.width/2, winSize.height - timeLabel.boundingBox.size.height);
         timeLabel.color = ccWHITE;
         [self addChild:timeLabel];
         
-        CCSprite *resource = [CCSprite spriteWithSpriteFrameName:@"bg_diafish.png"];
-        resource.anchorPoint = ccp(0, 1);
-        resource.position = ccp(0, winSize.height);
-        [self addChild:resource];
-        
-        CCLabelBMFont *diamond = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[FileManager sharedFileManager].userMoney] fntFile:@"font/jungle_24_o.fnt"];
-        diamond.anchorPoint = ccp(1, 0.5);
-        diamond.scale = 0.5;
-        diamond.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 - 1);
-        [self addChild:diamond];
-        
-        food = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.food] fntFile:@"font/jungle_24_o.fnt"];
-        food.anchorPoint = ccp(1, 0.5);
-        food.scale = 0.5;
-        food.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3 + 1);
-        food.color = ccGOLD;
-        [self addChild:food];
-        
-        //mana
-        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
-        mana.anchorPoint = ccp(1, 0.5);
-        mana.scale = 0.5;
-        mana.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3-20);
-        mana.color = ccBLUEVIOLET;
-        [self addChild:mana];
+//        CCSprite *resource = [CCSprite spriteWithSpriteFrameName:@"bg_diafish.png"];
+//        resource.anchorPoint = ccp(0, 1);
+//        resource.position = ccp(0, winSize.height);
+//        [self addChild:resource];
+//        
+//        CCLabelBMFont *diamond = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d",[FileManager sharedFileManager].userMoney] fntFile:@"font/jungle_24_o.fnt"];
+//        diamond.anchorPoint = ccp(1, 0.5);
+//        diamond.scale = 0.5;
+//        diamond.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 - 1);
+//        [self addChild:diamond];
+//        
+//        food = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.food] fntFile:@"font/jungle_24_o.fnt"];
+//        food.anchorPoint = ccp(1, 0.5);
+//        food.scale = 0.5;
+//        food.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3 + 1);
+//        food.color = ccGOLD;
+//        [self addChild:food];
+//        
+//        //mana
+//        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
+//        mana.anchorPoint = ccp(1, 0.5);
+//        mana.scale = 0.5;
+//        mana.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3-20);
+//        mana.color = ccBLUEVIOLET;
+//        [self addChild:mana];
         
 //        [self setUnitBoard];
         [self setPauseButton];
@@ -202,8 +203,8 @@
     
     [timeLabel setString:[NSString stringWithFormat:@"%2d:%02d", (int)playTime/60, (int)playTime%60]];
     
-    [food setString:[NSString stringWithFormat:@"%d", (int)player.food]];
-    [mana setString:[NSString stringWithFormat:@"%d", (int)player.mana]];
+//    [food setString:[NSString stringWithFormat:@"%d", (int)player.food]];
+//    [mana setString:[NSString stringWithFormat:@"%d", (int)player.mana]];
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {

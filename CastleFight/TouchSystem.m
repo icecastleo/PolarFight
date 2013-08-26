@@ -11,6 +11,8 @@
 #import "RenderComponent.h"
 
 @interface TouchSystem() {
+    NSArray *descriptors;
+    
     Entity *touchedEntity;
     BOOL isBegan;
     BOOL isPan;
@@ -26,9 +28,35 @@
 -(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
     if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
         panPath = [[NSMutableArray alloc] init];
+        
+#ifdef kTouchSystemSortEntities
+        [self initDescriptors];
+#endif
     }
     return self;
 }
+
+#ifdef kTouchSystemSortEntities
+-(void)initDescriptors {
+    // Sort entities by render's y position!
+    NSSortDescriptor *ySort = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO comparator:^NSComparisonResult(Entity *obj1, Entity *obj2) {
+        RenderComponent *render1 = (RenderComponent *)[obj1 getComponentOfName:[RenderComponent name]];
+        RenderComponent *render2 = (RenderComponent *)[obj2 getComponentOfName:[RenderComponent name]];
+        
+        NSAssert(render1 && render2, @"Can't sort entity without render component!");
+        
+        if (render1.node.zOrder < render2.node.zOrder) {
+            return NSOrderedAscending;
+        } else if (render1.node.zOrder > render2.node.zOrder) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    descriptors = [NSArray arrayWithObjects:ySort, nil];
+}
+#endif
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     if (isBegan) {
@@ -38,12 +66,19 @@
     // Prevent two touch
     isBegan = YES;
     
+    // Reset variable
+    isPan = NO;
+    touchedEntity = nil;
+    
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     NSArray *array = [self.entityManager getAllEntitiesPosessingComponentOfName:[TouchComponent name]];
     
-    // TODO: Sort entities by render's y position!
+#ifdef kTouchSystemSortEntities
+    array = [array sortedArrayUsingDescriptors:descriptors];
+#endif
+   
     for (Entity *entity in array) {
         RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         TouchComponent *touchCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
@@ -60,6 +95,7 @@
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     if (isPan == NO) {
         isPan = YES;
+        panPath = [[NSMutableArray alloc] init];
     }
     
     if (touchedEntity == nil) {
@@ -140,16 +176,10 @@
         }
     }
     isBegan = NO;
-    isPan = NO;
-    touchedEntity = nil;
-    panPath = [[NSMutableArray alloc] init];
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
     isBegan = NO;
-    isPan = NO;
-    touchedEntity = nil;
-    panPath = [[NSMutableArray alloc] init];
 }
 
 
