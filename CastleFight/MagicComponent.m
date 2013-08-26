@@ -50,8 +50,12 @@
     _path = nil;
 }
 
--(void)handlePan:(NSArray *)path {
-    [self activeWithPath:path];
+-(void)handlePan:(TouchState)state path:(NSArray *)path {
+    if (state == kTouchStateMove) {
+        // TODO: Draw path
+    } else if (state == kTouchStateEnd) {
+        [self activeWithPath:path];
+    }
 }
 
 @end

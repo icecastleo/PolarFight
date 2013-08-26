@@ -29,6 +29,9 @@
     if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
         panPath = [[NSMutableArray alloc] init];
         
+        touchedEntity = nil;
+        selectedEntity = nil;
+        
 #ifdef kTouchSystemSortEntities
         [self initDescriptors];
 #endif
@@ -106,6 +109,8 @@
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
+
+    
     if (touchedEntity) {
         if (touchedEntity == selectedEntity) {
             // Maybe we can move the selected entity!
@@ -114,11 +119,8 @@
             
             TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
             
-            if ([touchCom.delegate respondsToSelector:@selector(drawPan:)]) {
-                [touchCom.delegate drawPan:panPath];
-            }else if ([touchCom.delegate respondsToSelector:@selector(handlePan:)]) {
-                [touchCom.delegate handlePan:panPath];
-                [panPath removeAllObjects];
+            if ([touchCom.delegate respondsToSelector:@selector(handlePan:path:)]) {
+                [touchCom.delegate handlePan:kTouchStateMove path:panPath];
             }
         }
     }
@@ -128,25 +130,26 @@
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
+    // End location will be the same as the last move location, so we don't add it to pan path!
+    
     if (isPan && touchedEntity) {
         TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
         
-        // Moving orb function is in touchMoved method now.
-//        if ([touchCom.delegate respondsToSelector:@selector(handlePan:)]) {
-//            [touchCom.delegate handlePan:panPath];
-//        }
+        if ([touchCom.delegate respondsToSelector:@selector(handlePan:path:)]) {
+            [touchCom.delegate handlePan:kTouchStateEnd path:panPath];
+        }
     } else if (touchedEntity == nil) {
         // User doesn't touch anything!
         // Cancel selected entity or do something on selected entity !
         
-//        if (selectedEntity != nil) {
-//            TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
-//            
-//            if ([selectedEntityTouch.delegate respondsToSelector:@selector(handleUnselect)]) {
-//                [selectedEntityTouch.delegate handleUnselect];
-//            }
-//            selectedEntity = nil;
-//        }
+        if (selectedEntity != nil) {
+            TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
+            
+            if ([selectedEntityTouch.delegate respondsToSelector:@selector(handleUnselect)]) {
+                [selectedEntityTouch.delegate handleUnselect];
+            }
+            selectedEntity = nil;
+        }
     } else {
         // User definitely touched something!
         
