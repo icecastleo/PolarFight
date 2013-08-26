@@ -9,17 +9,16 @@
 #import "Component.h"
 
 typedef enum {
-    kNoTouchType = 0,
-    kTapType = 1,
-    kDragType,
-} TouchType;
+//    kTouchStateBegin,
+    kTouchStateMove,
+    kTouchStateEnd,
+} TouchState;
 
 @protocol TouchComponentDelegate <NSObject>
 
 @optional
 -(void)handleTap;
--(void)drawPan:(NSArray *)path;
--(void)handlePan:(NSArray *)path;
+-(void)handlePan:(TouchState)state path:(NSArray *)path;
 -(void)handleSelect;
 -(void)handleUnselect;
 
@@ -33,7 +32,6 @@ typedef enum {
 //@property (nonatomic) BOOL hasDragLine;
 @property (nonatomic) NSString *dragImage1;
 @property (nonatomic) NSString *dragImage2;
-@property (nonatomic) TouchType touchType;
 
 @property (nonatomic, weak) id<TouchComponentDelegate> delegate;
 

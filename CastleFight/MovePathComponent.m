@@ -64,15 +64,18 @@
     /*/ //another only compare x and y limit.
     if (fabs(aPosition.x - bPosition.x) < 10 && fabs(aPosition.y - bPosition.y) < 10) {
         return YES;
-    }else {
+    } else {
         return NO;
     }
     //*/
 }
 
--(void)handlePan:(NSArray *)path {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:path];
-    _path = array;
+-(void)handlePan:(TouchState)state path:(NSArray *)path {
+    if (state == kTouchStateMove) {
+        
+    } else if (state == kTouchStateEnd) {
+        _path = [path copy];
+    }
 }
 
 @end

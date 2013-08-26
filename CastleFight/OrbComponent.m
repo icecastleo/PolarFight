@@ -43,13 +43,11 @@
 //    
 //}
 
-
-
-
-//*
--(void)handlePan:(NSArray *)path {
-    CGPoint position = [[path lastObject] CGPointValue];
-    [self.board moveOrb:self.entity ToPosition:position];
+-(void)handlePan:(TouchState)state path:(NSArray *)path {
+    if (state == kTouchStateMove) {
+        CGPoint position = [[path lastObject] CGPointValue];
+        [self.board moveOrb:self.entity ToPosition:position];
+    }
 }
 
 -(void)handleTap {
@@ -86,6 +84,5 @@
     magic.entityFactory = self.board.entityFactory;
     [magic active];
 }
-//*/
 
 @end

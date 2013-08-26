@@ -23,6 +23,8 @@
 // For debug
 #define kPhisicalDebugDraw 0
 
+#define kTouchSystemSortEntities 0
+
 //For SummonType
 #define kSummonTypeNormal 1
 #define kSummonTypeStock 2
