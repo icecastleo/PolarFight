@@ -64,7 +64,7 @@ __weak static BattleController* currentInstance;
 -(id)initWithPrefix:(int)prefix suffix:(int)suffix {
     if(self = [super init]) {
         currentInstance = self;
-
+        
         _prefix = prefix;
         
         battleName = [NSString stringWithFormat:@"%02d_%02d", prefix, suffix];
@@ -72,8 +72,8 @@ __weak static BattleController* currentInstance;
         _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d - %02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
-//        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-//        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        //        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         mapLayer = [[TopLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
@@ -99,14 +99,14 @@ __weak static BattleController* currentInstance;
         
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
-
-        Entity *board = [entityFactory createOrbBoard];
-//        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
-//        boardRenderCom.node.position = ccp(100,20);
-//        boardRenderCom.node.anchorPoint = ccp(0,0);
-//        boardRenderCom.sprite.anchorPoint = ccp(0,0);
-//        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
-//        [statusLayer addChild:boardRenderCom.node];
+        
+        Entity *board = [entityFactory createOrbBoardWithOwner:_userPlayer];
+        //        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
+        //        boardRenderCom.node.position = ccp(100,20);
+        //        boardRenderCom.node.anchorPoint = ccp(0,0);
+        //        boardRenderCom.sprite.anchorPoint = ccp(0,0);
+        //        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+        //        [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
     }
@@ -119,7 +119,7 @@ __weak static BattleController* currentInstance;
     touchSystem = [[TouchSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
     
-//    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
+    //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
 }
 
@@ -127,11 +127,11 @@ __weak static BattleController* currentInstance;
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:touchSystem];
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
-//    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
-//        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
-//    }
-//    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-
+    //    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
+    //        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
+    //    }
+    //    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    
     [super onExit];
 }
 
@@ -141,8 +141,8 @@ __weak static BattleController* currentInstance;
     
     // FIXME: Create by file
     
-//    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
-//    _enemyCastle = [_battleData getEnemyCastle];
+    //    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
+    //    _enemyCastle = [_battleData getEnemyCastle];
 }
 
 -(void)setSystem {
@@ -214,11 +214,11 @@ __weak static BattleController* currentInstance;
 }
 
 //-(void)drawSelectedRange:(CGPoint)touchLocation {
-//    
+//
 //    RenderComponent *renderCom = (RenderComponent *)[self.selectedEntity getComponentOfName:[RenderComponent name]];
-//    
+//
 //    TouchComponent *selectCom = (TouchComponent *)[self.selectedEntity getComponentOfName:[TouchComponent name]];
-//    
+//
 //    if (selectCom.hasDragLine) {
 //        NSMutableArray *drawPath = [[NSMutableArray alloc] init];
 //        [drawPath addObject:[NSValue valueWithCGPoint:([renderCom.node.parent convertToWorldSpace:renderCom.position])]];
@@ -227,12 +227,12 @@ __weak static BattleController* currentInstance;
 //        line.path = drawPath;
 //        [statusLayer addChild:line z:0 tag:kDrawPathTag];
 //    }
-//    
+//
 //    MagicComponent *magicCom = (MagicComponent *)[self.selectedEntity getComponentOfName:[MagicComponent name]];
-//    
+//
 //    float rotation = 0;
 //    CGSize drawSize;
-//    
+//
 //    if (magicCom) {
 //        drawSize = magicCom.rangeSize;
 //    } else {
@@ -248,11 +248,11 @@ __weak static BattleController* currentInstance;
 //            rotation -= 180;
 //        }
 //    }
-//    
+//
 //    // draw range frame
 //    CCSprite *rangeFrame1;
 //    CCSprite *rangeFrame2;
-//    
+//
 //    SummonComponent *summonCom = (SummonComponent *)[self.selectedEntity getComponentOfName:[SummonComponent name]];
 //    if (summonCom) {
 //        rangeFrame1 = [CCSprite spriteWithSpriteFrameName:selectCom.dragImage1];
@@ -261,16 +261,16 @@ __weak static BattleController* currentInstance;
 //        [rangeFrame2 setOpacity:0];
 //    }else {
 //        rangeFrame1 = [CCSprite spriteWithFile:selectCom.dragImage1];
-//        
+//
 //        rangeFrame1.scaleX = drawSize.width / rangeFrame1.contentSize.width;
 //        rangeFrame1.scaleY = drawSize.height / rangeFrame1.contentSize.height;
-//        
+//
 //        if (![mapLayer canExecuteMagicInThisArea:[mapLayer convertToNodeSpace:touchLocation]]) {
 //            rangeFrame2 = [CCSprite spriteWithFile:@"forbidden_sign.png"];
 //        }else {
 //            rangeFrame2 = [CCSprite spriteWithFile:selectCom.dragImage2];
 //        }
-//        
+//
 //        [rangeFrame2 setOpacity:255];
 //        CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:0.5 opacity:0];
 //        CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:0.5 opacity:255];
@@ -278,14 +278,14 @@ __weak static BattleController* currentInstance;
 //        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:pulseSequence];
 //        [rangeFrame2 runAction:repeat];
 //    }
-//    
+//
 //    rangeFrame1.rotation = rotation;
 //    rangeFrame1.position = touchLocation;
 //    rangeFrame2.anchorPoint = ccp(0,0);
 //    [rangeFrame1 addChild:rangeFrame2];
-//    
+//
 //    [statusLayer addChild:rangeFrame1 z:0 tag:kDrawPathRangeSprite];
-//    
+//
 //}
 //
 //-(void)removeStatusLayerChild {

@@ -9,7 +9,10 @@
 #import "OrbComponent.h"
 #import "OrbBoardComponent.h"
 #import "RenderComponent.h"
+#import "PlayerComponent.h"
 #import "Magic.h"
+
+#import "SummonToLineMagic.h"
 
 @implementation OrbComponent
 
@@ -21,6 +24,7 @@
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         _matchInfo = dic;
+        _position = CGPointMake(0, 0);
     }
     return self;
 }
@@ -39,25 +43,49 @@
 //    
 //}
 
--(void)executeMatch:(int)number {
 
-    NSAssert(number >= 3, @"should not call this function when it is less than 3.");
-    
-    if (number > 5) {
-        number = 5;
+
+
+//*
+-(void)handlePan:(NSArray *)path {
+    CGPoint position = [[path lastObject] CGPointValue];
+    [self.board moveOrb:self.entity ToPosition:position];
+}
+
+-(void)handleTap {
+    NSArray *matchArray = [self.board findMatchFromPosition:self.position CurrentOrb:self.entity];
+    if (matchArray.count >= 3) {
+        [self executeMatch:matchArray.count];
+        [self.board matchClean:matchArray];
     }
+}
+
+-(void)executeMatch:(int)number {
     
-    NSDictionary *dic = [self.matchInfo objectForKey:[NSString stringWithFormat:@"%d",number]];
     
-    //execute a magic method
-    NSString *magicName = [dic objectForKey:@"magicName"];
-    Magic *magic = [[NSClassFromString(magicName) alloc] init];
+    PlayerComponent *playerCom = (PlayerComponent *)[self.board.owner getComponentOfName:[PlayerComponent name]];
     
-    //FIXME: give summon data to magic
-//    NSDictionary *summonDic = [dic objectForKey:@"summonData"];
-//    SummonComponent
+    NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
+    NSString *summonData = @"SummonData";
+    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:summonData];
     
+    int addLevel = 0;
+    switch (number) {
+        case 4:
+            addLevel += 1;
+            break;
+        case 5:
+            addLevel += 2;
+            break;
+        default:
+            break;
+    }
+    [magicInfo setValue:[NSNumber numberWithInt:addLevel] forKey:@"addLevel"];
+    //test
+    Magic *magic = [[SummonToLineMagic alloc] initWithMagicInformation:magicInfo];
+    magic.entityFactory = self.board.entityFactory;
     [magic active];
 }
+//*/
 
 @end

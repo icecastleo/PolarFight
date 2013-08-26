@@ -344,7 +344,7 @@
         for (CharacterInitData *data in battleTeamInitData) {
             SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
             summon.player = player;
-            summon.summon = YES;
+//            summon.summon = YES;
             [player.battleTeam addObject:summon];
         }
         
@@ -460,18 +460,23 @@
     render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
     render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
     render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
-    
+    if(type == OrbNull){
+        [render.node setVisible:NO];
+    }
+        
     [entity addComponent:render];
     
-    NSDictionary *orbtDic = [characterData objectForKey:@"OrbComponent"];
-    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbtDic];
+    NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
+    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
     orbCom.type = type;
     [entity addComponent:orbCom];
     
     NSDictionary *touchDic = [characterData objectForKey:@"TouchComponent"];
-    TouchComponent *touchCom = [[TouchComponent alloc] initWithDictionary:touchDic];
-    touchCom.delegate = orbCom;
-    [entity addComponent:touchCom];
+    if (touchDic) {
+        TouchComponent *touchCom = [[TouchComponent alloc] initWithDictionary:touchDic];
+        touchCom.delegate = orbCom;
+        [entity addComponent:touchCom];
+    }
     
     // TODO: Use CCSpriteBatchNode to put orb!
     if (self.mapLayer) {
@@ -481,7 +486,7 @@
     return entity;
 }
 
--(Entity *)createOrbBoard {
+-(Entity *)createOrbBoardWithOwner:(Entity *)owner {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
@@ -493,6 +498,7 @@
     sprite.opacity = 0;
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
+    orbBoardCom.owner = owner;
     [entity addComponent:orbBoardCom];
     
     return entity;

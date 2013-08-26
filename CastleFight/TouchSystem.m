@@ -116,6 +116,9 @@
             
             if ([touchCom.delegate respondsToSelector:@selector(drawPan:)]) {
                 [touchCom.delegate drawPan:panPath];
+            }else if ([touchCom.delegate respondsToSelector:@selector(handlePan:)]) {
+                [touchCom.delegate handlePan:panPath];
+                [panPath removeAllObjects];
             }
         }
     }
@@ -128,9 +131,10 @@
     if (isPan && touchedEntity) {
         TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
         
-        if ([touchCom.delegate respondsToSelector:@selector(handlePan:)]) {
-            [touchCom.delegate handlePan:panPath];
-        }
+        // Moving orb function is in touchMoved method now.
+//        if ([touchCom.delegate respondsToSelector:@selector(handlePan:)]) {
+//            [touchCom.delegate handlePan:panPath];
+//        }
     } else if (touchedEntity == nil) {
         // User doesn't touch anything!
         // Cancel selected entity or do something on selected entity !
@@ -164,13 +168,13 @@
                 // Select new entity! 
                 selectedEntity = touchedEntity;
                 
-                if ([touchCom.delegate respondsToSelector:@selector(handleSelect:)]) {
+                if ([touchCom.delegate respondsToSelector:@selector(handleSelect)]) {
                     [touchCom.delegate handleSelect];
                 }
             }
         } else {
             // Tap entity
-            if ([touchCom.delegate respondsToSelector:@selector(handleTap:)]) {
+            if ([touchCom.delegate respondsToSelector:@selector(handleTap)]) {
                 [touchCom.delegate handleTap];
             }
         }

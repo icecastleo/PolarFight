@@ -9,9 +9,13 @@
 #import "Component.h"
 #import "TouchComponent.h"
 
+@class OrbBoardComponent;
+
 @interface OrbComponent : Component <TouchComponentDelegate>
 
 @property (nonatomic) OrbType type;
+@property (nonatomic) CGPoint position; //position in the Board
+@property (nonatomic,assign) OrbBoardComponent *board;
 
 @property (nonatomic,readonly) NSDictionary *matchInfo;
 
