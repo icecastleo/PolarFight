@@ -86,9 +86,9 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
-#define kOrbWidth 30
-#define kOrbHeight 30
-#define kOrbSpeed 30
+#define kOrbWidth 40
+#define kOrbHeight 40
+#define kOrbSpeed 20
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)
@@ -182,8 +182,8 @@ typedef enum {
     OrbBlue,
     OrbGreen,
     OrbYellow,
-    OrbPurple,
-    OrbPink,
+//    OrbPurple,
+//    OrbPink,
     OrbBottom
 } OrbType;
 

@@ -41,7 +41,7 @@
                 // Random to create orb!
                 OrbType type = arc4random_uniform(OrbBottom - 1) + 1;
                 
-                if (arc4random_uniform(2) == 0) {
+                if (arc4random_uniform(3) > 0) {
                     type = OrbNull;
                 }
                 

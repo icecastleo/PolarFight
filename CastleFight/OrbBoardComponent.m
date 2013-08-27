@@ -70,14 +70,103 @@
 //    }
 //}
 
--(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition {
-    combos = 0;
+-(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition { //target should be BoardPosition
+    
     CGPoint target = [self getPositionInTheBoardFromRealPosition:targetPosition floor:YES];
-    Entity *targetOrb = [self getOrbInPosition:target];
-    if (!targetOrb) { //out of board
-        return;
+    
+    OrbComponent *startOrbCom = (OrbComponent *)[startOrb getComponentOfName:[OrbComponent name]];
+    
+    NSMutableArray *path = [[NSMutableArray alloc] init];
+    
+    int dx = target.x - startOrbCom.position.x;
+    int dy = target.y - startOrbCom.position.y;
+    
+    if (abs(dx)==1 || abs(dy)==1) {
+        NSValue *value = [NSValue valueWithCGPoint:target];
+        [path addObject:value];
+    }else {
+        if (dx==0 && dy==0) { // original point
+            return;
+        } else if(dx==0) {   // vertical line
+            path = [self slopeVerticalPath:path dy:dy startPosition:startOrbCom.position target:target];
+        } else if(dy==0) {   // horizontal line
+            path = [self slopeHorizontalPath:path dx:dx startPosition:startOrbCom.position target:target];
+        } else if(abs(dx)==abs(dy)) {   // 45 degree line
+            //TODO: actual??
+        } else if(abs(dx)>abs(dy)) {  // < 45 degree line
+            //TODO: actual??
+        } else {
+            
+        }
+        
     }
-    [self exchangeOrb:startOrb targetOrb:targetOrb];
+    
+//    for (int i=0; i<path.count; i++) {
+//        CGPoint targetPosition = [(NSValue *)[path objectAtIndex:i] CGPointValue];
+//        NSLog(@"position: %@",NSStringFromCGPoint(targetPosition));
+//    }
+    
+    [self moveOrb:startOrb andPath:path];
+    
+}
+
+-(NSMutableArray *)slopeVerticalPath:(NSMutableArray *)path dy:(int)dy startPosition:(CGPoint)startPosition target:(CGPoint)target {
+    if (dy>0) { //down
+        for (int j=1+startPosition.y; j<=target.y; j++) {
+            NSValue *value = [NSValue valueWithCGPoint:CGPointMake(startPosition.x, j)];
+            [path addObject:value];
+        }
+    }else {
+        for (int j=startPosition.y-1; j>=target.y; j--) {
+            NSValue *value = [NSValue valueWithCGPoint:CGPointMake(startPosition.x, j)];
+            [path addObject:value];
+        }
+    }
+    return path;
+}
+-(NSMutableArray *)slopeHorizontalPath:(NSMutableArray *)path dx:(int)dx startPosition:(CGPoint)startPosition target:(CGPoint)target {
+    if (dx>0) {
+        for (int i=1+startPosition.x; i<=target.x; i++) {
+            NSValue *value = [NSValue valueWithCGPoint:CGPointMake(i, startPosition.y)];
+            [path addObject:value];
+        }
+    }else {
+        for (int i=startPosition.x-1; i>=target.x; i--) {
+            NSValue *value = [NSValue valueWithCGPoint:CGPointMake(i, startPosition.y)];
+            [path addObject:value];
+        }
+    }
+    return path;
+}
+
+-(void)moveOrb:(Entity *)startOrb andPath:(NSArray *)path {
+    combos = 0;
+    OrbComponent *startOrbCom = (OrbComponent *)[startOrb getComponentOfName:[OrbComponent name]];
+    
+    for(int i=0; i<path.count; i++) {
+        CGPoint target = [(NSValue *)[path objectAtIndex:i] CGPointValue];
+        Entity *targetOrb = [self getOrbInPosition:target];
+        
+        OrbComponent *targetOrbCom = (OrbComponent *)[targetOrb getComponentOfName:[OrbComponent name]];
+        int x = abs(startOrbCom.position.x - targetOrbCom.position.x);
+        int y = abs(startOrbCom.position.y - targetOrbCom.position.y);
+        
+        if (!targetOrb || targetOrbCom.type != OrbNull || x>1 || y>1) { //out of board
+            return;
+        }
+        
+        if (x*y==1) {
+            Entity *orb1 = [self getOrbInPosition:ccp(startOrbCom.position.x,targetOrbCom.position.y)];
+            Entity *orb2 = [self getOrbInPosition:ccp(targetOrbCom.position.x,startOrbCom.position.y)];
+            OrbComponent *orb1Com = (OrbComponent *)[orb1 getComponentOfName:[OrbComponent name]];
+            OrbComponent *orb2Com = (OrbComponent *)[orb2 getComponentOfName:[OrbComponent name]];
+            if (orb1Com.type != OrbNull && orb2Com.type != OrbNull ) {
+                return;
+            }
+        }
+        
+        [self exchangeOrb:startOrb targetOrb:targetOrb];
+    }
 }
 
 -(CGPoint)getPositionInTheBoardFromRealPosition:(CGPoint)position floor:(BOOL)isFloor {
@@ -275,6 +364,11 @@
     // only test
     combosOrbSum = matchArray.count;
     [self showCombos];
+    if (combos>=5) {
+        matchArray = self.orbs;
+        CCAction *shake = [CCShake actionWithDuration:3.0 amplitude:ccp(5, 5)];
+        [self.entityFactory.mapLayer runAction:shake];
+    }
     for (Entity *orb in matchArray) {
         RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
         [orbRenderCom.sprite runAction:
@@ -300,7 +394,7 @@
     
     label.color = ccRED;
     label.position =  ccp(winSize.width - label.boundingBox.size.width/2, kOrbBoradDownMargin + (kOrbBoardRows+1)*kOrbHeight);
-    [self.entityFactory.mapLayer addChild:label z:0 tag:kCombosLabelTag];
+    [self.entityFactory.mapLayer addChild:label z:INT16_MAX tag:kCombosLabelTag];
     
     [label runAction:
      [CCSequence actions:
