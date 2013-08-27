@@ -140,10 +140,17 @@
         // TODO: Move map here!
         return;
     } else {
-        isPan = YES;
+        if (isPan == NO) {
+            CGPoint previousTouchLocation = [touch previousLocationInView:[touch view]];
+            previousTouchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+            
+            if (ccpDistance(touchLocation, previousTouchLocation) >= kTouchSystemPanDistance || touchPositions.count > 2) {
+                isPan = YES;
+            }
+        } else {
+            //    [self handlePan];
+        }
     }
-    
-//    [self handlePan];
 }
 
 -(void)handlePan {

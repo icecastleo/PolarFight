@@ -33,43 +33,99 @@
         
         _entityFactory = entityFactory;
         _orbs = [[NSMutableArray alloc] init];
+        combos = 0;
+        //TODO: create lots of Orb.
     }
     return self;
 }
 
 -(void)moveOrb:(Entity *)orb toPosition:(CGPoint)position {
-//    CGPoint target = [self getPositionInTheBoardFromRealPosition:position floor:YES];
-//    Entity *targetOrb = [self getOrbInPosition:target];
-//
-//    if (!targetOrb) { //out of board
-//        return;
-//    }
-//    
-//    [self exchangeOrb:orb targetOrb:targetOrb];
     
     RenderComponent *renderA = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
     
-    int deltaX = abs(renderA.node.position.x - position.x);
-    int deltaY = abs(renderA.node.position.y - position.y);
+    int deltaX = position.x - renderA.node.position.x;
+    int deltaY = position.y - renderA.node.position.y;
     
-    // FIXME: Limit to move one line!
-    if ((deltaX > kOrbWidth/2 && deltaY < kOrbHeight/2) ||
-        (deltaX < kOrbWidth/2 && deltaY > kOrbHeight/2)) {
+    // Not enough moved distance
+    if (abs(deltaX) < kOrbWidth/2 && abs(deltaY) < kOrbHeight/2) {
+        return;
+    }
+    
+    // Add calculated path
+    NSMutableArray *path = [[NSMutableArray alloc] init];
+    
+    int count;
+    
+    if (abs(deltaX) > abs(deltaY)) {
+        count = abs(deltaX) / kOrbWidth + 1;
+    } else {
+        count = abs(deltaY) / kOrbHeight + 1;
+    }
+    
+    float dx = deltaX / count;
+    float dy = deltaY / count;
+    
+    for (int i = 1; i <= count; i++) {
+        CGPoint position = ccp(renderA.position.x + i*dx, renderA.position.y + i*dy);
+        [path addObject:[NSValue valueWithCGPoint:position]];
+    }
+    
+//    for (int i=0; i<path.count; i++) {
+//        CGPoint targetPosition = [(NSValue *)[path objectAtIndex:i] CGPointValue];
+//        NSLog(@"position: %@",NSStringFromCGPoint(targetPosition));
+//    }
+    
+    [self moveOrb:orb withPath:path];
+}
+
+-(void)moveOrb:(Entity *)orb withPath:(NSArray *)path {
+    combos = 0;
+    
+    RenderComponent *renderA = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+    
+    CGPoint orbPositionA = [self convertRenderPositionToOrbPosition:renderA.node.position];
+    
+    Entity *entityA = [self orbAtPosition:orbPositionA];
+    
+    // Orb system have not create orb yet! so we have to wait it!
+    if (entityA != orb) {
+        return;
+    }
+    
+    for (int i = 0; i < path.count; i++) {
+        CGPoint position = [[path objectAtIndex:i] CGPointValue];
         
         CGPoint orbPositionA = [self convertRenderPositionToOrbPosition:renderA.node.position];
-        
-        Entity *entityA = [self orbAtPosition:orbPositionA];
-        
-        if (entityA != orb) {
-            // Orb system have not create orb yet! so we have to wait it!
-            return;
-        }
-        
         CGPoint orbPositionB = [self convertRenderPositionToOrbPosition:position];
+        
+        if (orbPositionA.x == orbPositionB.x && orbPositionA.y == orbPositionB.y) {
+            continue;
+        }
         
         Entity *entityB = [self orbAtPosition:orbPositionB];
         RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
         
+        OrbComponent *orbComponentB = (OrbComponent *)[entityB getComponentOfName:[OrbComponent name]];
+        
+        // Block
+        if (orbComponentB.type != OrbNull) {
+            break;
+        }
+        
+        // Block inclined move
+        if (ccpDistance(orbPositionA, orbPositionB) > 1) {
+            Entity *orb1 = [self orbAtPosition:ccp(orbPositionA.x, orbPositionB.y)];
+            Entity *orb2 = [self orbAtPosition:ccp(orbPositionB.x, orbPositionA.y)];
+            
+            OrbComponent *orb1Com = (OrbComponent *)[orb1 getComponentOfName:[OrbComponent name]];
+            OrbComponent *orb2Com = (OrbComponent *)[orb2 getComponentOfName:[OrbComponent name]];
+            
+            if (orb1Com.type != OrbNull && orb2Com.type != OrbNull ) {
+                break;
+            }
+        }
+        
+        // Change orb
         CGPoint temp = renderB.node.position;
         renderB.node.position = renderA.node.position;
         renderA.node.position = temp;
@@ -83,97 +139,13 @@
     int x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - (kOrbBoardColumns - _columns.count));
     int y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
     
-//    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
+    //    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
     
     return ccp(x, y);
 }
 
 -(Entity *)orbAtPosition:(CGPoint)position {
     return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
-}
-
-
--(CGPoint)getPositionInTheBoardFromRealPosition:(CGPoint)position floor:(BOOL)isFloor {
-    int x,y;
-    if (isFloor) {
-        x = floor((position.x-kOrbBoradLeftMargin) / (kOrbWidth));
-        y = floor((position.y-kOrbBoradDownMargin) / (kOrbHeight));
-    }else {
-        x = round((position.x-kOrbBoradLeftMargin) / (kOrbWidth));
-        y = round((position.y-kOrbBoradDownMargin) / (kOrbHeight));
-    }
-    
-    if (x>= kOrbBoardColumns -1) {
-        x = kOrbBoardColumns -1;
-    }
-    if (y>= kOrbBoardRows -1) {
-        y = kOrbBoardRows -1;
-    }
-    return CGPointMake(x, y);
-}
-
--(Entity *)getOrbInPosition:(CGPoint)position {
-    Entity *target = nil;
-    for (Entity *orb in self.orbs) {
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (CGPointEqualToPoint(orbCom.position, position)) {
-            target = orb;
-            break;
-        }
-    }
-    return target;
-}
-
--(void)exchangeOrb:(Entity *)orb targetOrb:(Entity *)targetOrb {
-    
-    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-    OrbComponent *targetOrbCom = (OrbComponent *)[targetOrb getComponentOfName:[OrbComponent name]];
-    
-    RenderComponent *startRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-    RenderComponent *targetRenderCom = (RenderComponent *)[targetOrb getComponentOfName:[RenderComponent name]];
-    
-    CGPoint tempOrbPoint = orbCom.position;
-    CGPoint tempRenderPoint = startRenderCom.node.position;
-    
-    orbCom.position = targetOrbCom.position;
-    targetOrbCom.position = tempOrbPoint;
-    startRenderCom.node.position = targetRenderCom.node.position;
-    targetRenderCom.node.position = tempRenderPoint;
-}
-
--(void)adjustOrbPosition:(Entity *)orb realPosition:(CGPoint)realPosition {
-    CGPoint boardPosition = [self getPositionInTheBoardFromRealPosition:realPosition floor:YES];
-    OrbComponent *orbComponent = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-    int currentX = orbComponent.position.x;
-    if (boardPosition.x == currentX) {
-        return;
-    }else {
-        orbComponent.position = boardPosition;
-    }
-}
-
--(void)clean {
-    NSMutableArray *deletOrbs = [[NSMutableArray alloc] init];
-    for (Entity *orb in self.orbs) {
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.position.x <= 0) {
-            [deletOrbs addObject:orb];
-        }
-    }
-    for (Entity *orb in deletOrbs) {
-        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-        [self.orbs removeObject:orb];
-        
-        [orbRenderCom.sprite runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:0.5f],
-          [CCCallBlock actionWithBlock:^{
-             [orbRenderCom.node removeFromParentAndCleanup:YES];
-         }],nil]];
-        
-        [orb removeSelf];
-    }
-    [deletOrbs removeAllObjects];
 }
 
 -(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb {

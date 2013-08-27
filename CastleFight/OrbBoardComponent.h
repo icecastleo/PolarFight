@@ -22,9 +22,6 @@
 
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
--(void)adjustOrbPosition:(Entity *)orb realPosition:(CGPoint)realPosition;
--(void)clean;
-
 -(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb;
 -(void)matchClean:(NSArray *)matchArray;
 

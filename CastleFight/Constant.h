@@ -24,6 +24,7 @@
 #define kPhisicalDebugDraw 0
 
 #define kTouchSystemSortEntities 0
+#define kTouchSystemPanDistance 10
 #define kTouchSystemLongPressTime 0.25
 
 //For SummonType
@@ -87,8 +88,8 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
-#define kOrbWidth 35
-#define kOrbHeight 35
+#define kOrbWidth 40
+#define kOrbHeight 40
 #define kOrbSpeed 20
 
 #define kOrbBoardRows 4
@@ -101,12 +102,6 @@ typedef enum {
     kAnimationTypeUniqueCharacter,
     kAnimationTypeNormalCharacter,
 } AnimationType;
-
-typedef enum {
-    kGameStateRoundStart,
-    kGameStateCharacterMove,
-    kGameStateRoundEnd,
-} GameState;
 
 typedef enum {
     // Fluid attributes
@@ -130,14 +125,6 @@ typedef enum {
     // For upgrade
     kCharacterAttributeUpdatePrice,
 } CharacterAttributeType;
-
-typedef enum {
-    kCharacterStateUseSkill,
-    kCharacterStateGetDamage,
-    kCharacterStateMove,
-    kCharacterStateIdle,
-    kCharacterStateDead
-} CharacterState;
 
 typedef enum {
     kDamageTypeNormal,
@@ -168,14 +155,6 @@ typedef enum {
 //    // AuraStatus
 //    statusAttackBuff,
 //} StatusType;
-
-typedef enum {
-    statusPoison,
-} TimeStatusType;
-
-typedef enum {
-    statusAttackBuff,
-} AuraStatusType;
 
 typedef enum {
     OrbNull = 0,
