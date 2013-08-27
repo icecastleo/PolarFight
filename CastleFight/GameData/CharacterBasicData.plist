@@ -218,7 +218,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack1</key>
-			<string>ChangeLineSkill</string>
+			<string>DeadBomb</string>
 			<key>attack2</key>
 			<string>DeadBomb</string>
 		</dict>
