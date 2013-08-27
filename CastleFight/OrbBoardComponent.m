@@ -29,55 +29,69 @@
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory {
     if (self = [super init]) {
         
+        _columns = [NSMutableArray arrayWithCapacity:kOrbBoardColumns];
+        
         _entityFactory = entityFactory;
         _orbs = [[NSMutableArray alloc] init];
-        
-        //TODO: create lots of Orb.
     }
     return self;
 }
 
-//-(void)produceOrbs {
-//    RenderComponent *boardRenderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
-//    
-//    for (int j = 0; j<_rows; j++) {
-//        
-//        int randomOrb = OrbRed + arc4random_uniform(OrbBottom-1);
-//        
-//        int randomExist = arc4random_uniform(2);
-//        if (randomExist == 0) {
-//            randomOrb = OrbNull;
-//        }
+-(void)moveOrb:(Entity *)orb toPosition:(CGPoint)position {
+//    CGPoint target = [self getPositionInTheBoardFromRealPosition:position floor:YES];
+//    Entity *targetOrb = [self getOrbInPosition:target];
 //
-//        Entity *orb = [_entityFactory createOrbForType:randomOrb];
-//        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-//        orbCom.board = self.entity;
-//        orbCom.position = CGPointMake(kOrbBoardLastColumnNum, j);
-//        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-//        
-//        if (randomOrb == OrbNull) {
-//            [orbRenderCom.node setVisible:NO];
-//        }
-//        
-//        CGPoint position = [boardRenderCom.sprite convertToNodeSpace:CGPointMake(boardRenderCom.sprite.boundingBox.size.width+kOrb_XSIZE,kOrb_YSIZE/2+(kOrb_YSIZE+kOrb_YPad)*j)];
-//        position = [boardRenderCom.node convertToWorldSpace:position];
-//        orbRenderCom.node.position = position;
-//        [boardRenderCom.node addChild:orbRenderCom.node];
-//        
-//        [self adjustOrbPosition:orb realPosition:orbRenderCom.node.position];
-//        
-//        [_board addObject:orb];
+//    if (!targetOrb) { //out of board
+//        return;
 //    }
-//}
-
--(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition {
-    CGPoint target = [self getPositionInTheBoardFromRealPosition:targetPosition floor:YES];
-    Entity *targetOrb = [self getOrbInPosition:target];
-    if (!targetOrb) { //out of board
-        return;
+//    
+//    [self exchangeOrb:orb targetOrb:targetOrb];
+    
+    RenderComponent *renderA = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+    
+    int deltaX = abs(renderA.node.position.x - position.x);
+    int deltaY = abs(renderA.node.position.y - position.y);
+    
+    // FIXME: Limit to move one line!
+    if ((deltaX > kOrbWidth/2 && deltaY < kOrbHeight/2) ||
+        (deltaX < kOrbWidth/2 && deltaY > kOrbHeight/2)) {
+        
+        CGPoint orbPositionA = [self convertRenderPositionToOrbPosition:renderA.node.position];
+        
+        Entity *entityA = [self orbAtPosition:orbPositionA];
+        
+        if (entityA != orb) {
+            // Orb system have not create orb yet! so we have to wait it!
+            return;
+        }
+        
+        CGPoint orbPositionB = [self convertRenderPositionToOrbPosition:position];
+        
+        Entity *entityB = [self orbAtPosition:orbPositionB];
+        RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
+        
+        CGPoint temp = renderB.node.position;
+        renderB.node.position = renderA.node.position;
+        renderA.node.position = temp;
+        
+        [[_columns objectAtIndex:orbPositionA.x] replaceObjectAtIndex:orbPositionA.y withObject:entityB];
+        [[_columns objectAtIndex:orbPositionB.x] replaceObjectAtIndex:orbPositionB.y withObject:entityA];
     }
-    [self exchangeOrb:startOrb targetOrb:targetOrb];
 }
+
+-(CGPoint)convertRenderPositionToOrbPosition:(CGPoint)position {
+    int x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - (kOrbBoardColumns - _columns.count));
+    int y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
+    
+//    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
+    
+    return ccp(x, y);
+}
+
+-(Entity *)orbAtPosition:(CGPoint)position {
+    return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
+}
+
 
 -(CGPoint)getPositionInTheBoardFromRealPosition:(CGPoint)position floor:(BOOL)isFloor {
     int x,y;
@@ -110,18 +124,18 @@
     return target;
 }
 
--(void)exchangeOrb:(Entity *)startOrb targetOrb:(Entity *)targetOrb {
+-(void)exchangeOrb:(Entity *)orb targetOrb:(Entity *)targetOrb {
     
-    OrbComponent *startOrbCom = (OrbComponent *)[startOrb getComponentOfName:[OrbComponent name]];
+    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
     OrbComponent *targetOrbCom = (OrbComponent *)[targetOrb getComponentOfName:[OrbComponent name]];
     
-    RenderComponent *startRenderCom = (RenderComponent *)[startOrb getComponentOfName:[RenderComponent name]];
+    RenderComponent *startRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
     RenderComponent *targetRenderCom = (RenderComponent *)[targetOrb getComponentOfName:[RenderComponent name]];
     
-    CGPoint tempOrbPoint = startOrbCom.position;
+    CGPoint tempOrbPoint = orbCom.position;
     CGPoint tempRenderPoint = startRenderCom.node.position;
     
-    startOrbCom.position = targetOrbCom.position;
+    orbCom.position = targetOrbCom.position;
     targetOrbCom.position = tempOrbPoint;
     startRenderCom.node.position = targetRenderCom.node.position;
     targetRenderCom.node.position = tempRenderPoint;

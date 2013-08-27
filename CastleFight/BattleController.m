@@ -116,7 +116,9 @@ __weak static BattleController* currentInstance;
 -(void)onEnter {
     [super onEnter];
     
-    touchSystem = [[TouchSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
+    touchSystem = [[TouchSystem alloc] initWithEntityManager:entityManager];
+    [self addChild:touchSystem];
+    
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
     
     //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];

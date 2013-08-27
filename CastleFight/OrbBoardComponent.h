@@ -12,15 +12,16 @@
 
 @interface OrbBoardComponent : Component
 
+@property (readonly) NSMutableArray *columns;
+
 @property (nonatomic,readonly) NSMutableArray *orbs;
 @property (nonatomic) Entity *owner; //player
 @property (nonatomic,readonly) EntityFactory *entityFactory;
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory;
 
--(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;
+-(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
-//-(void)produceOrbs;
 -(void)adjustOrbPosition:(Entity *)orb realPosition:(CGPoint)realPosition;
 -(void)clean;
 

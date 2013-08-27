@@ -17,8 +17,8 @@
 
 -(id)init {
     if ((self = [super init])) {
-        _food = 15.0;
-        _foodRate = 1.0;
+        _food = 10.0;
+        _foodRate = 0.0;
         _maxRate = _foodRate * 4;
         
         _mana = 10.0;

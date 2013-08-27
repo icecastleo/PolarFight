@@ -7,30 +7,36 @@
 //
 
 #import "TouchSystem.h"
-#import "TouchComponent.h"
 #import "RenderComponent.h"
 
 @interface TouchSystem() {
+    EntityManager *_entityManager;
+    
     NSArray *descriptors;
     
     Entity *touchedEntity;
-    BOOL isBegan;
-    BOOL isPan;
-    NSMutableArray *panPath;
-    
     __weak Entity *selectedEntity;
+    
+    NSMutableArray *touchPositions;
+    
+    BOOL isMove;
+    BOOL isPan;
+    
+    float touchPressTime;
 }
 
 @end
 
 @implementation TouchSystem
 
--(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
-    if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
-        panPath = [[NSMutableArray alloc] init];
+-(id)initWithEntityManager:(EntityManager *)entityManager {
+    if (self = [super init]) {
+        _entityManager = entityManager;
         
         touchedEntity = nil;
         selectedEntity = nil;
+      
+        [self scheduleUpdate];
         
 #ifdef kTouchSystemSortEntities
         [self initDescriptors];
@@ -61,22 +67,47 @@
 }
 #endif
 
+-(void)update:(ccTime)delta {
+    if (_state == kTouchStateBegan) {
+        if (touchPressTime > kTouchSystemLongPressTime) {
+            [self handleLongPress];
+        } else {
+            touchPressTime += delta;
+        }
+        
+    } else if (_state == kTouchStateMoved && isPan) {
+        [self handlePan];
+    }
+}
+
+-(void)handleLongPress {
+    if (touchedEntity) {
+        _state = kTouchStateMoved;
+        isPan = YES;
+    }
+}
+
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (isBegan) {
+    // Prevent two touch
+    if (_state != kTouchStateNone) {
         return NO;
     }
     
-    // Prevent two touch
-    isBegan = YES;
+    _state = kTouchStateBegan;
     
     // Reset variable
+    touchPressTime = 0;
+    isMove = NO;
     isPan = NO;
     touchedEntity = nil;
+    touchPositions = [[NSMutableArray alloc] init];
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-    NSArray *array = [self.entityManager getAllEntitiesPosessingComponentOfName:[TouchComponent name]];
+    [touchPositions addObject:[NSValue valueWithCGPoint:touchLocation]];
+    
+    NSArray *array = [_entityManager getAllEntitiesPosessingComponentOfName:[TouchComponent name]];
     
 #ifdef kTouchSystemSortEntities
     array = [array sortedArrayUsingDescriptors:descriptors];
@@ -96,98 +127,102 @@
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (isPan == NO) {
-        isPan = YES;
-        panPath = [[NSMutableArray alloc] init];
-    }
+    _state = kTouchStateMoved;
     
-    if (touchedEntity == nil) {
-        // TODO: Move map here!
-        return;
-    }
+    isMove = YES;
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-
+    [touchPositions addObject:[NSValue valueWithCGPoint:touchLocation]];
     
-    if (touchedEntity) {
-        if (touchedEntity == selectedEntity) {
-            // Maybe we can move the selected entity!
-        } else {
-            [panPath addObject:[NSValue valueWithCGPoint:touchLocation]];
-            
-            TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-            
-            if ([touchCom.delegate respondsToSelector:@selector(handlePan:path:)]) {
-                [touchCom.delegate handlePan:kTouchStateMove path:panPath];
-            }
+    if (touchedEntity == nil) {
+        // TODO: Move map here!
+        return;
+    } else {
+        isPan = YES;
+    }
+    
+//    [self handlePan];
+}
+
+-(void)handlePan {
+    if (touchedEntity == selectedEntity) {
+        // Maybe we can force the pan event only handled by select entity!
+    } else {
+        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+        
+        if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
+            [touchCom.delegate handlePan:kTouchStateMoved positions:touchPositions];
         }
     }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    _state = kTouchStateEnded;
+    
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     // End location will be the same as the last move location, so we don't add it to pan path!
     
-    if (isPan && touchedEntity) {
-        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-        
-        if ([touchCom.delegate respondsToSelector:@selector(handlePan:path:)]) {
-            [touchCom.delegate handlePan:kTouchStateEnd path:panPath];
-        }
-    } else if (touchedEntity == nil) {
-        // User doesn't touch anything!
-        // Cancel selected entity or do something on selected entity !
-        
-        if (selectedEntity != nil) {
-            TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
-            
-            if ([selectedEntityTouch.delegate respondsToSelector:@selector(handleUnselect)]) {
-                [selectedEntityTouch.delegate handleUnselect];
-            }
-            selectedEntity = nil;
-        }
-    } else {
-        // User definitely touched something!
-        
-        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-
-        if (touchCom.canSelect) {
-            // Cancle previous select
+    if (isMove == NO) {
+        if (touchedEntity == nil) {
+            // User doesn't touch anything!
+            // Cancel selected entity or do something on selected entity !
             if (selectedEntity != nil) {
                 TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
                 
                 if ([selectedEntityTouch.delegate respondsToSelector:@selector(handleUnselect)]) {
                     [selectedEntityTouch.delegate handleUnselect];
                 }
-            }
-            
-            if (touchedEntity == selectedEntity) {
                 selectedEntity = nil;
-            } else {
-                // Select new entity! 
-                selectedEntity = touchedEntity;
-                
-                if ([touchCom.delegate respondsToSelector:@selector(handleSelect)]) {
-                    [touchCom.delegate handleSelect];
-                }
             }
         } else {
-            // Tap entity
-            if ([touchCom.delegate respondsToSelector:@selector(handleTap)]) {
-                [touchCom.delegate handleTap];
+            // User definitely touched something!
+            TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+            
+            if (touchCom.canSelect) {
+                // Cancle previous select
+                if (selectedEntity != nil) {
+                    TouchComponent *selectedEntityTouch = (TouchComponent *)[selectedEntity getComponentOfName:[TouchComponent name]];
+                    
+                    if ([selectedEntityTouch.delegate respondsToSelector:@selector(handleUnselect)]) {
+                        [selectedEntityTouch.delegate handleUnselect];
+                    }
+                }
+                
+                if (touchedEntity == selectedEntity) {
+                    selectedEntity = nil;
+                } else {
+                    // Select new entity!
+                    selectedEntity = touchedEntity;
+                    
+                    if ([touchCom.delegate respondsToSelector:@selector(handleSelect)]) {
+                        [touchCom.delegate handleSelect];
+                    }
+                }
+            } else {
+                // Tap entity
+                if ([touchCom.delegate respondsToSelector:@selector(handleTap)]) {
+                    [touchCom.delegate handleTap];
+                }
+            }
+        }
+    } else {
+        if (isPan) {
+            TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+            
+            if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
+                [touchCom.delegate handlePan:kTouchStateEnded positions:touchPositions];
             }
         }
     }
-    isBegan = NO;
+    _state = kTouchStateNone;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    isBegan = NO;
+    _state = kTouchStateNone;
 }
-
 
 @end

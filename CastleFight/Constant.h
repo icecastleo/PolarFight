@@ -24,6 +24,7 @@
 #define kPhisicalDebugDraw 0
 
 #define kTouchSystemSortEntities 0
+#define kTouchSystemLongPressTime 0.25
 
 //For SummonType
 #define kSummonTypeNormal 1
@@ -85,9 +86,9 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
-#define kOrbWidth 30
-#define kOrbHeight 30
-#define kOrbSpeed 30
+#define kOrbWidth 35
+#define kOrbHeight 35
+#define kOrbSpeed 20
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)

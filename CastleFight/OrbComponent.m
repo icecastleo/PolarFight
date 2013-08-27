@@ -29,24 +29,10 @@
     return self;
 }
 
-//-(void)handlePan:(NSArray *)path {
-//    CGPoint position = [[path lastObject] CGPointValue];
-//    RenderComponent *boardRenderCom = (RenderComponent *)[self.board getComponentOfName:[RenderComponent name]];
-//    
-//    CGPoint position2 = [boardRenderCom.sprite convertToNodeSpace:position];
-//    
-//    OrbBoardComponent *boardCom = (OrbBoardComponent *)[self.board getComponentOfName:[OrbBoardComponent name]];
-//    [boardCom moveOrb:self.entity ToPosition:position2];
-//}
-//
-//-(void)handleTap {
-//    
-//}
-
--(void)handlePan:(TouchState)state path:(NSArray *)path {
-    if (state == kTouchStateMove) {
-        CGPoint position = [[path lastObject] CGPointValue];
-        [self.board moveOrb:self.entity ToPosition:position];
+-(void)handlePan:(TouchState)state positions:(NSArray *)positions {
+    if (state == kTouchStateMoved) {
+        CGPoint position = [[positions lastObject] CGPointValue];
+        [self.board moveOrb:self.entity toPosition:position];
     }
 }
 
@@ -59,13 +45,10 @@
 }
 
 -(void)executeMatch:(int)number {
-    
-    
     PlayerComponent *playerCom = (PlayerComponent *)[self.board.owner getComponentOfName:[PlayerComponent name]];
     
     NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
-    NSString *summonData = @"SummonData";
-    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:summonData];
+    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:@"SummonData"];
     
     int addLevel = 0;
     switch (number) {
