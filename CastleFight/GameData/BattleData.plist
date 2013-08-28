@@ -73,6 +73,15 @@
 				<integer>1</integer>
 			</dict>
 		</array>
+		<key>patterns</key>
+		<array>
+			<string>001</string>
+			<string>002</string>
+			<string>003</string>
+			<string>004</string>
+		</array>
+		<key>patternRandom</key>
+		<false/>
 	</dict>
 	<key>01 - 02</key>
 	<dict>

@@ -9,6 +9,7 @@
 #import "EntityFactory.h"
 #import "cocos2d.h"
 #import "FileManager.h"
+#import "BattleDataObject.h"
 #import "RenderComponent.h"
 #import "CharacterComponent.h"
 #import "LevelComponent.h"
@@ -486,7 +487,7 @@
     return entity;
 }
 
--(Entity *)createOrbBoardWithOwner:(Entity *)owner {
+-(Entity *)createOrbBoardWithOwner:(Entity *)owner andBattleData:(BattleDataObject *)battleData {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
@@ -497,8 +498,7 @@
     
     sprite.opacity = 0;
     
-    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self];
-    orbBoardCom.owner = owner;
+    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self owner:owner BattleData:battleData];
     [entity addComponent:orbBoardCom];
     
     return entity;

@@ -7,14 +7,22 @@
 //
 
 #import "OrbBoardComponent.h"
+#import "FileManager.h"
 #import "EntityFactory.h"
 #import "OrbComponent.h"
 #import "RenderComponent.h"
+#import "BattleDataObject.h"
 #import "cocos2d.h"
 
 @interface OrbBoardComponent() {
     int combos;
     int combosOrbSum; // only for test
+    BattleDataObject *_battleData;
+    int currentColumn;
+    int currentPattern;
+    int iteration;
+    NSArray *patterns;
+    NSDictionary *randomOrbs;
 }
 
 @end
@@ -26,12 +34,18 @@
     return name;
 }
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory {
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory owner:(Entity *)player BattleData:(BattleDataObject *)battleData {
     if (self = [super init]) {
         
         _entityFactory = entityFactory;
         _orbs = [[NSMutableArray alloc] init];
         combos = 0;
+        _owner = player;
+        _battleData = battleData;
+        currentColumn = 0;
+        currentPattern = -1;
+        iteration = 0;
+        randomOrbs = [[FileManager sharedFileManager] getPatternDataWithPid:@"RandomOrbs"];
         //TODO: create lots of Orb.
     }
     return self;
@@ -403,6 +417,60 @@
          combos = 0;
          [self.entityFactory.mapLayer removeChildByTag:kCombosLabelTag cleanup:YES];
      }],nil]];
+}
+
+-(NSArray *)nextColumn {
+    currentColumn++;
+    if (currentColumn >= patterns.count) {
+        currentColumn = 0;
+        iteration--;
+        // check iteration if pattern is needed change
+        if (iteration <= 0) {
+            // change pattern
+            if (_battleData.patternRandom) {
+                currentPattern = arc4random_uniform(_battleData.patterns.count);
+            }else {
+                currentPattern = (currentPattern+1)%_battleData.patterns.count;
+            }
+            NSString *pid = [_battleData.patterns objectAtIndex:currentPattern];
+            NSDictionary *patternData = [[FileManager sharedFileManager] getPatternDataWithPid:pid];
+            iteration = [[patternData objectForKey:@"iteration"] intValue];
+            patterns = [patternData objectForKey:@"patterns"];
+        }
+    }
+    NSMutableArray *nextColumn = [[NSMutableArray alloc] init];
+    NSArray *array = nil;
+    if (patterns.count > 0) {
+        array = [NSMutableArray arrayWithArray:[patterns objectAtIndex:currentColumn]];
+    }
+    
+    if (array.count == kOrbBoardRows) {
+        for (int i=0; i<kOrbBoardRows; i++) {
+            NSNumber *number = [array objectAtIndex:i];
+            if (number.intValue > 100) {
+                NSArray *randomArray = [randomOrbs objectForKey:number.stringValue];
+                NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
+                [nextColumn addObject:orbNumber];
+            }else if(number.intValue < 0) {
+                NSNumber *orbNumber = [NSNumber numberWithInt:(arc4random_uniform(OrbBottom - 1)+1)];
+                [nextColumn addObject:orbNumber];
+            }else {
+                [nextColumn addObject:number];
+            }
+        }
+    }else {
+        for (int i=0; i<kOrbBoardRows; i++) {
+            int type = arc4random_uniform(OrbBottom - 1) + 1;
+            if (arc4random_uniform(2) > 0) {
+                type = OrbNull;
+            }
+            NSNumber *orbNumber = [NSNumber numberWithInt:type];
+            [nextColumn addObject:orbNumber];
+        }
+        
+    }
+    
+    return nextColumn;
 }
 
 @end

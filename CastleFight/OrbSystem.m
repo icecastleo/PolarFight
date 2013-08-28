@@ -35,15 +35,13 @@
         
         if (countDown <= 0) {
             countDown += kOrbWidth;
-
+            NSArray *nextColumn = [board nextColumn];
+            NSAssert(nextColumn.count == kOrbBoardRows, @"why?");
+            
             for (int row = 0; row < kOrbBoardRows; row++) {
                 
-                // Random to create orb!
-                OrbType type = arc4random_uniform(OrbBottom - 1) + 1;
-                
-                if (arc4random_uniform(3) > 0) {
-                    type = OrbNull;
-                }
+                // create orb!
+                OrbType type = [[nextColumn objectAtIndex:row] intValue];
                 
                 Entity *orb = [self.entityFactory createOrb:type row:row];
                 RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
@@ -84,37 +82,4 @@
     }
 }
 
-/*
--(void)update:(float)delta {
-    
-    for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfName:[OrbBoardComponent name]]) {
-        OrbBoardComponent *orbBoardCom = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        
-        if (orbBoardCom.board.count == 0) {
-            [orbBoardCom produceOrbs];
-            return;
-        }
-        int lastOrbX = 0;
-        for(Entity *orb in orbBoardCom.board) {
-            RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-            orbRenderCom.node.position = ccp(orbRenderCom.node.position.x-1,orbRenderCom.node.position.y);
-            if (orbRenderCom.node.position.x > lastOrbX) {
-                lastOrbX = orbRenderCom.node.position.x;
-            }
-            [orbBoardCom adjustOrbPosition:orb realPosition:orbRenderCom.node.position];
-        }
-        
-        [orbBoardCom clean];
-        
-        RenderComponent *boardRenderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-        CGPoint position = [boardRenderCom.sprite convertToNodeSpace:ccp(boardRenderCom.sprite.boundingBox.size.width,0)];
-        position = [boardRenderCom.node convertToWorldSpace:position];
-        
-        if (lastOrbX < position.x) {
-            [orbBoardCom produceOrbs];
-        }
-        
-    }
-}
-//*/
 @end

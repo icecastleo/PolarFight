@@ -36,6 +36,8 @@
         
         _enemyCharacterDatas = [self getCharacterDataArrayFromArray:[dic objectForKey:@"enemies"]];
         _enemyBossDatas = [self getCharacterDataArrayFromArray:[dic objectForKey:@"bosses"]];
+        _patterns = [dic objectForKey:@"patterns"];
+        _patternRandom = [[dic objectForKey:@"patternRandom"] boolValue];
 //        _enemyCastleArray = [self getCharacterDataArrayFromArray:[dic objectForKey:@"castle"]];
     }
     return self;

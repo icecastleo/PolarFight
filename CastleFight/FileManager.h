@@ -34,6 +34,8 @@
 
 -(NSDictionary *)getCharacterDataWithCid:(NSString *)cid;
 
+-(NSDictionary *)getPatternDataWithPid:(NSString *)pid;
+
 //-(Character *)getPlayerHero;
 //-(Character *)getPlayerCastle;
 

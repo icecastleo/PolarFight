@@ -20,6 +20,9 @@
 
 @property (readonly) NSArray *enemyCharacterDatas;
 @property (readonly) NSArray *enemyBossDatas;
+@property (readonly) BOOL patternRandom;
+@property (readonly) NSArray *patterns;
+
 
 -(id)initWithBattleName:(NSString *)name;
 -(id)initWithBattleDictionary:(NSDictionary *)dic;

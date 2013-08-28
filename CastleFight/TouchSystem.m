@@ -18,10 +18,14 @@
     BOOL isPan;
     NSMutableArray *panPath;
     
+    CCSprite *touchSprite;
+    
     __weak Entity *selectedEntity;
 }
 
 @end
+
+#define kTouchSpriteTag 12345
 
 @implementation TouchSystem
 
@@ -88,6 +92,16 @@
         
         if (touchCom.touchable && CGRectContainsPoint(render.sprite.boundingBox, [render.sprite.parent convertToNodeSpace:touchLocation])) {
             touchedEntity = entity;
+            if ([render.sprite isKindOfClass:[CCSprite class]]) {
+                [(CCSprite *)render.sprite setOpacity:50];
+                touchSprite = [CCSprite spriteWithTexture:[(CCSprite *)render.sprite texture] rect:[(CCSprite *)render.sprite textureRect]];
+                touchSprite.position = touchLocation;
+                touchSprite.scaleX = render.sprite.scaleX;
+                touchSprite.scaleY = render.sprite.scaleY;
+                [touchSprite setOpacity:200];
+                [self.entityFactory.mapLayer addChild:touchSprite z:INT16_MAX tag:kTouchSpriteTag];
+                
+            }
             break;
         }
     }
@@ -109,7 +123,7 @@
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
-
+    touchSprite.position = touchLocation;
     
     if (touchedEntity) {
         if (touchedEntity == selectedEntity) {
@@ -183,6 +197,11 @@
         }
     }
     isBegan = NO;
+    if (touchedEntity) {
+        RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
+        [(CCSprite *)render.sprite setOpacity:255];
+    }
+    [self.entityFactory.mapLayer removeChildByTag:kTouchSpriteTag];
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {

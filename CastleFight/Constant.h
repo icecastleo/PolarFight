@@ -88,7 +88,7 @@
 //For Orbs
 #define kOrbWidth 40
 #define kOrbHeight 40
-#define kOrbSpeed 20
+#define kOrbSpeed 30
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)

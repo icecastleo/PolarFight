@@ -8,15 +8,15 @@
 
 #import "Component.h"
 
-@class EntityFactory;
+@class EntityFactory,BattleDataObject;
 
 @interface OrbBoardComponent : Component
 
 @property (nonatomic,readonly) NSMutableArray *orbs;
-@property (nonatomic) Entity *owner; //player
+@property (nonatomic,readonly) Entity *owner; //player
 @property (nonatomic,readonly) EntityFactory *entityFactory;
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory;
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory owner:(Entity *)player BattleData:(BattleDataObject *)battleData;
 
 -(void)moveOrb:(Entity *)startOrb ToPosition:(CGPoint)targetPosition;
 
@@ -26,5 +26,7 @@
 
 -(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb;
 -(void)matchClean:(NSArray *)matchArray;
+
+-(NSArray *)nextColumn;
 
 @end

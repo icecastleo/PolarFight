@@ -11,6 +11,7 @@
 
 @class ProjectileEvent;
 @class PhysicsSystem;
+@class BattleDataObject;
 
 @interface EntityFactory : NSObject
 
@@ -25,7 +26,7 @@
 
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level team:(int)team;
 -(Entity *)createOrb:(OrbType)type row:(int)row;
--(Entity *)createOrbBoardWithOwner:(Entity *)owner;
+-(Entity *)createOrbBoardWithOwner:(Entity *)owner andBattleData:(BattleDataObject *)battleData;
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
 

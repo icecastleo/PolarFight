@@ -156,6 +156,7 @@
 		37D97D36177198F600A2A7D6 /* MovePathComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D97D35177198F600A2A7D6 /* MovePathComponent.m */; };
 		37DA84A316FC961F007B3F72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84A516FC961F007B3F72 /* Localizable.strings */; };
 		37DA84C616FC99BB007B3F72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DA84C816FC99BB007B3F72 /* InfoPlist.strings */; };
+		37DB2B5E17CC8B0300AA9151 /* OrbPattern.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37DB2B5D17CC8B0300AA9151 /* OrbPattern.plist */; };
 		37DC0A9A17534D28000656A6 /* BigPillowBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9917534D28000656A6 /* BigPillowBomb.m */; };
 		37DC0AA017534F9B000656A6 /* DeadBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC0A9F17534F9B000656A6 /* DeadBomb.m */; };
 		37DC0AA217535AAA000656A6 /* HealSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE01A381695E81900B9C427 /* HealSkill.m */; };
@@ -773,6 +774,7 @@
 		37DA84C716FC99BB007B3F72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37DA84C916FC99BF007B3F72 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37DA84CA16FC99C1007B3F72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DB2B5D17CC8B0300AA9151 /* OrbPattern.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OrbPattern.plist; sourceTree = "<group>"; };
 		37DC0A9817534D28000656A6 /* BigPillowBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigPillowBomb.h; sourceTree = "<group>"; };
 		37DC0A9917534D28000656A6 /* BigPillowBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigPillowBomb.m; sourceTree = "<group>"; };
 		37DC0A9E17534F9B000656A6 /* DeadBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeadBomb.h; sourceTree = "<group>"; };
@@ -3242,6 +3244,7 @@
 				9BFE1C3017783802002433E5 /* BattleData.plist */,
 				9BFE1C3117783802002433E5 /* CharacterBasicData.plist */,
 				9BFE1C3217783802002433E5 /* UserData.plist */,
+				37DB2B5D17CC8B0300AA9151 /* OrbPattern.plist */,
 			);
 			name = GameDatas;
 			path = GameData;
@@ -3566,6 +3569,7 @@
 				37020EFA17BBB6290063A4BB /* yellow.png in Resources */,
 				37020EFB17BBB6290063A4BB /* yellow@2x.png in Resources */,
 				9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */,
+				37DB2B5E17CC8B0300AA9151 /* OrbPattern.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

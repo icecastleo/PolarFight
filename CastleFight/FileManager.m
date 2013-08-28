@@ -18,6 +18,7 @@
 #define kUserDataFile @"UserData.plist"
 #define kCharacterDatasFile @"CharacterBasicData.plist"
 #define kMapDatasFile @"BattleData.plist"
+#define kPatternDataFile @"OrbPattern.plist"
 
 #define kUserDataArchiveKey @"UserData"
 
@@ -25,6 +26,7 @@
 
 @interface FileManager () {
     NSDictionary *characterDatas;
+    NSDictionary *patterns;
     NSArray *sceneSounds;
     UserDataObject *userData;
 }
@@ -50,6 +52,7 @@
 	if((self = [super init])) {
         userData = [self loadUserData];
         characterDatas = [self getDictionaryFromPlistFile:kCharacterDatasFile];
+        patterns = [self getDictionaryFromPlistFile:kPatternDataFile];
         _achievementManager = [[AchievementManager alloc] initWithAchievements:userData.achievements AndProperties:userData.properties];
         
         // game center
@@ -224,6 +227,10 @@
 
 -(NSDictionary *)getCharacterDataWithCid:(NSString *)cid {
     return characterDatas[cid];
+}
+
+-(NSDictionary *)getPatternDataWithPid:(NSString *)pid {
+    return patterns[pid];
 }
 
 -(NSArray *)characterInitDatas {
