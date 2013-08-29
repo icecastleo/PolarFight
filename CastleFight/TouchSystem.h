@@ -7,7 +7,12 @@
 //
 
 #import "System.h"
+#import "TouchComponent.h"
 
-@interface TouchSystem : System <CCTouchOneByOneDelegate>
+@interface TouchSystem : CCNode <CCTouchOneByOneDelegate>
+
+@property (readonly) TouchState state;
+
+-(id)initWithEntityManager:(EntityManager *)entityManager;
 
 @end

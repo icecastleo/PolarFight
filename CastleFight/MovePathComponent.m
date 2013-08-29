@@ -70,11 +70,11 @@
     //*/
 }
 
--(void)handlePan:(TouchState)state path:(NSArray *)path {
-    if (state == kTouchStateMove) {
+-(void)handlePan:(TouchState)state positions:(NSArray *)positions {
+    if (state == kTouchStateMoved) {
         
-    } else if (state == kTouchStateEnd) {
-        _path = [path copy];
+    } else if (state == kTouchStateEnded) {
+        _path = [positions copy];
     }
 }
 
