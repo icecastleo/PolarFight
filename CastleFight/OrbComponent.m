@@ -24,7 +24,6 @@
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
         _matchInfo = dic;
-        _position = CGPointMake(0, 0);
     }
     return self;
 }
@@ -37,7 +36,7 @@
 }
 
 -(void)handleTap {
-    NSArray *matchArray = [self.board findMatchFromPosition:self.position CurrentOrb:self.entity];
+    NSArray *matchArray = [self.board findMatchForOrb:self.entity];
     if (matchArray.count >= 3) {
         [self executeMatch:matchArray.count];
         [self.board matchClean:matchArray];

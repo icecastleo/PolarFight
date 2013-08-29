@@ -22,9 +22,9 @@
     BOOL isMove;
     BOOL isPan;
     
-    CCSprite *touchSprite;
+    float touchPressTime;
     
-    __weak Entity *selectedEntity;
+    CCSprite *touchSprite;
 }
 
 @end
@@ -130,7 +130,7 @@
                 touchSprite.scaleX = render.sprite.scaleX;
                 touchSprite.scaleY = render.sprite.scaleY;
                 [touchSprite setOpacity:200];
-                [self.entityFactory.mapLayer addChild:touchSprite z:INT16_MAX tag:kTouchSpriteTag];
+                [render.node.parent addChild:touchSprite z:INT16_MAX tag:kTouchSpriteTag];
                 
             }
             break;
@@ -147,6 +147,8 @@
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+    
+    [touchPositions addObject:[NSValue valueWithCGPoint:touchLocation]];
     
     touchSprite.position = touchLocation;
     
@@ -186,6 +188,13 @@
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     // End location will be the same as the last move location, so we don't add it to pan path!
+    
+    if (touchedEntity) {
+        RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
+        [(CCSprite *)render.sprite setOpacity:255];
+        
+        [render.node.parent removeChildByTag:kTouchSpriteTag];
+    }
     
     if (isMove == NO) {
         if (touchedEntity == nil) {
@@ -239,12 +248,7 @@
             }
         }
     }
-    isBegan = NO;
-    if (touchedEntity) {
-        RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
-        [(CCSprite *)render.sprite setOpacity:255];
-    }
-    [self.entityFactory.mapLayer removeChildByTag:kTouchSpriteTag];
+    _state = kTouchStateNone;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {

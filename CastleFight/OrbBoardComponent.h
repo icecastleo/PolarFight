@@ -14,7 +14,6 @@
 
 @property (readonly) NSMutableArray *columns;
 
-@property (nonatomic,readonly) NSMutableArray *orbs;
 @property (nonatomic,readonly) Entity *owner; //player
 @property (nonatomic,readonly) EntityFactory *entityFactory;
 
@@ -22,7 +21,7 @@
 
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
--(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb;
+-(NSArray *)findMatchForOrb:(Entity *)currentOrb;
 -(void)matchClean:(NSArray *)matchArray;
 
 -(NSArray *)nextColumn;

@@ -10,6 +10,7 @@
 #import "FileManager.h"
 #import "EntityFactory.h"
 #import "OrbComponent.h"
+#import "TouchComponent.h"
 #import "RenderComponent.h"
 #import "BattleDataObject.h"
 #import "cocos2d.h"
@@ -40,7 +41,6 @@
         _columns = [NSMutableArray arrayWithCapacity:kOrbBoardColumns];
         
         _entityFactory = entityFactory;
-        _orbs = [[NSMutableArray alloc] init];
         combos = 0;
         _owner = player;
         _battleData = battleData;
@@ -48,7 +48,6 @@
         currentPattern = -1;
         iteration = 0;
         randomOrbs = [[FileManager sharedFileManager] getPatternDataWithPid:@"RandomOrbs"];
-        //TODO: create lots of Orb.
     }
     return self;
 }
@@ -162,108 +161,71 @@
     return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
 }
 
--(NSArray *)findMatchFromPosition:(CGPoint)position CurrentOrb:(Entity *)currentOrb {
+-(NSArray *)findMatchForOrb:(Entity *)currentOrb {
     
     OrbComponent *currentOrbCom = (OrbComponent *)[currentOrb getComponentOfName:[OrbComponent name]];
+    RenderComponent *currentRenderCom = (RenderComponent *)[currentOrb getComponentOfName:[RenderComponent name]];
+    
     if (currentOrbCom.type == OrbNull) {
         return nil;
     }
-    
-    NSMutableArray *xArray = [[NSMutableArray alloc] init];
-    NSMutableArray *yArray = [[NSMutableArray alloc] init];
-    
-    for (Entity *orb in self.orbs) {
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.type == currentOrbCom.type) {
-            if (orbCom.position.x == currentOrbCom.position.x) {
-                [xArray addObject:orbCom];
-            }
-            if (orbCom.position.y == currentOrbCom.position.y) {
-                [yArray addObject:orbCom];
-            }
-        }
-    }
-    
-    [xArray sortUsingComparator:^(OrbComponent *obj1, OrbComponent *obj2) {
-        int y1 = obj1.position.y;
-        int y2 = obj2.position.y;
-        if (y1 > y2) {
-            return NSOrderedDescending;
-        } else {
-            return NSOrderedAscending;
-        }
-    }];
-    [yArray sortUsingComparator:^(OrbComponent *obj1, OrbComponent *obj2) {
-        int x1 = obj1.position.x;
-        int x2 = obj2.position.x;
-        if (x1 > x2) {
-            return NSOrderedDescending;
-        } else {
-            return NSOrderedAscending;
-        }
-    }];
-    
     NSMutableArray *matchXArray = [[NSMutableArray alloc] init];
     NSMutableArray *matchYArray = [[NSMutableArray alloc] init];
     
-    int xStart = 0;
-    int xEnd = 0;
-    for (int i=0; i<xArray.count; i++) {
-        OrbComponent *orbCom = [xArray objectAtIndex:i];
-        if (orbCom.position.y > currentOrbCom.position.y) {
-            OrbComponent *lastOrbCom = [xArray objectAtIndex:xEnd];
-            if (orbCom.position.y == lastOrbCom.position.y+1) {
-                xEnd = i;
-            }else {
-                break;
-            }
-        } else {
-            OrbComponent *lastOrbCom = [xArray objectAtIndex:xEnd];
-            if (orbCom.position.y != lastOrbCom.position.y+1) {
-                xStart = i;
-            }
-            xEnd = i;
+    CGPoint currentOrbPosition = [self convertRenderPositionToOrbPosition:currentRenderCom.node.position];
+    int currentX = currentOrbPosition.x;
+    int currentY = currentOrbPosition.y;
+    //left way
+    for (int i=currentX-1; i>=0; i--) {
+        Entity *orb = [self orbAtPosition:ccp(i,currentY)];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == currentOrbCom.type) {
+            [matchXArray addObject:orb];
+        }else {
+            break;
         }
     }
     
-    int yStart = 0;
-    int yEnd = 0;
-    for (int i=0; i<yArray.count; i++) {
-        OrbComponent *orbCom = [yArray objectAtIndex:i];
-        if (orbCom.position.x > currentOrbCom.position.x) {
-            OrbComponent *lastOrbCom = [yArray objectAtIndex:yEnd];
-            if (orbCom.position.x == lastOrbCom.position.x+1) {
-                yEnd = i;
-            }else {
-                break;
-            }
-        } else {
-            OrbComponent *lastOrbCom = [yArray objectAtIndex:yEnd];
-            if (orbCom.position.x != lastOrbCom.position.x+1) {
-                yStart = i;
-            }
-            yEnd = i;
+    //right way
+    for (int i=currentX; i<kOrbBoardColumns; i++) {
+        Entity *orb = [self orbAtPosition:ccp(i,currentY)];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == currentOrbCom.type) {
+            [matchXArray addObject:orb];
+        }else {
+            break;
         }
     }
     
-    for (int i= xStart; i<=xEnd; i++) {
-        [matchXArray addObject:[xArray objectAtIndex:i]];
+    //up way
+    for (int j=currentY; j<kOrbBoardRows; j++) {
+        Entity *orb = [self orbAtPosition:ccp(currentX,j)];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == currentOrbCom.type) {
+            [matchYArray addObject:orb];
+        }else {
+            break;
+        }
     }
-    for (int i= yStart; i<=yEnd; i++) {
-        [matchYArray addObject:[yArray objectAtIndex:i]];
+    
+    //down way
+    for (int j=currentY-1; j>=0; j--) {
+        Entity *orb = [self orbAtPosition:ccp(currentX,j)];
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == currentOrbCom.type) {
+            [matchYArray addObject:orb];
+        }else {
+            break;
+        }
     }
     
     NSMutableArray *matchArray = [[NSMutableArray alloc] init];
     
-    if (matchXArray.count >= 3) {
-        for (OrbComponent *orbCom in matchXArray) {
-            [matchArray addObject:orbCom.entity];
-        }
+    if (matchXArray.count >=3) {
+        [matchArray addObjectsFromArray:matchXArray];
     }
-    if (matchYArray.count >= 3) {
-        for (OrbComponent *orbCom in matchYArray) {
-            [matchArray addObject:orbCom.entity];
-        }
+    if (matchYArray.count >=3) {
+        [matchArray addObjectsFromArray:matchYArray];
     }
     
     return matchArray;
@@ -273,12 +235,8 @@
     combos++;
     // only test
     combosOrbSum = matchArray.count;
+    
     [self showCombos];
-    if (combos>=5) {
-        matchArray = self.orbs;
-        CCAction *shake = [CCShake actionWithDuration:3.0 amplitude:ccp(5, 5)];
-        [self.entityFactory.mapLayer runAction:shake];
-    }
     for (Entity *orb in matchArray) {
         RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
         [orbRenderCom.sprite runAction:
@@ -289,6 +247,7 @@
          }],nil]];
         OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
         orbCom.type = OrbNull;
+        [orb removeComponent:[TouchComponent name]];
     }
 }
 
