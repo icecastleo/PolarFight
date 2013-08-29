@@ -14,6 +14,16 @@
 
 #import "SummonToLineMagic.h"
 
+static int kOriginalOrbOpacity = 0.25 * 255;
+static int kTouchOrbOpacity = 0.6 * 255;
+
+@interface OrbComponent () {
+    CCSprite *touchSprite;
+    int tempOpacity;
+}
+
+@end
+
 @implementation OrbComponent
 
 +(NSString *)name {
@@ -28,10 +38,32 @@
     return self;
 }
 
--(void)handlePan:(TouchState)state positions:(NSArray *)positions {
-    if (state == kTouchStateMoved) {
+-(void)handlePan:(PanState)state positions:(NSArray *)positions {
+    if (state == kPanStateBegan) {
+        RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
+
+        NSAssert([render.sprite isKindOfClass:[CCSprite class]], @"I think orb's sprite is ccsprite...");
+        tempOpacity = [(CCSprite *)render.sprite opacity];
+        [(CCSprite *)render.sprite setOpacity:kOriginalOrbOpacity];
+        
+        touchSprite = [CCSprite spriteWithTexture:[(CCSprite *)render.sprite texture] rect:[(CCSprite *)render.sprite textureRect]];
+        touchSprite.scaleX = render.sprite.scaleX;
+        touchSprite.scaleY = render.sprite.scaleY;
+        touchSprite.position = [[positions lastObject] CGPointValue];
+        [touchSprite setOpacity:kTouchOrbOpacity];
+        [render.node.parent addChild:touchSprite z:INT16_MAX];
+    } else if (state == kPanStateMoved) {
         CGPoint position = [[positions lastObject] CGPointValue];
         [self.board moveOrb:self.entity toPosition:position];
+        
+        touchSprite.position = position;
+    } else if (state == kPanStateEnded) {
+        RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
+        
+        NSAssert([render.sprite isKindOfClass:[CCSprite class]], @"I think orb's sprite is ccsprite...");
+        [(CCSprite *)render.sprite setOpacity:tempOpacity];
+        
+        [touchSprite removeFromParentAndCleanup:YES];
     }
 }
 

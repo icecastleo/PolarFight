@@ -9,6 +9,13 @@
 #import "TouchSystem.h"
 #import "RenderComponent.h"
 
+typedef enum {
+    kTouchStateNone,
+    kTouchStateBegan,
+    kTouchStateMoved,
+    kTouchStateEnded,
+} TouchState;
+
 @interface TouchSystem() {
     EntityManager *_entityManager;
     
@@ -19,17 +26,14 @@
     
     NSMutableArray *touchPositions;
     
+    TouchState state;
     BOOL isMove;
     BOOL isPan;
     
     float touchPressTime;
-    
-    CCSprite *touchSprite;
 }
 
 @end
-
-#define kTouchSpriteTag 12345
 
 @implementation TouchSystem
 
@@ -72,32 +76,39 @@
 #endif
 
 -(void)update:(ccTime)delta {
-    if (_state == kTouchStateBegan) {
+    if (state == kTouchStateBegan) {
         if (touchPressTime > kTouchSystemLongPressTime) {
             [self handleLongPress];
         } else {
             touchPressTime += delta;
         }
         
-    } else if (_state == kTouchStateMoved && isPan) {
+    } else if (state == kTouchStateMoved && isPan) {
         [self handlePan];
     }
 }
 
 -(void)handleLongPress {
     if (touchedEntity) {
-        _state = kTouchStateMoved;
         isPan = YES;
+        
+        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+        
+        if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
+            [touchCom.delegate handlePan:kPanStateBegan positions:touchPositions];
+        }
+        
+        state = kTouchStateMoved;
     }
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     // Prevent two touch
-    if (_state != kTouchStateNone) {
+    if (state != kTouchStateNone) {
         return NO;
     }
     
-    _state = kTouchStateBegan;
+    state = kTouchStateBegan;
     
     // Reset variable
     touchPressTime = 0;
@@ -123,16 +134,6 @@
         
         if (touchCom.touchable && CGRectContainsPoint(render.sprite.boundingBox, [render.sprite.parent convertToNodeSpace:touchLocation])) {
             touchedEntity = entity;
-            if ([render.sprite isKindOfClass:[CCSprite class]]) {
-                [(CCSprite *)render.sprite setOpacity:50];
-                touchSprite = [CCSprite spriteWithTexture:[(CCSprite *)render.sprite texture] rect:[(CCSprite *)render.sprite textureRect]];
-                touchSprite.position = touchLocation;
-                touchSprite.scaleX = render.sprite.scaleX;
-                touchSprite.scaleY = render.sprite.scaleY;
-                [touchSprite setOpacity:200];
-                [render.node.parent addChild:touchSprite z:INT16_MAX tag:kTouchSpriteTag];
-                
-            }
             break;
         }
     }
@@ -141,7 +142,7 @@
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    _state = kTouchStateMoved;
+    state = kTouchStateMoved;
     
     isMove = YES;
     
@@ -149,8 +150,6 @@
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     [touchPositions addObject:[NSValue valueWithCGPoint:touchLocation]];
-    
-    touchSprite.position = touchLocation;
     
     if (touchedEntity == nil) {
         // TODO: Move map here!
@@ -162,6 +161,12 @@
             
             if (ccpDistance(touchLocation, previousTouchLocation) >= kTouchSystemPanDistance || touchPositions.count > 2) {
                 isPan = YES;
+                
+                TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+                
+                if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
+                    [touchCom.delegate handlePan:kPanStateBegan positions:touchPositions];
+                }
             }
         } else {
             //    [self handlePan];
@@ -176,25 +181,18 @@
         TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
         
         if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-            [touchCom.delegate handlePan:kTouchStateMoved positions:touchPositions];
+            [touchCom.delegate handlePan:kPanStateMoved positions:touchPositions];
         }
     }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    _state = kTouchStateEnded;
+    state = kTouchStateEnded;
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     // End location will be the same as the last move location, so we don't add it to pan path!
-    
-    if (touchedEntity) {
-        RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
-        [(CCSprite *)render.sprite setOpacity:255];
-        
-        [render.node.parent removeChildByTag:kTouchSpriteTag];
-    }
     
     if (isMove == NO) {
         if (touchedEntity == nil) {
@@ -244,15 +242,15 @@
             TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
             
             if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-                [touchCom.delegate handlePan:kTouchStateEnded positions:touchPositions];
+                [touchCom.delegate handlePan:kPanStateEnded positions:touchPositions];
             }
         }
     }
-    _state = kTouchStateNone;
+    state = kTouchStateNone;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    _state = kTouchStateNone;
+    state = kTouchStateNone;
 }
 
 @end

@@ -9,17 +9,16 @@
 #import "Component.h"
 
 typedef enum {
-    kTouchStateNone,
-    kTouchStateBegan,
-    kTouchStateMoved,
-    kTouchStateEnded,
-} TouchState;
+    kPanStateBegan,
+    kPanStateMoved,
+    kPanStateEnded,
+} PanState;
 
 @protocol TouchComponentDelegate <NSObject>
 
 @optional
 -(void)handleTap;
--(void)handlePan:(TouchState)state positions:(NSArray *)positions;
+-(void)handlePan:(PanState)state positions:(NSArray *)positions;
 -(void)handleSelect;
 -(void)handleUnselect;
 
