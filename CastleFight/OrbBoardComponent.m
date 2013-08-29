@@ -12,6 +12,7 @@
 #import "OrbComponent.h"
 #import "TouchComponent.h"
 #import "RenderComponent.h"
+#import "PlayerComponent.h"
 #import "BattleDataObject.h"
 #import "cocos2d.h"
 
@@ -35,14 +36,15 @@
     return name;
 }
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory owner:(Entity *)player BattleData:(BattleDataObject *)battleData {
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory player:(Entity *)player aiPlayer:(Entity *)aiPlayer BattleData:(BattleDataObject *)battleData {
     if (self = [super init]) {
         
         _columns = [NSMutableArray arrayWithCapacity:kOrbBoardColumns];
         
         _entityFactory = entityFactory;
         combos = 0;
-        _owner = player;
+        _player = player;
+        _aiPlayer = aiPlayer;
         _battleData = battleData;
         currentColumn = 0;
         currentPattern = -1;
@@ -166,7 +168,7 @@
     OrbComponent *currentOrbCom = (OrbComponent *)[currentOrb getComponentOfName:[OrbComponent name]];
     RenderComponent *currentRenderCom = (RenderComponent *)[currentOrb getComponentOfName:[RenderComponent name]];
     
-    if (currentOrbCom.type == OrbNull) {
+    if (currentOrbCom.type == OrbNull || currentOrbCom.type == OrbPurple) {
         return nil;
     }
     NSMutableArray *matchXArray = [[NSMutableArray alloc] init];
@@ -175,6 +177,8 @@
     CGPoint currentOrbPosition = [self convertRenderPositionToOrbPosition:currentRenderCom.node.position];
     int currentX = currentOrbPosition.x;
     int currentY = currentOrbPosition.y;
+    int currentColumns = self.columns.count;
+    
     //left way
     for (int i=currentX-1; i>=0; i--) {
         Entity *orb = [self orbAtPosition:ccp(i,currentY)];
@@ -187,7 +191,7 @@
     }
     
     //right way
-    for (int i=currentX; i<kOrbBoardColumns; i++) {
+    for (int i=currentX; i<currentColumns; i++) {
         Entity *orb = [self orbAtPosition:ccp(i,currentY)];
         OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
         if (orbCom.type == currentOrbCom.type) {
@@ -223,31 +227,53 @@
     
     if (matchXArray.count >=3) {
         [matchArray addObjectsFromArray:matchXArray];
+        for (int i=0; i<currentColumns; i++) {
+            Entity *orb = [self orbAtPosition:ccp(i,currentY)];
+            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+            if (orbCom.type == OrbPurple) {
+                [self cleanOrb:orb];
+            }
+        }
     }
     if (matchYArray.count >=3) {
         [matchArray addObjectsFromArray:matchYArray];
+        for (int j=0; j<kOrbBoardRows; j++) {
+            Entity *orb = [self orbAtPosition:ccp(currentX,j)];
+            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+            if (orbCom.type == OrbPurple) {
+                [self cleanOrb:orb];
+            }
+        }
     }
     
     return matchArray;
 }
 
+-(void)cleanOrb:(Entity *)orb {
+    RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+    [orbRenderCom.sprite runAction:
+     [CCSequence actions:
+      [CCFadeOut actionWithDuration:0.5f],
+      [CCCallBlock actionWithBlock:^{
+         [orbRenderCom.node setVisible:NO];
+     }],nil]];
+    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+    orbCom.type = OrbNull;
+    [orb removeComponent:[TouchComponent name]];
+
+}
+
 -(void)matchClean:(NSArray *)matchArray {
     combos++;
+    PlayerComponent *playerCom = (PlayerComponent *)[self.player getComponentOfName:[PlayerComponent name]];
+    playerCom.mana += kManaForEachCombo * combos;
+    
     // only test
     combosOrbSum = matchArray.count;
     
     [self showCombos];
     for (Entity *orb in matchArray) {
-        RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-        [orbRenderCom.sprite runAction:
-         [CCSequence actions:
-          [CCFadeOut actionWithDuration:0.5f],
-          [CCCallBlock actionWithBlock:^{
-             [orbRenderCom.node setVisible:NO];
-         }],nil]];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        orbCom.type = OrbNull;
-        [orb removeComponent:[TouchComponent name]];
+        [self cleanOrb:orb];
     }
 }
 

@@ -98,6 +98,11 @@
 #define kOrbBoradLeftMargin 30
 #define kOrbBoradDownMargin 20
 
+// player mana's bar
+#define kManaBarFullValue 200
+#define kManaForEachCombo 25
+#define kManaForEachEnemyOrb 100
+
 typedef enum {
     kAnimationTypeUniqueCharacter,
     kAnimationTypeNormalCharacter,
@@ -162,7 +167,7 @@ typedef enum {
     OrbBlue,
     OrbGreen,
     OrbYellow,
-//    OrbPurple,
+    OrbPurple,
 //    OrbPink,
     OrbBottom
 } OrbType;

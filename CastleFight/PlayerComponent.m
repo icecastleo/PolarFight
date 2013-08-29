@@ -42,4 +42,12 @@
     }
 }
 
+-(void)setManaRate:(float)manaRate {
+    if (manaRate > _maxManaRate) {
+        _manaRate = _maxManaRate;
+    } else {
+        _manaRate = manaRate;
+    }
+}
+
 @end

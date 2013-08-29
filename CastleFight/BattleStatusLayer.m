@@ -22,11 +22,13 @@
 
 @interface BattleStatusLayer() {
     PlayerComponent *player;
+    PlayerComponent *enemyPlayer;
     
     float playTime;
     
     CCLabelBMFont *food;
     CCLabelBMFont *mana;
+    CCLabelBMFont *enemyMana;
     
     CCLabelBMFont *timeLabel;
     NSMutableArray *unitItems;
@@ -42,7 +44,9 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ingame.plist"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
         
-        player = (PlayerComponent *)[battleController.userPlayer getComponentOfName:[PlayerComponent name]];;
+        player = (PlayerComponent *)[battleController.userPlayer getComponentOfName:[PlayerComponent name]];
+        enemyPlayer = (PlayerComponent *)[battleController.enemyPlayer getComponentOfName:[PlayerComponent name]];
+        
         playTime = 0;
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -93,13 +97,22 @@
 //        food.color = ccGOLD;
 //        [self addChild:food];
 //        
-//        //mana
-//        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
-//        mana.anchorPoint = ccp(1, 0.5);
-//        mana.scale = 0.5;
-//        mana.position = ccp(resource.boundingBox.size.width - 10, winSize.height - resource.boundingBox.size.height / 4 * 3-20);
-//        mana.color = ccBLUEVIOLET;
-//        [self addChild:mana];
+        // player's mana
+        mana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)player.mana] fntFile:@"font/jungle_24_o.fnt"];
+        mana.anchorPoint = ccp(1, 0.5);
+        mana.scale = 0.5;
+        mana.position = ccp(winSize.width/4, timeLabel.position.y);
+        mana.color = ccBLUEVIOLET;
+        [self addChild:mana];
+        
+        // enemyPlayer's mana
+        enemyMana = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", (int)enemyPlayer.mana] fntFile:@"font/jungle_24_o.fnt"];
+        enemyMana.anchorPoint = ccp(1, 0.5);
+        enemyMana.scale = 0.5;
+        enemyMana.position = ccp(winSize.width*3/4, timeLabel.position.y);
+        enemyMana.color = ccBLUEVIOLET;
+        [self addChild:enemyMana];
+        
         
 //        [self setUnitBoard];
         [self setPauseButton];
@@ -205,7 +218,8 @@
     [timeLabel setString:[NSString stringWithFormat:@"%2d:%02d", (int)playTime/60, (int)playTime%60]];
     
 //    [food setString:[NSString stringWithFormat:@"%d", (int)player.food]];
-//    [mana setString:[NSString stringWithFormat:@"%d", (int)player.mana]];
+    [mana setString:[NSString stringWithFormat:@"%d", (int)player.mana]];
+    [enemyMana setString:[NSString stringWithFormat:@"%d", (int)enemyPlayer.mana]];
 }
 
 -(void)displayString:(NSString *)string withColor:(ccColor3B)color {

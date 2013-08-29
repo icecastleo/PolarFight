@@ -14,10 +14,12 @@
 
 @property (readonly) NSMutableArray *columns;
 
-@property (nonatomic,readonly) Entity *owner; //player
+@property (nonatomic,readonly) Entity *player; //player
+@property (nonatomic,readonly) Entity *aiPlayer;
+
 @property (nonatomic,readonly) EntityFactory *entityFactory;
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory owner:(Entity *)player BattleData:(BattleDataObject *)battleData;
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory player:(Entity *)player aiPlayer:(Entity *)aiPlayer BattleData:(BattleDataObject *)battleData ;
 
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 

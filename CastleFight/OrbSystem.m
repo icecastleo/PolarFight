@@ -9,6 +9,7 @@
 #import "OrbSystem.h"
 #import "OrbBoardComponent.h"
 #import "OrbComponent.h"
+#import "PlayerComponent.h"
 #import "RenderComponent.h"
 
 @interface OrbSystem () {
@@ -42,7 +43,12 @@
             if (board.columns.count == maxColumns) {
                 for (Entity *orb in [board.columns objectAtIndex:0]) {
                     RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-                    
+                    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                    if (orbCom.type == OrbPurple) {
+                        PlayerComponent *enemyPlayerCom = (PlayerComponent *)[board.aiPlayer getComponentOfName:[PlayerComponent name]];
+                        enemyPlayerCom.mana += kManaForEachEnemyOrb;
+                        CCLOG(@"add AI player mana!");
+                    }
                     [render.sprite runAction:
                      [CCSequence actions:
                       [CCFadeOut actionWithDuration:0.5f],

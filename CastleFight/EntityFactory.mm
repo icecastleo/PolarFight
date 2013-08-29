@@ -224,9 +224,9 @@
         
         [entity addComponent:[[TouchComponent alloc] initWithDictionary:[characterData objectForKey:@"TouchComponent"]]];
         
-        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
-        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
-        [entity addComponent:pathCom];
+//        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
+//        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
+//        [entity addComponent:pathCom];
     }
     
     // TODO: Set AI for different character
@@ -487,7 +487,7 @@
     return entity;
 }
 
--(Entity *)createOrbBoardWithOwner:(Entity *)owner andBattleData:(BattleDataObject *)battleData {
+-(Entity *)createOrbBoardWithUser:(Entity *)player AIPlayer:(Entity *)aiPlayer andBattleData:(BattleDataObject *)battleData {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
@@ -498,7 +498,7 @@
     
     sprite.opacity = 0;
     
-    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self owner:owner BattleData:battleData];
+    OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self player:player aiPlayer:aiPlayer BattleData:battleData];
     [entity addComponent:orbBoardCom];
     
     return entity;

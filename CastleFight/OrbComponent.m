@@ -44,7 +44,7 @@
 }
 
 -(void)executeMatch:(int)number {
-    PlayerComponent *playerCom = (PlayerComponent *)[self.board.owner getComponentOfName:[PlayerComponent name]];
+    PlayerComponent *playerCom = (PlayerComponent *)[self.board.player getComponentOfName:[PlayerComponent name]];
     
     NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
     [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:@"SummonData"];

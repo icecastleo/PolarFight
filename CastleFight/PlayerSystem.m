@@ -36,6 +36,19 @@
             player.mana += player.manaRate;
         }
         
+        if (player.mana > kManaBarFullValue) {
+            TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
+            if (team.team == 1) {
+                //user
+                CCLOG(@"Mana > 200! Summon Hero");
+            } else {
+                CCLOG(@"Mana > 200! Summon Boss");
+            }
+            player.mana -= kManaBarFullValue;
+            [self.entityFactory createCharacter:@"203" level:10 forTeam:team.team addToMap:YES];
+            
+        }
+        
         NSMutableArray *summonComponents = [[NSMutableArray alloc] init];
         // Summon entities
 //        NSMutableArray *summonComponents = player.summonComponents;
