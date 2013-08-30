@@ -64,11 +64,19 @@
 
             NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
             for (int row = 0; row < kOrbBoardRows; row++) {
-                
                 // create orb!
                 OrbType type = [[nextColumn objectAtIndex:row] intValue];
                 
-                Entity *orb = [self.entityFactory createOrb:type row:row];
+                Entity *orb = [self.entityFactory createOrb:type];
+                RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+                
+                if (board.columns.count == 0) {
+                    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
+                } else {
+                    Entity *lastEntity = [[board.columns lastObject] objectAtIndex:row];
+                    RenderComponent *lastEntityRender = (RenderComponent *)[lastEntity getComponentOfName:[RenderComponent name]];
+                    render.node.position = ccp(lastEntityRender.position.x + kOrbWidth, lastEntityRender.position.y);
+                }
             
                 OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
                 orbCom.board = board;

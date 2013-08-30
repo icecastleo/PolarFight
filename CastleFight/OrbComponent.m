@@ -64,6 +64,7 @@ static int kTouchOrbOpacity = 0.6 * 255;
         [(CCSprite *)render.sprite setOpacity:tempOpacity];
         
         [touchSprite removeFromParentAndCleanup:YES];
+        touchSprite = nil;
     }
 }
 
@@ -72,6 +73,14 @@ static int kTouchOrbOpacity = 0.6 * 255;
     if (matchArray.count >= 3) {
         [self executeMatch:matchArray.count];
         [self.board matchClean:matchArray];
+    }
+}
+
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEntityEventRemoveComponent) {
+        if (touchSprite) {
+            [touchSprite removeFromParentAndCleanup:YES];
+        }
     }
 }
 

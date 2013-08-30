@@ -117,18 +117,13 @@
             continue;
         }
         
-        Entity *entityB = [self orbAtPosition:orbPositionB];
-        RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
-        
-        OrbComponent *orbComponentB = (OrbComponent *)[entityB getComponentOfName:[OrbComponent name]];
-        
-        // Block
-        if (orbComponentB.type != OrbNull) {
-            break;
-        }
+//        CCLOG(@"Position : %@ -> %@", NSStringFromCGPoint(renderA.node.position), NSStringFromCGPoint(position));
+//        CCLOG(@"Orb Position : %@ -> %@", NSStringFromCGPoint(orbPositionA), NSStringFromCGPoint(orbPositionB));
         
         // Block inclined move
         if (ccpDistance(orbPositionA, orbPositionB) > 1) {
+            NSAssert(ccpDistance(orbPositionA, orbPositionB) < 2, @"It should be square root of 2!");
+            
             Entity *orb1 = [self orbAtPosition:ccp(orbPositionA.x, orbPositionB.y)];
             Entity *orb2 = [self orbAtPosition:ccp(orbPositionB.x, orbPositionA.y)];
             
@@ -139,6 +134,19 @@
                 break;
             }
         }
+        
+        Entity *entityB = [self orbAtPosition:orbPositionB];
+        RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
+
+        OrbComponent *orbComponentB = (OrbComponent *)[entityB getComponentOfName:[OrbComponent name]];
+        
+        // Block
+        if (orbComponentB.type != OrbNull) {
+            break;
+        }
+                        
+//        CCLOG(@"%f %f && %f %f",orbPositionA.x, orbPositionA.y, orbPositionB.x, orbPositionB.y);
+//        CCLOG(@"%@ && %@",entityA , entityB);
         
         // Change orb
         CGPoint temp = renderB.node.position;
@@ -154,7 +162,7 @@
     int x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - (kOrbBoardColumns - _columns.count));
     int y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
     
-    //    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
+//    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
     
     return ccp(x, y);
 }

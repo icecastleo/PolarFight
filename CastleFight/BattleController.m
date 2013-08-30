@@ -122,7 +122,7 @@ __weak static BattleController* currentInstance;
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
     
     //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"]; 
 }
 
 -(void)onExit {

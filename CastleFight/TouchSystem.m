@@ -29,7 +29,7 @@ typedef enum {
     TouchState state;
     BOOL isMove;
     BOOL isPan;
-    
+
     float touchPressTime;
 }
 
@@ -84,21 +84,18 @@ typedef enum {
         }
         
     } else if (state == kTouchStateMoved && isPan) {
-        [self handlePan];
+        [self handlePan:kPanStateMoved];
     }
 }
 
 -(void)handleLongPress {
     if (touchedEntity) {
+        state = kTouchStateMoved;
+        
+        isMove = YES;
         isPan = YES;
         
-        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-        
-        if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-            [touchCom.delegate handlePan:kPanStateBegan positions:touchPositions];
-        }
-        
-        state = kTouchStateMoved;
+        [self handlePan:kPanStateBegan];
     }
 }
 
@@ -114,6 +111,7 @@ typedef enum {
     touchPressTime = 0;
     isMove = NO;
     isPan = NO;
+
     touchedEntity = nil;
     touchPositions = [[NSMutableArray alloc] init];
     
@@ -142,46 +140,44 @@ typedef enum {
 }
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    state = kTouchStateMoved;
-    
-    isMove = YES;
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     [touchPositions addObject:[NSValue valueWithCGPoint:touchLocation]];
     
+    if (isMove == NO) {
+        CGPoint previousTouchLocation = [touch previousLocationInView:[touch view]];
+        previousTouchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
+        
+        if (ccpDistance(touchLocation, previousTouchLocation) >= kTouchSystemMinimumMoveDistance || touchPositions.count > 2) {
+            state = kTouchStateMoved;
+            isMove = YES;
+        } else {
+            // isMove == NO
+            return;
+        }
+    }
+    
     if (touchedEntity == nil) {
         // TODO: Move map here!
         return;
     } else {
         if (isPan == NO) {
-            CGPoint previousTouchLocation = [touch previousLocationInView:[touch view]];
-            previousTouchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];
-            
-            if (ccpDistance(touchLocation, previousTouchLocation) >= kTouchSystemPanDistance || touchPositions.count > 2) {
-                isPan = YES;
-                
-                TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-                
-                if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-                    [touchCom.delegate handlePan:kPanStateBegan positions:touchPositions];
-                }
-            }
-        } else {
-            //    [self handlePan];
+            isPan = YES;
+            [self handlePan:kPanStateBegan];
         }
     }
 }
 
--(void)handlePan {
+-(void)handlePan:(PanState)panState {
     if (touchedEntity == selectedEntity) {
         // Maybe we can force the pan event only handled by select entity!
     } else {
         TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
         
         if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-            [touchCom.delegate handlePan:kPanStateMoved positions:touchPositions];
+            [touchCom.delegate handlePan:panState positions:touchPositions];
         }
     }
 }
@@ -194,7 +190,11 @@ typedef enum {
     
     // End location will be the same as the last move location, so we don't add it to pan path!
     
-    if (isMove == NO) {
+    if (isMove) {
+        if (isPan) {
+            [self handlePan:kPanStateEnded];
+        }
+    } else {
         if (touchedEntity == nil) {
             // User doesn't touch anything!
             // Cancel selected entity or do something on selected entity !
@@ -235,14 +235,6 @@ typedef enum {
                 if ([touchCom.delegate respondsToSelector:@selector(handleTap)]) {
                     [touchCom.delegate handleTap];
                 }
-            }
-        }
-    } else {
-        if (isPan) {
-            TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
-            
-            if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
-                [touchCom.delegate handlePan:kPanStateEnded positions:touchPositions];
             }
         }
     }

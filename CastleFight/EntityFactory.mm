@@ -449,21 +449,24 @@
     return entity;
 }
 
--(Entity *)createOrb:(OrbType)type row:(int)row {
+-(Entity *)createOrb:(OrbType)type {
     Entity *entity = [_entityManager createEntity];
     
     NSString *cid = [NSString stringWithFormat:@"100%d",type];
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    
+    CCSprite *sprite;
+    
     NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
-    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    if (renderDic) {
+        sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    } else {
+        sprite = [[CCSprite alloc] init];
+    }
+    
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-        
-    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
     render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
     render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
-    if(type == OrbNull){
-        [render.node setVisible:NO];
-    }
         
     [entity addComponent:render];
     

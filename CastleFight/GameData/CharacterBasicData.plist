@@ -2776,11 +2776,6 @@
 	</dict>
 	<key>1000</key>
 	<dict>
-		<key>RenderComponent</key>
-		<dict>
-			<key>sprite</key>
-			<string>red.png</string>
-		</dict>
 		<key>OrbComponent</key>
 		<dict>
 			<key>3</key>

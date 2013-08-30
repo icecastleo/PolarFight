@@ -24,7 +24,7 @@
 #define kPhisicalDebugDraw 0
 
 #define kTouchSystemSortEntities 0
-#define kTouchSystemPanDistance 10
+#define kTouchSystemMinimumMoveDistance 10
 #define kTouchSystemLongPressTime 0.25
 
 //For SummonType
@@ -92,11 +92,11 @@
 #define kOrbHeight 40
 #define kOrbSpeed 30
 
-#define kOrbBoardRows 4
-#define kOrbBoardColumns (int)([CCDirector sharedDirector].winSize.width / kOrbWidth + 2)
-
 #define kOrbBoradLeftMargin 30
 #define kOrbBoradDownMargin 20
+
+#define kOrbBoardRows 4
+#define kOrbBoardColumns (int)(([CCDirector sharedDirector].winSize.width - kOrbBoradLeftMargin) / kOrbWidth + 1)
 
 // player mana's bar
 #define kManaBarFullValue 200
