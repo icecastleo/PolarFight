@@ -465,10 +465,33 @@
     }
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
-    render.sprite.scaleX = kOrbWidth/render.sprite.boundingBox.size.width;
-    render.sprite.scaleY = kOrbHeight/render.sprite.boundingBox.size.height;
-        
+    render.sprite.scale = kOrbWidth/render.sprite.boundingBox.size.width;
     [entity addComponent:render];
+    
+    
+    // FIXME: Link with User data's battle team
+    NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:[NSString stringWithFormat:@"00%d",type]];
+    NSString *name = [cData objectForKey:@"name"];
+    
+    if (name) {
+        NSString *spriteFrameName = nil;
+        
+        if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
+            spriteFrameName = [NSString stringWithFormat:@"%@_move_01.png", name];
+        } else {
+            spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
+        }
+        
+        CCSprite *character = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+        character.position = ccpSub(ccp(sprite.contentSize.width/2, sprite.contentSize.height/2), character.offsetPosition);
+        
+        if (character.boundingBox.size.width > character.boundingBox.size.height) {
+            character.scale = kOrbWidth/character.boundingBox.size.width/render.sprite.scale*0.75;
+        } else {
+            character.scale = kOrbHeight/character.boundingBox.size.height/render.sprite.scale*0.75;
+        }
+        [sprite addChild:character];
+    }
     
     NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
     OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
