@@ -29,8 +29,6 @@
 		370243DE17903FC7008267A8 /* spineboy.json in Resources */ = {isa = PBXBuildFile; fileRef = 370243D817903FC7008267A8 /* spineboy.json */; };
 		370243DF17903FC7008267A8 /* spineboy.png in Resources */ = {isa = PBXBuildFile; fileRef = 370243D917903FC7008267A8 /* spineboy.png */; };
 		370243E217903FE1008267A8 /* ExampleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 370243E117903FE1008267A8 /* ExampleLayer.m */; };
-		37062FCF17D5E1EF00AD3B0C /* explosion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37062FCD17D5E1EF00AD3B0C /* explosion@2x.png */; };
-		37062FD017D5E1EF00AD3B0C /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 37062FCE17D5E1EF00AD3B0C /* explosion.png */; };
 		370C938A176F333900A6990D /* DrawPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 370C9389176F333900A6990D /* DrawPath.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
 		3725262416EF684500C79A9E /* standard-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261C16EF684500C79A9E /* standard-black-button.png */; };
@@ -452,6 +450,8 @@
 		9BA6EA5F17D5E42300E6E862 /* b33.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA5517D5E42300E6E862 /* b33.png */; };
 		9BA6EA6017D5E42300E6E862 /* b44.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA5617D5E42300E6E862 /* b44.png */; };
 		9BA6EA6117D5E42300E6E862 /* b55.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA5717D5E42300E6E862 /* b55.png */; };
+		9BA6EA7017D5E76700E6E862 /* explosion-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA6E17D5E76700E6E862 /* explosion-hd.png */; };
+		9BA6EA7117D5E76700E6E862 /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA6F17D5E76700E6E862 /* explosion.png */; };
 		9BAF5B0117060B8500945271 /* StageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B0017060B8500945271 /* StageMenuItem.m */; };
 		9BAF5B04170610CB00945271 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B03170610CB00945271 /* StageLayer.m */; };
 		9BAF5B0A1709764A00945271 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAF5B091709764A00945271 /* MainScene.m */; };
@@ -617,8 +617,6 @@
 		370243D917903FC7008267A8 /* spineboy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spineboy.png; sourceTree = "<group>"; };
 		370243E017903FE1008267A8 /* ExampleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleLayer.h; sourceTree = "<group>"; };
 		370243E117903FE1008267A8 /* ExampleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleLayer.m; sourceTree = "<group>"; };
-		37062FCD17D5E1EF00AD3B0C /* explosion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explosion@2x.png"; sourceTree = "<group>"; };
-		37062FCE17D5E1EF00AD3B0C /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
 		370C9388176F333900A6990D /* DrawPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPath.h; sourceTree = "<group>"; };
 		370C9389176F333900A6990D /* DrawPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPath.m; sourceTree = "<group>"; };
 		3725261B16EF684500C79A9E /* standard-black-button-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-black-button-1.png"; sourceTree = "<group>"; };
@@ -1379,6 +1377,8 @@
 		9BA6EA5517D5E42300E6E862 /* b33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b33.png; sourceTree = "<group>"; };
 		9BA6EA5617D5E42300E6E862 /* b44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b44.png; sourceTree = "<group>"; };
 		9BA6EA5717D5E42300E6E862 /* b55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b55.png; sourceTree = "<group>"; };
+		9BA6EA6E17D5E76700E6E862 /* explosion-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explosion-hd.png"; sourceTree = "<group>"; };
+		9BA6EA6F17D5E76700E6E862 /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
 		9BAF5AFF17060B8500945271 /* StageMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageMenuItem.h; sourceTree = "<group>"; };
 		9BAF5B0017060B8500945271 /* StageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageMenuItem.m; sourceTree = "<group>"; };
 		9BAF5B02170610CA00945271 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
@@ -1720,25 +1720,6 @@
 				2DDDD14616FB050A00CBA47F /* EnemyAIData.m */,
 			);
 			name = AI;
-			sourceTree = "<group>";
-		};
-		37020EBF17BBB53F0063A4BB /* Orbs */ = {
-			isa = PBXGroup;
-			children = (
-				37062FCD17D5E1EF00AD3B0C /* explosion@2x.png */,
-				37062FCE17D5E1EF00AD3B0C /* explosion.png */,
-				9BA6EA3B17D5DEFF00E6E862 /* b1.png */,
-				9BA6EA3C17D5DEFF00E6E862 /* b2.png */,
-				9BA6EA3D17D5DEFF00E6E862 /* b3.png */,
-				9BA6EA3E17D5DEFF00E6E862 /* b4.png */,
-				9BA6EA3F17D5DEFF00E6E862 /* b5.png */,
-				9BA6EA4017D5DEFF00E6E862 /* b11.png */,
-				9BA6EA4117D5DEFF00E6E862 /* b22.png */,
-				9BA6EA4217D5DEFF00E6E862 /* b33.png */,
-				9BA6EA4317D5DEFF00E6E862 /* b44.png */,
-			);
-			name = Orbs;
-			path = orbs;
 			sourceTree = "<group>";
 		};
 		3702439017903DF0008267A8 /* spine */ = {
@@ -2902,6 +2883,8 @@
 				9BA6EA5517D5E42300E6E862 /* b33.png */,
 				9BA6EA5617D5E42300E6E862 /* b44.png */,
 				9BA6EA5717D5E42300E6E862 /* b55.png */,
+				9BA6EA6F17D5E76700E6E862 /* explosion.png */,
+				9BA6EA6E17D5E76700E6E862 /* explosion-hd.png */,
 			);
 			path = Orbs;
 			sourceTree = "<group>";
@@ -3569,8 +3552,8 @@
 				9BA6EA5F17D5E42300E6E862 /* b33.png in Resources */,
 				9BA6EA6017D5E42300E6E862 /* b44.png in Resources */,
 				9BA6EA6117D5E42300E6E862 /* b55.png in Resources */,
-				37062FCF17D5E1EF00AD3B0C /* explosion@2x.png in Resources */,
-				37062FD017D5E1EF00AD3B0C /* explosion.png in Resources */,
+				9BA6EA7017D5E76700E6E862 /* explosion-hd.png in Resources */,
+				9BA6EA7117D5E76700E6E862 /* explosion.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
