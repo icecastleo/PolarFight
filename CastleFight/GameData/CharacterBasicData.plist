@@ -2820,7 +2820,7 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>red.png</string>
+			<string>b1.png</string>
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
@@ -2866,7 +2866,7 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>blue.png</string>
+			<string>b2.png</string>
 		</dict>
 	</dict>
 	<key>1003</key>
@@ -2885,7 +2885,7 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>green.png</string>
+			<string>b3.png</string>
 		</dict>
 	</dict>
 	<key>1004</key>
@@ -2904,7 +2904,7 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>yellow.png</string>
+			<string>b4.png</string>
 		</dict>
 	</dict>
 	<key>1005</key>
@@ -2923,7 +2923,7 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>purple.png</string>
+			<string>b5.png</string>
 		</dict>
 	</dict>
 	<key>1006</key>

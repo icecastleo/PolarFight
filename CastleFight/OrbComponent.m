@@ -87,7 +87,7 @@ static int kTouchOrbOpacity = 0.6 * 255;
     PlayerComponent *playerCom = (PlayerComponent *)[self.board.player getComponentOfName:[PlayerComponent name]];
     
     NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
-    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type] forKey:@"SummonData"];
+    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type-1] forKey:@"SummonData"];
     
     int addLevel = 0;
     switch (number) {
