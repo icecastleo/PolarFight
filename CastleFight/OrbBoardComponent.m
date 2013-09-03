@@ -326,7 +326,10 @@ typedef enum {
         return matchArray;
     }
     
-    [self matchClean:matchArray];
+    for (Entity *orb in matchArray) {
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        orbCom.type = OrbNull;
+    }
     
     NSMutableArray *otherMatchArray = [[NSMutableArray alloc] init];
     for (NSNumber *way in wayArray) {
@@ -336,12 +339,11 @@ typedef enum {
     
     [self performSelector:@selector(bombOrb:) withObject:otherMatchArray afterDelay:kOrbBombDelay];
     
-    for (NSArray *array in otherMatchArray) {
-        [matchArray addObjectsFromArray:array];
-    }
+//    for (NSArray *array in otherMatchArray) {
+//        [matchArray addObjectsFromArray:array];
+//    }
     
-    combosOrbSum = matchArray.count;
-    [self showCombos];
+    currentOrbCom.type = searchType;
     
     return matchArray;
 }
@@ -373,7 +375,6 @@ typedef enum {
     
     [orbRenderCom.sprite runAction:
      [CCSequence actions:
-        [CCScaleTo actionWithDuration:0.1 scaleX:1.1 scaleY:1.1],
         spawn,
         fadeOut,
         [CCCallBlock actionWithBlock:^{
@@ -392,6 +393,10 @@ typedef enum {
     combos++;
     PlayerComponent *playerCom = (PlayerComponent *)[self.player getComponentOfName:[PlayerComponent name]];
     playerCom.mana += kManaForEachCombo * combos;
+    
+    combosOrbSum = matchArray.count;
+    
+    [self showCombos];
     
     for (Entity *orb in matchArray) {
         [self cleanOrb:orb];
