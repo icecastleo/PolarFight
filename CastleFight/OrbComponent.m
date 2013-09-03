@@ -72,7 +72,6 @@ static int kTouchOrbOpacity = 0.6 * 255;
     NSArray *matchArray = [self.board findMatchForOrb:self.entity];
     if (matchArray.count >= 3) {
         [self executeMatch:matchArray.count];
-        [self.board matchClean:matchArray];
     }
 }
 

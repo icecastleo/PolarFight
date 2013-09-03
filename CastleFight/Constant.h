@@ -97,6 +97,7 @@
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)(([CCDirector sharedDirector].winSize.width - kOrbBoradLeftMargin) / kOrbWidth + 1)
+#define kOrbBombDelay 0.1
 
 // player mana's bar
 #define kManaBarFullValue 200
