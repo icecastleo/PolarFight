@@ -16,6 +16,13 @@
 #import "BattleDataObject.h"
 #import "cocos2d.h"
 
+typedef enum {
+    kUp = 0,
+    kLeft,
+    kDown,
+    kRight
+} MatchWay;
+
 @interface OrbBoardComponent() {
     int combos;
     int combosOrbSum; // only for test
@@ -168,7 +175,94 @@
 }
 
 -(Entity *)orbAtPosition:(CGPoint)position {
-    return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
+    if (position.x >= 0 && position.x < self.columns.count && position.y >= 0 && position.y < kOrbBoardRows) {
+        return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
+    }
+    return nil;
+}
+
+-(NSArray *)searchOrbFromPosition:(CGPoint)position Way:(MatchWay)way OrbType:(OrbType)type {
+    
+    int currentColumns = self.columns.count;
+    int currentX = position.x;
+    int currentY = position.y;
+    
+    NSMutableArray *matchArray = [[NSMutableArray alloc] init];
+    
+    switch (way) {
+        case kUp:
+            for (int j=currentY+1; j<kOrbBoardRows; j++) {
+                Entity *orb = [self orbAtPosition:ccp(currentX,j)];
+                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                if (orbCom.type == type) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(currentX,j) Way:kLeft OrbType:type]];
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(currentX,j) Way:kRight OrbType:type]];
+                    [matchArray addObject:orb];
+                    break;
+                }else if(orbCom.type == OrbPurple) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObject:orb];
+                    break;
+                }
+            }
+            break;
+        case kLeft:
+            for (int i=currentX-1; i>=0; i--) {
+                Entity *orb = [self orbAtPosition:ccp(i,currentY)];
+                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                if (orbCom.type == type) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(i,currentY) Way:kUp OrbType:type]];
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(i,currentY) Way:kDown OrbType:type]];
+                    [matchArray addObject:orb];
+                    break;
+                }else if(orbCom.type == OrbPurple) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObject:orb];
+                    break;
+                }
+            }
+            break;
+        case kDown:
+            for (int j=currentY-1; j>=0; j--) {
+                Entity *orb = [self orbAtPosition:ccp(currentX,j)];
+                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                if (orbCom.type == type) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(currentX,j) Way:kLeft OrbType:type]];
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(currentX,j) Way:kRight OrbType:type]];
+                    [matchArray addObject:orb];
+                    break;
+                }else if(orbCom.type == OrbPurple) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObject:orb];
+                    break;
+                }
+            }
+            break;
+        case kRight:
+            for (int i=currentX+1; i<currentColumns; i++) {
+                Entity *orb = [self orbAtPosition:ccp(i,currentY)];
+                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                if (orbCom.type == type) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(i,currentY) Way:kUp OrbType:type]];
+                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:ccp(i,currentY) Way:kDown OrbType:type]];
+                    [matchArray addObject:orb];
+                    break;
+                }else if(orbCom.type == OrbPurple) {
+                    orbCom.type = OrbNull;
+                    [matchArray addObject:orb];
+                    break;
+                }
+            }
+            break;
+        default:
+            return nil;
+    }
+    
+    return matchArray;
 }
 
 -(NSArray *)findMatchForOrb:(Entity *)currentOrb {
@@ -179,95 +273,118 @@
     if (currentOrbCom.type == OrbNull || currentOrbCom.type == OrbPurple) {
         return nil;
     }
-    NSMutableArray *matchXArray = [[NSMutableArray alloc] init];
-    NSMutableArray *matchYArray = [[NSMutableArray alloc] init];
     
     CGPoint currentOrbPosition = [self convertRenderPositionToOrbPosition:currentRenderCom.node.position];
     int currentX = currentOrbPosition.x;
     int currentY = currentOrbPosition.y;
-    int currentColumns = self.columns.count;
     
-    //left way
-    for (int i=currentX-1; i>=0; i--) {
-        Entity *orb = [self orbAtPosition:ccp(i,currentY)];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.type == currentOrbCom.type) {
-            [matchXArray addObject:orb];
-        }else {
-            break;
-        }
-    }
+    Entity *upOrb = [self orbAtPosition:ccp(currentX,currentY+1)];
+    Entity *leftOrb = [self orbAtPosition:ccp(currentX-1,currentY)];
+    Entity *downOrb = [self orbAtPosition:ccp(currentX,currentY-1)];
+    Entity *rightOrb = [self orbAtPosition:ccp(currentX+1,currentY)];
     
-    //right way
-    for (int i=currentX; i<currentColumns; i++) {
-        Entity *orb = [self orbAtPosition:ccp(i,currentY)];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.type == currentOrbCom.type) {
-            [matchXArray addObject:orb];
-        }else {
-            break;
-        }
-    }
-    
-    //up way
-    for (int j=currentY; j<kOrbBoardRows; j++) {
-        Entity *orb = [self orbAtPosition:ccp(currentX,j)];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.type == currentOrbCom.type) {
-            [matchYArray addObject:orb];
-        }else {
-            break;
-        }
-    }
-    
-    //down way
-    for (int j=currentY-1; j>=0; j--) {
-        Entity *orb = [self orbAtPosition:ccp(currentX,j)];
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        if (orbCom.type == currentOrbCom.type) {
-            [matchYArray addObject:orb];
-        }else {
-            break;
-        }
-    }
+    OrbType searchType = currentOrbCom.type;
     
     NSMutableArray *matchArray = [[NSMutableArray alloc] init];
+    [matchArray addObject:currentOrb];
+    NSMutableArray *wayArray = [[NSMutableArray alloc] init];
     
-    if (matchXArray.count >=3) {
-        [matchArray addObjectsFromArray:matchXArray];
-        for (int i=0; i<currentColumns; i++) {
-            Entity *orb = [self orbAtPosition:ccp(i,currentY)];
-            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-            if (orbCom.type == OrbPurple) {
-                [self cleanOrb:orb];
-            }
+    if (upOrb) {
+        OrbComponent *orbCom = (OrbComponent *)[upOrb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == searchType) {
+            [matchArray addObject:upOrb];
+            [wayArray addObject:[NSNumber numberWithInt:kUp]];
         }
     }
-    if (matchYArray.count >=3) {
-        [matchArray addObjectsFromArray:matchYArray];
-        for (int j=0; j<kOrbBoardRows; j++) {
-            Entity *orb = [self orbAtPosition:ccp(currentX,j)];
-            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-            if (orbCom.type == OrbPurple) {
-                [self cleanOrb:orb];
-            }
+    
+    if (leftOrb) {
+        OrbComponent *orbCom = (OrbComponent *)[leftOrb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == searchType) {
+            [matchArray addObject:leftOrb];
+            [wayArray addObject:[NSNumber numberWithInt:kLeft]];
         }
     }
+    
+    if (downOrb) {
+        OrbComponent *orbCom = (OrbComponent *)[downOrb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == searchType) {
+            [matchArray addObject:downOrb];
+            [wayArray addObject:[NSNumber numberWithInt:kDown]];
+        }
+    }
+    
+    if (rightOrb) {
+        OrbComponent *orbCom = (OrbComponent *)[rightOrb getComponentOfName:[OrbComponent name]];
+        if (orbCom.type == searchType) {
+            [matchArray addObject:rightOrb];
+            [wayArray addObject:[NSNumber numberWithInt:kRight]];
+        }
+    }
+    
+    if (wayArray.count < 2) {
+        [matchArray removeAllObjects];
+        return matchArray;
+    }
+    
+    [self matchClean:matchArray];
+    
+    NSMutableArray *otherMatchArray = [[NSMutableArray alloc] init];
+    for (NSNumber *way in wayArray) {
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[self searchOrbFromPosition:currentOrbPosition Way:way.intValue OrbType:searchType]];
+        [otherMatchArray addObject:array];
+    }
+    
+    [self performSelector:@selector(bombOrb:) withObject:otherMatchArray afterDelay:kOrbBombDelay];
+    
+    for (NSArray *array in otherMatchArray) {
+        [matchArray addObjectsFromArray:array];
+    }
+    
+    combosOrbSum = matchArray.count;
+    [self showCombos];
     
     return matchArray;
 }
 
+-(void)bombOrb:(NSMutableArray *)matchArray {
+    for (NSMutableArray *array in matchArray) {
+        Entity *orb = [array lastObject];
+        [self cleanOrb:orb];
+        [array removeLastObject];
+    }
+    [self performSelector:@selector(bombOrb:) withObject:matchArray afterDelay:kOrbBombDelay];
+}
+
 -(void)cleanOrb:(Entity *)orb {
+    
     RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+    
+    CCFadeOut *fadeOut = [CCFadeOut actionWithDuration:0];
+    
+    CCSpawn *spawn = [CCSpawn actions:[CCCallBlock actionWithBlock:^{
+        CCSprite *sprite = [CCSprite spriteWithFile:@"explosion.png"];
+        [orbRenderCom.node addChild:sprite];
+        [sprite runAction:[CCSequence actions:
+                           [CCScaleTo actionWithDuration:0.1 scaleX:2.0 scaleY:2.0],
+                           fadeOut,
+                           [CCCallBlock actionWithBlock:^{
+            [sprite removeFromParentAndCleanup:YES];}],nil]];
+    }],[CCScaleTo actionWithDuration:0.1 scaleX:0.1 scaleY:0.1], nil];
+    
     [orbRenderCom.sprite runAction:
      [CCSequence actions:
-      [CCFadeOut actionWithDuration:0.5f],
-      [CCCallBlock actionWithBlock:^{
+        [CCScaleTo actionWithDuration:0.1 scaleX:1.1 scaleY:1.1],
+        spawn,
+        fadeOut,
+        [CCCallBlock actionWithBlock:^{
          [orbRenderCom.node setVisible:NO];
      }],nil]];
+    
     OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
     orbCom.type = OrbNull;
-    [orb removeComponent:[TouchComponent name]];
+    if ([orb getComponentOfName:[TouchComponent name]]) {
+        [orb removeComponent:[TouchComponent name]];
+    }
 
 }
 
@@ -276,10 +393,6 @@
     PlayerComponent *playerCom = (PlayerComponent *)[self.player getComponentOfName:[PlayerComponent name]];
     playerCom.mana += kManaForEachCombo * combos;
     
-    // only test
-    combosOrbSum = matchArray.count;
-    
-    [self showCombos];
     for (Entity *orb in matchArray) {
         [self cleanOrb:orb];
     }
