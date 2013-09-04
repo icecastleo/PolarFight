@@ -516,13 +516,11 @@
 -(Entity *)createOrbBoardWithUser:(Entity *)player AIPlayer:(Entity *)aiPlayer andBattleData:(BattleDataObject *)battleData {
     Entity *entity = [_entityManager createEntity];
     
-    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:@"1010"];
-    NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
-    CCSprite *sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
+    CCSprite *sprite = [[CCSprite alloc] init];
     RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
     [entity addComponent:renderCom];
     
-    sprite.opacity = 0;
+//    sprite.opacity = 0;
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self player:player aiPlayer:aiPlayer BattleData:battleData];
     [entity addComponent:orbBoardCom];
