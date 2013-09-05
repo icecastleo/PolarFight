@@ -23,8 +23,8 @@
 
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
--(NSArray *)findMatchForOrb:(Entity *)currentOrb;
--(void)matchClean:(NSArray *)matchArray;
+-(NSDictionary *)findMatchForOrb:(Entity *)currentOrb;
+-(void)matchClean:(NSDictionary *)matchDic;
 
 -(NSArray *)nextColumn;
 

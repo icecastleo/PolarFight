@@ -97,7 +97,15 @@
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)(([CCDirector sharedDirector].winSize.width - kOrbBoradLeftMargin) / kOrbWidth + 1)
+
 #define kOrbBombDelay 0.1
+#define kOrbMainMatch @"main"
+#define kOrbOtherMatch @"other"
+#define kOrbEnemyMatch @"enemy"
+#define kOrbSameColorMatch @"sameColor"
+#define kOrbBombArray @"bombArray"
+
+#define kOrbMinMatchSum 3
 
 // player mana's bar
 #define kManaBarFullValue 200
@@ -165,13 +173,13 @@ typedef enum {
 typedef enum {
     OrbNull = 0,
     OrbRed,
-    OrbBlue,
     OrbGreen,
+    OrbBlue,
     OrbYellow,
     OrbPurple,
-//    OrbPink,
+    OrbGray,
     OrbBottom
-} OrbType;
+} OrbColor;
 
 #import "ccTypes.h"
 

@@ -33,12 +33,19 @@ static int kTouchOrbOpacity = 0.6 * 255;
 
 -(id)initWithDictionary:(NSDictionary *)dic {
     if (self = [super init]) {
-        _matchInfo = dic;
+        _originalColor = [[dic objectForKey:@"color"] intValue];
+        _color = _originalColor;
+        _isMovable = [[dic objectForKey:@"move"] boolValue];
+        _isTappable = [[dic objectForKey:@"tap"] boolValue];
+        _team = [[dic objectForKey:@"team"] intValue];
     }
     return self;
 }
 
 -(void)handlePan:(PanState)state positions:(NSArray *)positions {
+    if (!self.isMovable) {
+        return;
+    }
     if (state == kPanStateBegan) {
         RenderComponent *render = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
 
@@ -69,10 +76,20 @@ static int kTouchOrbOpacity = 0.6 * 255;
 }
 
 -(void)handleTap {
-    NSArray *matchArray = [self.board findMatchForOrb:self.entity];
-    if (matchArray.count >= 3) {
+    if (!self.isTappable) {
+        return;
+    }
+    NSDictionary *matchDic = [self.board findMatchForOrb:self.entity];
+    if (!matchDic) {
+        return;
+    }
+    
+    NSArray *matchArray = [matchDic objectForKey:kOrbMainMatch];
+    NSArray *sameColorOrbs = [matchDic objectForKey:kOrbSameColorMatch];
+    
+    if ((matchArray.count+sameColorOrbs.count) >= kOrbMinMatchSum) {
         [self executeMatch:matchArray.count];
-        [self.board matchClean:matchArray];
+        [self.board matchClean:matchDic];
     }
 }
 
@@ -85,10 +102,9 @@ static int kTouchOrbOpacity = 0.6 * 255;
 }
 
 -(void)executeMatch:(int)number {
-    PlayerComponent *playerCom = (PlayerComponent *)[self.board.player getComponentOfName:[PlayerComponent name]];
     
     NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
-    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type-1] forKey:@"SummonData"];
+    [magicInfo setValue:self.summonData forKey:@"SummonData"];
     
     int addLevel = 0;
     switch (number) {

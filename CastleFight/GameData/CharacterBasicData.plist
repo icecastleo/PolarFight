@@ -2778,30 +2778,14 @@
 	<dict>
 		<key>OrbComponent</key>
 		<dict>
-			<key>3</key>
-			<dict>
-				<key>magicName</key>
-				<string>Summon</string>
-				<key>summonData</key>
-				<dict>
-					<key>cid</key>
-					<string>001</string>
-					<key>level</key>
-					<string>1</string>
-				</dict>
-			</dict>
-			<key>5</key>
-			<dict>
-				<key>magicName</key>
-				<string>Summon</string>
-				<key>summonData</key>
-				<dict>
-					<key>cid</key>
-					<string>001</string>
-					<key>level</key>
-					<string>2</string>
-				</dict>
-			</dict>
+			<key>color</key>
+			<integer>0</integer>
+			<key>move</key>
+			<false/>
+			<key>tap</key>
+			<false/>
+			<key>summonIndex</key>
+			<integer>-1</integer>
 		</dict>
 	</dict>
 	<key>1001</key>
@@ -2824,30 +2808,16 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
-			<key>3</key>
-			<dict>
-				<key>magicName</key>
-				<string>Summon</string>
-				<key>summonData</key>
-				<dict>
-					<key>cid</key>
-					<string>001</string>
-					<key>level</key>
-					<string>1</string>
-				</dict>
-			</dict>
-			<key>5</key>
-			<dict>
-				<key>magicName</key>
-				<string>Summon</string>
-				<key>summonData</key>
-				<dict>
-					<key>cid</key>
-					<string>001</string>
-					<key>level</key>
-					<string>2</string>
-				</dict>
-			</dict>
+			<key>color</key>
+			<integer>1</integer>
+			<key>move</key>
+			<true/>
+			<key>tap</key>
+			<true/>
+			<key>summonIndex</key>
+			<integer>0</integer>
+			<key>team</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>1002</key>
@@ -2868,6 +2838,19 @@
 			<key>sprite</key>
 			<string>b2.png</string>
 		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>color</key>
+			<integer>2</integer>
+			<key>move</key>
+			<true/>
+			<key>tap</key>
+			<true/>
+			<key>summonIndex</key>
+			<integer>1</integer>
+			<key>team</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>1003</key>
 	<dict>
@@ -2886,6 +2869,19 @@
 		<dict>
 			<key>sprite</key>
 			<string>b3.png</string>
+		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>color</key>
+			<integer>3</integer>
+			<key>move</key>
+			<true/>
+			<key>tap</key>
+			<true/>
+			<key>summonIndex</key>
+			<integer>2</integer>
+			<key>team</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>1004</key>
@@ -2906,6 +2902,19 @@
 			<key>sprite</key>
 			<string>b4.png</string>
 		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>color</key>
+			<integer>4</integer>
+			<key>move</key>
+			<true/>
+			<key>tap</key>
+			<true/>
+			<key>summonIndex</key>
+			<integer>3</integer>
+			<key>team</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>1005</key>
 	<dict>
@@ -2925,24 +2934,39 @@
 			<key>sprite</key>
 			<string>b5.png</string>
 		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>color</key>
+			<integer>5</integer>
+			<key>move</key>
+			<true/>
+			<key>tap</key>
+			<true/>
+			<key>summonIndex</key>
+			<integer>4</integer>
+			<key>team</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>1006</key>
 	<dict>
-		<key>TouchComponent</key>
-		<dict>
-			<key>hasDragLine</key>
-			<false/>
-			<key>dragImage1</key>
-			<string>rangeFrame_1.png</string>
-			<key>dragImage2</key>
-			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
-			<string>gold_frame.png</string>
-		</dict>
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>pink.png</string>
+			<string>b10.png</string>
+		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>color</key>
+			<integer>6</integer>
+			<key>move</key>
+			<false/>
+			<key>tap</key>
+			<false/>
+			<key>summonIndex</key>
+			<integer>-1</integer>
+			<key>team</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>1010</key>
@@ -2950,7 +2974,18 @@
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
-			<string>board.png</string>
+			<string>b10.png</string>
+		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>move</key>
+			<false/>
+			<key>tap</key>
+			<false/>
+			<key>summonIndex</key>
+			<integer>-1</integer>
+			<key>team</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 </dict>

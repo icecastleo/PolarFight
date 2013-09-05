@@ -44,7 +44,7 @@
                 for (Entity *orb in [board.columns objectAtIndex:0]) {
                     RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                     OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                    if (orbCom.type == OrbPurple) {
+                    if (orbCom.team == 2) {
                         PlayerComponent *enemyPlayerCom = (PlayerComponent *)[board.aiPlayer getComponentOfName:[PlayerComponent name]];
                         enemyPlayerCom.mana += kManaForEachEnemyOrb;
                         CCLOG(@"add AI player mana!");
@@ -65,9 +65,7 @@
             NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
             for (int row = 0; row < kOrbBoardRows; row++) {
                 // create orb!
-                OrbType type = [[nextColumn objectAtIndex:row] intValue];
-                
-                Entity *orb = [self.entityFactory createOrb:type];
+                Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row] withPlayer:board.player];
                 RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                 
                 if (board.columns.count == 0) {
