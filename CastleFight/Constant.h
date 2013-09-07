@@ -104,6 +104,7 @@
 #define kOrbEnemyMatch @"enemy"
 #define kOrbSameColorMatch @"sameColor"
 #define kOrbBombArray @"bombArray"
+#define kOrbNull @"1000"
 
 #define kOrbMinMatchSum 3
 

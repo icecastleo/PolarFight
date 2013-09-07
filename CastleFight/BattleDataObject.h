@@ -23,6 +23,9 @@
 @property (readonly) BOOL patternRandom;
 @property (readonly) NSArray *patterns;
 
+@property (readonly) NSArray *playerOrbs;
+@property (readonly) NSArray *enemyOrbs;
+@property (readonly) float enemyOrbsRatio;
 
 -(id)initWithBattleName:(NSString *)name;
 -(id)initWithBattleDictionary:(NSDictionary *)dic;

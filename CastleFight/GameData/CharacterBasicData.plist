@@ -2948,7 +2948,7 @@
 			<integer>1</integer>
 		</dict>
 	</dict>
-	<key>1006</key>
+	<key>1101</key>
 	<dict>
 		<key>RenderComponent</key>
 		<dict>
@@ -2959,25 +2959,6 @@
 		<dict>
 			<key>color</key>
 			<integer>6</integer>
-			<key>move</key>
-			<false/>
-			<key>tap</key>
-			<false/>
-			<key>summonIndex</key>
-			<integer>-1</integer>
-			<key>team</key>
-			<integer>2</integer>
-		</dict>
-	</dict>
-	<key>1010</key>
-	<dict>
-		<key>RenderComponent</key>
-		<dict>
-			<key>sprite</key>
-			<string>b10.png</string>
-		</dict>
-		<key>OrbComponent</key>
-		<dict>
 			<key>move</key>
 			<false/>
 			<key>tap</key>

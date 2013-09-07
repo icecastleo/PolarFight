@@ -28,10 +28,11 @@ typedef enum {
     int combosOrbSum; // only for test
     BattleDataObject *_battleData;
     int currentColumn;
-    int currentPattern;
+    int currentPatternIndex;
     int iteration;
     NSArray *patterns;
     NSDictionary *randomOrbs;
+    NSDictionary *currentPatternData;
 }
 
 @end
@@ -54,9 +55,10 @@ typedef enum {
         _aiPlayer = aiPlayer;
         _battleData = battleData;
         currentColumn = 0;
-        currentPattern = -1;
+        currentPatternIndex = -1;
         iteration = 0;
         randomOrbs = [[FileManager sharedFileManager] getPatternDataWithPid:@"RandomOrbs"];
+        currentPatternData = [[NSDictionary alloc] init];
     }
     return self;
 }
@@ -510,61 +512,237 @@ typedef enum {
      }],nil]];
 }
 
--(NSArray *)nextColumn {
-    currentColumn++;
-    if (currentColumn >= patterns.count) {
-        currentColumn = 0;
-        iteration--;
-        // check iteration if pattern is needed change
-        if (iteration <= 0) {
-            // change pattern
-            if (_battleData.patternRandom) {
-                currentPattern = arc4random_uniform(_battleData.patterns.count);
-            }else {
-                currentPattern = (currentPattern+1)%_battleData.patterns.count;
-            }
-            NSString *pid = [_battleData.patterns objectAtIndex:currentPattern];
-            NSDictionary *patternData = [[FileManager sharedFileManager] getPatternDataWithPid:pid];
-            iteration = [[patternData objectForKey:@"iteration"] intValue];
-            patterns = [patternData objectForKey:@"patterns"];
-        }
-    }
+-(NSMutableArray *)produceColumn:(NSArray *)originalColumn {
     NSMutableArray *nextColumn = [[NSMutableArray alloc] init];
-    NSArray *array = nil;
-    if (patterns.count > 0) {
-        array = [NSMutableArray arrayWithArray:[patterns objectAtIndex:currentColumn]];
-    }
     
-    if (array.count == kOrbBoardRows) {
+    if (originalColumn.count == kOrbBoardRows) {
+        int originalOrbSum = 0;
         for (int i=0; i<kOrbBoardRows; i++) {
-            NSNumber *number = [array objectAtIndex:i];
-            if (number.intValue > 100) {
+            NSNumber *number = [originalColumn objectAtIndex:i];
+            NSString *orbId = nil;
+            if (number.intValue > 1000) { // defined range
                 NSArray *randomArray = [randomOrbs objectForKey:number.stringValue];
                 NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
-                NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-                [nextColumn addObject:orbId];
-            }else if(number.intValue < 0) {
-                NSNumber *orbNumber = [NSNumber numberWithInt:(arc4random_uniform(OrbBottom - 1)+1)];
-                NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-                [nextColumn addObject:orbId];
+                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+            }else if(number.intValue == -1) { // player's orb team
+                NSNumber *orbNumber = [_battleData.playerOrbs objectAtIndex:arc4random_uniform(_battleData.playerOrbs.count)];
+                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+            }else if(number.intValue == -2) { // enemy's orb team
+                NSNumber *orbNumber = [_battleData.enemyOrbs objectAtIndex:arc4random_uniform(_battleData.enemyOrbs.count)];
+                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+            }else if(number.intValue == -3) { // both
+                NSMutableArray *randomArray = [[NSMutableArray alloc] init];
+                [randomArray addObjectsFromArray:_battleData.playerOrbs];
+                [randomArray addObjectsFromArray:_battleData.enemyOrbs];
+                NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
+                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
             }else {
-                NSString *orbId = [NSString stringWithFormat:@"1%03d",number.intValue];
-                [nextColumn addObject:orbId];
+                orbId = [NSString stringWithFormat:@"1%03d",number.intValue];
             }
+            if (![orbId isEqualToString:kOrbNull]) {
+                originalOrbSum++;
+            }
+            [nextColumn addObject:orbId];
         }
+        
+        int minOrb = [[currentPatternData objectForKey:@"minOrb"] intValue];
+        int maxOrb = [[currentPatternData objectForKey:@"maxOrb"] intValue];
+        int delta = maxOrb - minOrb;
+        
+        int orbSum = arc4random_uniform(delta+1) + minOrb;
+        // turn off random
+        orbSum = originalOrbSum;
+        
+        NSAssert(orbSum >= 0 && orbSum <= kOrbBoardRows, @"Range should be between 0 and rows.");
+        
+        if (orbSum > originalOrbSum) {
+            int count = orbSum - originalOrbSum;
+            
+            do {
+                for (int i=0; i<kOrbBoardRows; i++) {
+                    NSString *orbId = [nextColumn objectAtIndex:i];
+                    if ([orbId isEqualToString:kOrbNull]) {
+                        if (arc4random_uniform(2) > 0) {
+                            NSMutableArray *randomArray = [[NSMutableArray alloc] init];
+                            [randomArray addObjectsFromArray:_battleData.playerOrbs];
+                            [randomArray addObjectsFromArray:_battleData.enemyOrbs];
+                            NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
+                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+                            [nextColumn replaceObjectAtIndex:i withObject:orbId];
+                            count--;
+                            if (count<=0) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            } while (count>0);
+            
+        }else if (orbSum < originalOrbSum) {
+            int count = originalOrbSum - orbSum;
+            
+            do {
+                for (int i=0; i<kOrbBoardRows; i++) {
+                    NSString *orbId = [nextColumn objectAtIndex:i];
+                    if (![orbId isEqualToString:kOrbNull]) {
+                        if (arc4random_uniform(2) > 0) {
+                            orbId = kOrbNull;
+                            [nextColumn replaceObjectAtIndex:i withObject:orbId];
+                            count--;
+                            if (count<=0) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            } while (count>0);
+        }
+        
     }else {
         for (int i=0; i<kOrbBoardRows; i++) {
-            int color = arc4random_uniform(OrbBottom - 1) + 1;
+            NSMutableArray *randomArray = [[NSMutableArray alloc] init];
+            [randomArray addObjectsFromArray:_battleData.playerOrbs];
+            [randomArray addObjectsFromArray:_battleData.enemyOrbs];
+            NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
+            NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
             if (arc4random_uniform(2) > 0) {
-                color = OrbNull;
+                orbId = kOrbNull;
             }
-            NSString *orbId = [NSString stringWithFormat:@"1%03d",color];
+            
             [nextColumn addObject:orbId];
         }
         
     }
     
     return nextColumn;
+}
+
+-(NSArray *)producePattern {
+    
+    iteration--;
+    if (iteration <= 0) {
+        if (_battleData.patternRandom) {
+            currentPatternIndex = arc4random_uniform(_battleData.patterns.count);
+        }else {
+            currentPatternIndex = (currentPatternIndex+1)%_battleData.patterns.count;
+        }
+        NSString *pid = [_battleData.patterns objectAtIndex:currentPatternIndex];
+        currentPatternData = [[FileManager sharedFileManager] getPatternDataWithPid:pid];
+        
+        int minIteration = [[currentPatternData objectForKey:@"minIteration"] intValue];
+        int maxIteration = [[currentPatternData objectForKey:@"maxIteration"] intValue];
+        int delta = maxIteration - minIteration;
+        
+        iteration = arc4random_uniform(delta+1) + minIteration;
+    }
+    
+    NSArray *originalPatterns = [currentPatternData objectForKey:@"patterns"];
+    
+    int minColumns = [[currentPatternData objectForKey:@"minColumns"] intValue];
+    int maxColumns = [[currentPatternData objectForKey:@"maxColumns"] intValue];
+    int deltaColumns = maxColumns - minColumns;
+    
+    int columns = arc4random_uniform(deltaColumns+1) + minColumns;
+    
+    int count = originalPatterns.count - columns;
+    
+    NSAssert(count >= 0 && count < originalPatterns.count, @"count can not over pattern's count");
+    
+    NSMutableArray *fixedPatterns = [[NSMutableArray alloc] init];
+    for (int i=0; i<originalPatterns.count; i++) {
+        NSMutableArray *column = [self produceColumn:[originalPatterns objectAtIndex:i]];
+        [fixedPatterns addObject:column];
+    }
+    for (int i=0; i<count; i++) {
+        [fixedPatterns removeObjectAtIndex:arc4random_uniform(fixedPatterns.count)];
+    }
+    
+    int enemyOrbSum = 0;
+    int playerOrbSum = 0;
+    for (NSArray *column in fixedPatterns) {
+        for(NSString *orbId in column) {
+            int orbNum = orbId.intValue - 1000;
+            if (orbNum > 100) { //enemy
+                enemyOrbSum++;
+            }else if (orbNum > 0){
+                playerOrbSum++;
+            }
+        }
+    }
+    float orbSum = enemyOrbSum + playerOrbSum;
+    float ratio = enemyOrbSum / orbSum;
+    float defineRatio = _battleData.enemyOrbsRatio;
+    CCLOG(@"define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
+    
+    //turn off control ratio
+//    ratio = defineRatio;
+    
+    if (defineRatio > ratio) { // need to increase enemy
+        do {
+            for (int i=0; i<fixedPatterns.count; i++) {
+                NSMutableArray *column = [fixedPatterns objectAtIndex:i];
+                for (int j=0; j<column.count; j++) {
+                    NSString *orbId = [column objectAtIndex:j];
+                    int orbNum = orbId.intValue - 1000;
+                    if (orbNum > 0 && orbNum < 100) { // player's
+                        if (arc4random_uniform(2) > 0) {
+                            NSNumber *orbNumber = [_battleData.enemyOrbs objectAtIndex:arc4random_uniform(_battleData.enemyOrbs.count)];
+                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+                            [column replaceObjectAtIndex:j withObject:orbId];
+                            enemyOrbSum++;
+                            playerOrbSum--;
+                            ratio = enemyOrbSum / orbSum;
+                            if (ratio >= defineRatio) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (ratio >= defineRatio) {
+                    break;
+                }
+            }
+        } while (defineRatio > ratio);
+    }else if(defineRatio < ratio) { // need to decrease enemy
+        do {
+            for (int i=0; i<fixedPatterns.count; i++) {
+                NSMutableArray *column = [fixedPatterns objectAtIndex:i];
+                for (int j=0; j<column.count; j++) {
+                    NSString *orbId = [column objectAtIndex:j];
+                    int orbNum = orbId.intValue - 1000;
+                    if (orbNum > 100) { // enemy's
+                        if (arc4random_uniform(2) > 0) {
+                            NSNumber *orbNumber = [_battleData.playerOrbs objectAtIndex:arc4random_uniform(_battleData.playerOrbs.count)];
+                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+                            [column replaceObjectAtIndex:j withObject:orbId];
+                            playerOrbSum++;
+                            enemyOrbSum--;
+                            ratio = enemyOrbSum / orbSum;
+                            if (ratio <= defineRatio) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (ratio <= defineRatio) {
+                    break;
+                }
+            }
+        } while (defineRatio < ratio);
+    }
+    
+    CCLOG(@"fix define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
+    
+    return fixedPatterns;
+}
+
+-(NSArray *)nextColumn {
+    currentColumn++;
+    if (currentColumn >= patterns.count) {
+        currentColumn = 0;
+        patterns = [self producePattern];
+    }
+    return [patterns objectAtIndex:currentColumn];
 }
 
 @end
