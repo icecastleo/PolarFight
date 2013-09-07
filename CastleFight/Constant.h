@@ -88,12 +88,12 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
-#define kOrbWidth 40
-#define kOrbHeight 40
+#define kOrbWidth 37.5
+#define kOrbHeight 37.5
 #define kOrbSpeed 30
 
 #define kOrbBoradLeftMargin 30
-#define kOrbBoradDownMargin 20
+#define kOrbBoradDownMargin 5
 
 #define kOrbBoardRows 4
 #define kOrbBoardColumns (int)(([CCDirector sharedDirector].winSize.width - kOrbBoradLeftMargin) / kOrbWidth + 1)

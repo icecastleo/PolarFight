@@ -2,6 +2,44 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Random-One</key>
+	<dict>
+		<key>iteration</key>
+		<integer>1</integer>
+		<key>patterns</key>
+		<array>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<array>
+				<integer>101</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<array>
+				<integer>0</integer>
+				<integer>101</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>101</integer>
+				<integer>0</integer>
+			</array>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>101</integer>
+			</array>
+		</array>
+	</dict>
 	<key>001</key>
 	<dict>
 		<key>minColumns</key>
@@ -133,6 +171,8 @@
 		<array>
 			<integer>1</integer>
 			<integer>2</integer>
+			<integer>3</integer>
+			<integer>4</integer>
 		</array>
 	</dict>
 </dict>

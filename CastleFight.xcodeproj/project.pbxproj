@@ -521,6 +521,7 @@
 		9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD48F0B17AFD26D00DBFDE9 /* plants.png */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC4CD717C1DAC7004E13D6 /* music_1.caf */; };
+		9BE679ED17D8627D003B2EE4 /* christmas1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE679EC17D8627D003B2EE4 /* christmas1.png */; };
 		9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */; };
 		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
 		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
@@ -1530,6 +1531,7 @@
 		9BE01A4B16960E9E00B9C427 /* SwordmanSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwordmanSkill.m; sourceTree = "<group>"; };
 		9BE01A511696DA1000B9C427 /* WizardSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardSkill.h; sourceTree = "<group>"; };
 		9BE01A521696DA1100B9C427 /* WizardSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardSkill.m; sourceTree = "<group>"; };
+		9BE679EC17D8627D003B2EE4 /* christmas1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = christmas1.png; sourceTree = "<group>"; };
 		9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLineMapLayer.h; sourceTree = "<group>"; };
 		9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLineMapLayer.m; sourceTree = "<group>"; };
 		9BEF387B1776196B00FF538B /* ice-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ice-hd.png"; sourceTree = "<group>"; };
@@ -2033,6 +2035,7 @@
 				9BBAECE316FF935E00D0BDC3 /* blood_white.png */,
 				9BF3260816AC891A00D5782B /* bloodParticle.plist */,
 				B614E32717A9509A00C358AA /* christmas.png */,
+				9BE679EC17D8627D003B2EE4 /* christmas1.png */,
 				9B59597F17733A63004146D6 /* Default-568h@2x.png */,
 				9B062CF91635275100E06018 /* Default-Landscape~ipad.png */,
 				9B062CF71635275000E06018 /* Default.png */,
