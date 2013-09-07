@@ -3561,6 +3561,7 @@
 				9BA6EA7017D5E76700E6E862 /* explosion-hd.png in Resources */,
 				9BA6EA7117D5E76700E6E862 /* explosion.png in Resources */,
 				37E6755217D8406F00F995CE /* b10.png in Resources */,
+				9BE679ED17D8627D003B2EE4 /* christmas1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
