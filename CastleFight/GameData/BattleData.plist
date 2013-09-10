@@ -76,22 +76,30 @@
 		<key>patterns</key>
 		<array>
 			<string>001</string>
+			<string>002</string>
+			<string>003</string>
 			<string>004</string>
 		</array>
 		<key>patternRandom</key>
 		<false/>
 		<key>playerOrbs</key>
-		<array>
-			<integer>1</integer>
-			<integer>2</integer>
-			<integer>3</integer>
-			<integer>4</integer>
+		<dict>
+			<key>1</key>
 			<integer>5</integer>
-		</array>
+			<key>2</key>
+			<integer>4</integer>
+			<key>3</key>
+			<integer>3</integer>
+			<key>4</key>
+			<integer>2</integer>
+			<key>5</key>
+			<integer>1</integer>
+		</dict>
 		<key>enemyOrbs</key>
-		<array>
-			<integer>101</integer>
-		</array>
+		<dict>
+			<key>101</key>
+			<integer>1</integer>
+		</dict>
 		<key>enemyOrbsRatio</key>
 		<real>0.25</real>
 	</dict>

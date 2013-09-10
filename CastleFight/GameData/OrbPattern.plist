@@ -51,9 +51,9 @@
 		<key>maxIteration</key>
 		<integer>3</integer>
 		<key>minOrb</key>
-		<integer>1</integer>
+		<integer>-1</integer>
 		<key>maxOrb</key>
-		<integer>1</integer>
+		<integer>-1</integer>
 		<key>patterns</key>
 		<array>
 			<array>
@@ -84,6 +84,18 @@
 	</dict>
 	<key>002</key>
 	<dict>
+		<key>minColumns</key>
+		<integer>7</integer>
+		<key>maxColumns</key>
+		<integer>7</integer>
+		<key>minIteration</key>
+		<integer>1</integer>
+		<key>maxIteration</key>
+		<integer>2</integer>
+		<key>minOrb</key>
+		<integer>-1</integer>
+		<key>maxOrb</key>
+		<integer>-1</integer>
 		<key>patterns</key>
 		<array>
 			<array>
@@ -132,8 +144,27 @@
 	</dict>
 	<key>003</key>
 	<dict>
+		<key>minColumns</key>
+		<integer>1</integer>
+		<key>maxColumns</key>
+		<integer>1</integer>
+		<key>minIteration</key>
+		<integer>3</integer>
+		<key>maxIteration</key>
+		<integer>3</integer>
+		<key>minOrb</key>
+		<integer>0</integer>
+		<key>maxOrb</key>
+		<integer>4</integer>
 		<key>patterns</key>
-		<array/>
+		<array>
+			<array>
+				<integer>-3</integer>
+				<integer>-3</integer>
+				<integer>-3</integer>
+				<integer>-3</integer>
+			</array>
+		</array>
 	</dict>
 	<key>004</key>
 	<dict>
@@ -146,9 +177,9 @@
 		<key>maxIteration</key>
 		<integer>5</integer>
 		<key>minOrb</key>
-		<integer>4</integer>
+		<integer>-1</integer>
 		<key>maxOrb</key>
-		<integer>4</integer>
+		<integer>-1</integer>
 		<key>patterns</key>
 		<array>
 			<array>

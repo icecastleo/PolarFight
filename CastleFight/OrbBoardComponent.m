@@ -23,6 +23,12 @@ typedef enum {
     kRight
 } MatchWay;
 
+typedef enum {
+    kPlayer = -1,
+    kEnemy = -2,
+    kAll = -3
+} OrbTeam;
+
 @interface OrbBoardComponent() {
     int combos;
     int combosOrbSum; // only for test
@@ -33,6 +39,13 @@ typedef enum {
     NSArray *patterns;
     NSDictionary *randomOrbs;
     NSDictionary *currentPatternData;
+    
+    NSDictionary *playerOrbSortDic;
+    NSDictionary *enemyOrbSortDic;
+    NSDictionary *allOrbSortDic;
+    NSArray *playerOrbSortArray;
+    NSArray *enemyOrbSortArray;
+    NSArray *allOrbSortArray;
 }
 
 @end
@@ -59,6 +72,22 @@ typedef enum {
         iteration = 0;
         randomOrbs = [[FileManager sharedFileManager] getPatternDataWithPid:@"RandomOrbs"];
         currentPatternData = [[NSDictionary alloc] init];
+        
+        playerOrbSortDic = [self sortOrbRatioDictionary:battleData.playerOrbs];
+        enemyOrbSortDic = [self sortOrbRatioDictionary:battleData.enemyOrbs];
+        NSMutableDictionary *allDic = [NSMutableDictionary dictionaryWithDictionary:battleData.playerOrbs];
+        [allDic addEntriesFromDictionary:battleData.enemyOrbs];
+        allOrbSortDic = [self sortOrbRatioDictionary:allDic];
+        
+        playerOrbSortArray = [playerOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
+            return [str1 compare:str2 options:NSNumericSearch];
+        }];
+        enemyOrbSortArray = [enemyOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
+            return [str1 compare:str2 options:NSNumericSearch];
+        }];
+        allOrbSortArray = [allOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
+            return [str1 compare:str2 options:NSNumericSearch];
+        }];
     }
     return self;
 }
@@ -209,11 +238,12 @@ typedef enum {
                     orbCom.color = OrbNull;
                     [matchArray addObject:orb];
                     break;
-                }else if(orbCom.color != OrbNull){
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
                 }
+//                else if(orbCom.color != OrbNull){
+//                    orbCom.color = OrbNull;
+//                    [matchArray addObject:orb];
+//                    break;
+//                }
             }
             break;
         case kLeft:
@@ -233,11 +263,12 @@ typedef enum {
                     orbCom.color = OrbNull;
                     [matchArray addObject:orb];
                     break;
-                }else if(orbCom.color != OrbNull){
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
                 }
+//                else if(orbCom.color != OrbNull){
+//                    orbCom.color = OrbNull;
+//                    [matchArray addObject:orb];
+//                    break;
+//                }
             }
             break;
         case kDown:
@@ -257,11 +288,12 @@ typedef enum {
                     orbCom.color = OrbNull;
                     [matchArray addObject:orb];
                     break;
-                }else if(orbCom.color != OrbNull){
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
                 }
+//                else if(orbCom.color != OrbNull){
+//                    orbCom.color = OrbNull;
+//                    [matchArray addObject:orb];
+//                    break;
+//                }
             }
             break;
         case kRight:
@@ -281,11 +313,12 @@ typedef enum {
                     orbCom.color = OrbNull;
                     [matchArray addObject:orb];
                     break;
-                }else if(orbCom.color != OrbNull){
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
                 }
+//                else if(orbCom.color != OrbNull){
+//                    orbCom.color = OrbNull;
+//                    [matchArray addObject:orb];
+//                    break;
+//                }
             }
             break;
         default:
@@ -512,6 +545,60 @@ typedef enum {
      }],nil]];
 }
 
+#pragma mark create columns and patterns
+
+-(NSDictionary *)sortOrbRatioDictionary:(NSDictionary *)ratioDictionary {
+    NSAssert(ratioDictionary.count>0, @"you forgot to make ratioDictionart.");
+    
+    NSMutableDictionary *sortRatioDictionary = [[NSMutableDictionary alloc] init];
+    int sumOfProbability = 0;
+    
+    for (NSString *orbId in ratioDictionary) {
+        NSNumber *probability = [ratioDictionary objectForKey:orbId];
+        NSAssert(probability.intValue >= 0, @"ratio error");
+        sumOfProbability += probability.intValue;
+        [sortRatioDictionary setObject:orbId forKey:[NSString stringWithFormat:@"%d",sumOfProbability]];
+    }
+    return sortRatioDictionary;
+}
+
+-(NSString *)randomOrbFromRatioArray:(NSArray *)ratioArray RatioDictionary:(NSDictionary *)ratioDictionary {
+    
+    NSString *orbKey = nil;
+    int count = ratioArray.count;
+    if (count > 1) {
+        int random = arc4random_uniform([[ratioArray lastObject] intValue]);
+        
+        for (int i=0; i<count; i++) {
+            if (i>0) {
+                NSString *preValue = [ratioArray objectAtIndex:i-1];
+                NSString *value = [ratioArray objectAtIndex:i];
+                if (random >= preValue.intValue && random < value.intValue) {
+                    orbKey = value;
+                    break;
+                }
+            }else {
+                NSString *value = [ratioArray objectAtIndex:i];
+                if (random < value.intValue) {
+                    orbKey = value;
+                    break;
+                }
+            }
+        }
+    }else {
+        orbKey = [ratioArray lastObject];
+    }
+    
+    NSAssert(orbKey!=nil, @"not found orbKey");
+    
+    int orbNum = [[ratioDictionary objectForKey:orbKey] intValue];
+    NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNum];
+    
+    NSAssert(orbId!=nil, @"not found orbId");
+    
+    return orbId;
+}
+
 -(NSMutableArray *)produceColumn:(NSArray *)originalColumn {
     NSMutableArray *nextColumn = [[NSMutableArray alloc] init];
     
@@ -524,18 +611,12 @@ typedef enum {
                 NSArray *randomArray = [randomOrbs objectForKey:number.stringValue];
                 NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
                 orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-            }else if(number.intValue == -1) { // player's orb team
-                NSNumber *orbNumber = [_battleData.playerOrbs objectAtIndex:arc4random_uniform(_battleData.playerOrbs.count)];
-                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-            }else if(number.intValue == -2) { // enemy's orb team
-                NSNumber *orbNumber = [_battleData.enemyOrbs objectAtIndex:arc4random_uniform(_battleData.enemyOrbs.count)];
-                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-            }else if(number.intValue == -3) { // both
-                NSMutableArray *randomArray = [[NSMutableArray alloc] init];
-                [randomArray addObjectsFromArray:_battleData.playerOrbs];
-                [randomArray addObjectsFromArray:_battleData.enemyOrbs];
-                NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
-                orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+            }else if(number.intValue == kPlayer) { // player's orb team
+                orbId = [self randomOrbFromRatioArray:playerOrbSortArray RatioDictionary:playerOrbSortDic];
+            }else if(number.intValue == kEnemy) { // enemy's orb team
+                orbId = [self randomOrbFromRatioArray:enemyOrbSortArray RatioDictionary:enemyOrbSortDic];
+            }else if(number.intValue == kAll) { // both
+                orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
             }else {
                 orbId = [NSString stringWithFormat:@"1%03d",number.intValue];
             }
@@ -547,64 +628,58 @@ typedef enum {
         
         int minOrb = [[currentPatternData objectForKey:@"minOrb"] intValue];
         int maxOrb = [[currentPatternData objectForKey:@"maxOrb"] intValue];
-        int delta = maxOrb - minOrb;
         
-        int orbSum = arc4random_uniform(delta+1) + minOrb;
-        // turn off random
-        orbSum = originalOrbSum;
-        
-        NSAssert(orbSum >= 0 && orbSum <= kOrbBoardRows, @"Range should be between 0 and rows.");
-        
-        if (orbSum > originalOrbSum) {
-            int count = orbSum - originalOrbSum;
+        // do not adjust orb num when they are negative.
+        if (minOrb >= 0 && maxOrb >= 0) {
+            int delta = maxOrb - minOrb;
+            int orbSum = arc4random_uniform(delta+1) + minOrb;
             
-            do {
-                for (int i=0; i<kOrbBoardRows; i++) {
-                    NSString *orbId = [nextColumn objectAtIndex:i];
-                    if ([orbId isEqualToString:kOrbNull]) {
-                        if (arc4random_uniform(2) > 0) {
-                            NSMutableArray *randomArray = [[NSMutableArray alloc] init];
-                            [randomArray addObjectsFromArray:_battleData.playerOrbs];
-                            [randomArray addObjectsFromArray:_battleData.enemyOrbs];
-                            NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
-                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-                            [nextColumn replaceObjectAtIndex:i withObject:orbId];
-                            count--;
-                            if (count<=0) {
-                                break;
+            NSAssert(orbSum >= 0 && orbSum <= kOrbBoardRows, @"Range should be between 0 and rows.");
+            
+            if (orbSum > originalOrbSum) {
+                int count = orbSum - originalOrbSum;
+                
+                do {
+                    for (int i=0; i<kOrbBoardRows; i++) {
+                        NSString *orbId = [nextColumn objectAtIndex:i];
+                        if ([orbId isEqualToString:kOrbNull]) {
+                            if (arc4random_uniform(2) > 0) {
+                                orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
+                                
+                                [nextColumn replaceObjectAtIndex:i withObject:orbId];
+                                count--;
+                                if (count<=0) {
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-            } while (count>0);
-            
-        }else if (orbSum < originalOrbSum) {
-            int count = originalOrbSum - orbSum;
-            
-            do {
-                for (int i=0; i<kOrbBoardRows; i++) {
-                    NSString *orbId = [nextColumn objectAtIndex:i];
-                    if (![orbId isEqualToString:kOrbNull]) {
-                        if (arc4random_uniform(2) > 0) {
-                            orbId = kOrbNull;
-                            [nextColumn replaceObjectAtIndex:i withObject:orbId];
-                            count--;
-                            if (count<=0) {
-                                break;
+                } while (count>0);
+                
+            }else if (orbSum < originalOrbSum) {
+                int count = originalOrbSum - orbSum;
+                
+                do {
+                    for (int i=0; i<kOrbBoardRows; i++) {
+                        NSString *orbId = [nextColumn objectAtIndex:i];
+                        if (![orbId isEqualToString:kOrbNull]) {
+                            if (arc4random_uniform(2) > 0) {
+                                orbId = kOrbNull;
+                                [nextColumn replaceObjectAtIndex:i withObject:orbId];
+                                count--;
+                                if (count<=0) {
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-            } while (count>0);
+                } while (count>0);
+            }
         }
         
     }else {
         for (int i=0; i<kOrbBoardRows; i++) {
-            NSMutableArray *randomArray = [[NSMutableArray alloc] init];
-            [randomArray addObjectsFromArray:_battleData.playerOrbs];
-            [randomArray addObjectsFromArray:_battleData.enemyOrbs];
-            NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
-            NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+            NSString *orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
             if (arc4random_uniform(2) > 0) {
                 orbId = kOrbNull;
             }
@@ -657,11 +732,12 @@ typedef enum {
         [fixedPatterns removeObjectAtIndex:arc4random_uniform(fixedPatterns.count)];
     }
     
+    //Adjust sum of enemy's orb according to the enemyOrbsRatio
     int enemyOrbSum = 0;
     int playerOrbSum = 0;
     for (NSArray *column in fixedPatterns) {
         for(NSString *orbId in column) {
-            int orbNum = orbId.intValue - 1000;
+            int orbNum = orbId.intValue - kOrbNull.intValue;
             if (orbNum > 100) { //enemy
                 enemyOrbSum++;
             }else if (orbNum > 0){
@@ -672,10 +748,7 @@ typedef enum {
     float orbSum = enemyOrbSum + playerOrbSum;
     float ratio = enemyOrbSum / orbSum;
     float defineRatio = _battleData.enemyOrbsRatio;
-    CCLOG(@"define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
-    
-    //turn off control ratio
-//    ratio = defineRatio;
+//    CCLOG(@"define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
     
     if (defineRatio > ratio) { // need to increase enemy
         do {
@@ -683,11 +756,10 @@ typedef enum {
                 NSMutableArray *column = [fixedPatterns objectAtIndex:i];
                 for (int j=0; j<column.count; j++) {
                     NSString *orbId = [column objectAtIndex:j];
-                    int orbNum = orbId.intValue - 1000;
-                    if (orbNum > 0 && orbNum < 100) { // player's
+                    int orbNum = orbId.intValue - kOrbNull.intValue;
+                    if (orbNum > 0 && orbNum <= 100) { // player's
                         if (arc4random_uniform(2) > 0) {
-                            NSNumber *orbNumber = [_battleData.enemyOrbs objectAtIndex:arc4random_uniform(_battleData.enemyOrbs.count)];
-                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+                            orbId = [self randomOrbFromRatioArray:enemyOrbSortArray RatioDictionary:enemyOrbSortDic];
                             [column replaceObjectAtIndex:j withObject:orbId];
                             enemyOrbSum++;
                             playerOrbSum--;
@@ -709,11 +781,10 @@ typedef enum {
                 NSMutableArray *column = [fixedPatterns objectAtIndex:i];
                 for (int j=0; j<column.count; j++) {
                     NSString *orbId = [column objectAtIndex:j];
-                    int orbNum = orbId.intValue - 1000;
+                    int orbNum = orbId.intValue - kOrbNull.intValue;
                     if (orbNum > 100) { // enemy's
                         if (arc4random_uniform(2) > 0) {
-                            NSNumber *orbNumber = [_battleData.playerOrbs objectAtIndex:arc4random_uniform(_battleData.playerOrbs.count)];
-                            orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
+                            orbId = [self randomOrbFromRatioArray:playerOrbSortArray RatioDictionary:playerOrbSortDic];
                             [column replaceObjectAtIndex:j withObject:orbId];
                             playerOrbSum++;
                             enemyOrbSum--;
@@ -731,7 +802,7 @@ typedef enum {
         } while (defineRatio < ratio);
     }
     
-    CCLOG(@"fix define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
+//    CCLOG(@"fix define Ratio:%g, ratio:%g, enemy:%d, player:%d",defineRatio,ratio,enemyOrbSum,playerOrbSum);
     
     return fixedPatterns;
 }
