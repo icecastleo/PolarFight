@@ -25,9 +25,9 @@
     NSAssert(team, @"Invalid entity!");
         
     if (self = [super initWithEntity:entity sprite:[CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"gauge%02d.png", team.team]]]) {
-        self.midpoint = ccp(team.team == 1 ? 1 : 0, 0);
+        self.midpoint = ccp(team.team == kPlayerTeam ? 1 : 0, 0);
         
-        vibrate = team.team == 1? YES : NO;
+        vibrate = team.team == kPlayerTeam ? YES : NO;
     }
     return self;
 }

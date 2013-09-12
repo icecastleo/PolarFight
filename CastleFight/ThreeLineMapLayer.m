@@ -109,7 +109,7 @@
         CGSize winSize = [CCDirector sharedDirector].winSize;
 
         // castle
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             render.position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/2, winSize.height/2);
         } else {
             render.position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/2, winSize.height/2);
@@ -127,7 +127,7 @@
     
     CGPoint position;
     
-    if (team.team == 1) {
+    if (team.team == kPlayerTeam) {
         position = ccp(kMapStartDistance, kMapPathFloor + arc4random_uniform(kMapPathRandomHeight));
 //        [prepareEntities setObject:entity forKey:[NSNumber numberWithInt:selectLine]];
 //        [entity sendEvent:kEntityEventPrepare Message:nil];

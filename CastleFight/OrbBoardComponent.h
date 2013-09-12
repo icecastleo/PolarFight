@@ -21,11 +21,13 @@
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory player:(Entity *)player aiPlayer:(Entity *)aiPlayer BattleData:(BattleDataObject *)battleData ;
 
+-(Entity *)orbAtPosition:(CGPoint)position;
+-(CGPoint)convertRenderPositionToOrbPosition:(CGPoint)position;
+
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
--(NSDictionary *)findMatchForOrb:(Entity *)currentOrb;
--(void)matchClean:(NSDictionary *)matchDic;
-
 -(NSArray *)nextColumn;
+
+-(void)addToRecord:(NSDictionary *)matchDic;
 
 @end

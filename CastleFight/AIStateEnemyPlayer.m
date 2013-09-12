@@ -77,7 +77,7 @@
         player.food -= nextEnemy.cost;
         
         // Auto add to map
-        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2 addToMap:YES];
+        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:kEnemyTeam addToMap:YES];
 
         // Add count
         nextEnemy.currentCount++;
@@ -130,7 +130,7 @@
     for (Entity *entity in entities) {
         TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             continue;
         }
         

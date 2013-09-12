@@ -63,14 +63,14 @@ const static int pathSizeHeight = 40;
     CGPoint position;
     
     if (character) {
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             position = ccp(kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         } else {
             position = ccp(self.boundaryX - kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
         }
     } else {
         // castle
-        if (team.team == 1) {
+        if (team.team == kEnemyTeam) {
             position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
         } else {
             position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);

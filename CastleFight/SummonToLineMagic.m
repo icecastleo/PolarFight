@@ -36,7 +36,7 @@
         return;
     }
     NSNumber *addLevel = [self.magicInformation objectForKey:@"addLevel"];
-    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:1 addToMap:NO];
+    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:kPlayerTeam addToMap:NO];
     [self.entityFactory.mapLayer addEntity:summonEntity];
 //    int line = [(ThreeLineMapLayer*)self.entityFactory.mapLayer positionConvertToLine:endPosition];
 //    [(ThreeLineMapLayer*)self.entityFactory.mapLayer addEntity:summonEntity line:line];

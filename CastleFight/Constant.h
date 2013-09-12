@@ -182,6 +182,19 @@ typedef enum {
     OrbBottom
 } OrbColor;
 
+typedef enum {
+    kUp = 0,
+    kLeft,
+    kDown,
+    kRight
+} MatchWay;
+
+typedef enum {
+    kPlayerTeam = 1,
+    kEnemyTeam,
+    kAllTeam
+} OrbTeam;
+
 #import "ccTypes.h"
 
 //! AliceBlue color (240,248,255)

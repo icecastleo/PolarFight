@@ -16,22 +16,11 @@
 #import "BattleDataObject.h"
 #import "cocos2d.h"
 
-typedef enum {
-    kUp = 0,
-    kLeft,
-    kDown,
-    kRight
-} MatchWay;
-
-typedef enum {
-    kPlayer = -1,
-    kEnemy = -2,
-    kAll = -3
-} OrbTeam;
-
 @interface OrbBoardComponent() {
+    //for combos
     int combos;
-    int combosOrbSum; // only for test
+    
+    // for patterns
     BattleDataObject *_battleData;
     int currentColumn;
     int currentPatternIndex;
@@ -39,13 +28,15 @@ typedef enum {
     NSArray *patterns;
     NSDictionary *randomOrbs;
     NSDictionary *currentPatternData;
-    
     NSDictionary *playerOrbSortDic;
     NSDictionary *enemyOrbSortDic;
     NSDictionary *allOrbSortDic;
     NSArray *playerOrbSortArray;
     NSArray *enemyOrbSortArray;
     NSArray *allOrbSortArray;
+    
+    // for record
+    NSMutableDictionary *matchOrbRecord;
 }
 
 @end
@@ -88,6 +79,8 @@ typedef enum {
         allOrbSortArray = [allOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
             return [str1 compare:str2 options:NSNumericSearch];
         }];
+        
+        matchOrbRecord = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -212,325 +205,44 @@ typedef enum {
     return nil;
 }
 
--(NSArray *)searchOrbFromPosition:(CGPoint)position Way:(MatchWay)way OrbColor:(OrbColor)color {
+-(void)addToRecord:(NSDictionary *)matchDic {
+    NSMutableArray *allOrbs = [[NSMutableArray alloc] initWithArray:[matchDic objectForKey:kOrbMainMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbSameColorMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbEnemyMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbOtherMatch]];
     
-    int currentColumns = self.columns.count;
-    int currentX = position.x;
-    int currentY = position.y;
-    
-    NSMutableArray *matchArray = [[NSMutableArray alloc] init];
-    
-    switch (way) {
-        case kUp:
-            for (int j=currentY+1; j<kOrbBoardRows; j++) {
-                CGPoint orbPosition = ccp(currentX,j);
-                Entity *orb = [self orbAtPosition:orbPosition];
-                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                if (orbCom.color == color) {
-                    orbCom.color = OrbNull;
-                    
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kLeft OrbColor:color]];
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kRight OrbColor:color]];
-                    
-                    [matchArray addObject:orb];
-                    break;
-                }else if(orbCom.team == 2) {
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
-                }
-//                else if(orbCom.color != OrbNull){
-//                    orbCom.color = OrbNull;
-//                    [matchArray addObject:orb];
-//                    break;
-//                }
-            }
-            break;
-        case kLeft:
-            for (int i=currentX-1; i>=0; i--) {
-                CGPoint orbPosition = ccp(i,currentY);
-                Entity *orb = [self orbAtPosition:orbPosition];
-                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                if (orbCom.color == color) {
-                    orbCom.color = OrbNull;
-                    
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kUp OrbColor:color]];
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kDown OrbColor:color]];
-                    
-                    [matchArray addObject:orb];
-                    break;
-                }else if(orbCom.team == 2) {
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
-                }
-//                else if(orbCom.color != OrbNull){
-//                    orbCom.color = OrbNull;
-//                    [matchArray addObject:orb];
-//                    break;
-//                }
-            }
-            break;
-        case kDown:
-            for (int j=currentY-1; j>=0; j--) {
-                CGPoint orbPosition = ccp(currentX,j);
-                Entity *orb = [self orbAtPosition:orbPosition];
-                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                if (orbCom.color == color) {
-                    orbCom.color = OrbNull;
-                    
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kLeft OrbColor:color]];
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kRight OrbColor:color]];
-                    
-                    [matchArray addObject:orb];
-                    break;
-                }else if(orbCom.team == 2) {
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
-                }
-//                else if(orbCom.color != OrbNull){
-//                    orbCom.color = OrbNull;
-//                    [matchArray addObject:orb];
-//                    break;
-//                }
-            }
-            break;
-        case kRight:
-            for (int i=currentX+1; i<currentColumns; i++) {
-                CGPoint orbPosition = ccp(i,currentY);
-                Entity *orb = [self orbAtPosition:orbPosition];
-                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                if (orbCom.color == color) {
-                    orbCom.color = OrbNull;
-                    
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kUp OrbColor:color]];
-                    [matchArray addObjectsFromArray:[self searchOrbFromPosition:orbPosition Way:kDown OrbColor:color]];
-                    
-                    [matchArray addObject:orb];
-                    break;
-                }else if(orbCom.team == 2) {
-                    orbCom.color = OrbNull;
-                    [matchArray addObject:orb];
-                    break;
-                }
-//                else if(orbCom.color != OrbNull){
-//                    orbCom.color = OrbNull;
-//                    [matchArray addObject:orb];
-//                    break;
-//                }
-            }
-            break;
-        default:
-            return nil;
-    }
-    
-    return matchArray;
-}
-
--(NSDictionary *)findMatchForOrb:(Entity *)currentOrb {
-    
-    OrbComponent *currentOrbCom = (OrbComponent *)[currentOrb getComponentOfName:[OrbComponent name]];
-    
-    if (currentOrbCom.color == OrbNull || currentOrbCom.team == 2) {
-        return nil;
-    }
-    
-    RenderComponent *currentRenderCom = (RenderComponent *)[currentOrb getComponentOfName:[RenderComponent name]];
-    CGPoint currentOrbPosition = [self convertRenderPositionToOrbPosition:currentRenderCom.node.position];
-    int currentX = currentOrbPosition.x;
-    int currentY = currentOrbPosition.y;
-    
-    Entity *upOrb = [self orbAtPosition:ccp(currentX,currentY+1)];
-    Entity *leftOrb = [self orbAtPosition:ccp(currentX-1,currentY)];
-    Entity *downOrb = [self orbAtPosition:ccp(currentX,currentY-1)];
-    Entity *rightOrb = [self orbAtPosition:ccp(currentX+1,currentY)];
-    
-    OrbColor searchColor = currentOrbCom.color;
-    
-    NSMutableArray *matchArray = [[NSMutableArray alloc] init];
-    [matchArray addObject:currentOrb];
-    NSMutableArray *wayArray = [[NSMutableArray alloc] init];
-    
-    if (upOrb) {
-        OrbComponent *orbCom = (OrbComponent *)[upOrb getComponentOfName:[OrbComponent name]];
-        if (orbCom.color == searchColor) {
-            [matchArray addObject:upOrb];
-            [wayArray addObject:[NSNumber numberWithInt:kUp]];
-        }
-    }
-    
-    if (leftOrb) {
-        OrbComponent *orbCom = (OrbComponent *)[leftOrb getComponentOfName:[OrbComponent name]];
-        if (orbCom.color == searchColor) {
-            [matchArray addObject:leftOrb];
-            [wayArray addObject:[NSNumber numberWithInt:kLeft]];
-        }
-    }
-    
-    if (downOrb) {
-        OrbComponent *orbCom = (OrbComponent *)[downOrb getComponentOfName:[OrbComponent name]];
-        if (orbCom.color == searchColor) {
-            [matchArray addObject:downOrb];
-            [wayArray addObject:[NSNumber numberWithInt:kDown]];
-        }
-    }
-    
-    if (rightOrb) {
-        OrbComponent *orbCom = (OrbComponent *)[rightOrb getComponentOfName:[OrbComponent name]];
-        if (orbCom.color == searchColor) {
-            [matchArray addObject:rightOrb];
-            [wayArray addObject:[NSNumber numberWithInt:kRight]];
-        }
-    }
-    
-    if (wayArray.count < 2) {
-        [matchArray removeAllObjects];
-        return nil;
-    }
-    
-    for (Entity *orb in matchArray) {
+    for (Entity *orb in allOrbs) {
         OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        orbCom.color = OrbNull;
-    }
-    
-    NSMutableArray *bombArray = [[NSMutableArray alloc] init];
-    for (NSNumber *way in wayArray) {
         
-        NSMutableArray *array = [NSMutableArray arrayWithArray:[self searchOrbFromPosition:currentOrbPosition Way:way.intValue OrbColor:searchColor]];
-        
-        for (Entity *orb in array) {
-            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-            orbCom.color = orbCom.originalColor;
+        NSNumber *number = [matchOrbRecord objectForKey:[NSString stringWithFormat:@"%d",orbCom.color]];
+        if (!number) {
+            number = [[NSNumber alloc] initWithInt:1];
+        }else {
+            number = [[NSNumber alloc] initWithInt:number.intValue+1];
         }
-        
-        [bombArray addObject:array];
+        [matchOrbRecord setValue:number forKey:[NSString stringWithFormat:@"%d",orbCom.color]];
     }
     
-    // remove repeated orb
-    for (NSMutableArray *array in bombArray) {
-        if (array.count > 0) {
-            Entity *orb = [array lastObject];
-            for (NSMutableArray *array2 in bombArray) {
-                if (array != array2) {
-                    [array2 removeObject:orb];
-                }
-            }
-        }
+    for (NSString *key in matchOrbRecord) {
+        NSNumber *sum = [matchOrbRecord objectForKey:key];
+        CCLOG(@"color:%@, sum:%d",key,sum.intValue);
     }
     
-    NSMutableArray *sameColorOrbs = [[NSMutableArray alloc] init];
-    NSMutableArray *enemyOrbs = [[NSMutableArray alloc] init];
-    NSMutableArray *otherColorOrbs = [[NSMutableArray alloc] init];
-    
-    for (NSArray *array in bombArray) {
-        for (Entity *orb in array) {
-            OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-            if (orbCom.color == searchColor) {
-                [sameColorOrbs addObject:orb];
-            }else if(orbCom.team == 2) {
-                [enemyOrbs addObject:orb];
-            }else {
-                [otherColorOrbs addObject:orb];
-            }
-        }
-    }
-    
-    for (Entity *orb in matchArray) {
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        orbCom.color = orbCom.originalColor;
-    }
-    
-    CCLOG(@"mainMatchOrbs: %d, sameColorOrbs: %d, enemyOrbs: %d, otherColorOrbs: %d",matchArray.count,sameColorOrbs.count,enemyOrbs.count,otherColorOrbs.count);
-    
-    NSDictionary *matchDic = [[NSDictionary alloc] initWithObjectsAndKeys:matchArray,kOrbMainMatch,sameColorOrbs,kOrbSameColorMatch,enemyOrbs,kOrbEnemyMatch,otherColorOrbs,kOrbOtherMatch,bombArray,kOrbBombArray, nil];
-    
-    return matchDic;
+    [self showCombos];
 }
 
--(void)bombOrb:(NSMutableArray *)bombArray {
-    NSMutableArray *removeArray = [[NSMutableArray alloc] init];
+-(void)showCombos {
     
-    for (NSMutableArray *array in bombArray) {
-        if (array.count > 0) {
-            Entity *orb = [array lastObject];
-            [self cleanOrb:orb];
-            for (NSMutableArray *array2 in bombArray) {
-                [array2 removeObject:orb];
-            }
-        }
-        if (array.count == 0) {
-            [removeArray addObject:array];
-        }
-    }
-    
-    [bombArray removeObjectsInArray:removeArray];
-    
-    if (bombArray.count > 0) {
-        [self performSelector:@selector(bombOrb:) withObject:bombArray afterDelay:kOrbBombDelay];
-    }
-}
-
--(void)cleanOrb:(Entity *)orb {
-    
-    RenderComponent *orbRenderCom = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-    
-    CCFadeOut *fadeOut = [CCFadeOut actionWithDuration:0];
-    
-    CCSpawn *spawn = [CCSpawn actions:[CCCallBlock actionWithBlock:^{
-        CCSprite *sprite = [CCSprite spriteWithFile:@"explosion.png"];
-        [orbRenderCom.node addChild:sprite];
-        [sprite runAction:[CCSequence actions:
-                           [CCScaleTo actionWithDuration:0.1 scaleX:2.0 scaleY:2.0],
-                           fadeOut,
-                           [CCCallBlock actionWithBlock:^{
-            [sprite removeFromParentAndCleanup:YES];}],nil]];
-    }],[CCScaleTo actionWithDuration:0.1 scaleX:0.1 scaleY:0.1], nil];
-    
-    [orbRenderCom.sprite runAction:
-     [CCSequence actions:
-        spawn,
-        fadeOut,
-        [CCCallBlock actionWithBlock:^{
-         [orbRenderCom.node setVisible:NO];
-     }],nil]];
-    
-    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-    orbCom.color = OrbNull;
-    if ([orb getComponentOfName:[TouchComponent name]]) {
-        [orb removeComponent:[TouchComponent name]];
-    }
-
-}
-
--(void)matchClean:(NSDictionary *)matchDic {
-    NSArray *matchArray = [matchDic objectForKey:kOrbMainMatch];
-    NSArray *sameColorOrb = [matchDic objectForKey:kOrbSameColorMatch];
-    NSArray *bombArray = [matchDic objectForKey:kOrbBombArray];
     combos++;
     PlayerComponent *playerCom = (PlayerComponent *)[self.player getComponentOfName:[PlayerComponent name]];
     playerCom.mana += kManaForEachCombo * combos;
     
-    combosOrbSum = matchArray.count + sameColorOrb.count;
-    
-    [self showCombos];
-    
-    for (Entity *orb in matchArray) {
-        [self cleanOrb:orb];
-    }
-    
-    [self performSelector:@selector(bombOrb:) withObject:bombArray afterDelay:kOrbBombDelay];
-}
-
--(void)showCombos {
     if ([self.entityFactory.mapLayer getChildByTag:kCombosLabelTag]) {
         [self.entityFactory.mapLayer removeChildByTag:kCombosLabelTag cleanup:YES];
     }
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
-    //test
-    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Combos: %d, sum: %d",combos,combosOrbSum] fontName:@"Helvetica" fontSize:30];
-//    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Combos: %d",combos] fontName:@"Helvetica" fontSize:30];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Combos: %d",combos] fontName:@"Helvetica" fontSize:30];
     
     label.color = ccRED;
     label.position =  ccp(winSize.width - label.boundingBox.size.width/2, kOrbBoradDownMargin + (kOrbBoardRows+1)*kOrbHeight);
@@ -611,11 +323,11 @@ typedef enum {
                 NSArray *randomArray = [randomOrbs objectForKey:number.stringValue];
                 NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
                 orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
-            }else if(number.intValue == kPlayer) { // player's orb team
+            }else if(number.intValue == kPlayerTeam*-1) { // player's orb team
                 orbId = [self randomOrbFromRatioArray:playerOrbSortArray RatioDictionary:playerOrbSortDic];
-            }else if(number.intValue == kEnemy) { // enemy's orb team
+            }else if(number.intValue == kEnemyTeam*-1) { // enemy's orb team
                 orbId = [self randomOrbFromRatioArray:enemyOrbSortArray RatioDictionary:enemyOrbSortDic];
-            }else if(number.intValue == kAll) { // both
+            }else if(number.intValue == kAllTeam*-1) { // both
                 orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
             }else {
                 orbId = [NSString stringWithFormat:@"1%03d",number.intValue];

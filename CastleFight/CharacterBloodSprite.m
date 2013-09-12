@@ -22,7 +22,7 @@
         
         self.position = ccp(0, render.sprite.boundingBox.size.height/2 + self.sprite.boundingBox.size.height*1.5);
         self.midpoint = ccp(0, 0);
-        self.color = team.team == 1 ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
+        self.color = team.team == kPlayerTeam ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
         self.scaleX = render.sprite.boundingBox.size.width / self.sprite.boundingBox.size.width;
         self.visible = NO;
         [render.node addChild:self];

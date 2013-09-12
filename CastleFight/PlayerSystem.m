@@ -38,7 +38,7 @@
         
         if (player.mana > kManaBarFullValue) {
             TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
-            if (team.team == 1) {
+            if (team.team == kPlayerTeam) {
                 //user
                 CCLOG(@"Mana > 200! Summon Hero");
             } else {

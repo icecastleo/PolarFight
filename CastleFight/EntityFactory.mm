@@ -102,9 +102,9 @@
         [entity addComponent:[[LineComponent alloc] init]];
     }
     
-    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)];
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)];
     // FIXME: Change all character asset to right
-    direction.spriteDirection = (team == 1 ? kSpriteDirectionRight : kSpriteDirectionLeft);
+    direction.spriteDirection = (team == kPlayerTeam ? kSpriteDirectionRight : kSpriteDirectionLeft);
     [entity addComponent:direction];
     
     NSString *spriteFrameName = nil;
@@ -253,7 +253,7 @@
     
     CCSprite *sprite;
 
-    if (team == 1) {
+    if (team == kPlayerTeam) {
         sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
@@ -307,7 +307,7 @@
     
     [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     
-    [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)]];
+    [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)]];
     
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
@@ -323,13 +323,13 @@
     // TODO: Set by file
     PlayerComponent *player = [[PlayerComponent alloc] init];
     
-    if (team == 2) {
+    if (team == kEnemyTeam) {
         player.foodAddend = 0.0;
     }
     
     [entity addComponent:player];
     
-    if (team == 1) {
+    if (team == kPlayerTeam) {
         NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
         
         for (CharacterInitData *data in characterInitDatas) {
@@ -369,7 +369,7 @@
         
         [entity addComponent:[[ProjectileComponent alloc] init]];
         
-    } else if (team == 2) {
+    } else if (team == kEnemyTeam) {
         [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self]]];
     }
     

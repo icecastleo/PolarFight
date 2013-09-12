@@ -26,4 +26,10 @@
 
 -(void)executeMatch:(int)number;
 
+-(void)disappearAfterMatch;
+-(void)touchEndLine;
+
+-(NSDictionary *)findMatch;
+-(void)matchClean:(NSDictionary *)matchDic;
+
 @end

@@ -86,8 +86,8 @@ __weak static BattleController* currentInstance;
         
         [self setCastle];
         
-        _userPlayer = [entityFactory createPlayerForTeam:1];
-        _enemyPlayer = [entityFactory createPlayerForTeam:2];
+        _userPlayer = [entityFactory createPlayerForTeam:kPlayerTeam];
+        _enemyPlayer = [entityFactory createPlayerForTeam:kEnemyTeam];
         
         systems = [[NSMutableArray alloc] init];
         [systems addObject:physicsSystem];
@@ -138,8 +138,8 @@ __weak static BattleController* currentInstance;
 }
 
 -(void)setCastle {
-    _userCastle = [entityFactory createCastleForTeam:1];
-    _enemyCastle = [entityFactory createCastleForTeam:2];
+    _userCastle = [entityFactory createCastleForTeam:kPlayerTeam];
+    _enemyCastle = [entityFactory createCastleForTeam:kEnemyTeam];
     
     // FIXME: Create by file
     

@@ -202,7 +202,7 @@
         } else {
             TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
             
-            if (team.team == 1) {
+            if (team.team == kPlayerTeam) {
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
             } else {
                 [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_dog.caf"];
