@@ -2776,8 +2776,21 @@
 	</dict>
 	<key>1000</key>
 	<dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>0</integer>
 			<key>move</key>
@@ -2808,6 +2821,8 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>1</integer>
 			<key>move</key>
@@ -2840,6 +2855,8 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>2</integer>
 			<key>move</key>
@@ -2872,6 +2889,8 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>3</integer>
 			<key>move</key>
@@ -2904,6 +2923,8 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>4</integer>
 			<key>move</key>
@@ -2936,6 +2957,8 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>5</integer>
 			<key>move</key>
@@ -2950,6 +2973,17 @@
 	</dict>
 	<key>1101</key>
 	<dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
 		<key>RenderComponent</key>
 		<dict>
 			<key>sprite</key>
@@ -2957,10 +2991,46 @@
 		</dict>
 		<key>OrbComponent</key>
 		<dict>
+			<key>type</key>
+			<string>OrbComponent</string>
 			<key>color</key>
 			<integer>6</integer>
 			<key>move</key>
 			<false/>
+			<key>tap</key>
+			<false/>
+			<key>summonIndex</key>
+			<integer>-1</integer>
+			<key>team</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>1102</key>
+	<dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>b10.png</string>
+		</dict>
+		<key>OrbComponent</key>
+		<dict>
+			<key>type</key>
+			<string>SkullOrbComponent</string>
+			<key>color</key>
+			<integer>6</integer>
+			<key>move</key>
+			<true/>
 			<key>tap</key>
 			<false/>
 			<key>summonIndex</key>

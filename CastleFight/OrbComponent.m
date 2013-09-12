@@ -38,6 +38,7 @@ static int kTouchOrbOpacity = 0.6 * 255;
         _isMovable = [[dic objectForKey:@"move"] boolValue];
         _isTappable = [[dic objectForKey:@"tap"] boolValue];
         _team = [[dic objectForKey:@"team"] intValue];
+        _type = [dic objectForKey:@"type"];
     }
     return self;
 }
@@ -432,11 +433,7 @@ static int kTouchOrbOpacity = 0.6 * 255;
 }
 
 -(void)touchEndLine {
-    if (self.team == kEnemyTeam) {
-        PlayerComponent *enemyPlayerCom = (PlayerComponent *)[self.board.aiPlayer getComponentOfName:[PlayerComponent name]];
-        enemyPlayerCom.mana += kManaForEachEnemyOrb;
-        CCLOG(@"add AI player mana!");
-    }
+    
 }
 
 @end

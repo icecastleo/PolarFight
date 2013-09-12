@@ -99,6 +99,8 @@
 		<dict>
 			<key>101</key>
 			<integer>1</integer>
+			<key>102</key>
+			<integer>1</integer>
 		</dict>
 		<key>enemyOrbsRatio</key>
 		<real>0.25</real>

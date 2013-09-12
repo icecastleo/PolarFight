@@ -456,11 +456,6 @@
     
     CCSprite *sprite;
     
-    NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
-    
-    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
-    [entity addComponent:orbCom];
-    
     NSDictionary *renderDic = [characterData objectForKey:@"RenderComponent"];
     if (renderDic) {
         sprite = [CCSprite spriteWithFile:[renderDic objectForKey:@"sprite"]];
@@ -471,6 +466,13 @@
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
     render.sprite.scale = kOrbWidth/render.sprite.boundingBox.size.width;
     [entity addComponent:render];
+    
+    NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
+    NSString *type = [orbDic objectForKey:@"type"];
+    
+    OrbComponent *orbCom = [[NSClassFromString(type) alloc] initWithDictionary:orbDic];
+//    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
+    [entity addComponent:orbCom];
     
     PlayerComponent *playerCom = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
     

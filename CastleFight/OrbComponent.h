@@ -15,6 +15,7 @@
 
 @property (nonatomic,readonly) OrbColor originalColor;
 @property (nonatomic) OrbColor color;
+@property (nonatomic) NSString *type;
 @property (nonatomic,assign) OrbBoardComponent *board;
 
 @property (nonatomic,readonly) BOOL isMovable;
