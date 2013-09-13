@@ -130,8 +130,8 @@
 }
 
 -(void)setCastle {
-    _userCastle = [entityFactory createCastleForTeam:1];
-    _enemyCastle = [entityFactory createCastleForTeam:2];
+    _userCastle = [entityFactory createCastleForTeam:kPlayerTeam];
+    _enemyCastle = [entityFactory createCastleForTeam:kEnemyTeam];
     
     // FIXME: Create by file
     

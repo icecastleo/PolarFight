@@ -26,7 +26,7 @@
     TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
     MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
     
-    if (teamCom.team == 1) {
+    if (teamCom.team == kPlayerTeam) {
         moveCom.velocity = ccp(1, 0);
     } else {
         moveCom.velocity = ccp(-1, 0);

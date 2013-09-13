@@ -50,7 +50,7 @@
     if (character) {
         CGPoint position;
         
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             position = ccp(kMapStartDistance, kMapPathFloor + arc4random_uniform(kMapPathRandomHeight));
         } else {
             position = ccp(winSize.width - kMapStartDistance, kMapPathFloor + arc4random_uniform(kMapPathRandomHeight));
@@ -58,7 +58,7 @@
         [self addEntity:entity toPosition:position];
     } else {
         // castle
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             render.position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/2, kMapPathFloor);
         } else {
             render.position = ccp(winSize.width - kMapStartDistance + render.sprite.boundingBox.size.width/2, kMapPathFloor);

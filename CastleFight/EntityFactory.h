@@ -29,7 +29,7 @@
 -(Entity *)createEnemyPlayerForTeam:(int)team battleData:(BattleDataObject *)battleData;
 
 -(Entity *)createMagicButton:(NSString *)cid level:(int)level team:(int)team;
--(Entity *)createOrb:(OrbType)type;
+-(Entity *)createOrb:(NSString *)orbId withPlayer:(Entity *)player;
 -(Entity *)createOrbBoardWithUser:(Entity *)player AIPlayer:(Entity *)aiPlayer andBattleData:(BattleDataObject *)battleData;
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;

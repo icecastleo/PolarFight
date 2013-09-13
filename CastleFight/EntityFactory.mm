@@ -107,9 +107,9 @@
         [entity addComponent:[[LineComponent alloc] init]];
     }
     
-    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)];
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)];
     // FIXME: Change all character asset to right
-    direction.spriteDirection = (team == 1 ? kSpriteDirectionRight : kSpriteDirectionLeft);
+    direction.spriteDirection = (team == kPlayerTeam ? kSpriteDirectionRight : kSpriteDirectionLeft);
     [entity addComponent:direction];
     
     NSString *spriteFrameName = nil;
@@ -274,7 +274,7 @@
     
     CCSprite *sprite;
 
-    if (team == 1) {
+    if (team == kPlayerTeam) {
         sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_user_home_01.png"]];
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"building_enemy_home.png"]];
@@ -328,7 +328,7 @@
     
     [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     
-    [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == 1 ? 1 : -1, 0)]];
+    [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)]];
     
     if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
@@ -476,11 +476,10 @@
     return entity;
 }
 
--(Entity *)createOrb:(OrbType)type {
+-(Entity *)createOrb:(NSString *)orbId withPlayer:(Entity *)player {
     Entity *entity = [_entityManager createEntity];
     
-    NSString *cid = [NSString stringWithFormat:@"100%d",type];
-    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:orbId];
     
     CCSprite *sprite;
     
@@ -495,35 +494,45 @@
     render.sprite.scale = kOrbWidth/render.sprite.boundingBox.size.width;
     [entity addComponent:render];
     
-    
-    // FIXME: Link with User data's battle team
-    NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:[NSString stringWithFormat:@"00%d",type]];
-    NSString *name = [cData objectForKey:@"name"];
-    
-    if (name) {
-        NSString *spriteFrameName = nil;
-        
-        if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
-            spriteFrameName = [NSString stringWithFormat:@"%@_move_01.png", name];
-        } else {
-            spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
-        }
-        
-        CCSprite *character = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
-        character.position = ccpSub(ccp(sprite.contentSize.width/2, sprite.contentSize.height/2), character.offsetPosition);
-        
-        if (character.boundingBox.size.width > character.boundingBox.size.height) {
-            character.scale = kOrbWidth/character.boundingBox.size.width/render.sprite.scale*0.75;
-        } else {
-            character.scale = kOrbHeight/character.boundingBox.size.height/render.sprite.scale*0.75;
-        }
-        [sprite addChild:character];
-    }
-    
     NSDictionary *orbDic = [characterData objectForKey:@"OrbComponent"];
-    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
-    orbCom.type = type;
+    NSString *type = [orbDic objectForKey:@"type"];
+    
+    OrbComponent *orbCom = [[NSClassFromString(type) alloc] initWithDictionary:orbDic];
+//    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
     [entity addComponent:orbCom];
+    
+    PlayerComponent *playerCom = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
+    
+    int summonIndex = [[orbDic objectForKey:@"summonIndex"] intValue];
+    
+    if (summonIndex >= 0) {
+        SummonComponent *summonCom = [playerCom.battleTeam objectAtIndex:summonIndex];
+        orbCom.summonData = summonCom;
+        
+        // FIXME: Link with User data's battle team
+        NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:summonCom.data.cid];
+        NSString *name = [cData objectForKey:@"name"];
+        
+        if (name) {
+            NSString *spriteFrameName = nil;
+            
+            if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
+                spriteFrameName = [NSString stringWithFormat:@"%@_move_01.png", name];
+            } else {
+                spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
+            }
+            
+            CCSprite *character = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+            character.position = ccpSub(ccp(sprite.contentSize.width/2, sprite.contentSize.height/2), character.offsetPosition);
+            
+            if (character.boundingBox.size.width > character.boundingBox.size.height) {
+                character.scale = kOrbWidth/character.boundingBox.size.width/render.sprite.scale*0.75;
+            } else {
+                character.scale = kOrbHeight/character.boundingBox.size.height/render.sprite.scale*0.75;
+            }
+            [sprite addChild:character];
+        }
+    }
     
     NSDictionary *touchDic = [characterData objectForKey:@"TouchComponent"];
     if (touchDic) {

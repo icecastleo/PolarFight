@@ -15,42 +15,52 @@
 				<integer>0</integer>
 			</array>
 			<array>
-				<integer>101</integer>
+				<integer>1001</integer>
 				<integer>0</integer>
 				<integer>0</integer>
 				<integer>0</integer>
 			</array>
 			<array>
 				<integer>0</integer>
-				<integer>101</integer>
+				<integer>1001</integer>
 				<integer>0</integer>
 				<integer>0</integer>
 			</array>
 			<array>
 				<integer>0</integer>
 				<integer>0</integer>
-				<integer>101</integer>
+				<integer>1001</integer>
 				<integer>0</integer>
 			</array>
 			<array>
 				<integer>0</integer>
 				<integer>0</integer>
 				<integer>0</integer>
-				<integer>101</integer>
+				<integer>1001</integer>
 			</array>
 		</array>
 	</dict>
 	<key>001</key>
 	<dict>
-		<key>iteration</key>
+		<key>minColumns</key>
+		<integer>4</integer>
+		<key>maxColumns</key>
+		<integer>4</integer>
+		<key>minIteration</key>
 		<integer>3</integer>
+		<key>maxIteration</key>
+		<integer>3</integer>
+		<key>minOrb</key>
+		<integer>-1</integer>
+		<key>maxOrb</key>
+		<integer>-1</integer>
 		<key>patterns</key>
 		<array>
 			<array>
 				<integer>0</integer>
 				<integer>0</integer>
 				<integer>0</integer>
-				<integer>-1</integer>
+				<integer>-2</integer>
 			</array>
 			<array>
 				<integer>0</integer>
@@ -65,7 +75,7 @@
 				<integer>0</integer>
 			</array>
 			<array>
-				<integer>-1</integer>
+				<integer>-3</integer>
 				<integer>0</integer>
 				<integer>0</integer>
 				<integer>0</integer>
@@ -74,8 +84,18 @@
 	</dict>
 	<key>002</key>
 	<dict>
-		<key>iteration</key>
+		<key>minColumns</key>
+		<integer>7</integer>
+		<key>maxColumns</key>
+		<integer>7</integer>
+		<key>minIteration</key>
+		<integer>1</integer>
+		<key>maxIteration</key>
 		<integer>2</integer>
+		<key>minOrb</key>
+		<integer>-1</integer>
+		<key>maxOrb</key>
+		<integer>-1</integer>
 		<key>patterns</key>
 		<array>
 			<array>
@@ -124,22 +144,49 @@
 	</dict>
 	<key>003</key>
 	<dict>
-		<key>iteration</key>
-		<integer>5</integer>
-		<key>patterns</key>
-		<array/>
-	</dict>
-	<key>004</key>
-	<dict>
-		<key>iteration</key>
-		<integer>10</integer>
+		<key>minColumns</key>
+		<integer>1</integer>
+		<key>maxColumns</key>
+		<integer>1</integer>
+		<key>minIteration</key>
+		<integer>3</integer>
+		<key>maxIteration</key>
+		<integer>3</integer>
+		<key>minOrb</key>
+		<integer>0</integer>
+		<key>maxOrb</key>
+		<integer>4</integer>
 		<key>patterns</key>
 		<array>
 			<array>
-				<integer>101</integer>
-				<integer>101</integer>
-				<integer>101</integer>
-				<integer>101</integer>
+				<integer>-3</integer>
+				<integer>-3</integer>
+				<integer>-3</integer>
+				<integer>-3</integer>
+			</array>
+		</array>
+	</dict>
+	<key>004</key>
+	<dict>
+		<key>minColumns</key>
+		<integer>2</integer>
+		<key>maxColumns</key>
+		<integer>2</integer>
+		<key>minIteration</key>
+		<integer>5</integer>
+		<key>maxIteration</key>
+		<integer>5</integer>
+		<key>minOrb</key>
+		<integer>-1</integer>
+		<key>maxOrb</key>
+		<integer>-1</integer>
+		<key>patterns</key>
+		<array>
+			<array>
+				<integer>1001</integer>
+				<integer>1001</integer>
+				<integer>1001</integer>
+				<integer>1001</integer>
 			</array>
 			<array>
 				<integer>0</integer>
@@ -151,7 +198,7 @@
 	</dict>
 	<key>RandomOrbs</key>
 	<dict>
-		<key>101</key>
+		<key>1001</key>
 		<array>
 			<integer>1</integer>
 			<integer>2</integer>

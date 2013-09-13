@@ -29,6 +29,9 @@
 		370243DE17903FC7008267A8 /* spineboy.json in Resources */ = {isa = PBXBuildFile; fileRef = 370243D817903FC7008267A8 /* spineboy.json */; };
 		370243DF17903FC7008267A8 /* spineboy.png in Resources */ = {isa = PBXBuildFile; fileRef = 370243D917903FC7008267A8 /* spineboy.png */; };
 		370243E217903FE1008267A8 /* ExampleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 370243E117903FE1008267A8 /* ExampleLayer.m */; };
+		370AFE7C17E1B95600E369C9 /* SkullOrbComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 370AFE7B17E1B95200E369C9 /* SkullOrbComponent.m */; };
+		370AFE7F17E1C10700E369C9 /* skull-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 370AFE7D17E1C10700E369C9 /* skull-hd.png */; };
+		370AFE8017E1C10700E369C9 /* skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 370AFE7E17E1C10700E369C9 /* skull.png */; };
 		370C938A176F333900A6990D /* DrawPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 370C9389176F333900A6990D /* DrawPath.m */; };
 		3725262316EF684500C79A9E /* standard-black-button-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261B16EF684500C79A9E /* standard-black-button-1.png */; };
 		3725262416EF684500C79A9E /* standard-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3725261C16EF684500C79A9E /* standard-black-button.png */; };
@@ -193,6 +196,7 @@
 		37E5D13A179EB7FD009B2C83 /* rangeFrame_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E5D138179EB7FD009B2C83 /* rangeFrame_1@2x.png */; };
 		37E5D13D179EB8DA009B2C83 /* rangeFrame_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E5D13B179EB8DA009B2C83 /* rangeFrame_2@2x.png */; };
 		37E5D13E179EB8DA009B2C83 /* rangeFrame_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E5D13C179EB8DA009B2C83 /* rangeFrame_2.png */; };
+		37E6755217D8406F00F995CE /* b10.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E6755117D8406F00F995CE /* b10.png */; };
 		37E68CA516F97B4900AB5FBD /* CharacterInitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E68CA416F97B4800AB5FBD /* CharacterInitData.m */; };
 		37E75129175CCB3B009AFEFB /* PeaceSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E75128175CCB3B009AFEFB /* PeaceSkill.m */; };
 		37E798BF17549F7800E0435E /* KnockOutSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E798BE17549F7800E0435E /* KnockOutSkill.m */; };
@@ -609,6 +613,10 @@
 		370243D917903FC7008267A8 /* spineboy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spineboy.png; sourceTree = "<group>"; };
 		370243E017903FE1008267A8 /* ExampleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleLayer.h; sourceTree = "<group>"; };
 		370243E117903FE1008267A8 /* ExampleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleLayer.m; sourceTree = "<group>"; };
+		370AFE7A17E1B95100E369C9 /* SkullOrbComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkullOrbComponent.h; sourceTree = "<group>"; };
+		370AFE7B17E1B95200E369C9 /* SkullOrbComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkullOrbComponent.m; sourceTree = "<group>"; };
+		370AFE7D17E1C10700E369C9 /* skull-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skull-hd.png"; sourceTree = "<group>"; };
+		370AFE7E17E1C10700E369C9 /* skull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skull.png; sourceTree = "<group>"; };
 		370C9388176F333900A6990D /* DrawPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPath.h; sourceTree = "<group>"; };
 		370C9389176F333900A6990D /* DrawPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPath.m; sourceTree = "<group>"; };
 		3725261B16EF684500C79A9E /* standard-black-button-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-black-button-1.png"; sourceTree = "<group>"; };
@@ -842,6 +850,7 @@
 		37E5D138179EB7FD009B2C83 /* rangeFrame_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeFrame_1@2x.png"; sourceTree = "<group>"; };
 		37E5D13B179EB8DA009B2C83 /* rangeFrame_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rangeFrame_2@2x.png"; sourceTree = "<group>"; };
 		37E5D13C179EB8DA009B2C83 /* rangeFrame_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rangeFrame_2.png; sourceTree = "<group>"; };
+		37E6755117D8406F00F995CE /* b10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b10.png; sourceTree = "<group>"; };
 		37E68CA316F97B4800AB5FBD /* CharacterInitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterInitData.h; sourceTree = "<group>"; };
 		37E68CA416F97B4800AB5FBD /* CharacterInitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterInitData.m; sourceTree = "<group>"; };
 		37E75127175CCB3B009AFEFB /* PeaceSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeaceSkill.h; sourceTree = "<group>"; };
@@ -2872,6 +2881,7 @@
 				9BA6EA5017D5E42300E6E862 /* b3.png */,
 				9BA6EA5117D5E42300E6E862 /* b4.png */,
 				9BA6EA5217D5E42300E6E862 /* b5.png */,
+				37E6755117D8406F00F995CE /* b10.png */,
 				9BA6EA5317D5E42300E6E862 /* b11.png */,
 				9BA6EA5417D5E42300E6E862 /* b22.png */,
 				9BA6EA5517D5E42300E6E862 /* b33.png */,
@@ -2879,6 +2889,8 @@
 				9BA6EA5717D5E42300E6E862 /* b55.png */,
 				9BA6EA6F17D5E76700E6E862 /* explosion.png */,
 				9BA6EA6E17D5E76700E6E862 /* explosion-hd.png */,
+				370AFE7D17E1C10700E369C9 /* skull-hd.png */,
+				370AFE7E17E1C10700E369C9 /* skull.png */,
 			);
 			path = Orbs;
 			sourceTree = "<group>";
@@ -3548,7 +3560,10 @@
 				9BA6EA6117D5E42300E6E862 /* b55.png in Resources */,
 				9BA6EA7017D5E76700E6E862 /* explosion-hd.png in Resources */,
 				9BA6EA7117D5E76700E6E862 /* explosion.png in Resources */,
+				37E6755217D8406F00F995CE /* b10.png in Resources */,
 				9BE679ED17D8627D003B2EE4 /* christmas1.png in Resources */,
+				370AFE7F17E1C10700E369C9 /* skull-hd.png in Resources */,
+				370AFE8017E1C10700E369C9 /* skull.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

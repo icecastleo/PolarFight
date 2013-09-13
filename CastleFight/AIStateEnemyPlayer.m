@@ -130,7 +130,7 @@
     for (Entity *entity in entities) {
         TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
         
-        if (team.team == 1) {
+        if (team.team == kPlayerTeam) {
             continue;
         }
         

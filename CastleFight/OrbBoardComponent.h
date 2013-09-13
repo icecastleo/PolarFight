@@ -33,11 +33,13 @@ typedef enum {
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory player:(Entity *)player aiPlayer:(Entity *)aiPlayer BattleData:(BattleDataObject *)battleData ;
 
+-(Entity *)orbAtPosition:(CGPoint)position;
+-(CGPoint)convertRenderPositionToOrbPosition:(CGPoint)position;
+
 -(void)moveOrb:(Entity *)startOrb toPosition:(CGPoint)position;
 
--(NSArray *)findMatchForOrb:(Entity *)currentOrb;
--(void)matchClean:(NSArray *)matchArray;
-
 -(NSArray *)nextColumn;
+
+-(void)addToRecord:(NSDictionary *)matchDic;
 
 @end
