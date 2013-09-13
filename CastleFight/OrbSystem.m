@@ -41,7 +41,7 @@
                 NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
                 for (int row = 0; row < kOrbBoardRows; row++) {
                     // create orb!
-                    Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row] withPlayer:board.player];
+                    Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row]];
                     RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                     
                     if (board.columns.count == 0) {
@@ -53,34 +53,24 @@
                     }
                     
                     OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                    if ([orbCom respondsToSelector:@selector(touchEndLine)]) {
-                        [orbCom touchEndLine];
-                    }
-                    [render.sprite runAction:
-                     [CCSequence actions:
-                      [CCFadeOut actionWithDuration:0.5f],
-                      [CCCallBlock actionWithBlock:^{
-                         [render.node removeFromParentAndCleanup:YES];
-                     }],nil]];
+                    orbCom.board = board;
                     
                     [column addObject:orb];
                 }
-                
-                [board.columns removeObjectAtIndex:0];
-            }
-
-            NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
-            for (int row = 0; row < kOrbBoardRows; row++) {
-                // create orb!
-                Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row]];
-                RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-                
-                if (board.columns.count == 0) {
-                    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
-                } else {
-                    Entity *lastEntity = [[board.columns lastObject] objectAtIndex:row];
-                    RenderComponent *lastEntityRender = (RenderComponent *)[lastEntity getComponentOfName:[RenderComponent name]];
-                    render.node.position = ccp(lastEntityRender.position.x + kOrbWidth, lastEntityRender.position.y);
+                [board.columns addObject:column];
+            } else {
+                if (board.columns.count > 0) {
+                    [self removeFirstColumnsInBoard:board];
+                    
+                    if (board.columns.count == 0) {
+                        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+                        
+                        [render.node runAction:[CCSequence actions:
+                                                [CCDelayTime actionWithDuration:0.5f],
+                                                [CCCallBlock actionWithBlock:^{
+                            board.status = kOrbBoardStatusEnd;
+                        }], nil]];
+                    }
                 }
             }
         }
@@ -101,7 +91,9 @@
         RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
         
         OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        [orbCom touchEndLine];
+        if ([orbCom respondsToSelector:@selector(touchEndLine)]) {
+            [orbCom touchEndLine];
+        }
         
         [render.sprite runAction:
          [CCSequence actions:
