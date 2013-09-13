@@ -190,7 +190,8 @@ typedef enum {
 } MatchWay;
 
 typedef enum {
-    kPlayerTeam = 1,
+    kNoTeam = 0,
+    kPlayerTeam,
     kEnemyTeam,
     kAllTeam
 } OrbTeam;

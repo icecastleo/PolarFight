@@ -31,10 +31,13 @@
     
 //    TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
     
-    SummonComponent *summonCom = [self.magicInformation objectForKey:@"SummonData"];
+    SummonComponent *summonCom = [[SummonComponent alloc] initWithCharacterInitData:
+                                  [self.magicInformation objectForKey:@"SummonData"]];
+    ;
     if (!summonCom) {
         return;
     }
+    
     NSNumber *addLevel = [self.magicInformation objectForKey:@"addLevel"];
     Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:kPlayerTeam addToMap:NO];
     [self.entityFactory.mapLayer addEntity:summonEntity];

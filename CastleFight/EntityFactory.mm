@@ -449,7 +449,7 @@
     return entity;
 }
 
--(Entity *)createOrb:(NSString *)orbId withPlayer:(Entity *)player {
+-(Entity *)createOrb:(NSString *)orbId {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:orbId];
@@ -474,16 +474,16 @@
 //    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
     [entity addComponent:orbCom];
     
-    PlayerComponent *playerCom = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
-    
     int summonIndex = [[orbDic objectForKey:@"summonIndex"] intValue];
     
     if (summonIndex >= 0) {
-        SummonComponent *summonCom = [playerCom.battleTeam objectAtIndex:summonIndex];
-        orbCom.summonData = summonCom;
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
+        CharacterInitData *data = [battleTeamInitData objectAtIndex:summonIndex];
+        
+        orbCom.summonData = data;
         
         // FIXME: Link with User data's battle team
-        NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:summonCom.data.cid];
+        NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:data.cid];
         NSString *name = [cData objectForKey:@"name"];
         
         if (name) {

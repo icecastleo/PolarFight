@@ -205,6 +205,8 @@
     return nil;
 }
 
+#pragma mark Record & Show Combos
+// might move to other place
 -(void)addToRecord:(NSDictionary *)matchDic {
     NSMutableArray *allOrbs = [[NSMutableArray alloc] initWithArray:[matchDic objectForKey:kOrbMainMatch]];
     [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbSameColorMatch]];

@@ -424,15 +424,14 @@ static int kTouchOrbOpacity = 0.6 * 255;
          [orbRenderCom.node setVisible:NO];
      }],nil]];
     
-    OrbComponent *orbCom = (OrbComponent *)[self.entity getComponentOfName:[OrbComponent name]];
-    orbCom.color = OrbNull;
+    _color = OrbNull;
+    _team = kNoTeam;
+    [touchSprite removeFromParentAndCleanup:YES];
+    touchSprite = nil;
+    
     if ([self.entity getComponentOfName:[TouchComponent name]]) {
         [self.entity removeComponent:[TouchComponent name]];
     }
-    
-}
-
--(void)touchEndLine {
     
 }
 

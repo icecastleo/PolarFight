@@ -44,7 +44,9 @@
                 for (Entity *orb in [board.columns objectAtIndex:0]) {
                     RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                     OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                    [orbCom touchEndLine];
+                    if ([orbCom respondsToSelector:@selector(touchEndLine)]) {
+                        [orbCom touchEndLine];
+                    }
                     [render.sprite runAction:
                      [CCSequence actions:
                       [CCFadeOut actionWithDuration:0.5f],
@@ -61,7 +63,7 @@
             NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
             for (int row = 0; row < kOrbBoardRows; row++) {
                 // create orb!
-                Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row] withPlayer:board.player];
+                Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row]];
                 RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                 
                 if (board.columns.count == 0) {

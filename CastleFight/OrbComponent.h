@@ -9,9 +9,14 @@
 #import "Component.h"
 #import "TouchComponent.h"
 
-@class OrbBoardComponent,SummonComponent;
+@class OrbBoardComponent,CharacterInitData;
 
-@interface OrbComponent : Component <TouchComponentDelegate>
+@protocol OrbComponentDelegate <NSObject>
+@optional
+-(void)touchEndLine;
+@end
+
+@interface OrbComponent : Component <TouchComponentDelegate,OrbComponentDelegate>
 
 @property (nonatomic,readonly) OrbColor originalColor;
 @property (nonatomic) OrbColor color;
@@ -21,14 +26,13 @@
 @property (nonatomic,readonly) BOOL isMovable;
 @property (nonatomic,readonly) BOOL isTappable;
 @property (nonatomic,readonly) int team;
-@property (nonatomic,assign) SummonComponent *summonData;
+@property (nonatomic,assign) CharacterInitData *summonData;
 
 -(id)initWithDictionary:(NSDictionary *)dic;
 
 -(void)executeMatch:(int)number;
 
 -(void)disappearAfterMatch;
--(void)touchEndLine;
 
 -(NSDictionary *)findMatch;
 -(void)matchClean:(NSDictionary *)matchDic;
