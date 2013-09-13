@@ -31,6 +31,6 @@
     EnemyData *nextEnemy;
 }
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory;
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory battleDataObject:(BattleDataObject *)battleData;
 
 @end

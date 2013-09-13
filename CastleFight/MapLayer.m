@@ -17,9 +17,6 @@
 
 @dynamic maxChildZ;
 
-//const int pathSizeHeight = 25;
-const static int pathSizeHeight = 40;
-
 -(id)initWithName:(NSString *)name {
     if(self = [super init]) {
         [self setMap:name];
@@ -54,29 +51,7 @@ const static int pathSizeHeight = 40;
 }
 
 -(void)addEntity:(Entity *)entity {
-    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-    NSAssert(render, @"Need render component to add on map!");
-    
-    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
-    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
-    
-    CGPoint position;
-    
-    if (character) {
-        if (team.team == 1) {
-            position = ccp(kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
-        } else {
-            position = ccp(self.boundaryX - kMapStartDistance, arc4random_uniform(pathSizeHeight) + kMapPathHeight);
-        }
-    } else {
-        // castle
-        if (team.team == 1) {
-            position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
-        } else {
-            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathHeight + pathSizeHeight/2);
-        }
-    }
-    [self addEntity:entity toPosition:position];
+    [self addEntity:entity toPosition:CGPointZero];
 }
 
 -(void)addEntity:(Entity *)entity toPosition:(CGPoint)position {
@@ -148,7 +123,6 @@ const static int pathSizeHeight = 40;
 //    location = [touch locationInView:[CCDirector sharedDirector].view];
 //    location = [[CCDirector sharedDirector] convertToGL: location];
 }
-
 
 -(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
     // FIXME: Replace by entity action

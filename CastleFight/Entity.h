@@ -59,6 +59,8 @@ typedef enum {
 @property (readonly) uint32_t eid;
 @property (readonly) NSNumber *eidNumber;
 
+@property CGPoint position;
+
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager;
 
 -(void)addComponent:(Component*)component;

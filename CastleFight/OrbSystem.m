@@ -12,78 +12,69 @@
 #import "PlayerComponent.h"
 #import "RenderComponent.h"
 
-@interface OrbSystem () {
-    int maxColumns;
-    
-    float countDown;
-}
-
-@end
-
 @implementation OrbSystem
-
--(id)initWithEntityManager:(EntityManager *)entityManager entityFactory:(EntityFactory *)entityFactory {
-    if (self = [super initWithEntityManager:entityManager entityFactory:entityFactory]) {
-        maxColumns = kOrbBoardColumns;
-        countDown = 0;
-    }
-    return self;
-}
 
 -(void)update:(float)delta {
     for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfName:[OrbBoardComponent name]]) {
         OrbBoardComponent *board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
         
-        if (countDown <= 0) {
-            countDown += kOrbWidth;
-            NSArray *nextColumn = [board nextColumn];
-            NSAssert(nextColumn.count == kOrbBoardRows, @"nextColumn.count is not enough for creating orbs.");
+        if (board.status != kOrbBoardStatusStart) {
+            continue;
+        }
+        
+        if (board.timeCountdown > 0) {
+            board.timeCountdown = MAX(0, board.timeCountdown - delta);
+        }
+        
+        if (board.orbCountdown <= 0) {
+            board.orbCountdown += kOrbWidth;
             
-            // Too much orbs
-            if (board.columns.count == maxColumns) {
-                for (Entity *orb in [board.columns objectAtIndex:0]) {
-                    RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-                    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                    if (orbCom.type == OrbPurple) {
-                        PlayerComponent *enemyPlayerCom = (PlayerComponent *)[board.aiPlayer getComponentOfName:[PlayerComponent name]];
-                        enemyPlayerCom.mana += kManaForEachEnemyOrb;
-                        CCLOG(@"add AI player mana!");
-                    }
-                    [render.sprite runAction:
-                     [CCSequence actions:
-                      [CCFadeOut actionWithDuration:0.5f],
-                      [CCCallBlock actionWithBlock:^{
-                         [render.node removeFromParentAndCleanup:YES];
-                     }],nil]];
+            if (board.timeCountdown > 0) {
+                // Too much orbs
+                if (board.columns.count == board.maxColumns) {
+                    [self removeFirstColumnsInBoard:board];
+                }
+                
+                NSArray *nextColumn = [board nextColumn];
+                NSAssert(nextColumn.count == kOrbBoardRows, @"Columns's patter does not match orb's row.");
+                
+                NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
+                for (int row = 0; row < kOrbBoardRows; row++) {
+                    // create orb!
+                    OrbType type = [[nextColumn objectAtIndex:row] intValue];
                     
-                    [orb removeSelf];
+                    Entity *orb = [self.entityFactory createOrb:type];
+                    RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+                    
+                    if (board.columns.count == 0) {
+                        render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
+                    } else {
+                        Entity *lastEntity = [[board.columns lastObject] objectAtIndex:row];
+                        RenderComponent *lastEntityRender = (RenderComponent *)[lastEntity getComponentOfName:[RenderComponent name]];
+                        render.node.position = ccp(lastEntityRender.position.x + kOrbWidth, lastEntityRender.position.y);
+                    }
+                    
+                    OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+                    orbCom.board = board;
+                    
+                    [column addObject:orb];
                 }
-                
-                [board.columns removeObjectAtIndex:0];
-            }
-
-            NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
-            for (int row = 0; row < kOrbBoardRows; row++) {
-                // create orb!
-                OrbType type = [[nextColumn objectAtIndex:row] intValue];
-                
-                Entity *orb = [self.entityFactory createOrb:type];
-                RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
-                
-                if (board.columns.count == 0) {
-                    render.node.position = ccp(kOrbBoardColumns * kOrbWidth + kOrbBoradLeftMargin, kOrbHeight/2 + kOrbHeight * row + kOrbBoradDownMargin);
-                } else {
-                    Entity *lastEntity = [[board.columns lastObject] objectAtIndex:row];
-                    RenderComponent *lastEntityRender = (RenderComponent *)[lastEntity getComponentOfName:[RenderComponent name]];
-                    render.node.position = ccp(lastEntityRender.position.x + kOrbWidth, lastEntityRender.position.y);
+                [board.columns addObject:column];
+            } else {
+                if (board.columns.count > 0) {
+                    [self removeFirstColumnsInBoard:board];
+                    
+                    if (board.columns.count == 0) {
+                        RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+                        
+                        [render.node runAction:[CCSequence actions:
+                                                [CCDelayTime actionWithDuration:0.5f],
+                                                [CCCallBlock actionWithBlock:^{
+                            board.status = kOrbBoardStatusEnd;
+                        }], nil]];
+                    }
                 }
-            
-                OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-                orbCom.board = board;
-                
-                [column addObject:orb];
             }
-            [board.columns addObject:column];
         }
         
         for (NSArray *column in board.columns) {
@@ -93,8 +84,32 @@
             }
         }
         
-        countDown -= kOrbSpeed * delta;
+        board.orbCountdown -= kOrbSpeed * delta;
     }
+}
+
+-(void)removeFirstColumnsInBoard:(OrbBoardComponent *)board {
+    for (Entity *orb in [board.columns objectAtIndex:0]) {
+        RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
+        
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        // Do something on bad orb!
+        if (orbCom.type == OrbPurple) {
+            PlayerComponent *enemyPlayerCom = (PlayerComponent *)[board.aiPlayer getComponentOfName:[PlayerComponent name]];
+            enemyPlayerCom.mana += kManaForEachEnemyOrb;
+        }
+        
+        [render.sprite runAction:
+         [CCSequence actions:
+          [CCFadeOut actionWithDuration:0.5f],
+          [CCCallBlock actionWithBlock:^{
+             [render.node removeFromParentAndCleanup:YES];
+         }],nil]];
+        
+        [orb removeSelf];
+    }
+    
+    [board.columns removeObjectAtIndex:0];
 }
 
 @end

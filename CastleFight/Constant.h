@@ -33,8 +33,8 @@
 #define kSummonTypeStockOnce 3
 
 // For map
-//#define kMapPathFloor 50
-#define kMapPathFloor [CCDirector sharedDirector].winSize.height/2 + 10
+#define kMapPathFloor 50
+//#define kMapPathFloor [CCDirector sharedDirector].winSize.height/2 + 10
 #define kMapPathHeight 65
 #define kMapPathRandomHeight 15
 #define kMapPathMaxLine 3
@@ -88,14 +88,14 @@
 #define kAISystemUpdateInterval 0.1
 
 //For Orbs
-#define kOrbWidth 37.5
-#define kOrbHeight 37.5
+#define kOrbWidth 45
+#define kOrbHeight 45
 #define kOrbSpeed 30
 
 #define kOrbBoradLeftMargin 30
-#define kOrbBoradDownMargin 5
+#define kOrbBoradDownMargin 15
 
-#define kOrbBoardRows 4
+#define kOrbBoardRows 5
 #define kOrbBoardColumns (int)(([CCDirector sharedDirector].winSize.width - kOrbBoradLeftMargin) / kOrbWidth + 1)
 #define kOrbBombDelay 0.1
 

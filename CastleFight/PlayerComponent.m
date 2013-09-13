@@ -26,7 +26,6 @@
         _maxManaRate = _manaRate * 4;
         
         _interval = 0.25;
-        _foodAddend = 0.05;
         
         _summonComponents = [[NSMutableArray alloc] init];
         _battleTeam = [[NSMutableArray alloc] init];

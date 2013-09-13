@@ -39,12 +39,12 @@
 
 @implementation AIStateEnemyPlayer
 
--(id)initWithEntityFactory:(EntityFactory *)entityFactory {
+-(id)initWithEntityFactory:(EntityFactory *)entityFactory battleDataObject:(BattleDataObject *)battleData {
     if (self = [super init]) {
         _entityFactory = entityFactory;
         enemyDatas = [[EnemyDatas alloc] init];
         
-        NSArray *enemys = [BattleController currentInstance].battleData.enemyCharacterDatas;
+        NSArray *enemys = battleData.enemyCharacterDatas;
         
         for (EnemyData *data in enemys) {
             [enemyDatas addEnemyData:data];
@@ -77,7 +77,7 @@
         player.food -= nextEnemy.cost;
         
         // Auto add to map
-        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2 addToMap:YES];
+        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2];
 
         // Add count
         nextEnemy.currentCount++;

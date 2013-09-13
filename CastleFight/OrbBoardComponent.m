@@ -24,6 +24,9 @@ typedef enum {
 } MatchWay;
 
 @interface OrbBoardComponent() {
+    // Only used for very short period board time to adjust orb position!
+    int columnsShift;
+    
     int combos;
     int combosOrbSum; // only for test
     BattleDataObject *_battleData;
@@ -45,8 +48,8 @@ typedef enum {
 
 -(id)initWithEntityFactory:(EntityFactory *)entityFactory player:(Entity *)player aiPlayer:(Entity *)aiPlayer BattleData:(BattleDataObject *)battleData {
     if (self = [super init]) {
-        
         _columns = [NSMutableArray arrayWithCapacity:kOrbBoardColumns];
+        _maxColumns = kOrbBoardColumns;
         
         _entityFactory = entityFactory;
         combos = 0;
@@ -61,8 +64,15 @@ typedef enum {
     return self;
 }
 
--(void)moveOrb:(Entity *)orb toPosition:(CGPoint)position {
+-(void)setTimeCountdown:(float)timeCountdown {
+    if (timeCountdown <= 0) {
+        columnsShift = _maxColumns - _columns.count;
+    }
     
+    _timeCountdown = timeCountdown;
+}
+
+-(void)moveOrb:(Entity *)orb toPosition:(CGPoint)position {
     RenderComponent *renderA = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
     
     int deltaX = position.x - renderA.node.position.x;
@@ -92,11 +102,6 @@ typedef enum {
         [path addObject:[NSValue valueWithCGPoint:position]];
     }
     
-//    for (int i=0; i<path.count; i++) {
-//        CGPoint targetPosition = [(NSValue *)[path objectAtIndex:i] CGPointValue];
-//        NSLog(@"position: %@",NSStringFromCGPoint(targetPosition));
-//    }
-    
     [self moveOrb:orb withPath:path];
 }
 
@@ -124,9 +129,6 @@ typedef enum {
             continue;
         }
         
-//        CCLOG(@"Position : %@ -> %@", NSStringFromCGPoint(renderA.node.position), NSStringFromCGPoint(position));
-//        CCLOG(@"Orb Position : %@ -> %@", NSStringFromCGPoint(orbPositionA), NSStringFromCGPoint(orbPositionB));
-        
         // Block inclined move
         if (ccpDistance(orbPositionA, orbPositionB) > 1) {
             NSAssert(ccpDistance(orbPositionA, orbPositionB) < 2, @"It should be square root of 2!");
@@ -143,17 +145,20 @@ typedef enum {
         }
         
         Entity *entityB = [self orbAtPosition:orbPositionB];
-        RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
-
+        
+        // Change orb with invalid position
+        if (entityB == nil) {
+            break;
+        }
+        
         OrbComponent *orbComponentB = (OrbComponent *)[entityB getComponentOfName:[OrbComponent name]];
         
-        // Block
+        // Change orb with other orb
         if (orbComponentB.type != OrbNull) {
             break;
         }
                         
-//        CCLOG(@"%f %f && %f %f",orbPositionA.x, orbPositionA.y, orbPositionB.x, orbPositionB.y);
-//        CCLOG(@"%@ && %@",entityA , entityB);
+        RenderComponent *renderB = (RenderComponent *)[entityB getComponentOfName:[RenderComponent name]];
         
         // Change orb
         CGPoint temp = renderB.node.position;
@@ -166,8 +171,16 @@ typedef enum {
 }
 
 -(CGPoint)convertRenderPositionToOrbPosition:(CGPoint)position {
-    int x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - (kOrbBoardColumns - _columns.count));
-    int y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
+    int x = 0;
+    int y = 0;
+    
+    if (_timeCountdown > 0) {
+        x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - (_maxColumns - _columns.count));
+        y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
+    } else {
+        x = MAX(0, (position.x - kOrbBoradLeftMargin) / kOrbWidth - columnsShift);
+        y = MIN(kOrbBoardRows - 1, MAX(0, (position.y - kOrbBoradDownMargin) / kOrbHeight));
+    }
     
 //    CCLOG(@"%f %f -> %d %d", position.x, position.y, x, y);
     
@@ -178,6 +191,7 @@ typedef enum {
     if (position.x >= 0 && position.x < self.columns.count && position.y >= 0 && position.y < kOrbBoardRows) {
         return [[_columns objectAtIndex:position.x] objectAtIndex:position.y];
     }
+    
     return nil;
 }
 

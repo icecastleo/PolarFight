@@ -39,6 +39,7 @@
 #import "ProjectileEvent.h"
 #import "AIStateProjectile.h"
 #import "LineComponent.h"
+#import "PlayerArmyComponent.h"
 
 #import "TouchComponent.h"
 #import "MovePathComponent.h"
@@ -81,7 +82,11 @@
     return self;
 }
 
--(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team addToMap:(BOOL)add {
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team {
+    return [self createCharacter:cid level:level forTeam:team scale:1.0];
+}
+
+-(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team scale:(float)scale {
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
     
     NSString *name = [characterData objectForKey:@"name"];
@@ -121,17 +126,12 @@
     if ([cid intValue]/100 == 2) {
         CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
         [animationNode updateWorldTransform];
-        
         sprite = animationNode;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
-        
-        if ([cid intValue]/100 == 0) {
-            sprite.scale = 0.8;
-        } else if ([cid intValue]/100 == 1) {
-            sprite.scale = 0.7;
-        }
     }
+    
+    sprite.scale = scale;
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
     render.enableShadowPosition = YES;
@@ -151,7 +151,6 @@
         
         [physics.root addChild:physicsNode];
     }
-    
     
     [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
     
@@ -237,11 +236,33 @@
     
     //    [_entityManager addComponent:[[PlayerComponent alloc] init] toEntity:entity];
     
-    if (self.mapLayer && add) {
+    if (self.mapLayer) {
         [self.mapLayer addEntity:entity];
     }
     
     return entity;
+}
+
+-(void)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team {
+    // TODO: 前排，後排，count系數
+    
+    Entity *entity = [self createCharacter:cid level:5 forTeam:team scale:0.6];
+    entity.position = ccp(arc4random_uniform(240) + (team == 1 ? 0 : 240), arc4random_uniform(100) + kMapPathFloor);
+    
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+    
+    for (int i = 0; i < count/3; i++) {
+        Entity *minion = [self createCharacter:cid level:1 forTeam:team scale:0.35];
+
+        while (YES) {
+            CGPoint temp = ccp(CCRANDOM_MINUS1_1() * render.sprite.boundingBox.size.width*2, CCRANDOM_MINUS1_1() * render.sprite.boundingBox.size.height*2);
+            
+            if (ccpLength(temp) > MAX(render.sprite.boundingBox.size.width/3, render.sprite.boundingBox.size.height/3) && ccpLength(temp) < MAX(render.sprite.boundingBox.size.width/2, render.sprite.boundingBox.size.height/2)) {
+                minion.position = ccpAdd(render.position, temp);
+                break;
+            }
+        }
+    }
 }
 
 -(Entity *)createCastleForTeam:(int)team {
@@ -316,62 +337,68 @@
     return entity;
 }
 
--(Entity *)createPlayerForTeam:(int)team {
+-(Entity *)createUserPlayerForTeam:(int)team {
     Entity *entity = [_entityManager createEntity];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     
     // TODO: Set by file
     PlayerComponent *player = [[PlayerComponent alloc] init];
-    
-    if (team == 2) {
-        player.foodAddend = 0.0;
-    }
-    
     [entity addComponent:player];
     
-    if (team == 1) {
-        NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
+    PlayerArmyComponent *armies = [[PlayerArmyComponent alloc] init];
+    [entity addComponent:armies];
+    
+    NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
+    
+    for (CharacterInitData *data in characterInitDatas) {
+        Entity *summonButton = [self createSummonButton:data];
+        MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
+        magicCom.spellCaster = entity;
+        [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
         
-        for (CharacterInitData *data in characterInitDatas) {
-            Entity *summonButton = [self createSummonButton:data];
-            MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
-            magicCom.spellCaster = entity;
-            [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
-            
-            [player.summonComponents addObject:summonButton];
-        }
-        
-        NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
-        for (CharacterInitData *data in battleTeamInitData) {
-            SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
-            summon.player = player;
-//            summon.summon = YES;
-            [player.battleTeam addObject:summon];
-        }
-        
-       MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
-        NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
-        
-        for (CharacterInitData *data in magicTeamInitData) {
-            Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
-            
-            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
-            magicCom.spellCaster = entity;
-            NSAssert(NSClassFromString(magicCom.name), @"you forgot to make this skill.");
-            
-            [magicSkillCom.magicTeam addObject:magicButton];
-        }
-        
-        [entity addComponent:magicSkillCom];
-        
-        [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
-                              nil]];
-        
-        [entity addComponent:[[ProjectileComponent alloc] init]];
-        
-    } else if (team == 2) {
-        [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self]]];
+        [player.summonComponents addObject:summonButton];
     }
+    
+    NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
+    for (CharacterInitData *data in battleTeamInitData) {
+        SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
+        summon.player = player;
+        //            summon.summon = YES;
+        [player.battleTeam addObject:summon];
+    }
+    
+    MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
+    NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
+    
+    for (CharacterInitData *data in magicTeamInitData) {
+        Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
+        
+        MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
+        magicCom.spellCaster = entity;
+        NSAssert(NSClassFromString(magicCom.name), @"You forgot to make this skill.");
+        
+        [magicSkillCom.magicTeam addObject:magicButton];
+    }
+    
+    [entity addComponent:magicSkillCom];
+    
+    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
+                          nil]];
+    
+    [entity addComponent:[[ProjectileComponent alloc] init]];
+    
+    return entity;
+}
+
+-(Entity *)createEnemyPlayerForTeam:(int)team battleData:(BattleDataObject *)battleData {
+    Entity *entity = [_entityManager createEntity];
+    [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
+    
+    // TODO: Set by file
+    PlayerComponent *player = [[PlayerComponent alloc] init];
+    [entity addComponent:player];
+    
+//    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self battleDataObject:battleData]]];
     
     return entity;
 }
@@ -517,13 +544,16 @@
     Entity *entity = [_entityManager createEntity];
     
     CCSprite *sprite = [[CCSprite alloc] init];
-    RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
-    [entity addComponent:renderCom];
-    
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    [entity addComponent:render];
+//
 //    sprite.opacity = 0;
     
     OrbBoardComponent *orbBoardCom = [[OrbBoardComponent alloc] initWithEntityFactory:self player:player aiPlayer:aiPlayer BattleData:battleData];
     [entity addComponent:orbBoardCom];
+    
+    NSAssert(self.mapLayer, @"Orb system use a ccaction to support!");
+    [self.mapLayer addChild:render.node];
     
     return entity;
 }

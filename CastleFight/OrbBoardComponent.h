@@ -8,11 +8,23 @@
 
 #import "Component.h"
 
-@class EntityFactory,BattleDataObject;
+@class EntityFactory, BattleDataObject;
+
+typedef enum {
+    kOrbBoardStatusReady,
+    kOrbBoardStatusStart,
+    kOrbBoardStatusEnd,
+} OrbBoardStatus;
 
 @interface OrbBoardComponent : Component
 
+@property OrbBoardStatus status;
+
 @property (readonly) NSMutableArray *columns;
+@property (readonly) int maxColumns;
+
+@property (nonatomic) float timeCountdown;
+@property float orbCountdown;
 
 @property (nonatomic,readonly) Entity *player; //player
 @property (nonatomic,readonly) Entity *aiPlayer;

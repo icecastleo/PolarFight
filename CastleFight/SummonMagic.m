@@ -30,9 +30,8 @@
     
     TeamComponent *teamCom = (TeamComponent *)[self.owner getComponentOfName:[TeamComponent name]];
     SummonComponent *summonCom = (SummonComponent *)[self.owner getComponentOfName:[SummonComponent name]];
-    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level forTeam:teamCom.team addToMap:NO];
-    
-    [self.entityFactory.mapLayer addEntity:summonEntity toPosition:endPosition];
+    Entity *summonEntity = [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level forTeam:teamCom.team];
+    summonEntity.position = endPosition;
 }
 
 @end
