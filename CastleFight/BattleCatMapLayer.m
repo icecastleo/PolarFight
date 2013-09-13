@@ -7,20 +7,11 @@
 //
 
 #import "BattleCatMapLayer.h"
-#import "HeroAI.h"
+#import "RenderComponent.h"
+#import "TeamComponent.h"
+#import "CharacterComponent.h"
 
 @implementation BattleCatMapLayer
-
--(id)initWithName:(NSString *)name {
-    if (self = [super initWithName:name]) {
-//        _hero = [[Character alloc] initWithId:@"209" andLevel:1];
-//        _hero.player = 1;
-//        [_hero.sprite addBloodSprite];
-//        [self addCharacter:_hero];
-//        _hero.ai = [[HeroAI alloc] initWithCharacter:_hero];
-    }
-    return self;
-}
 
 -(void)setMap:(NSString *)name {
     // Background
@@ -58,47 +49,30 @@
     self.contentSize = CGSizeMake(map1.contentSize.width*2, map1.contentSize.height);
 }
 
-//-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-//    isMove = NO;
-//    return YES;
-//}
-//
-//-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-//    isMove = YES;
-//    
-//    CGPoint location = [touch locationInView:touch.view];
-//    location = [[CCDirector sharedDirector] convertToGL:location];
-//    
-//    CGPoint lastLocation = [touch previousLocationInView:touch.view];
-//    lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
-//    
-//    CGPoint diff = ccpSub(lastLocation, location);
-//    
-//    [self.cameraControl moveBy:ccpMult(diff, 0.5)];
-//    
-//    if (isFollow) {
-//        isFollow = NO;
-//        [self.cameraControl stopFollow];
-//    }
-//}
-//
-//-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-//    // map location
-//    CGPoint location = [self convertTouchToNodeSpace:touch];
-//    
-//    //    // win location
-//    //    location = [touch locationInView:[CCDirector sharedDirector].view];
-//    //    location = [[CCDirector sharedDirector] convertToGL: location];
-//    
-//    if (!isMove) {
-//        _hero.ai.targetPoint = location;
-//        
-//        if (isFollow == NO) {
-//            isFollow = YES;
-//            [self.cameraControl followCharacter:_hero];
-//        }
-//    }
-//}
-
+-(void)addEntity:(Entity *)entity {
+    RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+    NSAssert(render, @"Need render component to add on map!");
+    
+    TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
+    
+    CGPoint position;
+    
+    if (character) {
+        if (team.team == 1) {
+            position = ccp(kMapStartDistance, arc4random_uniform(kMapPathRandomHeight) + kMapPathFloor);
+        } else {
+            position = ccp(self.boundaryX - kMapStartDistance, arc4random_uniform(kMapPathRandomHeight) + kMapPathFloor);
+        }
+    } else {
+        // castle
+        if (team.team == 1) {
+            position = ccp(kMapStartDistance - render.sprite.boundingBox.size.width/4, kMapPathFloor);
+        } else {
+            position = ccp(self.boundaryX - kMapStartDistance + render.sprite.boundingBox.size.width/4, kMapPathFloor);
+        }
+    }
+    [self addEntity:entity toPosition:position];
+}
 
 @end

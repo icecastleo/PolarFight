@@ -16,6 +16,7 @@
 #import "MainScene.h"
 #import "FileManager.h"
 #import "ExampleLayer.h"
+#import "RoundBattleController.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -91,19 +92,26 @@
 
         gameCenterMenuItem.position = ccp(background.boundingBox.size.width - gameCenterMenuItem.boundingBox.size.width, background.boundingBox.size.height - gameCenterMenuItem.boundingBox.size.height);
         
-        CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_down.png"] block:^(id sender) {
-                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
-                    [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:1 suffix:1]];
-//[[CCDirector sharedDirector] replaceScene:[ExampleLayer scene]];
-            
+//        CCMenuItem *testMenuItem = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_down.png"] block:^(id sender) {
+//                    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
+//                    [[CCDirector sharedDirector] replaceScene:[[BattleController alloc] initWithPrefix:1 suffix:1]];
+////[[CCDirector sharedDirector] replaceScene:[ExampleLayer scene]];
+//            
+//        }];
+//        
+//        testMenuItem.position = ccp(testMenuItem.boundingBox.size.width, testMenuItem.boundingBox.size.height);
+        
+        CCMenuItem *testMenuItem2 = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_up.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"bt_main_help_down.png"] block:^(id sender) {
+            [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"etc.plist"];
+            [[CCDirector sharedDirector] replaceScene:[[RoundBattleController alloc] initWithPrefix:1 suffix:1]];
         }];
         
-        testMenuItem.position=ccp(testMenuItem.boundingBox.size.width,testMenuItem.boundingBox.size.height);
+        testMenuItem2.position = ccp(testMenuItem2.boundingBox.size.width, testMenuItem2.boundingBox.size.height);
         
         CCAction *shake = [CCShake actionWithDuration:5.0 amplitude:ccp(5, 5)];
         [self runAction:shake];
         
-        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem,testMenuItem, nil];
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, testMenuItem2, nil];
         menu.position = CGPointZero;
         
         [self addChild:menu];

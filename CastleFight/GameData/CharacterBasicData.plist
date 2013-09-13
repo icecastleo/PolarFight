@@ -218,9 +218,7 @@
 		<key>activeSkills</key>
 		<dict>
 			<key>attack1</key>
-			<string>DeadBomb</string>
-			<key>attack2</key>
-			<string>DeadBomb</string>
+			<string>NinjaRangeAttackSkill</string>
 		</dict>
 		<key>AIComponent</key>
 		<dict>
@@ -230,8 +228,6 @@
 			<dict>
 				<key>attack1</key>
 				<integer>1</integer>
-				<key>attack2</key>
-				<integer>0</integer>
 			</dict>
 		</dict>
 	</dict>

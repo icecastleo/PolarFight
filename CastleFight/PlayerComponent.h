@@ -21,8 +21,6 @@
 @property (readonly) float maxManaRate;
 
 @property (readonly) float interval;
-@property float foodAddend;
-
 @property float delta;
 
 @property NSMutableArray *summonComponents;

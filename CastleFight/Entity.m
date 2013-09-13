@@ -9,14 +9,19 @@
 #import "Component.h"
 #import "Entity.h"
 #import "EntityManager.h"
+#import "RenderComponent.h"
 
 @interface Entity() {
     EntityManager *_entityManager;
+    
+    RenderComponent *render;
 }
 
 @end
 
 @implementation Entity
+
+@dynamic position;
 
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager {
     if ((self = [super init])) {
@@ -60,6 +65,24 @@
             [component receiveEvent:type Message:message];
         }
     }
+}
+
+-(void)setPosition:(CGPoint)position {
+    if (render == nil) {
+        render = (RenderComponent *)[self getComponentOfName:[RenderComponent name]];
+        NSAssert(render, @"We need render component to set position!");
+    }
+    
+    render.node.position = position;
+}
+
+-(CGPoint)position {
+    if (render == nil) {
+        render = (RenderComponent *)[self getComponentOfName:[RenderComponent name]];
+        NSAssert(render, @"We need render component to get position!");
+    }
+    
+    return render.node.position;
 }
 
 @end

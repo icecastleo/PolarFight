@@ -180,10 +180,10 @@
 //        }
 //    }
     
-    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
-    emitter.positionType = kCCPositionTypeRelative;
-    emitter.autoRemoveOnFinish = YES;
-    [render.node addChild:emitter];
+//    CCParticleSystemQuad *emitter = [[CCParticleSystemQuad alloc] initWithFile:@"bloodParticle.plist"];
+//    emitter.positionType = kCCPositionTypeRelative;
+//    emitter.autoRemoveOnFinish = YES;
+//    [render.sprite addChild:emitter];
     
     [render.sprite runAction:
      [CCSequence actions:

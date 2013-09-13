@@ -1,9 +1,9 @@
 //
-//  BattleController.h
-//  LightBugBattle
+//  RoundBattleController.h
+//  CastleFight
 //
-//  Created by 朱 世光 on 12/10/31.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 朱 世光 on 13/9/5.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -12,15 +12,16 @@
 #import "DPadLayer.h"
 #import "TiledMapLayer.h"
 #import "BattleDataObject.h"
-@class BattleStatusLayer;
+@class RoundBattleStatusLayer;
 
-@interface BattleController : CCScene {
+@interface RoundBattleController : CCScene {
     MapLayer *mapLayer;
-    BattleStatusLayer *statusLayer;
-//    DPadLayer *dPadLayer;
+    RoundBattleStatusLayer *statusLayer;
 
     NSMutableArray *systems;
 }
+
+@property (readonly) int roundTime;
 
 @property (readonly) BattleDataObject *battleData;
 
@@ -34,4 +35,3 @@
 -(void)smoothMoveCameraTo:(CGPoint)position;
 
 @end
-

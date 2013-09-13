@@ -127,7 +127,7 @@
     CCSprite *select = [CCSprite spriteWithSpriteFrameName:@"bg_unit_board.png"];
     select.anchorPoint = ccp(0.5, 0);
     select.position = ccp(winSize.width / 2, 0);
-//    [self addChild:select];
+    [self addChild:select];
     
     for (Entity *entity in player.summonComponents) {
         break;
@@ -152,12 +152,6 @@
         levelLabel.position = ccp(0, renderCom.sprite.boundingBox.size.height - costLabel.boundingBox.size.height);
         [renderCom.node addChild:levelLabel z:0 tag:kLevelLabelTag];
     }
-    
-//    for (SummonComponent *summon in player.battleTeam) {
-//        // hero
-//        summon.summon = YES;
-//        summon.summonType = kSummonTypeNormal;
-//    }
     
     MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
     

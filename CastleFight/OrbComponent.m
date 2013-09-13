@@ -104,26 +104,29 @@ static int kTouchOrbOpacity = 0.6 * 255;
 }
 
 -(void)executeMatch:(int)number {
+    // TODO: Add mana here?
     
-    NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
-    [magicInfo setValue:self.summonData forKey:@"SummonData"];
-    
-    int addLevel = 0;
-    switch (number) {
-        case 4:
-            addLevel += 1;
-            break;
-        case 5:
-            addLevel += 2;
-            break;
-        default:
-            break;
-    }
-    [magicInfo setValue:[NSNumber numberWithInt:addLevel] forKey:@"addLevel"];
-    //test
-    Magic *magic = [[SummonToLineMagic alloc] initWithMagicInformation:magicInfo];
-    magic.entityFactory = self.board.entityFactory;
-    [magic active];
+//    PlayerComponent *playerCom = (PlayerComponent *)[self.board.player getComponentOfName:[PlayerComponent name]];
+//    
+//    NSMutableDictionary *magicInfo = [[NSMutableDictionary alloc] init];
+//    [magicInfo setValue:[playerCom.battleTeam objectAtIndex:self.type-1] forKey:@"SummonData"];
+//    
+//    int addLevel = 0;
+//    switch (number) {
+//        case 4:
+//            addLevel += 1;
+//            break;
+//        case 5:
+//            addLevel += 2;
+//            break;
+//        default:
+//            break;
+//    }
+//    [magicInfo setValue:[NSNumber numberWithInt:addLevel] forKey:@"addLevel"];
+//    //test
+//    Magic *magic = [[SummonToLineMagic alloc] initWithMagicInformation:magicInfo];
+//    magic.entityFactory = self.board.entityFactory;
+//    [magic active];
 }
 
 #pragma mark Looking For Match
