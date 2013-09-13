@@ -98,7 +98,7 @@ typedef enum {
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
         board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        board.timeCountdown = 1;
+        board.timeCountdown = 60;
         
         [self runAction:[CCSequence actions:
                          [CCCallBlock actionWithBlock:^{

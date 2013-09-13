@@ -78,8 +78,8 @@
         
         [self setCastle];
         
-        _userPlayer = [entityFactory createUserPlayerForTeam:1];
-        _enemyPlayer = [entityFactory createEnemyPlayerForTeam:2 battleData:_battleData];
+        _userPlayer = [entityFactory createUserPlayerForTeam:kPlayerTeam];
+        _enemyPlayer = [entityFactory createEnemyPlayerForTeam:kEnemyTeam battleData:_battleData];
         
         systems = [[NSMutableArray alloc] init];
         [systems addObject:physicsSystem];

@@ -12,7 +12,7 @@
 
 @property NSDictionary *remainArmies;
 
--(void)addCount:(int)count onOrbType:(OrbType)type;
+-(void)addCount:(int)count onOrbColor:(OrbColor)color;
 -(NSMutableDictionary *)getCalculatedArmies;
 
 @end

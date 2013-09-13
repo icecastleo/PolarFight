@@ -41,9 +41,7 @@
                 NSMutableArray *column = [[NSMutableArray alloc] initWithCapacity:kOrbBoardRows];
                 for (int row = 0; row < kOrbBoardRows; row++) {
                     // create orb!
-                    OrbType type = [[nextColumn objectAtIndex:row] intValue];
-                    
-                    Entity *orb = [self.entityFactory createOrb:type];
+                    Entity *orb = [self.entityFactory createOrb:[nextColumn objectAtIndex:row] withPlayer:board.player];
                     RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
                     
                     if (board.columns.count == 0) {
@@ -93,11 +91,7 @@
         RenderComponent *render = (RenderComponent *)[orb getComponentOfName:[RenderComponent name]];
         
         OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        // Do something on bad orb!
-        if (orbCom.type == OrbPurple) {
-            PlayerComponent *enemyPlayerCom = (PlayerComponent *)[board.aiPlayer getComponentOfName:[PlayerComponent name]];
-            enemyPlayerCom.mana += kManaForEachEnemyOrb;
-        }
+        [orbCom touchEndLine];
         
         [render.sprite runAction:
          [CCSequence actions:

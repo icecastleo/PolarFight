@@ -36,6 +36,6 @@
         return;
     }
     NSNumber *addLevel = [self.magicInformation objectForKey:@"addLevel"];
-    [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:1];
+    [self.entityFactory createCharacter:summonCom.data.cid level:summonCom.data.level + addLevel.intValue forTeam:kPlayerTeam];
 }
 @end

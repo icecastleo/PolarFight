@@ -28,8 +28,8 @@
     return self;
 }
 
--(void)addCount:(int)count onOrbType:(OrbType)type {
-    NSNumber *key = [NSNumber numberWithInt:type];
+-(void)addCount:(int)count onOrbColor:(OrbColor)color; {
+    NSNumber *key = [NSNumber numberWithInt:color];
     NSNumber *number = [counts objectForKey:key];
     
     if (number == nil) {

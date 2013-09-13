@@ -77,7 +77,7 @@
         player.food -= nextEnemy.cost;
         
         // Auto add to map
-        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:2];
+        [_entityFactory createCharacter:nextEnemy.cid level:nextEnemy.level forTeam:kEnemyTeam];
 
         // Add count
         nextEnemy.currentCount++;

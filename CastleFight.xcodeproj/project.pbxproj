@@ -2602,6 +2602,8 @@
 				37020EBA17BBA7A60063A4BB /* OrbBoardComponent.m */,
 				37020EBC17BBAFE20063A4BB /* OrbComponent.h */,
 				37020EBD17BBAFE20063A4BB /* OrbComponent.m */,
+				370AFE7A17E1B95100E369C9 /* SkullOrbComponent.h */,
+				370AFE7B17E1B95200E369C9 /* SkullOrbComponent.m */,
 				9B2AC5A417E06436009E2078 /* PlayerArmyComponent.h */,
 				9B2AC5A517E06436009E2078 /* PlayerArmyComponent.m */,
 			);
@@ -3751,6 +3753,7 @@
 				37E16AF317BCA82A0092B8EC /* OrbSystem.m in Sources */,
 				9B08435717C5B3F600AC9049 /* TouchSystem.m in Sources */,
 				9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */,
+				370AFE7C17E1B95600E369C9 /* SkullOrbComponent.m in Sources */,
 				9BE679F317D88337003B2EE4 /* RoundBattleController.m in Sources */,
 				9BD2109017D97E2E00F5CCC5 /* RoundBattleStatusLayer.m in Sources */,
 				9B2AC5A617E06436009E2078 /* PlayerArmyComponent.m in Sources */,

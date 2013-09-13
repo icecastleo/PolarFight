@@ -20,6 +20,7 @@
     // Only used for very short period board time to adjust orb position!
     int columnsShift;
     
+    //for combos
     int combos;
     
     // for patterns
@@ -176,8 +177,8 @@
         
         OrbComponent *orbComponentB = (OrbComponent *)[entityB getComponentOfName:[OrbComponent name]];
         
-        // Change orb with other orb
-        if (orbComponentB.type != OrbNull) {
+        // Block
+        if (orbComponentB.color != OrbNull) {
             break;
         }
                         
