@@ -11,12 +11,13 @@
 
 @interface AIComponent() {
     AIState *tempState;
-    int sumOfZeroProbabilitySkill;
 }
 
 @end
 
 @implementation AIComponent
+
+@dynamic sumOfProbability;
 
 +(NSString *)name {
     static NSString *name = @"AIComponent";
@@ -26,8 +27,7 @@
 -(id)initWithDictionary:(NSDictionary *)dic {
     if ((self = [super init])) {
         _state = [[NSClassFromString([dic objectForKey:@"state"]) alloc] init];
-        [self setSkillTable:[dic objectForKey:@"skillProbability"]];
-        sumOfZeroProbabilitySkill = 0;
+        _skillProbabilityDic = [dic objectForKey:@"skillProbability"];
     }
     return self;
 }
@@ -64,40 +64,26 @@
     [_state exit:self.entity];
 }
 
--(void)setSkillTable:(NSDictionary *)dic {
-    NSMutableDictionary *adjustDic = [[NSMutableDictionary alloc] initWithCapacity:dic.count];
-    
-    for(NSString *skillName in dic.allKeys) {
-        NSNumber *value = [dic objectForKey:skillName];
-        int probability = value.intValue;
-        if (probability > 0) {
-            _sumOfProbability += probability;
-            [adjustDic setObject:skillName forKey:[NSString stringWithFormat:@"%d",self.sumOfProbability]];
-        }else {
-            sumOfZeroProbabilitySkill += 1;
-            [adjustDic setObject:skillName forKey:[NSString stringWithFormat:@"%d",sumOfZeroProbabilitySkill*-1]];
-        }
+-(int)sumOfProbability {
+    int sum = 0;
+    for (NSNumber *ratio in _skillProbabilityDic.allValues) {
+        sum += ratio.intValue;
     }
-
-    _sortSkillProbabilities = [adjustDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
-        return [str1 compare:str2 options:NSNumericSearch];
-    }];
-    
-    _skillProbability = adjustDic;
+    return sum;
 }
 
--(NSString *)getSkillNameFromNumber:(int)number {
-    NSAssert(number < self.sumOfProbability, @"Skill only happens if the number is smaller than sum of probability.");
+-(NSString *)getSkillNameFromNumber:(int)random {
+    NSAssert(random < self.sumOfProbability, @"Skill only happens if the number is smaller than sum of probability.");
     
-    int count = self.sortSkillProbabilities.count - 1;
-    for (int i = 0; i < count ; i++) {
-        NSString *value = [self.sortSkillProbabilities objectAtIndex:i];
-        NSString *nextValue = [self.sortSkillProbabilities objectAtIndex:i+1];
-        if (number >= value.intValue && number < nextValue.intValue) {
-            return [self.skillProbability objectForKey:nextValue];
+    for (NSString *key in self.skillProbabilityDic.allKeys) {
+        NSNumber *ratio = [self.skillProbabilityDic objectForKey:key];
+        random -= ratio.intValue;
+        if (random <= 0) {
+            return key;
         }
     }
     return nil;
 }
+
 
 @end
