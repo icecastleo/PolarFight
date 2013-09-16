@@ -98,7 +98,7 @@ typedef enum {
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
         board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        board.timeCountdown = 60;
+        board.timeCountdown = 1;
         
         [self runAction:[CCSequence actions:
                          [CCCallBlock actionWithBlock:^{
@@ -194,6 +194,8 @@ typedef enum {
         [entityFactory createGroupCharacter:@"104" withCount:20 forTeam:2];
         [entityFactory createGroupCharacter:@"105" withCount:20 forTeam:2];
         [entityFactory createGroupCharacter:@"106" withCount:20 forTeam:2];
+        
+        [entityFactory createGroupCharacter:@"201" withCount:20 forTeam:1];
         status = kBattleStatusWait;
         
         [self runAction:[CCSequence actions:

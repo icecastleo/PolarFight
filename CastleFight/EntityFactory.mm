@@ -57,7 +57,7 @@
 #import "Box2D.h"
 
 //test
-#import "CCSkeletonAnimation.h"
+#import "spine-cocos2d-iphone.h"
 //test
 
 @implementation EntityFactory {
@@ -124,9 +124,10 @@
 
     // hero spine
     if ([cid intValue]/100 == 2) {
-        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
+        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"fly_bear.json" atlasFile:@"fly_bear.atlas" scale:1.0];
         [animationNode updateWorldTransform];
         sprite = animationNode;
+        scale *= 0.1;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
     }
@@ -223,9 +224,9 @@
         
         [entity addComponent:[[TouchComponent alloc] initWithDictionary:[characterData objectForKey:@"TouchComponent"]]];
         
-//        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
-//        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
-//        [entity addComponent:pathCom];
+        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(50,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
+        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
+        [entity addComponent:pathCom];
     }
     
     // TODO: Set AI for different character

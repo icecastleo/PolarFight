@@ -13,7 +13,7 @@
 #import "DirectionComponent.h"
 #import "KnockOutComponent.h"
 #import "DefenderComponent.h"
-#import "CCSkeletonAnimation.h"
+#import "spine-cocos2d-iphone.h"
 #import "LineComponent.h"
 #import "ThreeLineMapLayer.h"
 
@@ -115,19 +115,23 @@
             }
             
             if (animation.state == kAnimationStateNone) {
-                CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
-                
                 if (render.isSpineNode) {
                     CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
-                    [animationNode setAnimation:@"walk" loop:YES];
-                    animation.state = kAnimationStateMove;
-                } else if (moveAnimation) {
-                    CCAction *action = [CCRepeatForever actionWithAction:
-                                        [CCAnimate actionWithAnimation:moveAnimation]];
-                    action.tag = kAnimationActionTag;
-                    [render.sprite runAction:action];
-
-                    animation.state = kAnimationStateMove;
+                    
+                    if ([animationNode hasAnimation:@"walk"]) {
+                        [animationNode setAnimation:@"walk" loop:YES];
+                        animation.state = kAnimationStateMove;
+                    }
+                } else {
+                    CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
+                    if (moveAnimation) {
+                        CCAction *action = [CCRepeatForever actionWithAction:
+                                            [CCAnimate actionWithAnimation:moveAnimation]];
+                        action.tag = kAnimationActionTag;
+                        [render.sprite runAction:action];
+                        
+                        animation.state = kAnimationStateMove;
+                    }
                 }
             }
         }

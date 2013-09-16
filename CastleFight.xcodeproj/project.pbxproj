@@ -130,8 +130,13 @@
 		3750F4F21785A992009E2689 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3750F4F11785A991009E2689 /* LightningMagic.png */; };
 		3750F4F51785B494009E2689 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F41785B491009E2689 /* MagicComponent.m */; };
 		3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F71785B5A6009E2689 /* MaskComponent.m */; };
+		3765683817E6F788000865EF /* fly_bear.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3765683417E6F786000865EF /* fly_bear.atlas */; };
+		3765683917E6F788000865EF /* fly_bear.json in Resources */ = {isa = PBXBuildFile; fileRef = 3765683517E6F786000865EF /* fly_bear.json */; };
+		3765683A17E6F788000865EF /* fly_bear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765683617E6F787000865EF /* fly_bear.png */; };
+		3765683B17E6F788000865EF /* fly_bear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765683717E6F787000865EF /* fly_bear2.png */; };
 		376D320B177854B700949015 /* InformationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D320A177854B700949015 /* InformationComponent.m */; };
 		3774E03817AFE14B001CD798 /* SummonMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3774E03717AFE14A001CD798 /* SummonMagic.m */; };
+		377FDF8817E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 377FDF8717E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m */; };
 		378451F5179648FE0074F718 /* CCSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F0179648FE0074F718 /* CCSkeleton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F2179648FE0074F718 /* CCSkeletonAnimation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F7179648FE0074F718 /* spine-cocos2d-iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -727,10 +732,16 @@
 		3750F4F41785B491009E2689 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
 		3750F4F61785B5A4009E2689 /* MaskComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskComponent.h; sourceTree = "<group>"; };
 		3750F4F71785B5A6009E2689 /* MaskComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskComponent.m; sourceTree = "<group>"; };
+		3765683417E6F786000865EF /* fly_bear.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fly_bear.atlas; sourceTree = "<group>"; };
+		3765683517E6F786000865EF /* fly_bear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fly_bear.json; sourceTree = "<group>"; };
+		3765683617E6F787000865EF /* fly_bear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bear.png; sourceTree = "<group>"; };
+		3765683717E6F787000865EF /* fly_bear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bear2.png; sourceTree = "<group>"; };
 		376D3209177854B700949015 /* InformationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationComponent.h; sourceTree = "<group>"; };
 		376D320A177854B700949015 /* InformationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationComponent.m; sourceTree = "<group>"; };
 		3774E03617AFE14A001CD798 /* SummonMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummonMagic.h; sourceTree = "<group>"; };
 		3774E03717AFE14A001CD798 /* SummonMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummonMagic.m; sourceTree = "<group>"; };
+		377FDF8617E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSkeletonAnimation+CheckAnimation.h"; sourceTree = "<group>"; };
+		377FDF8717E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSkeletonAnimation+CheckAnimation.m"; sourceTree = "<group>"; };
 		378451EF179648FE0074F718 /* CCSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSkeleton.h; sourceTree = "<group>"; };
 		378451F0179648FE0074F718 /* CCSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSkeleton.m; sourceTree = "<group>"; };
 		378451F1179648FE0074F718 /* CCSkeletonAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSkeletonAnimation.h; sourceTree = "<group>"; };
@@ -1730,6 +1741,10 @@
 		370243D317903FC7008267A8 /* spineData */ = {
 			isa = PBXGroup;
 			children = (
+				3765683417E6F786000865EF /* fly_bear.atlas */,
+				3765683517E6F786000865EF /* fly_bear.json */,
+				3765683617E6F787000865EF /* fly_bear.png */,
+				3765683717E6F787000865EF /* fly_bear2.png */,
 				370243D417903FC7008267A8 /* goblins.atlas */,
 				370243D517903FC7008267A8 /* goblins.json */,
 				370243D617903FC7008267A8 /* goblins.png */,
@@ -1782,6 +1797,8 @@
 				378451F2179648FE0074F718 /* CCSkeletonAnimation.m */,
 				378451F3179648FE0074F718 /* spine-cocos2d-iphone.h */,
 				378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */,
+				377FDF8617E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.h */,
+				377FDF8717E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m */,
 			);
 			name = spine;
 			path = "spine-cocos2d-iphone";
@@ -3566,6 +3583,10 @@
 				9BE679ED17D8627D003B2EE4 /* christmas1.png in Resources */,
 				370AFE7F17E1C10700E369C9 /* skull-hd.png in Resources */,
 				370AFE8017E1C10700E369C9 /* skull.png in Resources */,
+				3765683817E6F788000865EF /* fly_bear.atlas in Resources */,
+				3765683917E6F788000865EF /* fly_bear.json in Resources */,
+				3765683A17E6F788000865EF /* fly_bear.png in Resources */,
+				3765683B17E6F788000865EF /* fly_bear2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3757,6 +3778,7 @@
 				9BE679F317D88337003B2EE4 /* RoundBattleController.m in Sources */,
 				9BD2109017D97E2E00F5CCC5 /* RoundBattleStatusLayer.m in Sources */,
 				9B2AC5A617E06436009E2078 /* PlayerArmyComponent.m in Sources */,
+				377FDF8817E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

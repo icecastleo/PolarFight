@@ -19,7 +19,7 @@
 
 #import "SideEffect.h"
 #import "StateComponent.h"
-#import "CCSkeletonAnimation.h"
+#import "spine-cocos2d-iphone.h"
 
 @implementation CombatSystem
 

@@ -28,6 +28,9 @@
 #import "CCSkeleton.h"
 #import "CCSkeletonAnimation.h"
 
+// Customize
+#import "CCSkeletonAnimation+CheckAnimation.h"
+
 #ifdef __cplusplus
 namespace spine {
 extern "C" {
