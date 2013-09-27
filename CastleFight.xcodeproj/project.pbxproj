@@ -3817,6 +3817,7 @@
 				370AFE7C17E1B95600E369C9 /* SkullOrbComponent.m in Sources */,
 				9BE679F317D88337003B2EE4 /* RoundBattleController.m in Sources */,
 				9BD2109017D97E2E00F5CCC5 /* RoundBattleStatusLayer.m in Sources */,
+				377FDF8817E708E800EF22C1 /* CCSkeletonAnimation+CheckAnimation.m in Sources */,
 				9BDBB08D17E716750089AE21 /* MinionAIStateWalk.m in Sources */,
 				9BDBB09017E7190C0089AE21 /* MinionAIState.m in Sources */,
 			);

@@ -57,18 +57,17 @@
             skill = [skillCom.skills objectForKey:skillName];
             if (skill.canActive) {
                 break;
-            } else if(removeIndex < 0){
-                // not found
-                break;
             } else {
-                [sortSkillKey removeObjectAtIndex:removeIndex];
-                count2 = sortSkillKey.count;
+                [skillDic removeObjectForKey:skillName];
+                if (skillDic.count == 0) {
+                    break;
+                }
                 skill = nil;
                 skillName = nil;
             }
         }
     } else {
-        skillName = [aiCom.skillProbability objectForKey:[aiCom.sortSkillProbabilities objectAtIndex:0]];
+        skillName = [aiCom.skillProbabilityDic.allKeys objectAtIndex:0];
         skill = [skillCom.skills objectForKey:skillName];
     }
     NSAssert(skill != nil, @"you forgot to make this skill.");
