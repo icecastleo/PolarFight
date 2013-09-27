@@ -8,6 +8,7 @@
 
 #import "EntityManager.h"
 #import "Component.h"
+#import "AliveComponent.h"
 
 @interface EntityManager() {
     NSMutableArray *_entities;
@@ -52,7 +53,10 @@
     NSMutableDictionary *components = [NSMutableDictionary dictionary];
     _componentsByEntity[@(eid)] = components;
     
-    return [[Entity alloc] initWithEid:eid entityManager:self];
+    Entity *entity = [[Entity alloc] initWithEid:eid entityManager:self];
+    [entity addComponent:[[AliveComponent alloc] init]];
+    
+    return entity;
 }
 
 -(void)removeEntity:(Entity *)entity {
@@ -83,19 +87,6 @@
     [_componentsByEntity[entity.eidNumber] setObject:component forKey:NSStringFromClass([component class])];
 }
 
-//-(void)removeComponentOfName:(Class)aClass fromEntity:(Entity *)entity {
-//    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
-//    if (components && components[entity.eidNumber]) {
-//        Component *component = components[entity.eidNumber];
-//        if ([component respondsToSelector:@selector(receiveEvent:Message:)]) {
-//            [component receiveEvent:kEntityEventRemoveComponent Message:component];
-//        }
-//
-//        [components removeObjectForKey:entity.eidNumber];
-//        [_componentsByEntity[entity.eidNumber] removeObjectForKey:NSStringFromClass(aClass)];
-//    }
-//}
-
 -(void)removeComponentOfName:(NSString *)name fromEntity:(Entity *)entity {
     NSMutableDictionary *components = _componentsByClass[name];
     
@@ -111,10 +102,6 @@
     }
 }
 
-//-(Component *)getComponentOfName:(Class)aClass fromEntity:(Entity *)entity {
-//    return _componentsByClass[NSStringFromClass(aClass)][entity.eidNumber];
-//}
-
 -(Component *)getComponentOfName:(NSString *)name fromEntity:(Entity *)entity {
     return _componentsByClass[name][entity.eidNumber];
 }
@@ -122,19 +109,6 @@
 -(NSArray *)getAllComponentsOfEntity:(Entity *)entity {
     return [_componentsByEntity[entity.eidNumber] allValues];
 }
-
-//-(NSArray *)getAllEntitiesPosessingComponentOfName:(Class)aClass {
-//    NSMutableDictionary * components = _componentsByClass[NSStringFromClass(aClass)];
-//    if (components) {
-//        NSMutableArray * retval = [NSMutableArray arrayWithCapacity:components.allKeys.count];
-//        for (NSNumber * eid in components.allKeys) {
-//            [retval addObject:[[Entity alloc] initWithEid:eid.integerValue entityManager:self]];
-//        }
-//        return retval;
-//    } else {
-//        return [NSArray array];
-//    }
-//}
 
 -(NSArray *)getAllEntitiesPosessingComponentOfName:(NSString *)name {
     NSMutableDictionary *components = _componentsByClass[name];

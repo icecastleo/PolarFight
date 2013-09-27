@@ -31,7 +31,7 @@
 -(void)changeState:(AIState *)state forEntity:(Entity *)entity {
     AIComponent *ai = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
-    NSAssert(ai.state == self, @"Why??");
+    NSAssert(ai.state == self, @"Why not??");
     
     [ai.state exit:entity];
     ai.state = state;

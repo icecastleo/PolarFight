@@ -8,12 +8,11 @@
 
 #import "SquareRange.h"
 #import "Box2D.h"
+#import "RenderComponent.h"
 
 @interface SquareRange() {
-    int width;
     int height;
 }
-
 @end
 
 @implementation SquareRange
@@ -25,9 +24,11 @@
         
         NSAssert(w && h, @"You must indicate width & height!");
         NSAssert([w intValue] > 0 && [h intValue] > 0, @"You can't set a value below 0!!");
-        
+
         width = [w intValue];
         height = [h intValue];
+        
+        distance = width/2;
     }
     return self;
 }

@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic) Entity *owner;
+@property (readonly) Range *range;
 
 @property float cooldown;
 @property NSString *animationKey;

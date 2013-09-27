@@ -15,14 +15,18 @@
 
 @implementation RangeAttackSkill
  
--(id)init {
-    if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSimpleXY,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
-        
-        range = [Range rangeWithParameters:dictionary];
-        self.cooldown = 2;
-    }
-    return self;
+-(void)setOwner:(Entity *)owner {
+    RenderComponent *render = (RenderComponent *)[owner getComponentOfName:[RenderComponent name]];
+    int width = render.sprite.boundingBox.size.width*10;
+    int height = render.sprite.boundingBox.size.height*5;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    
+    range = [Range rangeWithParameters:dictionary];
+    
+    [super setOwner:owner];
+    
+    self.cooldown = 2;
 }
 
 -(void)activeEffect {

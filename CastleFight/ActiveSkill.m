@@ -15,6 +15,8 @@
 
 @implementation ActiveSkill
 
+@synthesize range;
+
 -(id)init {
     if (self = [super init]) {
         _combo = [[NSMutableDictionary alloc] initWithCapacity:0];

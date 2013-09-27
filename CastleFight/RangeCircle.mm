@@ -28,6 +28,7 @@
         NSAssert([r intValue] > 0, @"You can't set a radius value below 0!!");
         
         radius = [r intValue];
+        width = radius;
     }
     return self;
 }

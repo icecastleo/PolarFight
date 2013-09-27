@@ -9,17 +9,22 @@
 #import "ArmyBearAttackSkill.h"
 #import "AttackEvent.h"
 #import "AttackerComponent.h"
+#import "RenderComponent.h"
 
 @implementation ArmyBearAttackSkill
 
--(id)init {
-    if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSimpleXY,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
-        
-        range = [Range rangeWithParameters:dictionary];
-        self.cooldown = 3;
-    }
-    return self;
+-(void)setOwner:(Entity *)owner {
+    RenderComponent *render = (RenderComponent *)[owner getComponentOfName:[RenderComponent name]];
+    int width = render.sprite.boundingBox.size.width*4;
+    int height = render.sprite.boundingBox.size.height;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    
+    range = [Range rangeWithParameters:dictionary];
+    
+    [super setOwner:owner];
+    
+    self.cooldown = 3;
 }
 
 -(void)activeEffect {

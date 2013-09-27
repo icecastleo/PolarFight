@@ -19,17 +19,13 @@
 
 @implementation Range
 
+@synthesize width;
 @dynamic effectPosition;
 
 +(id)rangeWithParameters:(NSMutableDictionary*)dict {
-    NSString* className = [dict objectForKey:kRangeKeyType];
-    
-    // FIXME: Projectile range
-    if ([className isEqualToString:kRangeTypeProjectile]) {
-        return nil;
-    }
-    
+    NSString *className = [dict objectForKey:kRangeKeyType];
     NSAssert(className != nil, @"You must define rangeType for a range");
+    
     return [[NSClassFromString(className) alloc] initWithParameters:dict];
 }
 
@@ -48,18 +44,6 @@
             NSAssert([d intValue] > 0, @"You can not set a distance value below 0!!");
             distance = [d intValue];
         }
-
-//        NSString *file = [dict objectForKey:kRangeKeySpriteFile];
-//        
-//        if (file) {
-//            // TODO: Maybe each range can set its special parameter based on the sprite.
-//            _rangeSprite = [CCSprite spriteWithFile:file];
-//            [self setSpecialParameter:dict];
-//        } else {
-//            NSAssert(![[dict objectForKey:kRangeKeyType] isEqualToString:kRangeTypeProjectile], @"You must define a spriteFile for a ProjectileRange!");
-//            [self setSpecialParameter:dict];
-//            [self setRangeSprite];
-//        }
     }
     return self;
 }
@@ -114,36 +98,13 @@
     return nil;
 }
 
-//-(void)setRangeSprite {
-//    
-//    CGColorSpaceRef imageColorSpace = CGColorSpaceCreateDeviceRGB();
-//    CGContextRef context = CGBitmapContextCreate(NULL, width*CC_CONTENT_SCALE_FACTOR(), height*CC_CONTENT_SCALE_FACTOR(), 8, width*CC_CONTENT_SCALE_FACTOR()*4, imageColorSpace, kCGImageAlphaPremultipliedLast);
-//    CGContextSetRGBFillColor(context, 1.0, 0.8, 0.8, 0.8);
-//    CGContextScaleCTM(context, CC_CONTENT_SCALE_FACTOR(), CC_CONTENT_SCALE_FACTOR());
-//    CGContextAddPath(context, attackRange);
-//    
-//    CGContextFillPath(context);
-//    
-//    // Get CGImageRef
-//    CGImageRef imgRef = CGBitmapContextCreateImage(context);
-//
-//    _rangeSprite = [CCSprite spriteWithCGImage:imgRef key:nil];
-//}
-
-//-(void)setDirection:(CGPoint)velocity {
-//    float angleRadians = atan2f(velocity.y, velocity.x);
-//    float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
-//    float cocosDegrees = 270 - angleDegrees;
-//    
-//    _rangeSprite.rotation = cocosDegrees;
-//}
-
 -(NSArray *)getEffectEntities {
     NSAssert(physicsSystem, @"You must set an entity as range owner, and it should have a physics component!");
     
     NSMutableArray *rawEntities = [[NSMutableArray alloc] init];
     
     for(Entity* entity in [physicsSystem getCollisionEntitiesWithBody:body]) {
+        // Check for valid effect entities!
         if ([self containEntity:entity]) {
             [rawEntities addObject:entity];
         }
@@ -172,7 +133,7 @@
 }
 
 -(BOOL)containEntity:(Entity *)entity {
-    
+
     if ([self checkFilter:entity]) {
         return NO;
     }

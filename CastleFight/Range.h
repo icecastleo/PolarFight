@@ -15,10 +15,9 @@ CLS_DEF(b2Body);
 
 // RangeType
 #define kRangeTypeCircle @"RangeCircle"
-#define kRangeTypeFanShape @"RangeFanShape"
+//#define kRangeTypeFanShape @"RangeFanShape"
 #define kRangeTypeSquare @"SquareRange"
-#define kRangeTypeProjectile @"ProjectileRange"
-#define kRangeTypeSimpleXY @"RangeSimpleXY"
+//#define kRangeTypeSimpleXY @"RangeSimpleXY"
 
 // TODO: Add target entities component!!
 
@@ -47,7 +46,7 @@ CLS_DEF(b2Body);
 #define kRangeFilterSelf @"Self"
 
 @interface Range : NSObject {
-    NSString *name;
+    int width;
     
     NSArray *sides;
     NSArray *filters;
@@ -59,20 +58,14 @@ CLS_DEF(b2Body);
     
     // Range's distance from entity
     int distance;
-    
-//    CGMutablePathRef attackRange;
-//    
-//    int width;
-//    int height;
 }
 
+@property (readonly) int width;
 @property (nonatomic) Entity *owner;
-//@property (readonly) CCSprite *rangeSprite;
 @property (readonly) CGPoint effectPosition;
 
 +(id)rangeWithParameters:(NSMutableDictionary *)dict;
 -(id)initWithParameters:(NSMutableDictionary *)dict;
-//-(BOOL)checkSide:(Entity *)entity;
 -(BOOL)checkFilter:(Entity *)entity;
 -(NSArray *)sortEntities:(NSArray *)entities;
 

@@ -29,7 +29,6 @@
 }
 
 -(void)update:(float)delta {
-    
     // TODO: Heal
     for (Entity *entity in [self.entityManager getAllEntitiesPosessingComponentOfName:[AttackerComponent name]]) {
         AttackerComponent *attack = (AttackerComponent *)[entity getComponentOfName:[AttackerComponent name]];
@@ -37,7 +36,7 @@
         for (AttackEvent *event in attack.attackEventQueue) {
             NSAssert(entity.eid == event.attacker.eid, @"AttackEvent should be added to attacker's AttackerComponent!");
             
-            CCLOG(@"%d attack",attack.entity.eid);
+//            CCLOG(@"%d attack",attack.entity.eid);
             
             [event.attacker sendEvent:kEventSendAttackEvent Message:event];
             [event.defender sendEvent:kEventReceiveAttackEvent Message:event];
@@ -64,7 +63,7 @@
         
         for (DamageEvent *event in defense.damageEventQueue) {
             NSAssert(entity.eid == event.receiver.eid, @"DamageEvent should be added to damager's DefenderComponent!");
-            CCLOG(@"%d damage",defense.entity.eid);
+//            CCLOG(@"%d damage",defense.entity.eid);
             
             [event.sender sendEvent:kEventSendDamageEvent Message:event];
             [event.receiver sendEvent:kEventReceiveDamageEvent Message:event];
@@ -84,7 +83,7 @@
 //                return;
 //            }
             
-            CCLOG(@"Entity %d gets %d damage!", entity.eid, damage.damage);
+//            CCLOG(@"Entity %d gets %d damage!", entity.eid, damage.damage);
             
             defense.hp.currentValue -= damage.damage;
             
@@ -92,14 +91,14 @@
                 [defense.bloodSprite update];
             }
             
-            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
-            if (damage.damage > 0) {
-                [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
-            } else {
+//            RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+//            if (damage.damage > 0) {
+//                [renderCom addFlashString:[NSString stringWithFormat:@"%d", damage.damage] color:ccRED];
+//            } else {
                 // FIXME: Move heal to else where?
-                [renderCom addFlashString:[NSString stringWithFormat:@"%d", abs(damage.damage)] color:ccGREEN];
-            }
-                        
+//                [renderCom addFlashString:[NSString stringWithFormat:@"%d", abs(damage.damage)] color:ccGREEN];
+//            }
+            
 //            // Knock out effect
 //            if (damage.knockOutPower != 0) {
 //                CGPoint velocity = ccpSub(self.position, damage.position);
@@ -117,7 +116,7 @@
         if (defense.hp.currentValue == 0) {
             // state = kCharacterStateDead;
             
-            CCLOG(@"Entity %d is dead", entity.eid);
+//            CCLOG(@"Entity %d is dead", entity.eid);
             
             [entity sendEvent:kEntityEventDead Message:nil];
             

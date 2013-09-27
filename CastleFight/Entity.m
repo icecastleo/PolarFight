@@ -10,10 +10,10 @@
 #import "Entity.h"
 #import "EntityManager.h"
 #import "RenderComponent.h"
+#import "AliveComponent.h"
 
 @interface Entity() {
     EntityManager *_entityManager;
-    
     RenderComponent *render;
 }
 
@@ -67,6 +67,16 @@
     }
 }
 
+-(BOOL)isDead {
+    AliveComponent *alive = (AliveComponent *)[self getComponentOfName:[AliveComponent name]];
+    
+    if (alive == nil || alive.isDead) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 -(void)setPosition:(CGPoint)position {
     if (render == nil) {
         render = (RenderComponent *)[self getComponentOfName:[RenderComponent name]];
@@ -83,6 +93,15 @@
     }
     
     return render.node.position;
+}
+
+-(CGRect)boundingBox {
+    if (render == nil) {
+        render = (RenderComponent *)[self getComponentOfName:[RenderComponent name]];
+        NSAssert(render, @"We need render component to get position!");
+    }
+    
+    return render.sprite.boundingBox;
 }
 
 @end

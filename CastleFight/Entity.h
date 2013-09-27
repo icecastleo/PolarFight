@@ -59,7 +59,10 @@ typedef enum {
 @property (readonly) uint32_t eid;
 @property (readonly) NSNumber *eidNumber;
 
+@property (readonly) BOOL isDead;
+
 @property CGPoint position;
+@property (readonly) CGRect boundingBox;
 
 -(id)initWithEid:(uint32_t)eid entityManager:(EntityManager *)entityManager;
 

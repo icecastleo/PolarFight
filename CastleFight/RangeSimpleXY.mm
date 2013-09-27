@@ -101,10 +101,7 @@ static NSMutableArray *yInterval;
         }
     }
     
-    // Hero may out of range!
-    if (region == yInterval.count) {
-        region--;
-    }
+    NSAssert(region < yInterval.count, @"The target in beyond kMapPathMaxLine!");
     
     for (int i = 0; i <= region; i++) {
         if([[yInterval objectAtIndex:i] intValue] > b) {

@@ -58,10 +58,10 @@
             skill = [skillCom.skills objectForKey:skillName];
             if (skill.canActive) {
                 break;
-            }else if(removeIndex < 0){
+            } else if(removeIndex < 0){
                 // not found
                 break;
-            }else {
+            } else {
                 [sortSkillKey removeObjectAtIndex:removeIndex];
                 count2 = sortSkillKey.count;
                 skill = nil;
@@ -69,7 +69,7 @@
             }
             
         }
-    }else {
+    } else {
         skillName = [aiCom.skillProbability objectForKey:[aiCom.sortSkillProbabilities objectAtIndex:0]];
         skill = [skillCom.skills objectForKey:skillName];
     }

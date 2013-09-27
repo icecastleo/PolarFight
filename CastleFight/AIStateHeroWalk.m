@@ -34,8 +34,7 @@
     CGPoint diff = ccpSub(nextPosition, currentPosition);
     
     MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
-    
-    moveCom.velocity = ccpNormalize(diff);
+    moveCom.velocity = diff;
     
     ActiveSkillComponent *skillCom = (ActiveSkillComponent *)[entity getComponentOfName:[ActiveSkillComponent name]];
     

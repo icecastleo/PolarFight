@@ -80,8 +80,6 @@ typedef enum {
         PhysicsSystem *physicsSystem = [[PhysicsSystem alloc] initWithEntityManager:entityManager entityFactory:entityFactory];
         entityFactory.physicsSystem = physicsSystem;
         
-//        [self setCastle];
-        
         _userPlayer = [entityFactory createUserPlayerForTeam:1];
         _enemyPlayer = [entityFactory createEnemyPlayerForTeam:2 battleData:_battleData];
         
@@ -98,7 +96,7 @@ typedef enum {
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
         board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        board.timeCountdown = 60;
+        board.timeCountdown = 1;
         
         [self runAction:[CCSequence actions:
                          [CCCallBlock actionWithBlock:^{
@@ -132,22 +130,7 @@ typedef enum {
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:touchSystem];
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
-    //    for (UIGestureRecognizer *recognizer in [CCDirector sharedDirector].view.gestureRecognizers) {
-    //        [[CCDirector sharedDirector].view removeGestureRecognizer:recognizer];
-    //    }
-    //    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-    
     [super onExit];
-}
-
--(void)setCastle {
-    _userCastle = [entityFactory createCastleForTeam:1];
-    _enemyCastle = [entityFactory createCastleForTeam:2];
-    
-    // FIXME: Create by file
-    
-    //    _playerCastle = [[FileManager sharedFileManager] getPlayerCastle];
-    //    _enemyCastle = [_battleData getEnemyCastle];
 }
 
 -(void)setSystem {
@@ -182,8 +165,7 @@ typedef enum {
         }
     }
     
-    if (status == kBattleStatusPrepareFight) {        
-//        [entityFactory createCharacter:@"001" level:1 forTeam:1];
+    if (status == kBattleStatusPrepareFight) {
         [entityFactory createGroupCharacter:@"001" withCount:20 forTeam:1];
         [entityFactory createGroupCharacter:@"002" withCount:20 forTeam:1];
         [entityFactory createGroupCharacter:@"003" withCount:20 forTeam:1];
@@ -217,16 +199,19 @@ typedef enum {
             [system update:delta];
         }
         
-//        [self checkBattleEnd];
+        [self checkBattleEnd];
     }
 }
 
 -(void)checkBattleEnd {
-    if ([self isEntityDead:_userCastle]) {
+    PlayerComponent *userPlayer = (PlayerComponent *)[_userPlayer getComponentOfName:[PlayerComponent name]];
+    PlayerComponent *enemyPlayer = (PlayerComponent *)[_enemyPlayer getComponentOfName:[PlayerComponent name]];
+    
+    if (userPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Lose!!" withColor:ccWHITE];
         [self unscheduleUpdate];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
-    } else if ([self isEntityDead:_enemyCastle]) {
+    } else if (enemyPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Win!!" withColor:ccWHITE];
         
         [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_completed"]] Value:1];
@@ -246,16 +231,6 @@ typedef enum {
         
         [self unscheduleUpdate];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
-    }
-}
-
--(BOOL)isEntityDead:(Entity *)entity {
-    DefenderComponent *defense = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
-    
-    if (defense.hp.currentValue == 0) {
-        return YES;
-    } else {
-        return NO;
     }
 }
 

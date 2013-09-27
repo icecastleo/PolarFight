@@ -26,10 +26,12 @@
             continue;
         }
         
+        // Check running skill
         if (skillCom.currentSkill) {
             if (skillCom.currentSkill.isFinish) {
                 skillCom.currentSkill.isFinish = NO;
                 
+                // No next active skill
                 if (!skillCom.activeKey) {
                     skillCom.currentSkill = nil;
                     continue;
@@ -38,6 +40,7 @@
                 ActiveSkill *skill = [skillCom.currentSkill.combo objectForKey:skillCom.activeKey];
                 skillCom.activeKey = nil;
                 
+                // Next skill can active
                 if (skill && skill.canActive) {
                     skillCom.currentSkill = skill;
                     [skill active];

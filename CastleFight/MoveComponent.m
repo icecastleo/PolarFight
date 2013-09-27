@@ -7,6 +7,7 @@
 //
 
 #import "MoveComponent.h"
+#import "cocos2d.h"
 
 @implementation MoveComponent
 
@@ -18,9 +19,17 @@
 -(id)initWithSpeedAttribute:(Attribute *)speed {
     if ((self = [super init])) {
         _speed = speed;
-        _velocity = CGPointMake(0, 0);
+        _velocity = CGPointZero;
     }
     return self;
+}
+
+-(void)setVelocity:(CGPoint)velocity {
+    if (CGPointEqualToPoint(velocity, CGPointZero)) {
+        _velocity = velocity;
+    } else {
+        _velocity = ccpNormalize(velocity);
+    }
 }
 
 @end

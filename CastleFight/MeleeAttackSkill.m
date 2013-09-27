@@ -27,10 +27,9 @@
 
 -(void)setOwner:(Entity *)owner {
     RenderComponent *render = (RenderComponent *)[owner getComponentOfName:[RenderComponent name]];
-    int width = render.sprite.boundingBox.size.width/2;
+    int width = render.sprite.boundingBox.size.width;
     int height = render.sprite.boundingBox.size.height;
     
-    // FIXME: Another solution to auto change range?
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
     
     range = [Range rangeWithParameters:dictionary];

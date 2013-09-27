@@ -107,12 +107,13 @@
 
 -(BOOL)isCostSufficient {
     NSAssert(_player, @"Who will you summon for?");
-    
-    if (_player.food >= _cost) {
-        return YES;
-    } else {
-        return NO;
-    }
+
+    return YES;
+//    if (_player.food >= _cost) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
 }
 
 -(void)updateSummon {
@@ -154,7 +155,6 @@
             
             PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfName:[PlayerComponent name]];
             player.food -= _cost;
-            
             
             [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
             break;

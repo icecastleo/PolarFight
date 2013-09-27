@@ -16,7 +16,6 @@
 		2D05597F17157A6200F82A08 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05597E17157A6200F82A08 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D14424816E88EAC00969C12 /* AIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424416E88EAB00969C12 /* AIStateAttack.m */; };
 		2D14424C16E88EFD00969C12 /* AIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D14424B16E88EFD00969C12 /* AIState.m */; };
-		2D4AA460174D361D00275F47 /* RangeSimpleXY.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2D4AA45F174D361C00275F47 /* RangeSimpleXY.mm */; };
 		2D918CEB1761D3C3002EE90C /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D918CEA1761D3C3002EE90C /* libFlurry.a */; };
 		2D9A482D177ECFF4007A3C76 /* rightarrow-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */; };
 		2D9A482E177ECFF4007A3C76 /* rightarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9A482C177ECFF2007A3C76 /* rightarrow.png */; };
@@ -165,7 +164,6 @@
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
 		37DE292D17A657A2002D0377 /* LineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292C17A657A2002D0377 /* LineComponent.m */; };
-		37DE293017A66BF0002D0377 /* ChangeLineSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292F17A66BF0002D0377 /* ChangeLineSkill.m */; };
 		37DF1A8D17606F27009042CB /* AttackUpPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */; };
 		37DF1A9017607356009042CB /* NoiseSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8F17607356009042CB /* NoiseSkill.m */; };
 		37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */; };
@@ -244,6 +242,7 @@
 		9B146C8F1739381F00D141F1 /* ActiveSkillSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C8E1739381D00D141F1 /* ActiveSkillSystem.m */; };
 		9B146C98173BB96200D141F1 /* DirectionComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C97173BB95B00D141F1 /* DirectionComponent.m */; };
 		9B146C9E173D91E900D141F1 /* CombatSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B146C9D173D91E700D141F1 /* CombatSystem.m */; };
+		9B18265117F15BC300A24C9D /* AliveComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B18265017F15BC300A24C9D /* AliveComponent.m */; };
 		9B27D1B81782E1240012E126 /* SimpleAudioEngine+VibrateExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D1B71782E1240012E126 /* SimpleAudioEngine+VibrateExtend.m */; };
 		9B27D1C1178305960012E126 /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D1C0178305950012E126 /* CCShake.m */; };
 		9B27D49717832E160012E126 /* AttackBonusMultiplierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27D1C317832E140012E126 /* AttackBonusMultiplierComponent.m */; };
@@ -259,7 +258,6 @@
 		9B293EBE17170CA800C1E728 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B293EBD17170CA700C1E728 /* noise.png */; };
 		9B293EC11718730E00C1E728 /* AccumulateAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B293EC01718730E00C1E728 /* AccumulateAttribute.m */; };
 		9B2AB06816665C0500B78136 /* ActiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AB06716665C0500B78136 /* ActiveSkill.m */; };
-		9B2AC5A617E06436009E2078 /* PlayerArmyComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2AC5A517E06436009E2078 /* PlayerArmyComponent.m */; };
 		9B2C78601699E6B500CA1A1C /* blood_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B2C785F1699E6B500CA1A1C /* blood_frame.png */; };
 		9B32207F179AAE9B00BB7EC8 /* SquareRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B32207E179AAE9B00BB7EC8 /* SquareRange.mm */; };
 		9B3881361675F40100E1FBF4 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E02F1616676B8B00BAF11B /* ColoredCircleSprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -432,7 +430,6 @@
 		9B92F36C17130CDB00DAF766 /* CCScrollLayerAdvance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B92F36A1712F5BB00DAF766 /* CCScrollLayerAdvance.m */; };
 		9B939D681791C2FF00E73432 /* PhysicsNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B10BFCA178FF1CF00C1290B /* PhysicsNode.mm */; };
 		9B93B17A1754E0280086540C /* CCMenu+RowColumnExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AF54A171EF36C00CB419F /* CCMenu+RowColumnExtend.m */; };
-		9B93DE7B17441F8400DA62F2 /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B93DE7D1744CCA400DA62F2 /* SummonComponent.m */; };
 		9B93DE831744F21700DA62F2 /* Range.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFAE62163E9DBB00073DC5 /* Range.mm */; };
 		9B93DE841744F21D00DA62F2 /* TeamComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB95173254CB0030C9D7 /* TeamComponent.m */; };
@@ -445,6 +442,7 @@
 		9BA147FE167BAE920012F2C0 /* FluctuantAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA147FD167BAE920012F2C0 /* FluctuantAttribute.m */; };
 		9BA4E41116E09D5D00D5FA07 /* MapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41016E09D5D00D5FA07 /* MapLayer.m */; };
 		9BA4E41416E09F0700D5FA07 /* MapCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4E41316E09F0700D5FA07 /* MapCamera.m */; };
+		9BA68B7E17EFF8D90056656E /* BattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B82F78B164FB2780001A357 /* BattleStatusLayer.m */; };
 		9BA6EA5817D5E42300E6E862 /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA4E17D5E42300E6E862 /* b1.png */; };
 		9BA6EA5917D5E42300E6E862 /* b2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA4F17D5E42300E6E862 /* b2.png */; };
 		9BA6EA5A17D5E42300E6E862 /* b3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA6EA5017D5E42300E6E862 /* b3.png */; };
@@ -518,23 +516,29 @@
 		9BC514B516FAEBE400ABE811 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = 9B98481516EDD27600D3D55D /* bg */; };
 		9BC8FD951652261D00A9EAC7 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8FD941652261D00A9EAC7 /* Helper.m */; };
 		9BD2109017D97E2E00F5CCC5 /* RoundBattleStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2108F17D97E2E00F5CCC5 /* RoundBattleStatusLayer.m */; };
+		9BD258E417F409C100237E49 /* GeneralAIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD258E317F409C100237E49 /* GeneralAIStateAttack.m */; };
+		9BD258E717F410E500237E49 /* MinionAIStateAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD258E617F410E500237E49 /* MinionAIStateAttack.m */; };
 		9BD25C02174121D600B6FBFB /* PlayerComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BB93173254CB0030C9D7 /* PlayerComponent.m */; };
-		9BD25C051741250C00B6FBFB /* AIStateEnemyPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD25C041741250B00B6FBFB /* AIStateEnemyPlayer.m */; };
 		9BD25C0817415A1900B6FBFB /* EnemyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD25C0717415A1800B6FBFB /* EnemyData.m */; };
 		9BD25C091742672300B6FBFB /* PlayerSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B55BBB0173255090030C9D7 /* PlayerSystem.m */; };
 		9BD25C0A1742CA9300B6FBFB /* UnitMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6EA71416F1FAED00C61AD9 /* UnitMenuItem.m */; };
 		9BD48F0C17AFD26D00DBFDE9 /* plants.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD48F0B17AFD26D00DBFDE9 /* plants.png */; };
+		9BDBB08D17E716750089AE21 /* MinionAIStateWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBB08C17E716750089AE21 /* MinionAIStateWalk.m */; };
+		9BDBB09017E7190C0089AE21 /* MinionAIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBB08F17E7190B0089AE21 /* MinionAIState.m */; };
 		9BDC0781166E3913009559C3 /* AttackEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC0780166E3913009559C3 /* AttackEvent.m */; };
 		9BDC4CD817C1DAC7004E13D6 /* music_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC4CD717C1DAC7004E13D6 /* music_1.caf */; };
 		9BE679ED17D8627D003B2EE4 /* christmas1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE679EC17D8627D003B2EE4 /* christmas1.png */; };
 		9BE679F317D88337003B2EE4 /* RoundBattleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE679F217D88337003B2EE4 /* RoundBattleController.m */; };
 		9BE6D7D917C7443C008BA285 /* TopLineMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */; };
+		9BE78B4417F573060098AED7 /* MinionAIStatePanic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE78B4317F573060098AED7 /* MinionAIStatePanic.m */; };
+		9BEEFEF417F01DA7004C5C8F /* GeneralAIStateWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEFEF317F01DA7004C5C8F /* GeneralAIStateWalk.m */; };
 		9BEF387D1776196C00FF538B /* ice-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387B1776196B00FF538B /* ice-hd.png */; };
 		9BEF387E1776196C00FF538B /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF387C1776196C00FF538B /* ice.png */; };
 		9BEF75301705802B006DE945 /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF752F1705802B006DE945 /* ShopLayer.m */; };
 		9BEF753317058047006DE945 /* StageScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF753217058047006DE945 /* StageScrollLayer.m */; };
 		9BF3260616AC559700D5782B /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260516AC559700D5782B /* fire.png */; };
 		9BF3260916AC891A00D5782B /* bloodParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BF3260816AC891A00D5782B /* bloodParticle.plist */; };
+		9BF6E71D17F2B7B2004BEA45 /* GroupComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF6E71C17F2B7B2004BEA45 /* GroupComponent.m */; };
 		9BFE1C3317783802002433E5 /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C2F17783802002433E5 /* animations.plist */; };
 		9BFE1C3417783802002433E5 /* BattleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C3017783802002433E5 /* BattleData.plist */; };
 		9BFE1C3517783802002433E5 /* CharacterBasicData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFE1C3117783802002433E5 /* CharacterBasicData.plist */; };
@@ -596,7 +600,6 @@
 		2D4AA45E174D361C00275F47 /* RangeSimpleXY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSimpleXY.h; sourceTree = "<group>"; };
 		2D4AA45F174D361C00275F47 /* RangeSimpleXY.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RangeSimpleXY.mm; sourceTree = "<group>"; };
 		2D4AD592163FCE1B00A949C3 /* SkillKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillKit.h; sourceTree = "<group>"; };
-		2D4AD59E163FE35800A949C3 /* RangeFanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeFanShape.m; sourceTree = "<group>"; };
 		2D918CE91761D3C3002EE90C /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		2D918CEA1761D3C3002EE90C /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		2D9A482B177ECFF0007A3C76 /* rightarrow-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightarrow-hd.png"; sourceTree = "<group>"; };
@@ -918,6 +921,8 @@
 		9B146C97173BB95B00D141F1 /* DirectionComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionComponent.m; sourceTree = "<group>"; };
 		9B146C9C173D91E500D141F1 /* CombatSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombatSystem.h; sourceTree = "<group>"; };
 		9B146C9D173D91E700D141F1 /* CombatSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombatSystem.m; sourceTree = "<group>"; };
+		9B18264F17F15BC300A24C9D /* AliveComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliveComponent.h; sourceTree = "<group>"; };
+		9B18265017F15BC300A24C9D /* AliveComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliveComponent.m; sourceTree = "<group>"; };
 		9B2040C6169F0C84000EF31F /* TankSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TankSkill.h; sourceTree = "<group>"; };
 		9B2040C7169F0C84000EF31F /* TankSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TankSkill.m; sourceTree = "<group>"; };
 		9B2040CD169F2E7C000EF31F /* SuicideSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuicideSkill.h; sourceTree = "<group>"; };
@@ -955,8 +960,6 @@
 		9B2AB06716665C0500B78136 /* ActiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveSkill.m; sourceTree = "<group>"; };
 		9B2AB06916668F6A00B78136 /* PassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSkill.h; sourceTree = "<group>"; };
 		9B2AB06A16668F6A00B78136 /* PassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassiveSkill.m; sourceTree = "<group>"; };
-		9B2AC5A417E06436009E2078 /* PlayerArmyComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerArmyComponent.h; sourceTree = "<group>"; };
-		9B2AC5A517E06436009E2078 /* PlayerArmyComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerArmyComponent.m; sourceTree = "<group>"; };
 		9B2C785F1699E6B500CA1A1C /* blood_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_frame.png; sourceTree = "<group>"; };
 		9B2C7861169A1C2C00CA1A1C /* AttackUpAura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackUpAura.h; sourceTree = "<group>"; };
 		9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackUpAura.m; sourceTree = "<group>"; };
@@ -1310,8 +1313,6 @@
 		9B5DB0DB177360C30024DA98 /* CCRepeatForever+RepeatForeverAnimateExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CCRepeatForever+RepeatForeverAnimateExtend.m"; path = "cocos2d/Extensions/CCRepeatForever+RepeatForeverAnimateExtend.m"; sourceTree = "<group>"; };
 		9B60DAD717477A320039A031 /* ProjectileEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileEvent.h; sourceTree = "<group>"; };
 		9B60DAD817477A320039A031 /* ProjectileEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileEvent.m; sourceTree = "<group>"; };
-		9B60DADA174792D40039A031 /* ProjectileRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileRange.h; sourceTree = "<group>"; };
-		9B60DADB174792D50039A031 /* ProjectileRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileRange.m; sourceTree = "<group>"; };
 		9B60DAE01747D4B10039A031 /* ProjectileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectileSystem.h; sourceTree = "<group>"; };
 		9B60DAE11747D4B20039A031 /* ProjectileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectileSystem.m; sourceTree = "<group>"; };
 		9B6DE0A6174FDADA00A09550 /* EntityFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EntityFactory.mm; sourceTree = "<group>"; };
@@ -1517,6 +1518,10 @@
 		9BC8FD941652261D00A9EAC7 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		9BD2108E17D97E2E00F5CCC5 /* RoundBattleStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundBattleStatusLayer.h; sourceTree = "<group>"; };
 		9BD2108F17D97E2E00F5CCC5 /* RoundBattleStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundBattleStatusLayer.m; sourceTree = "<group>"; };
+		9BD258E217F409C100237E49 /* GeneralAIStateAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralAIStateAttack.h; sourceTree = "<group>"; };
+		9BD258E317F409C100237E49 /* GeneralAIStateAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralAIStateAttack.m; sourceTree = "<group>"; };
+		9BD258E517F410E500237E49 /* MinionAIStateAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionAIStateAttack.h; sourceTree = "<group>"; };
+		9BD258E617F410E500237E49 /* MinionAIStateAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionAIStateAttack.m; sourceTree = "<group>"; };
 		9BD25C031741250B00B6FBFB /* AIStateEnemyPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateEnemyPlayer.h; sourceTree = "<group>"; };
 		9BD25C041741250B00B6FBFB /* AIStateEnemyPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateEnemyPlayer.m; sourceTree = "<group>"; };
 		9BD25C0617415A1600B6FBFB /* EnemyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyData.h; sourceTree = "<group>"; };
@@ -1524,6 +1529,10 @@
 		9BD25C0B17440CCE00B6FBFB /* PlistDictionaryInitialing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlistDictionaryInitialing.h; sourceTree = "<group>"; };
 		9BD48F0A17AFA24900DBFDE9 /* LICENSE_Box2D.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE_Box2D.txt; path = CastleFight/libs/Box2D/LICENSE_Box2D.txt; sourceTree = "<group>"; };
 		9BD48F0B17AFD26D00DBFDE9 /* plants.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plants.png; sourceTree = "<group>"; };
+		9BDBB08B17E716750089AE21 /* MinionAIStateWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionAIStateWalk.h; sourceTree = "<group>"; };
+		9BDBB08C17E716750089AE21 /* MinionAIStateWalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionAIStateWalk.m; sourceTree = "<group>"; };
+		9BDBB08E17E7190B0089AE21 /* MinionAIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionAIState.h; sourceTree = "<group>"; };
+		9BDBB08F17E7190B0089AE21 /* MinionAIState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionAIState.m; sourceTree = "<group>"; };
 		9BDC077F166E3913009559C3 /* AttackEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackEvent.h; sourceTree = "<group>"; };
 		9BDC0780166E3913009559C3 /* AttackEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackEvent.m; sourceTree = "<group>"; };
 		9BDC4CD717C1DAC7004E13D6 /* music_1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = music_1.caf; sourceTree = "<group>"; };
@@ -1538,6 +1547,10 @@
 		9BE679F217D88337003B2EE4 /* RoundBattleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundBattleController.m; sourceTree = "<group>"; };
 		9BE6D7D717C7443B008BA285 /* TopLineMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLineMapLayer.h; sourceTree = "<group>"; };
 		9BE6D7D817C7443B008BA285 /* TopLineMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLineMapLayer.m; sourceTree = "<group>"; };
+		9BE78B4217F573060098AED7 /* MinionAIStatePanic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionAIStatePanic.h; sourceTree = "<group>"; };
+		9BE78B4317F573060098AED7 /* MinionAIStatePanic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionAIStatePanic.m; sourceTree = "<group>"; };
+		9BEEFEF217F01DA7004C5C8F /* GeneralAIStateWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralAIStateWalk.h; sourceTree = "<group>"; };
+		9BEEFEF317F01DA7004C5C8F /* GeneralAIStateWalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralAIStateWalk.m; sourceTree = "<group>"; };
 		9BEF387B1776196B00FF538B /* ice-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ice-hd.png"; sourceTree = "<group>"; };
 		9BEF387C1776196C00FF538B /* ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice.png; sourceTree = "<group>"; };
 		9BEF752E1705802B006DE945 /* ShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopLayer.h; sourceTree = "<group>"; };
@@ -1552,6 +1565,8 @@
 		9BF467C516BA73C9005B1BBE /* CCMoveCharacterTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterTo.m; sourceTree = "<group>"; };
 		9BF467C716BA8190005B1BBE /* CCMoveCharacterBy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMoveCharacterBy.h; sourceTree = "<group>"; };
 		9BF467C816BA8191005B1BBE /* CCMoveCharacterBy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMoveCharacterBy.m; sourceTree = "<group>"; };
+		9BF6E71B17F2B7B2004BEA45 /* GroupComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupComponent.h; sourceTree = "<group>"; };
+		9BF6E71C17F2B7B2004BEA45 /* GroupComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupComponent.m; sourceTree = "<group>"; };
 		9BFE1C2F17783802002433E5 /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = animations.plist; sourceTree = "<group>"; };
 		9BFE1C3017783802002433E5 /* BattleData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BattleData.plist; sourceTree = "<group>"; };
 		9BFE1C3117783802002433E5 /* CharacterBasicData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterBasicData.plist; sourceTree = "<group>"; };
@@ -1567,7 +1582,6 @@
 		9BFFAE62163E9DBB00073DC5 /* Range.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Range.mm; sourceTree = "<group>"; };
 		9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCircle.h; sourceTree = "<group>"; };
 		9BFFAE64163E9DBB00073DC5 /* RangeCircle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RangeCircle.mm; sourceTree = "<group>"; };
-		9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeFanShape.h; sourceTree = "<group>"; };
 		B614E32717A9509A00C358AA /* christmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = christmas.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1659,29 +1673,6 @@
 			path = TapjoyPublisherLibrary;
 			sourceTree = "<group>";
 		};
-		2D14424916E88EBC00969C12 /* AIState */ = {
-			isa = PBXGroup;
-			children = (
-				2D14424A16E88EFD00969C12 /* AIState.h */,
-				2D14424B16E88EFD00969C12 /* AIState.m */,
-				2D14424116E88EAB00969C12 /* AIStateWalk.h */,
-				2D14424216E88EAB00969C12 /* AIStateWalk.m */,
-				2D14424316E88EAB00969C12 /* AIStateAttack.h */,
-				2D14424416E88EAB00969C12 /* AIStateAttack.m */,
-				9BD25C031741250B00B6FBFB /* AIStateEnemyPlayer.h */,
-				9BD25C041741250B00B6FBFB /* AIStateEnemyPlayer.m */,
-				2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */,
-				2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */,
-				2D07E0C71702E2E80028C492 /* AIStateHeroIdle.h */,
-				2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */,
-				3741400A1772F49F00E6365A /* AIStateHeroAttack.h */,
-				3741400B1772F49F00E6365A /* AIStateHeroAttack.m */,
-				9B953FE3179C26B20069CF89 /* AIStateProjectile.h */,
-				9B953FE4179C26B20069CF89 /* AIStateProjectile.m */,
-			);
-			name = AIState;
-			sourceTree = "<group>";
-		};
 		2D4AD598163FDDC400A949C3 /* Range */ = {
 			isa = PBXGroup;
 			children = (
@@ -1691,10 +1682,6 @@
 				9B32207E179AAE9B00BB7EC8 /* SquareRange.mm */,
 				9BFFAE63163E9DBB00073DC5 /* RangeCircle.h */,
 				9BFFAE64163E9DBB00073DC5 /* RangeCircle.mm */,
-				9BFFAE65163E9DBB00073DC5 /* RangeFanShape.h */,
-				2D4AD59E163FE35800A949C3 /* RangeFanShape.m */,
-				9B60DADA174792D40039A031 /* ProjectileRange.h */,
-				9B60DADB174792D50039A031 /* ProjectileRange.m */,
 				2D4AA45E174D361C00275F47 /* RangeSimpleXY.h */,
 				2D4AA45F174D361C00275F47 /* RangeSimpleXY.mm */,
 			);
@@ -1713,7 +1700,24 @@
 		2DA446BC16E4A53C00BDC060 /* AI */ = {
 			isa = PBXGroup;
 			children = (
-				2D14424916E88EBC00969C12 /* AIState */,
+				9BEEFEF117F01D7E004C5C8F /* General */,
+				9BDBB08A17E70F850089AE21 /* Minion */,
+				2D14424A16E88EFD00969C12 /* AIState.h */,
+				2D14424B16E88EFD00969C12 /* AIState.m */,
+				2D14424116E88EAB00969C12 /* AIStateWalk.h */,
+				2D14424216E88EAB00969C12 /* AIStateWalk.m */,
+				2D14424316E88EAB00969C12 /* AIStateAttack.h */,
+				2D14424416E88EAB00969C12 /* AIStateAttack.m */,
+				9BD25C031741250B00B6FBFB /* AIStateEnemyPlayer.h */,
+				9BD25C041741250B00B6FBFB /* AIStateEnemyPlayer.m */,
+				2D07E0C31702E2AF0028C492 /* AIStateHeroWalk.h */,
+				2D07E0C41702E2AF0028C492 /* AIStateHeroWalk.m */,
+				2D07E0C71702E2E80028C492 /* AIStateHeroIdle.h */,
+				2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */,
+				3741400A1772F49F00E6365A /* AIStateHeroAttack.h */,
+				3741400B1772F49F00E6365A /* AIStateHeroAttack.m */,
+				9B953FE3179C26B20069CF89 /* AIStateProjectile.h */,
+				9B953FE4179C26B20069CF89 /* AIStateProjectile.m */,
 			);
 			name = AI;
 			sourceTree = "<group>";
@@ -2556,6 +2560,8 @@
 				9B27D19B1781F9970012E126 /* StateComponents */,
 				9B55BB8A173254CB0030C9D7 /* Component.h */,
 				9B55BB8B173254CB0030C9D7 /* Component.m */,
+				9B18264F17F15BC300A24C9D /* AliveComponent.h */,
+				9B18265017F15BC300A24C9D /* AliveComponent.m */,
 				9B55BB92173254CB0030C9D7 /* PlayerComponent.h */,
 				9B55BB93173254CB0030C9D7 /* PlayerComponent.m */,
 				9B93DE7C1744CCA400DA62F2 /* SummonComponent.h */,
@@ -2604,8 +2610,8 @@
 				37020EBD17BBAFE20063A4BB /* OrbComponent.m */,
 				370AFE7A17E1B95100E369C9 /* SkullOrbComponent.h */,
 				370AFE7B17E1B95200E369C9 /* SkullOrbComponent.m */,
-				9B2AC5A417E06436009E2078 /* PlayerArmyComponent.h */,
-				9B2AC5A517E06436009E2078 /* PlayerArmyComponent.m */,
+				9BF6E71B17F2B7B2004BEA45 /* GroupComponent.h */,
+				9BF6E71C17F2B7B2004BEA45 /* GroupComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3177,6 +3183,21 @@
 			path = Rope;
 			sourceTree = "<group>";
 		};
+		9BDBB08A17E70F850089AE21 /* Minion */ = {
+			isa = PBXGroup;
+			children = (
+				9BDBB08E17E7190B0089AE21 /* MinionAIState.h */,
+				9BDBB08F17E7190B0089AE21 /* MinionAIState.m */,
+				9BDBB08B17E716750089AE21 /* MinionAIStateWalk.h */,
+				9BDBB08C17E716750089AE21 /* MinionAIStateWalk.m */,
+				9BD258E517F410E500237E49 /* MinionAIStateAttack.h */,
+				9BD258E617F410E500237E49 /* MinionAIStateAttack.m */,
+				9BE78B4217F573060098AED7 /* MinionAIStatePanic.h */,
+				9BE78B4317F573060098AED7 /* MinionAIStatePanic.m */,
+			);
+			name = Minion;
+			sourceTree = "<group>";
+		};
 		9BDC077D166E3719009559C3 /* Attack */ = {
 			isa = PBXGroup;
 			children = (
@@ -3231,6 +3252,17 @@
 				9BE01A521696DA1100B9C427 /* WizardSkill.m */,
 			);
 			name = ActiveSkill;
+			sourceTree = "<group>";
+		};
+		9BEEFEF117F01D7E004C5C8F /* General */ = {
+			isa = PBXGroup;
+			children = (
+				9BEEFEF217F01DA7004C5C8F /* GeneralAIStateWalk.h */,
+				9BEEFEF317F01DA7004C5C8F /* GeneralAIStateWalk.m */,
+				9BD258E217F409C100237E49 /* GeneralAIStateAttack.h */,
+				9BD258E317F409C100237E49 /* GeneralAIStateAttack.m */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 		9BEF387A1774E51700FF538B /* GameDatas */ = {
@@ -3363,7 +3395,12 @@
 		9B062CD61635275000E06018 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					9B062CDE1635275000E06018 = {
+						DevelopmentTeam = RZ24W88RN5;
+					};
+				};
 			};
 			buildConfigurationList = 9B062CD91635275000E06018 /* Build configuration list for PBXProject "CastleFight" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3580,6 +3617,7 @@
 				9B3881371675F40100E1FBF4 /* ColoredSquareSprite.m in Sources */,
 				9B3881381675F40100E1FBF4 /* HelloWorldScene.m in Sources */,
 				9B3881391675F40100E1FBF4 /* SneakyButton.m in Sources */,
+				9BA68B7E17EFF8D90056656E /* BattleStatusLayer.m in Sources */,
 				9B38813A1675F40100E1FBF4 /* SneakyButtonSkinnedBase.m in Sources */,
 				9B38813B1675F40100E1FBF4 /* SneakyJoystick.m in Sources */,
 				9B38813C1675F40100E1FBF4 /* SneakyJoystickSkinnedBase.m in Sources */,
@@ -3634,7 +3672,9 @@
 				9B73C786172E8247008575E5 /* BattleCatMapLayer.m in Sources */,
 				9B73C789172E82E4008575E5 /* ThreeLineMapLayer.m in Sources */,
 				9B55BB9E173254CB0030C9D7 /* Component.m in Sources */,
+				9BF6E71D17F2B7B2004BEA45 /* GroupComponent.m in Sources */,
 				9B55BBB7173255090030C9D7 /* System.m in Sources */,
+				9BD258E717F410E500237E49 /* MinionAIStateAttack.m in Sources */,
 				9B55BBC2173267470030C9D7 /* CharacterComponent.m in Sources */,
 				9B55BBC61732734E0030C9D7 /* AnimationComponent.m in Sources */,
 				9B55BBC81732A1FE0030C9D7 /* Entity.m in Sources */,
@@ -3652,20 +3692,19 @@
 				9B146C891738133C00D141F1 /* AIComponent.m in Sources */,
 				9B146C8A17381DD800D141F1 /* AIStateWalk.m in Sources */,
 				9B146C8C1738262600D141F1 /* MoveSystem.m in Sources */,
+				9BD258E417F409C100237E49 /* GeneralAIStateAttack.m in Sources */,
 				9B146C8F1739381F00D141F1 /* ActiveSkillSystem.m in Sources */,
 				9B146C98173BB96200D141F1 /* DirectionComponent.m in Sources */,
 				9B146C9E173D91E900D141F1 /* CombatSystem.m in Sources */,
 				9BD25C02174121D600B6FBFB /* PlayerComponent.m in Sources */,
-				9BD25C051741250C00B6FBFB /* AIStateEnemyPlayer.m in Sources */,
+				9BE78B4417F573060098AED7 /* MinionAIStatePanic.m in Sources */,
 				9BD25C0817415A1900B6FBFB /* EnemyData.m in Sources */,
 				9BD25C091742672300B6FBFB /* PlayerSystem.m in Sources */,
 				9BD25C0A1742CA9300B6FBFB /* UnitMenuItem.m in Sources */,
-				9B93DE7B17441F8400DA62F2 /* BattleStatusLayer.m in Sources */,
 				9B93DE7E1744CCA400DA62F2 /* SummonComponent.m in Sources */,
 				9B93DE831744F21700DA62F2 /* Range.mm in Sources */,
 				9B93DE841744F21D00DA62F2 /* TeamComponent.m in Sources */,
 				9B60DAD917477A320039A031 /* ProjectileEvent.m in Sources */,
-				2D4AA460174D361D00275F47 /* RangeSimpleXY.mm in Sources */,
 				9B6DE0A7174FDADA00A09550 /* EntityFactory.mm in Sources */,
 				37E42C39174E2C5F0010B9E9 /* EffectSystem.m in Sources */,
 				37E42C3C174E49BB0010B9E9 /* SideEffect.m in Sources */,
@@ -3705,6 +3744,7 @@
 				9B27D51F17832E160012E126 /* PoisonComponent.m in Sources */,
 				9B27D6A217832E160012E126 /* SpeedBonusAddComponent.m in Sources */,
 				9B27D6A317832E160012E126 /* StateComponent.m in Sources */,
+				9B18265117F15BC300A24C9D /* AliveComponent.m in Sources */,
 				9B27D6A417832E160012E126 /* StealthComponent.m in Sources */,
 				9B27D6AE17832F020012E126 /* KnockOutComponent.m in Sources */,
 				3750F4F51785B494009E2689 /* MagicComponent.m in Sources */,
@@ -3741,7 +3781,7 @@
 				9B953FE5179C26B20069CF89 /* AIStateProjectile.m in Sources */,
 				9B953FE6179C5DED0069CF89 /* ProjectileSystem.m in Sources */,
 				37DE292D17A657A2002D0377 /* LineComponent.m in Sources */,
-				37DE293017A66BF0002D0377 /* ChangeLineSkill.m in Sources */,
+				9BEEFEF417F01DA7004C5C8F /* GeneralAIStateWalk.m in Sources */,
 				3774E03817AFE14B001CD798 /* SummonMagic.m in Sources */,
 				37EC99AB17B13ACE00B8F4DE /* SummonToLineMagic.m in Sources */,
 				37DD362917B39B0000B8E199 /* ActiveSkillComponent.m in Sources */,
@@ -3756,7 +3796,8 @@
 				370AFE7C17E1B95600E369C9 /* SkullOrbComponent.m in Sources */,
 				9BE679F317D88337003B2EE4 /* RoundBattleController.m in Sources */,
 				9BD2109017D97E2E00F5CCC5 /* RoundBattleStatusLayer.m in Sources */,
-				9B2AC5A617E06436009E2078 /* PlayerArmyComponent.m in Sources */,
+				9BDBB08D17E716750089AE21 /* MinionAIStateWalk.m in Sources */,
+				9BDBB09017E7190C0089AE21 /* MinionAIState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3967,8 +4008,9 @@
 		9B062E761635275300E06018 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3983,12 +4025,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3999,8 +4044,9 @@
 		9B062E771635275300E06018 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -4013,8 +4059,11 @@
 					"NS_BLOCK_ASSERTIONS=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -4032,6 +4081,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4064,8 +4114,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shih-Kuang Chu";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shih-Kuang Chu";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4084,8 +4134,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = CastleFight;
-				PROVISIONING_PROFILE = "B75B3A96-8175-405F-AF15-D6C2EA224AC8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B75B3A96-8175-405F-AF15-D6C2EA224AC8";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"CastleFight/libs\"";
@@ -4156,7 +4206,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -4184,7 +4233,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;

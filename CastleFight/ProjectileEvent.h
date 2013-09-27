@@ -6,9 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import "ProjectileRange.h"
 #import "DirectionComponent.h"
+#import "cocos2d.h"
+#import "Range.h"
 
 typedef enum {
     kProjectileTypeInstant,

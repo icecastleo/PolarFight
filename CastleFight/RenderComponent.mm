@@ -34,11 +34,12 @@
             _isSpineNode = YES;
             _sprite.position = ccp(0, -sprite.boundingBox.size.height/2);
         } else if ([sprite isKindOfClass:[CCSprite class]]) {
-            _sprite.position = ccpMult([(CCSprite *)sprite offsetPosition], -1);
+            // Adjust sprite position by offset, and take sprite's scale into consideration!
+            _sprite.position = ccpMult([(CCSprite *)sprite offsetPosition], -1 * _sprite.scale);
         } else {
             NSAssert(NO, @"Did you use a CCNode?");
         }
-
+        
         _spriteBoundingBox = _sprite.boundingBox;
     }
     return self;

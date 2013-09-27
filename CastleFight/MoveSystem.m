@@ -118,7 +118,7 @@
                 CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
                 
                 if (render.isSpineNode) {
-                    CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
+                    CCSkeletonAnimation *animationNode = (CCSkeletonAnimation* )render.sprite;
                     [animationNode setAnimation:@"walk" loop:YES];
                     animation.state = kAnimationStateMove;
                 } else if (moveAnimation) {

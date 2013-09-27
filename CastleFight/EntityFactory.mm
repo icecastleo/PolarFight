@@ -39,7 +39,9 @@
 #import "ProjectileEvent.h"
 #import "AIStateProjectile.h"
 #import "LineComponent.h"
-#import "PlayerArmyComponent.h"
+#import "GeneralAIStateWalk.h"
+#import "MinionAIStateWalk.h"
+#import "GroupComponent.h"
 
 #import "TouchComponent.h"
 #import "MovePathComponent.h"
@@ -56,9 +58,8 @@
 #import "PhysicsNode.h"
 #import "Box2D.h"
 
-//test
 #import "CCSkeletonAnimation.h"
-//test
+
 
 @implementation EntityFactory {
     EntityManager * _entityManager;
@@ -95,10 +96,10 @@
     NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
     NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
     NSDictionary *auras = [characterData objectForKey:@"auras"];
-    NSDictionary *aiDictionary = [characterData objectForKey:@"AIComponent"];
+//    NSDictionary *aiDictionary = [characterData objectForKey:@"AIComponent"];
     
     Entity *entity = [_entityManager createEntity];    
-    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeNormal name:name]];
+    [entity addComponent:[[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeGeneral name:name]];
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
@@ -229,7 +230,10 @@
     }
     
     // TODO: Set AI for different character
-    [entity addComponent:[[AIComponent alloc] initWithDictionary:aiDictionary]];
+//    [entity addComponent:[[AIComponent alloc] initWithDictionary:aiDictionary]];
+
+    AIComponent *ai = [[AIComponent alloc] initWithState:[[GeneralAIStateWalk alloc] init]];
+    [entity addComponent:ai];
     
     // Level component should be set after all components that contained attributes.
     [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
@@ -243,17 +247,147 @@
     return entity;
 }
 
+-(Entity *)createMinion:(NSString *)cid level:(int)level forTeam:(int)team withGeneral:(Entity *)general {
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    
+    NSString *name = [characterData objectForKey:@"name"];
+//    int cost = [[characterData objectForKey:@"cost"] intValue];
+    NSDictionary *attributes = [characterData objectForKey:@"attributes"];
+    NSDictionary *activeSkills = [characterData objectForKey:@"activeSkills"];
+//    NSDictionary *passiveSkills = [characterData objectForKey:@"passiveSkills"];
+//    NSDictionary *auras = [characterData objectForKey:@"auras"];
+    
+    Entity *entity = [_entityManager createEntity];
+    [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
+    
+    CharacterComponent *character = [[CharacterComponent alloc] initWithCid:cid type:kCharacterTypeMinion name:name];
+    [entity addComponent:character];
+    
+    for (Entity *player in [entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]]) {
+        TeamComponent *pTeam = (TeamComponent *)[player getComponentOfName:[TeamComponent name]];
+        
+        if (pTeam.team == team) {
+            PlayerComponent *pPlayer = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
+            character.player = pPlayer;
+        }
+    }
+    
+    DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)];
+    // FIXME: Change all character asset to right
+    direction.spriteDirection = (team == kPlayerTeam ? kSpriteDirectionRight : kSpriteDirectionLeft);
+    [entity addComponent:direction];
+    
+    NSString *spriteFrameName = nil;
+    
+    if ([name hasPrefix:@"user"] || [name hasPrefix:@"enemy"] || [name hasPrefix:@"hero"] || [name hasPrefix:@"boss"]) {
+        spriteFrameName = [NSString stringWithFormat:@"%@_move_01.png", name];
+    } else {
+        spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
+    }
+    
+    CCNode *sprite;
+    
+    // hero spine
+    if ([cid intValue]/100 == 2) {
+        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:1.0];
+        [animationNode updateWorldTransform];
+        sprite = animationNode;
+    } else {
+        sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+    }
+    
+    sprite.scale = 0.3;
+    
+    RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
+    render.enableShadowPosition = YES;
+    [entity addComponent:render];
+    
+    if (_physicsSystem) {
+        PhysicsComponent *physics = [[PhysicsComponent alloc] initWithPhysicsSystem:_physicsSystem renderComponent:render];
+        physics.direction = direction;
+        [entity addComponent:physics];
+        
+        // Add Physics body
+        b2Body *body = [self createBoxBodyWithEntity:entity];
+        body->SetUserData((__bridge void*)entity);
+        
+        PhysicsNode *physicsNode = [[PhysicsNode alloc] init];
+        physicsNode.b2Body = body;
+        
+        [physics.root addChild:physicsNode];
+    }
+    
+    [entity addComponent:[[AnimationComponent alloc] initWithAnimations:[self animationsByCharacterName:name]]];
+    
+    MoveComponent *move = [[MoveComponent alloc] initWithSpeedAttribute:[[Attribute alloc] initWithDictionary:[attributes objectForKey:@"speed"]]];
+    [entity addComponent:move];
+    
+    [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
+                          [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"attack"]]]];
+    
+    DefenderComponent *defenseCom = [[DefenderComponent alloc] initWithHpAttribute:[[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"hp"]]];
+    [entity addComponent:defenseCom];
+    
+    defenseCom.defense = [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"defense"]];
+    defenseCom.armorType = kArmorNoraml;
+    defenseCom.bloodSprite = [[CharacterBloodSprite alloc] initWithEntity:entity];
+    
+    [entity addComponent:[[ProjectileComponent alloc] init]];
+    
+    ActiveSkillComponent *skillCom = [[ActiveSkillComponent alloc] init];
+    
+    for (NSString *key in activeSkills.allKeys) {
+        NSString *value = [activeSkills valueForKey:key];
+        NSAssert(NSClassFromString(value), @"you forgot to make this skill.");
+        [skillCom.skills setObject:[[NSClassFromString(value) alloc] init] forKey:key];
+    }
+    
+    if (skillCom.skills.count > 0) {
+        // Some entity might not have agile attribute
+        if ([attributes objectForKey:@"agile"]) {
+            Attribute *agile = [[Attribute alloc] initWithDictionary:[attributes objectForKey:@"agile"]];
+            skillCom.agile = agile;
+        }
+        [entity addComponent:skillCom];
+    }
+    
+    AIComponent *ai = [[AIComponent alloc] initWithState:[[MinionAIStateWalk alloc] initWithGeneral:general]];
+    [entity addComponent:ai];
+    
+    // Level component should be set after all components that contained attributes.
+    [entity addComponent:[[LevelComponent alloc] initWithLevel:level]];
+    
+    if (self.mapLayer) {
+        [self.mapLayer addEntity:entity];
+    }
+    
+    return entity;
+}
+
+
 -(void)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team {
     // TODO: 前排，後排，count系數
     
+    NSMutableArray *groupEntities = [[NSMutableArray alloc] init];
+    
     Entity *entity = [self createCharacter:cid level:5 forTeam:team scale:0.6];
-    entity.position = ccp(arc4random_uniform(240) + (team == 1 ? 0 : 240), arc4random_uniform(100) + kMapPathFloor);
+    entity.position = ccp(arc4random_uniform(240) + (team == 1 ? 0 : 240), arc4random_uniform(200) + kMapPathFloor);
+    
+    GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
+    [entity addComponent:group];
+    
+    [groupEntities addObject:entity];
     
     RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
     for (int i = 0; i < count/3; i++) {
-        Entity *minion = [self createCharacter:cid level:1 forTeam:team scale:0.35];
+        Entity *minion = [self createMinion:cid level:1 forTeam:team withGeneral:entity];
+        
+        GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
+        [minion addComponent:group];
 
+        [groupEntities addObject:minion];
+        
         while (YES) {
             CGPoint temp = ccp(CCRANDOM_MINUS1_1() * render.sprite.boundingBox.size.width*2, CCRANDOM_MINUS1_1() * render.sprite.boundingBox.size.height*2);
             
@@ -344,9 +478,6 @@
     // TODO: Set by file
     PlayerComponent *player = [[PlayerComponent alloc] init];
     [entity addComponent:player];
-    
-    PlayerArmyComponent *armies = [[PlayerArmyComponent alloc] init];
-    [entity addComponent:armies];
     
     NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
     

@@ -13,10 +13,9 @@
 @implementation PeaceSkill
 
 -(void)checkEvent:(EntityEvent)eventType  Message:(id)message {
-    if (eventType != kEntityEventDead) {
-        return;
+    if (eventType == kEntityEventDead) {
+        [self activeEffect];
     }
-    [self activeEffect];
 }
 
 -(void)activeEffect {

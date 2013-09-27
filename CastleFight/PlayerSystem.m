@@ -28,13 +28,13 @@
     for (Entity *entity in entities) {
         PlayerComponent * player = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
         
-        player.delta += delta;
-        
-        if (player.delta >= player.interval) {
-            player.delta -= player.interval;
-            player.food += player.foodRate;
-            player.mana += player.manaRate;
-        }
+//        player.delta += delta;
+//        
+//        if (player.delta >= player.interval) {
+//            player.delta -= player.interval;
+//            player.food += player.foodRate;
+//            player.mana += player.manaRate;
+//        }
         
 //        if (player.mana > kManaBarFullValue) {
 //            TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];

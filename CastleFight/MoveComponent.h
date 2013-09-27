@@ -13,7 +13,7 @@
 @interface MoveComponent : Component
 
 @property (readonly) Attribute *speed;
-@property CGPoint velocity;
+@property (nonatomic) CGPoint velocity;
 
 -(id)initWithSpeedAttribute:(Attribute *)speed;
 

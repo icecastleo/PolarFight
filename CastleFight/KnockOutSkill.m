@@ -11,17 +11,22 @@
 #import "DamageEvent.h"
 #import "SideEffect.h"
 #import "AttackEvent.h"
+#import "RenderComponent.h"
 
 @implementation KnockOutSkill
 
--(id)init {
-    if (self = [super init]) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSimpleXY,kRangeKeyType,@80,kRangeKeyRadius,@(M_PI/2),kRangeKeyAngle,@1,kRangeKeyTargetLimit,nil];
-        
-        range = [Range rangeWithParameters:dictionary];
-        self.cooldown = 1.5;
-    }
-    return self;
+-(void)setOwner:(Entity *)owner {
+    RenderComponent *render = (RenderComponent *)[owner getComponentOfName:[RenderComponent name]];
+    int width = render.sprite.boundingBox.size.width;
+    int height = render.sprite.boundingBox.size.height;
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@[kRangeSideEnemy],kRangeKeySide,kRangeTypeSquare,kRangeKeyType,[NSNumber numberWithInt:width],kRangeKeyWidth,[NSNumber numberWithInt:height],kRangeKeyHeight,@1,kRangeKeyTargetLimit,nil];
+    
+    range = [Range rangeWithParameters:dictionary];
+    
+    [super setOwner:owner];
+    
+    self.cooldown = 1.5;
 }
 
 -(void)activeEffect {

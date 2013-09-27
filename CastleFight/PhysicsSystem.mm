@@ -145,7 +145,7 @@ const static int kPositionIterations = 3;
         debugDraw->SetFlags(flags);
         
         PhysicsDebugDrawLayer *debugLayer = [[PhysicsDebugDrawLayer alloc] initWithPhysicsWorld:_world];
-        [entityFactory.mapLayer addChild:debugLayer z:NSIntegerMax];
+        [entityFactory.mapLayer addChild:debugLayer];
 #endif
     }
     return self;

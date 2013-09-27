@@ -21,6 +21,7 @@
         NSAssert(team, @"Invalid entity!");
         
         self.position = ccp(0, render.sprite.boundingBox.size.height/2 + self.sprite.boundingBox.size.height*1.5);
+        self.position = ccpAdd(self.position, render.sprite.position);
         self.midpoint = ccp(0, 0);
         self.color = team.team == kPlayerTeam ? ccc3(0, 180, 30) : ccc3(224, 32, 32);
         self.scaleX = render.sprite.boundingBox.size.width / self.sprite.boundingBox.size.width;

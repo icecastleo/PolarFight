@@ -12,6 +12,11 @@
     
 }
 
+@property NSDictionary *remainArmies;
+
+-(void)addCount:(int)count onOrbColor:(OrbColor)color;
+-(NSMutableDictionary *)getCalculatedArmies;
+
 @property float food;
 @property (nonatomic) float foodRate;
 @property (readonly) float maxRate;
@@ -25,5 +30,7 @@
 
 @property NSMutableArray *summonComponents;
 @property (nonatomic) NSMutableArray *battleTeam;
+
+@property int armiesCount;
 
 @end

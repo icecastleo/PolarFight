@@ -7,10 +7,11 @@
 //
 
 #import "Component.h"
+#import "PlayerComponent.h"
 
 typedef enum {
-    kCharacterTypeUnique,
-    kCharacterTypeNormal,
+    kCharacterTypeGeneral,
+    kCharacterTypeMinion,
 } CharacterType;
 
 @interface CharacterComponent : Component {
@@ -20,6 +21,8 @@ typedef enum {
 @property (readonly) NSString *cid;
 @property (readonly) CharacterType type;
 @property (readonly) NSString *name;
+
+@property (nonatomic) PlayerComponent *player;
 
 -(id)initWithCid:(NSString *)cid type:(CharacterType)type name:(NSString *)name;
 
