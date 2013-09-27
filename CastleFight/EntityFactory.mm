@@ -125,9 +125,10 @@
 
     // hero spine
     if ([cid intValue]/100 == 2) {
-        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:0.2];
+        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"fly_bear.json" atlasFile:@"fly_bear.atlas" scale:1.0];
         [animationNode updateWorldTransform];
         sprite = animationNode;
+        scale *= 0.1;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
     }
@@ -224,9 +225,9 @@
         
         [entity addComponent:[[TouchComponent alloc] initWithDictionary:[characterData objectForKey:@"TouchComponent"]]];
         
-//        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(150,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
-//        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
-//        [entity addComponent:pathCom];
+        NSArray *path = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(50,110)],[NSValue valueWithCGPoint:ccp(250,110)], nil];
+        MovePathComponent *pathCom = [[MovePathComponent alloc] initWithMovePath:path];
+        [entity addComponent:pathCom];
     }
     
     // TODO: Set AI for different character
@@ -607,7 +608,7 @@
     return entity;
 }
 
--(Entity *)createOrb:(NSString *)orbId withPlayer:(Entity *)player {
+-(Entity *)createOrb:(NSString *)orbId {
     Entity *entity = [_entityManager createEntity];
     
     NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:orbId];
@@ -632,16 +633,16 @@
 //    OrbComponent *orbCom = [[OrbComponent alloc] initWithDictionary:orbDic];
     [entity addComponent:orbCom];
     
-    PlayerComponent *playerCom = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
-    
     int summonIndex = [[orbDic objectForKey:@"summonIndex"] intValue];
     
     if (summonIndex >= 0) {
-        SummonComponent *summonCom = [playerCom.battleTeam objectAtIndex:summonIndex];
-        orbCom.summonData = summonCom;
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
+        CharacterInitData *data = [battleTeamInitData objectAtIndex:summonIndex];
+        
+        orbCom.summonData = data;
         
         // FIXME: Link with User data's battle team
-        NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:summonCom.data.cid];
+        NSDictionary *cData = [[FileManager sharedFileManager] getCharacterDataWithCid:data.cid];
         NSString *name = [cData objectForKey:@"name"];
         
         if (name) {

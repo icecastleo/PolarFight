@@ -1,0 +1,122 @@
+
+fly_bear.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fly bear body
+  rotate: false
+  xy: 1, 423
+  size: 499, 598
+  orig: 560, 613
+  offset: 11, 9
+  index: -1
+fly bear body 2
+  rotate: false
+  xy: 502, 423
+  size: 499, 598
+  orig: 560, 613
+  offset: 11, 9
+  index: -1
+fly bear fire 2-10
+  rotate: true
+  xy: 817, 1
+  size: 150, 140
+  orig: 182, 158
+  offset: 0, 0
+  index: -1
+fly bear left hand
+  rotate: true
+  xy: 221, 19
+  size: 235, 180
+  orig: 252, 187
+  offset: 10, 3
+  index: -1
+fly bear left leg 2
+  rotate: false
+  xy: 635, 203
+  size: 248, 218
+  orig: 260, 242
+  offset: 7, 17
+  index: -1
+fly bear right hand
+  rotate: true
+  xy: 403, 23
+  size: 231, 179
+  orig: 244, 198
+  offset: 6, 4
+  index: -1
+fly bear right hand 2
+  rotate: false
+  xy: 584, 22
+  size: 231, 179
+  orig: 244, 198
+  offset: 6, 4
+  index: -1
+fly bear right leg 2
+  rotate: true
+  xy: 1, 6
+  size: 248, 218
+  orig: 260, 242
+  offset: 7, 17
+  index: -1
+fly bear right pipe
+  rotate: true
+  xy: 885, 153
+  size: 268, 109
+  orig: 276, 127
+  offset: 6, 6
+  index: -1
+fly bear-17
+  rotate: false
+  xy: 1, 256
+  size: 632, 165
+  orig: 653, 181
+  offset: 15, 7
+  index: -1
+
+fly_bear2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fly bear body 3
+  rotate: false
+  xy: 1, 341
+  size: 499, 598
+  orig: 560, 613
+  offset: 11, 9
+  index: -1
+fly bear fire-09
+  rotate: false
+  xy: 271, 246
+  size: 99, 93
+  orig: 118, 103
+  offset: 16, 5
+  index: -1
+fly bear left foot
+  rotate: false
+  xy: 1, 1
+  size: 139, 228
+  orig: 152, 242
+  offset: 7, 7
+  index: -1
+fly bear left pipe
+  rotate: false
+  xy: 1, 231
+  size: 268, 108
+  orig: 276, 117
+  offset: 6, 4
+  index: -1
+fly bear right foot
+  rotate: false
+  xy: 142, 1
+  size: 139, 228
+  orig: 148, 242
+  offset: 7, 7
+  index: -1
+fly bear weapon 1
+  rotate: false
+  xy: 502, 430
+  size: 508, 509
+  orig: 562, 523
+  offset: 27, 7
+  index: -1

@@ -31,12 +31,7 @@
     NSArray *patterns;
     NSDictionary *randomOrbs;
     NSDictionary *currentPatternData;
-    NSDictionary *playerOrbSortDic;
-    NSDictionary *enemyOrbSortDic;
-    NSDictionary *allOrbSortDic;
-    NSArray *playerOrbSortArray;
-    NSArray *enemyOrbSortArray;
-    NSArray *allOrbSortArray;
+    NSDictionary *allOrbRatioDic;
     
     // for record
     NSMutableDictionary *matchOrbRecord;
@@ -67,22 +62,10 @@
         randomOrbs = [[FileManager sharedFileManager] getPatternDataWithPid:@"RandomOrbs"];
         currentPatternData = [[NSDictionary alloc] init];
         
-        playerOrbSortDic = [self sortOrbRatioDictionary:battleData.playerOrbs];
-        enemyOrbSortDic = [self sortOrbRatioDictionary:battleData.enemyOrbs];
         NSMutableDictionary *allDic = [NSMutableDictionary dictionaryWithDictionary:battleData.playerOrbs];
         [allDic addEntriesFromDictionary:battleData.enemyOrbs];
-        allOrbSortDic = [self sortOrbRatioDictionary:allDic];
-        
-        playerOrbSortArray = [playerOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
-            return [str1 compare:str2 options:NSNumericSearch];
-        }];
-        enemyOrbSortArray = [enemyOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
-            return [str1 compare:str2 options:NSNumericSearch];
-        }];
-        allOrbSortArray = [allOrbSortDic.allKeys sortedArrayUsingComparator:^(NSString *str1, NSString *str2) {
-            return [str1 compare:str2 options:NSNumericSearch];
-        }];
-        
+        allOrbRatioDic = allDic;
+                
         matchOrbRecord = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -219,6 +202,8 @@
     return nil;
 }
 
+#pragma mark Record & Show Combos
+// might move to other place
 -(void)addToRecord:(NSDictionary *)matchDic {
     NSMutableArray *allOrbs = [[NSMutableArray alloc] initWithArray:[matchDic objectForKey:kOrbMainMatch]];
     [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbSameColorMatch]];
@@ -273,54 +258,26 @@
 
 #pragma mark create columns and patterns
 
--(NSDictionary *)sortOrbRatioDictionary:(NSDictionary *)ratioDictionary {
-    NSAssert(ratioDictionary.count>0, @"you forgot to make ratioDictionart.");
+-(NSString *)randomOrbFromRatioDictionary:(NSDictionary *)ratioDictionary {
     
-    NSMutableDictionary *sortRatioDictionary = [[NSMutableDictionary alloc] init];
-    int sumOfProbability = 0;
+    NSString *orbId = nil;
     
-    for (NSString *orbId in ratioDictionary) {
-        NSNumber *probability = [ratioDictionary objectForKey:orbId];
-        NSAssert(probability.intValue >= 0, @"ratio error");
-        sumOfProbability += probability.intValue;
-        [sortRatioDictionary setObject:orbId forKey:[NSString stringWithFormat:@"%d",sumOfProbability]];
+    int ratioSum = 0;
+    for (NSNumber *ratio in ratioDictionary.allValues) {
+        ratioSum += ratio.intValue;
     }
-    return sortRatioDictionary;
-}
-
--(NSString *)randomOrbFromRatioArray:(NSArray *)ratioArray RatioDictionary:(NSDictionary *)ratioDictionary {
     
-    NSString *orbKey = nil;
-    int count = ratioArray.count;
-    if (count > 1) {
-        int random = arc4random_uniform([[ratioArray lastObject] intValue]);
-        
-        for (int i=0; i<count; i++) {
-            if (i>0) {
-                NSString *preValue = [ratioArray objectAtIndex:i-1];
-                NSString *value = [ratioArray objectAtIndex:i];
-                if (random >= preValue.intValue && random < value.intValue) {
-                    orbKey = value;
-                    break;
-                }
-            }else {
-                NSString *value = [ratioArray objectAtIndex:i];
-                if (random < value.intValue) {
-                    orbKey = value;
-                    break;
-                }
-            }
+    int random = arc4random_uniform(ratioSum) + 1;
+    
+    for (NSString *key in ratioDictionary.allKeys) {
+        NSNumber *ratio = [ratioDictionary objectForKey:key];
+        random -= ratio.intValue;
+        if (random <= 0) {
+            orbId = [NSString stringWithFormat:@"1%03d",key.intValue];
+            break;
         }
-    }else {
-        orbKey = [ratioArray lastObject];
     }
-    
-    NSAssert(orbKey!=nil, @"not found orbKey");
-    
-    int orbNum = [[ratioDictionary objectForKey:orbKey] intValue];
-    NSString *orbId = [NSString stringWithFormat:@"1%03d",orbNum];
-    
-    NSAssert(orbId!=nil, @"not found orbId");
+    NSAssert(orbId!=nil, @"not found orbKey");
     
     return orbId;
 }
@@ -338,11 +295,11 @@
                 NSNumber *orbNumber = [randomArray objectAtIndex:arc4random_uniform(randomArray.count)];
                 orbId = [NSString stringWithFormat:@"1%03d",orbNumber.intValue];
             }else if(number.intValue == kPlayerTeam*-1) { // player's orb team
-                orbId = [self randomOrbFromRatioArray:playerOrbSortArray RatioDictionary:playerOrbSortDic];
+                orbId = [self randomOrbFromRatioDictionary:_battleData.playerOrbs];
             }else if(number.intValue == kEnemyTeam*-1) { // enemy's orb team
-                orbId = [self randomOrbFromRatioArray:enemyOrbSortArray RatioDictionary:enemyOrbSortDic];
+                orbId = [self randomOrbFromRatioDictionary:_battleData.enemyOrbs];
             }else if(number.intValue == kAllTeam*-1) { // both
-                orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
+                orbId = [self randomOrbFromRatioDictionary:allOrbRatioDic];
             }else {
                 orbId = [NSString stringWithFormat:@"1%03d",number.intValue];
             }
@@ -370,7 +327,7 @@
                         NSString *orbId = [nextColumn objectAtIndex:i];
                         if ([orbId isEqualToString:kOrbNull]) {
                             if (arc4random_uniform(2) > 0) {
-                                orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
+                                orbId = [self randomOrbFromRatioDictionary:allOrbRatioDic];
                                 
                                 [nextColumn replaceObjectAtIndex:i withObject:orbId];
                                 count--;
@@ -405,7 +362,7 @@
         
     }else {
         for (int i=0; i<kOrbBoardRows; i++) {
-            NSString *orbId = [self randomOrbFromRatioArray:allOrbSortArray RatioDictionary:allOrbSortDic];
+            NSString *orbId = [self randomOrbFromRatioDictionary:allOrbRatioDic];
             if (arc4random_uniform(2) > 0) {
                 orbId = kOrbNull;
             }
@@ -485,7 +442,7 @@
                     int orbNum = orbId.intValue - kOrbNull.intValue;
                     if (orbNum > 0 && orbNum <= 100) { // player's
                         if (arc4random_uniform(2) > 0) {
-                            orbId = [self randomOrbFromRatioArray:enemyOrbSortArray RatioDictionary:enemyOrbSortDic];
+                            orbId = [self randomOrbFromRatioDictionary:_battleData.enemyOrbs];
                             [column replaceObjectAtIndex:j withObject:orbId];
                             enemyOrbSum++;
                             playerOrbSum--;
@@ -510,7 +467,7 @@
                     int orbNum = orbId.intValue - kOrbNull.intValue;
                     if (orbNum > 100) { // enemy's
                         if (arc4random_uniform(2) > 0) {
-                            orbId = [self randomOrbFromRatioArray:playerOrbSortArray RatioDictionary:playerOrbSortDic];
+                            orbId = [self randomOrbFromRatioDictionary:_battleData.playerOrbs];
                             [column replaceObjectAtIndex:j withObject:orbId];
                             playerOrbSum++;
                             enemyOrbSum--;

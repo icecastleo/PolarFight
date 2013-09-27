@@ -13,7 +13,7 @@
 #import "DirectionComponent.h"
 #import "KnockOutComponent.h"
 #import "DefenderComponent.h"
-#import "CCSkeletonAnimation.h"
+#import "spine-cocos2d-iphone.h"
 #import "LineComponent.h"
 #import "ThreeLineMapLayer.h"
 
@@ -115,8 +115,6 @@
             }
             
             if (animation.state == kAnimationStateNone) {
-                CCAnimation *moveAnimation = [animation.animations objectForKey:@"move"];
-                
                 if (render.isSpineNode) {
                     CCSkeletonAnimation *animationNode = (CCSkeletonAnimation* )render.sprite;
                     [animationNode setAnimation:@"walk" loop:YES];

@@ -176,6 +176,8 @@ typedef enum {
         [entityFactory createGroupCharacter:@"104" withCount:20 forTeam:2];
         [entityFactory createGroupCharacter:@"105" withCount:20 forTeam:2];
         [entityFactory createGroupCharacter:@"106" withCount:20 forTeam:2];
+        
+        [entityFactory createGroupCharacter:@"201" withCount:20 forTeam:1];
         status = kBattleStatusWait;
         
         [self runAction:[CCSequence actions:

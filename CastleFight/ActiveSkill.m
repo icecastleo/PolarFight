@@ -11,7 +11,7 @@
 #import "AnimationComponent.h"
 #import "MoveComponent.h"
 #import "DirectionComponent.h"
-#import "CCSkeletonAnimation.h"
+#import "spine-cocos2d-iphone.h"
 
 @implementation ActiveSkill
 
@@ -51,27 +51,22 @@
              _canActive = YES;
          }], nil]];
     }
-    
+
     if (_animationKey) {
         AnimationComponent *animationCom = (AnimationComponent *)[_owner getComponentOfName:[AnimationComponent name]];
         
         CCAnimation *animation = [animationCom.animations objectForKey:_animationKey];
         
-        if (animation) {
-            [render stopAnimation];
-            
-            animationCom.state = kAnimationStateAttack;
-            
-            //FIXME: spine node's animation.
-            if (render.isSpineNode) {
-                CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
-                [animationNode setAnimation:@"jump" loop:NO];
+        if (render.isSpineNode) {
+            CCSkeletonAnimation* animationNode = (CCSkeletonAnimation* )render.sprite;
+            if ([animationNode hasAnimation:_animationKey]) {
                 
-                AnimationState* state = [animationNode.states.lastObject pointerValue];
+                [render stopAnimation];
+                animationCom.state = kAnimationStateAttack;
                 
-                float duration = 0;
-                if (state->animation)
-                    duration = state->animation->duration;
+                [animationNode setAnimation:_animationKey loop:NO];
+                
+                float duration = [animationNode AnimationDuration:[animationNode.states.lastObject pointerValue]];
                 
                 CCSequence *attack = [CCSequence actions:
                                       [CCDelayTime actionWithDuration:duration - animation.delayPerUnit],
@@ -88,7 +83,14 @@
                 action.tag = kAnimationActionTag;
                 
                 [render.node runAction:action];
-            } else {
+                return;
+            }
+        } else {
+            if (animation) {
+                [render stopAnimation];
+                
+                animationCom.state = kAnimationStateAttack;
+                
                 CCAnimationFrame *frame = [animation.frames lastObject];
                 
                 CCSequence *attack = [CCSequence actions:
@@ -107,10 +109,10 @@
                 
                 action.tag = kAnimationActionTag;
                 [render.sprite runAction:action];
-            }
-            
+                
 //            [[SimpleAudioEngine sharedEngine] playEffect:@"sound_caf/effect_die_cat.caf"];
-            return;
+                return;
+            }
         }
     }
     

@@ -27,32 +27,31 @@
     //test skill
     AIComponent *aiCom = (AIComponent *)[entity getComponentOfName:[AIComponent name]];
     
-    ActiveSkill *skill;
+    ActiveSkill *skill = nil;
     NSString *skillName = nil;
     
     if (skillCom.skills.count > 1) {
-        NSMutableArray *sortSkillKey = [NSMutableArray arrayWithArray:aiCom.sortSkillProbabilities];
+        NSMutableDictionary *skillDic = [[NSMutableDictionary alloc] initWithDictionary:aiCom.skillProbabilityDic];
+        int count = skillDic.count;
+        int ratioSum = 0;
         
-        int count = sortSkillKey.count;
-        int count2 = count;
-        
-        for (int i = 0; i < count; i++) {
-            int random = arc4random_uniform([[sortSkillKey lastObject] intValue]);
-            //FIXME: edit it to skill.
-            int removeIndex = -1;
+        for (int i=0; i<count; i++) {
+            for (NSNumber *ratio in skillDic.allValues) {
+                ratioSum += ratio.intValue;
+            }
+            int random = arc4random_uniform(ratioSum)+1;
             
-            for (int j = 1; j < count2; j++) {
-                NSString *preValue = [sortSkillKey objectAtIndex:j-1];
-                NSString *value = [sortSkillKey objectAtIndex:j];
-                if (random >= preValue.intValue && random < value.intValue) {
-                    skillName = [aiCom.skillProbability objectForKey:value];
-                    removeIndex = j;
+            for (NSString *key in skillDic.allKeys) {
+                NSNumber *ratio = [skillDic objectForKey:key];
+                random -= ratio.intValue;
+                if (random <= 0) {
+                    skillName = key;
                     break;
                 }
             }
             
             if (!skillName) {
-                skillName = [aiCom.skillProbability objectForKey:[sortSkillKey objectAtIndex:0]];
+                skillName = [skillDic.allKeys objectAtIndex:0];
             }
             
             skill = [skillCom.skills objectForKey:skillName];
@@ -67,7 +66,6 @@
                 skill = nil;
                 skillName = nil;
             }
-            
         }
     } else {
         skillName = [aiCom.skillProbability objectForKey:[aiCom.sortSkillProbabilities objectAtIndex:0]];

@@ -7,8 +7,7 @@
 //
 
 #import "RenderComponent.h"
-#import "CCSkeletonAnimation.h"
-
+#import "spine-cocos2d-iphone.h"
 
 @implementation RenderComponent
 
@@ -149,12 +148,12 @@
         switch (direction) {
             case kDirectionLeft: {
                 CCSkeletonAnimation *animationNode = (CCSkeletonAnimation *)self.sprite;
-                [animationNode setScaleX:-1];
+                [animationNode setScaleX:self.sprite.scaleX*-1];
                 break;
             }
             case kDirectionRight: {
                 CCSkeletonAnimation *animationNode = (CCSkeletonAnimation *)self.sprite;
-                [animationNode setScaleX:1];
+                [animationNode setScaleX:self.sprite.scaleX*-1];
                 break;
             }
             default:
