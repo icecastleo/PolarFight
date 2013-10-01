@@ -103,10 +103,10 @@
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
     [entity addComponent:[[CostComponent alloc] initWithFood:cost mana:0]];
     
-    if ([cid intValue]/100 != 2) {
-        //hero doesn't need to change line.
-        [entity addComponent:[[LineComponent alloc] init]];
-    }
+//    if ([cid intValue]/100 != 2) {
+//        //hero doesn't need to change line.
+//        [entity addComponent:[[LineComponent alloc] init]];
+//    }
     
     DirectionComponent *direction = [[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)];
     // FIXME: Change all character asset to right
@@ -290,14 +290,14 @@
     
     // hero spine
     if ([cid intValue]/100 == 2) {
-        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"spineboy.json" atlasFile:@"spineboy.atlas" scale:1.0];
+        CCSkeletonAnimation *animationNode = [CCSkeletonAnimation skeletonWithFile:@"fly_bear.json" atlasFile:@"fly_bear.atlas" scale:1.0];
         [animationNode updateWorldTransform];
         sprite = animationNode;
+        sprite.scale = 0.03;
     } else {
         sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+        sprite.scale = 0.3;
     }
-    
-    sprite.scale = 0.3;
     
     RenderComponent *render = [[RenderComponent alloc] initWithSprite:sprite];
     render.enableShadowPosition = YES;
@@ -331,7 +331,7 @@
     
     defenseCom.defense = [[AccumulateAttribute alloc] initWithDictionary:[attributes objectForKey:@"defense"]];
     defenseCom.armorType = kArmorNoraml;
-    defenseCom.bloodSprite = [[CharacterBloodSprite alloc] initWithEntity:entity];
+//    defenseCom.bloodSprite = [[CharacterBloodSprite alloc] initWithEntity:entity];
     
     [entity addComponent:[[ProjectileComponent alloc] init]];
     
