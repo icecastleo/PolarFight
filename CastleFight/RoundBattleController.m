@@ -96,7 +96,7 @@ typedef enum {
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
         board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        board.timeCountdown = 1;
+        board.timeCountdown = 11;
         
         [self runAction:[CCSequence actions:
                          [CCCallBlock actionWithBlock:^{
@@ -166,6 +166,15 @@ typedef enum {
     }
     
     if (status == kBattleStatusPrepareFight) {
+        
+        PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
+        
+        NSDictionary *orbInfo = [playerCom orbInfo];
+        for (NSString *key in orbInfo) {
+            NSNumber *sum = [orbInfo objectForKey:key];
+            CCLOG(@"color:%@, sum:%d",key,sum.intValue);
+        }
+        
         [entityFactory createGroupCharacter:@"001" withCount:20 forTeam:1];
         [entityFactory createGroupCharacter:@"002" withCount:20 forTeam:1];
         [entityFactory createGroupCharacter:@"003" withCount:20 forTeam:1];

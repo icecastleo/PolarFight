@@ -40,6 +40,4 @@ typedef enum {
 
 -(NSArray *)nextColumn;
 
--(void)addToRecord:(NSDictionary *)matchDic;
-
 @end

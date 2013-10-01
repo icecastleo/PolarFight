@@ -84,4 +84,19 @@
     }
 }
 
+#pragma mark Record
+-(void)addToRecord:(NSDictionary *)matchDic {
+    NSMutableArray *allOrbs = [[NSMutableArray alloc] initWithArray:[matchDic objectForKey:kOrbMainMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbSameColorMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbEnemyMatch]];
+    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbOtherMatch]];
+    
+    PlayerComponent *playerCom = (PlayerComponent *)[self.board.aiPlayer getComponentOfName:[PlayerComponent name]];
+    
+    for (Entity *orb in allOrbs) {
+        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
+        [playerCom addCount:1 onOrbColor:orbCom.color];
+    }
+}
+
 @end

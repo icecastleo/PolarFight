@@ -37,4 +37,6 @@
 -(NSDictionary *)findMatch;
 -(void)matchClean:(NSDictionary *)matchDic;
 
+-(void)addToRecord:(NSDictionary *)matchDic;
+
 @end

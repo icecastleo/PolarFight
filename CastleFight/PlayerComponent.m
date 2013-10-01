@@ -88,4 +88,8 @@
 //    }
 //}
 
+-(NSDictionary *)orbInfo {
+    return counts;
+}
+
 @end
