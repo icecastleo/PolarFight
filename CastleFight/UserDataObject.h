@@ -19,8 +19,10 @@
 @property (nonatomic) float backgroundMusicVolume;
 @property (nonatomic) float soundsEffectVolume;
 
-@property NSArray *achievements;
-@property NSArray *properties;
+@property (nonatomic) NSArray *achievements;
+@property (nonatomic) NSArray *properties;
+@property (nonatomic) NSArray *orbSkills;
+@property (nonatomic) NSArray *orbSkillProperties;
 
 @property (readonly) NSArray *characterInitDatas;
 @property (readonly) NSArray *playerHeroArray;

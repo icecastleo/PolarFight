@@ -53,7 +53,13 @@
         userData = [self loadUserData];
         characterDatas = [self getDictionaryFromPlistFile:kCharacterDatasFile];
         patterns = [self getDictionaryFromPlistFile:kPatternDataFile];
-        _achievementManager = [[AchievementManager alloc] initWithAchievements:userData.achievements AndProperties:userData.properties];
+        
+        NSMutableArray *achievements = [NSMutableArray arrayWithArray:userData.achievements];
+        NSMutableArray *properties = [NSMutableArray arrayWithArray:userData.properties];
+        [achievements addObjectsFromArray:userData.orbSkills];
+        [properties addObjectsFromArray:userData.orbSkillProperties];
+        
+        _achievementManager = [[AchievementManager alloc] initWithAchievements:achievements AndProperties:properties];
         
         // game center
         self.gameCenterManager = [[GameCenterManager alloc] init];
@@ -243,6 +249,10 @@
 
 -(NSArray *)magicTeam {
     return userData.magicTeam;
+}
+
+-(NSArray *)orbSkills {
+    return userData.orbSkills;
 }
 
 //-(Character *)getPlayerHero {

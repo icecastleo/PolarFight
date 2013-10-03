@@ -124,6 +124,7 @@
 		3747FF2917FD29F000BDA50D /* AddReward.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2817FD29ED00BDA50D /* AddReward.m */; };
 		3747FF2C17FD4C1600BDA50D /* AddAgile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2B17FD4C1500BDA50D /* AddAgile.m */; };
 		3747FF2F17FD4C8700BDA50D /* AddSpeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2E17FD4C8600BDA50D /* AddSpeed.m */; };
+		3747FF3217FD612100BDA50D /* OrbSkillData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF3117FD612100BDA50D /* OrbSkillData.m */; };
 		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
 		37486B3C1781C2880011F3DB /* LightningMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B3B1781C2880011F3DB /* LightningMagic.m */; };
 		374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */; };
@@ -739,6 +740,8 @@
 		3747FF2B17FD4C1500BDA50D /* AddAgile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAgile.m; sourceTree = "<group>"; };
 		3747FF2D17FD4C8500BDA50D /* AddSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSpeed.h; sourceTree = "<group>"; };
 		3747FF2E17FD4C8600BDA50D /* AddSpeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSpeed.m; sourceTree = "<group>"; };
+		3747FF3017FD612100BDA50D /* OrbSkillData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbSkillData.h; sourceTree = "<group>"; };
+		3747FF3117FD612100BDA50D /* OrbSkillData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbSkillData.m; sourceTree = "<group>"; };
 		37486B371781951D0011F3DB /* Magic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magic.h; sourceTree = "<group>"; };
 		37486B381781951D0011F3DB /* Magic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magic.m; sourceTree = "<group>"; };
 		37486B3A1781C2880011F3DB /* LightningMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightningMagic.h; sourceTree = "<group>"; };
@@ -1800,6 +1803,8 @@
 				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				37DCA5C716F1CBD90006D656 /* FileManager.h */,
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
+				3747FF3017FD612100BDA50D /* OrbSkillData.h */,
+				3747FF3117FD612100BDA50D /* OrbSkillData.m */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -3882,6 +3887,7 @@
 				3747FF2917FD29F000BDA50D /* AddReward.m in Sources */,
 				3747FF2C17FD4C1600BDA50D /* AddAgile.m in Sources */,
 				3747FF2F17FD4C8700BDA50D /* AddSpeed.m in Sources */,
+				3747FF3217FD612100BDA50D /* OrbSkillData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

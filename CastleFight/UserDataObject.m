@@ -11,6 +11,7 @@
 #import "Property.h"
 #import "Achievement.h"
 #import "PlistDictionaryInitialing.h"
+#import "OrbSkillData.h"
 
 #define kMoneyTrickValue 1000
 
@@ -27,6 +28,8 @@
 #define kProperties @"properties"
 #define kBattleTeam @"battleTeam"
 #define kMagicTeam @"magicTeam"
+#define kOrbSkills @"orbSkills"
+#define kOrbSkillProperties @"orbSkillProperties"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
@@ -60,6 +63,9 @@
         
         _achievements = [self convertArray:[plist objectForKey:kAchievements] className:[Achievement class]];
         _properties = [self convertArray:[plist objectForKey:kProperties] className:[Property class]];
+        
+        _orbSkills = [self convertArray:[plist objectForKey:kOrbSkills] className:[OrbSkillData class]];
+        _orbSkillProperties = [self convertArray:[plist objectForKey:kOrbSkillProperties] className:[Property class]];
         
         //FIXME: [CharacterDataObject class] change to item class?
         _items = [self convertArray:[plist objectForKey:kItemArray] className:[CharacterInitData class]];

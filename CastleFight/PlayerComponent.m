@@ -8,6 +8,8 @@
 
 #import "PlayerComponent.h"
 #import "OrbSkill.h"
+#import "FileManager.h"
+#import "OrbSkillData.h"
 
 @interface PlayerComponent() {
     NSMutableDictionary *counts;
@@ -95,20 +97,21 @@
 
 -(NSArray *)activeSkills {
     
-    //FIXME: suppose allSkills is from userData
-    NSDictionary *allSkills = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:10],@"AddAttack",[NSNumber numberWithInt:5],@"AddDefense",[NSNumber numberWithInt:3],@"AddCharacterSum",[NSNumber numberWithInt:20],@"AddHealthPoint",[NSNumber numberWithInt:5],@"AddMana",[NSNumber numberWithInt:10],@"AddReward", nil];
+    NSArray *allSkills = [FileManager sharedFileManager].orbSkills;
     
     // for test
     [counts setObject:[NSNumber numberWithInt:2] forKey:@"Combos"];
     
     NSMutableArray *activeSkills = [[NSMutableArray alloc] init];
     
-    for (NSString *key in allSkills.allKeys) {
-        int level = [[allSkills objectForKey:key] intValue];
-        OrbSkill *skill = [[NSClassFromString(key) alloc] initWithLevel:level];
-        NSAssert(skill != nil, @"you forgot to make this skill");
-        if ([skill isActivated:counts]) {
-            [activeSkills addObject:skill];
+    for (OrbSkillData *skillData in allSkills) {
+        int level = skillData.level;
+        if (skillData.unLocked && level > 0) {
+            OrbSkill *skill = [[NSClassFromString(skillData.name) alloc] initWithLevel:level];
+            NSAssert(skill != nil, @"you forgot to make this skill");
+            if ([skill isActivated:counts]) {
+                [activeSkills addObject:skill];
+            }
         }
     }
     return activeSkills;
