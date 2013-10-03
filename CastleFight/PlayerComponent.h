@@ -17,6 +17,7 @@
 -(void)addCount:(int)count onOrbColor:(OrbColor)color;
 -(NSMutableDictionary *)getCalculatedArmies;
 -(NSDictionary *)orbInfo;
+-(NSArray *)activeSkills;
 
 @property float food;
 @property (nonatomic) float foodRate;

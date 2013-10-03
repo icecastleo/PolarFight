@@ -7,6 +7,7 @@
 //
 
 #import "PlayerComponent.h"
+#import "OrbSkill.h"
 
 @interface PlayerComponent() {
     NSMutableDictionary *counts;
@@ -90,6 +91,27 @@
 
 -(NSDictionary *)orbInfo {
     return counts;
+}
+
+-(NSArray *)activeSkills {
+    
+    //FIXME: suppose allSkills is from userData
+    NSDictionary *allSkills = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:10],@"AddAttack",[NSNumber numberWithInt:5],@"AddDefense",[NSNumber numberWithInt:3],@"AddCharacterSum",[NSNumber numberWithInt:20],@"AddHealthPoint",[NSNumber numberWithInt:5],@"AddMana",[NSNumber numberWithInt:10],@"AddReward", nil];
+    
+    // for test
+    [counts setObject:[NSNumber numberWithInt:2] forKey:@"Combos"];
+    
+    NSMutableArray *activeSkills = [[NSMutableArray alloc] init];
+    
+    for (NSString *key in allSkills.allKeys) {
+        int level = [[allSkills objectForKey:key] intValue];
+        OrbSkill *skill = [[NSClassFromString(key) alloc] initWithLevel:level];
+        NSAssert(skill != nil, @"you forgot to make this skill");
+        if ([skill isActivated:counts]) {
+            [activeSkills addObject:skill];
+        }
+    }
+    return activeSkills;
 }
 
 @end

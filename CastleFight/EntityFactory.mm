@@ -366,7 +366,7 @@
 }
 
 
--(void)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team {
+-(NSArray *)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team  BonusCount:(int)bonusCount {
     // TODO: 前排，後排，count系數
     
     NSMutableArray *groupEntities = [[NSMutableArray alloc] init];
@@ -381,7 +381,7 @@
     
     RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
-    for (int i = 0; i < count/3; i++) {
+    for (int i = 0; i < count/3 + bonusCount; i++) {
         Entity *minion = [self createMinion:cid level:1 forTeam:team withGeneral:entity];
         
         GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
@@ -398,6 +398,7 @@
             }
         }
     }
+    return groupEntities;
 }
 
 -(Entity *)createCastleForTeam:(int)team {
