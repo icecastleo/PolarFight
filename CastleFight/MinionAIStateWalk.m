@@ -58,7 +58,7 @@
         // Follow general
         if (CGPointEqualToPoint(generalMove.velocity, CGPointZero) == NO) {
             GroupComponent *group = (GroupComponent *)[entity getComponentOfName:[GroupComponent name]];
-            [self flock:entity withEntities:group.groupEntities withSeparationWeight:0.3 andAlignmentWeight:0.5 andCohesionWeight:0.3];
+            [self flock:entity withEntities:group.groupEntities withSeparationWeight:0.3 andAlignmentWeight:0.6 andCohesionWeight:0.3];
         } else {
             ActiveSkill *skill = [skills.skills objectForKey:@"attack1"];
             
@@ -154,7 +154,7 @@
             
             // Adjust force by distance, the closer, the force is more powerful!
             float distance = ccpDistance(entity.position, groupEntity.position);
-            difference = ccpMult(difference, 1.0f/distance);
+            difference = ccpMult(difference, (seperateDistance - distance)/seperateDistance);
             
             force = ccpAdd(force, difference);
             count++;
@@ -175,15 +175,15 @@
 }
 
 -(CGPoint)align:(Entity *)entity withEntities:(NSMutableArray *)entities usingMultiplier:(float)multiplier {
-    int neighborDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height)*2;
-    
-	CGPoint force = CGPointZero;
+    CGPoint force = CGPointZero;
 	int	count = 0;
     
     for (Entity *groupEntity in entities) {
         if (entity.eid == groupEntity.eid) {
             continue;
         }
+        
+        int neighborDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height + groupEntity.boundingBox.size.width + groupEntity.boundingBox.size.height)/2;
         
         if (ccpDistance(entity.position, groupEntity.position) < neighborDistance) {
             MoveComponent *groupEntityMove = (MoveComponent *)[groupEntity getComponentOfName:[MoveComponent name]];
@@ -197,7 +197,7 @@
     
 	// Average
 	if(count > 0)
-		force = ccpMult(force, 1.0f / count);
+		force = ccpMult(force, 1.0f/count);
     
 	// apply
 	if(multiplier != 1.0)
@@ -207,29 +207,35 @@
 }
 
 -(CGPoint)cohesion:(Entity *)entity withEntities:(NSMutableArray *)entities usingMultiplier:(float)multiplier {
-    int neighborDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height)*2;
-    int ignoreDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height);
+	int neighborDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height);
     
-	CGPoint force = CGPointZero;
+    CGPoint cohesion = CGPointZero;
+    CGPoint force = CGPointZero;
 	int	count = 0;
 	
     for (Entity *groupEntity in entities) {
-        if (entity.eid == groupEntity.eid) {
-            continue;
-        }
         
-        float distance = ccpDistance(entity.position, groupEntity.position);
-        
-        if (distance > ignoreDistance && distance < neighborDistance) {
-            force = ccpAdd(force, groupEntity.position);
+        if (ccpDistance(entity.position, groupEntity.position) < neighborDistance) {
+            cohesion = ccpAdd(cohesion, groupEntity.position);
             count++;
         }
     }
     
 	if(count > 0) {
         // Average
-		force = ccpMult(force, 1.0f/count);
-        force = [self steerEntity:entity withTarget:force easeAsApproaching:NO withEaseDistance:0];
+		cohesion = ccpMult(cohesion, 1.0f/count);
+        
+        int ignoreDistance = (entity.boundingBox.size.width + entity.boundingBox.size.height)/2;
+        float distance = ccpDistance(entity.position, cohesion);
+        
+        if (distance < ignoreDistance) {
+            return CGPointZero;
+        }
+        
+        force = ccpSub(cohesion, entity.position);
+        force = ccpNormalize(force);
+        
+//        force = [self steerEntity:entity withTarget:force easeAsApproaching:NO withEaseDistance:0];
     }
 	
 	// apply
@@ -239,31 +245,31 @@
 	return force;
 }
 
-#pragma mark Movement
--(CGPoint)steerEntity:(Entity *)entity withTarget:(CGPoint)targetPoint easeAsApproaching:(BOOL)ease withEaseDistance:(float)easeDistance
-{
-	CGPoint steeringForce = ccp(targetPoint.x, targetPoint.y);
-	steeringForce = ccpSub(steeringForce, entity.position);
-	
-	float distanceSquared = ccpLengthSQ(steeringForce);
-	float easeDistanceSquared = easeDistance * easeDistance;
-	
-	if(distanceSquared > FLT_EPSILON)
-	{
-		// Slow down or not
-		if(ease && distanceSquared < easeDistanceSquared) {
-			float distance = sqrtf(distanceSquared);
-			steeringForce = ccpMult(steeringForce, (distance/easeDistance) );
-		}
-		
-//		// Slow down
-//        MoveComponent *move = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
-//		steeringForce = ccpSub(steeringForce, move.velocity);
-	}
-	
-    steeringForce = ccpNormalize(steeringForce);
-    
-	return steeringForce;
-}
+//#pragma mark Movement
+//-(CGPoint)steerEntity:(Entity *)entity withTarget:(CGPoint)targetPoint easeAsApproaching:(BOOL)ease withEaseDistance:(float)easeDistance
+//{
+//	CGPoint steeringForce = ccp(targetPoint.x, targetPoint.y);
+//	steeringForce = ccpSub(steeringForce, entity.position);
+//	
+//	float distanceSquared = ccpLengthSQ(steeringForce);
+//	float easeDistanceSquared = easeDistance * easeDistance;
+//	
+//	if(distanceSquared > FLT_EPSILON)
+//	{
+//		// Slow down or not
+//		if(ease && distanceSquared < easeDistanceSquared) {
+//			float distance = sqrtf(distanceSquared);
+//			steeringForce = ccpMult(steeringForce, (distance/easeDistance) );
+//		}
+//		
+////		// Slow down
+////        MoveComponent *move = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
+////		steeringForce = ccpSub(steeringForce, move.velocity);
+//	}
+//	
+////    steeringForce = ccpNormalize(steeringForce);
+//    
+//	return steeringForce;
+//}
 
 @end
