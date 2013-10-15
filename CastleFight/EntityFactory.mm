@@ -375,6 +375,17 @@
     Entity *entity = [self createCharacter:cid level:5 forTeam:team scale:0.6];
     entity.position = ccp(arc4random_uniform(240) + (team == 1 ? 0 : 240), arc4random_uniform(200) + kMapPathFloor);
     
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
+    
+    for (Entity *player in [entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]]) {
+        TeamComponent *pTeam = (TeamComponent *)[player getComponentOfName:[TeamComponent name]];
+        
+        if (pTeam.team == team) {
+            PlayerComponent *pPlayer = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
+            character.player = pPlayer;
+        }
+    }
+    
     GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
     [entity addComponent:group];
     
@@ -580,7 +591,6 @@
     TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
     ItemComponent *itemCom = (ItemComponent *)[entity getComponentOfName:[ItemComponent name]];
     itemCom.count = count;
-    itemCom.entityManager = _entityManager;
     selectCom.delegate = itemCom;
     
     return entity;

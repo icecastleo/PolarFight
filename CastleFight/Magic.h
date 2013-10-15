@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Entity.h"
 #import "EntityFactory.h"
-#import "EntityManager.h"
 #import "Range.h"
 
 @interface Magic : NSObject
 
 @property (nonatomic, assign) EntityFactory *entityFactory;
-@property (nonatomic, assign) EntityManager *entityManager;
 @property (nonatomic, assign) Entity *owner;
 @property (nonatomic) NSDictionary *magicInformation;
 

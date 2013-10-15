@@ -39,7 +39,7 @@
     NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"test",@"test", nil];
     Magic* magic = [[NSClassFromString(self.effect) alloc] initWithMagicInformation:magicInfo];
     
-    magic.entityManager = self.entityManager;
+    magic.owner = self.owner;
     [magic active];
     
     CCLOG(@"%@ active count:%d",self.name,self.count);

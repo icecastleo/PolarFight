@@ -24,7 +24,7 @@
 }
 
 -(void)active {
-    NSArray *entities = [self.entityManager getAllEntitiesPosessingComponentOfName:[DefenderComponent name]];
+    NSArray *entities = [self.owner getAllEntitiesPosessingComponentOfName:[DefenderComponent name]];
     
     for (Entity *entity in entities) {
         TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
