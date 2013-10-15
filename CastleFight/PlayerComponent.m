@@ -39,6 +39,8 @@
         
         _summonComponents = [[NSMutableArray alloc] init];
         _battleTeam = [[NSMutableArray alloc] init];
+        _items = [[NSMutableArray alloc] init];
+        _itemsInBattle = [[NSMutableArray alloc] init];
     }
     return self;
 }

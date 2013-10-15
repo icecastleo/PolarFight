@@ -3035,5 +3035,42 @@
 			<integer>2</integer>
 		</dict>
 	</dict>
+	<key>2001</key>
+	<dict>
+		<key>ItemComponent</key>
+		<dict>
+			<key>name</key>
+			<string>First Aid Kit</string>
+			<key>images</key>
+			<dict>
+				<key>image1</key>
+				<string>test1.png</string>
+				<key>image2</key>
+				<string>test2.png</string>
+			</dict>
+			<key>effect</key>
+			<string>AllHeal</string>
+			<key>maxCount</key>
+			<string>99</string>
+			<key>price</key>
+			<string>1000</string>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>selectedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>SummonMagic_button.png</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

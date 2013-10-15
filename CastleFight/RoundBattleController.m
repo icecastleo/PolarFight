@@ -97,7 +97,8 @@ typedef enum {
         //        dPadLayer = [DPadLayer node];
         //        [self addChild:dPadLayer];
         
-        statusLayer = [[RoundBattleStatusLayer alloc] init];
+//        statusLayer = [[RoundBattleStatusLayer alloc] init];
+        statusLayer = [[RoundBattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
@@ -172,6 +173,9 @@ typedef enum {
     }
     
     if (status == kBattleStatusPrepareFight) {
+        
+        [statusLayer setMagicButton];
+        [statusLayer setItemButton];
         
         PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
         

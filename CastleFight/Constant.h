@@ -77,6 +77,7 @@
 #define kLevelLabelTag 9879
 #define kSelectedImageTag 9880
 #define kCombosLabelTag 9881
+#define kCountLabelTag 9882
 
 //For Achievement System
 #define ACTIVE_IF_GREATER_THAN @">"

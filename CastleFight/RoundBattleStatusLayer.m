@@ -20,8 +20,11 @@
 #import "CostComponent.h"
 #import "LevelComponent.h"
 
-@interface RoundBattleStatusLayer() {
+#import "RoundBattleController.h"
+#import "ItemComponent.h"
 
+@interface RoundBattleStatusLayer() {
+    PlayerComponent *player;
 }
 
 @end
@@ -68,6 +71,67 @@
 
 -(void)pauseButtonTapped:(id)sender {
     [self addChild:[PauseLayer node]];
+}
+
+-(id)initWithBattleController:(RoundBattleController *)battleController {
+    if ([self init]) {
+        player = (PlayerComponent *)[battleController.userPlayer getComponentOfName:[PlayerComponent name]];
+    }
+    return self;
+}
+
+-(void)setMagicButton {
+    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
+    
+    for (Entity *entity in magicSkillCom.magicTeam) {
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+        //FIXME: the position is not correct.
+        renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),30);
+        [self addChild:renderCom.node];
+        
+        //FIXME: maybe do not need these or move to other appropriate place.
+        CostComponent *costCom = (CostComponent *)[entity getComponentOfName:[CostComponent name]];
+        NSString *costString;
+        ccColor3B color;
+        switch (costCom.type) {
+            case kCostTypeFood:
+                costString = [NSString stringWithFormat:@"%d",costCom.food];
+                color = ccGOLD;
+                break;
+            case kCostTypeMana:
+                costString = [NSString stringWithFormat:@"%d",costCom.mana];
+                color = ccBLUEVIOLET;
+                break;
+            default:
+                break;
+        }
+        NSAssert(costString != nil, @"this costType String does not be made yet.");
+        CCLabelTTF *label = [CCLabelBMFont labelWithString:costString fntFile:@"WhiteFont.fnt"];
+        label.color = color;
+        label.position =  ccp(0, renderCom.sprite.boundingBox.size.height/2 + label.boundingBox.size.height);
+        label.anchorPoint = CGPointMake(0.5, 1);
+        [renderCom.node addChild:label z:0 tag:kCostLabelTag];
+    }
+}
+-(void)setItemButton {
+    NSArray *itemsInBattle = player.itemsInBattle;
+    
+    for (Entity *entity in itemsInBattle) {
+        RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
+        //FIXME: the position is not correct.
+        renderCom.position = ccp(240+40*([itemsInBattle indexOfObject:entity]+1),30);
+        [self addChild:renderCom.node];
+        
+        //FIXME: maybe do not need these or move to other appropriate place.
+        ItemComponent *itemCom = (ItemComponent *)[entity getComponentOfName:[ItemComponent name]];
+        NSString *costString = [NSString stringWithFormat:@"%d",itemCom.count];
+        ccColor3B color = ccGOLD;
+        CCLabelTTF *label = [CCLabelBMFont labelWithString:costString fntFile:@"WhiteFont.fnt"];
+        label.color = color;
+        label.position =  ccp(0, renderCom.sprite.boundingBox.size.height/2 + label.boundingBox.size.height);
+        label.anchorPoint = CGPointMake(0.5, 1);
+        [renderCom.node addChild:label z:0 tag:kCountLabelTag];
+    }
 }
 
 //-(void)update:(ccTime)delta {

@@ -10,6 +10,13 @@
 #import "AttackerComponent.h"
 #import "Attribute.h"
 
+@interface AddAttack ()
+{
+    int orbSum;
+}
+
+@end
+
 @implementation AddAttack
 
 -(id)initWithLevel:(int)level {
@@ -22,10 +29,10 @@
 -(BOOL)isActivated:(NSDictionary *)orbInfo {
     _isActivated = NO;
     
-    // suppose if red color > 2, is active.
+    // suppose if red color > 0, is active.
     //FIXME: +3 is for test.
-    int redColorOrb = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbRed]] intValue] +3 ;
-    if (redColorOrb > 2) {
+    orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbRed]] intValue] +3 ;
+    if (orbSum > 0) {
         CCLOG(@"level %d: Add Attack is Active",self.level);
         _isActivated = YES;
     }
@@ -42,7 +49,9 @@
     // only for log
     int oldAttribute = attribute.value;
     
-    float multiplier = 0.25 * self.level + 1;
+    // basic rate: 0.25
+    float multiplier = 0.25 * orbSum;
+    
     [attribute addMultiplier:multiplier];
     
     CCLOG(@"Add Attack: from %d to %d.",oldAttribute,attribute.value);

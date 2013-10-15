@@ -1,23 +1,23 @@
 //
-//  AddDefense.m
+//  AddSpeed2.m
 //  CastleFight
 //
-//  Created by  浩翔 on 13/10/1.
+//  Created by  浩翔 on 13/10/8.
 //
 //
 
-#import "AddDefense.h"
-#import "DefenderComponent.h"
+#import "AddSpeed2.h"
+#import "MoveComponent.h"
 #import "Attribute.h"
 
-@interface AddDefense ()
+@interface AddSpeed2 ()
 {
     int orbSum;
 }
 
 @end
 
-@implementation AddDefense
+@implementation AddSpeed2
 
 -(id)initWithLevel:(int)level {
     if (self = [super initWithLevel:level]) {
@@ -31,30 +31,31 @@
     
     // suppose if red color > 0, is active.
     //FIXME: +3 is for test.
-    orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbBlue]] intValue] +3 ;
+    orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbYellow]] intValue] +3 ;
     if (orbSum > 0) {
-        CCLOG(@"level %d: Add Defense is Active",self.level);
+        CCLOG(@"level %d: Add Speed2 is Active",self.level);
         _isActivated = YES;
     }
     return _isActivated;
+    
 }
 
 -(void)affectOnEntity:(Entity *)entity {
     if (!self.isActivated) {
         return;
     }
-    DefenderComponent *defenderCom = (DefenderComponent *)[entity getComponentOfName:[DefenderComponent name]];
-    Attribute *attribute = defenderCom.defense;
+    MoveComponent *moveCom = (MoveComponent *)[entity getComponentOfName:[MoveComponent name]];
+    Attribute *attribute = moveCom.speed;
     
     // only for log
     int oldAttribute = attribute.value;
     
-    // basic rate: 0.25
-    float multiplier = 0.25 * orbSum;
+    // plus rate: 0.1
+    float multiplier = 0.1 * self.level * orbSum;
     
     [attribute addMultiplier:multiplier];
     
-    CCLOG(@"Add Defense: from %d to %d.",oldAttribute,attribute.value);
+    CCLOG(@"Add Speed2: from %d to %d.",oldAttribute,attribute.value);
 }
 
 @end

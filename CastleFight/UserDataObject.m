@@ -19,7 +19,8 @@
 #define kCastle @"castle"
 #define kHero @"heros"
 #define kCharacters @"characters"
-#define kItemArray @"items"
+#define kItems @"items"
+#define kItemsInBattle @"itemsInBattle"
 #define kSoundsEffectVolume @"soundsEffectVolume"
 #define kBackgroundMucsicVolume @"backgroundMusicVolume"
 #define kSoundsEffectEnable @"soundsEffectEnable"
@@ -36,7 +37,6 @@
 }
 //@property NSArray *playerHeroArray;
 @property NSArray *playerCastleArray;
-@property NSArray *items;
 
 @end
 
@@ -68,7 +68,8 @@
         _orbSkillProperties = [self convertArray:[plist objectForKey:kOrbSkillProperties] className:[Property class]];
         
         //FIXME: [CharacterDataObject class] change to item class?
-        _items = [self convertArray:[plist objectForKey:kItemArray] className:[CharacterInitData class]];
+        _items = [plist objectForKey:kItems];
+        _itemsInBattle = [plist objectForKey:kItemsInBattle];
     }
     return self;
 }
@@ -115,7 +116,8 @@
         _magicTeam = [decoder decodeObjectForKey:kMagicTeam];
         
         moneyNumber = [decoder decodeObjectForKey:kMoney];
-        _items = [decoder decodeObjectForKey:kItemArray];
+        _items = [decoder decodeObjectForKey:kItems];
+        _itemsInBattle = [decoder decodeObjectForKey:kItemsInBattle];
         _soundsEffectVolume = [decoder decodeFloatForKey:kSoundsEffectVolume];
         _backgroundMusicVolume = [decoder decodeFloatForKey:kBackgroundMucsicVolume];
         _soundsEffectSwitch = [decoder decodeBoolForKey:kSoundsEffectEnable];
@@ -134,7 +136,8 @@
     [encoder encodeObject:_magicTeam forKey:kMagicTeam];
     
     [encoder encodeObject:moneyNumber forKey:kMoney];
-    [encoder encodeObject:_items forKey:kItemArray];
+    [encoder encodeObject:_items forKey:kItems];
+    [encoder encodeObject:_itemsInBattle forKey:kItemsInBattle];
     [encoder encodeFloat:_soundsEffectVolume forKey:kSoundsEffectVolume];
     [encoder encodeFloat:_backgroundMusicVolume forKey:kBackgroundMucsicVolume];
     [encoder encodeBool:_soundsEffectSwitch forKey:kSoundsEffectEnable];

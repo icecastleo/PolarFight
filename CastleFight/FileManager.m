@@ -255,6 +255,14 @@
     return userData.orbSkills;
 }
 
+-(NSArray *)items {
+    return userData.items;
+}
+
+-(NSArray *)itemsInBattle {
+    return userData.itemsInBattle;
+}
+
 //-(Character *)getPlayerHero {
 //    return [self.userDataObject getPlayerHero];
 //}

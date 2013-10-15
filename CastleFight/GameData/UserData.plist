@@ -135,7 +135,18 @@
 		</dict>
 	</array>
 	<key>items</key>
-	<array/>
+	<array>
+		<dict>
+			<key>itemId</key>
+			<string>2001</string>
+			<key>count</key>
+			<integer>10</integer>
+		</dict>
+	</array>
+	<key>itemsInBattle</key>
+	<array>
+		<integer>0</integer>
+	</array>
 	<key>magicTeam</key>
 	<array>
 		<dict>
@@ -521,83 +532,13 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>AddCharacterSum</string>
+			<string>AddReward</string>
 			<key>maxLevel</key>
 			<integer>3</integer>
 			<key>message</key>
-			<string>AddCharacterSum is unlocked.</string>
+			<string>AddReward is unlocked.</string>
 			<key>content</key>
-			<string>AddCharacterSum Orb&apos;s Skill is unlocked</string>
-			<key>unLocked</key>
-			<true/>
-			<key>propertyNames</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddAttack</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
-			<key>message</key>
-			<string>AddAttack is unlocked.</string>
-			<key>content</key>
-			<string>AddAttack Orb&apos;s Skill is unlocked</string>
-			<key>unLocked</key>
-			<true/>
-			<key>propertyNames</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddDefense</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
-			<key>message</key>
-			<string>AddDefense is unlocked.</string>
-			<key>content</key>
-			<string>AddDefense Orb&apos;s Skill is unlocked</string>
-			<key>unLocked</key>
-			<true/>
-			<key>propertyNames</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddAgile</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
-			<key>message</key>
-			<string>AddAgile is unlocked.</string>
-			<key>content</key>
-			<string>AddAgile Orb&apos;s Skill is unlocked</string>
-			<key>unLocked</key>
-			<true/>
-			<key>propertyNames</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddSpeed</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
-			<key>message</key>
-			<string>AddSpeed is unlocked.</string>
-			<key>content</key>
-			<string>AddSpeed Orb&apos;s Skill is unlocked</string>
-			<key>unLocked</key>
-			<true/>
-			<key>propertyNames</key>
-			<array/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddHealthPoint</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
-			<key>message</key>
-			<string>AddHealthPoint is unlocked.</string>
-			<key>content</key>
-			<string>AddHealthPoint Orb&apos;s Skill is unlocked</string>
+			<string>AddReward Orb&apos;s Skill is unlocked</string>
 			<key>unLocked</key>
 			<true/>
 			<key>propertyNames</key>
@@ -619,13 +560,153 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>AddReward</string>
+			<string>AddCharacterSum</string>
 			<key>maxLevel</key>
 			<integer>3</integer>
 			<key>message</key>
-			<string>AddReward is unlocked.</string>
+			<string>AddCharacterSum is unlocked.</string>
 			<key>content</key>
-			<string>AddReward Orb&apos;s Skill is unlocked</string>
+			<string>AddCharacterSum Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAttack</string>
+			<key>maxLevel</key>
+			<integer>1</integer>
+			<key>message</key>
+			<string>AddAttack is unlocked.</string>
+			<key>content</key>
+			<string>AddAttack Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAttack2</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>AddAttack is unlocked.</string>
+			<key>content</key>
+			<string>AddAttack Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddDefense</string>
+			<key>maxLevel</key>
+			<integer>1</integer>
+			<key>message</key>
+			<string>AddDefense is unlocked.</string>
+			<key>content</key>
+			<string>AddDefense Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddDefense2</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>AddDefense is unlocked.</string>
+			<key>content</key>
+			<string>AddDefense Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAgile</string>
+			<key>maxLevel</key>
+			<integer>1</integer>
+			<key>message</key>
+			<string>AddAgile is unlocked.</string>
+			<key>content</key>
+			<string>AddAgile Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAgile2</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>AddAgile is unlocked.</string>
+			<key>content</key>
+			<string>AddAgile Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddSpeed</string>
+			<key>maxLevel</key>
+			<integer>1</integer>
+			<key>message</key>
+			<string>AddSpeed is unlocked.</string>
+			<key>content</key>
+			<string>AddSpeed Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddSpeed2</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>AddSpeed is unlocked.</string>
+			<key>content</key>
+			<string>AddSpeed Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddHealthPoint</string>
+			<key>maxLevel</key>
+			<integer>1</integer>
+			<key>message</key>
+			<string>AddHealthPoint is unlocked.</string>
+			<key>content</key>
+			<string>AddHealthPoint Orb&apos;s Skill is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddHealthPoint2</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>AddHealthPoint is unlocked.</string>
+			<key>content</key>
+			<string>AddHealthPoint Orb&apos;s Skill is unlocked</string>
 			<key>unLocked</key>
 			<true/>
 			<key>propertyNames</key>
@@ -634,108 +715,6 @@
 	</array>
 	<key>orbSkillProperties</key>
 	<array>
-		<dict>
-			<key>name</key>
-			<string>AddAttack_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddAttack</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddCharacterSum_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddCharacterSum</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddDefense_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddDefense</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddAgile_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddAgile</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddSpeed_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddSpeed</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>AddHealthPoint_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>AddHealthPoint</string>
-				<string>level</string>
-			</array>
-		</dict>
 		<dict>
 			<key>name</key>
 			<string>AddMana_level</string>
@@ -767,6 +746,193 @@
 			<key>tags</key>
 			<array>
 				<string>AddReward</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddCharacterSum_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddCharacterSum</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAttack_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddAttack</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAttack2_level</string>
+			<key>value</key>
+			<integer>0</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddAttack2</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddDefense_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddDefense</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddDefense2_level</string>
+			<key>value</key>
+			<integer>0</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddDefense2</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAgile_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddAgile</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddAgile2_level</string>
+			<key>value</key>
+			<integer>0</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddAgile2</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddSpeed_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddSpeed</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddSpeed2_level</string>
+			<key>value</key>
+			<integer>0</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddSpeed2</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddHealthPoint_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddHealthPoint</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>AddHealthPoint2_level</string>
+			<key>value</key>
+			<integer>0</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>AddHealthPoint2</string>
 				<string>level</string>
 			</array>
 		</dict>

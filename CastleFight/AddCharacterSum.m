@@ -18,7 +18,11 @@
 }
 
 -(BOOL)isActivated:(NSDictionary *)orbInfo {
-    _isActivated = YES;
+    _isActivated = NO;
+    
+    if (self.level > 0) {
+        _isActivated = YES;
+    }
     
     //suppose this skill does not need any orb conditions;
     CCLOG(@"level %d: AddCharacterSum is Active",self.level);

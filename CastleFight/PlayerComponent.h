@@ -33,6 +33,9 @@
 @property NSMutableArray *summonComponents;
 @property (nonatomic) NSMutableArray *battleTeam;
 
+@property NSMutableArray *items;
+@property NSMutableArray *itemsInBattle;
+
 @property int armiesCount;
 
 @end

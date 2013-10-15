@@ -36,4 +36,6 @@
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
 
+-(Entity *)createItemButton:(NSString *)cid count:(int)count;
+
 @end

@@ -1,23 +1,23 @@
 //
-//  AddDefense.m
+//  AddDefense2.m
 //  CastleFight
 //
-//  Created by  浩翔 on 13/10/1.
+//  Created by  浩翔 on 13/10/8.
 //
 //
 
-#import "AddDefense.h"
+#import "AddDefense2.h"
 #import "DefenderComponent.h"
 #import "Attribute.h"
 
-@interface AddDefense ()
+@interface AddDefense2 ()
 {
     int orbSum;
 }
 
 @end
 
-@implementation AddDefense
+@implementation AddDefense2
 
 -(id)initWithLevel:(int)level {
     if (self = [super initWithLevel:level]) {
@@ -33,7 +33,7 @@
     //FIXME: +3 is for test.
     orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbBlue]] intValue] +3 ;
     if (orbSum > 0) {
-        CCLOG(@"level %d: Add Defense is Active",self.level);
+        CCLOG(@"level %d: Add Defense2 is Active",self.level);
         _isActivated = YES;
     }
     return _isActivated;
@@ -49,12 +49,12 @@
     // only for log
     int oldAttribute = attribute.value;
     
-    // basic rate: 0.25
-    float multiplier = 0.25 * orbSum;
+    // plus rate: 0.1
+    float multiplier = 0.1 * self.level * orbSum;
     
     [attribute addMultiplier:multiplier];
     
-    CCLOG(@"Add Defense: from %d to %d.",oldAttribute,attribute.value);
+    CCLOG(@"Add Defense2: from %d to %d.",oldAttribute,attribute.value);
 }
 
 @end

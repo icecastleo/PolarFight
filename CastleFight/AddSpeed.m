@@ -10,6 +10,13 @@
 #import "MoveComponent.h"
 #import "Attribute.h"
 
+@interface AddSpeed ()
+{
+    int orbSum;
+}
+
+@end
+
 @implementation AddSpeed
 
 -(id)initWithLevel:(int)level {
@@ -20,12 +27,17 @@
 }
 
 -(BOOL)isActivated:(NSDictionary *)orbInfo {
-    _isActivated = YES;
+    _isActivated = NO;
     
-    //suppose this skill does not need any orb conditions;
-    CCLOG(@"level %d: Add Speed is Active",self.level);
-    
+    // suppose if red color > 0, is active.
+    //FIXME: +3 is for test.
+    orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbYellow]] intValue] +3 ;
+    if (orbSum > 0) {
+        CCLOG(@"level %d: Add Speed is Active",self.level);
+        _isActivated = YES;
+    }
     return _isActivated;
+
 }
 
 -(void)affectOnEntity:(Entity *)entity {
@@ -38,7 +50,9 @@
     // only for log
     int oldAttribute = attribute.value;
     
-    float multiplier = 0.25 * self.level + 1;
+    // basic rate: 0.25
+    float multiplier = 0.25 * orbSum;
+    
     [attribute addMultiplier:multiplier];
     
     CCLOG(@"Add Speed: from %d to %d.",oldAttribute,attribute.value);

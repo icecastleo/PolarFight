@@ -51,6 +51,7 @@
 #import "MaskComponent.h"
 #import "OrbComponent.h"
 #import "OrbBoardComponent.h"
+#import "ItemComponent.h"
 
 #import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
@@ -515,6 +516,27 @@
     
     [entity addComponent:magicSkillCom];
     
+    //items
+    NSArray *items = [FileManager sharedFileManager].items;
+    
+    for (NSDictionary *dic in items) {
+        NSString *itemId = [dic objectForKey:@"itemId"];
+        int count = [[dic objectForKey:@"count"] intValue];
+        Entity *itemButton = [self createItemButton:itemId count:count];
+        
+        ItemComponent *itemCom = (ItemComponent *)[itemButton getComponentOfName:[ItemComponent name]];
+        itemCom.owner = entity;
+        NSAssert(NSClassFromString(itemCom.effect), @"You forgot to make this skill.");
+        
+        [player.items addObject:itemButton];
+    }
+
+    //itemsInBattle
+    NSArray *itemsInBattle = [FileManager sharedFileManager].itemsInBattle;
+    for (NSNumber *index in itemsInBattle) {
+        [player.itemsInBattle addObject:[player.items objectAtIndex:index.intValue]];
+    }
+    
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           nil]];
     
@@ -532,6 +554,34 @@
     [entity addComponent:player];
     
 //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self battleDataObject:battleData]]];
+    
+    return entity;
+}
+
+-(Entity *)createItemButton:(NSString *)cid count:(int)count {
+    
+    Entity *entity = [_entityManager createEntity];
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
+    
+    for (NSString *key in characterData) {
+        NSDictionary *dic = [characterData objectForKey:key];
+        if ([key isEqualToString:@"RenderComponent"]) {
+            CCSprite *sprite = [CCSprite spriteWithFile:[dic objectForKey:@"sprite"]];
+            RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+            [entity addComponent:renderCom];
+//            [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
+        }else {
+            NSAssert(NSClassFromString(key), assert);
+            [entity addComponent:[[NSClassFromString(key) alloc] initWithDictionary:dic]];
+        }
+    }
+    
+    TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
+    ItemComponent *itemCom = (ItemComponent *)[entity getComponentOfName:[ItemComponent name]];
+    itemCom.count = count;
+    itemCom.entityManager = _entityManager;
+    selectCom.delegate = itemCom;
     
     return entity;
 }

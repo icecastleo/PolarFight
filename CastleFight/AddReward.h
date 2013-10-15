@@ -2,7 +2,7 @@
 //  AddReward.h
 //  CastleFight
 //
-//  Created by  DAN on 13/10/3.
+//  Created by  浩翔 on 13/10/3.
 //
 //
 

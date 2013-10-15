@@ -10,6 +10,13 @@
 #import "DefenderComponent.h"
 #import "Attribute.h"
 
+@interface AddHealthPoint ()
+{
+    int orbSum;
+}
+
+@end
+
 @implementation AddHealthPoint
 
 -(id)initWithLevel:(int)level {
@@ -22,10 +29,11 @@
 -(BOOL)isActivated:(NSDictionary *)orbInfo {
     _isActivated = NO;
     
-    // suppose if red color > 2, is active;
-    int redColorOrb = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbRed]] intValue] +3 ;
-    if (redColorOrb > 2) {
-        CCLOG(@"level %d: Add Hp is Active",self.level);
+    // suppose if red color > 0, is active.
+    //FIXME: +3 is for test.
+    orbSum = [[orbInfo objectForKey:[NSNumber numberWithInt:OrbPurple]] intValue] +3 ;
+    if (orbSum > 0) {
+        CCLOG(@"level %d: Add HealthPoint is Active",self.level);
         _isActivated = YES;
     }
     return _isActivated;
@@ -41,7 +49,9 @@
     // only for log
     int oldAttribute = attribute.value;
     
-    float multiplier = 0.25 * self.level + 1;
+    // basic rate: 0.25
+    float multiplier = 0.25 * orbSum;
+    
     [attribute addMultiplier:multiplier];
     
     CCLOG(@"Add Hp: from %d to %d.",oldAttribute,attribute.value);
