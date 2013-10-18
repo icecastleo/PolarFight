@@ -28,6 +28,7 @@
 @property (readonly) NSArray *playerHeroArray;
 @property (readonly) NSArray *battleTeam;
 @property (readonly) NSArray *magicTeam;
+@property (readonly) NSArray *magicInBattle;
 @property (readonly) NSArray *items;
 @property (readonly) NSArray *itemsInBattle;
 

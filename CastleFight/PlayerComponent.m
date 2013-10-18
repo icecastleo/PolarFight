@@ -41,6 +41,8 @@
         _battleTeam = [[NSMutableArray alloc] init];
         _items = [[NSMutableArray alloc] init];
         _itemsInBattle = [[NSMutableArray alloc] init];
+        _magicTeam = [[NSMutableArray alloc] init];
+        _magicInBattle = [[NSMutableArray alloc] init];
     }
     return self;
 }

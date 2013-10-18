@@ -46,7 +46,6 @@
 #import "TouchComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "MagicSkillComponent.h"
 #import "MagicComponent.h"
 #import "MaskComponent.h"
 #import "OrbComponent.h"
@@ -512,7 +511,6 @@
         [player.battleTeam addObject:summon];
     }
     
-    MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
     NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
     
     for (CharacterInitData *data in magicTeamInitData) {
@@ -522,10 +520,14 @@
         magicCom.spellCaster = entity;
         NSAssert(NSClassFromString(magicCom.name), @"You forgot to make this skill.");
         
-        [magicSkillCom.magicTeam addObject:magicButton];
+        [player.magicTeam addObject:magicButton];
     }
     
-    [entity addComponent:magicSkillCom];
+    //magicInBattle
+    NSArray *magicInBattle = [FileManager sharedFileManager].magicInBattle;
+    for (NSNumber *index in magicInBattle) {
+        [player.magicInBattle addObject:[player.magicTeam objectAtIndex:index.intValue]];
+    }
     
     //items
     NSArray *items = [FileManager sharedFileManager].items;

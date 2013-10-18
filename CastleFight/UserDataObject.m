@@ -29,6 +29,7 @@
 #define kProperties @"properties"
 #define kBattleTeam @"battleTeam"
 #define kMagicTeam @"magicTeam"
+#define kMagicInBattle @"magicInBattle"
 #define kOrbSkills @"orbSkills"
 #define kOrbSkillProperties @"orbSkillProperties"
 
@@ -60,6 +61,7 @@
 //        _playerCastleArray = [self convertArray:[plist objectForKey:kCastle] className:[CharacterInitData class]];
         _battleTeam = [self convertArray:[plist objectForKey:kBattleTeam] className:[CharacterInitData class]];
         _magicTeam = [self convertArray:[plist objectForKey:kMagicTeam] className:[CharacterInitData class]];
+        _magicInBattle = [plist objectForKey:kMagicInBattle];
         
         _achievements = [self convertArray:[plist objectForKey:kAchievements] className:[Achievement class]];
         _properties = [self convertArray:[plist objectForKey:kProperties] className:[Property class]];
@@ -114,6 +116,7 @@
 //        _playerCastleArray = [decoder decodeObjectForKey:kCastle];
         _battleTeam = [decoder decodeObjectForKey:kBattleTeam];
         _magicTeam = [decoder decodeObjectForKey:kMagicTeam];
+        _magicInBattle = [decoder decodeObjectForKey:kMagicInBattle];
         
         moneyNumber = [decoder decodeObjectForKey:kMoney];
         _items = [decoder decodeObjectForKey:kItems];
@@ -134,6 +137,7 @@
 //    [encoder encodeObject:_playerCastleArray forKey:kCastle];
     [encoder encodeObject:_battleTeam forKey:kBattleTeam];
     [encoder encodeObject:_magicTeam forKey:kMagicTeam];
+    [encoder encodeObject:_magicInBattle forKey:kMagicInBattle];
     
     [encoder encodeObject:moneyNumber forKey:kMoney];
     [encoder encodeObject:_items forKey:kItems];

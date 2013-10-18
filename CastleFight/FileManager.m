@@ -251,6 +251,10 @@
     return userData.magicTeam;
 }
 
+-(NSArray *)magicInBattle {
+    return userData.magicInBattle;
+}
+
 -(NSArray *)orbSkills {
     return userData.orbSkills;
 }

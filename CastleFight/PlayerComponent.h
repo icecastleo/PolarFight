@@ -35,6 +35,8 @@
 
 @property NSMutableArray *items;
 @property NSMutableArray *itemsInBattle;
+@property NSMutableArray *magicTeam;
+@property NSMutableArray *magicInBattle;
 
 @property int armiesCount;
 

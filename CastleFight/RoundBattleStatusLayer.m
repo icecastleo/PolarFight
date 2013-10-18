@@ -16,7 +16,6 @@
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
 #import "RenderComponent.h"
-#import "MagicSkillComponent.h"
 #import "CostComponent.h"
 #import "LevelComponent.h"
 
@@ -87,12 +86,12 @@
 }
 
 -(void)setMagicButton {
-    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
+    NSArray *magicInBattle = player.magicInBattle;
     
-    for (Entity *entity in magicSkillCom.magicTeam) {
+    for (Entity *entity in magicInBattle) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(40+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),30);
+        renderCom.position = ccp(40+40*([magicInBattle indexOfObject:entity]+1),30);
         [self addChild:renderCom.node];
         
         //FIXME: maybe do not need these or move to other appropriate place.
