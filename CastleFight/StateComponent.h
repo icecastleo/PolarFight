@@ -10,13 +10,16 @@
 
 @class DamageEvent;
 
-@interface StateComponent : Component
+@protocol StateComponentDelegate
+@optional
+-(void)process;
+@end
+
+@interface StateComponent : Component <StateComponentDelegate>
 
 @property float currentTime;
 @property float cdTime;   //second
 @property float totalTime;    //second
 @property DamageEvent *event;
-
--(void)process;
 
 @end

@@ -36,6 +36,7 @@
     
     self.count--;
     
+    //FIXME: need?
     NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"test",@"test", nil];
     Magic* magic = [[NSClassFromString(self.effect) alloc] initWithMagicInformation:magicInfo];
     

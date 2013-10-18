@@ -47,6 +47,12 @@
         _timeLabel.color = ccWHITE;
         [self addChild:_timeLabel];
         
+        _manaLabel = [[CCLabelBMFont alloc] initWithString:[NSString stringWithFormat:@"%d", 0] fntFile:@"font/jungle_24_o.fnt"];
+        _manaLabel.scale = 0.5;
+        _manaLabel.position = ccp(50, winSize.height - _manaLabel.boundingBox.size.height);
+        _manaLabel.color = ccPURPLE;
+        [self addChild:_manaLabel];
+        
         [self setPauseButton];
         [self displayString:@"Start!!" withColor:ccWHITE];
     }
@@ -86,7 +92,7 @@
     for (Entity *entity in magicSkillCom.magicTeam) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),30);
+        renderCom.position = ccp(40+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),30);
         [self addChild:renderCom.node];
         
         //FIXME: maybe do not need these or move to other appropriate place.

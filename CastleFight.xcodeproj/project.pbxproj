@@ -136,6 +136,18 @@
 		3750F4F21785A992009E2689 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3750F4F11785A991009E2689 /* LightningMagic.png */; };
 		3750F4F51785B494009E2689 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F41785B491009E2689 /* MagicComponent.m */; };
 		3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F71785B5A6009E2689 /* MaskComponent.m */; };
+		3763DFF51811143D005F00CE /* Hp_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFE91811143C005F00CE /* Hp_button.png */; };
+		3763DFF61811143D005F00CE /* mana_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEA1811143C005F00CE /* mana_button.png */; };
+		3763DFF71811143D005F00CE /* mana_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEB1811143C005F00CE /* mana_button@2x.png */; };
+		3763DFF81811143D005F00CE /* AttackUp_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEC1811143C005F00CE /* AttackUp_button.png */; };
+		3763DFF91811143D005F00CE /* Cleansing_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFED1811143C005F00CE /* Cleansing_button.png */; };
+		3763DFFA1811143D005F00CE /* Hp_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEE1811143D005F00CE /* Hp_button@2x.png */; };
+		3763DFFB1811143D005F00CE /* CleanseMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEF1811143D005F00CE /* CleanseMagic_button.png */; };
+		3763DFFC1811143D005F00CE /* Paralysis_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF01811143D005F00CE /* Paralysis_button.png */; };
+		3763DFFD1811143D005F00CE /* AttackUp_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF11811143D005F00CE /* AttackUp_button@2x.png */; };
+		3763DFFE1811143D005F00CE /* CleanseMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */; };
+		3763DFFF1811143D005F00CE /* Cleansing_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF31811143D005F00CE /* Cleansing_button@2x.png */; };
+		3763E0001811143D005F00CE /* Paralysis_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF41811143D005F00CE /* Paralysis_button@2x.png */; };
 		3765683817E6F788000865EF /* fly_bear.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3765683417E6F786000865EF /* fly_bear.atlas */; };
 		3765683917E6F788000865EF /* fly_bear.json in Resources */ = {isa = PBXBuildFile; fileRef = 3765683517E6F786000865EF /* fly_bear.json */; };
 		3765683A17E6F788000865EF /* fly_bear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765683617E6F787000865EF /* fly_bear.png */; };
@@ -176,6 +188,11 @@
 		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
+		37DDB6B1180F92E000660643 /* AllAttackUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B0180F92E000660643 /* AllAttackUp.m */; };
+		37DDB6B4180F9E0800660643 /* AllCleanse.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B3180F9E0800660643 /* AllCleanse.m */; };
+		37DDB6B7180FCE0C00660643 /* AddManaByItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B6180FCE0C00660643 /* AddManaByItem.m */; };
+		37DDB6BA180FEE6300660643 /* ParalysisMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B9180FEE6300660643 /* ParalysisMagic.m */; };
+		37DDB6BD180FF07600660643 /* RangeCleanseMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */; };
 		37DE292D17A657A2002D0377 /* LineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292C17A657A2002D0377 /* LineComponent.m */; };
 		37DEF1FA17FAAB05004A2024 /* OrbSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF1F917FAAB05004A2024 /* OrbSkill.m */; };
 		37DEF1FD17FAB251004A2024 /* AddAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF1FC17FAB251004A2024 /* AddAttack.m */; };
@@ -766,6 +783,18 @@
 		3750F4F41785B491009E2689 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
 		3750F4F61785B5A4009E2689 /* MaskComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskComponent.h; sourceTree = "<group>"; };
 		3750F4F71785B5A6009E2689 /* MaskComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskComponent.m; sourceTree = "<group>"; };
+		3763DFE91811143C005F00CE /* Hp_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hp_button.png; sourceTree = "<group>"; };
+		3763DFEA1811143C005F00CE /* mana_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mana_button.png; sourceTree = "<group>"; };
+		3763DFEB1811143C005F00CE /* mana_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mana_button@2x.png"; sourceTree = "<group>"; };
+		3763DFEC1811143C005F00CE /* AttackUp_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AttackUp_button.png; sourceTree = "<group>"; };
+		3763DFED1811143C005F00CE /* Cleansing_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cleansing_button.png; sourceTree = "<group>"; };
+		3763DFEE1811143D005F00CE /* Hp_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hp_button@2x.png"; sourceTree = "<group>"; };
+		3763DFEF1811143D005F00CE /* CleanseMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CleanseMagic_button.png; sourceTree = "<group>"; };
+		3763DFF01811143D005F00CE /* Paralysis_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paralysis_button.png; sourceTree = "<group>"; };
+		3763DFF11811143D005F00CE /* AttackUp_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AttackUp_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CleanseMagic_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF31811143D005F00CE /* Cleansing_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cleansing_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF41811143D005F00CE /* Paralysis_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Paralysis_button@2x.png"; sourceTree = "<group>"; };
 		3765683417E6F786000865EF /* fly_bear.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fly_bear.atlas; sourceTree = "<group>"; };
 		3765683517E6F786000865EF /* fly_bear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fly_bear.json; sourceTree = "<group>"; };
 		3765683617E6F787000865EF /* fly_bear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bear.png; sourceTree = "<group>"; };
@@ -834,6 +863,16 @@
 		37DDA2C41709638A0016E8CB /* AchievementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementManager.h; sourceTree = "<group>"; };
 		37DDA2C51709638A0016E8CB /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 		37DDA2C61709638A0016E8CB /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		37DDB6AF180F92E000660643 /* AllAttackUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllAttackUp.h; sourceTree = "<group>"; };
+		37DDB6B0180F92E000660643 /* AllAttackUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllAttackUp.m; sourceTree = "<group>"; };
+		37DDB6B2180F9E0800660643 /* AllCleanse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllCleanse.h; sourceTree = "<group>"; };
+		37DDB6B3180F9E0800660643 /* AllCleanse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllCleanse.m; sourceTree = "<group>"; };
+		37DDB6B5180FCE0B00660643 /* AddManaByItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddManaByItem.h; sourceTree = "<group>"; };
+		37DDB6B6180FCE0C00660643 /* AddManaByItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddManaByItem.m; sourceTree = "<group>"; };
+		37DDB6B8180FEE6200660643 /* ParalysisMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMagic.h; sourceTree = "<group>"; };
+		37DDB6B9180FEE6300660643 /* ParalysisMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMagic.m; sourceTree = "<group>"; };
+		37DDB6BB180FF07400660643 /* RangeCleanseMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCleanseMagic.h; sourceTree = "<group>"; };
+		37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeCleanseMagic.m; sourceTree = "<group>"; };
 		37DE292B17A657A1002D0377 /* LineComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineComponent.h; sourceTree = "<group>"; };
 		37DE292C17A657A2002D0377 /* LineComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineComponent.m; sourceTree = "<group>"; };
 		37DE292E17A66BF0002D0377 /* ChangeLineSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLineSkill.h; sourceTree = "<group>"; };
@@ -1843,6 +1882,16 @@
 				37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */,
 				3737E9811807C87D00698B7D /* AllHeal.h */,
 				3737E9821807C87D00698B7D /* AllHeal.m */,
+				37DDB6AF180F92E000660643 /* AllAttackUp.h */,
+				37DDB6B0180F92E000660643 /* AllAttackUp.m */,
+				37DDB6B2180F9E0800660643 /* AllCleanse.h */,
+				37DDB6B3180F9E0800660643 /* AllCleanse.m */,
+				37DDB6B5180FCE0B00660643 /* AddManaByItem.h */,
+				37DDB6B6180FCE0C00660643 /* AddManaByItem.m */,
+				37DDB6B8180FEE6200660643 /* ParalysisMagic.h */,
+				37DDB6B9180FEE6300660643 /* ParalysisMagic.m */,
+				37DDB6BB180FF07400660643 /* RangeCleanseMagic.h */,
+				37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */,
 			);
 			name = Magic;
 			sourceTree = "<group>";
@@ -2184,6 +2233,18 @@
 				37DD0F5517A15998004595BD /* black_arrow@2x.png */,
 				37EC99A517B107CA00B8F4DE /* SummonMagic_button.png */,
 				37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */,
+				3763DFE91811143C005F00CE /* Hp_button.png */,
+				3763DFEA1811143C005F00CE /* mana_button.png */,
+				3763DFEB1811143C005F00CE /* mana_button@2x.png */,
+				3763DFEC1811143C005F00CE /* AttackUp_button.png */,
+				3763DFED1811143C005F00CE /* Cleansing_button.png */,
+				3763DFEE1811143D005F00CE /* Hp_button@2x.png */,
+				3763DFEF1811143D005F00CE /* CleanseMagic_button.png */,
+				3763DFF01811143D005F00CE /* Paralysis_button.png */,
+				3763DFF11811143D005F00CE /* AttackUp_button@2x.png */,
+				3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */,
+				3763DFF31811143D005F00CE /* Cleansing_button@2x.png */,
+				3763DFF41811143D005F00CE /* Paralysis_button@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3717,6 +3778,18 @@
 				3765683917E6F788000865EF /* fly_bear.json in Resources */,
 				3765683A17E6F788000865EF /* fly_bear.png in Resources */,
 				3765683B17E6F788000865EF /* fly_bear2.png in Resources */,
+				3763DFF51811143D005F00CE /* Hp_button.png in Resources */,
+				3763DFF61811143D005F00CE /* mana_button.png in Resources */,
+				3763DFF71811143D005F00CE /* mana_button@2x.png in Resources */,
+				3763DFF81811143D005F00CE /* AttackUp_button.png in Resources */,
+				3763DFF91811143D005F00CE /* Cleansing_button.png in Resources */,
+				3763DFFA1811143D005F00CE /* Hp_button@2x.png in Resources */,
+				3763DFFB1811143D005F00CE /* CleanseMagic_button.png in Resources */,
+				3763DFFC1811143D005F00CE /* Paralysis_button.png in Resources */,
+				3763DFFD1811143D005F00CE /* AttackUp_button@2x.png in Resources */,
+				3763DFFE1811143D005F00CE /* CleanseMagic_button@2x.png in Resources */,
+				3763DFFF1811143D005F00CE /* Cleansing_button@2x.png in Resources */,
+				3763E0001811143D005F00CE /* Paralysis_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3930,6 +4003,11 @@
 				37DFBF491803AFA1003B650D /* AddHealthPoint2.m in Sources */,
 				37B1515E18067AEF0049471D /* ItemComponent.m in Sources */,
 				3737E9831807C87D00698B7D /* AllHeal.m in Sources */,
+				37DDB6B1180F92E000660643 /* AllAttackUp.m in Sources */,
+				37DDB6B4180F9E0800660643 /* AllCleanse.m in Sources */,
+				37DDB6B7180FCE0C00660643 /* AddManaByItem.m in Sources */,
+				37DDB6BA180FEE6300660643 /* ParalysisMagic.m in Sources */,
+				37DDB6BD180FF07600660643 /* RangeCleanseMagic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

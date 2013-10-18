@@ -14,6 +14,7 @@
 @interface RoundBattleStatusLayer : CCLayer
 
 @property (readonly) CCLabelBMFont *timeLabel;
+@property (readonly) CCLabelBMFont *manaLabel;
 
 -(id)init;
 -(id)initWithBattleController:(RoundBattleController *)battleController ;

@@ -45,6 +45,14 @@
     return self;
 }
 
+-(void)receiveEvent:(EntityEvent)type Message:(id)message {
+    if (type == kEventManaChanged) {
+        CCLOG(@"from :%f",self.mana);
+        self.mana += [message intValue];
+        CCLOG(@"to :%f",self.mana);
+    }
+}
+
 -(void)addCount:(int)count onOrbColor:(OrbColor)color; {
     NSNumber *key = [NSNumber numberWithInt:color];
     NSNumber *number = [counts objectForKey:key];

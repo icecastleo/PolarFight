@@ -33,6 +33,7 @@ typedef enum {
     kEntityEventRevive,
 
     kEventFoodChanged,
+    kEventManaChanged,
     
     kEventSendMagicEvent,
     kEventUseMask,

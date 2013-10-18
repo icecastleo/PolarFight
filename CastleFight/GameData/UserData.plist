@@ -142,10 +142,31 @@
 			<key>count</key>
 			<integer>10</integer>
 		</dict>
+		<dict>
+			<key>itemId</key>
+			<string>2002</string>
+			<key>count</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>itemId</key>
+			<string>2003</string>
+			<key>count</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>itemId</key>
+			<string>2004</string>
+			<key>count</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>itemsInBattle</key>
 	<array>
 		<integer>0</integer>
+		<integer>1</integer>
+		<integer>2</integer>
+		<integer>3</integer>
 	</array>
 	<key>magicTeam</key>
 	<array>
@@ -158,6 +179,18 @@
 		<dict>
 			<key>id</key>
 			<string>902</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>904</string>
+			<key>level</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>905</string>
 			<key>level</key>
 			<integer>1</integer>
 		</dict>

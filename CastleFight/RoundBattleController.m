@@ -204,6 +204,7 @@ typedef enum {
         int maxMana = 100;
         playerCom.mana += maxMana * bonusMana;
         CCLOG(@"Add Mana: from %f to %f",playerCom.mana-maxMana * bonusMana,playerCom.mana);
+        [statusLayer.manaLabel setString:[NSString stringWithFormat:@"%d", (int)playerCom.mana]];
         
         // create characters from user battleTeam.
         NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
@@ -248,6 +249,8 @@ typedef enum {
     if (status == kBattleStatusFight) {
         fightTime += delta;
         [statusLayer.timeLabel setString:[NSString stringWithFormat:@"%d", (int)fightTime]];
+        PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
+        [statusLayer.manaLabel setString:[NSString stringWithFormat:@"%d", (int)playerCom.mana]];
         
         for (System *system in systems) {
             [system update:delta];
