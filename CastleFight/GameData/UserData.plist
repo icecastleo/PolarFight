@@ -171,28 +171,60 @@
 	<key>magicTeam</key>
 	<array>
 		<dict>
-			<key>id</key>
+			<key>name</key>
 			<string>901</string>
-			<key>level</key>
-			<integer>1</integer>
+			<key>maxLevel</key>
+			<integer>3</integer>
+			<key>message</key>
+			<string>901 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 901 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
 		</dict>
 		<dict>
-			<key>id</key>
+			<key>name</key>
 			<string>902</string>
-			<key>level</key>
-			<integer>1</integer>
+			<key>maxLevel</key>
+			<integer>3</integer>
+			<key>message</key>
+			<string>902 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 902 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
 		</dict>
 		<dict>
-			<key>id</key>
+			<key>name</key>
 			<string>904</string>
-			<key>level</key>
-			<integer>1</integer>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>904 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 904 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
 		</dict>
 		<dict>
-			<key>id</key>
+			<key>name</key>
 			<string>905</string>
-			<key>level</key>
-			<integer>1</integer>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>905 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 905 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
 		</dict>
 	</array>
 	<key>magicInBattle</key>
@@ -973,6 +1005,94 @@
 			<key>tags</key>
 			<array>
 				<string>AddHealthPoint2</string>
+				<string>level</string>
+			</array>
+		</dict>
+	</array>
+	<key>magicProperties</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>901_level</string>
+			<key>value</key>
+			<integer>3</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>901</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>902_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>902</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>903_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>903</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>904_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>904</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>905_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>905</string>
 				<string>level</string>
 			</array>
 		</dict>

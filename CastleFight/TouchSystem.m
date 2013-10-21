@@ -132,10 +132,13 @@ typedef enum {
         
         if (touchCom.touchable && CGRectContainsPoint(render.sprite.boundingBox, [render.sprite.parent convertToNodeSpace:touchLocation])) {
             touchedEntity = entity;
+            // Tap entity
+            if ([touchCom.delegate respondsToSelector:@selector(handleTap:)]) {
+                [touchCom.delegate handleTap:kTapStateBegan];
+            }
             break;
         }
     }
-        
     return YES;
 }
 
@@ -232,8 +235,8 @@ typedef enum {
                 }
             } else {
                 // Tap entity
-                if ([touchCom.delegate respondsToSelector:@selector(handleTap)]) {
-                    [touchCom.delegate handleTap];
+                if ([touchCom.delegate respondsToSelector:@selector(handleTap:)]) {
+                    [touchCom.delegate handleTap:kTapStateEnded];
                 }
             }
         }

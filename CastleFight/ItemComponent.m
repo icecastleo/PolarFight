@@ -11,6 +11,14 @@
 #import "MaskComponent.h"
 #import "Magic.h"
 
+@interface ItemComponent()
+{
+    RenderComponent *renderCom;
+    TouchComponent *touchCom;
+}
+
+@end
+
 @implementation ItemComponent
 
 +(NSString *)name {
@@ -36,7 +44,7 @@
     
     self.count--;
     
-    //FIXME: need?
+    //FIXME: need magicInfo?
     NSDictionary *magicInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"test",@"test", nil];
     Magic* magic = [[NSClassFromString(self.effect) alloc] initWithMagicInformation:magicInfo];
     
@@ -44,8 +52,6 @@
     [magic active];
     
     CCLOG(@"%@ active count:%d",self.name,self.count);
-    
-    RenderComponent *renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     
     CCLabelTTF *oldLabel = (CCLabelTTF *)[renderCom.node getChildByTag:kCountLabelTag];
     
@@ -62,8 +68,32 @@
     }
 }
 
--(void)handleTap {
-    [self active];
+-(void)handleTap:(TapState)state {
+    if (!renderCom) {
+        renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
+    }
+    if ([renderCom.node getChildByTag:kSelectedImageTag]) {
+        [renderCom.node removeChildByTag:kSelectedImageTag cleanup:YES];
+    }
+    
+    if (state == kTapStateBegan) {
+        CCLOG(@"kTapStateBegan");
+        if (!touchCom) {
+            touchCom = (TouchComponent *)[self.entity getComponentOfName:[TouchComponent name]];
+        }
+        [renderCom.node addChild:touchCom.selectedSprite z:0 tag:kSelectedImageTag];
+    }else if (state == kTapStateEnded) {
+        CCLOG(@"kTapStateEnded");
+        [self active];
+    }
+}
+
+-(void)handlePan:(PanState)state positions:(NSArray *)positions {
+    if (state == kPanStateEnded) {
+        if ([renderCom.node getChildByTag:kSelectedImageTag]) {
+            [renderCom.node removeChildByTag:kSelectedImageTag cleanup:YES];
+        }
+    }
 }
 
 @end

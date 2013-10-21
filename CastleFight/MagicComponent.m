@@ -10,6 +10,16 @@
 #import "Attribute.h"
 #import "Magic.h"
 #import "AccumulateAttribute.h"
+#import "RenderComponent.h"
+#import "DrawPath.h"
+#import "LevelComponent.h"
+
+@interface MagicComponent()
+{
+    RenderComponent *renderCom;
+    LevelComponent *levelCom;
+}
+@end
 
 @implementation MagicComponent
 
@@ -40,7 +50,15 @@
     } 
 }
 
+-(void)changeValueByLevel:(int)level {
+    [self.damage updateValueWithLevel:level];
+}
+
 -(void)activeWithPath:(NSArray *)path {
+    if (!levelCom) {
+        levelCom = (LevelComponent *)[self.entity getComponentOfName:[LevelComponent name]];
+    }
+    [self changeValueByLevel:levelCom.level];
     _canActive = YES;
     _path = path;
 }
@@ -51,8 +69,18 @@
 }
 
 -(void)handlePan:(PanState)state positions:(NSArray *)positions {
+    if (!renderCom) {
+        renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
+    }
+    if ([renderCom.node.parent getChildByTag:kDrawPathTag]) {
+        [renderCom.node.parent removeChildByTag:kDrawPathTag cleanup:YES];
+    }
     if (state == kPanStateMoved) {
-        // TODO: Draw path
+        DrawPath *line = [DrawPath node];
+        line.path = [NSMutableArray arrayWithObjects:[NSValue valueWithCGPoint:renderCom.position],[positions lastObject], nil];
+        line.drawSize = self.rangeSize;
+        [renderCom.node.parent addChild:line z:0 tag:kDrawPathTag];
+
     } else if (state == kPanStateEnded) {
         [self activeWithPath:positions];
     }

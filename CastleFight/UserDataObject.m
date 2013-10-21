@@ -32,6 +32,7 @@
 #define kMagicInBattle @"magicInBattle"
 #define kOrbSkills @"orbSkills"
 #define kOrbSkillProperties @"orbSkillProperties"
+#define kMagicProperties @"magicProperties"
 
 @interface UserDataObject() {
     NSNumber *moneyNumber;
@@ -60,7 +61,7 @@
         _playerHeroArray = [self convertArray:[plist objectForKey:kHero] className:[CharacterInitData class]];
 //        _playerCastleArray = [self convertArray:[plist objectForKey:kCastle] className:[CharacterInitData class]];
         _battleTeam = [self convertArray:[plist objectForKey:kBattleTeam] className:[CharacterInitData class]];
-        _magicTeam = [self convertArray:[plist objectForKey:kMagicTeam] className:[CharacterInitData class]];
+        _magicTeam = [self convertArray:[plist objectForKey:kMagicTeam] className:[OrbSkillData class]];
         _magicInBattle = [plist objectForKey:kMagicInBattle];
         
         _achievements = [self convertArray:[plist objectForKey:kAchievements] className:[Achievement class]];
@@ -68,6 +69,7 @@
         
         _orbSkills = [self convertArray:[plist objectForKey:kOrbSkills] className:[OrbSkillData class]];
         _orbSkillProperties = [self convertArray:[plist objectForKey:kOrbSkillProperties] className:[Property class]];
+        _magicProperties = [self convertArray:[plist objectForKey:kMagicProperties] className:[Property class]];
         
         //FIXME: [CharacterDataObject class] change to item class?
         _items = [plist objectForKey:kItems];
@@ -127,6 +129,10 @@
         _backgroundMusicSwitch = [decoder decodeBoolForKey:kBackgroundMucsicEnable];
         _achievements = [decoder decodeObjectForKey:kAchievements];
         _properties = [decoder decodeObjectForKey:kProperties];
+        
+        _orbSkills = [decoder decodeObjectForKey:kOrbSkills];
+        _orbSkillProperties = [decoder decodeObjectForKey:kOrbSkillProperties];
+        _magicProperties = [decoder decodeObjectForKey:kMagicProperties];
     }
     return self;
 }
@@ -148,6 +154,10 @@
     [encoder encodeBool:_backgroundMusicSwitch forKey:kBackgroundMucsicEnable];
     [encoder encodeObject:_achievements forKey:kAchievements];
     [encoder encodeObject:_properties forKey:kProperties];
+    
+    [encoder encodeObject:_orbSkills forKey:kOrbSkills];
+    [encoder encodeObject:_orbSkillProperties forKey:kOrbSkillProperties];
+    [encoder encodeObject:_magicProperties forKey:kMagicProperties];
 }
 
 @end

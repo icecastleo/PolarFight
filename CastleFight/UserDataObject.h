@@ -23,6 +23,7 @@
 @property (nonatomic) NSArray *properties;
 @property (nonatomic) NSArray *orbSkills;
 @property (nonatomic) NSArray *orbSkillProperties;
+@property (nonatomic) NSArray *magicProperties;
 
 @property (readonly) NSArray *characterInitDatas;
 @property (readonly) NSArray *playerHeroArray;

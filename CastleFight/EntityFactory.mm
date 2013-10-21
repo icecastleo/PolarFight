@@ -51,6 +51,7 @@
 #import "OrbComponent.h"
 #import "OrbBoardComponent.h"
 #import "ItemComponent.h"
+#import "OrbSkillData.h"
 
 #import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
@@ -513,8 +514,8 @@
     
     NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
     
-    for (CharacterInitData *data in magicTeamInitData) {
-        Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
+    for (OrbSkillData *data in magicTeamInitData) {
+        Entity *magicButton = [self createMagicButton:data.name level:data.level team:team];
         
         MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
         magicCom.spellCaster = entity;

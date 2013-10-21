@@ -57,6 +57,8 @@
         NSMutableArray *achievements = [NSMutableArray arrayWithArray:userData.achievements];
         NSMutableArray *properties = [NSMutableArray arrayWithArray:userData.properties];
         [achievements addObjectsFromArray:userData.orbSkills];
+        [achievements addObjectsFromArray:userData.magicTeam];
+        [properties addObjectsFromArray:userData.magicProperties];
         [properties addObjectsFromArray:userData.orbSkillProperties];
         
         _achievementManager = [[AchievementManager alloc] initWithAchievements:achievements AndProperties:properties];
