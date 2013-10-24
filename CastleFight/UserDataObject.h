@@ -19,13 +19,19 @@
 @property (nonatomic) float backgroundMusicVolume;
 @property (nonatomic) float soundsEffectVolume;
 
-@property NSArray *achievements;
-@property NSArray *properties;
+@property (nonatomic) NSArray *achievements;
+@property (nonatomic) NSArray *properties;
+@property (nonatomic) NSArray *orbSkills;
+@property (nonatomic) NSArray *orbSkillProperties;
+@property (nonatomic) NSArray *magicProperties;
 
 @property (readonly) NSArray *characterInitDatas;
 @property (readonly) NSArray *playerHeroArray;
 @property (readonly) NSArray *battleTeam;
 @property (readonly) NSArray *magicTeam;
+@property (readonly) NSArray *magicInBattle;
+@property (readonly) NSArray *items;
+@property (readonly) NSArray *itemsInBattle;
 
 -(id)initWithPlistPath:(NSString *)path;
 

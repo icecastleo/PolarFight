@@ -45,11 +45,13 @@
 #import "TouchComponent.h"
 #import "MovePathComponent.h"
 #import "InformationComponent.h"
-#import "MagicSkillComponent.h"
 #import "MagicComponent.h"
 #import "MaskComponent.h"
 #import "OrbComponent.h"
 #import "OrbBoardComponent.h"
+#import "ItemComponent.h"
+#import "OrbSkillData.h"
+#import "ItemData.h"
 
 #import "PhysicsComponent.h"
 #import "PhysicsSystem.h"
@@ -363,13 +365,24 @@
 }
 
 
--(void)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team {
+-(NSArray *)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team  BonusCount:(int)bonusCount {
     // TODO: 前排，後排，count系數
     
     NSMutableArray *groupEntities = [[NSMutableArray alloc] init];
     
     Entity *entity = [self createCharacter:cid level:5 forTeam:team scale:0.6];
     entity.position = ccp(arc4random_uniform(240) + (team == 1 ? 0 : 240), arc4random_uniform(200) + kMapPathFloor);
+    
+    CharacterComponent *character = (CharacterComponent *)[entity getComponentOfName:[CharacterComponent name]];
+    
+    for (Entity *player in [entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]]) {
+        TeamComponent *pTeam = (TeamComponent *)[player getComponentOfName:[TeamComponent name]];
+        
+        if (pTeam.team == team) {
+            PlayerComponent *pPlayer = (PlayerComponent *)[player getComponentOfName:[PlayerComponent name]];
+            character.player = pPlayer;
+        }
+    }
     
     GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
     [entity addComponent:group];
@@ -378,7 +391,7 @@
     
     RenderComponent *render = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
     
-    for (int i = 0; i < count/3; i++) {
+    for (int i = 0; i < count/3 + bonusCount; i++) {
         Entity *minion = [self createMinion:cid level:1 forTeam:team withGeneral:entity];
         
         GroupComponent *group = [[GroupComponent alloc] initWithGroupArray:groupEntities];
@@ -395,6 +408,7 @@
             }
         }
     }
+    return groupEntities;
 }
 
 -(Entity *)createCastleForTeam:(int)team {
@@ -475,16 +489,16 @@
     PlayerComponent *player = [[PlayerComponent alloc] init];
     [entity addComponent:player];
     
-    NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
-    
-    for (CharacterInitData *data in characterInitDatas) {
-        Entity *summonButton = [self createSummonButton:data];
-        MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
-        magicCom.spellCaster = entity;
-        [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
-        
-        [player.summonComponents addObject:summonButton];
-    }
+//    NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
+//    
+//    for (CharacterInitData *data in characterInitDatas) {
+//        Entity *summonButton = [self createSummonButton:data];
+//        MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
+//        magicCom.spellCaster = entity;
+//        [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
+//        
+//        [player.summonComponents addObject:summonButton];
+//    }
     
     NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
     for (CharacterInitData *data in battleTeamInitData) {
@@ -494,20 +508,56 @@
         [player.battleTeam addObject:summon];
     }
     
-    MagicSkillComponent *magicSkillCom = [[MagicSkillComponent alloc] init];
     NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
     
-    for (CharacterInitData *data in magicTeamInitData) {
-        Entity *magicButton = [self createMagicButton:data.cid level:data.level team:team];
+    for (OrbSkillData *data in magicTeamInitData) {
+        if (!data.unLocked || data.level <= 0) {
+            continue;
+        }
+        Entity *magicButton = [self createMagicButton:data.name level:data.level team:team];
         
         MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
         magicCom.spellCaster = entity;
         NSAssert(NSClassFromString(magicCom.name), @"You forgot to make this skill.");
         
-        [magicSkillCom.magicTeam addObject:magicButton];
+        [player.magicTeam addObject:magicButton];
     }
     
-    [entity addComponent:magicSkillCom];
+    //magicInBattle
+    NSArray *magicInBattle = [FileManager sharedFileManager].magicInBattle;
+    for (NSString *magicId in magicInBattle) {
+        for (Entity *magicButton in player.magicTeam) {
+            MagicComponent *magicCom = (MagicComponent *)[magicButton getComponentOfName:[MagicComponent name]];
+            if ([magicId isEqualToString:magicCom.magicId]) {
+                [player.magicInBattle addObject:magicButton];
+            }
+        }
+    }
+    
+    //items
+    NSArray *items = [FileManager sharedFileManager].items;
+    
+    for (ItemData *data in items) {
+        if (data.count > 0) {
+            Entity *itemButton = [self createItemButton:data.itemId count:data.count];
+            
+            ItemComponent *itemCom = (ItemComponent *)[itemButton getComponentOfName:[ItemComponent name]];
+            itemCom.owner = entity;
+            NSAssert(NSClassFromString(itemCom.effect), @"You forgot to make this skill.");
+            [player.items addObject:itemButton];
+        }
+    }
+
+    //itemsInBattle
+    NSArray *itemsInBattle = [FileManager sharedFileManager].itemsInBattle;
+    for (NSString *itemId in itemsInBattle) {
+        for (Entity *itemButton in player.items) {
+            ItemComponent *itemCom = (ItemComponent *)[itemButton getComponentOfName:[ItemComponent name]];
+            if ([itemId isEqualToString:itemCom.itemId]) {
+                [player.itemsInBattle addObject:itemButton];
+            }
+        }
+    }
     
     [entity addComponent:[[AttackerComponent alloc] initWithAttackAttribute:
                           nil]];
@@ -526,6 +576,34 @@
     [entity addComponent:player];
     
 //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self battleDataObject:battleData]]];
+    
+    return entity;
+}
+
+-(Entity *)createItemButton:(NSString *)cid count:(int)count {
+    
+    Entity *entity = [_entityManager createEntity];
+    NSDictionary *characterData = [[FileManager sharedFileManager] getCharacterDataWithCid:cid];
+    NSString *assert = [NSString stringWithFormat:@"you forgot to make this component in CharacterBasicData.plist id:%@",cid];
+    
+    for (NSString *key in characterData) {
+        NSDictionary *dic = [characterData objectForKey:key];
+        if ([key isEqualToString:@"RenderComponent"]) {
+            CCSprite *sprite = [CCSprite spriteWithFile:[dic objectForKey:@"sprite"]];
+            RenderComponent *renderCom = [[RenderComponent alloc] initWithSprite:sprite];
+            [entity addComponent:renderCom];
+//            [entity addComponent:[[MaskComponent alloc] initWithRenderComponent:renderCom]];
+        }else {
+            NSAssert(NSClassFromString(key), assert);
+            [entity addComponent:[[NSClassFromString(key) alloc] initWithDictionary:dic]];
+        }
+    }
+    
+    TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
+    ItemComponent *itemCom = (ItemComponent *)[entity getComponentOfName:[ItemComponent name]];
+    itemCom.itemId = cid;
+    itemCom.count = count;
+    selectCom.delegate = itemCom;
     
     return entity;
 }
@@ -551,6 +629,7 @@
     
     TouchComponent *selectCom = (TouchComponent *)[entity getComponentOfName:[TouchComponent name]];
     MagicComponent *magicCom = (MagicComponent *)[entity getComponentOfName:[MagicComponent name]];
+    magicCom.magicId = cid;
     selectCom.delegate = magicCom;
     
     [entity addComponent:[[TeamComponent alloc] initWithTeam:team]];
@@ -593,7 +672,7 @@
     } else {
         spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
     }
-    NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"selectedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
+    NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"touchedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
     TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
     selectCom.delegate = magicCom;
     [entity addComponent:selectCom];

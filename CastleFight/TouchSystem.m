@@ -99,6 +99,20 @@ typedef enum {
     }
 }
 
+-(void)showTouchSprite:(BOOL)show {
+    RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
+    if (show) {
+        TouchComponent *touchCom = (TouchComponent *)[touchedEntity getComponentOfName:[TouchComponent name]];
+//        [(CCSprite *)render.sprite setOpacity:0];
+        [render.node addChild:touchCom.touchSprite z:0 tag:kSelectedImageTag];
+    } else {
+//        [(CCSprite *)render.sprite setOpacity:255];
+        if ([render.node getChildByTag:kSelectedImageTag]) {
+            [render.node removeChildByTag:kSelectedImageTag cleanup:YES];
+        }
+    }
+}
+
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     // Prevent two touch
     if (state != kTouchStateNone) {
@@ -132,10 +146,10 @@ typedef enum {
         
         if (touchCom.touchable && CGRectContainsPoint(render.sprite.boundingBox, [render.sprite.parent convertToNodeSpace:touchLocation])) {
             touchedEntity = entity;
+            [self showTouchSprite:YES];
             break;
         }
     }
-        
     return YES;
 }
 
@@ -178,12 +192,18 @@ typedef enum {
         
         if ([touchCom.delegate respondsToSelector:@selector(handlePan:positions:)]) {
             [touchCom.delegate handlePan:panState positions:touchPositions];
+        }else {
+            RenderComponent *render = (RenderComponent *)[touchedEntity getComponentOfName:[RenderComponent name]];
+            if (!CGRectContainsPoint(render.sprite.boundingBox, [render.sprite.parent convertToNodeSpace:[[touchPositions lastObject] CGPointValue]])) {
+                [self showTouchSprite:NO];
+            }
         }
     }
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     state = kTouchStateEnded;
+    [self showTouchSprite:NO];
     
     CGPoint touchLocation = [touch locationInView:[touch view]];
     touchLocation = [[CCDirector sharedDirector] convertToGL:touchLocation];

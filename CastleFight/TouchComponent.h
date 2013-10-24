@@ -24,14 +24,16 @@ typedef enum {
 
 @end
 
+@class CCSprite;
+
 @interface TouchComponent : Component
 
 @property BOOL touchable;
 
 @property (readonly) BOOL canSelect;
-//@property (nonatomic) BOOL hasDragLine;
 @property (nonatomic) NSString *dragImage1;
 @property (nonatomic) NSString *dragImage2;
+@property (nonatomic) CCSprite *touchSprite;
 
 @property (nonatomic, weak) id<TouchComponentDelegate> delegate;
 

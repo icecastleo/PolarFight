@@ -13,8 +13,8 @@
 
 @interface Magic : NSObject
 
-@property (nonatomic) EntityFactory *entityFactory;
-@property (nonatomic) Entity *owner;
+@property (nonatomic, assign) EntityFactory *entityFactory;
+@property (nonatomic, assign) Entity *owner;
 @property (nonatomic) NSDictionary *magicInformation;
 
 @property (nonatomic) CGSize rangeSize;

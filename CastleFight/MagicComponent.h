@@ -13,6 +13,7 @@
 
 @interface MagicComponent : Component <TouchComponentDelegate>
 
+@property (nonatomic) NSString *magicId;
 @property (nonatomic,readonly) Attribute *damage;
 @property (nonatomic,readonly) NSString *name;
 @property (nonatomic,readonly) NSDictionary *images;

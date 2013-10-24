@@ -29,7 +29,10 @@
     }
     
     //TODO: radius depends on range's radius
-//    ccDrawCircle(end, self.drawSize.width, 360, 30, NO);
+    if (!CGSizeEqualToSize(self.drawSize, CGSizeZero)) {
+        ccDrawCircle(end, self.drawSize.width, 360, 30, NO);
+    }
+    
 //    ccDrawRect(ccp(end.x - self.drawSize.width/2, end.y - self.drawSize.height/2),ccp(end.x + self.drawSize.width/2, end.y + self.drawSize.height/2));
 }
 

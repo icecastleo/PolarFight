@@ -42,7 +42,9 @@
                 if (stateComponent.event) {
                     [defendCom.damageEventQueue addObject:stateComponent.event];
                 }
-            [stateComponent process];
+                if ([stateComponent respondsToSelector:@selector(process)]) {
+                    [stateComponent process];
+                }
             }
         } else {
             [entity removeComponent:[[stateComponent class] name]];

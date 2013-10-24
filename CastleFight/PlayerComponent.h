@@ -16,6 +16,8 @@
 
 -(void)addCount:(int)count onOrbColor:(OrbColor)color;
 -(NSMutableDictionary *)getCalculatedArmies;
+-(NSDictionary *)orbInfo;
+-(NSArray *)activeSkills;
 
 @property float food;
 @property (nonatomic) float foodRate;
@@ -30,6 +32,11 @@
 
 @property NSMutableArray *summonComponents;
 @property (nonatomic) NSMutableArray *battleTeam;
+
+@property NSMutableArray *items;
+@property NSMutableArray *itemsInBattle;
+@property NSMutableArray *magicTeam;
+@property NSMutableArray *magicInBattle;
 
 @property int armiesCount;
 

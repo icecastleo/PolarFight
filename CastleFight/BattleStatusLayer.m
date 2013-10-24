@@ -16,7 +16,6 @@
 #import "PlayerComponent.h"
 #import "SummonComponent.h"
 #import "RenderComponent.h"
-#import "MagicSkillComponent.h"
 #import "CostComponent.h"
 #import "LevelComponent.h"
 
@@ -153,12 +152,10 @@
         [renderCom.node addChild:levelLabel z:0 tag:kLevelLabelTag];
     }
     
-    MagicSkillComponent *magicSkillCom = (MagicSkillComponent *)[player.entity getComponentOfName:[MagicSkillComponent name]];
-    
-    for (Entity *entity in magicSkillCom.magicTeam) {
+    for (Entity *entity in player.magicTeam) {
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         //FIXME: the position is not correct.
-        renderCom.position = ccp(70+40*([magicSkillCom.magicTeam indexOfObject:entity]+1),265);
+        renderCom.position = ccp(70+40*([player.magicTeam indexOfObject:entity]+1),265);
         [self addChild:renderCom.node];
         
         //FIXME: maybe do not need these or move to other appropriate place.

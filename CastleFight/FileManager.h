@@ -16,6 +16,10 @@
 @property (readonly) NSArray *characterInitDatas;
 @property (nonatomic, readonly) NSArray *battleTeam;
 @property (nonatomic, readonly) NSArray *magicTeam;
+@property (nonatomic, readonly) NSArray *magicInBattle;
+@property (nonatomic, readonly) NSArray *items;
+@property (nonatomic, readonly) NSArray *itemsInBattle;
+@property (nonatomic, readonly) NSArray *orbSkills;
 
 @property AchievementManager *achievementManager;
 //game center

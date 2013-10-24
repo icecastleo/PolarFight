@@ -1508,7 +1508,7 @@
 		</dict>
 		<key>TouchComponent</key>
 		<dict>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -1589,7 +1589,7 @@
 		</dict>
 		<key>TouchComponent</key>
 		<dict>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -1676,7 +1676,7 @@
 			<string>yellow_arrow.png</string>
 			<key>dragImage2</key>
 			<string>yellow_arrow.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -2571,7 +2571,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2629,7 +2629,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2687,7 +2687,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2726,6 +2726,122 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>904</key>
+	<dict>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Mana</string>
+			<key>food</key>
+			<integer>0</integer>
+			<key>mana</key>
+			<integer>15</integer>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>Paralysis_button.png</string>
+		</dict>
+		<key>InformationComponent</key>
+		<dict>
+			<key>name</key>
+			<string>BombMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test BombMagic</string>
+		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>500</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>5</integer>
+			<key>magicName</key>
+			<string>ParalysisMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>nicefire.png</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>905</key>
+	<dict>
+		<key>CostComponent</key>
+		<dict>
+			<key>costType</key>
+			<string>Mana</string>
+			<key>food</key>
+			<integer>0</integer>
+			<key>mana</key>
+			<integer>20</integer>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<true/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>CleanseMagic_button.png</string>
+		</dict>
+		<key>InformationComponent</key>
+		<dict>
+			<key>name</key>
+			<string>BombMagic</string>
+			<key>type</key>
+			<string>magic</string>
+			<key>description</key>
+			<string>test test BombMagic</string>
+		</dict>
+		<key>MagicComponent</key>
+		<dict>
+			<key>damage</key>
+			<dict>
+				<key>a</key>
+				<string>0</string>
+				<key>b</key>
+				<string>0.02c</string>
+				<key>c</key>
+				<string>500</string>
+			</dict>
+			<key>cooldown</key>
+			<integer>10</integer>
+			<key>magicName</key>
+			<string>RangeCleanseMagic</string>
+			<key>magicImages</key>
+			<dict>
+				<key>projectileImage</key>
+				<string>nicefire.png</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>999</key>
 	<dict>
 		<key>TouchComponent</key>
@@ -2736,7 +2852,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>InformationComponent</key>
@@ -2780,7 +2896,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>OrbComponent</key>
@@ -2807,7 +2923,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2841,7 +2957,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2875,7 +2991,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2909,7 +3025,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2943,7 +3059,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2977,7 +3093,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3011,7 +3127,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3033,6 +3149,154 @@
 			<integer>-1</integer>
 			<key>team</key>
 			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>2001</key>
+	<dict>
+		<key>ItemComponent</key>
+		<dict>
+			<key>name</key>
+			<string>First Aid Kit</string>
+			<key>images</key>
+			<dict>
+				<key>image1</key>
+				<string>gold_frame.png</string>
+				<key>image2</key>
+				<string>test2.png</string>
+			</dict>
+			<key>effect</key>
+			<string>AllHeal</string>
+			<key>maxCount</key>
+			<string>99</string>
+			<key>price</key>
+			<string>1000</string>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>Hp_button.png</string>
+		</dict>
+	</dict>
+	<key>2002</key>
+	<dict>
+		<key>ItemComponent</key>
+		<dict>
+			<key>name</key>
+			<string>Attack Up</string>
+			<key>images</key>
+			<dict>
+				<key>image1</key>
+				<string>test1.png</string>
+				<key>image2</key>
+				<string>test2.png</string>
+			</dict>
+			<key>effect</key>
+			<string>AllAttackUp</string>
+			<key>maxCount</key>
+			<string>99</string>
+			<key>price</key>
+			<string>1000</string>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>AttackUp_button.png</string>
+		</dict>
+	</dict>
+	<key>2003</key>
+	<dict>
+		<key>ItemComponent</key>
+		<dict>
+			<key>name</key>
+			<string>Remove Bad State</string>
+			<key>images</key>
+			<dict>
+				<key>image1</key>
+				<string>test1.png</string>
+				<key>image2</key>
+				<string>test2.png</string>
+			</dict>
+			<key>effect</key>
+			<string>AllCleanse</string>
+			<key>maxCount</key>
+			<string>99</string>
+			<key>price</key>
+			<string>1000</string>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>Cleansing_button.png</string>
+		</dict>
+	</dict>
+	<key>2004</key>
+	<dict>
+		<key>ItemComponent</key>
+		<dict>
+			<key>name</key>
+			<string>Add Mana By Item</string>
+			<key>images</key>
+			<dict>
+				<key>image1</key>
+				<string>test1.png</string>
+				<key>image2</key>
+				<string>test2.png</string>
+			</dict>
+			<key>effect</key>
+			<string>AddManaByItem</string>
+			<key>maxCount</key>
+			<string>99</string>
+			<key>price</key>
+			<string>1000</string>
+		</dict>
+		<key>TouchComponent</key>
+		<dict>
+			<key>hasDragLine</key>
+			<false/>
+			<key>dragImage1</key>
+			<string>rangeFrame_1.png</string>
+			<key>dragImage2</key>
+			<string>rangeFrame_2.png</string>
+			<key>touchedImage</key>
+			<string>gold_frame.png</string>
+		</dict>
+		<key>RenderComponent</key>
+		<dict>
+			<key>sprite</key>
+			<string>mana_button.png</string>
 		</dict>
 	</dict>
 </dict>

@@ -115,8 +115,16 @@
 		372526C016EF68D800C79A9E /* shopbutton.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 372526B816EF68D800C79A9E /* shopbutton.pvr.ccz */; };
 		3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815016F7550800F1F7EE /* BattleDataObject.m */; };
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
+		373641791818C89C0028C137 /* ItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = 373641781818C89C0028C137 /* ItemData.m */; };
+		3737E9831807C87D00698B7D /* AllHeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737E9821807C87D00698B7D /* AllHeal.m */; };
 		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
+		3747FF2017FD1F6000BDA50D /* AddHealthPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF1F17FD1F5F00BDA50D /* AddHealthPoint.m */; };
+		3747FF2317FD260200BDA50D /* AddMana.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2217FD260200BDA50D /* AddMana.m */; };
+		3747FF2917FD29F000BDA50D /* AddReward.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2817FD29ED00BDA50D /* AddReward.m */; };
+		3747FF2C17FD4C1600BDA50D /* AddAgile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2B17FD4C1500BDA50D /* AddAgile.m */; };
+		3747FF2F17FD4C8700BDA50D /* AddSpeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF2E17FD4C8600BDA50D /* AddSpeed.m */; };
+		3747FF3217FD612100BDA50D /* OrbSkillData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747FF3117FD612100BDA50D /* OrbSkillData.m */; };
 		37486B391781951D0011F3DB /* Magic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B381781951D0011F3DB /* Magic.m */; };
 		37486B3C1781C2880011F3DB /* LightningMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37486B3B1781C2880011F3DB /* LightningMagic.m */; };
 		374C90A3178AB33A00C8FB47 /* BombMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C90A1178AB33A00C8FB47 /* BombMagic_button@2x.png */; };
@@ -127,6 +135,18 @@
 		3750F4F21785A992009E2689 /* LightningMagic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3750F4F11785A991009E2689 /* LightningMagic.png */; };
 		3750F4F51785B494009E2689 /* MagicComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F41785B491009E2689 /* MagicComponent.m */; };
 		3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3750F4F71785B5A6009E2689 /* MaskComponent.m */; };
+		3763DFF51811143D005F00CE /* Hp_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFE91811143C005F00CE /* Hp_button.png */; };
+		3763DFF61811143D005F00CE /* mana_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEA1811143C005F00CE /* mana_button.png */; };
+		3763DFF71811143D005F00CE /* mana_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEB1811143C005F00CE /* mana_button@2x.png */; };
+		3763DFF81811143D005F00CE /* AttackUp_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEC1811143C005F00CE /* AttackUp_button.png */; };
+		3763DFF91811143D005F00CE /* Cleansing_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFED1811143C005F00CE /* Cleansing_button.png */; };
+		3763DFFA1811143D005F00CE /* Hp_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEE1811143D005F00CE /* Hp_button@2x.png */; };
+		3763DFFB1811143D005F00CE /* CleanseMagic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFEF1811143D005F00CE /* CleanseMagic_button.png */; };
+		3763DFFC1811143D005F00CE /* Paralysis_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF01811143D005F00CE /* Paralysis_button.png */; };
+		3763DFFD1811143D005F00CE /* AttackUp_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF11811143D005F00CE /* AttackUp_button@2x.png */; };
+		3763DFFE1811143D005F00CE /* CleanseMagic_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */; };
+		3763DFFF1811143D005F00CE /* Cleansing_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF31811143D005F00CE /* Cleansing_button@2x.png */; };
+		3763E0001811143D005F00CE /* Paralysis_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3763DFF41811143D005F00CE /* Paralysis_button@2x.png */; };
 		3765683817E6F788000865EF /* fly_bear.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3765683417E6F786000865EF /* fly_bear.atlas */; };
 		3765683917E6F788000865EF /* fly_bear.json in Resources */ = {isa = PBXBuildFile; fileRef = 3765683517E6F786000865EF /* fly_bear.json */; };
 		3765683A17E6F788000865EF /* fly_bear.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765683617E6F787000865EF /* fly_bear.png */; };
@@ -137,7 +157,7 @@
 		378451F5179648FE0074F718 /* CCSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F0179648FE0074F718 /* CCSkeleton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F2179648FE0074F718 /* CCSkeletonAnimation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		378451F7179648FE0074F718 /* spine-cocos2d-iphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		37D498281786B1B100413D56 /* MagicSkillComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D498271786B1B100413D56 /* MagicSkillComponent.m */; };
+		37B1515E18067AEF0049471D /* ItemComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B1515D18067AEF0049471D /* ItemComponent.m */; };
 		37D7563B177438ED005ACE35 /* HeroComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563A177438ED005ACE35 /* HeroComponent.m */; };
 		37D7563E17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7563D17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.m */; };
 		37D832A117130EF2001A1C3A /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D832A017130EF2001A1C3A /* GameCenterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -166,13 +186,27 @@
 		37DDA2C71709638A0016E8CB /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C11709638A0016E8CB /* Property.m */; };
 		37DDA2C81709638A0016E8CB /* AchievementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C31709638A0016E8CB /* AchievementManager.m */; };
 		37DDA2C91709638A0016E8CB /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDA2C51709638A0016E8CB /* Achievement.m */; };
+		37DDB6B1180F92E000660643 /* AllAttackUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B0180F92E000660643 /* AllAttackUp.m */; };
+		37DDB6B4180F9E0800660643 /* AllCleanse.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B3180F9E0800660643 /* AllCleanse.m */; };
+		37DDB6B7180FCE0C00660643 /* AddManaByItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B6180FCE0C00660643 /* AddManaByItem.m */; };
+		37DDB6BA180FEE6300660643 /* ParalysisMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6B9180FEE6300660643 /* ParalysisMagic.m */; };
+		37DDB6BD180FF07600660643 /* RangeCleanseMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */; };
 		37DE292D17A657A2002D0377 /* LineComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE292C17A657A2002D0377 /* LineComponent.m */; };
+		37DEF1FA17FAAB05004A2024 /* OrbSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF1F917FAAB05004A2024 /* OrbSkill.m */; };
+		37DEF1FD17FAB251004A2024 /* AddAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF1FC17FAB251004A2024 /* AddAttack.m */; };
+		37DEF20017FAB7A3004A2024 /* AddDefense.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF1FF17FAB7A3004A2024 /* AddDefense.m */; };
+		37DEF20317FABF6C004A2024 /* AddCharacterSum.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DEF20217FABF6C004A2024 /* AddCharacterSum.m */; };
 		37DF1A8D17606F27009042CB /* AttackUpPassiveSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */; };
 		37DF1A9017607356009042CB /* NoiseSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1A8F17607356009042CB /* NoiseSkill.m */; };
 		37DF1AA21761ECA5009042CB /* SpeedUpSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF1AA11761ECA4009042CB /* SpeedUpSkill.m */; };
 		37DF1AA617621C9E009042CB /* AttackUpAura.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C7862169A1C2C00CA1A1C /* AttackUpAura.m */; };
 		37DF3B45174F540A00CA7824 /* PoisonMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */; };
 		37DF3B51174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */; };
+		37DFBF3D1803AB4F003B650D /* AddAttack2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFBF3C1803AB4F003B650D /* AddAttack2.m */; };
+		37DFBF401803AF42003B650D /* AddDefense2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFBF3F1803AF41003B650D /* AddDefense2.m */; };
+		37DFBF431803AF75003B650D /* AddAgile2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFBF421803AF75003B650D /* AddAgile2.m */; };
+		37DFBF461803AF8C003B650D /* AddSpeed2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFBF451803AF8B003B650D /* AddSpeed2.m */; };
+		37DFBF491803AFA1003B650D /* AddHealthPoint2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFBF481803AFA1003B650D /* AddHealthPoint2.m */; };
 		37E00B0F178C454D00AE7757 /* gold_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0D178C454D00AE7757 /* gold_frame.png */; };
 		37E00B10178C454D00AE7757 /* gold_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B0E178C454D00AE7757 /* gold_frame@2x.png */; };
 		37E00B1F178C49AB00AE7757 /* rainbowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E00B1D178C49AB00AE7757 /* rainbowCircle.png */; };
@@ -721,8 +755,24 @@
 		3730815016F7550800F1F7EE /* BattleDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleDataObject.m; sourceTree = "<group>"; };
 		3730815216F7578100F1F7EE /* UserDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataObject.h; sourceTree = "<group>"; };
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
+		373641771818C89C0028C137 /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemData.h; sourceTree = "<group>"; };
+		373641781818C89C0028C137 /* ItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemData.m; sourceTree = "<group>"; };
+		3737E9811807C87D00698B7D /* AllHeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHeal.h; sourceTree = "<group>"; };
+		3737E9821807C87D00698B7D /* AllHeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHeal.m; sourceTree = "<group>"; };
 		3741400A1772F49F00E6365A /* AIStateHeroAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroAttack.h; sourceTree = "<group>"; };
 		3741400B1772F49F00E6365A /* AIStateHeroAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIStateHeroAttack.m; sourceTree = "<group>"; };
+		3747FF1E17FD1F5F00BDA50D /* AddHealthPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHealthPoint.h; sourceTree = "<group>"; };
+		3747FF1F17FD1F5F00BDA50D /* AddHealthPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHealthPoint.m; sourceTree = "<group>"; };
+		3747FF2117FD260100BDA50D /* AddMana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMana.h; sourceTree = "<group>"; };
+		3747FF2217FD260200BDA50D /* AddMana.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMana.m; sourceTree = "<group>"; };
+		3747FF2717FD29EC00BDA50D /* AddReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReward.h; sourceTree = "<group>"; };
+		3747FF2817FD29ED00BDA50D /* AddReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReward.m; sourceTree = "<group>"; };
+		3747FF2A17FD4C1400BDA50D /* AddAgile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAgile.h; sourceTree = "<group>"; };
+		3747FF2B17FD4C1500BDA50D /* AddAgile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAgile.m; sourceTree = "<group>"; };
+		3747FF2D17FD4C8500BDA50D /* AddSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSpeed.h; sourceTree = "<group>"; };
+		3747FF2E17FD4C8600BDA50D /* AddSpeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSpeed.m; sourceTree = "<group>"; };
+		3747FF3017FD612100BDA50D /* OrbSkillData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbSkillData.h; sourceTree = "<group>"; };
+		3747FF3117FD612100BDA50D /* OrbSkillData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbSkillData.m; sourceTree = "<group>"; };
 		37486B371781951D0011F3DB /* Magic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magic.h; sourceTree = "<group>"; };
 		37486B381781951D0011F3DB /* Magic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magic.m; sourceTree = "<group>"; };
 		37486B3A1781C2880011F3DB /* LightningMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightningMagic.h; sourceTree = "<group>"; };
@@ -738,6 +788,18 @@
 		3750F4F41785B491009E2689 /* MagicComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicComponent.m; sourceTree = "<group>"; };
 		3750F4F61785B5A4009E2689 /* MaskComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskComponent.h; sourceTree = "<group>"; };
 		3750F4F71785B5A6009E2689 /* MaskComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskComponent.m; sourceTree = "<group>"; };
+		3763DFE91811143C005F00CE /* Hp_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hp_button.png; sourceTree = "<group>"; };
+		3763DFEA1811143C005F00CE /* mana_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mana_button.png; sourceTree = "<group>"; };
+		3763DFEB1811143C005F00CE /* mana_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mana_button@2x.png"; sourceTree = "<group>"; };
+		3763DFEC1811143C005F00CE /* AttackUp_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AttackUp_button.png; sourceTree = "<group>"; };
+		3763DFED1811143C005F00CE /* Cleansing_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cleansing_button.png; sourceTree = "<group>"; };
+		3763DFEE1811143D005F00CE /* Hp_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hp_button@2x.png"; sourceTree = "<group>"; };
+		3763DFEF1811143D005F00CE /* CleanseMagic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CleanseMagic_button.png; sourceTree = "<group>"; };
+		3763DFF01811143D005F00CE /* Paralysis_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paralysis_button.png; sourceTree = "<group>"; };
+		3763DFF11811143D005F00CE /* AttackUp_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AttackUp_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CleanseMagic_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF31811143D005F00CE /* Cleansing_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cleansing_button@2x.png"; sourceTree = "<group>"; };
+		3763DFF41811143D005F00CE /* Paralysis_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Paralysis_button@2x.png"; sourceTree = "<group>"; };
 		3765683417E6F786000865EF /* fly_bear.atlas */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fly_bear.atlas; sourceTree = "<group>"; };
 		3765683517E6F786000865EF /* fly_bear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fly_bear.json; sourceTree = "<group>"; };
 		3765683617E6F787000865EF /* fly_bear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly_bear.png; sourceTree = "<group>"; };
@@ -754,8 +816,8 @@
 		378451F2179648FE0074F718 /* CCSkeletonAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSkeletonAnimation.m; sourceTree = "<group>"; };
 		378451F3179648FE0074F718 /* spine-cocos2d-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spine-cocos2d-iphone.h"; sourceTree = "<group>"; };
 		378451F4179648FE0074F718 /* spine-cocos2d-iphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "spine-cocos2d-iphone.m"; sourceTree = "<group>"; };
-		37D498261786B1B100413D56 /* MagicSkillComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSkillComponent.h; sourceTree = "<group>"; };
-		37D498271786B1B100413D56 /* MagicSkillComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSkillComponent.m; sourceTree = "<group>"; };
+		37B1515C18067AEF0049471D /* ItemComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemComponent.h; sourceTree = "<group>"; };
+		37B1515D18067AEF0049471D /* ItemComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemComponent.m; sourceTree = "<group>"; };
 		37D75639177438ED005ACE35 /* HeroComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroComponent.h; sourceTree = "<group>"; };
 		37D7563A177438ED005ACE35 /* HeroComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroComponent.m; sourceTree = "<group>"; };
 		37D7563C17743A04005ACE35 /* ReflectAttackWithThirtyAndDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectAttackWithThirtyAndDouble.h; sourceTree = "<group>"; };
@@ -804,10 +866,28 @@
 		37DDA2C41709638A0016E8CB /* AchievementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementManager.h; sourceTree = "<group>"; };
 		37DDA2C51709638A0016E8CB /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 		37DDA2C61709638A0016E8CB /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		37DDB6AF180F92E000660643 /* AllAttackUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllAttackUp.h; sourceTree = "<group>"; };
+		37DDB6B0180F92E000660643 /* AllAttackUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllAttackUp.m; sourceTree = "<group>"; };
+		37DDB6B2180F9E0800660643 /* AllCleanse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllCleanse.h; sourceTree = "<group>"; };
+		37DDB6B3180F9E0800660643 /* AllCleanse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllCleanse.m; sourceTree = "<group>"; };
+		37DDB6B5180FCE0B00660643 /* AddManaByItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddManaByItem.h; sourceTree = "<group>"; };
+		37DDB6B6180FCE0C00660643 /* AddManaByItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddManaByItem.m; sourceTree = "<group>"; };
+		37DDB6B8180FEE6200660643 /* ParalysisMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMagic.h; sourceTree = "<group>"; };
+		37DDB6B9180FEE6300660643 /* ParalysisMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMagic.m; sourceTree = "<group>"; };
+		37DDB6BB180FF07400660643 /* RangeCleanseMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeCleanseMagic.h; sourceTree = "<group>"; };
+		37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeCleanseMagic.m; sourceTree = "<group>"; };
 		37DE292B17A657A1002D0377 /* LineComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineComponent.h; sourceTree = "<group>"; };
 		37DE292C17A657A2002D0377 /* LineComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineComponent.m; sourceTree = "<group>"; };
 		37DE292E17A66BF0002D0377 /* ChangeLineSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLineSkill.h; sourceTree = "<group>"; };
 		37DE292F17A66BF0002D0377 /* ChangeLineSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLineSkill.m; sourceTree = "<group>"; };
+		37DEF1F817FAAB05004A2024 /* OrbSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbSkill.h; sourceTree = "<group>"; };
+		37DEF1F917FAAB05004A2024 /* OrbSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbSkill.m; sourceTree = "<group>"; };
+		37DEF1FB17FAB251004A2024 /* AddAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAttack.h; sourceTree = "<group>"; };
+		37DEF1FC17FAB251004A2024 /* AddAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAttack.m; sourceTree = "<group>"; };
+		37DEF1FE17FAB7A3004A2024 /* AddDefense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDefense.h; sourceTree = "<group>"; };
+		37DEF1FF17FAB7A3004A2024 /* AddDefense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDefense.m; sourceTree = "<group>"; };
+		37DEF20117FABF6C004A2024 /* AddCharacterSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCharacterSum.h; sourceTree = "<group>"; };
+		37DEF20217FABF6C004A2024 /* AddCharacterSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCharacterSum.m; sourceTree = "<group>"; };
 		37DF1A8B17606F27009042CB /* AttackUpPassiveSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackUpPassiveSkill.h; sourceTree = "<group>"; };
 		37DF1A8C17606F27009042CB /* AttackUpPassiveSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttackUpPassiveSkill.m; sourceTree = "<group>"; };
 		37DF1A8E17607356009042CB /* NoiseSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoiseSkill.h; sourceTree = "<group>"; };
@@ -818,6 +898,16 @@
 		37DF3B44174F540A00CA7824 /* PoisonMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonMeleeAttackSkill.m; sourceTree = "<group>"; };
 		37DF3B4F174F73CB00CA7824 /* ParalysisMeleeAttackSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParalysisMeleeAttackSkill.h; sourceTree = "<group>"; };
 		37DF3B50174F73CB00CA7824 /* ParalysisMeleeAttackSkill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParalysisMeleeAttackSkill.m; sourceTree = "<group>"; };
+		37DFBF3B1803AB4F003B650D /* AddAttack2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAttack2.h; sourceTree = "<group>"; };
+		37DFBF3C1803AB4F003B650D /* AddAttack2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAttack2.m; sourceTree = "<group>"; };
+		37DFBF3E1803AF41003B650D /* AddDefense2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDefense2.h; sourceTree = "<group>"; };
+		37DFBF3F1803AF41003B650D /* AddDefense2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDefense2.m; sourceTree = "<group>"; };
+		37DFBF411803AF74003B650D /* AddAgile2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAgile2.h; sourceTree = "<group>"; };
+		37DFBF421803AF75003B650D /* AddAgile2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAgile2.m; sourceTree = "<group>"; };
+		37DFBF441803AF8B003B650D /* AddSpeed2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSpeed2.h; sourceTree = "<group>"; };
+		37DFBF451803AF8B003B650D /* AddSpeed2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSpeed2.m; sourceTree = "<group>"; };
+		37DFBF471803AFA0003B650D /* AddHealthPoint2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHealthPoint2.h; sourceTree = "<group>"; };
+		37DFBF481803AFA1003B650D /* AddHealthPoint2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHealthPoint2.m; sourceTree = "<group>"; };
 		37E00B0D178C454D00AE7757 /* gold_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold_frame.png; sourceTree = "<group>"; };
 		37E00B0E178C454D00AE7757 /* gold_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gold_frame@2x.png"; sourceTree = "<group>"; };
 		37E00B1D178C49AB00AE7757 /* rainbowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbowCircle.png; sourceTree = "<group>"; };
@@ -1791,6 +1881,10 @@
 				3730815016F7550800F1F7EE /* BattleDataObject.m */,
 				37DCA5C716F1CBD90006D656 /* FileManager.h */,
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
+				3747FF3017FD612100BDA50D /* OrbSkillData.h */,
+				3747FF3117FD612100BDA50D /* OrbSkillData.m */,
+				373641771818C89C0028C137 /* ItemData.h */,
+				373641781818C89C0028C137 /* ItemData.m */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -1806,6 +1900,18 @@
 				3774E03717AFE14A001CD798 /* SummonMagic.m */,
 				37EC99A917B13ACD00B8F4DE /* SummonToLineMagic.h */,
 				37EC99AA17B13ACD00B8F4DE /* SummonToLineMagic.m */,
+				3737E9811807C87D00698B7D /* AllHeal.h */,
+				3737E9821807C87D00698B7D /* AllHeal.m */,
+				37DDB6AF180F92E000660643 /* AllAttackUp.h */,
+				37DDB6B0180F92E000660643 /* AllAttackUp.m */,
+				37DDB6B2180F9E0800660643 /* AllCleanse.h */,
+				37DDB6B3180F9E0800660643 /* AllCleanse.m */,
+				37DDB6B5180FCE0B00660643 /* AddManaByItem.h */,
+				37DDB6B6180FCE0C00660643 /* AddManaByItem.m */,
+				37DDB6B8180FEE6200660643 /* ParalysisMagic.h */,
+				37DDB6B9180FEE6300660643 /* ParalysisMagic.m */,
+				37DDB6BB180FF07400660643 /* RangeCleanseMagic.h */,
+				37DDB6BC180FF07500660643 /* RangeCleanseMagic.m */,
 			);
 			name = Magic;
 			sourceTree = "<group>";
@@ -1914,6 +2020,41 @@
 				37DDA2C11709638A0016E8CB /* Property.m */,
 			);
 			name = Achievement;
+			sourceTree = "<group>";
+		};
+		37DEF1F717FAAAE1004A2024 /* OrbSkill */ = {
+			isa = PBXGroup;
+			children = (
+				37DEF1F817FAAB05004A2024 /* OrbSkill.h */,
+				37DEF1F917FAAB05004A2024 /* OrbSkill.m */,
+				37DEF1FB17FAB251004A2024 /* AddAttack.h */,
+				37DEF1FC17FAB251004A2024 /* AddAttack.m */,
+				37DEF1FE17FAB7A3004A2024 /* AddDefense.h */,
+				37DEF1FF17FAB7A3004A2024 /* AddDefense.m */,
+				3747FF2A17FD4C1400BDA50D /* AddAgile.h */,
+				3747FF2B17FD4C1500BDA50D /* AddAgile.m */,
+				3747FF2D17FD4C8500BDA50D /* AddSpeed.h */,
+				3747FF2E17FD4C8600BDA50D /* AddSpeed.m */,
+				3747FF1E17FD1F5F00BDA50D /* AddHealthPoint.h */,
+				3747FF1F17FD1F5F00BDA50D /* AddHealthPoint.m */,
+				37DEF20117FABF6C004A2024 /* AddCharacterSum.h */,
+				37DEF20217FABF6C004A2024 /* AddCharacterSum.m */,
+				3747FF2117FD260100BDA50D /* AddMana.h */,
+				3747FF2217FD260200BDA50D /* AddMana.m */,
+				3747FF2717FD29EC00BDA50D /* AddReward.h */,
+				3747FF2817FD29ED00BDA50D /* AddReward.m */,
+				37DFBF3B1803AB4F003B650D /* AddAttack2.h */,
+				37DFBF3C1803AB4F003B650D /* AddAttack2.m */,
+				37DFBF3E1803AF41003B650D /* AddDefense2.h */,
+				37DFBF3F1803AF41003B650D /* AddDefense2.m */,
+				37DFBF411803AF74003B650D /* AddAgile2.h */,
+				37DFBF421803AF75003B650D /* AddAgile2.m */,
+				37DFBF441803AF8B003B650D /* AddSpeed2.h */,
+				37DFBF451803AF8B003B650D /* AddSpeed2.m */,
+				37DFBF471803AFA0003B650D /* AddHealthPoint2.h */,
+				37DFBF481803AFA1003B650D /* AddHealthPoint2.m */,
+			);
+			name = OrbSkill;
 			sourceTree = "<group>";
 		};
 		37DF1A9F1761EBFA009042CB /* Range */ = {
@@ -2109,6 +2250,18 @@
 				37DD0F5517A15998004595BD /* black_arrow@2x.png */,
 				37EC99A517B107CA00B8F4DE /* SummonMagic_button.png */,
 				37EC99A617B107CA00B8F4DE /* SummonMagic_button@2x.png */,
+				3763DFE91811143C005F00CE /* Hp_button.png */,
+				3763DFEA1811143C005F00CE /* mana_button.png */,
+				3763DFEB1811143C005F00CE /* mana_button@2x.png */,
+				3763DFEC1811143C005F00CE /* AttackUp_button.png */,
+				3763DFED1811143C005F00CE /* Cleansing_button.png */,
+				3763DFEE1811143D005F00CE /* Hp_button@2x.png */,
+				3763DFEF1811143D005F00CE /* CleanseMagic_button.png */,
+				3763DFF01811143D005F00CE /* Paralysis_button.png */,
+				3763DFF11811143D005F00CE /* AttackUp_button@2x.png */,
+				3763DFF21811143D005F00CE /* CleanseMagic_button@2x.png */,
+				3763DFF31811143D005F00CE /* Cleansing_button@2x.png */,
+				3763DFF41811143D005F00CE /* Paralysis_button@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2660,8 +2813,6 @@
 				37D97D35177198F600A2A7D6 /* MovePathComponent.m */,
 				376D3209177854B700949015 /* InformationComponent.h */,
 				376D320A177854B700949015 /* InformationComponent.m */,
-				37D498261786B1B100413D56 /* MagicSkillComponent.h */,
-				37D498271786B1B100413D56 /* MagicSkillComponent.m */,
 				3750F4F31785B490009E2689 /* MagicComponent.h */,
 				3750F4F41785B491009E2689 /* MagicComponent.m */,
 				3750F4F61785B5A4009E2689 /* MaskComponent.h */,
@@ -2676,6 +2827,8 @@
 				370AFE7B17E1B95200E369C9 /* SkullOrbComponent.m */,
 				9BF6E71B17F2B7B2004BEA45 /* GroupComponent.h */,
 				9BF6E71C17F2B7B2004BEA45 /* GroupComponent.m */,
+				37B1515C18067AEF0049471D /* ItemComponent.h */,
+				37B1515D18067AEF0049471D /* ItemComponent.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3399,6 +3552,7 @@
 		9BFFAE60163E9D8A00073DC5 /* Skill */ = {
 			isa = PBXGroup;
 			children = (
+				37DEF1F717FAAAE1004A2024 /* OrbSkill */,
 				37486B36178195060011F3DB /* Magic */,
 				9B2C786B169ADA7E00CA1A1C /* Aura */,
 				9BE01A351695E21600B9C427 /* ActiveSkill */,
@@ -3684,6 +3838,18 @@
 				3765683917E6F788000865EF /* fly_bear.json in Resources */,
 				3765683A17E6F788000865EF /* fly_bear.png in Resources */,
 				3765683B17E6F788000865EF /* fly_bear2.png in Resources */,
+				3763DFF51811143D005F00CE /* Hp_button.png in Resources */,
+				3763DFF61811143D005F00CE /* mana_button.png in Resources */,
+				3763DFF71811143D005F00CE /* mana_button@2x.png in Resources */,
+				3763DFF81811143D005F00CE /* AttackUp_button.png in Resources */,
+				3763DFF91811143D005F00CE /* Cleansing_button.png in Resources */,
+				3763DFFA1811143D005F00CE /* Hp_button@2x.png in Resources */,
+				3763DFFB1811143D005F00CE /* CleanseMagic_button.png in Resources */,
+				3763DFFC1811143D005F00CE /* Paralysis_button.png in Resources */,
+				3763DFFD1811143D005F00CE /* AttackUp_button@2x.png in Resources */,
+				3763DFFE1811143D005F00CE /* CleanseMagic_button@2x.png in Resources */,
+				3763DFFF1811143D005F00CE /* Cleansing_button@2x.png in Resources */,
+				3763E0001811143D005F00CE /* Paralysis_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3835,7 +4001,6 @@
 				9B27D6AE17832F020012E126 /* KnockOutComponent.m in Sources */,
 				3750F4F51785B494009E2689 /* MagicComponent.m in Sources */,
 				3750F4F81785B5A9009E2689 /* MaskComponent.m in Sources */,
-				37D498281786B1B100413D56 /* MagicSkillComponent.m in Sources */,
 				370243E217903FE1008267A8 /* ExampleLayer.m in Sources */,
 				378451F5179648FE0074F718 /* CCSkeleton.m in Sources */,
 				378451F6179648FE0074F718 /* CCSkeletonAnimation.m in Sources */,
@@ -3888,6 +4053,29 @@
 				9B93275A180F94350063A667 /* SharedMenuLayer.m in Sources */,
 				9BDBB08D17E716750089AE21 /* MinionAIStateWalk.m in Sources */,
 				9BDBB09017E7190C0089AE21 /* MinionAIState.m in Sources */,
+				37DEF1FA17FAAB05004A2024 /* OrbSkill.m in Sources */,
+				37DEF1FD17FAB251004A2024 /* AddAttack.m in Sources */,
+				37DEF20017FAB7A3004A2024 /* AddDefense.m in Sources */,
+				37DEF20317FABF6C004A2024 /* AddCharacterSum.m in Sources */,
+				3747FF2017FD1F6000BDA50D /* AddHealthPoint.m in Sources */,
+				3747FF2317FD260200BDA50D /* AddMana.m in Sources */,
+				3747FF2917FD29F000BDA50D /* AddReward.m in Sources */,
+				3747FF2C17FD4C1600BDA50D /* AddAgile.m in Sources */,
+				3747FF2F17FD4C8700BDA50D /* AddSpeed.m in Sources */,
+				3747FF3217FD612100BDA50D /* OrbSkillData.m in Sources */,
+				37DFBF3D1803AB4F003B650D /* AddAttack2.m in Sources */,
+				37DFBF401803AF42003B650D /* AddDefense2.m in Sources */,
+				37DFBF431803AF75003B650D /* AddAgile2.m in Sources */,
+				37DFBF461803AF8C003B650D /* AddSpeed2.m in Sources */,
+				37DFBF491803AFA1003B650D /* AddHealthPoint2.m in Sources */,
+				37B1515E18067AEF0049471D /* ItemComponent.m in Sources */,
+				3737E9831807C87D00698B7D /* AllHeal.m in Sources */,
+				37DDB6B1180F92E000660643 /* AllAttackUp.m in Sources */,
+				37DDB6B4180F9E0800660643 /* AllCleanse.m in Sources */,
+				37DDB6B7180FCE0C00660643 /* AddManaByItem.m in Sources */,
+				37DDB6BA180FEE6300660643 /* ParalysisMagic.m in Sources */,
+				37DDB6BD180FF07600660643 /* RangeCleanseMagic.m in Sources */,
+				373641791818C89C0028C137 /* ItemData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

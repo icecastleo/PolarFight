@@ -37,6 +37,10 @@
 #import "BattleCatMapLayer.h"
 #import "ThreeLineMapLayer.h"
 
+#import "CharacterInitData.h"
+#import "EnemyData.h"
+#import "OrbSkill.h"
+
 typedef enum {
     kBattleStatusWait,
     kBattleStatusOrb,
@@ -54,6 +58,8 @@ typedef enum {
     
     BattleStatus status;
     OrbBoardComponent *board;
+    
+    NSArray *activeSkills;
     
     float fightTime;
 }
@@ -91,7 +97,8 @@ typedef enum {
         //        dPadLayer = [DPadLayer node];
         //        [self addChild:dPadLayer];
         
-        statusLayer = [[RoundBattleStatusLayer alloc] init];
+//        statusLayer = [[RoundBattleStatusLayer alloc] init];
+        statusLayer = [[RoundBattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
@@ -166,18 +173,64 @@ typedef enum {
     }
     
     if (status == kBattleStatusPrepareFight) {
-        [entityFactory createGroupCharacter:@"001" withCount:20 forTeam:1];
-        [entityFactory createGroupCharacter:@"002" withCount:20 forTeam:1];
-        [entityFactory createGroupCharacter:@"003" withCount:20 forTeam:1];
-        [entityFactory createGroupCharacter:@"004" withCount:20 forTeam:1];
-        [entityFactory createGroupCharacter:@"101" withCount:20 forTeam:2];
-        [entityFactory createGroupCharacter:@"102" withCount:20 forTeam:2];
-        [entityFactory createGroupCharacter:@"103" withCount:20 forTeam:2];
-        [entityFactory createGroupCharacter:@"104" withCount:20 forTeam:2];
-        [entityFactory createGroupCharacter:@"105" withCount:20 forTeam:2];
-        [entityFactory createGroupCharacter:@"106" withCount:20 forTeam:2];
         
-        [entityFactory createGroupCharacter:@"201" withCount:20 forTeam:1];
+        [statusLayer setMagicButton];
+        [statusLayer setItemButton];
+        
+        PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
+        
+        NSDictionary *orbInfo = [playerCom orbInfo];
+        for (NSString *key in orbInfo) {
+            NSNumber *sum = [orbInfo objectForKey:key];
+            CCLOG(@"color:%@, sum:%d",key,sum.intValue);
+        }
+        
+        activeSkills = [playerCom activeSkills];
+        
+        int bonusCount = 0;
+        float bonusMana = 0;
+        for (OrbSkill *orbSkill in activeSkills) {
+            if (orbSkill.skillType == OrbSkillTypePrepareBattle) {
+                if ([orbSkill respondsToSelector:@selector(characterBonusCount)]) {
+                    bonusCount += [orbSkill characterBonusCount];
+                }
+                if ([orbSkill respondsToSelector:@selector(bonusMana)]) {
+                    bonusMana += [orbSkill bonusMana];
+                }
+            }
+        }
+        
+        //FIXME: suppose the max of mana is 100
+        int maxMana = 100;
+        playerCom.mana += maxMana * bonusMana;
+        CCLOG(@"Add Mana: from %f to %f",playerCom.mana-maxMana * bonusMana,playerCom.mana);
+        [statusLayer.manaLabel setString:[NSString stringWithFormat:@"%d", (int)playerCom.mana]];
+        
+        // create characters from user battleTeam.
+        NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
+        for (int i=0; i<battleTeamInitData.count; i++) {
+            int count = [[orbInfo objectForKey:[NSNumber numberWithInt:i+1]] intValue];
+            CharacterInitData *data = [battleTeamInitData objectAtIndex:i];
+            NSArray *groupEntities = [entityFactory createGroupCharacter:data.cid withCount:count forTeam:kPlayerTeam BonusCount:bonusCount];
+            
+            for (Entity *entity in groupEntities) {
+                for (OrbSkill *orbSkill in activeSkills) {
+                    if (orbSkill.skillType == OrbSkillTypePrepareBattle && [orbSkill respondsToSelector:@selector(affectOnEntity:)]) {
+                        [orbSkill affectOnEntity:entity];
+                    }
+                }
+            }
+        }
+        
+        // create characters from battleData.
+        NSArray *enemies = self.battleData.enemyCharacterDatas;
+        for (int i=0; i<enemies.count; i++) {
+            EnemyData *data = [enemies objectAtIndex:i];
+            
+            //FIXME:count might load from battleData.
+            [entityFactory createGroupCharacter:data.cid withCount:20 forTeam:kEnemyTeam BonusCount:0];
+        }
+        
         status = kBattleStatusWait;
         
         [self runAction:[CCSequence actions:
@@ -196,6 +249,8 @@ typedef enum {
     if (status == kBattleStatusFight) {
         fightTime += delta;
         [statusLayer.timeLabel setString:[NSString stringWithFormat:@"%d", (int)fightTime]];
+        PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
+        [statusLayer.manaLabel setString:[NSString stringWithFormat:@"%d", (int)playerCom.mana]];
         
         for (System *system in systems) {
             [system update:delta];
@@ -212,26 +267,37 @@ typedef enum {
     if (userPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Lose!!" withColor:ccWHITE];
         [self unscheduleUpdate];
+        [statusLayer removeChildByTag:kPauseMenuTag cleanup:YES];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     } else if (enemyPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Win!!" withColor:ccWHITE];
         
+        //FIXME: calculate the Reward.
+        int coins = 1000;
+        for (OrbSkill *orbSkill in activeSkills) {
+            if (orbSkill.skillType == OrbSkillTypeAfterBattle) {
+                if ([orbSkill respondsToSelector:@selector(bonusReward)]) {
+                    coins += coins*[orbSkill bonusReward];
+                }
+            }
+        }
+        CCLOG(@"You get %d coins!",coins);
+        
         [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_completed"]] Value:1];
         
         //FIXME: calculate the number of star.
-        int stars = 2; // fix it.
+        int stars = 2;
         int oldStars = [[FileManager sharedFileManager].achievementManager getValueFromProperty:[battleName stringByAppendingString:@"_star"]];
         
-        [[FileManager sharedFileManager].achievementManager resetPropertiesWithTags:@[battleName,@"star"]];
         if (oldStars < stars) {
+            [[FileManager sharedFileManager].achievementManager resetPropertiesWithTags:@[battleName,@"star"]];
             [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:stars];
-        } else {
-            [[FileManager sharedFileManager].achievementManager addValueForPropertyNames:@[[battleName stringByAppendingString:@"_star"]] Value:oldStars];
         }
         
         [[FileManager sharedFileManager].achievementManager checkAchievementsForTags:nil];
         
         [self unscheduleUpdate];
+        [statusLayer removeChildByTag:kPauseMenuTag cleanup:YES];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     }
 }

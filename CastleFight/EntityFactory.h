@@ -22,7 +22,9 @@
 
 -(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team;
 -(Entity *)createCharacter:(NSString *)cid level:(int)level forTeam:(int)team scale:(float)scale;
--(void)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team;
+
+-(NSArray *)createGroupCharacter:(NSString *)cid withCount:(int)count forTeam:(int)team BonusCount:(int)bonusCount;
+
 -(Entity *)createCastleForTeam:(int)team;
 
 -(Entity *)createUserPlayerForTeam:(int)team;
@@ -33,5 +35,7 @@
 -(Entity *)createOrbBoardWithUser:(Entity *)player AIPlayer:(Entity *)aiPlayer andBattleData:(BattleDataObject *)battleData;
 
 -(Entity *)createProjectileEntityWithEvent:(ProjectileEvent *)event forTeam:(int)team;
+
+-(Entity *)createItemButton:(NSString *)cid count:(int)count;
 
 @end

@@ -32,9 +32,6 @@
     NSDictionary *randomOrbs;
     NSDictionary *currentPatternData;
     NSDictionary *allOrbRatioDic;
-    
-    // for record
-    NSMutableDictionary *matchOrbRecord;
 }
 
 @end
@@ -65,8 +62,6 @@
         NSMutableDictionary *allDic = [NSMutableDictionary dictionaryWithDictionary:battleData.playerOrbs];
         [allDic addEntriesFromDictionary:battleData.enemyOrbs];
         allOrbRatioDic = allDic;
-                
-        matchOrbRecord = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -204,31 +199,6 @@
 
 #pragma mark Record & Show Combos
 // might move to other place
--(void)addToRecord:(NSDictionary *)matchDic {
-    NSMutableArray *allOrbs = [[NSMutableArray alloc] initWithArray:[matchDic objectForKey:kOrbMainMatch]];
-    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbSameColorMatch]];
-    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbEnemyMatch]];
-    [allOrbs addObjectsFromArray:[matchDic objectForKey:kOrbOtherMatch]];
-    
-    for (Entity *orb in allOrbs) {
-        OrbComponent *orbCom = (OrbComponent *)[orb getComponentOfName:[OrbComponent name]];
-        
-        NSNumber *number = [matchOrbRecord objectForKey:[NSString stringWithFormat:@"%d",orbCom.color]];
-        if (!number) {
-            number = [[NSNumber alloc] initWithInt:1];
-        }else {
-            number = [[NSNumber alloc] initWithInt:number.intValue+1];
-        }
-        [matchOrbRecord setValue:number forKey:[NSString stringWithFormat:@"%d",orbCom.color]];
-    }
-    
-    for (NSString *key in matchOrbRecord) {
-        NSNumber *sum = [matchOrbRecord objectForKey:key];
-        CCLOG(@"color:%@, sum:%d",key,sum.intValue);
-    }
-    
-    [self showCombos];
-}
 
 -(void)showCombos {
     
