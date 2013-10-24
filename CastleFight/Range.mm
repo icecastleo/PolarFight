@@ -10,7 +10,6 @@
 #import "Entity.h"
 #import "TeamComponent.h"
 #import "RenderComponent.h"
-#import "CollisionComponent.h"
 #import "DirectionComponent.h"
 #import "DefenderComponent.h"
 #import "Box2D.h"

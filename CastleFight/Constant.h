@@ -40,14 +40,17 @@
 #define kMapPathMaxLine 3
 #define kMapStartDistance 50
 
-// For Character make collision CGPath
-#define kCollisionPointRange 25
+#define kMinionAttributeRatio 0.3
 
 // The lower the value the higher the priority
 // It is not used since 'SneakyJoystick' is a library
 #define kTouchPriotiryDpad 1
 #define kTouchPriorityTouchSystem 2
 #define kTouchPriorityMap 3
+
+//#define kCCScissorLayerTouchPriority = kCCMenuHandlerPriority-10,
+#define kTouchPriorityMask kCCMenuHandlerPriority-1
+
 
 // For Aura and PassiveSkill
 #define kAuraInterval 0.4

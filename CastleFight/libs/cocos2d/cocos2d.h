@@ -188,6 +188,7 @@
 #import "SimpleAudioEngine+VibrateExtend.h"
 #import "CCShake.h"
 #import "CCUntouchableLayer.h"
+#import "CCScissorLayer.h"
 
 
 #ifdef __cplusplus

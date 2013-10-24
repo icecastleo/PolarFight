@@ -74,6 +74,10 @@
         
         CCMenu *menu = [CCMenu menuWithItems:back, next, market, free, nil];
         menu.position = ccp(0, 0);
+        
+        // Because it is out from a scissor layer range!
+        [menu setTouchPriority:kCCScissorLayerTouchPriority-1];
+        
         [background addChild:menu];
     }
     return self;

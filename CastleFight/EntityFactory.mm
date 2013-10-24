@@ -31,7 +31,6 @@
 #import "PlayerComponent.h"
 #import "AIStateEnemyPlayer.h"
 #import "SummonComponent.h"
-#import "CollisionComponent.h"
 #import "ProjectileComponent.h"
 #import "PassiveComponent.h"
 #import "HeroComponent.h"
@@ -170,8 +169,6 @@
     defenseCom.bloodSprite = [[CharacterBloodSprite alloc] initWithEntity:entity];
     
     [entity addComponent:[[ProjectileComponent alloc] init]];
-    
-    [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     
     // FIXME: Add price to character data
     [entity addComponent:[[UpgradePriceComponent alloc]
@@ -460,8 +457,6 @@
     
     defenseCom.armorType = kArmorNoraml;
     defenseCom.bloodSprite = [[CastleBloodSprite alloc] initWithEntity:entity];
-    
-    [entity addComponent:[[CollisionComponent alloc] initWithBoundingBox:sprite.boundingBox]];
     
     [entity addComponent:[[DirectionComponent alloc] initWithType:kDirectionTypeLeftRight velocity:ccp(team == kPlayerTeam ? 1 : -1, 0)]];
     

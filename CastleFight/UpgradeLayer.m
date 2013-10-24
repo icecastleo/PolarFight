@@ -1,27 +1,36 @@
 //
-//  ShopLayer.m
+//  StoreLayer.m
 //  CastleFight
 //
-//  Created by 朱 世光 on 13/3/29.
+//  Created by 朱 世光 on 13/10/18.
 //
 //
 
-#import "ShopLayer.h"
-#import "CCScrollNode.h"
-#import "ShopUnitLayer.h"
+#import "UpgradeLayer.h"
+#import "UpgradeUnits.h"
 
-@implementation ShopLayer
+@interface UpgradeLayer() {
+    CGRect childRect;
+    CGPoint childPosition;
+}
+@end
+
+@implementation UpgradeLayer
+
+static int childTag = 333;
 
 -(id)init {
-    if (self = [super init]) {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    if (self = [super initWithRect:CGRectMake(winSize.width/8, 0, winSize.width/4*3, winSize.height)]) {
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"button.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"shopbutton.plist"];
         
-        CGSize winSize = [CCDirector sharedDirector].winSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"bg/shop/bg_shop_back.png"];
-        background.anchorPoint = ccp(0.5, 0);
-        background.position = ccp(winSize.width / 2, 0);
-        [self addChild:background];
+        CCLabelTTF *titile = [CCLabelTTF labelWithString:@"Store" fontName:@"Symbol" fontSize:20];
+        titile.position = ccp(self.frame.boundingBox.size.width/2, self.frame.boundingBox.size.height - titile.boundingBox.size.height);
+        [self.frame addChild:titile];
+        
         
         CCMenuItemSprite *unit = [[CCMenuItemSprite alloc]
                                   initWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"bt_unit_off_up.png"]
@@ -43,44 +52,67 @@
                                   disabledSprite:nil
                                   target:self selector:@selector(click:)];
         item.tag = 3;
-
+        
         CCMenu *menu = [CCMenu menuWithItems:unit, hero, item, nil];
-        menu.position = ccp(winSize.width/2 - 240 + unit.boundingBox.size.width/2, winSize.height - 50 - unit.boundingBox.size.height/2 * menu.children.count);
+        menu.position = ccp(unit.boundingBox.size.width/2, titile.position.y - titile.boundingBox.size.height - unit.boundingBox.size.height/2 * menu.children.count);
         [menu alignItemsVerticallyWithPadding:0];
+        [menu setTouchPriority:NSIntegerMin];
+        [self.frame addChild:menu];
         
-        // Because it is out from a scissor layer range!
-        [menu setTouchPriority:kCCScissorLayerTouchPriority-1];
-        [self addChild:menu];
+        selectedMenuItem = unit;
         
-        current = unit;
+        childRect = CGRectMake(winSize.width/8 + unit.boundingBox.size.width, 0, winSize.width/4*3 - unit.boundingBox.size.width, winSize.height - titile.boundingBox.size.height*2);
+        childPosition = ccp(unit.boundingBox.size.width, titile.position.y - titile.boundingBox.size.height);
         
-        ShopUnitLayer *unitLayer = [[ShopUnitLayer alloc] init];
-        [self addChild:unitLayer];
+        UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
+        units.position = childPosition;
+        [self.frame addChild:units z:0 tag:childTag];
+
     }
     return self;
 }
 
 -(void)click:(CCMenuItemSprite *)sender {
-    if (sender != current) {
-        [self setMenuItem:sender unclick:current];
-        current = sender;
+    if (sender != selectedMenuItem) {
+        [self click:sender unclick:selectedMenuItem];
+        selectedMenuItem = sender;
     }
 }
 
--(void)setMenuItem:(CCMenuItemSprite *)click unclick:(CCMenuItemSprite *)unclick {
+-(void)click:(CCMenuItemSprite *)click unclick:(CCMenuItemSprite *)unclick {
+    [self.frame removeChildByTag:childTag];
+    
     switch (click.tag) {
-        case 1:
+        case 1: {
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_unit_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_unit_off_down.png"];
+            
+            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
+            
             break;
-        case 2:
+        }
+        case 2: {
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_hero_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_hero_off_down.png"];
+            
+            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
+            
             break;
-        case 3:
+        }
+        case 3: {
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_item_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_item_off_down.png"];
+            
+            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
+
             break;
+        }
     }
     
     switch (unclick.tag) {
@@ -98,5 +130,6 @@
             break;
     }
 }
+
 
 @end

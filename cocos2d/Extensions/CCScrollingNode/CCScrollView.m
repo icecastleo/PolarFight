@@ -11,7 +11,7 @@
 
 @implementation UIImageView (ForScrollView)
 
-- (void) setAlpha:(float)alpha {
+-(void)setAlpha:(float)alpha {
     
     if (self.superview.tag == noDisableVerticalScrollTag) {
         if (alpha == 0 && self.autoresizingMask == UIViewAutoresizingFlexibleLeftMargin) {

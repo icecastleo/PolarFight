@@ -17,6 +17,8 @@
 #import "FileManager.h"
 #import "ExampleLayer.h"
 #import "RoundBattleController.h"
+#import "SharedFrameSprite.h"
+#import "MenuScene.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -111,7 +113,12 @@
         CCAction *shake = [CCShake actionWithDuration:5.0 amplitude:ccp(5, 5)];
         [self runAction:shake];
         
-        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, testMenuItem2, nil];
+        CCMenuItemFont *abc = [CCMenuItemFont itemWithString:@"Test!" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[[MenuScene alloc] init]];
+        }];
+        abc.position = ccp(size.width/2, size.height/2);
+        
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, testMenuItem2, abc, nil];
         menu.position = CGPointZero;
         
         [self addChild:menu];

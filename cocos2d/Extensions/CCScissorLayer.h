@@ -13,6 +13,14 @@
     CGRect pixelRect;
 }
 
+enum {
+	//* priority used by the menu for the event handler
+	kCCScissorLayerTouchPriority = kCCMenuHandlerPriority-10,
+};
+
 -(id)initWithRect:(CGRect)aRect;
+
+@property BOOL verticalScissor;
+@property BOOL horizontalScissor;
 
 @end

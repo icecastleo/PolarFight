@@ -154,6 +154,7 @@ const static float attack_max = 200.0;
         menu = [[CCMenu alloc] init];
         menu.position = ccp(0, 0);
         [menu addChild:upgrade];
+        [menu setTouchPriority:kCCScissorLayerTouchPriority+1];
         [self addChild:menu];
         
         CCSprite *diamond = [CCSprite spriteWithSpriteFrameName:@"dia.png"];
@@ -169,13 +170,6 @@ const static float attack_max = 200.0;
         [self addChild:diamond_font];
     }
     return self;
-}
-
--(void)onEnter {
-    [super onEnter];
-    
-    // FIXME: We assume it is in a CCScissorLayer
-    [menu setHandlerPriority:kCCMenuHandlerPriority+2];
 }
 
 -(void)upgrade {
