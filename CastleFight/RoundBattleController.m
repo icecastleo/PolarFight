@@ -267,6 +267,7 @@ typedef enum {
     if (userPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Lose!!" withColor:ccWHITE];
         [self unscheduleUpdate];
+        [statusLayer removeChildByTag:kPauseMenuTag cleanup:YES];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     } else if (enemyPlayer.armiesCount == 0) {
         [statusLayer displayString:@"Win!!" withColor:ccWHITE];
@@ -296,6 +297,7 @@ typedef enum {
         [[FileManager sharedFileManager].achievementManager checkAchievementsForTags:nil];
         
         [self unscheduleUpdate];
+        [statusLayer removeChildByTag:kPauseMenuTag cleanup:YES];
         [self performSelector:@selector(endBattle) withObject:nil afterDelay:3.0];
     }
 }

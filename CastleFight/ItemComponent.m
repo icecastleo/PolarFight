@@ -14,7 +14,6 @@
 @interface ItemComponent()
 {
     RenderComponent *renderCom;
-    TouchComponent *touchCom;
 }
 
 @end
@@ -53,6 +52,10 @@
     
     CCLOG(@"%@ active count:%d",self.name,self.count);
     
+    if (!renderCom) {
+        renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
+    }
+    
     CCLabelTTF *oldLabel = (CCLabelTTF *)[renderCom.node getChildByTag:kCountLabelTag];
     
     CCLabelTTF *label = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",self.count] fntFile:@"WhiteFont.fnt"];
@@ -68,32 +71,8 @@
     }
 }
 
--(void)handleTap:(TapState)state {
-    if (!renderCom) {
-        renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
-    }
-    if ([renderCom.node getChildByTag:kSelectedImageTag]) {
-        [renderCom.node removeChildByTag:kSelectedImageTag cleanup:YES];
-    }
-    
-    if (state == kTapStateBegan) {
-        CCLOG(@"kTapStateBegan");
-        if (!touchCom) {
-            touchCom = (TouchComponent *)[self.entity getComponentOfName:[TouchComponent name]];
-        }
-        [renderCom.node addChild:touchCom.selectedSprite z:0 tag:kSelectedImageTag];
-    }else if (state == kTapStateEnded) {
-        CCLOG(@"kTapStateEnded");
-        [self active];
-    }
-}
-
--(void)handlePan:(PanState)state positions:(NSArray *)positions {
-    if (state == kPanStateEnded) {
-        if ([renderCom.node getChildByTag:kSelectedImageTag]) {
-            [renderCom.node removeChildByTag:kSelectedImageTag cleanup:YES];
-        }
-    }
+-(void)handleTap {
+    [self active];
 }
 
 @end

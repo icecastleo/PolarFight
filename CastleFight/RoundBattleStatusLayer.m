@@ -71,7 +71,7 @@
     
     CCMenu *pauseMenu = [CCMenu menuWithItems:pauseMenuItem, nil];
     pauseMenu.position = CGPointZero;
-    [self addChild:pauseMenu];
+    [self addChild:pauseMenu z:0 tag:kPauseMenuTag];
 }
 
 -(void)pauseButtonTapped:(id)sender {

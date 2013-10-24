@@ -21,8 +21,7 @@
         _touchable = YES;
         
         _canSelect = [[dic objectForKey:@"canSelect"] boolValue];
-        _selectedSprite = [CCSprite spriteWithFile:[dic objectForKey:@"selectedImage"]];
-//        _hasDragLine = [[dic objectForKey:@"hasDragLine"] boolValue];
+        _touchSprite = [CCSprite spriteWithFile:[dic objectForKey:@"touchedImage"]];
         _dragImage1 = [dic objectForKey:@"dragImage1"];
         _dragImage2 = [dic objectForKey:@"dragImage2"];
     }

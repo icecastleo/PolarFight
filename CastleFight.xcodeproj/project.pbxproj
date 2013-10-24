@@ -117,6 +117,7 @@
 		372526C016EF68D800C79A9E /* shopbutton.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 372526B816EF68D800C79A9E /* shopbutton.pvr.ccz */; };
 		3730815116F7550800F1F7EE /* BattleDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815016F7550800F1F7EE /* BattleDataObject.m */; };
 		3730815416F7578100F1F7EE /* UserDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3730815316F7578100F1F7EE /* UserDataObject.m */; };
+		373641791818C89C0028C137 /* ItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = 373641781818C89C0028C137 /* ItemData.m */; };
 		3737E9831807C87D00698B7D /* AllHeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737E9821807C87D00698B7D /* AllHeal.m */; };
 		374140091772EE1C00E6365A /* AIStateHeroIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D07E0C81702E2E80028C492 /* AIStateHeroIdle.m */; };
 		3741400C1772F49F00E6365A /* AIStateHeroAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3741400B1772F49F00E6365A /* AIStateHeroAttack.m */; };
@@ -751,6 +752,8 @@
 		3730815016F7550800F1F7EE /* BattleDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleDataObject.m; sourceTree = "<group>"; };
 		3730815216F7578100F1F7EE /* UserDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataObject.h; sourceTree = "<group>"; };
 		3730815316F7578100F1F7EE /* UserDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataObject.m; sourceTree = "<group>"; };
+		373641771818C89C0028C137 /* ItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemData.h; sourceTree = "<group>"; };
+		373641781818C89C0028C137 /* ItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemData.m; sourceTree = "<group>"; };
 		3737E9811807C87D00698B7D /* AllHeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHeal.h; sourceTree = "<group>"; };
 		3737E9821807C87D00698B7D /* AllHeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHeal.m; sourceTree = "<group>"; };
 		3741400A1772F49F00E6365A /* AIStateHeroAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateHeroAttack.h; sourceTree = "<group>"; };
@@ -1862,6 +1865,8 @@
 				37DCA5C816F1CBD90006D656 /* FileManager.m */,
 				3747FF3017FD612100BDA50D /* OrbSkillData.h */,
 				3747FF3117FD612100BDA50D /* OrbSkillData.m */,
+				373641771818C89C0028C137 /* ItemData.h */,
+				373641781818C89C0028C137 /* ItemData.m */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -4002,6 +4007,7 @@
 				37DDB6B7180FCE0C00660643 /* AddManaByItem.m in Sources */,
 				37DDB6BA180FEE6300660643 /* ParalysisMagic.m in Sources */,
 				37DDB6BD180FF07600660643 /* RangeCleanseMagic.m in Sources */,
+				373641791818C89C0028C137 /* ItemData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

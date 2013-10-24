@@ -12,6 +12,7 @@
 #import "Achievement.h"
 #import "PlistDictionaryInitialing.h"
 #import "OrbSkillData.h"
+#import "ItemData.h"
 
 #define kMoneyTrickValue 1000
 
@@ -72,7 +73,7 @@
         _magicProperties = [self convertArray:[plist objectForKey:kMagicProperties] className:[Property class]];
         
         //FIXME: [CharacterDataObject class] change to item class?
-        _items = [plist objectForKey:kItems];
+        _items = [self convertArray:[plist objectForKey:kItems] className:[ItemData class]];
         _itemsInBattle = [plist objectForKey:kItemsInBattle];
     }
     return self;

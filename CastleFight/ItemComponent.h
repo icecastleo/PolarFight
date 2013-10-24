@@ -11,6 +11,7 @@
 
 @interface ItemComponent : Component <TouchComponentDelegate>
 
+@property (nonatomic) NSString *itemId;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSDictionary *images;
 @property (nonatomic, readonly) NSString *effect;

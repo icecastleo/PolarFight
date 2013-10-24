@@ -1508,7 +1508,7 @@
 		</dict>
 		<key>TouchComponent</key>
 		<dict>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -1589,7 +1589,7 @@
 		</dict>
 		<key>TouchComponent</key>
 		<dict>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -1676,7 +1676,7 @@
 			<string>yellow_arrow.png</string>
 			<key>dragImage2</key>
 			<string>yellow_arrow.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>rainbowCircle.png</string>
 		</dict>
 		<key>AIComponent</key>
@@ -2571,7 +2571,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2629,7 +2629,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2687,7 +2687,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2745,7 +2745,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2803,7 +2803,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2852,7 +2852,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>InformationComponent</key>
@@ -2896,7 +2896,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>OrbComponent</key>
@@ -2923,7 +2923,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2957,7 +2957,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -2991,7 +2991,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3025,7 +3025,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3059,7 +3059,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3093,7 +3093,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3127,7 +3127,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3179,7 +3179,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3216,7 +3216,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3253,7 +3253,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>
@@ -3290,7 +3290,7 @@
 			<string>rangeFrame_1.png</string>
 			<key>dragImage2</key>
 			<string>rangeFrame_2.png</string>
-			<key>selectedImage</key>
+			<key>touchedImage</key>
 			<string>gold_frame.png</string>
 		</dict>
 		<key>RenderComponent</key>

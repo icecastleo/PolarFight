@@ -82,7 +82,9 @@
         [renderCom.node.parent addChild:line z:0 tag:kDrawPathTag];
 
     } else if (state == kPanStateEnded) {
-        [self activeWithPath:positions];
+        if (!CGRectContainsPoint(renderCom.sprite.boundingBox, [renderCom.sprite.parent convertToNodeSpace:[[positions lastObject] CGPointValue]])) {
+            [self activeWithPath:positions];
+        }
     }
 }
 

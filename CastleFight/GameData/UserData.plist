@@ -134,6 +134,20 @@
 			<integer>1</integer>
 		</dict>
 	</array>
+	<key>itemsInBattle</key>
+	<array>
+		<string>2001</string>
+		<string>2002</string>
+		<string>2004</string>
+		<string>2003</string>
+	</array>
+	<key>magicInBattle</key>
+	<array>
+		<string>901</string>
+		<string>902</string>
+		<string>905</string>
+		<string>904</string>
+	</array>
 	<key>items</key>
 	<array>
 		<dict>
@@ -161,24 +175,15 @@
 			<integer>3</integer>
 		</dict>
 	</array>
-	<key>itemsInBattle</key>
-	<array>
-		<integer>0</integer>
-		<integer>1</integer>
-		<integer>2</integer>
-		<integer>3</integer>
-	</array>
-	<key>magicTeam</key>
+	<key>achievements</key>
 	<array>
 		<dict>
 			<key>name</key>
-			<string>901</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
+			<string>01_01</string>
 			<key>message</key>
-			<string>901 is unlocked.</string>
+			<string>1-1 is unlocked.</string>
 			<key>content</key>
-			<string>Magic 901 is unlocked</string>
+			<string>Battle 1-1.</string>
 			<key>unLocked</key>
 			<true/>
 			<key>propertyNames</key>
@@ -186,53 +191,48 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>902</string>
-			<key>maxLevel</key>
-			<integer>3</integer>
+			<string>01_02</string>
 			<key>message</key>
-			<string>902 is unlocked.</string>
+			<string>Congratulations, You&apos;ve Just Passed 1-1. 1-2 is unlocked.</string>
 			<key>content</key>
-			<string>Magic 902 is unlocked</string>
+			<string>Battle 1-2.</string>
 			<key>unLocked</key>
-			<true/>
+			<false/>
 			<key>propertyNames</key>
-			<array/>
+			<array>
+				<string>01_01_completed</string>
+			</array>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>904</string>
-			<key>maxLevel</key>
-			<integer>10</integer>
+			<string>AllCompleted</string>
 			<key>message</key>
-			<string>904 is unlocked.</string>
+			<string>Congratulations, You are great.</string>
 			<key>content</key>
-			<string>Magic 904 is unlocked</string>
+			<string>Please Pass All Battle and Get All Stars.</string>
 			<key>unLocked</key>
-			<true/>
+			<false/>
 			<key>propertyNames</key>
-			<array/>
+			<array>
+				<string>01_01_completed</string>
+				<string>01_02_completed</string>
+			</array>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>905</string>
-			<key>maxLevel</key>
-			<integer>10</integer>
+			<string>AllStars</string>
 			<key>message</key>
-			<string>905 is unlocked.</string>
+			<string>Congratulations, You are great.</string>
 			<key>content</key>
-			<string>Magic 905 is unlocked</string>
+			<string>Please Pass All Battle and Get All Stars.</string>
 			<key>unLocked</key>
-			<true/>
+			<false/>
 			<key>propertyNames</key>
-			<array/>
+			<array>
+				<string>01_01_star</string>
+				<string>01_02_star</string>
+			</array>
 		</dict>
-	</array>
-	<key>magicInBattle</key>
-	<array>
-		<integer>0</integer>
-		<integer>1</integer>
-		<integer>2</integer>
-		<integer>3</integer>
 	</array>
 	<key>properties</key>
 	<array>
@@ -541,15 +541,17 @@
 			</array>
 		</dict>
 	</array>
-	<key>achievements</key>
+	<key>magicTeam</key>
 	<array>
 		<dict>
 			<key>name</key>
-			<string>01_01</string>
+			<string>901</string>
+			<key>maxLevel</key>
+			<integer>3</integer>
 			<key>message</key>
-			<string>1-1 is unlocked.</string>
+			<string>901 is unlocked.</string>
 			<key>content</key>
-			<string>Battle 1-1.</string>
+			<string>Magic 901 is unlocked</string>
 			<key>unLocked</key>
 			<true/>
 			<key>propertyNames</key>
@@ -557,46 +559,132 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>01_02</string>
+			<string>902</string>
+			<key>maxLevel</key>
+			<integer>3</integer>
 			<key>message</key>
-			<string>Congratulations, You&apos;ve Just Passed 1-1. 1-2 is unlocked.</string>
+			<string>902 is unlocked.</string>
 			<key>content</key>
-			<string>Battle 1-2.</string>
+			<string>Magic 902 is unlocked</string>
 			<key>unLocked</key>
-			<false/>
+			<true/>
 			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>904</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>904 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 904 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>905</string>
+			<key>maxLevel</key>
+			<integer>10</integer>
+			<key>message</key>
+			<string>905 is unlocked.</string>
+			<key>content</key>
+			<string>Magic 905 is unlocked</string>
+			<key>unLocked</key>
+			<true/>
+			<key>propertyNames</key>
+			<array/>
+		</dict>
+	</array>
+	<key>magicProperties</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>901_level</string>
+			<key>value</key>
+			<integer>3</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
 			<array>
-				<string>01_01_completed</string>
+				<string>901</string>
+				<string>level</string>
 			</array>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>AllCompleted</string>
-			<key>message</key>
-			<string>Congratulations, You are great.</string>
-			<key>content</key>
-			<string>Please Pass All Battle and Get All Stars.</string>
-			<key>unLocked</key>
-			<false/>
-			<key>propertyNames</key>
+			<string>902_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
 			<array>
-				<string>01_01_completed</string>
-				<string>01_02_completed</string>
+				<string>902</string>
+				<string>level</string>
 			</array>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>AllStars</string>
-			<key>message</key>
-			<string>Congratulations, You are great.</string>
-			<key>content</key>
-			<string>Please Pass All Battle and Get All Stars.</string>
-			<key>unLocked</key>
-			<false/>
-			<key>propertyNames</key>
+			<string>903_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
 			<array>
-				<string>01_01_star</string>
-				<string>01_02_star</string>
+				<string>903</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>904_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>904</string>
+				<string>level</string>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>905_level</string>
+			<key>value</key>
+			<integer>1</integer>
+			<key>activation</key>
+			<string>&gt;</string>
+			<key>initialValue</key>
+			<integer>0</integer>
+			<key>activationValue</key>
+			<integer>2</integer>
+			<key>tags</key>
+			<array>
+				<string>905</string>
+				<string>level</string>
 			</array>
 		</dict>
 	</array>
@@ -1005,94 +1093,6 @@
 			<key>tags</key>
 			<array>
 				<string>AddHealthPoint2</string>
-				<string>level</string>
-			</array>
-		</dict>
-	</array>
-	<key>magicProperties</key>
-	<array>
-		<dict>
-			<key>name</key>
-			<string>901_level</string>
-			<key>value</key>
-			<integer>3</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>901</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>902_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>902</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>903_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>903</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>904_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>904</string>
-				<string>level</string>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>905_level</string>
-			<key>value</key>
-			<integer>1</integer>
-			<key>activation</key>
-			<string>&gt;</string>
-			<key>initialValue</key>
-			<integer>0</integer>
-			<key>activationValue</key>
-			<integer>2</integer>
-			<key>tags</key>
-			<array>
-				<string>905</string>
 				<string>level</string>
 			</array>
 		</dict>

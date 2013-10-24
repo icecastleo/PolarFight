@@ -14,15 +14,10 @@ typedef enum {
     kPanStateEnded,
 } PanState;
 
-typedef enum {
-    kTapStateBegan,
-    kTapStateEnded,
-} TapState;
-
 @protocol TouchComponentDelegate <NSObject>
 
 @optional
--(void)handleTap:(TapState)state;
+-(void)handleTap;
 -(void)handlePan:(PanState)state positions:(NSArray *)positions;
 -(void)handleSelect;
 -(void)handleUnselect;
@@ -36,10 +31,9 @@ typedef enum {
 @property BOOL touchable;
 
 @property (readonly) BOOL canSelect;
-//@property (nonatomic) BOOL hasDragLine;
 @property (nonatomic) NSString *dragImage1;
 @property (nonatomic) NSString *dragImage2;
-@property (nonatomic) CCSprite *selectedSprite;
+@property (nonatomic) CCSprite *touchSprite;
 
 @property (nonatomic, weak) id<TouchComponentDelegate> delegate;
 
