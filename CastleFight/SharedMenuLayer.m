@@ -11,6 +11,7 @@
 
 @interface SharedMenuLayer() {
     CGRect rect;
+    int priority;
     
     BOOL isClosing;
 }
@@ -22,12 +23,16 @@
 @synthesize frame;
 
 -(id)initWithRect:(CGRect)aRect {
+    return [self initWithRect:aRect maskPriotity:kTouchPriorityMask];
+}
+
+-(id)initWithRect:(CGRect)aRect maskPriotity:(int)aPriority {
     if (self = [super initWithColor:ccc4(50, 50, 50, 150)]) {
-               
         rect = aRect;
+        priority = aPriority;
         
         isClosing = NO;
-
+        
         [self setTouchEnabled:YES];
         
         frame = [[SharedFrameSprite alloc] initWithSize:rect.size];
@@ -41,16 +46,17 @@
         
         CCMenu *closeMenu = [CCMenu menuWithItems:closeButton, nil];
         closeMenu.position = CGPointZero;
-        [closeMenu setTouchPriority:NSIntegerMin];
+        [closeMenu setTouchPriority:priority];
         
         [frame addChild:closeMenu];
     }
     return self;
 }
 
+
 -(void)registerWithTouchDispatcher {
 	CCDirector *director = [CCDirector sharedDirector];
-	[[director touchDispatcher] addTargetedDelegate:self priority:kTouchPriorityMask swallowsTouches:YES];
+	[[director touchDispatcher] addTargetedDelegate:self priority:priority swallowsTouches:YES];
 }
 
 -(void)onEnter {

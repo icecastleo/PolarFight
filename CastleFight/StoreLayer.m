@@ -7,6 +7,8 @@
 //
 
 #import "StoreLayer.h"
+#import "StoreItems.h"
+#import "StoreUnits.h"
 
 @interface StoreLayer() {
     CGRect childRect;
@@ -55,7 +57,7 @@ static int childTag = 333;
         CCMenu *menu = [CCMenu menuWithItems:unit, hero, item, nil];
         menu.position = ccp(unit.boundingBox.size.width/2, titile.position.y - titile.boundingBox.size.height - unit.boundingBox.size.height/2 * menu.children.count);
         [menu alignItemsVerticallyWithPadding:0];
-        [menu setTouchPriority:NSIntegerMin];
+        [menu setTouchPriority:kTouchPriorityMask-5];
         [self.frame addChild:menu];
         
         selectedMenuItem = unit;
@@ -63,9 +65,9 @@ static int childTag = 333;
         childRect = CGRectMake(winSize.width/8 + unit.boundingBox.size.width, 0, winSize.width/4*3 - unit.boundingBox.size.width, winSize.height - titile.boundingBox.size.height*2);
         childPosition = ccp(unit.boundingBox.size.width, titile.position.y - titile.boundingBox.size.height);
         
-//        UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
-//        units.position = childPosition;
-//        [self.frame addChild:units z:0 tag:childTag];
+        StoreUnits *units = [[StoreUnits alloc] initWithRect:childRect];
+        units.position = childPosition;
+        [self.frame addChild:units z:0 tag:childTag];
         
     }
     return self;
@@ -86,9 +88,9 @@ static int childTag = 333;
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_unit_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_unit_off_down.png"];
             
-//            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
-//            units.position = childPosition;
-//            [self.frame addChild:units z:0 tag:childTag];
+            StoreUnits *units = [[StoreUnits alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
             
             break;
         }
@@ -96,19 +98,19 @@ static int childTag = 333;
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_hero_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_hero_off_down.png"];
             
-//            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
-//            units.position = childPosition;
-//            [self.frame addChild:units z:0 tag:childTag];
+            StoreItems *units = [[StoreItems alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
             
             break;
         }
         case 3: {
             click.normalImage = [CCSprite spriteWithSpriteFrameName:@"bt_item_off_up.png"];
             click.selectedImage = [CCSprite spriteWithSpriteFrameName:@"bt_item_off_down.png"];
-//            
-//            UpgradeUnits *units = [[UpgradeUnits alloc] initWithRect:childRect];
-//            units.position = childPosition;
-//            [self.frame addChild:units z:0 tag:childTag];
+            
+            StoreUnits *units = [[StoreUnits alloc] initWithRect:childRect];
+            units.position = childPosition;
+            [self.frame addChild:units z:0 tag:childTag];
             
             break;
         }

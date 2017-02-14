@@ -30,8 +30,8 @@
 @property (readonly) float interval;
 @property float delta;
 
-@property NSMutableArray *summonComponents;
-@property (nonatomic) NSMutableArray *battleTeam;
+@property NSMutableArray *summonButtons;
+//@property (nonatomic) NSMutableArray *battleTeam;
 
 @property NSMutableArray *items;
 @property NSMutableArray *itemsInBattle;

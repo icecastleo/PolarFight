@@ -103,7 +103,7 @@ typedef enum {
         
         Entity *entity = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
         board = (OrbBoardComponent *)[entity getComponentOfName:[OrbBoardComponent name]];
-        board.timeCountdown = 1;
+        board.timeCountdown = 30;
         
         [self runAction:[CCSequence actions:
                          [CCCallBlock actionWithBlock:^{
@@ -175,7 +175,7 @@ typedef enum {
     if (status == kBattleStatusPrepareFight) {
         
         [statusLayer setMagicButton];
-        [statusLayer setItemButton];
+//        [statusLayer setItemButton];
         
         PlayerComponent *playerCom = (PlayerComponent *)[self.userPlayer getComponentOfName:[PlayerComponent name]];
         

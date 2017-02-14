@@ -115,14 +115,14 @@
     [_cameraControl moveBy:ccpMult(diff, 0.5)];
 }
 
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    // map location
+//-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+//    // map location
 //    CGPoint location = [self convertTouchToNodeSpace:touch];
-    
+//    
 //    // win location
 //    location = [touch locationInView:[CCDirector sharedDirector].view];
 //    location = [[CCDirector sharedDirector] convertToGL: location];
-}
+//}
 
 -(void)knockOutEntity:(Entity *)entity byPosition:(CGPoint)position boundaryLimit:(BOOL)limit {
     // FIXME: Replace by entity action

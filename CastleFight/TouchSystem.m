@@ -31,6 +31,8 @@ typedef enum {
     BOOL isPan;
 
     float touchPressTime;
+    
+    MapLayer *map;
 }
 
 @end
@@ -74,6 +76,10 @@ typedef enum {
     descriptors = [NSArray arrayWithObjects:ySort, nil];
 }
 #endif
+
+-(void)setMapLayer:(MapLayer *)mapLayer {
+    map = mapLayer;
+}
 
 -(void)update:(ccTime)delta {
     if (state == kTouchStateBegan) {
@@ -174,7 +180,13 @@ typedef enum {
     }
     
     if (touchedEntity == nil) {
-        // TODO: Move map here!
+        // Move map here!
+        CGPoint lastLocation = [touch previousLocationInView:touch.view];
+        lastLocation = [[CCDirector sharedDirector] convertToGL:lastLocation];
+        
+        CGPoint diff = ccpSub(lastLocation, touchLocation);
+        
+        [map.cameraControl moveBy:ccpMult(diff, 0.5)];
         return;
     } else {
         if (isPan == NO) {

@@ -11,6 +11,7 @@
 @interface SharedMenuLayer : CCLayerColor
 
 -(id)initWithRect:(CGRect)aRect;
+-(id)initWithRect:(CGRect)aRect maskPriotity:(int)aPriority;
 
 @property (readonly) CCSprite *frame;
 

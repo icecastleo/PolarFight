@@ -60,22 +60,22 @@
 }
 
 -(void)reSummon {
-    NSArray *array = [self.entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]];
-
-    for (Entity *entity in array) {
-        TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
-        
-        if (teamCom.team == self.team) {
-            PlayerComponent *playerCom = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
-            
-            for (SummonComponent *summonCom in playerCom.battleTeam) {
-                if ([summonCom.data.cid isEqualToString:self.cid]) {
-                    summonCom.summon = YES;
-                }
-            }
-            break;
-        }
-    }
+//    NSArray *array = [self.entity getAllEntitiesPosessingComponentOfName:[PlayerComponent name]];
+//
+//    for (Entity *entity in array) {
+//        TeamComponent *teamCom = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
+//        
+//        if (teamCom.team == self.team) {
+//            PlayerComponent *playerCom = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
+//            
+//            for (SummonComponent *summonCom in playerCom.battleTeam) {
+//                if ([summonCom.data.cid isEqualToString:self.cid]) {
+//                    summonCom.summon = YES;
+//                }
+//            }
+//            break;
+//        }
+//    }
 }
 
 @end

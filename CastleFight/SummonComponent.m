@@ -28,7 +28,7 @@
         NSDictionary *dic = [[FileManager sharedFileManager] getCharacterDataWithCid:_data.cid];
         _cost = [[dic objectForKey:@"cost"] intValue];
         
-        _summonType = kSummonTypeStockOnce;
+        _summonType = kSummonTypeNormal;
         
         _currentCooldown = 0;
         _currentStock = 0;
@@ -108,12 +108,12 @@
 -(BOOL)isCostSufficient {
     NSAssert(_player, @"Who will you summon for?");
 
-    return YES;
-//    if (_player.food >= _cost) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
+//    return YES;
+    if (_player.food >= _cost) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 -(void)updateSummon {
@@ -153,8 +153,7 @@
         case kSummonTypeNormal: {
             _currentCooldown = _cooldown;
             
-            PlayerComponent *player = (PlayerComponent *)[self.entity getComponentOfName:[PlayerComponent name]];
-            player.food -= _cost;
+            self.player.food -= _cost;
             
             [self.entity sendEvent:kEventUseMask Message:[NSNumber numberWithFloat:_cooldown]];
             break;
@@ -220,6 +219,10 @@
     RenderComponent *renderCom = (RenderComponent *)[self.entity getComponentOfName:[RenderComponent name]];
     CCLabelBMFont* label = (CCLabelBMFont*)[renderCom.node getChildByTag:kCostLabelTag];
     [label setString:string];
+}
+
+-(void)handleTap {
+    _summon = YES;
 }
 
 @end

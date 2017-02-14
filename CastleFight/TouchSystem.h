@@ -13,4 +13,6 @@
 
 -(id)initWithEntityManager:(EntityManager *)entityManager;
 
+-(void)setMapLayer:(MapLayer *)mapLayer;
+
 @end

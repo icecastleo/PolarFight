@@ -8,6 +8,8 @@
 
 #import "StoreItems.h"
 #import "CCScrollNode.h"
+#import "FileManager.h"
+#import "ItemSprite.h"
 
 @interface StoreItems() {
     CCScrollNode *scrollingNode;
@@ -34,7 +36,7 @@
         [layer addChild:scrollingNode];
         [self addChild:layer];
         
-//        NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
+        NSArray *itemDatas = [FileManager sharedFileManager].items;
         
 //        for (int i = 0; i < characterInitDatas.count; i++) {
 //            CharacterInitData *data = characterInitDatas[i];
@@ -46,11 +48,21 @@
 //            [scrollingNode addChild:temp];
 //        }
         
+        int count = 4;
+        
+        for (int i = 0; i < count; i++) {
+            CCSprite *item = [[ItemSprite alloc] init];
+            item.anchorPoint = ccp(0, 1);
+            item.position = ccp(0, -item.boundingBox.size.height * i);
+            
+            [scrollingNode addChild:item];
+        }
+        
         CCSprite *temp = [scrollingNode.children lastObject];
         
         //        CGSize contentSize = CGSizeMake(temp.contentSize.width, temp.boundingBox.size.height * characterInitDatas.count);
-//        CGSize contentSize = CGSizeMake(rect.size.width, temp.boundingBox.size.height * characterInitDatas.count);
-//        scrollingNode.scrollView.contentSize = contentSize;
+        CGSize contentSize = CGSizeMake(rect.size.width, temp.boundingBox.size.height * count);
+        scrollingNode.scrollView.contentSize = contentSize;
     }
     return self;
 }

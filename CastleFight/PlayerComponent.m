@@ -28,17 +28,17 @@
         counts = [[NSMutableDictionary alloc] init];
         
         _food = 10.0;
-//        _foodRate = 1.0;
-//        _maxRate = _foodRate * 4;
-//        
+        _foodRate = 1.0;
+        _maxRate = _foodRate * 4;
+
         _mana = 10.0;
 //        _manaRate = 1.0;
 //        _maxManaRate = _manaRate * 4;
         
         _interval = 0.25;
         
-        _summonComponents = [[NSMutableArray alloc] init];
-        _battleTeam = [[NSMutableArray alloc] init];
+        _summonButtons = [[NSMutableArray alloc] init];
+//        _battleTeam = [[NSMutableArray alloc] init];
         _items = [[NSMutableArray alloc] init];
         _itemsInBattle = [[NSMutableArray alloc] init];
         _magicTeam = [[NSMutableArray alloc] init];

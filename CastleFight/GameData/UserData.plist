@@ -197,7 +197,7 @@
 			<key>content</key>
 			<string>Battle 1-2.</string>
 			<key>unLocked</key>
-			<false/>
+			<true/>
 			<key>propertyNames</key>
 			<array>
 				<string>01_01_completed</string>

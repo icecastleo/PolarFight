@@ -88,7 +88,14 @@
 -(void)setMagicButton {
     NSArray *magicInBattle = player.magicInBattle;
     
+    int i = 0;
+    
     for (Entity *entity in magicInBattle) {
+        i++;
+        
+        if (i==2)
+            break;
+        
         RenderComponent *renderCom = (RenderComponent *)[entity getComponentOfName:[RenderComponent name]];
         //FIXME: the position is not correct.
         renderCom.position = ccp(40+40*([magicInBattle indexOfObject:entity]+1),30);

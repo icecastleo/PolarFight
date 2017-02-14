@@ -64,16 +64,10 @@
 
 #endif // __CC_PLATFORM_IOS
 
+
 @implementation CCScrollNode
 
-@synthesize scrollView = scrollView_;
-
-#pragma mark - UIScrollViewDelegate
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGPoint contentOffset = [scrollView contentOffset];
-    [self setPosition:contentOffset];
-}
+@synthesize scrollView = _scrollView;
 
 #pragma mark - Initialization
 
@@ -81,27 +75,27 @@
     if(self = [super init]) {
         _rect = aRect;
         uiY = [CCDirector sharedDirector].winSize.height - _rect.size.height - _rect.origin.y;
-        scrollView_ = [[[CCScrollView alloc] initWithFrame:CGRectMake(_rect.origin.x, uiY, _rect.size.width, _rect.size.height)] retain];
-        scrollView_.delegate = self;
+        _scrollView = [[[CCScrollView alloc] initWithFrame:CGRectMake(_rect.origin.x, uiY, _rect.size.width, _rect.size.height)] retain];
+        _scrollView.delegate = self;
         
-        self.position = ccp(0, 0);
+//        self.position = ccp(0, 0);
     }
     return self;
 }
 
 -(void)onEnter {
     [super onEnter];
-    [[CCDirector sharedDirector].view addSubview:scrollView_];
-    [scrollView_ flashScrollIndicators];
+    [[CCDirector sharedDirector].view addSubview:_scrollView];
+    [_scrollView flashScrollIndicators];
 }
 
 -(void)onExit {
-    [scrollView_ removeFromSuperview];
+    [_scrollView removeFromSuperview];
     [super onExit];
 }
 
 -(void)dealloc {
-    [scrollView_ release];
+    [_scrollView release];
     [super dealloc];
 }
 
@@ -121,6 +115,13 @@
     } else {
         _position = ccp(_position.x - _rect.origin.x, _position.y + uiY);
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint contentOffset = [scrollView contentOffset];
+    [self setPosition:contentOffset];
 }
 
 @end

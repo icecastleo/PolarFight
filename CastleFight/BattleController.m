@@ -64,9 +64,9 @@
         _battleData = [[FileManager sharedFileManager] loadBattleInfo:[NSString stringWithFormat:@"%02d - %02d", prefix, suffix]];
         NSAssert(_battleData != nil, @"you do not load the correct battle's data.");
         
-        //        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        //        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
-        mapLayer = [[TopLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+        mapLayer = [[BattleCatMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+//        mapLayer = [[ThreeLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
+//        mapLayer = [[TopLineMapLayer alloc] initWithName:[NSString stringWithFormat:@"map/map_%02d", prefix]];
         [self addChild:mapLayer];
         
         entityManager = [[EntityManager alloc] init];
@@ -92,13 +92,13 @@
         statusLayer = [[BattleStatusLayer alloc] initWithBattleController:self];
         [self addChild:statusLayer];
         
-        Entity *board = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
-        //        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
-        //        boardRenderCom.node.position = ccp(100,20);
-        //        boardRenderCom.node.anchorPoint = ccp(0,0);
-        //        boardRenderCom.sprite.anchorPoint = ccp(0,0);
-        //        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
-        //        [statusLayer addChild:boardRenderCom.node];
+//        Entity *board = [entityFactory createOrbBoardWithUser:_userPlayer AIPlayer:_enemyPlayer andBattleData:_battleData];
+//        RenderComponent *boardRenderCom = (RenderComponent *)[board getComponentOfName:[RenderComponent name]];
+//        boardRenderCom.node.position = ccp(100,20);
+//        boardRenderCom.node.anchorPoint = ccp(0,0);
+//        boardRenderCom.sprite.anchorPoint = ccp(0,0);
+//        [(CCSprite *)boardRenderCom.sprite setOpacity:0];
+//        [statusLayer addChild:boardRenderCom.node];
         
         [self scheduleUpdate];
     }
@@ -112,6 +112,8 @@
     [self addChild:touchSystem];
     
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:touchSystem priority:kTouchPriorityTouchSystem swallowsTouches:YES];
+    
+    [touchSystem setMapLayer:mapLayer];
     
     //    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:[NSString stringWithFormat:@"sound_caf/bgm_battle%d.caf", _prefix]];
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music_1.caf"]; 
@@ -162,7 +164,7 @@
     
     [statusLayer update:delta];
     
-    [self checkBattleEnd];
+//    [self checkBattleEnd];
 }
 
 -(void)checkBattleEnd {

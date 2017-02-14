@@ -28,13 +28,13 @@
     for (Entity *entity in entities) {
         PlayerComponent * player = (PlayerComponent *)[entity getComponentOfName:[PlayerComponent name]];
         
-//        player.delta += delta;
-//        
-//        if (player.delta >= player.interval) {
-//            player.delta -= player.interval;
-//            player.food += player.foodRate;
-//            player.mana += player.manaRate;
-//        }
+        player.delta += delta;
+        
+        if (player.delta >= player.interval) {
+            player.delta -= player.interval;
+            player.food += player.foodRate;
+            player.mana += player.manaRate;
+        }
         
 //        if (player.mana > kManaBarFullValue) {
 //            TeamComponent *team = (TeamComponent *)[entity getComponentOfName:[TeamComponent name]];
@@ -48,14 +48,15 @@
 //            [self.entityFactory createCharacter:@"203" level:10 forTeam:team.team];
 //        }
         
-        NSMutableArray *summonComponents = [[NSMutableArray alloc] init];
         // Summon entities
-//        NSMutableArray *summonComponents = player.summonComponents;
+        NSMutableArray *summonComponents = player.summonButtons;
         
         // Summon heros
-        [summonComponents addObjectsFromArray:player.battleTeam];
+//        [summonComponents addObjectsFromArray:player.battleTeam];
         
-        for (SummonComponent *summon in summonComponents) {
+        for (Entity *summonButton in summonComponents) {
+            SummonComponent *summon = (SummonComponent *)[summonButton getComponentOfName:[SummonComponent name]];
+            
             if (summon.summon && summon.canSummon) {
                 summon.summon = NO;
                                 

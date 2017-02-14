@@ -9,10 +9,11 @@
 #import "Component.h"
 #import "CharacterInitData.h"
 #import "UnitMenuItem.h"
+#import "TouchComponent.h"
 
 @class PlayerComponent;
 
-@interface SummonComponent : Component {
+@interface SummonComponent : Component <TouchComponentDelegate> {
     
 }
 

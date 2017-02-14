@@ -67,10 +67,16 @@ const static float attack_max = 200.0;
         lv.scale = 0.5;
         [self addChild:lv];
         
-        CCLabelTTF *name = [[CCLabelTTF alloc] initWithString:NSLocalizedString(@"TITLE", nil) fontName:@"Georgia-Bold"  fontSize:12];
+//        CCLabelTTF *name = [[CCLabelTTF alloc] initWithString:NSLocalizedString(@"TITLE", nil) fontName:@"Georgia-Bold"  fontSize:12];
+//        name.anchorPoint = ccp(0, 0);
+//        name.position = ccp(lv.position.x + lv.boundingBox.size.width + 5, lv.position.y);
+//        [self addChild:name];
+        
+        CCLabelTTF *name = [[CCLabelTTF alloc] initWithString:character.name fontName:@"Georgia-Bold"  fontSize:12];
         name.anchorPoint = ccp(0, 0);
         name.position = ccp(lv.position.x + lv.boundingBox.size.width + 5, lv.position.y);
         [self addChild:name];
+
         
         CCSprite *hp_bg = [CCSprite spriteWithSpriteFrameName:@"info_bar_bg.png"];
         hp_bg.anchorPoint = ccp(0, 0);

@@ -56,7 +56,7 @@ static int childTag = 333;
         CCMenu *menu = [CCMenu menuWithItems:unit, hero, item, nil];
         menu.position = ccp(unit.boundingBox.size.width/2, titile.position.y - titile.boundingBox.size.height - unit.boundingBox.size.height/2 * menu.children.count);
         [menu alignItemsVerticallyWithPadding:0];
-        [menu setTouchPriority:NSIntegerMin];
+        [menu setTouchPriority:kTouchPriorityMask-5];
         [self.frame addChild:menu];
         
         selectedMenuItem = unit;

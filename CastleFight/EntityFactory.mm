@@ -232,7 +232,7 @@
     // TODO: Set AI for different character
 //    [entity addComponent:[[AIComponent alloc] initWithDictionary:aiDictionary]];
 
-    AIComponent *ai = [[AIComponent alloc] initWithState:[[GeneralAIStateWalk alloc] init]];
+    AIComponent *ai = [[AIComponent alloc] initWithState:[[AIStateWalk alloc] init]];
     [entity addComponent:ai];
     
     // Level component should be set after all components that contained attributes.
@@ -489,24 +489,24 @@
     PlayerComponent *player = [[PlayerComponent alloc] init];
     [entity addComponent:player];
     
-//    NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
-//    
-//    for (CharacterInitData *data in characterInitDatas) {
-//        Entity *summonButton = [self createSummonButton:data];
+    NSArray *characterInitDatas = [FileManager sharedFileManager].characterInitDatas;
+
+    for (CharacterInitData *data in characterInitDatas) {
+        Entity *summonButton = [self createSummonButton:data player:player];
 //        MagicComponent *magicCom = (MagicComponent *)[summonButton getComponentOfName:[MagicComponent name]];
 //        magicCom.spellCaster = entity;
-//        [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
-//        
-//        [player.summonComponents addObject:summonButton];
-//    }
-    
-    NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
-    for (CharacterInitData *data in battleTeamInitData) {
-        SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
-        summon.player = player;
-        //            summon.summon = YES;
-        [player.battleTeam addObject:summon];
+        [summonButton addComponent:[[TeamComponent alloc] initWithTeam:team]];
+
+        [player.summonButtons addObject:summonButton];
     }
+    
+//    NSArray *battleTeamInitData = [FileManager sharedFileManager].battleTeam;
+//    for (CharacterInitData *data in battleTeamInitData) {
+//        SummonComponent *summon = [[SummonComponent alloc] initWithCharacterInitData:data];
+//        summon.player = player;
+//        summon.summon = YES;
+//        [player.battleTeam addObject:summon];
+//    }
     
     NSArray *magicTeamInitData = [FileManager sharedFileManager].magicTeam;
     
@@ -575,6 +575,7 @@
     PlayerComponent *player = [[PlayerComponent alloc] init];
     [entity addComponent:player];
     
+    // Enemy AI
 //    [entity addComponent:[[AIComponent alloc] initWithState:[[AIStateEnemyPlayer alloc] initWithEntityFactory:self battleDataObject:battleData]]];
     
     return entity;
@@ -638,7 +639,7 @@
     return entity;
 }
 
--(Entity *)createSummonButton:(CharacterInitData *)data {
+-(Entity *)createSummonButton:(CharacterInitData *)data player:(PlayerComponent *)player {
     
     Entity *entity = [_entityManager createEntity];
     
@@ -646,6 +647,7 @@
     
     // add SummonComponent
     SummonComponent *summonCom = [[SummonComponent alloc] initWithCharacterInitData:data];
+    summonCom.player = player;
     [entity addComponent:summonCom];
     
     // add CostComponent
@@ -653,10 +655,10 @@
     CostComponent *costCom = [[CostComponent alloc] initWithDictionary:costDic];
     [entity addComponent:costCom];
     
-    // add MagicComponent
-    NSDictionary *magicDic = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:summonCom.cooldown], @"cooldown", @"SummonToLineMagic",@"magicName", nil];
-    MagicComponent *magicCom = [[MagicComponent alloc] initWithDictionary:magicDic];
-    [entity addComponent:magicCom];
+//    // add MagicComponent
+//    NSDictionary *magicDic = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:summonCom.cooldown], @"cooldown", @"SummonToLineMagic",@"magicName", nil];
+//    MagicComponent *magicCom = [[MagicComponent alloc] initWithDictionary:magicDic];
+//    [entity addComponent:magicCom];
     
     // add button icon in Render Component 
     CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"bt_char_%02d.png",[data.cid intValue]]];
@@ -672,9 +674,11 @@
     } else {
         spriteFrameName = [NSString stringWithFormat:@"%@_0.png", name];
     }
+    
     NSDictionary *selectDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"gold_frame.png", @"touchedImage", [NSNumber numberWithBool:NO],@"hasDragLine", spriteFrameName,@"dragImage1", spriteFrameName,@"dragImage2",nil];
+
     TouchComponent *selectCom = [[TouchComponent alloc] initWithDictionary:selectDic];
-    selectCom.delegate = magicCom;
+    selectCom.delegate = summonCom;
     [entity addComponent:selectCom];
     
     [entity addComponent:[[LevelComponent alloc] initWithLevel:data.level]];

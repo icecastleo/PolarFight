@@ -113,12 +113,12 @@
         CCAction *shake = [CCShake actionWithDuration:5.0 amplitude:ccp(5, 5)];
         [self runAction:shake];
         
-        CCMenuItemFont *abc = [CCMenuItemFont itemWithString:@"Test!" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[[MenuScene alloc] init]];
-        }];
-        abc.position = ccp(size.width/2, size.height/2);
+//        CCMenuItemFont *abc = [CCMenuItemFont itemWithString:@"Test!" block:^(id sender) {
+//            [[CCDirector sharedDirector] replaceScene:[[MenuScene alloc] init]];
+//        }];
+//        abc.position = ccp(size.width/2, size.height/2);
         
-        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, testMenuItem2, abc, nil];
+        CCMenu *menu = [CCMenu menuWithItems:gameCenterMenuItem, startMenuItem, testMenuItem2, nil];
         menu.position = CGPointZero;
         
         [self addChild:menu];

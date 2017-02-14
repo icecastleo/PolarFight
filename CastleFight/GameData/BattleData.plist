@@ -115,7 +115,7 @@
 				<key>level</key>
 				<integer>2</integer>
 				<key>targetRatio</key>
-				<integer>1</integer>
+				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>id</key>
@@ -131,7 +131,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>id</key>
@@ -139,7 +139,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>id</key>
@@ -147,7 +147,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>id</key>
@@ -155,7 +155,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>targetRatio</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 		</array>
 		<key>bosses</key>

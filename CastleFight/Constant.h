@@ -33,7 +33,7 @@
 #define kSummonTypeStockOnce 3
 
 // For map
-#define kMapPathFloor 50
+#define kMapPathFloor 80
 //#define kMapPathFloor [CCDirector sharedDirector].winSize.height/2 + 10
 #define kMapPathHeight 65
 #define kMapPathRandomHeight 15
