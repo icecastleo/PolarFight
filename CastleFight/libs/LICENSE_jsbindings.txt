@@ -1,7 +1,6 @@
-cocos2d for iPhone: http://www.cocos2d-iphone.org
+JS Bindings: http://github.com/zynga/jsbindings
 
-Copyright (c) 2008-2011 - Ricardo Quesada and contributors
-Copyright (c) 2011-2012 - Zynga Inc. and contributors
+Copyright (c) 2012 - Zynga Inc. and contributors
 (see each file to see the different copyright owners)
 
 

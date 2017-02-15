@@ -63,7 +63,7 @@
 #pragma mark -
 #pragma mark Director - global variables (optimization)
 
-CGFloat	__ccContentScaleFactor = 1;
+float	__ccContentScaleFactor = 1;
 
 #pragma mark -
 #pragma mark Director
@@ -502,7 +502,7 @@ GLToClipTransform(kmMat4 *transformOut)
 
 -(void)getFPSImageData:(unsigned char**)datapointer length:(NSUInteger*)len
 {
-	int device = [[CCConfiguration sharedConfiguration] runningDevice];
+	NSInteger device = [[CCConfiguration sharedConfiguration] runningDevice];
 
 	if( device == kCCDeviceiPadRetinaDisplay) {
 		*datapointer = cc_fps_images_ipadhd_png;
@@ -566,9 +566,7 @@ GLToClipTransform(kmMat4 *transformOut)
 
 #else
 	// setup DisplayLink in main thread
-//	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    
+	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 #endif
 
     _isAnimating = YES;
@@ -627,8 +625,7 @@ GLToClipTransform(kmMat4 *transformOut)
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-//	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+	[_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
 	// start the run loop
 	[[NSRunLoop currentRunLoop] run];

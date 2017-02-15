@@ -37,7 +37,7 @@
     
     if (vibrate) {
         if (lastUpdate + 5 < CACurrentMediaTime()) {
-            [[SimpleAudioEngine sharedEngine] vibrate];
+            // [[SimpleAudioEngine sharedEngine] vibrate];
         }
         lastUpdate = CACurrentMediaTime();
     }

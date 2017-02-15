@@ -30,11 +30,11 @@ const static int kFollowLimit = 50;
         CCNode *target = _target;
         
         tempPos = ccp(clampf(tempPos.x, target.position.x - kFollowLimit, target.position.x + kFollowLimit), clampf(tempPos.y, target.position.y - kFollowLimit, target.position.y + kFollowLimit));
-        
-		[_target setPosition:ccp(clampf(tempPos.x,_leftBoundary,_rightBoundary), clampf(tempPos.y,_bottomBoundary,_topBoundary))];
+  
+        [(CCNode *)_target setPosition:ccp(clampf(tempPos.x,_leftBoundary,_rightBoundary), clampf(tempPos.y,_bottomBoundary,_topBoundary))];
 	}
 	else
-		[_target setPosition:ccpSub( _halfScreenSize, _followedNode.position )];
+		[(CCNode *)_target setPosition:ccpSub( _halfScreenSize, _followedNode.position )];
 }
 
 @end

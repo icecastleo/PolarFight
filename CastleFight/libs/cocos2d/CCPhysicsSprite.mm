@@ -21,6 +21,7 @@
 
 #import "CCPhysicsSprite.h"
 #import "Support/CGPointExtension.h"
+#import "ccConfig.h"
 
 #if CC_ENABLE_CHIPMUNK_INTEGRATION
 #import "chipmunk.h"
@@ -114,22 +115,12 @@
 	
 	float x = pos.x * _PTMRatio;
 	float y = pos.y * _PTMRatio;
-    
-    if (self.parent) {
-        return [self.parent convertToNodeSpace:ccp(x, y)];
-    } else {
-        return ccp(x, y);
-    }
+	return ccp(x,y);
 }
 
 -(void)setPosition:(CGPoint)position
 {
 	float angle = _b2Body->GetAngle();
-    
-    if (self.parent) {
-        position = [self.parent convertToWorldSpace:ccp(position.x, position.y)];
-    }
-        
 	_b2Body->SetTransform( b2Vec2(position.x / _PTMRatio, position.y / _PTMRatio), angle );
 }
 

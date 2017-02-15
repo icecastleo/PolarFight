@@ -161,7 +161,7 @@ b2Fixture* b2Body::CreateFixture(const b2FixtureDef* def)
 	void* memory = allocator->Allocate(sizeof(b2Fixture));
 	b2Fixture* fixture = new (memory) b2Fixture;
 	fixture->Create(allocator, this, def);
-    
+
 	if (m_flags & e_activeFlag)
 	{
 		b2BroadPhase* broadPhase = &m_world->m_contactManager.m_broadPhase;

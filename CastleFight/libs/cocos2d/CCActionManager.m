@@ -192,12 +192,6 @@
 	tHashElement *element = NULL;
 	HASH_FIND_INT(targets, &target, element);
 	if( element ) {
-        NSUInteger limit = element->actions->num;
-		for( NSUInteger i = 0; i < limit; i++) {
-			CCAction *a = element->actions->arr[i];
-            [a stop];
-		}
-        
 		if( ccArrayContainsObject(element->actions, element->currentAction) && !element->currentActionSalvaged ) {
 			[element->currentAction retain];
 			element->currentActionSalvaged = YES;
@@ -224,11 +218,8 @@
 	HASH_FIND_INT(targets, &target, element );
 	if( element ) {
 		NSUInteger i = ccArrayGetIndexOfObject(element->actions, action);
-		if( i != NSNotFound ) {
-            CCAction *a = element->actions->arr[i];
-            [a stop];
+		if( i != NSNotFound )
 			[self removeActionAtIndex:i hashElement:element];
-        }
 	}
 //	else {
 //		CCLOG(@"cocos2d: removeAction: Target not found");
@@ -249,7 +240,6 @@
 			CCAction *a = element->actions->arr[i];
 
 			if( a.tag == aTag && [a originalTarget]==target) {
-                [a stop];
 				[self removeActionAtIndex:i hashElement:element];
 				break;
 			}
